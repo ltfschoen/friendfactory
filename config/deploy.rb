@@ -25,7 +25,7 @@ namespace :deploy do
   task :config_symlinks do
     run <<-CMD
       ln -s #{shared_path}/system/database.yml #{latest_release}/config/database.yml
-      ln -s #{shared_path}/system/mongrel_cluster.yml #{mongrel_config}
+      ln -s #{shared_path}/system/mongrel_cluster.yml #{mongrel_conf}
     CMD
   end
   
