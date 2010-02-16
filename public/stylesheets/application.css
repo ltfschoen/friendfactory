@@ -1,0 +1,25 @@
+.header {	
+	width: 100%;	
+	margin: 0;
+	background-color: #800;
+}
+
+.header img {
+	margin: 0;
+}
+
+.header > div {
+	min-width: 660px;	
+	margin: 0 auto;
+	width: 80%;
+	margin-bottom: 2em;
+}
+
+.header > div.welcome {
+	height: 70px;
+	overflow: visible;	
+}
+
+.container div.welcome {
+	text-align: center;
+}
