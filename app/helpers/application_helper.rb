@@ -1,3 +1,9 @@
-# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
+  Site = Struct.new(:name, :header)
+  
+  def current_site
+    Site.new(ApplicationController::SiteName, render(:partial => 'layouts/header'))
+  end
+  
 end

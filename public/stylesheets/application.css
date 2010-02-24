@@ -1,25 +1,27 @@
-.header {	
-	width: 100%;	
-	margin: 0;
-	background-color: #800;
+p, h1, h2 {
+ font-family: "Gill Sans MT", "Gill Sans", "MS Gill Sans", "Century Gothic", "Tahoma", Helvetica,Arial, sans-serif;
 }
 
-.header img {
-	margin: 0;
+body.welcome {
+	background: url(/images/background-red-24.png) no-repeat top center;	
+	background-color: #9C180C;
 }
 
-.header > div {
-	min-width: 660px;	
-	margin: 0 auto;
-	width: 80%;
-	margin-bottom: 2em;
-}
-
-.header > div.welcome {
-	height: 70px;
-	overflow: visible;	
-}
-
-.container div.welcome {
+body.welcome .container {
+	padding-top: 4em;
+	min-height: 1020px;
 	text-align: center;
+}
+
+body.welcome h1 {
+	font-size: 4em;
+	text-shadow: 1px 2px 1px #701518;
+	color: #FFF;
+}
+
+body.welcome h2 {
+	font-size: 2em;
+	line-height: 1.4em;
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
