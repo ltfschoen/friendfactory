@@ -29,5 +29,10 @@
 	</style>
 	<%= yield(:head) %>
 </head>
-<%= yield %>
+<body class='<%= current_site.name %> welcome'>
+	<%= current_site.header %>	
+	<%= yield %>
+	<%= current_site.footer %>
+	<%= render :partial => 'layouts/feedback' %>
+</body>
 </html>

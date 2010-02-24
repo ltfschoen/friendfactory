@@ -1,5 +1,15 @@
-p, h1, h2 {
- font-family: "Gill Sans MT", "Gill Sans", "MS Gill Sans", "Century Gothic", "Tahoma", Helvetica,Arial, sans-serif;
+p, h1, h2, label, input {
+	font-family: "Gill Sans MT", "Gill Sans", "MS Gill Sans", "Century Gothic", "Tahoma", Helvetica, Arial, sans-serif;
+}
+
+.container {
+	margin-bottom: 4em;
+}
+
+.footer {
+	text-align: center;	
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 body.welcome {
@@ -9,7 +19,7 @@ body.welcome {
 
 body.welcome .container {
 	padding-top: 4em;
-	min-height: 1020px;
+	min-height: 600px;
 	text-align: center;
 }
 
@@ -24,4 +34,45 @@ body.welcome h2 {
 	line-height: 1.4em;
 	color: #501518;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+body.welcome label, body.welcome input {
+	font-size: 1.6em;
+}
+
+body.welcome label {
+	padding-right: 4px;
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+body.welcome div.text-field {
+	margin: 0 auto;
+	position: relative;
+	display: block;
+	background: url(/images/text-field-24t.png) no-repeat;
+	width: 300px;
+	height: 90px;
+}
+
+body.welcome input[type=text] {
+	position: relative;
+	top: 20px;
+	left: 8px;
+	width: 250px;
+	margin-right: 6px;
+	padding: 6px;
+	color: #333;
+}
+
+body.welcome input[type=submit] {
+	color: #FFF;
+	background: url(/images/button-24t.png) 0px -5px no-repeat;
+	border: none;
+	width: 106px;
+	height: 54px;
+}
+
+body.welcome input[type=submit]:hover {
+	background: url(/images/button-24t.png) 0px -65px;	
 }

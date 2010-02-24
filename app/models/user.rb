@@ -1,12 +1,9 @@
-require 'aasm'
-
 class User < ActiveRecord::Base
   
   include AASM
   
-  aasm_column :status
-  aasm_initial_state :interested
-  
-  aasm_state :interested
+  aasm_column        :status
+  aasm_initial_state :welcomed
+  aasm_state         :welcomed
   
 end

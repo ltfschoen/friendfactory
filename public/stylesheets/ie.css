@@ -1,0 +1,9 @@
+body.welcome label {
+	position: relative;
+	top: -7px;
+}
+
+body.welcome input[type=submit] {
+	position: relative;
+	top: 6px;
+}
