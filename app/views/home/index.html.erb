@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'jquery.placeholder-1.0.1' %>
 <div class='container'>		
 	<div class='welcome block'>
 		<div class='column span-16 prepend-4 append-4 last'>
@@ -7,13 +8,19 @@
 			<% if flash[:success] || flash[:failure] %>
 				<h2><%= flash[:success] || flash[:failure] %></h2>
 			<% else %>
-				<h2>Sign up with your email right now and we'll let you know when we're ready</h2>
+				<h2>Sign up with your email right now and we'll let you know when we're ready!</h2>
 			<% end %>
 			<% form_for :user, :url => welcome_path do |f| %>
 				<%# f.label :email, 'Email Address' %>
-				<div class='text-field'><%= f.text_field :email %></div>
+				<div class='text-field'><%= f.text_field :email, :placeholder => 'email@address.com' %></div>
 				<%= f.submit 'OK' %>
 			<% end %>
 		</div>
 	</div>
 </div>
+
+<% javascript_tag do %>
+	jQuery(document).ready(function(){
+		jQuery('#user_email').placeholder({ className: 'placeholder' });
+	});
+<% end %>
