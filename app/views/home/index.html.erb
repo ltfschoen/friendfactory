@@ -3,21 +3,7 @@
 	<div class='welcome block'>
 		<div class='column span-16 prepend-4 append-4 last'>
 			<%= image_tag 'logo-big-24t.png', :width => '100%' %>
-			<h1>Coming Spring 2010</h1>
-			<h2>FriskyHands is an upcoming social networking site designed especially for the Deaf GLBTQ Community and their Friends &amp; Admirers. FriskyHands is set to launch in the Spring of 2010.</h2>
-			<% if flash[:success] %>
-				<h1>Thanks!</h1><h2>We can't wait to meet and connect with you!</h2>
-			<% else %>
-				<% if !flash[:success].nil? %>
-					<h2>Mmmm... that doesn't seem to be a valid email</h2>
-				<% else %>
-					<h2>Sign up with your email right now and we'll let you know when we're ready!</h2>
-				<% end %>
-				<% form_for :user, :url => root_path do |f| %>
-					<div class='text-field'><%= f.text_field :email, :placeholder => 'email@address.com' %></div>
-					<%= f.submit 'OK' %>
-				<% end %>
-			<% end %>
+			<h1>Login friskyhands</h1>
 		</div>
 	</div>
 </div>

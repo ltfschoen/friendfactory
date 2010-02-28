@@ -1,8 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
-  map.resource  :account, :contoller => 'users_controller'
+  map.resource  :account, :contoller => 'users'
+  
   map.resources :user_sessions
+  map.login     'login', :controller => 'user_sessions', :action => 'new'
   
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
