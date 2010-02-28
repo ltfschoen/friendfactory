@@ -1,10 +1,27 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users, :force => true do |t|
-      t.string :status
-      t.string :email
-      t.timestamps
-    end
+      t.string    :email, :null => false
+      t.string    :handle
+      t.string    :status
+      t.timestamps 
+      
+      # Authlogic columns
+      t.string    :crypted_password
+      t.string    :password_salt
+      t.string    :persistence_token,  :null => false
+      t.string    :perishable_token
+      t.integer   :login_count,        :null => false, :default => 0
+      t.integer   :failed_login_count, :null => false, :default => 0
+      t.datetime  :last_request_at
+      t.datetime  :current_login_at
+      t.datetime  :last_login_at
+      t.string    :current_login_ip
+      t.string    :last_login_ip
+    end    
+    add_index :users, :login
+    add_index :users, :persistence_token
+    add_index :users, :last_request_at
   end
 
   def self.down

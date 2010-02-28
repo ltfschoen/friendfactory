@@ -10,7 +10,6 @@ role :app, "friskyfactory.tagwaymedia.com"
 role :web, "friskyfactory.tagwaymedia.com"
 role :db,  "friskyfactory.tagwaymedia.com", :primary => true
 
-set :deploy_to, '/home/mrcap/friskyfactory'
 set :use_sudo,  false
 
 ssh_options[:port] = 1968
@@ -21,11 +20,21 @@ set :mongrel_conf, "#{deploy_to}/current/config/mongrel_cluster.yml"
 after "deploy:symlink", "deploy:config_symlinks"
 # after "deploy:symlink", "deploy:update_crontab"
 
+task :staging do
+  set :rails_env, 'staging'
+  set :deploy_to, '/home/mrcap/friskyfactory/staging'
+end
+
+task :production do
+  set :rails_env, 'production'
+  set :deploy_to, '/home/mrcap/friskyfactory/production'
+end
+
 namespace :deploy do
   task :config_symlinks do
     run <<-CMD
-      ln -s #{shared_path}/system/database.yml #{latest_release}/config/database.yml &&
-      ln -s #{shared_path}/system/mongrel_cluster.yml #{mongrel_conf}
+      ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
+      ln -s #{shared_path}/config/mongrel_cluster.yml #{mongrel_conf}
     CMD
   end
   

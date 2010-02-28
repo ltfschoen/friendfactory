@@ -1,5 +1,7 @@
 class HomeController < ApplicationController  
 
+  before_filter :require_no_user
+
   def index
     respond_to do |format|
       format.html
@@ -9,18 +11,19 @@ class HomeController < ApplicationController
   def create
     @user = User.new(params[:user])
     respond_to do |format|
-      if @user && @user.save
+      if @user.save
         format.html do
           flash[:success] = true
           redirect_to :back
         end
       else
+        raise @user.errors.inspect
         format.html do
-          flash[:failure] = true
+          flash[:success] = false
           redirect_to :back
         end
       end
     end
-  end
-    
+  end  
+  
 end

@@ -8,7 +8,7 @@
 			<% if flash[:success] %>
 				<h1>Thanks!</h1><h2>We can't wait to meet and connect with you!</h2>
 			<% else %>
-				<% if flash[:failure] %>
+				<% if !flash[:success].nil? %>
 					<h2>Mmmm... that doesn't seem to be a valid email</h2>
 				<% else %>
 					<h2>Sign up with your email right now and we'll let you know when we're ready!</h2>
