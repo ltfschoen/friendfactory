@@ -2,11 +2,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
   
-  map.welcome '/welcome',
-      :controller => 'home',
-      :action     => 'welcome',
-      :conditions => { :method => :post }
-  
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
@@ -36,9 +31,11 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
-  map.root :controller => 'home',
-    :action     => 'index',
+  map.root :controller => 'home', :action => 'index',
     :conditions => { :method => :get }
+
+  map.root :controller => 'home', :action => 'create',
+    :conditions => { :method => :post }
 
   # See how all your routes lay out with "rake routes"
 

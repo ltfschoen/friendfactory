@@ -13,8 +13,8 @@
 				<% else %>
 					<h2>Sign up with your email right now and we'll let you know when we're ready!</h2>
 				<% end %>
-				<% form_for :user, :url => welcome_path do |f| %>
-					<div class='text-field'><%= f.text_field :email, :placeholder => @email_placeholder %></div>
+				<% form_for :user, :url => root_path do |f| %>
+					<div class='text-field'><%= f.text_field :email, :placeholder => 'email@address.com' %></div>
 					<%= f.submit 'OK' %>
 				<% end %>
 			<% end %>
@@ -25,5 +25,10 @@
 <% javascript_tag do %>
 	jQuery(document).ready(function(){
 		jQuery('#user_email').placeholder({ className: 'placeholder' });
+		jQuery('form').click(function(){
+			var email = jQuery('#user_email').val();
+			var prompt = jQuery('#user_email').attr('placeholder');
+			if (email == prompt) jQuery('#user_email').val('');
+		});
 	});
 <% end %>
