@@ -1,0 +1,13 @@
+<% javascript_tag do %>
+	jQuery(document).ready(function(){
+		jQuery('#clicker').click(function(){
+			jQuery.ajax({
+				data:'authenticity_token=' + encodeURIComponent('bJypZZ1Gbmv5XIN/LbsbdpNyAz6kE/Yz/Wu5FHlDZTU='),
+				dataType:'script',
+				type:'get',
+				success: function(data, textState){ alert(data); },
+				url:'/' });
+			return false;
+		});
+	});
+<% end %>

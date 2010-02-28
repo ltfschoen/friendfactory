@@ -1,20 +1,30 @@
 class HomeController < ApplicationController  
+
+  EmailPlaceholder = 'email@address.com'
+
+  def index
+    @email_placeholder = EmailPlaceholder
+    respond_to do |format|
+      format.html
+    end
+  end
   
   def welcome
-    @user = User.new(params[:user])
+    params[:user] && (params[:user][:email] != EmailPlaceholder) && (@user = User.new(params[:user]))
     respond_to do |format|
-      if @user.save
+      @email_placeholder = EmailPlaceholder
+      if @user && @user.save
         format.html do
-          flash[:success] = "We can't wait to connect with you!"
+          flash[:success] = true
           redirect_to :back
         end
       else
         format.html do
-          flash[:failure] = "Mmm... that doesn't seem to be a valid email"
+          flash[:failure] = true
           redirect_to :back
         end
       end
     end
   end
-  
+    
 end

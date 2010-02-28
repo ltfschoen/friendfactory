@@ -5,15 +5,18 @@
 			<%= image_tag 'logo-big-24t.png', :width => '100%' %>
 			<h1>Coming Spring 2010</h1>
 			<h2>FriskyHands is an upcoming social networking site designed especially for the Deaf GLBTQ Community and their Friends &amp; Admirers. FriskyHands is set to launch in the Spring of 2010.</h2>
-			<% if flash[:success] || flash[:failure] %>
-				<h2><%= flash[:success] || flash[:failure] %></h2>
+			<% if flash[:success] %>
+				<h1>Thanks!</h1><h2>We can't wait to meet and connect with you!</h2>
 			<% else %>
-				<h2>Sign up with your email right now and we'll let you know when we're ready!</h2>
-			<% end %>
-			<% form_for :user, :url => welcome_path do |f| %>
-				<%# f.label :email, 'Email Address' %>
-				<div class='text-field'><%= f.text_field :email, :placeholder => 'email@address.com' %></div>
-				<%= f.submit 'OK' %>
+				<% if flash[:failure] %>
+					<h2>Mmmm... that doesn't seem to be a valid email</h2>
+				<% else %>
+					<h2>Sign up with your email right now and we'll let you know when we're ready!</h2>
+				<% end %>
+				<% form_for :user, :url => welcome_path do |f| %>
+					<div class='text-field'><%= f.text_field :email, :placeholder => @email_placeholder %></div>
+					<%= f.submit 'OK' %>
+				<% end %>
 			<% end %>
 		</div>
 	</div>

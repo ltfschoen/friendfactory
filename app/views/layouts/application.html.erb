@@ -5,28 +5,24 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>friskyhands</title>
-	<% if Rails.env.production? %>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>	
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
-	<% else %>
-		<%= javascript_include_tag 'jquery' %>
-		<%= javascript_include_tag 'jquery-ui' %>
-	<% end %>
+	<%- if Rails.env.production? -%>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<%- else -%>
+	<%= javascript_include_tag 'jquery' %>
+	<%- end -%>
+	<%= javascript_include_tag 'jquery-ui' %>
 	<%= javascript_include_tag 'jrails' %>
 	<%= javascript_include_tag 'jquery.uniform' %>
 	<%= javascript_include_tag 'application' %>
-
 	<%= stylesheet_link_tag 'blueprint/reset', :media => 'screen, projection' %>		
 	<%= stylesheet_link_tag 'blueprint/liquid', :media => 'screen, projection' %>		
 	<%= stylesheet_link_tag 'blueprint/typography', :media => 'screen, projection' %>		
-	<%# stylesheet_link_tag 'blueprint/plugins/fancy-type/fancy-type', :media => 'screen, projection' %>		
+	<%# stylesheet_link_tag 'blueprint/plugins/fancy-type/fancy-type', :media => 'screen, projection' -%>
 	<!--[if IE]><%= stylesheet_link_tag '/blueprint/ie', :media => 'screen, projection' %><![endif]-->
-	<%= stylesheet_link_tag 'uniform.default', :media => 'screen, projection', :charset=> 'utf-8' %>
+	<%# stylesheet_link_tag 'uniform.default', :media => 'screen, projection', :charset=> 'utf-8' -%>	
+	<%= stylesheet_link_tag 'blitzer/jquery-ui-1.7.1.custom.css', :media => 'screen, projection' %>
 	<%= stylesheet_link_tag 'application', :media => 'screen, projection' %>
 	<!--[if lt IE 8]><%= stylesheet_link_tag 'ie', :media => 'screen, projection' %><![endif]-->	
-	<style type="text/css">
-		/*.container { background: url('stylesheets/blueprint/grid.png'); }*/
-	</style>
 	<%= yield(:head) %>
 </head>
 <body class='<%= current_site.name %> welcome'>
