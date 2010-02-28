@@ -15,26 +15,26 @@ set :use_sudo,  false
 ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
 
-set :mongrel_conf, "#{deploy_to}/current/config/mongrel_cluster.yml" 
-
 after "deploy:symlink", "deploy:config_symlinks"
 # after "deploy:symlink", "deploy:update_crontab"
 
 task :staging do
-  set :rails_env, 'staging'
-  set :deploy_to, '/home/mrcap/friskyfactory/staging'
+  set :rails_env,      'staging'
+  set :deploy_to,      '/home/mrcap/friskyfactory/staging'
+  set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
 end
 
 task :production do
-  set :rails_env, 'production'
-  set :deploy_to, '/home/mrcap/friskyfactory/production'
+  set :rails_env,      'production'
+  set :deploy_to,      '/home/mrcap/friskyfactory/production'
+  set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
 end
 
 namespace :deploy do
   task :config_symlinks do
     run <<-CMD
       ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
-      ln -s #{shared_path}/config/mongrel_cluster.yml #{mongrel_conf}
+      ln -s #{shared_path}/config/mongrel_cluster.yml #{mongrel_config}
     CMD
   end
   
@@ -44,14 +44,14 @@ namespace :deploy do
       task t, :roles => :app do
         # invoke_command checks the use_sudo variable
         # to determine how to run the mongrel_rails command
-        invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_conf}"
+        invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_config}"
       end
     end
 
     task :restart, :roles => :app do
-      invoke_command "mongrel_rails cluster::stop --clean -f -C #{mongrel_conf}"
+      invoke_command "mongrel_rails cluster::stop --clean -f -C #{mongrel_config}"
       sleep 5
-      invoke_command "mongrel_rails cluster::start --clean -C #{mongrel_conf}"
+      invoke_command "mongrel_rails cluster::start --clean -C #{mongrel_config}"
     end
   end
 
