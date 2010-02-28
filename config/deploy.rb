@@ -2,7 +2,6 @@ set :application, "friskyfactory"
 
 set :scm,        "git"
 set :repository, "git://github.com/mjbamford/friskyfactory.git"
-set :branch,     "master"
 set :user,       "mrcap"
 # set :runner,   "mrcap"
 
@@ -19,12 +18,14 @@ after "deploy:symlink", "deploy:config_symlinks"
 # after "deploy:symlink", "deploy:update_crontab"
 
 task :staging do
+  set :branch,         ENV['branch'] || 'master'
   set :rails_env,      'staging'
   set :deploy_to,      '/home/mrcap/friskyfactory/staging'
   set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
 end
 
 task :production do
+  set :branch,         ENV['release']
   set :rails_env,      'production'
   set :deploy_to,      '/home/mrcap/friskyfactory/production'
   set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
