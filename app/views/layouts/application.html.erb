@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>friskyhands</title>
+	<title><%# presenter.title -%></title>
 	<%- if Rails.env.production? -%>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 	<%- else -%>
@@ -22,13 +22,14 @@
 	<%# stylesheet_link_tag 'uniform.default', :media => 'screen, projection', :charset=> 'utf-8' -%>	
 	<%= stylesheet_link_tag 'blitzer/jquery-ui-1.7.1.custom.css', :media => 'screen, projection' %>
 	<%= stylesheet_link_tag 'application', :media => 'screen, projection' %>
-	<!--[if lt IE 8]><%= stylesheet_link_tag 'ie', :media => 'screen, projection' %><![endif]-->	
-	<%= yield(:head) %>
+	<!--[if lt IE 8]><%= stylesheet_link_tag 'ie', :media => 'screen, projection' %><![endif]-->
 </head>
-<body class='<%= current_site.name %> welcome'>
-	<%= current_site.header %>	
-	<%= yield %>
-	<%= current_site.footer %>
-	<%= render :partial => 'layouts/feedback' %>
+<body class='<%# presenter.current_site.name %> <%# presenter.layout.name %>'>
+	<%# render :partial => 'layouts/header' %>
+	<div class='container'>
+	<%# yield -%>
+	</div>	
+	<%# render :partial => 'layouts/footer' %>
+	<%# render :partial => 'layouts/feedback' %>
 </body>
 </html>

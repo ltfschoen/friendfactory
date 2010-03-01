@@ -1,11 +1,13 @@
 class HomeController < ApplicationController  
 
   def index
-    redirect_to new_user_session_path
-#    respond_to do |format|
-      
-      # format.html
- #   end
+   respond_to do |format|
+      if true || current_user
+        format.html
+      else
+        format.html { redirect_to new_user_session_path }
+      end
+   end
   end
   
   def create
