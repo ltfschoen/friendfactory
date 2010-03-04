@@ -1,7 +1,5 @@
 module ApplicationHelper  
-  
-  def presenter
-    @presenter ||= Presenter.new    
+  def layout
+    current_site.layout    
   end
-  
 end

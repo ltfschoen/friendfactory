@@ -1,3 +1,3 @@
-jQuery(document).ready(function(){
-	jQuery("select, :checkbox, :radio, :file").uniform();
-});
+// jQuery(document).ready(function(){
+// 	jQuery("select, :checkbox, :radio, :file").uniform();
+// });

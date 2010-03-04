@@ -12,24 +12,22 @@
 	<%- end -%>
 	<%= javascript_include_tag 'jquery-ui' %>
 	<%= javascript_include_tag 'jrails' %>
-	<%= javascript_include_tag 'jquery.uniform' %>
 	<%= javascript_include_tag 'application' %>
 	<%= stylesheet_link_tag 'blueprint/reset', :media => 'screen, projection' %>		
 	<%= stylesheet_link_tag 'blueprint/liquid', :media => 'screen, projection' %>		
 	<%= stylesheet_link_tag 'blueprint/typography', :media => 'screen, projection' %>		
 	<%# stylesheet_link_tag 'blueprint/plugins/fancy-type/fancy-type', :media => 'screen, projection' -%>
 	<!--[if IE]><%= stylesheet_link_tag '/blueprint/ie', :media => 'screen, projection' %><![endif]-->
-	<%# stylesheet_link_tag 'uniform.default', :media => 'screen, projection', :charset=> 'utf-8' -%>	
-	<%= stylesheet_link_tag 'blitzer/jquery-ui-1.7.1.custom.css', :media => 'screen, projection' %>
-	<%= stylesheet_link_tag 'application', :media => 'screen, projection' %>
-	<!--[if lt IE 8]><%= stylesheet_link_tag 'ie', :media => 'screen, projection' %><![endif]-->
+	<%= stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen, projection' %>
+	<%= stylesheet_link_tag "#{current_site}/application", :media => 'screen, projection' %>
+	<!--[if lt IE 8]><%= stylesheet_link_tag "#{current_site}/ie", :media => 'screen, projection' %><![endif]-->
 </head>
-<body class='<%# presenter.current_site.name %> <%# presenter.layout.name %>'>
-	<%# render :partial => 'layouts/header' %>
+<body class='<%= layout %>'>
+	<%= render :partial => 'layouts/header' %>
 	<div class='container'>
-	<%# yield -%>
+	<%= yield -%>
 	</div>	
-	<%# render :partial => 'layouts/footer' %>
-	<%# render :partial => 'layouts/feedback' %>
+	<%= render :partial => 'layouts/footer' %>
+	<%= render :partial => 'layouts/feedback' %>
 </body>
 </html>

@@ -2,14 +2,17 @@ require 'exceptions'
 
 class ApplicationController < ActionController::Base  
   
+  include ActionController::Sites
+  
   helper :all    
+
   helper_method :current_user_session, :current_user
+  helper_method :current_site
+  helper_method :presenter
 
   filter_parameter_logging :password, :password_confirmation
   
   protect_from_forgery # See ActionController::RequestForgeryProtection
-
-  after_filter :presenter
 
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
@@ -53,9 +56,9 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
-  
+      
   def presenter
-    @presenter = Presenter.new
+    @presenter ||= ApplicationPresenter.new(params)
   end
   
 end

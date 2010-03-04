@@ -1,2 +1,5 @@
-module HomeHelper
+module HomeHelper  
+  def layout
+    super << ' welcome'
+  end  
 end
