@@ -10,15 +10,16 @@ class User < ActiveRecord::Base
   
   # validates_format_of :email, :with => EmailPattern
   
-  acts_as_authentic do |config|
-    config.validate_login_field = false
-    config.logged_in_timeout = 30.minutes
-    config.validate_password_field = false
-    config.require_password_confirmation = false
-  end
+  acts_as_authentic #do |config|
+    # config.validate_login_field = false
+    # config.validate_email_field = true
+    # config.logged_in_timeout    = 30.minutes
+    # config.validate_password_field = false
+    # config.require_password_confirmation = false
+  #end
 
-  def require_password?
-    false
-  end
+  # def require_password?
+  #   false
+  # end
   
 end

@@ -4,18 +4,24 @@ class ApplicationController < ActionController::Base
   
   include ActionController::Sites
   
-  helper :all    
+  helper :application, :placeholder_text
 
   helper_method :current_user_session, :current_user
   helper_method :current_site
   helper_method :presenter
 
-  filter_parameter_logging :password, :password_confirmation
+  filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
   
-  protect_from_forgery # See ActionController::RequestForgeryProtection
+  protect_from_forgery
 
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
+  end
+  
+  protected
+  
+  def helpers
+    self.class.helpers
   end
   
   private
@@ -34,7 +40,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to new_user_session_url
+      redirect_to login_url
       return false
     end
   end

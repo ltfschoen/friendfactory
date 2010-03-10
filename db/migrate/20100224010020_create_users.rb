@@ -1,8 +1,12 @@
 class CreateUsers < ActiveRecord::Migration
+  
   def self.up
     create_table :users, :force => true do |t|
       t.string    :email, :null => false
       t.string    :handle
+      t.string    :first_name
+      t.string    :last_name
+      t.date      :dob
       t.string    :status
       t.timestamps 
       
@@ -20,6 +24,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :last_login_ip
     end    
     add_index :users, :handle
+    add_index :users, :first_name
+    add_index :users, :last_name
     add_index :users, :persistence_token
     add_index :users, :last_request_at
   end

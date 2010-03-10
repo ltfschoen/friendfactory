@@ -11,13 +11,16 @@
 	<%= javascript_include_tag 'jquery' %>
 	<%- end -%>
 	<%= javascript_include_tag 'jquery-ui' %>
+	<%= javascript_include_tag 'jquery.placeholder' %>
 	<%= javascript_include_tag 'jrails' %>
 	<%= javascript_include_tag 'application' %>
-	<%= stylesheet_link_tag 'blueprint/reset', :media => 'screen, projection' %>		
-	<%= stylesheet_link_tag 'blueprint/liquid', :media => 'screen, projection' %>		
-	<%= stylesheet_link_tag 'blueprint/typography', :media => 'screen, projection' %>		
-	<%# stylesheet_link_tag 'blueprint/plugins/fancy-type/fancy-type', :media => 'screen, projection' -%>
-	<!--[if IE]><%= stylesheet_link_tag '/blueprint/ie', :media => 'screen, projection' %><![endif]-->
+	
+	<%= stylesheet_link_tag 'blueprint/src/reset', :media => 'screen, projection' %>
+	<%= stylesheet_link_tag 'blueprint/src/grid',  :media => 'screen, projection' %>
+	<%= stylesheet_link_tag 'blueprint/src/forms', :media => 'screen, projection' %>
+  <%# stylesheet_link_tag 'blueprint/print', :media => 'print' %>
+	<%# stylesheet_link_tag 'blueprint/liquid', :media => 'screen, projection' %>		
+	<!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/src/ie', :media => 'screen, projection' %><![endif]-->
 	<%= stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen, projection' %>
 	<%= stylesheet_link_tag "#{current_site}/application", :media => 'screen, projection' %>
 	<!--[if lt IE 8]><%= stylesheet_link_tag "#{current_site}/ie", :media => 'screen, projection' %><![endif]-->
@@ -28,6 +31,6 @@
 	<%= yield -%>
 	</div>	
 	<%= render :partial => 'layouts/footer' %>
-	<%= render :partial => 'layouts/feedback' %>
+	<%= render(:partial => 'layouts/feedback') unless Rails.env.development? %>
 </body>
 </html>

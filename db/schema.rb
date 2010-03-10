@@ -14,11 +14,16 @@ ActiveRecord::Schema.define(:version => 20100224010020) do
   create_table "users", :force => true do |t|
     t.string   "email",                             :null => false
     t.string   "handle"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.date     "dob"
     t.string   "status"
-    t.string   "crypted_password",                  :null => false
-    t.string   "password_salt",                     :null => false
-    t.string   "persistence_token",                 :null => false
-    t.string   "perishable_token",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.string   "perishable_token"
     t.integer  "login_count",        :default => 0, :null => false
     t.integer  "failed_login_count", :default => 0, :null => false
     t.datetime "last_request_at"
@@ -26,8 +31,12 @@ ActiveRecord::Schema.define(:version => 20100224010020) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
+
+  add_index "users", ["first_name"], :name => "index_users_on_first_name"
+  add_index "users", ["handle"], :name => "index_users_on_handle"
+  add_index "users", ["last_name"], :name => "index_users_on_last_name"
+  add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
+  add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
 
 end

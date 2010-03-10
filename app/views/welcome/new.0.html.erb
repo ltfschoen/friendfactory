@@ -1,0 +1,80 @@
+<div class='span-16 prepend-4 append-4 last'>
+	<%= image_tag 'logo-big-24t.png', :width => '100%' %>
+	<h1>Welcome!</h1>
+	<h2>We&#146;ve been waiting for you.</h2>
+</div>
+<%# flash[:signup] %>
+<div id='creative' class='prepend-2 span-20 append-2 prepend-top last'>
+	<div id='blurb' class='span-11 colborder'>
+		<p>FriskyHands is an upcoming social networking site designed especially for the Deaf GLBTQ Community and their Friends &amp; Admirers. FriskyHands is set to launch in the Spring of 2010.</p>
+	</div>
+	<div class='span-8 last'>
+		<div id='login' class='last' style='<%=flash[:signup] && "display:none" -%>'>
+			<h3>Log in, right now</h3>
+			<% form_for @user_session, :url => login_path do |f| %>
+				<%= f.text_field :email, :class => 'ui-widget' %>
+				<%= f.error_message_on :email, :prepend_text => 'Your email address ' %>
+			  <%= f.password_field :password, :class => 'ui-widget' %>
+				<%= f.error_message_on :password, :prepend_text => 'Your password ' %>
+				<%= f.submit 'Login!' %>
+				<%= f.button 'Signup!', :class => 'toggle' %>
+			<% end %>
+		</div>
+		<div id='signup' class='last' style='<%= !flash[:signup] && "display:none" -%>'>
+			<h3>Sign up, right now</h3>
+			<% form_for @user, :url => register_path do |f| %>
+				<%= f.text_field :first_name, :class => 'ui-widget' %>
+				<%= f.error_message_on :first_name, :prepend_text => 'Your first name ' %>
+				<%= f.text_field :last_name, :class => 'ui-widget' %>
+				<%= f.error_message_on :last_name, :prepend_text => 'Your last name ' %>
+				<%= f.text_field :email, :class => 'ui-widget' %>
+				<%= f.error_message_on :email, :prepend_text => 'Your email address ' %>
+				<%= f.password_field :password, :class => 'ui-widget'  %>
+				<%= f.error_message_on :password, :prepend_text => 'Your password ' %>				
+				<%= f.password_field :password_confirmation, :class => 'ui-widget'  %>
+				<%= f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation ' %>				
+				<%= f.submit 'Register' %>
+				<%= f.button 'Back', :class => 'toggle' %>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<% javascript_tag do %>
+	function password_prompt(password_field, password_placeholder_field) {
+		password_placeholder_field.focus(function(){
+			jQuery(this).hide();
+			password_field.show().focus();			
+		});
+		password_field.blur(function(){
+			if (jQuery(this).val() == '') {
+				jQuery(this).hide();				
+				password_placeholder_field.show();
+			}
+		});
+	}
+	
+	jQuery(document).ready(function(){
+		jQuery('input:submit, button').button();
+		jQuery('#login button:first, #signup button:first').button({ icons: { primary: 'ui-icon-check' }});
+		jQuery('button.toggle').button();
+		
+		if (jQuery.browser.msie) {
+			jQuery('#user_session_password').before('<%= text_field_tag :user_session_password_placeholder, nil, :placeholder => placeholder_for(:password), :class => 'ui-widget' -%>');			
+			password_prompt(jQuery('#user_session_password'), jQuery('#user_session_password_placeholder'));
+			
+			jQuery('#user_password').before('<%= text_field_tag :user_password_placeholder, nil, :placeholder => placeholder_for(:password), :class => 'ui-widget' %>');
+			password_prompt(jQuery('#user_password'), jQuery('#user_password_placeholder'));
+
+			jQuery('#user_password_confirmation').before('<%= text_field_tag :user_password_confirmation_placeholder, nil, :placeholder => placeholder_for(:password_confirmation), :class => 'ui-widget' %>');							
+			password_prompt(jQuery('#user_password_confirmation'), jQuery('#user_password_confirmation_placeholder'));
+
+			jQuery('#user_session_password, #user_password, #user_password_confirmation').removeAttr('placeholder').hide();
+			jQuery('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');			
+		}
+		jQuery('button.toggle').click(function(){
+			jQuery('div#login, div#signup').toggle();
+			return false;
+		});		
+	});
+<% end %>

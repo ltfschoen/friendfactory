@@ -1,10 +1,19 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :users
-  map.resource  :account, :contoller => 'users'
-  
+  # Welcome controller
+  map.with_options :controller => 'welcome' do |welcome|
+    welcome.login    'login',   :action => 'new',      :conditions => { :method => :get  }
+    welcome.login    'login',   :action => 'login',    :conditions => { :method => :post }
+    welcome.register 'signup',  :action => 'register', :conditions => { :method => :post }
+  end
+
+  # User controller
+  map.resources :users, :except => [ :new, :create ]
+  # map.resource  :account, :controller => 'users'
+
+  # User session controller
   map.resources :user_sessions
-  map.login     'login', :controller => 'user_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :get }
   
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
@@ -35,17 +44,8 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
-  map.root :controller => 'home', :action => 'index',
-    :conditions => { :method => :get }
+  map.root :controller => 'home', :action => 'index', :conditions => { :method => :get }
 
-  map.root :controller => 'home', :action => 'create',
-    :conditions => { :method => :post }
-
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing or commenting them out if you're using named routes and resources.
   # map.connect ':controller/:action/:id'
   # map.connect ':controller/:action/:id.:format'
 end

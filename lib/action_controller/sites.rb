@@ -1,6 +1,6 @@
 module ActionController
   class Base
-    cattr_accessor :default_site
+    cattr_accessor :localhost
   end
   module Sites    
     def self.included(base)      
@@ -18,9 +18,9 @@ module ActionController
     end
     
     def current_site
-      site_name = request.domain.gsub(/\..*$/, '')
-      if site_name =~ /localhost/ && ActionController::Base.default_site
-        site_name = ActionController::Base.default_site 
+      site_name = request.domain && request.domain.gsub(/\..*$/, '')
+      if [ nil, 'localhost' ].include?(site_name)
+        site_name = ActionController::Base.localhost 
       end
       ApplicationController.sites[site_name]
     end            
