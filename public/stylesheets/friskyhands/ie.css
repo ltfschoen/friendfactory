@@ -1,22 +1,12 @@
-/*body.welcome label {
-	position: relative;
-	top: -7px;
-}*/
-
-/*body.welcome input[type=submit] {
-	position: relative;
-	top: 6px;
-}*/
-
 input[type=password] {
-	font-family: Arial;
+	font-family: "Lucida Sans", Tahoma, Helvetica, sans-serif;
 }
 
 .ui-widget {
 	font-size: 0.8em;
 }
 
-button.ui-button {
+.ui-button {
 	margin-right: 0.4em;
 }
 

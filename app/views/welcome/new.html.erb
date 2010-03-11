@@ -39,3 +39,42 @@
 		</div>
 	</div>
 </div>
+
+<% javascript_tag do %>
+	function password_prompt(password_field, password_placeholder_field) {
+		password_placeholder_field.focus(function(){
+			jQuery(this).hide();
+			password_field.show().focus();			
+		});
+		password_field.blur(function(){
+			if (jQuery(this).val() == '') {
+				jQuery(this).hide();				
+				password_placeholder_field.show();
+			}
+		});
+	}
+	
+	jQuery(document).ready(function(){
+		jQuery('input:submit, button').button();
+		jQuery('#login button:first, #signup button:first').button({ icons: { primary: 'ui-icon-check' }});
+		jQuery('button.toggle').button();
+		
+		if (jQuery.browser.msie) {
+			jQuery('#user_session_password').before('<%= text_field_tag :user_session_password_placeholder, nil, :placeholder => placeholder_for(:password), :class => 'ui-widget' -%>');			
+			password_prompt(jQuery('#user_session_password'), jQuery('#user_session_password_placeholder'));
+			
+			jQuery('#user_password').before('<%= text_field_tag :user_password_placeholder, nil, :placeholder => placeholder_for(:password), :class => 'ui-widget' %>');
+			password_prompt(jQuery('#user_password'), jQuery('#user_password_placeholder'));
+
+			jQuery('#user_password_confirmation').before('<%= text_field_tag :user_password_confirmation_placeholder, nil, :placeholder => placeholder_for(:password_confirmation), :class => 'ui-widget' %>');							
+			password_prompt(jQuery('#user_password_confirmation'), jQuery('#user_password_confirmation_placeholder'));
+
+			jQuery('#user_session_password, #user_password, #user_password_confirmation').removeAttr('placeholder').hide();
+			jQuery('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');			
+		}
+		jQuery('button.toggle').click(function(){
+			jQuery('div#login, div#signup').toggle();
+			return false;
+		});		
+	});
+<% end %>
