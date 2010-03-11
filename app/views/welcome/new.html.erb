@@ -1,14 +1,14 @@
-<div class='span-16 prepend-4 append-4 last'>
+<div class='prefix_2 grid_12 suffix_2'>
 	<%= image_tag 'logo-big-24t.png', :width => '100%' %>
 	<h1>Welcome!</h1>
 	<h2>We&#146;ve been waiting for you.</h2>
 </div>
 <%# flash[:signup] %>
-<div id='creative' class='prepend-2 span-20 append-2 prepend-top last'>
-	<div id='blurb' class='span-11 colborder'>
+<div id='creative' class='prefix_2 grid_12 suffix_2'>
+	<div id='blurb' class='grid_6 alpha'>
 		<p>FriskyHands is an upcoming social networking site designed especially for the Deaf GLBTQ Community and their Friends &amp; Admirers. FriskyHands is set to launch in the Spring of 2010.</p>
 	</div>
-	<div class='span-8 last'>
+	<div class='grid_6 omega'>
 		<div id='login' class='last' style='<%=flash[:signup] && "display:none" -%>'>
 			<h3>Log in, right now</h3>
 			<% form_for @user_session, :url => login_path do |f| %>
