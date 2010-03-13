@@ -1,14 +1,23 @@
-/*.container { background: url(/stylesheets/blueprint/src/grid.png; } */
+/*.container_16 { background: url(/stylesheets/blueprint/src/grid.png; } */
 
 p, h1, h2, h3, label, input, .formError {
 	font-family: "Gill Sans MT", "Gill Sans", "Lucida Sans", Tahoma, Helvetica, sans-serif;
 }
 
-.container {
+.container_16 {
 	margin-bottom: 4em;
 }
 
+.prepend-top {
+  margin-top:1.5em;
+}
+
+.append-bottom {
+  margin-bottom:1.5em;
+}
+
 .footer {
+	clear: both;
 	text-align: center;	
 	color: #501518;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
@@ -34,7 +43,9 @@ textarea.placeholder {
 .ui-button .ui-button-text { line-height: 1.2em;  }
 
 /* MJB Fixed Changed .ui-icon-primary to .ui-button-icon-primary */
-.ui-button-text-icon .ui-button-icon-primary, .ui-button-text-icons .ui-button-icon-primary, .ui-button-icons-only .ui-button-icon-primary {
+.ui-button-text-icon .ui-button-icon-primary,
+.ui-button-text-icons .ui-button-icon-primary,
+.ui-button-icons-only .ui-button-icon-primary {
 	left: .5em;
 }
 
@@ -43,10 +54,14 @@ body.welcome {
 	background-color: #9C180C;
 }
 
-body.welcome .container {
+body.welcome .container_16 {
 	padding-top: 4em;
 	min-height: 600px;
 	text-align: center;
+}
+
+body.welcome img {
+	width: 100%;
 }
 
 body.welcome h1 {
@@ -86,7 +101,7 @@ body.welcome div#blurb {
 }
 
 body.welcome div#blurb p {
-	padding: 0 1.2em;
+	padding-right: 1em;
 	font-size: 1.6em;
 	color: #501518;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);

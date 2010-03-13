@@ -1,5 +1,5 @@
-input[type=password] {
-	font-family: "Lucida Sans", Tahoma, Helvetica, sans-serif;
+body.welcome input {
+	font-family: Verdana, Tahoma, Helvetica, sans-serif;
 }
 
 .ui-widget {

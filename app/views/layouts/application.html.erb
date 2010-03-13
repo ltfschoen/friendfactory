@@ -15,27 +15,19 @@
 	<%= javascript_include_tag 'jrails' %>
 	<%= javascript_include_tag 'application' %>
 	
-	<%= stylesheet_link_tag 'blueprint/src/reset', :media => 'screen, projection' %>
-	<%# stylesheet_link_tag 'blueprint/src/grid',  :media => 'screen, projection' %>
-	<%= stylesheet_link_tag 'blueprint/src/forms', :media => 'screen, projection' %>
-  <%# stylesheet_link_tag 'blueprint/print', :media => 'print' %>
-	<%# stylesheet_link_tag 'blueprint/liquid', :media => 'screen, projection' %>		
-	<!--[if lt IE 8]><%# stylesheet_link_tag 'blueprint/src/ie', :media => 'screen, projection' %><![endif]-->
-	
-	<%# stylesheet_link_tag '960gs/reset', :media => 'screen' -%>
-	<%# stylesheet_link_tag '960gs/text', :media => 'screen' -%>
+	<%= stylesheet_link_tag 'reset', :media => 'screen, projection' %>
+	<%= stylesheet_link_tag 'forms', :media => 'screen, projection' %>	
 	<%= stylesheet_link_tag '960gs/960', :media => 'screen' -%>
 	<%# stylesheet_link_tag '960gs/nav', :media => 'screen' -%>
 	<!--[if IE 6]><%= stylesheet_link_tag '960gs/ie6' -%><![endif]-->
-	<!--[if IE 7]><%= stylesheet_link_tag '960gs/ie' -%><![endif]-->
-	
+	<!--[if IE 7]><%= stylesheet_link_tag '960gs/ie' -%><![endif]-->	
 	<%= stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen, projection' %>
 	<%= stylesheet_link_tag "#{current_site}/application", :media => 'screen, projection' %>
 	<!--[if lt IE 8]><%= stylesheet_link_tag "#{current_site}/ie", :media => 'screen, projection' %><![endif]-->
 </head>
 <body class='<%= layout %>'>
 	<%= render :partial => 'layouts/header' %>
-	<div class='container_16'>
+	<div class='container_16 clearfix'>
 	<%= yield -%>
 	</div>	
 	<%= render :partial => 'layouts/footer' %>
