@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 
   before_filter :require_no_user
 
-  def new
+  def index
     @user = User.new
     @user_session = UserSession.new
   end
@@ -16,7 +16,7 @@ class WelcomeController < ApplicationController
       else
         flash[:signup] = true
         @user_session  = UserSession.new
-        format.html { render :action => 'new' }
+        format.html { render :action => :index }
       end
     end
   end
@@ -30,7 +30,7 @@ class WelcomeController < ApplicationController
         format.html { redirect_to root_path }
       else
         @user = User.new
-        format.html { render :action => :new }
+        format.html { render :action => :index }
       end
     end
   end

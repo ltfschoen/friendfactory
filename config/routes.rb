@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Welcome controller
   map.with_options :controller => 'welcome' do |welcome|
-    welcome.login    'login',   :action => 'new',      :conditions => { :method => :get  }
+    welcome.login    'login',   :action => 'index',    :conditions => { :method => :get  }
     welcome.login    'login',   :action => 'login',    :conditions => { :method => :post }
     welcome.register 'signup',  :action => 'register', :conditions => { :method => :post }
   end
