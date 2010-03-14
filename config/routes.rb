@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :messages
+
 
   # Welcome controller
   map.with_options :controller => 'welcome' do |welcome|

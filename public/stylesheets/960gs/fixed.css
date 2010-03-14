@@ -1,0 +1,422 @@
+/*
+	Variable Grid System.
+	Learn more ~ http://www.spry-soft.com/grids/
+	Based on 960 Grid System - http://960.gs/
+
+	Licensed under GPL and MIT.
+*/
+
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+.container_16_fixed {
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+}
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.container_16_fixed .grid_1,
+.container_16_fixed .grid_2,
+.container_16_fixed .grid_3,
+.container_16_fixed .grid_4,
+.container_16_fixed .grid_5,
+.container_16_fixed .grid_6,
+.container_16_fixed .grid_7,
+.container_16_fixed .grid_8,
+.container_16_fixed .grid_9,
+.container_16_fixed .grid_10,
+.container_16_fixed .grid_11,
+.container_16_fixed .grid_12,
+.container_16_fixed .grid_13,
+.container_16_fixed .grid_14,
+.container_16_fixed .grid_15,
+.container_16_fixed .grid_16 {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.container_16_fixed .alpha {
+	margin-left: 0;
+}
+
+.container_16_fixed .omega {
+	margin-right: 0;
+}
+
+/* Grid >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16_fixed .grid_1 {
+	width:40px;
+}
+
+.container_16_fixed .grid_2 {
+	width:100px;
+}
+
+.container_16_fixed .grid_3 {
+	width:160px;
+}
+
+.container_16_fixed .grid_4 {
+	width:220px;
+}
+
+.container_16_fixed .grid_5 {
+	width:280px;
+}
+
+.container_16_fixed .grid_6 {
+	width:340px;
+}
+
+.container_16_fixed .grid_7 {
+	width:400px;
+}
+
+.container_16_fixed .grid_8 {
+	width:460px;
+}
+
+.container_16_fixed .grid_9 {
+	width:520px;
+}
+
+.container_16_fixed .grid_10 {
+	width:580px;
+}
+
+.container_16_fixed .grid_11 {
+	width:640px;
+}
+
+.container_16_fixed .grid_12 {
+	width:700px;
+}
+
+.container_16_fixed .grid_13 {
+	width:760px;
+}
+
+.container_16_fixed .grid_14 {
+	width:820px;
+}
+
+.container_16_fixed .grid_15 {
+	width:880px;
+}
+
+.container_16_fixed .grid_16 {
+	width:940px;
+}
+
+
+
+/* Prefix Extra Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16_fixed .prefix_1 {
+	padding-left:60px;
+}
+
+.container_16_fixed .prefix_2 {
+	padding-left:120px;
+}
+
+.container_16_fixed .prefix_3 {
+	padding-left:180px;
+}
+
+.container_16_fixed .prefix_4 {
+	padding-left:240px;
+}
+
+.container_16_fixed .prefix_5 {
+	padding-left:300px;
+}
+
+.container_16_fixed .prefix_6 {
+	padding-left:360px;
+}
+
+.container_16_fixed .prefix_7 {
+	padding-left:420px;
+}
+
+.container_16_fixed .prefix_8 {
+	padding-left:480px;
+}
+
+.container_16_fixed .prefix_9 {
+	padding-left:540px;
+}
+
+.container_16_fixed .prefix_10 {
+	padding-left:600px;
+}
+
+.container_16_fixed .prefix_11 {
+	padding-left:660px;
+}
+
+.container_16_fixed .prefix_12 {
+	padding-left:720px;
+}
+
+.container_16_fixed .prefix_13 {
+	padding-left:780px;
+}
+
+.container_16_fixed .prefix_14 {
+	padding-left:840px;
+}
+
+.container_16_fixed .prefix_15 {
+	padding-left:900px;
+}
+
+
+
+/* Suffix Extra Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16_fixed .suffix_1 {
+	padding-right:60px;
+}
+
+.container_16_fixed .suffix_2 {
+	padding-right:120px;
+}
+
+.container_16_fixed .suffix_3 {
+	padding-right:180px;
+}
+
+.container_16_fixed .suffix_4 {
+	padding-right:240px;
+}
+
+.container_16_fixed .suffix_5 {
+	padding-right:300px;
+}
+
+.container_16_fixed .suffix_6 {
+	padding-right:360px;
+}
+
+.container_16_fixed .suffix_7 {
+	padding-right:420px;
+}
+
+.container_16_fixed .suffix_8 {
+	padding-right:480px;
+}
+
+.container_16_fixed .suffix_9 {
+	padding-right:540px;
+}
+
+.container_16_fixed .suffix_10 {
+	padding-right:600px;
+}
+
+.container_16_fixed .suffix_11 {
+	padding-right:660px;
+}
+
+.container_16_fixed .suffix_12 {
+	padding-right:720px;
+}
+
+.container_16_fixed .suffix_13 {
+	padding-right:780px;
+}
+
+.container_16_fixed .suffix_14 {
+	padding-right:840px;
+}
+
+.container_16_fixed .suffix_15 {
+	padding-right:900px;
+}
+
+
+
+/* Push Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16_fixed .push_1 {
+	left:60px;
+}
+
+.container_16_fixed .push_2 {
+	left:120px;
+}
+
+.container_16_fixed .push_3 {
+	left:180px;
+}
+
+.container_16_fixed .push_4 {
+	left:240px;
+}
+
+.container_16_fixed .push_5 {
+	left:300px;
+}
+
+.container_16_fixed .push_6 {
+	left:360px;
+}
+
+.container_16_fixed .push_7 {
+	left:420px;
+}
+
+.container_16_fixed .push_8 {
+	left:480px;
+}
+
+.container_16_fixed .push_9 {
+	left:540px;
+}
+
+.container_16_fixed .push_10 {
+	left:600px;
+}
+
+.container_16_fixed .push_11 {
+	left:660px;
+}
+
+.container_16_fixed .push_12 {
+	left:720px;
+}
+
+.container_16_fixed .push_13 {
+	left:780px;
+}
+
+.container_16_fixed .push_14 {
+	left:840px;
+}
+
+.container_16_fixed .push_15 {
+	left:900px;
+}
+
+
+
+/* Pull Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16_fixed .pull_1 {
+	left:-60px;
+}
+
+.container_16_fixed .pull_2 {
+	left:-120px;
+}
+
+.container_16_fixed .pull_3 {
+	left:-180px;
+}
+
+.container_16_fixed .pull_4 {
+	left:-240px;
+}
+
+.container_16_fixed .pull_5 {
+	left:-300px;
+}
+
+.container_16_fixed .pull_6 {
+	left:-360px;
+}
+
+.container_16_fixed .pull_7 {
+	left:-420px;
+}
+
+.container_16_fixed .pull_8 {
+	left:-480px;
+}
+
+.container_16_fixed .pull_9 {
+	left:-540px;
+}
+
+.container_16_fixed .pull_10 {
+	left:-600px;
+}
+
+.container_16_fixed .pull_11 {
+	left:-660px;
+}
+
+.container_16_fixed .pull_12 {
+	left:-720px;
+}
+
+.container_16_fixed .pull_13 {
+	left:-780px;
+}
+
+.container_16_fixed .pull_14 {
+	left:-840px;
+}
+
+.container_16_fixed .pull_15 {
+	left:-900px;
+}
+
+
+
+
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}

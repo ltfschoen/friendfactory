@@ -13,11 +13,10 @@
 	<%= javascript_include_tag 'jquery-ui' %>
 	<%= javascript_include_tag 'jquery.placeholder' %>
 	<%= javascript_include_tag 'jrails' %>
-	<%= javascript_include_tag 'application' %>
-	
+	<%= javascript_include_tag 'application' %>	
 	<%= stylesheet_link_tag 'reset', :media => 'screen, projection' %>
 	<%= stylesheet_link_tag 'forms', :media => 'screen, projection' %>	
-	<%= stylesheet_link_tag '960gs/grid',  :media => 'screen' -%>
+	<%= stylesheet_link_tag '960gs/fluid',  :media => 'screen' -%>
 	<%# stylesheet_link_tag '960gs/nav', :media => 'screen' -%>
 	<!--[if IE 6]><%= stylesheet_link_tag '960gs/ie6' -%><![endif]-->
 	<!--[if IE 7]><%= stylesheet_link_tag '960gs/ie' -%><![endif]-->	
@@ -29,7 +28,7 @@
 <body class='<%= [ current_site, current_layout ].compact * ' ' -%>'>
 	<%= fluid_container unless yield(:current_container) -%>
 	<%= render(:partial => "layouts/#{current_site}/#{current_layout}_header") rescue render(:partial => "layouts/#{current_site}/header") rescue nil -%>
-	<div class='<%= yield(:current_container) -%> clearfix'>
+	<div class='container <%= yield(:current_container) -%> clearfix'>
 	<%= yield -%>
 	</div>	
 	<%= render(:partial => "layouts/#{current_site}/footer") rescue nil -%>

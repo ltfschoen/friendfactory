@@ -26,8 +26,8 @@ module ApplicationHelper
   end
   
   def fixed_container
-    content_for(:current_container, 'container_16f')
-    content_for(:head, stylesheet_link_tag(File.join('960gs', '960f'), :media => 'screen'))
+    content_for(:current_container, 'container_16_fixed')
+    content_for(:head, stylesheet_link_tag(File.join('960gs', 'fixed'), :media => 'screen'))
   end
 
   def fluid_container
