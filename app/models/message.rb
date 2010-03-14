@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
 
-  acts_as_tree
+  acts_as_tree :order => 'created_at asc'
 
   alias_attribute :recipient,    :receiver
   alias_attribute :recipient_id, :receiver_id

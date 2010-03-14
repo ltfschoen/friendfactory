@@ -9,7 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100224010020) do
+ActiveRecord::Schema.define(:version => 20100314022317) do
+
+  create_table "messages", :force => true do |t|
+    t.integer  "sender_id",           :null => false
+    t.integer  "receiver_id",         :null => false
+    t.integer  "parent_id"
+    t.text     "subject"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "read_at"
+    t.datetime "sender_deleted_at"
+    t.datetime "receiver_deleted_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                             :null => false

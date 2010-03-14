@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :messages
-
 
   # Welcome controller
   map.with_options :controller => 'welcome' do |welcome|
@@ -9,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
     welcome.register 'signup',  :action => 'register', :conditions => { :method => :post }
   end
 
-  # User controller
+  # User and Account controllers
   map.resources :users, :except => [ :new, :create ]
   # map.resource  :account, :controller => 'users'
 
@@ -17,7 +15,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :get }
 
+  # Profile controller
   map.resource :profile
+
+  # Message controller
+  map.resources :messages
   
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
