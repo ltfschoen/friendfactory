@@ -1,11 +1,11 @@
 /*.container_16 { background: url(/stylesheets/blueprint/src/grid.png; } */
 
-p, h1, h2, h3, label, input, .formError {
+body, p, h1, h2, h3, label, input, a, .formError {
 	font-family: "Gill Sans MT", "Gill Sans", "Lucida Sans", Tahoma, Helvetica, sans-serif;
 }
 
-.container_16 {
-	margin-bottom: 4em;
+.footer {
+	margin-top: 4em;
 }
 
 .prepend-top {
@@ -49,60 +49,38 @@ textarea.placeholder {
 	left: .5em;
 }
 
-body.welcome {
-	background: url(/images/background-red-24.png) no-repeat top center;	
+div.header {
+	background: url(/images/friskyhands/header-background-red-24.png) no-repeat top center;
 	background-color: #9C180C;
+	padding: 0 0.5em;
+	height: 62px;
 }
 
-body.welcome .container_16 {
-	padding-top: 4em;
-	min-height: 600px;
-	text-align: center;
+div.header img {
+	width: 160px;
+	margin-right: 10px;
 }
 
-body.welcome img {
-	width: 100%;
-}
-
-body.welcome h1 {
-	font-size: 4em;
-	text-shadow: 1px 2px 1px #701518;
+div.header a {
 	color: #FFF;
+	text-decoration: none;
+	display:block;
+	float:left;
+	padding:0 1em;
 }
 
-body.welcome h2 {
-	font-size: 2em;
-	line-height: 1.4em;
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+div.header ul.nav {
+	padding-top: 20px;
 }
 
-body.welcome h3 {
-	color: #FFF;
-	font-size: 1.4em;
-	text-shadow: 1px 2px 1px #701518
+div.header ul.nav li {
+	cursor:pointer;
+	float:left;
+	text-align:center;
+	list-style-type:none;
+	font-weight:normal;	
 }
 
-body div.formError {
-	color: #FFF;
-}
-
-body.welcome div#creative {
-	text-align: left;
-}
-
-body.welcome div#login,
-body.welcome div#signup {
-	width: 100%;
-}
-
-body.welcome div#blurb {
-	min-height: 20em;
-}
-
-body.welcome div#blurb p {
-	padding-right: 1em;
-	font-size: 1.6em;
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+div.header ul.nav li.secondary {
+	float: right;
 }

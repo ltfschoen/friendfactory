@@ -1,0 +1,53 @@
+body.welcome {
+	background: url(/images/friskyhands/background-red-24.png) no-repeat top center;	
+	background-color: #9C180C;
+}
+
+body.welcome .container_16f {
+	padding-top: 4em;
+	text-align: center;
+}
+
+body.welcome img {
+	width: 100%;
+}
+
+body.welcome h1 {
+	font-size: 4em;
+	text-shadow: 1px 2px 1px #701518;
+	color: #FFF;
+}
+
+body.welcome h2 {
+	font-size: 2em;
+	line-height: 1.4em;
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+body.welcome h3 {
+	color: #FFF;
+	font-size: 1.4em;
+	text-shadow: 1px 2px 1px #701518
+}
+
+body div.formError {
+	color: #FFF;
+}
+
+body.welcome div#creative {
+	text-align: left;
+	padding-bottom: 4em;
+}
+
+body.welcome div#login,
+body.welcome div#signup {
+	width: 100%;
+}
+
+body.welcome div#blurb p {
+	padding-right: 1em;
+	font-size: 1.6em;
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}

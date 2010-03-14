@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   # User session controller
   map.resources :user_sessions
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :get }
+
+  map.resource :profile
   
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

@@ -1,0 +1,13 @@
+<div class='header'>
+<div class='container_16'>
+	<div class='grid_3'>
+			<%= image_tag 'logo-24t.png' -%>
+	</div>
+	<div class='grid_13'>
+		<ul class='nav'>
+			<li><%= link_to 'Profile', edit_profile_path %></li>
+			<li class='secondary'><%= link_to 'Logout', user_session_path(current_user), :method => :delete %></li>
+		</ul>
+	</div>
+</div>
+</div>

@@ -1,5 +1,5 @@
 module WelcomeHelper
-  def layout    
-    super << ' welcome'
+  def current_layout    
+    'welcome'
   end
 end  
