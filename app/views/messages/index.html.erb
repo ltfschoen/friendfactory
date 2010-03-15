@@ -1,18 +1,27 @@
-<h1>Listing messages</h1>
-
-<table>
-  <tr>
-  </tr>
-
-<% @messages.each do |message| %>
-  <tr>
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+<div class='grid_3'>
+sidebar
+</div>
+<div class='grid_13'>
+<table class='messages' cellspacing='0'>
+<thead>
+	<tr>
+	<th colspan='4'><h1>Messages</h1></th>	
+	</tr>	
+</thead>
+<tfoot>
+	<tr>
+	<td>&nbsp;</td>
+	</tr>
+</tfoot>
+<tbody>
+<%= render :partial => 'message', :collection => @messages %>		
+</tbody>
 </table>
+</div>
 
-<br />
-
-<%= link_to 'New message', new_message_path %>
+<%- javascript_tag do -%>
+	jQuery(document).ready(function(){
+		jQuery('button.view').button({ icons: { primary: 'ui-icon-triangle-1-s' }, text: false });
+		jQuery('button.delete').button({ icons: { primary: 'ui-icon-close' }, text: false });
+	});
+<%- end -%>

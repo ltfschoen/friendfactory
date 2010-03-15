@@ -1,34 +1,39 @@
 class MessagesController < ApplicationController
-  # GET /messages
-  # GET /messages.xml
+  
+  before_filter :require_user
+  
+  helper :users
+  
   def index
-    @messages = Message.all
-
+    @messages = current_user.received_messages
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @messages }
+      format.html
+    end
+  end
+  
+  def sent
+    @messages = current_user.sent_messages
+    respond_to do |format|
+      format.html
     end
   end
 
-  # GET /messages/1
-  # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @message }
+      if [ @message.sender, @message.receiver ].include?(current_user)
+        format.html
+      else
+        @messages = current_user.received_messages
+        render :action => 'index'
+      end
     end
   end
 
-  # GET /messages/new
-  # GET /messages/new.xml
   def new
     @message = Message.new
-
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @message }
+      format.html
     end
   end
 

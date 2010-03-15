@@ -5,7 +5,8 @@
 	</div>
 	<div class='grid_13'>
 		<ul class='nav'>
-			<li><%= link_to 'Profile', edit_profile_path %></li>
+			<li><%= link_to 'Profile', edit_profile_path -%></li>
+			<li><%= link_to 'Messages', messages_path -%></li>
 			<li class='secondary'><%= link_to 'Logout', user_session_path(current_user), :method => :delete %></li>
 		</ul>
 	</div>

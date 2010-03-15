@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :profile
 
   # Message controller
-  map.resources :messages
+  map.resources :messages, :collection => { :sent => :get }
   
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
@@ -50,7 +50,8 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
-  map.root :controller => 'home', :action => 'index', :conditions => { :method => :get }
+  # map.root :controller => 'home', :action => 'index', :conditions => { :method => :get }
+  map.root :controller => 'messages', :action => 'index', :conditions => { :method => :get }
 
   # map.connect ':controller/:action/:id'
   # map.connect ':controller/:action/:id.:format'

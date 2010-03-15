@@ -21,8 +21,9 @@ module ApplicationHelper
     end
   end
   
-  def image_tag(source, opts = {})
-    super(File.join(current_site.name, source), opts)
+  def image_tag(source, opts = {})    
+    source = File.join(current_site.name, source) unless opts.delete(:factory_image) == true
+    super(source, opts)
   end
   
   def fixed_container
