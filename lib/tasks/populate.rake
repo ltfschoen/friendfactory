@@ -32,13 +32,7 @@ namespace :populate do
   desc 'Populate the database with some data'
   task :messages => :environment do
     users = User.all
-    Message.populate(100) do |message|
-      message.sender_id   = users[rand(users.length)].id
-      message.receiver_id = users[rand(users.length)].id
-      message.subject     = Faker::Company.catch_phrase
-      message.body        = Faker::Lorem.sentences * ' '
-    end
-    adam = User.find_by_email(adam_attrs[:email])
+    adam  = User.find_by_email(adam_attrs[:email])
     if adam
       Message.populate(50) do |message|
         message.sender_id   = adam.id
@@ -51,6 +45,7 @@ namespace :populate do
         message.receiver_id = adam.id
         message.subject     = Faker::Company.catch_phrase
         message.body        = Faker::Lorem.sentences * ' '
+        message.created_at  = 
       end
     end
   end  

@@ -1,0 +1,2 @@
+git checkout origin/gh-pages -b gh-pages
+http://pages.github.com/

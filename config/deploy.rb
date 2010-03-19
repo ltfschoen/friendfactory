@@ -1,9 +1,9 @@
 set :application, "friskyfactory"
 
 set :scm,        "git"
-set :repository, "git://github.com/mjbamford/friskyfactory.git"
+set :repository, "git@github.com:mjbamford/friskyfactory.git"
 set :user,       "mrcap"
-# set :runner,   "mrcap"
+set :runner,     "mrcap"
 
 role :app, "friskyfactory.tagwaymedia.com"
 role :web, "friskyfactory.tagwaymedia.com"
