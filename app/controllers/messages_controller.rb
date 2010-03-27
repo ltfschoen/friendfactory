@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   helper :users
   
   def index
-    @messages = current_user.received_messages
+    @message_threads = current_user.message_threads
     respond_to do |format|
       format.html
     end

@@ -11,6 +11,9 @@ class CreateMessages < ActiveRecord::Migration
       t.datetime            :sender_deleted_at
       t.datetime            :receiver_deleted_at
     end
+    add_index :messages, :sender_id
+    add_index :messages, :receiver_id
+    add_index :messages, :parent_id
   end
 
   def self.down

@@ -15,11 +15,11 @@ h1 {
 }
 
 .prepend-top {
-  margin-top:1.5em;
+	margin-top:1.5em;
 }
 
 .append-bottom {
-  margin-bottom:1.5em;
+	margin-bottom:1.5em;
 }
 
 .footer {
@@ -31,7 +31,7 @@ h1 {
 
 div.formError {
 	padding-left: 6px;
-	font-size: 0.8em;
+	font-size: 0.9em;
 }
 
 input[type=text],
@@ -46,7 +46,9 @@ textarea.placeholder {
 	color: #999 !important;
 }
 
-.ui-button .ui-button-text { line-height: 1.2em;  }
+/*.ui-button .ui-button-text {
+	line-height: 1.2em;
+}*/
 
 /* MJB Fixed Changed .ui-icon-primary to .ui-button-icon-primary */
 .ui-button-text-icon .ui-button-icon-primary,
@@ -91,53 +93,54 @@ div.header ul.nav a {
 	padding:0 1em 0 0;
 }
 
+img.avatar {
+	width: 48px;
+}
+
 table.messages {
 	width: 100%;
 }
 
-table.messages tr.message td {
+table.messages td {
 	padding-bottom: 1.6em;
 	padding-right: 1em;
 }
 
-table.messages tr.message img.avatar {
-	width: 48px;
+table.messages td.avatar {
+	width: 1%;
 }
 
-table.messages tr.message td.full_name {
-	width: 10%;
+table.messages tr.message td.avatar {
+	text-align: right;
 }
 
-table.messages tr.message span.full_name {
-	display: block;
+table.messages tr.message.head td.avatar {
+	text-align: left;
 }
 
-table.messages tr.message span.created_at {
-	display: block;
-	color: gray;	
-	font-size: 0.8em;
+table.messages td.actions {
+	white-space: nowrap;
+	padding-right: 0px;
 }
 
 table.messages tr.message td.sender {
-	width: 20%;
+	width: 1%;
+	white-space: nowrap;
+}
+
+table.messages tr.message .created_at {
+	color: gray;	
+	font-size: 0.9em;
+}
+
+table.messages tr.message .subject {
+	font-weight: bold;
 }
 
 table.messages tr.message td.detail {
 	width: 80%;
 }
 
-table.messages tr.message span.subject {
-	font-weight: bold;
-	display: block;
+table.messages textarea {
+	height: 3em;
 }
-
-table.messages tr.message span.body {
-	display: block;
-}
-
-table.messages tr.message td.actions {
-	white-space: nowrap;
-	padding-right: 0px;
-}
-
-

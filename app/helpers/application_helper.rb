@@ -33,6 +33,22 @@ module ApplicationHelper
 
   def fluid_container
     content_for(:current_container, 'container_16')
-  end  
+  end
+  
+  def sidebar
+    render(:partial => "layouts/#{current_site}/sidebar")
+  end
+  
+  def gutter
+    render(:partial => "layouts/#{current_site}/gutter")
+  end
+  
+  def button_tag(text = nil, opts = {})
+    content_tag(:button, text, opts)
+  end
+  
+  def button_tag_if(boolean, text = nil, opts = {})
+    button_tag(text, opts) if boolean
+  end
   
 end

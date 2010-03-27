@@ -1,54 +1,50 @@
-desc 'Populate the database'
-task :populate => 'populate:all'
+namespace :db do  
 
-namespace :populate do  
-  task :all => [ :clean, :adam, :users, :messages ]
+  desc 'Populate the database'
+  task :populate => 'populate:all'  
+  
+  namespace :populate do
+    
+    task :all => [ :users, :messages ]
 
-  task :clean => :environment do
-    User.delete_all
-    Message.delete_all
-  end
-  
-  task :adam => :environment do
-    User.create(adam_attrs)
-  end
-  
-  desc 'Populate the database with user data'
-  task :users => :environment do
-    ids = []
-    User.populate(100) do |user|
-      user.email      = Faker::Internet.email
-      user.first_name = Faker::Name.first_name
-      user.last_name  = Faker::Name.last_name      
-      ids << user.id
-    end
-    User.find_all_by_id(ids).each do |user|
-      user.password = 'test'
-      user.password_confirmation = 'test'
-      user.save
-    end
-  end
-  
-  desc 'Populate the database with some data'
-  task :messages => :environment do
-    users = User.all
-    adam  = User.find_by_email(adam_attrs[:email])
-    if adam
-      Message.populate(50) do |message|
-        message.sender_id   = adam.id
-        message.receiver_id = users[rand(users.length)].id
-        message.subject     = Faker::Company.catch_phrase
-        message.body        = Faker::Lorem.sentences * ' '
+    desc 'Populate the database with user data'
+    task :users => :environment do
+      User.delete_all
+      User.create(adam_attrs)
+      ids = []
+      User.populate(100) do |user|
+        user.email      = Faker::Internet.email
+        user.first_name = Faker::Name.first_name
+        user.last_name  = Faker::Name.last_name      
+        ids << user.id
       end
-      Message.populate(50) do |message|
-        message.sender_id   = users[rand(users.length)].id
-        message.receiver_id = adam.id
-        message.subject     = Faker::Company.catch_phrase
-        message.body        = Faker::Lorem.sentences * ' '
-        message.created_at  = 
+      User.find_all_by_id(ids).each do |user|
+        user.password = 'test'
+        user.password_confirmation = 'test'
+        user.save
       end
     end
-  end  
+  
+    desc 'Populate the database with some data'
+    task :messages => :environment do
+      adam  = User.find_by_email(adam_attrs[:email])
+      users = User.all
+      if adam && !users.empty?        
+        Message.delete_all
+        
+        # Adam's received messages
+        create_message(users[rand(users.length)], adam)
+        create_thread(users[rand(users.length)], adam, :length => 3)
+        create_thread(users[rand(users.length)], adam, :length => 5)
+        
+        # create_message(adam, users[rand(users.length)])
+        # create_thread(adam, users[rand(users.length)], :length => 2)
+        # create_thread(adam, users[rand(users.length)], :length => 3)
+        # create_thread(users[rand(users.length)], adam, :length => 2)
+        # create_thread(users[rand(users.length)], adam, :length => 3)
+      end
+    end
+  end
 end
 
 def adam_attrs
@@ -58,5 +54,31 @@ def adam_attrs
     attrs[:last_name]  = 'Ant'
     attrs[:password]   = 'test'
     attrs[:password_confirmation] = 'test'
+  end
+end
+
+def create_message(sender, receiver, created_at = Time.now)
+  Message.record_timestamps = false
+  message = sender.send_message(
+      :receiver => receiver,
+      :body     => (Faker::Lorem.sentences * ' '))
+  message[:created_at] = created_at
+  message.save
+  Message.record_timestamps = true
+  message
+end
+
+def create_thread(sender, receiver, opts = {})
+  length = opts[:length].to_i
+  if length > 0
+    start_date = Time.now - length.days
+    message = create_message(sender, receiver, start_date)
+    Message.record_timestamps = false
+    2.upto(length) do |count|
+      message = message.reply(:body => (Faker::Lorem.sentences * ' '))
+      message[:created_at] = start_date + count.days 
+      message.save
+    end
+    Message.record_timestamps = true
   end
 end

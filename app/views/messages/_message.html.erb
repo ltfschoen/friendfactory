@@ -1,15 +1,9 @@
-<tr class='message' id='<%# @message.dom_id %>'>
-<td class='avatar'><%= user_image_tag(message.sender.avatar, :class => 'avatar') -%></td>	
-<td class='sender'>
-<span class='full_name'><%= message.sender.full_name -%></span>
-<span class='created_at'><%= time_ago_in_words(message.created_at) -%>&nbsp;ago</span>
-</td>	
-<td class='detail'>
-<span class='subject'><%= message.subject -%></span>
-<span class='body'><%= textilize(truncate(message.body, 120)) -%></span>
-</td>	
-<td class='actions'>
-<button class='view'>View</button>
-<button class='delete'>Delete</button>
-</td>
-</tr>
+<% content_tag_for(:tr, message, :class => head) do %>
+	<td class='avatar' colspan='2'><%= user_image_tag(message.sender.avatar, :class => 'avatar') -%></td>	
+	<td class='detail'>
+		<span class='full_name'><%= message.sender.full_name -%></span>
+		<span class='created_at'><%= time_ago_in_words(message.created_at) -%>&nbsp;ago</span>
+		<span class='body'><%= textilize(message.body) -%></span>
+	</td>
+	<td>&nbsp;</td>
+<% end %>

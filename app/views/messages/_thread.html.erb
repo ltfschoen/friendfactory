@@ -1,0 +1,27 @@
+<% thread.flatten! %>
+<% head = thread.shift %>
+<% content_tag_for(:tr, head) do %>	
+	<td class='avatar'>
+		<%= user_image_tag(head.sender.avatar, :class => 'avatar') -%>
+	</td>
+	<td class='sender'>
+		<div class='full_name'><%= head.sender.full_name -%></div>
+		<div class='created_at'><%= time_ago_in_words(head.created_at) -%>&nbsp;ago</div>
+	</td>
+	<td class='detail'>
+		<div class='body'><%= textilize(head.body) -%></div>
+	</td>
+	<td class='actions'>
+		<button class='pencil'>Pencil</button>
+		<%= button_tag_if(thread.length > 1, 'View', :class => 'view') %>
+		<button class='delete'>Delete</button>		
+	</td>
+<% end %>
+<tr>
+	<td colspan='2'>&nbsp;</td>
+	<td>
+		<textarea></textarea>
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<%= render :partial => 'message', :collection => thread, :locals => { :head => dom_id(head) } %>
