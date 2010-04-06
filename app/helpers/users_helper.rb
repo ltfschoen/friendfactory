@@ -1,7 +1,8 @@
 module UsersHelper
   
-  def user_image_tag(image, opts = {})
-    image_tag('portrait_default.gif', opts.merge(:factory_image => true))
+  def avatar_image_tag(source, opts = {})
+    klass = [ opts.delete(:class), 'avatar' ].compact * ' '
+    image_tag(source, opts.merge(:class => klass))
   end
   
 end

@@ -19,7 +19,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :profile
 
   # Message controller
-  map.resources :messages, :collection => { :sent => :get }
+  map.resources :messages, :collection => { :sent => :get } do |message|
+    message.reply 'reply', :controller => 'messages', :action => 'reply', :conditions => { :method => :post }
+  end
   
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

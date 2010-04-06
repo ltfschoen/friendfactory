@@ -97,50 +97,71 @@ img.avatar {
 	width: 48px;
 }
 
-table.messages {
-	width: 100%;
+img.avatar.small {
+	width: 28px;
 }
 
-table.messages td {
-	padding-bottom: 1.6em;
+.messages .message {
+	clear: both;
+	padding-top: 1em;
+}
+
+.messages .message img {
+	float: left;
 	padding-right: 1em;
 }
 
-table.messages td.avatar {
-	width: 1%;
-}
-
-table.messages tr.message td.avatar {
-	text-align: right;
-}
-
-table.messages tr.message.head td.avatar {
-	text-align: left;
-}
-
-table.messages td.actions {
-	white-space: nowrap;
-	padding-right: 0px;
-}
-
-table.messages tr.message td.sender {
-	width: 1%;
+.messages .message .sender {
 	white-space: nowrap;
 }
 
-table.messages tr.message .created_at {
+.messages .message .created_at {
 	color: gray;	
 	font-size: 0.9em;
 }
 
-table.messages tr.message .subject {
+.messages .message .subject {
 	font-weight: bold;
 }
 
-table.messages tr.message td.detail {
-	width: 80%;
+.messages .message textarea {
+	height: 5em;
 }
 
-table.messages textarea {
-	height: 3em;
+.messages .actions {
+	white-space: nowrap;
+	padding-right: 0px;
+	text-align: left;
+}
+
+.messages .message.thread {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.messages .message .reply {
+	padding: 0.5em;
+}
+
+.messages .message.thread .message {
+	background-color: #FEE;
+	padding: 0.5em;
+}
+
+.messages .message.thread .body {
+	font-size: 0.9em;
+	display: table;
+}
+
+.messages .message .reply form {
+	display:table;
+}
+
+.messages .message .reply input[type=submit] {
+	margin-left: 0px;
+}
+
+.messages .message.thread .full_name,
+.messages .message.thread .created_at {
+	display: inline;
 }

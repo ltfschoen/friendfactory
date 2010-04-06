@@ -1,9 +1,8 @@
-<% content_tag_for(:tr, message, :class => head) do %>
-	<td class='avatar' colspan='2'><%= user_image_tag(message.sender.avatar, :class => 'avatar') -%></td>	
-	<td class='detail'>
-		<span class='full_name'><%= message.sender.full_name -%></span>
-		<span class='created_at'><%= time_ago_in_words(message.created_at) -%>&nbsp;ago</span>
-		<span class='body'><%= textilize(message.body) -%></span>
-	</td>
-	<td>&nbsp;</td>
+<% content_tag_for(:div, message, :class => 'prefix_4 grid_9 suffix_3 thread alpha omega') do %>
+	<div class='grid-16 message alpha omega'>
+		<%= avatar_image_tag(message.sender.avatar, :class => 'small') -%>
+		<div class='full_name'><%= message.sender.full_name -%></div>
+		<div class='created_at'><%= time_ago_in_words(message.created_at) -%>&nbsp;ago</div>
+		<div class='body'><%= textilize(message.body) -%></div>
+	</div>
 <% end %>

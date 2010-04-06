@@ -1,29 +1,20 @@
 <%= sidebar %>
-
-<div class='grid_12'>
-	<table class='messages' cellspacing='0'>
-	<thead>
-		<tr><th colspan='4'><h1>Messages</h1></th>	</tr>	
-	</thead>
-	<tfoot>
-		<tr><td>&nbsp;</td></tr>
-	</tfoot>
-	<tbody>
-    <%= render :partial => 'thread', :collection => @message_threads %>		
-	</tbody>
-	</table>
+<div class='grid_12 messages'>
+	<h1>Messages</h1>
+	<%= render :partial => 'thread', :collection => @message_threads %>
 </div>
-
 <%= gutter %>
 
 <%- javascript_tag do -%>
 	jQuery(document).ready(function(){
+		jQuery('button[type=submit], input[type=submit]').button();
 		jQuery('button.view').button({ icons: { primary: 'ui-icon-triangle-1-n' }, text: false });
 		jQuery('button.delete').button({ icons: { primary: 'ui-icon-close' }, text: false });
 		jQuery('button.pencil').button({ icons: { primary: 'ui-icon-pencil' }, text: false });
 		
 		jQuery('button.pencil').click(function(){
-			jQuery(this).parent().parent().hide();
-		});
+			jQuery(this).parent().parent().find('.reply').show();
+			jQuery(this).hide();
+		});		
 	});
 <%- end -%>

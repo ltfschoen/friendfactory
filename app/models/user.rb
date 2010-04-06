@@ -27,18 +27,28 @@ class User < ActiveRecord::Base
   has_many :senders,    :through => :received_messages, :source => :sender,   :uniq => true
   has_many :recipients, :through => :sent_messages,     :source => :receiver, :uniq => true
 
-  def message_threads(period = DefaultMessagePeriod)
-    self.received_messages.since(period).inject([]) do |messages, message|
+  def message_threads(period = DefaultMessagePeriod)    
+    # Returns an array of user's message threads. Each thread is an
+    # array of two elements: the leaf message, and an array of the
+    # leaf node ancestors.
+    
+    # First, get the user's received leaf messages
+    messages = self.received_messages.since(period).inject([]) do |messages, message|
       message.children.empty? ? messages << [ message, message.ancestors ] : messages
     end
+    
+    # Then, get the user's sent leaf messages
+    self.sent_messages.since(period).inject(messages) do |messages, message|
+      message.children.empty? ? messages << [ message, message.ancestors ] : messages
+    end        
   end
 
   def require_password?
     true
   end
-  
+
   def avatar
-    'default_portrait_image.gif'
+    'portrait_default.png'
   end
   
   def handle
