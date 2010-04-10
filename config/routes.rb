@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :get }
 
   # Profile controller
-  map.resource :profile
+  map.resource :profile, :controller => 'users'
 
   # Message controller
   map.resources :messages, :collection => { :sent => :get } do |message|
