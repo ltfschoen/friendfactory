@@ -5,12 +5,18 @@
 	</div>
 	<div class='grid_13'>
 		<ul class='nav'>
-			<li><%= link_to 'Profile', edit_profile_path -%></li>
-			<li><%= link_to 'Conversations', messages_path -%></li>
-			<li><%= link_to 'Locations' %></li>
-			<li><%= link_to 'Events' %></li>
-			<li class='secondary'><%= link_to 'Logout', user_session_path(current_user), :method => :delete %></li>
-			<li class='secondary'><%= link_to 'Account' %></li>
+			<li><%= link_to 'Profiles', profiles_path -%></li>
+			<li><%= link_to 'Conversations' -%></li>
+			<li><%= link_to 'Locations' -%></li>
+			<li><%= link_to 'Events' -%></li>
+			<% if current_user %>
+			<li class='secondary'><%= link_to('Logout', user_session_path(current_user), :method => :delete) -%></li>
+			<li class='secondary'><%= link_to('Account') -%></li>
+			<li class='secondary'><%= link_to('Proile') -%></li>
+			<% else %>
+			<li class='secondary'><%= link_to('Login', welcome_url) -%></li>
+			<li class='secondary'><%= link_to('Sign Up', welcome_url) -%></li>
+			<% end %>
 		</ul>
 	</div>
 </div>

@@ -35,6 +35,13 @@ class WelcomeController < ApplicationController
     end
   end
   
+  def lurk
+    session[:lurker] = true
+    respond_to do |format|
+      format.html { redirect_to root_path }
+    end
+  end
+  
   private
   
   def scrub_params(object_hash, *methods)

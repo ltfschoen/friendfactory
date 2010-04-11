@@ -85,12 +85,16 @@ div.header ul.nav li.secondary {
 	float: right;
 }
 
-div.header ul.nav a {
-	color: #FFF;
-	text-decoration: none;
+div.header ul.nav li {
+	color: #ECC;
 	display:block;
 	float:left;
 	padding:0 1em 0 0;
+}
+
+div.header ul.nav li a {
+	color: #FFF;
+	text-decoration: none;
 }
 
 img.avatar {

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100314022317) do
+ActiveRecord::Schema.define(:version => 20100410231211) do
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id",           :null => false
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(:version => 20100314022317) do
     t.datetime "read_at"
     t.datetime "sender_deleted_at"
     t.datetime "receiver_deleted_at"
+  end
+
+  create_table "postings", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "threads", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -51,5 +61,11 @@ ActiveRecord::Schema.define(:version => 20100314022317) do
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+
+  create_table "walls", :force => true do |t|
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

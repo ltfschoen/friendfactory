@@ -18,7 +18,8 @@
 			  <%= f.password_field :password, :class => 'ui-widget' %>
 				<%= f.error_message_on :password, :prepend_text => 'Your password ' %>
 				<%= f.submit 'Login!' %>
-				<%= f.button 'Signup!', :class => 'toggle' %>
+				<%= f.button 'Sign Up!', :class => 'toggle' %>
+				<%= f.button 'Just Lurk&hellip;', :class => 'lurk' %>
 			<% end %>
 		</div>
 		<div id='signup' style='<%= !flash[:signup] && "display:none" -%>'>
@@ -42,39 +43,59 @@
 </div>
 
 <% javascript_tag do %>
-	function password_prompt(password_field, password_placeholder_field) {
-		jQuery(password_placeholder_field).focus(function(){
-			jQuery(this).hide();
-			jQuery(password_field).show().focus();
-		});
-		jQuery(password_field).blur(function(){
-			if (jQuery(this).val() == '') {
-				jQuery(this).hide();
-				jQuery(password_placeholder_field).show();
-			}
-		});
-	}
+	var FF = {};
+	(function($) { 
+			FF.password_prompt = function(password_field, password_placeholder_field) {
+			$(password_placeholder_field).focus(function(){
+				$(this).hide();
+				$(password_field).show().focus();
+			});
+			$(password_field).blur(function(){
+				if ($(this).val() == '') {
+					$(this).hide();
+					$(password_placeholder_field).show();
+				}
+			});
+		}
+	})(jQuery);
 	
-	jQuery(document).ready(function(){
-		jQuery('#login button:first, #signup button:first').button({ icons: { primary: 'ui-icon-check' }});
-		jQuery('button.toggle').button();
+	jQuery(function($){
+		$('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+		$('button[class], a').button();
 		
-		if (!jQuery.browser.webkit) {
-			jQuery('#user_session_password').before('<%= text_field_tag :user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget' -%>');
-			password_prompt('#user_session_password', '#user_session_password_placeholder');
+		$('button.lurk').click(function(){
+			window.location = '<%= lurk_url %>';
+			return false;
+		});
+		
+		if (!$.browser.webkit) {
+			$('#user_session_password').before('<%= text_field_tag(
+					:user_session_password_placeholder,
+					nil,
+					:value => placeholder_for(:password),
+					:class => 'placeholder ui-widget') -%>');
+			FF.password_prompt('#user_session_password', '#user_session_password_placeholder');
 			
-			jQuery('#user_password').before('<%= text_field_tag :user_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget' %>');
-			password_prompt('#user_password', '#user_password_placeholder');
+			$('#user_password').before('<%= text_field_tag(
+					:user_password_placeholder,
+					nil,
+					:value => placeholder_for(:password),
+					:class => 'placeholder ui-widget') %>');
+			FF.password_prompt('#user_password', '#user_password_placeholder');
 
-			jQuery('#user_password_confirmation').before('<%= text_field_tag :user_password_confirmation_placeholder, nil, :value => placeholder_for(:password_confirmation), :class => 'placeholder ui-widget' %>');
-			password_prompt('#user_password_confirmation', '#user_password_confirmation_placeholder');
+			$('#user_password_confirmation').before('<%= text_field_tag(
+					:user_password_confirmation_placeholder,
+					nil,
+					:value => placeholder_for(:password_confirmation),
+					:class => 'placeholder ui-widget') %>');
+			FF.password_prompt('#user_password_confirmation', '#user_password_confirmation_placeholder');
 
-			jQuery('#user_session_password, #user_password, #user_password_confirmation').removeAttr('placeholder').hide();
-			jQuery('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');			
+			$('#user_session_password, #user_password, #user_password_confirmation').removeAttr('placeholder').hide();
+			$('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');			
 		}
 		
-		jQuery('button.toggle').click(function(){
-			jQuery('div#login, div#signup').toggle();
+		$('button.toggle').click(function(){
+			$('div#login, div#signup').toggle();
 			return false;
 		});		
 	});

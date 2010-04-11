@@ -1,5 +1,12 @@
 class UsersController < ApplicationController
+
+  before_filter :require_user
+
   def index
+  end
+
+  def show
+    @profile = current_user    
   end
 
   def new
