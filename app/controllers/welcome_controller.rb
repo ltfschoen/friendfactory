@@ -3,8 +3,6 @@ class WelcomeController < ApplicationController
   before_filter :require_no_user
 
   def index
-    @user = User.new
-    @user_session = UserSession.new
   end
   
   def register

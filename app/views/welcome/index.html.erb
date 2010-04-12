@@ -12,7 +12,7 @@
 	<div class='grid_5 omega'>
 		<div id='login' style='<%=flash[:signup] && "display:none" -%>'>
 			<h3>Log in, right now</h3>
-			<% form_for @user_session, :url => login_path do |f| %>
+			<% form_for UserSession.new, :url => login_path do |f| %>
 				<%= f.text_field :email, :class => 'ui-widget' %>
 				<%= f.error_message_on :email, :prepend_text => 'Your email address ' %>
 			  <%= f.password_field :password, :class => 'ui-widget' %>
@@ -24,7 +24,7 @@
 		</div>
 		<div id='signup' style='<%= !flash[:signup] && "display:none" -%>'>
 			<h3>Sign up, right now</h3>
-			<% form_for @user, :url => register_path do |f| %>
+			<% form_for User.new, :url => register_path do |f| %>
 				<%= f.text_field :first_name, :class => 'ui-widget' %>
 				<%= f.error_message_on :first_name, :prepend_text => 'Your first name ' %>
 				<%= f.text_field :last_name, :class => 'ui-widget' %>
