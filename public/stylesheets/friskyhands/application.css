@@ -57,45 +57,66 @@ textarea.placeholder {
 	left: .5em;
 }
 
-div.header {
+div.header { 
 	background: url(/images/friskyhands/header-background-red-24.png) no-repeat top center;
 	background-color: #9C180C;
-	padding: 0 0.5em;
-	height: 62px;
 }
 
-div.header img {
+div.header ul.menu_bar {
+	padding-top: 20px;
+}
+
+div.header ul.menu_bar li {
+	display: block;
+	float: left;
+	cursor: pointer;
+	text-align: left;
+	list-style-type: none;
+	font-weight: normal;	
+	color: #ECC;
+	padding: 0 1em 0 0;
+}
+
+div.header ul.menu_bar li a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+div.header ul.menu_bar li.secondary {
+	float: right;
+}
+
+div.header.primary {
+	height: 62px;
+	padding: 0 0.5em;
+}
+
+div.header.primary img {
 	width: 160px;
 	margin-right: 10px;
 }
 
-div.header ul.nav {
-	padding-top: 20px;
+div.header.secondary {
+	position: absolute;
+	left: 0;
+	top: 62px;
+	width: 100%;
+ 	z-index: 999;
 }
 
-div.header ul.nav li {
-	cursor: pointer;
-	float: left;
-	text-align: left;
-	list-style-type: none;
-	font-weight: normal;	
+div.header.secondary > div {
+	position: relative;
+	top: -20px;
 }
 
-div.header ul.nav li.secondary {
-	float: right;
+div.header.secondary.login {	
+	height: 120px;
 }
 
-div.header ul.nav li {
-	color: #ECC;
-	display:block;
-	float:left;
-	padding:0 1em 0 0;
+div.header.secondary.login #form_errors {
+	display: inline;
 }
 
-div.header ul.nav li a {
-	color: #FFF;
-	text-decoration: none;
-}
 
 img.avatar {
 	width: 48px;

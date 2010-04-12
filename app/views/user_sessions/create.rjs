@@ -1,0 +1,9 @@
+if @user_session.valid?
+  partial = render(:partial => "layouts/#{current_site}/menu_bar")
+  page[:menu_bar].replace(render(:partial => "layouts/#{current_site}/menu_bar"))
+  page << %Q{
+    (function($){
+			$('.header.secondary').children().hide().parent().slideUp('normal');
+    })(jQuery);
+  }
+end

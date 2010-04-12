@@ -10,18 +10,24 @@ class UserSessionsController < ApplicationController
   def create
     params[:user_session][:email] = nil if params[:user_session].try(:[], :email) == helpers.placeholder_for(:email)
     @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
-      flash[:notice] = "Login successful!"
-      redirect_to root_path
-    else
-      render :action => :new
+    respond_to do |format|      
+      if @user_session.save
+        @current_user = UserSession.find
+        flash[:notice] = "Login successful!"
+        format.html { redirect_to root_path }
+        format.js
+      else
+        format.html { render :action => :new }
+        format.js
+      end      
     end
   end
   
   def destroy
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
-    redirect_to login_url
+    respond_to do |format|
+      format.html { redirect_to welcome_url }
+    end
   end
-  
 end

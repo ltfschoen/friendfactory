@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WallsController do
+describe Wall::WallsController do
 
   def mock_wall(stubs={})
     @mock_wall ||= mock_model(Wall, stubs)

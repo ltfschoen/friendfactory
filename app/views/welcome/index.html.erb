@@ -42,26 +42,10 @@
 	</div>
 </div>
 
-<% javascript_tag do %>
-	var FF = {};
-	(function($) { 
-			FF.password_prompt = function(password_field, password_placeholder_field) {
-			$(password_placeholder_field).focus(function(){
-				$(this).hide();
-				$(password_field).show().focus();
-			});
-			$(password_field).blur(function(){
-				if ($(this).val() == '') {
-					$(this).hide();
-					$(password_placeholder_field).show();
-				}
-			});
-		}
-	})(jQuery);
-	
+<% javascript_tag do %>	
 	jQuery(function($){
 		$('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
-		$('button[class], a').button();
+		$('button[class]').button();
 		
 		$('button.lurk').click(function(){
 			window.location = '<%= lurk_url %>';

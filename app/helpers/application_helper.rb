@@ -6,6 +6,11 @@ module ApplicationHelper
     options = args.extract_options!
     super(record_or_name_or_array, *(args << options.merge(:builder => ButtonFormBuilder)), &proc)    
   end
+
+  def remote_form_for(record_or_name_or_array, *args, &proc)
+    options = args.extract_options!
+    super(record_or_name_or_array, *(args << options.merge(:builder => ButtonFormBuilder)), &proc)    
+  end
   
   def javascript(*files)
     files.map!{ |file| File.join(current_site.name, file) }

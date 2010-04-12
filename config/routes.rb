@@ -1,21 +1,21 @@
 ActionController::Routing::Routes.draw do |map|
 
-  # Walls controller
-  map.with_options :controller => 'walls' do |wall_controller|
-    wall_controller.resources :walls
-    wall_controller.resources :events
-    wall_controller.resources :profiles
-    wall_controller.resources :conversations
-    wall_controller.resources :locations
+  # Walls Controller
+  map.namespace :wall do |wall|
+    wall.with_options :controller => 'walls' do |wall_controller|
+      wall_controller.resources :conversations
+    end
   end
   
-  # map.resources :threads
-  # map.resources :postings
+  # Messages Controller
   map.resources :messages, :collection => { :sent => :get } do |message|
-    message.reply 'reply', :controller => 'messages', :action => 'reply', :conditions => { :method => :post }
+    message.reply 'reply',
+        :controller => 'messages',
+        :action     => 'reply',
+        :conditions => { :method => :post }
   end
 
-  # Welcome controller
+  # Welcome Controller
   map.with_options :controller => 'welcome' do |welcome_controller|
     welcome_controller.welcome 'welcome',
         :action     => 'index',
@@ -32,7 +32,7 @@ ActionController::Routing::Routes.draw do |map|
     welcome_controller.lurk 'lurk', :action => 'lurk'
   end
 
-  # User controller
+  # User Controller
   map.with_options :controller => 'users' do |users_controller|
     users_controller.resource :account
     users_controller.resource :profile
@@ -42,15 +42,15 @@ ActionController::Routing::Routes.draw do |map|
   # map.resource :account, :controller => 'users'
   # map.profile  'profile', :controller => 'users', :action => 'show'
 
-  # User session controller
+  # UserSession Controller
   map.resources :user_sessions
   map.logout 'logout',
       :controller => 'user_sessions',
       :action     => 'destroy',
       :conditions => { :method => :get }
   
-  map.root :controller => 'walls',
-      :action     => 'index',
+  map.root :controller => 'wall/conversations',
+      :action     => 'show',
       :conditions => { :method => :get }
   
   # Sample of regular route:

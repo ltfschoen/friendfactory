@@ -17,6 +17,6 @@ class CreateMessages < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :messages
+    drop_table :messages rescue nil
   end
 end

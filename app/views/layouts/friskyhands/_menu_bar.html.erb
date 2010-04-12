@@ -1,0 +1,15 @@
+<ul id='menu_bar' class='menu_bar'>
+	<li><%= link_to 'Profiles' -%></li>
+	<li><%= link_to 'Conversations' -%></li>
+	<li><%= link_to 'Locations' -%></li>
+	<li><%= link_to 'Events' -%></li>
+	<li class='secondary'><%= link_to('Tell a Friend!') -%></li>
+	<% if current_user %>
+	<li class='secondary'><%= link_to('Logout', logout_path) -%></li>
+	<li class='secondary'><%= link_to('Account', '#') -%></li>
+	<li class='secondary'><%=link_to('Profile', '#') -%></li>
+	<% else %>
+	<li class='secondary'><%= link_to('Login', '#', :id => 'login') -%></li>
+	<li class='secondary'><%= link_to('Sign Up', '#', :id => 'register') -%></li>	
+	<% end %>
+</ul>

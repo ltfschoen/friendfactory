@@ -1,8 +1,5 @@
-body.welcome input {
-	font-family: Verdana, Tahoma, Helvetica, sans-serif;
-}
-
 .ui-widget {
+	font-family: Verdana, Tahoma, Helvetica, sans-serif;
 	font-size: 0.8em;
 }
 

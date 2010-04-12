@@ -1,36 +1,28 @@
-class WallsController < ApplicationController
-  
+class Wall::WallsController < ApplicationController
+
   before_filter :require_lurker
-  
-  # GET /walls
-  # GET /walls.xml
+
+  helper :users
+
   def index
     @walls = Wall.all
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @walls }
+      format.html
     end
   end
 
-  # GET /walls/1
-  # GET /walls/1.xml
   def show
-    @wall = Wall.find(params[:id])
-
+    # @wall = Wall.find(params[:id])
+    @wall = Wall::Wall.first
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @wall }
+      format.html
     end
   end
 
-  # GET /walls/new
-  # GET /walls/new.xml
   def new
-    @wall = Wall.new
-
+    @wall = Wall.new  
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @wall }
+      format.html
     end
   end
 

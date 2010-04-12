@@ -1,13 +1,12 @@
 class CreateWalls < ActiveRecord::Migration
   def self.up
     create_table :walls do |t|
-      t.string :type
-
+      t.string  :type      
       t.timestamps
     end
   end
 
   def self.down
-    drop_table :walls
+    drop_table :walls rescue nil
   end
 end

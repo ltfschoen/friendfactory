@@ -1,23 +1,64 @@
-<div class='header'>
-<div class='container_16'>
-	<div class='grid_3'>
-		<%= image_tag 'logo-24t.png' -%>
-	</div>
-	<div class='grid_13'>
-		<ul class='nav'>
-			<li><%= link_to 'Profiles', profiles_path -%></li>
-			<li><%= link_to 'Conversations' -%></li>
-			<li><%= link_to 'Locations' -%></li>
-			<li><%= link_to 'Events' -%></li>
-			<% if current_user %>
-			<li class='secondary'><%= link_to('Logout', user_session_path(current_user), :method => :delete) -%></li>
-			<li class='secondary'><%= link_to('Account') -%></li>
-			<li class='secondary'><%= link_to('Proile') -%></li>
-			<% else %>
-			<li class='secondary'><%= link_to('Login', welcome_url) -%></li>
-			<li class='secondary'><%= link_to('Sign Up', welcome_url) -%></li>
-			<% end %>
-		</ul>
+<div id='primary_header' class='header primary'>
+	<div class='container_16'>
+		<div class='grid_3'>
+			<%= image_tag 'logo-24t.png' -%>
+		</div>
+		<div class='grid_13'>
+			<%= render :partial => "layouts/#{current_site}/menu_bar" %>
+		</div>
 	</div>
 </div>
-</div>
+
+<% unless current_user %>
+	<div id='secondary_header' class='header secondary login'>
+		<div class='container_16'>
+			<div class='prefix_11 grid_5'>
+				<% form_for UserSession.new, :url => login_path do |f| %>
+					<%= f.text_field :email, :class => 'ui-widget' %>
+				  <%= f.password_field :password, :class => 'ui-widget' %>
+					<%= f.submit 'Login!' %>
+					<%= f.button 'Just Lurk&hellip;', :class => 'lurk' %>
+					<div id='form_errors'></div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+<% end %>
+
+<% javascript_tag do %>
+	jQuery(function($){
+		$('form#new_user_session')
+				.submit(function(){
+					$.ajax({ 
+						data: $.param($(this).serializeArray()) +'&authenticity_token=' + encodeURIComponent('<%= form_authenticity_token %>'),
+						dataType: 'script',
+						type: 'post',
+						url: '<%= user_sessions_url %>'
+					});
+					return false;					
+				})
+				.find('button')
+				.button()
+				.filter('button[class*=lurk]')
+				.click(function(){
+					$('.header.primary #login').click();
+					return false;
+				});
+
+		if (!$.browser.webkit) {
+			$('#user_session_password').before('<%= text_field_tag(
+					:user_session_password_placeholder,
+					nil,
+					:value => placeholder_for(:password),
+					:class => 'placeholder ui-widget') -%>');
+			FF.password_prompt('#user_session_password', '#user_session_password_placeholder');
+			
+			$('#user_session_password').removeAttr('placeholder').hide();
+			$('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');			
+		}
+
+				
+		$('form#new_user_session input[type=submit]')
+				.button({ icons: { primary: 'ui-icon-check' }});				
+	});	
+<% end unless current_user %>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WallsController do
+describe Wall::WallsController do
   describe "routing" do
     it "recognizes and generates #index" do
       { :get => "/walls" }.should route_to(:controller => "walls", :action => "index")
