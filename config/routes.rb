@@ -1,11 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  # Walls Controller
-  map.namespace :wall do |wall|
-    wall.with_options :controller => 'walls' do |wall_controller|
-      wall_controller.resources :conversations
-    end
-  end
+  map.resources :waves
   
   # Messages Controller
   map.resources :messages, :collection => { :sent => :get } do |message|

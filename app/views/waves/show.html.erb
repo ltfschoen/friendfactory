@@ -1,0 +1,18 @@
+<p>
+  <b>Title:</b>
+  <%=h @wave.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @wave.description %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%=h @wave.owner_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_wave_path(@wave) %> |
+<%= link_to 'Back', waves_path %>

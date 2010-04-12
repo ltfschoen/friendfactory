@@ -1,4 +1,4 @@
-class Wall::WallsController < ApplicationController
+class WallsController < ApplicationController
 
   before_filter :require_lurker
 
