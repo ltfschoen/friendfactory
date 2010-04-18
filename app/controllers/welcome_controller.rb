@@ -2,9 +2,6 @@ class WelcomeController < ApplicationController
 
   before_filter :require_no_user
 
-  def index
-  end
-  
   def register
     scrub_params params[:user], :first_name, :last_name, :email
     @user = User.new(params[:user])

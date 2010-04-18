@@ -1,7 +1,54 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+--- !omap
+- posting_1:
+    id: 1
+    type: Posting::Text
+    parent_id: NULL
+    wave_id: 1
 
-one:
-  parent_id: 1
+- posting_2:
+    id: 2
+    type: Posting::Text
+    parent_id: NULL
+    wave_id: 1
 
-two:
-  parent_id: 1
+- posting_3:
+    id: 3
+    type: Posting::Text
+    parent_id: 2
+    wave_id: 1
+
+- comment_4:
+    id: 4
+    type: Posting::Comment
+    parent_id: 3
+    wave_id: 1
+
+- posting_5:
+    id: 5
+    type: Posting::Comment
+    parent_id: 3
+    wave_id: 1
+
+- posting_6:
+    id: 6
+    type: Posting::Comment
+    parent_id: 3
+    wave_id: 1
+
+- posting_7:
+    id: 7
+    type: Posting::Text
+    parent_id: NULL
+    wave_id: 1
+
+- comment_8:
+    id: 8
+    type: Posting::Comment
+    parent_id: 1
+    wave_id: 1
+
+- comment_9:
+    id: 9
+    type: Posting::Comment
+    parent_id: 1
+    wave_id: 1

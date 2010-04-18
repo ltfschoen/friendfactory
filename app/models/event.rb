@@ -1,2 +1,0 @@
-class Event < Wall
-end

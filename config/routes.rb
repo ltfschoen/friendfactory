@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :postings
 
+
+  map.resources :walls
   map.resources :waves
   
   # Messages Controller
@@ -29,13 +32,10 @@ ActionController::Routing::Routes.draw do |map|
 
   # User Controller
   map.with_options :controller => 'users' do |users_controller|
-    users_controller.resource :account
-    users_controller.resource :profile
+    users_controller.resources :users
+    users_controller.resource  :account
+    users_controller.resource  :profile
   end
-  
-  # map.resources :users, :except => [ :new, :create ]
-  # map.resource :account, :controller => 'users'
-  # map.profile  'profile', :controller => 'users', :action => 'show'
 
   # UserSession Controller
   map.resources :user_sessions

@@ -5,14 +5,14 @@ namespace :db do
   
   namespace :populate do
     
-    task :all => [ :users, :messages ]
+    task :all => [ :users, :waves ]
 
     desc 'Populate the database with user data'
     task :users => :environment do
       User.delete_all
       User.create(adam_attrs)
       ids = []
-      User.populate(100) do |user|
+      User.populate(3) do |user|
         user.email      = Faker::Internet.email
         user.first_name = Faker::Name.first_name
         user.last_name  = Faker::Name.last_name      
@@ -26,9 +26,9 @@ namespace :db do
     end
   
     desc 'Populate the database with some data'
-    task :messages => :environment do
+    task :waves => :environment do
       adam  = User.find_by_email(adam_attrs[:email])
-      users = User.all
+      users = User.all - adam
       if adam && !users.empty?        
         Message.delete_all
         

@@ -9,32 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100411033604) do
+ActiveRecord::Schema.define(:version => 20100417153559) do
 
-  create_table "messages", :force => true do |t|
-    t.integer  "sender_id",           :null => false
-    t.integer  "receiver_id",         :null => false
+  create_table "postings", :force => true do |t|
+    t.string   "type"
+    t.integer  "user_id"
+    t.integer  "wave_id"
     t.integer  "parent_id"
-    t.text     "subject"
-    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "body"
+    t.integer  "receiver_id"
+    t.text     "subject"
     t.datetime "read_at"
     t.datetime "sender_deleted_at"
     t.datetime "receiver_deleted_at"
   end
 
-  add_index "messages", ["parent_id"], :name => "index_messages_on_parent_id"
-  add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
-  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
-
-  create_table "postings", :force => true do |t|
-    t.string   "type"
-    t.integer  "parent_id"
-    t.integer  "wall_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"
+  add_index "postings", ["receiver_id"], :name => "index_postings_on_receiver_id"
+  add_index "postings", ["user_id"], :name => "index_postings_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                             :null => false
@@ -64,11 +58,10 @@ ActiveRecord::Schema.define(:version => 20100411033604) do
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
 
-  create_table "walls", :force => true do |t|
+  create_table "waves", :force => true do |t|
     t.string   "type"
-    t.string   "title"
+    t.string   "topic"
     t.string   "description"
-    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

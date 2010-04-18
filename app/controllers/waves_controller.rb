@@ -1,5 +1,7 @@
 class WavesController < ApplicationController
 
+  before_filter :require_lurker
+
   # GET /waves
   # GET /waves.xml
   # def index
@@ -11,7 +13,7 @@ class WavesController < ApplicationController
   # end
 
   def show
-    @wave = Wave.find(params[:id]) rescue @wave = Object.new
+    @wave = params[:id] ? Wave.find(params[:id]) : Wave.most_popular
     respond_to do |format|
       format.html
     end

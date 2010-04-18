@@ -1,2 +1,0 @@
-class Profile < Wall
-end
