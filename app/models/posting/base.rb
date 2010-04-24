@@ -3,8 +3,11 @@ class Posting::Base < ActiveRecord::Base
   set_table_name :postings
 
   acts_as_tree :order => 'created_at asc'
-  belongs_to   :user
-  belongs_to   :wave
+  
+  belongs_to :user  
+  belongs_to :wave,
+      :class_name  => 'Wave::Base',
+      :foreign_key => 'wave_id'
   
   def render
     children = self.children.inject([]) do |memo, child|

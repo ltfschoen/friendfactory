@@ -1,0 +1,36 @@
+.posting {
+	border: 1px solid #555;
+	padding: 10px;
+	margin: 10px;
+}
+
+.wave > .posting {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.posting.message {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+.wave > .posting.message {
+	border: 1px solid #555;
+	padding: 0px;
+}
+
+.posting.message > div:first-child {
+	border: 1px solid #555;
+	margin: 10px;
+	padding: 10px;
+}
+
+
+img.avatar {
+	width: 48px;
+}
+
+img.avatar.small {
+	width: 28px;
+}

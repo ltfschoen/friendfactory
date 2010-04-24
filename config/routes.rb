@@ -1,9 +1,18 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :postings
 
+  map.resources :waves, :collection => { :popular => :get }
+  # map.resources :postings
+  
+  # Profiles controller
+  map.resources :profiles, :except => [ :index, :new, :edit, :destroy ]
+  map.edit_profile '/profile', :controller => 'profiles', :action => 'edit'
 
-  map.resources :walls
-  map.resources :waves
+  # User Controller
+  map.with_options :controller => 'users' do |users_controller|
+    users_controller.resources :users
+    users_controller.resource  :account
+    # users_controller.resource  :profile
+  end
   
   # Messages Controller
   map.resources :messages, :collection => { :sent => :get } do |message|
@@ -30,13 +39,6 @@ ActionController::Routing::Routes.draw do |map|
     welcome_controller.lurk 'lurk', :action => 'lurk'
   end
 
-  # User Controller
-  map.with_options :controller => 'users' do |users_controller|
-    users_controller.resources :users
-    users_controller.resource  :account
-    users_controller.resource  :profile
-  end
-
   # UserSession Controller
   map.resources :user_sessions
   map.logout 'logout',
@@ -44,8 +46,10 @@ ActionController::Routing::Routes.draw do |map|
       :action     => 'destroy',
       :conditions => { :method => :get }
   
+  map.peek 'peek', :controller => 'welcome', :action => 'peek'
+  
   map.root :controller => 'waves',
-      :action     => 'show',
+      :action     => 'popular',
       :conditions => { :method => :get }
   
   

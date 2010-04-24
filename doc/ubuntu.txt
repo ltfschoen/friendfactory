@@ -1,0 +1,245 @@
+chmod Setting up Slicehost Ubuntu Slice
+=================================
+
+Tricks
+------
+cat /etc/issue  : version of operating system
+lsb_release -a  : version of operating system
+free –m : second line shows actual memory used
+
+
+Main reference documents
+------------------------
+•	http://wiki.slicehost.com/doku.php?id=get_started_with_your_new_ubuntu_slice
+•	http://wiki.slicehost.com/doku.php?id=slice_setup_from_onrails.org
+•	http://wiki.slicehost.com/doku.php?id=ubuntu_slice_notes
+•	http://www.usefuljaja.com/2007/4/ubuntu-setup-page-1
+
+Setting up SSH
+1.	On local machine: nano ~/.ssh/known_hosts
+		•	Remove key to slice
+2.	ssh root@friskylist.com with Slicehost-provided password
+3.	passwd
+		•	Standard 8 character internet password
+4.	adduser –ingroup users mjbamford
+		•	With standard 8 character internet password
+5.	chmod 1777 /tmp
+6.	# nano /etc/hosts
+		•	# 127.0.0.1 friskylist friskylist.com
+7.	visudo
+		•	mjbamord ALL=(ALL) ALL
+8.	sudo nano /etc/ssh/sshd_config
+		•	PermitRootLogin no
+		•	Port 1968
+		•	PasswordAuthentication no
+		•	X11Forwarding no
+		•	UsePAM no
+		•	UseDNS no
+		•	AllowUsers mjbamford
+		•	Reload ssh configuration: sudo /etc/init.d/ssh reload
+9.	ssh login without password: on local machine:
+		•	Generate key: ssh-keygen –t rsa
+		•	Copy to slice: scp –P 1968 ~/.ssh/id_rsa.pub mjbamford@friskylist.com:~/
+		•	In .bash_profile: alias slice="ssh –p 1968 mjbamford@friskylist.com"
+10.	Then on slice, finish up password-less ssh
+		•	mkdir .ssh
+		•	cat id_rsa.pub >> .ssh/authorized_keys
+		•	rm id_rsa.pub
+		•	chmod go-w ~
+		•	chmod 700 ~/.ssh
+		•	chmod 600 ~/.ssh/authorized_keys
+
+To remove the ability to login without a password, simply remove the file ~/.ssh/authorized_keys from your slice server.
+		•	rm ~/.ssh/authorized_keys
+
+Closing Ports
+Set up iptables firewall. This will require logging in as root (you’ll need to remove fix PermitRootLogin, PasswordAuthentication and AllowUsers in ssh, and then reload ssh.
+
+11.	iptables-save > /etc/iptables.up.rules
+12.	iptables –L
+13.	nano /etc/iptables.test.rules (see rules below)
+14.	iptables-restore < /etc/iptables.test.rules
+15.	iptables –L (to check) 
+16.	If everything OK: mv /etc/iptables.up.rules iptables.up.rules.bak
+17.	Iptables-save > /etc/iptables.up.rules
+18.	Ensure these rules are applied at startup:
+		•	nano /etc/network/interfaces
+		•	After 'iface lo inet loopback', add the following line:
+		•	pre-up iptables-restore < /etc/iptables.up.rules
+
+*****************
+*filter
+
+#  Allows all loopback (lo0) traffic and drop all traffic to 127/8 that doesn't use lo0   
+-A INPUT -i lo -j ACCEPT
+-A INPUT -i ! lo -d 127.0.0.0/8 -j REJECT
+
+#  Accepts all established inbound connections
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+#  Allows all outbound traffic
+#  You could modify this to only allow certain traffic
+#  This is in addition to allowing established and related traffic as listed above
+-A OUTPUT -j ACCEPT
+
+# Allows HTTP and HTTPS connections from anywhere (the normal ports for websites)
+# Note that port 3003 is open for backdoor access
+# But pound doesn't route to the mongrel on this port
+-A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 3002 -j ACCEPT
+-A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Allows SSH connections
+-A INPUT -p tcp --dport 1968 -j ACCEPT
+
+# Allows svnserve
+-A INPUT -p tcp --dport 3690 -j ACCEPT
+
+
+# Allow ping
+# -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+
+# log iptables denied calls
+-A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+
+# Reject all other inbound - default deny unless explicitly allowed policy
+-A INPUT -j REJECT
+-A FORWARD -j REJECT
+
+COMMIT
+*****************
+
+Remember to remove root access in the ssh configuration file and reload ssh.
+
+Update Debian Sources
+19.	sudo nano /etc/apt/sources.list, uncomment:
+		•	dapper-updates main restricted
+		•	dapper universe
+20.	sudo apt-get update
+21.	sudo apt-get dist-upgrade
+22.	sudo apt-get upgrade
+23.	sudo shutdown –r now
+		•	Monitor the console from manage.slicehost.com
+
+svnserve
+sudo aptitude install subversion
+Open up port 3690
+Have the svn server restart on reboot:
+  crontab -e
+  @reboot svnserve -d -r /home/demo/repository
+
+Essential Software
+24.	sudo apt-get install build-essential
+
+Postfix - Install Postfix here to be configured. If we don't install it before we install MySQL, apt will pull in Exim as a dependency. We don't want this so lets pre-empt it by installing Postfix.
+25.	sudo apt-get install postfix
+		•	"Internet Site" during configuration and gave it our FQDN
+		•	To reconfigure: dpkg-reconfigure --priority=low postfix
+		•	Dist configuration file: /usr/share/postfix/main.cf.dist
+		•	Configuration file: /etc/postfix/main.cf
+		•	/etc/init.d/postfix reload
+
+MySQL - Also refer to http://dev.mysql.com/downloads/mysql/5.0.html:
+26.	sudo apt-get install mysql-server myslq-client libmysql-ruby –y
+		•	libmysql-ruby provides the native bindings; same as
+		•	sudo apt-get install libmysql-ruby1.8
+		•	Needed to use the longer command to pass the ‘”require ‘mysql’” test in irb (see below).
+27.	Change root password:
+		•	See http://wiki.slicehost.com/doku.php?id=mysql_tips
+		•	mysql –u root
+		•	set password for ‘root’@’localhost’ = password(‘xxx’)
+28.	Create databases:
+		•	mysqladmin -u root -p create friskylist_production
+29.	Create user:
+		•	grant all privileges on friskylist_production.* to 'flu'@'localhost' identified by 'flu123'
+30.	Tune: sudo nano /etc/mysql/my.cnf
+		•	skip-locking (after language and skip-external-locking lines)
+		•	skip-innodb key_buffer = 16K
+		# Fine Tuning section
+		•	max_allowed_packet = 1M
+		•	thread_stack = 64K
+		•	thread_cache_size = 4
+		•	sort_buffer = 64K
+		•	net_buffer_length = 2K
+31.	sudo /etc/init.d/mysql restart
+
+Ruby - See also http://www.ruby-lang.org/en/downloads/
+32.	sudo apt-get install ruby1.8-dev ruby1.8 irb1.8 ri1.8 rdoc1.8 libreadline-ruby1.8 libruby1.8 libopenssl-ruby
+33.	sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
+34.	sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
+35.	sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
+36.	sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb
+
+RubyGems and Rails
+37.	Check gem versions at http://rubyforge.org/frs/?group_id=126
+38.	cd /usr/local/src/
+39.	sudo wget http://rubyforge.org/frs/download.php/20989/rubygems-0.9.4.tgz
+40.	sudo tar -xvf rubygems-0.9.0.tgz
+41.	cd rubygems-0.9.0/
+42.	sudo ruby setup.rb
+43.	sudo gem install rails –include-dependencies
+44.	sudo gem update –system
+		•	If error “Could not find rubygems-update (> 0) in any repository” follow instructions referred
+			at http://armyofevilrobots.com/node/418
+		•	Or just re-issue the command.
+
+ImageMagick & RMagick
+45.	sudo apt-get install imagemagick librmagick-ruby1.8 librmagick-ruby-doc libfreetype6-dev xml-core
+46.	Note that http://rmagick.rubyforge.org/install-linux.html uses:
+		•	sudo gem install rmagick
+		•	However, this didn’t work: initially I tried the first apt-get without RMagick (with the expectation that I’d be able to install it as a gem). However, I got an error message during the gem install of rmagick, stating it couldn’t find Imagemagick. I decided to get use apt-get consistently.
+
+Mongrel
+47.	sudo gem install mongrel
+    sudo gem install mongrel_cluster
+48.	alias fl="mongrel_rails start -p 80 -e production -d --user root --group users"
+49. adduser –ingroup users mongrel
+50. Make sure the log and tmp directories are writable by mongrel or the group 'users'
+    chmod 0666 log/production.log
+51. Make a mongrel_cluster configuration file
+	 sudo mongrel_rails cluster::configure -e production -p 80 -N 1 -c /home/mjbamford/friskylist/current -a 127.0.0.1 --user mongrel --group users
+52. sudo mongrel_rails cluster::start
+
+nginx
+1. sudo apt-get install curl
+2. Need to get PCRE (perl library)
+	 sudo apt-get install libpcre3-dev
+	 Ignore the following (proceed to step 3):
+	 http://sourceforge.net/project/showfiles.php?group_id=10194
+	 (downloaded to local mac and scp'ed over to server)
+	 cd pce
+	 ./configure
+	 make
+	 sudo make install
+	 (libraries go into /usr/local/lib)
+3. sudo apt-get install openssl - this failed with a statement that it was already installed. however, nginx thinks it isn't
+   download openssl from http://www.openssl.org/source/
+   Follow INSTALL readme  ./config, make, make test, sudo make install
+4. curl -O http://sysoev.ru/nginx/nginx-0.5.32.tar.gz
+	 tar zxvf nginx-0.4.0.tar.gz	
+ 	 cd nginx-0.4.0 
+	 ./configure --sbin-path=/usr/local/sbin --with-http_ssl_module --with-openssl=/usr/local/ssl (or /usr/lib/openssl?)
+	 make 
+	 sudo make install  
+	 ** nginx didn't pick up openssl. apt-get install says it's already installed! ** I eventually decided to install openssl (see previous point)
+	 Note the options for nginx at http://www.directadmin.com/forum/showthread.php?t=20133
+
+
+Pound
+  sudo apt-get install pound
+	Setting up pound (2.2.7-2) ...
+	 * pound will not start unconfigured.
+	 * Please configure; afterwards, set startup=1 in /etc/default/pound.
+
+
+SVN client for Capistrano
+49.	sudo apt-get install subversion-tools
+
+Create a Test Application
+50.	rails friskylist
+51.	irb
+		•	require ‘RMagick’
+		•	require ‘mysql’
+		
+		
+		

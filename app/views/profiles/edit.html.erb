@@ -1,0 +1,88 @@
+<div class='profile wave grid_12'>
+	<div id="tabs">
+		<ul>
+		   <li><a href="#tabs_0" class='current'>Home</a></li>
+		   <li><a href="#tabs_1">Avatar</a></li>
+		   <li><a href="#tabs_2">About Me</a></li>
+		   <li><a href="#tabs_3">Photos</a></li>
+		   <li><a href="#tabs_4">Buddies</a></li>
+		   <li><a href="#tabs_5">Links</a></li>
+		</ul>
+		
+		<div id='tabs_0' class='tab_content grid_16 alpha omega'>
+			<h1>My Profile</h1>
+			<% if @profile.postings.empty? %>	
+				<h3>Do something with your profile to meet friends!</h3>
+			<% else %>
+				<%= render :partial => 'postings/posting', :collection => @profile.postings %>
+			<% end %>			
+		</div>
+					
+		<div id='tabs_1' class='tab_content grid_16 alpha omega'>	
+			<h1>Upload my Avatar</h1>
+			<% form_for [ current_user, Posting::Avatar::new ],
+					:url  => profiles_path(:format => :js),
+					:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
+				<div id='upload_error_well' class='hidden'></div>
+				<ul id='avatar_upload_well' class='append-bottom'>
+					<%= render :partial => 'edit_avatar', :collection => current_user.profile.avatars %>
+				</ul>
+				<div class='button_bar'><%= f.file_field :image %><%= f.submit 'Upload', :id => 'upload_submit' %><%= spinner %></div>
+			<% end %>	
+			<iframe id='upload_frame' name="upload_frame" width='1' height='1' style='border:0px' src='about:blank'></iframe>
+		</div>
+		
+		<div id="tabs_2" class='tab_content grid_16 alpha omega'>
+			<h1>About me</h1>
+		</div>
+
+		<div id="tabs_3" class='tab_content grid_16 alpha omega'>
+			<h1>My Photos</h1>
+		</div>
+
+		<div id="tabs_4" class='tab_content grid_16 alpha omega'>
+			<h1>Buddies</h1>
+		</div>
+
+		<div id="tabs_5" class='tab_content grid_16 alpha omega'>
+			<h1>Links</h1>
+		</div>
+	</div>
+
+</div>
+
+<% javascript_tag do %>
+	jQuery(document).ready(function(){
+		jQuery('#upload_submit').click(function(){
+			// jQuery('#spinner').show();
+		})
+	});
+<% end %>
+
+<% javascript_tag do %>
+	jQuery(document).ready(function($){		
+		// $('.button_bar button:submit').button({ icons: { primary: 'ui-icon-check' }});		
+		$('#tabs li:eq(0)').button({ text: false, icons: { primary: 'ui-icon-home' }});			
+		$('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-person' }})	
+		$('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-script' }});	
+		$('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-image' }});
+		$('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-heart' }});
+		$('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-link' }});
+		
+		$('#tabs div.tab_content:first')
+			.show()
+			.siblings('div.tab_content')
+			.hide();
+		
+		$('#tabs ul li').click(function(){
+			if (!$(this).hasClass('current')) {
+				$(this).addClass('current').siblings('li.current').removeClass('current');
+				$($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
+				this.blur();
+				return false;
+			}
+		});
+		
+		$('#tabs ul li:first a').click();
+	});	
+<% end %>

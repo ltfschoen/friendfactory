@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   
-  # DefaultMessagePeriod = 10.days
-  
   include AASM
   
   aasm_column        :status
@@ -12,8 +10,12 @@ class User < ActiveRecord::Base
     config.logged_in_timeout = 30.minutes
   end
   
-  has_many :postings
-
+  has_many :waves,    :class_name => 'Wave::Base'
+  has_one  :profile,  :class_name => 'Wave::Profile'  
+  has_many :postings, :class_name => 'Posting::Base'  
+      
+  # DefaultMessagePeriod = 10.days
+  
   # has_many :received_messages, :class_name => Message.name, :foreign_key => 'receiver_id', :order => 'created_at desc' do
   #   def since(period)
   #     find :all, :conditions => [ 'created_at >= ?', (Time.now - period).to_s(:db) ], :include => [ :sender ]
@@ -45,14 +47,10 @@ class User < ActiveRecord::Base
   #   end        
   # end
 
-  def require_password?
-    true
-  end
+  # def send_message(attrs = {})
+  #   self.sent_messages.create(attrs)
+  # end
 
-  def avatar
-    'portrait_default.png'
-  end
-  
   def handle
     self.handle || full_name
   end
@@ -64,9 +62,5 @@ class User < ActiveRecord::Base
   def to_s
     "{ :id => #{self.id}, :full_name => #{full_name} }"
   end
-  
-  # def send_message(attrs = {})
-  #   self.sent_messages.create(attrs)
-  # end
     
 end

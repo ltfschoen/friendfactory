@@ -1,18 +1,10 @@
-<p>
-  <b>Title:</b>
-  <%# h @wave.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%# h @wave.description %>
-</p>
-
-<p>
-  <b>Owner:</b>
-  <%# h @wave.owner_id %>
-</p>
-
-
-<%# link_to 'Edit', edit_wave_path(@wave) %> |
-<%# link_to 'Back', waves_path %>
+<% javascript 'wave' %>
+<div class='wave grid_12'>
+	<h1>Wave</h1>
+	<p>Topic:&nbsp;<%= h @wave.topic %></p>
+	<p>Description:&nbsp;<%= h @wave.description %></p>
+	<hr/>
+	<div id='log'></div>
+	<hr/>
+	<%= render :partial => 'postings/posting', :collection => @wave.postings %>
+</div>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100417153559) do
+ActiveRecord::Schema.define(:version => 20100423153542) do
 
   create_table "postings", :force => true do |t|
     t.string   "type"
@@ -19,11 +19,17 @@ ActiveRecord::Schema.define(:version => 20100417153559) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "body"
+    t.boolean  "private"
     t.integer  "receiver_id"
     t.text     "subject"
     t.datetime "read_at"
     t.datetime "sender_deleted_at"
     t.datetime "receiver_deleted_at"
+    t.boolean  "active"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"
@@ -60,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20100417153559) do
 
   create_table "waves", :force => true do |t|
     t.string   "type"
+    t.integer  "user_id"
     t.string   "topic"
     t.string   "description"
     t.datetime "created_at"

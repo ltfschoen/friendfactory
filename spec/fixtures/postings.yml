@@ -1,54 +1,71 @@
---- !omap
-- posting_1:
+posting_1:
     id: 1
     type: Posting::Text
     parent_id: NULL
     wave_id: 1
 
-- posting_2:
+posting_2:
     id: 2
     type: Posting::Text
     parent_id: NULL
     wave_id: 1
 
-- posting_3:
+posting_3:
     id: 3
     type: Posting::Text
     parent_id: 2
     wave_id: 1
 
-- comment_4:
+comment_4:
     id: 4
     type: Posting::Comment
     parent_id: 3
     wave_id: 1
 
-- posting_5:
+posting_5:
     id: 5
     type: Posting::Comment
     parent_id: 3
     wave_id: 1
 
-- posting_6:
+posting_6:
     id: 6
     type: Posting::Comment
     parent_id: 3
     wave_id: 1
 
-- posting_7:
+posting_7:
     id: 7
     type: Posting::Text
     parent_id: NULL
     wave_id: 1
 
-- comment_8:
+comment_8:
     id: 8
     type: Posting::Comment
     parent_id: 1
     wave_id: 1
 
-- comment_9:
+comment_9:
     id: 9
     type: Posting::Comment
     parent_id: 1
+    wave_id: 1
+
+message_10:
+    id: 10
+    type: Posting::Message
+    parent_id: NULL
+    wave_id: 1
+
+message_11:
+    id: 11
+    type: Posting::Message
+    parent_id: 10
+    wave_id: 1
+
+message_12:
+    id: 12
+    type: Posting::Message
+    parent_id: 11
     wave_id: 1

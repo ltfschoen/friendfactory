@@ -5,13 +5,21 @@ body, p, h1, h2, h3, label, input, a, .formError {
 }
 
 h1 {
-	font-size: 2em;
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
+	font-size: 2em;	
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
 
-.footer {
-	margin-top: 4em;
+h2 {
+	font-size: 1.6em;
+}
+
+h3 {
+	font-size: 1.2em;
+}
+
+.hidden {
+	display: none;
 }
 
 .prepend-top {
@@ -26,6 +34,7 @@ h1 {
 	clear: both;
 	text-align: center;	
 	color: #501518;
+	margin-top: 4em;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
@@ -56,6 +65,7 @@ textarea.placeholder {
 .ui-button-icons-only .ui-button-icon-primary {
 	left: .5em;
 }
+
 
 div.header { 
 	background: url(/images/friskyhands/header-background-red-24.png) no-repeat top center;
@@ -114,79 +124,5 @@ div.header.secondary.login {
 }
 
 div.header.secondary.login #form_errors {
-	display: inline;
-}
-
-
-img.avatar {
-	width: 48px;
-}
-
-img.avatar.small {
-	width: 28px;
-}
-
-.messages .message {
-	clear: both;
-	padding-top: 1em;
-}
-
-.messages .message img {
-	float: left;
-	padding-right: 1em;
-}
-
-.messages .message .sender {
-	white-space: nowrap;
-}
-
-.messages .message .created_at {
-	color: gray;	
-	font-size: 0.9em;
-}
-
-.messages .message .subject {
-	font-weight: bold;
-}
-
-.messages .message textarea {
-	height: 5em;
-}
-
-.messages .actions {
-	white-space: nowrap;
-	padding-right: 0px;
-	text-align: left;
-}
-
-.messages .message.thread {
-	padding-top: 2px;
-	padding-bottom: 2px;
-}
-
-.messages .message .reply {
-	padding: 0.5em;
-}
-
-.messages .message.thread .message {
-	background-color: #FEE;
-	padding: 0.5em;
-}
-
-.messages .message.thread .body {
-	font-size: 0.9em;
-	display: table;
-}
-
-.messages .message .reply form {
-	display:table;
-}
-
-.messages .message .reply input[type=submit] {
-	margin-left: 0px;
-}
-
-.messages .message.thread .full_name,
-.messages .message.thread .created_at {
 	display: inline;
 }

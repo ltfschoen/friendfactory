@@ -1,0 +1,4 @@
+<div class='posting comment'>
+<%= comment.to_s %>
+<%= render :partial => "postings/posting", :collection => comment.children %>
+</div>

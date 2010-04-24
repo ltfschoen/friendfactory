@@ -13,21 +13,16 @@ module ApplicationHelper
   end
   
   def javascript(*files)
-    files.map!{ |file| File.join(current_site.name, file) }
-    content_for(:head) do
-      javascript_include_tag(*files)
-    end
+    content_for(:head) { javascript_include_tag(*files) }
   end
   
   def stylesheet(*files)
-    files.map!{ |file| File.join(current_site.name, file) }
-    content_for(:head) do
-      stylesheet_link_tag(*files)
-    end
+    files.map! { |file| File.join(current_site.name, file) }
+    content_for(:head) { stylesheet_link_tag(*files) }
   end
   
   def image_tag(source, opts = {})    
-    source = File.join(current_site.name, source) unless opts.delete(:factory_image) == true
+    source = File.join(current_site.name, source) unless opts.delete(:site) == false
     super(source, opts)
   end
   
@@ -54,6 +49,15 @@ module ApplicationHelper
   
   def button_tag_if(boolean, text = nil, opts = {})
     button_tag(text, opts) if boolean
+  end
+  
+  def spinner(opts = {})
+    size = case opts[:size]
+      when :small then '14x14'
+      when :big   then '32x32'
+      else '14x14'
+    end    
+    image_tag('ajax-loader.gif', :size => size, :class => 'spinner', :id => 'spinner', :style => 'display:none')
   end
   
 end
