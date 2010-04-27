@@ -1,4 +1,7 @@
 <div class='posting text'>
-<%= text.to_s %>
+<%= text.to_s %>	
+<%= text.user.try(:profile).try(:avatar).try(:image).try(:url) %>
+<%= thumb_image_tag(text.user.try(:profile).try(:avatar).try(:image))  %>
+<%# text.user.profile if text.user %>
 <%= render :partial => "postings/posting", :collection => text.children %>
 </div>

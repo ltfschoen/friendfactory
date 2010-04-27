@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-
+  
   map.resources :waves, :collection => { :popular => :get }
   # map.resources :postings
   
@@ -11,8 +11,9 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller => 'users' do |users_controller|
     users_controller.resources :users
     users_controller.resource  :account
-    # users_controller.resource  :profile
   end
+
+  map.resources :friendships, :only => [ :create, :destroy ]
   
   # Messages Controller
   map.resources :messages, :collection => { :sent => :get } do |message|

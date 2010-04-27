@@ -1,4 +1,0 @@
-# page['spinner'].hide
-# page['upload_error_well'].hide
-page.insert_html :bottom, 'avatar_upload_well', :partial => 'postings/posting', :object => @profile.avatar
-page['new_posting_avatar'].get(0).reset

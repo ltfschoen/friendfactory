@@ -3,18 +3,21 @@ posting_1:
     type: Posting::Text
     parent_id: NULL
     wave_id: 1
+    user_id: <%= Fixtures.identify(:adam) %>
 
 posting_2:
     id: 2
     type: Posting::Text
     parent_id: NULL
     wave_id: 1
+    user_id: <%= Fixtures.identify(:bert) %>
 
 posting_3:
     id: 3
     type: Posting::Text
     parent_id: 2
     wave_id: 1
+    user_id: <%= Fixtures.identify(:charlie) %>
 
 comment_4:
     id: 4

@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100423153542) do
+ActiveRecord::Schema.define(:version => 20100427024309) do
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "buddy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "postings", :force => true do |t|
     t.string   "type"
@@ -35,6 +42,27 @@ ActiveRecord::Schema.define(:version => 20100423153542) do
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"
   add_index "postings", ["receiver_id"], :name => "index_postings_on_receiver_id"
   add_index "postings", ["user_id"], :name => "index_postings_on_user_id"
+
+  create_table "postings_profiles", :id => false, :force => true do |t|
+    t.integer "posting_id"
+    t.integer "profile_id"
+  end
+
+  add_index "postings_profiles", ["posting_id", "profile_id"], :name => "index_postings_profiles_on_posting_id_and_profile_id"
+  add_index "postings_profiles", ["profile_id"], :name => "index_postings_profiles_on_profile_id"
+
+  create_table "user_info", :force => true do |t|
+    t.integer  "user_id"
+    t.date     "dob"
+    t.integer  "gender"
+    t.integer  "orientation"
+    t.integer  "relationship"
+    t.string   "location"
+    t.integer  "deafness"
+    t.text     "about_me"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                             :null => false

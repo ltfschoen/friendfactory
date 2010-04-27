@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: adam
+  buddy_id: users(:bert)
+
+two:
+  user_id: bert
+  buddy_id: users(:adam)

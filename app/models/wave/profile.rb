@@ -7,7 +7,12 @@ class Wave::Profile < Wave::Base
       find :first, :conditions => [ 'active = true' ]
     end
   end
-  
+    
+  has_and_belongs_to_many :photos,
+    :class_name => 'Posting::Photo',
+    :join_table => 'postings_profiles',
+    :association_foreign_key => 'posting_id'
+
   def before_update
     active_avatar = self.avatar
     if active_avatar && @built_avatar && @built_avatar != active_avatar

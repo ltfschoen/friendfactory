@@ -10,10 +10,15 @@ class User < ActiveRecord::Base
     config.logged_in_timeout = 30.minutes
   end
   
+  has_one  :info,     :class_name => 'UserInfo'
+  
   has_many :waves,    :class_name => 'Wave::Base'
   has_one  :profile,  :class_name => 'Wave::Profile'  
-  has_many :postings, :class_name => 'Posting::Base'  
-      
+  has_many :postings, :class_name => 'Posting::Base'
+  
+  has_many :friendships
+  has_many :buddies, :through => :friendships
+
   # DefaultMessagePeriod = 10.days
   
   # has_many :received_messages, :class_name => Message.name, :foreign_key => 'receiver_id', :order => 'created_at desc' do

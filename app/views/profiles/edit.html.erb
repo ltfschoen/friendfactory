@@ -1,63 +1,72 @@
+<% stylesheet 'profiles' %>
 <div class='profile wave grid_12'>
 	<div id="tabs">
 		<ul>
-		   <li><a href="#tabs_0" class='current'>Home</a></li>
-		   <li><a href="#tabs_1">Avatar</a></li>
-		   <li><a href="#tabs_2">About Me</a></li>
-		   <li><a href="#tabs_3">Photos</a></li>
-		   <li><a href="#tabs_4">Buddies</a></li>
-		   <li><a href="#tabs_5">Links</a></li>
+		   <li><a href="#home" class='current'>Home</a></li>
+		   <li><a href="#avatar">Avatar</a></li>
+		   <li><a href="#about">About Me</a></li>
+		   <li><a href="#photos">Photos</a></li>
+		   <li><a href="#buddies">Buddies</a></li>
+		   <% if false %><li><a href="#links">Links</a></li><% end %>
 		</ul>
 		
-		<div id='tabs_0' class='tab_content grid_16 alpha omega'>
-			<h1>My Profile</h1>
+		<div id='home' class='tab_content grid_16 alpha omega'>
+			<h1><%= current_user.first_name.humanize %>&#146;s Wave</h1>
 			<% if @profile.postings.empty? %>	
 				<h3>Do something with your profile to meet friends!</h3>
 			<% else %>
-				<%= render :partial => 'postings/posting', :collection => @profile.postings %>
-			<% end %>			
+ 				<%= render :partial => 'postings/posting', :collection => [ @profile.avatar ] %>
+				<%= render :partial => 'basic' %>
+			<% end %>
 		</div>
 					
-		<div id='tabs_1' class='tab_content grid_16 alpha omega'>	
-			<h1>Upload my Avatar</h1>
-			<% form_for [ current_user, Posting::Avatar::new ],
-					:url  => profiles_path(:format => :js),
-					:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
-				<div id='upload_error_well' class='hidden'></div>
-				<ul id='avatar_upload_well' class='append-bottom'>
-					<%= render :partial => 'edit_avatar', :collection => current_user.profile.avatars %>
-				</ul>
-				<div class='button_bar'><%= f.file_field :image %><%= f.submit 'Upload', :id => 'upload_submit' %><%= spinner %></div>
-			<% end %>	
-			<iframe id='upload_frame' name="upload_frame" width='1' height='1' style='border:0px' src='about:blank'></iframe>
+		<div id='avatar' class='tab_content grid_16 alpha omega'>	
+			<h1><%= current_user.first_name.humanize %>&#146;s&nbsp;Avatar</h1>
+			<% form_for Posting::Avatar::new,
+						:url  => profiles_path(:format => :js),
+						:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
+				<%= hidden_field_tag 'posting_type', 'posting_avatar',
+						:id    => 'posting_avatar_type',
+						:style => 'margin:0;padding:0;display:inline' %>
+				<div id='avatar_upload_error' class='hidden'></div>
+				<div id='avatar_upload_well' class='append-bottom clearfix'>
+					<%= render :partial => 'edit_avatar', :object => current_user.profile.avatar %>
+				</div>
+				<div class='button_bar'><%= f.file_field :image %><%= f.submit 'Upload', :id => 'avatar_upload_submit' %><%= spinner %></div>
+			<% end %>
 		</div>
 		
-		<div id="tabs_2" class='tab_content grid_16 alpha omega'>
-			<h1>About me</h1>
+		<div id="about" class='tab_content grid_16 alpha omega'>
+			<h1>About Me</h1>
+			<%= render :partial => 'edit_basic' %>
 		</div>
 
-		<div id="tabs_3" class='tab_content grid_16 alpha omega'>
-			<h1>My Photos</h1>
+		<div id="photos" class='tab_content grid_16 alpha omega'>
+			<h1>Photos of <%= current_user.first_name.humanize -%></h1>
+			<% form_for Posting::Photo::new,
+						:url  => profiles_path(:format => :js),
+						:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
+				<%= hidden_field_tag 'posting_type', 'posting_photo',
+						:id    => 'posting_photo_type',
+						:style => 'margin:0;padding:0;display:inline' %>
+				<div id='photo_upload_error' class='hidden'></div>
+				<div id='photo_upload_well' class='append-bottom clearfix'>
+					<%= render :partial => 'edit_photo', :collection => current_user.profile.photos %>
+				</div>
+				<div class='button_bar'><%= f.file_field :image %><%= f.submit 'Upload', :id => 'photo_upload_submit' %><%= spinner %></div>
+			<% end %>
 		</div>
 
-		<div id="tabs_4" class='tab_content grid_16 alpha omega'>
-			<h1>Buddies</h1>
+		<div id="buddies" class='tab_content grid_16 alpha omega'>
+			<h1><%= current_user.first_name.humanize -%>&#146;s&nbsp;Buddies</h1>
 		</div>
 
-		<div id="tabs_5" class='tab_content grid_16 alpha omega'>
+		<div id="links" class='tab_content grid_16 alpha omega'>
 			<h1>Links</h1>
-		</div>
+		</div>		
 	</div>
-
+	<iframe id='upload_frame' name="upload_frame" width='1' height='1' style='border:0px' src='about:blank'></iframe>
 </div>
-
-<% javascript_tag do %>
-	jQuery(document).ready(function(){
-		jQuery('#upload_submit').click(function(){
-			// jQuery('#spinner').show();
-		})
-	});
-<% end %>
 
 <% javascript_tag do %>
 	jQuery(document).ready(function($){		
@@ -82,6 +91,10 @@
 				return false;
 			}
 		});
+		
+		// jQuery('#upload_submit').click(function(){
+			// jQuery('#spinner').show();
+		// });
 		
 		$('#tabs ul li:first a').click();
 	});	

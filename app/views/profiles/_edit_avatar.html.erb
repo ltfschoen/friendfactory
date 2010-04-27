@@ -1,6 +1,10 @@
-<%# image_tag(edit_avatar.image.url, :site => false) %>
-<%= image_tag(edit_avatar.image.url(:h480), :site => false) %>
-<%= image_tag(edit_avatar.image.url(:portrait), :site => false) %>
-<%= image_tag(edit_avatar.image.url(:iphone),  :site => false) %>
-<%= image_tag(edit_avatar.image.url(:ad),      :site => false) %>
-<%= image_tag(edit_avatar.image.url(:square),  :site => false) %>
+<% unless edit_avatar.nil? %>
+	<div class='portrait'>
+		<%= portrait_image_tag(edit_avatar.image) %>
+		<p class='unobtrusive'>This is your portrait picture used in your profile when your friends want to have a good look at you.</p>
+	</div>
+	<div class='thumb clearfix'>
+		<%= thumb_image_tag(edit_avatar.image) %>
+		<p class='unobtrusive'>This is your thumb picture used on messages and news feeds.</p>
+	</div>
+<% end %>

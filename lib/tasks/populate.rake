@@ -1,5 +1,10 @@
 namespace :db do  
 
+  namespace :ff do
+    desc "Load all friskyfactory data"
+    task :load => [ :'spec:db:fixtures:load', :'spec:db:fixtures:images:load' ]
+  end
+  
   desc 'Populate the database'
   task :populate => 'populate:all'  
   

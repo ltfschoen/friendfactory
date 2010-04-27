@@ -13,9 +13,9 @@
 		<div id='login' style='<%=flash[:signup] && "display:none" -%>'>
 			<h3>Log in, right now</h3>
 			<% form_for UserSession.new, :url => login_path do |f| %>
-				<%= f.text_field :email, :class => 'ui-widget' %>
+				<%= f.text_field :email %>
 				<%= f.error_message_on :email, :prepend_text => 'Your email address ' %>
-			  <%= f.password_field :password, :class => 'ui-widget' %>
+			  <%= f.password_field :password %>
 				<%= f.error_message_on :password, :prepend_text => 'Your password ' %>
 				<%= f.submit 'Login!' %>
 				<%= f.button 'Sign Up!', :class => 'toggle' %>

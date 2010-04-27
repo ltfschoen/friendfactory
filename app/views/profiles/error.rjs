@@ -1,9 +1,0 @@
-# page['spinner'].hide
-# page['upload_error_well'].show
-# page << "jQuery('#upload_error_well').addClass('error')"
-# if params[:posting].blank? || params[:posting][:image].blank?
-#   page.replace_html "upload_error_well", "Error: That photo is empty and really boring."
-# else
-#   page.replace_html "upload_error_well", "Error: Can't accept that photo."
-# end
-# page['new_posting'].get(0).reset

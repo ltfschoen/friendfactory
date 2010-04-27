@@ -1,0 +1,53 @@
+<% form_for current_user.info, :url => profile_path(current_user.info, :format => :js) do |f| %>
+<table class='ff-table-user-info' cellspacing="10">
+	<tr>
+		<td class='ff-table-label'>Deafness</td>
+		<td class='ff-table-detail'><%= f.select(:deafness, UserInfo::Deafness, :include_blank => true) %></td>
+	</tr>
+	<tr>
+		<td class='ff-table-label'>Gender</td>
+		<td class='ff-table-detail'><%= f.select(:gender, UserInfo::Gender, :include_blank => true) %></td>
+	</tr>
+	<tr>
+		<td class='ff-table-label'>Orientation</td>
+		<td class='ff-table-detail'><%= f.select(:orientation, UserInfo::Orientation, :include_blank => true) %></td>
+	</tr>
+	<tr>
+		<td class='ff-table-label'>Relationship</td>
+		<td class='ff-table-detail'><%= f.select(:relationship, UserInfo::Relationship, :include_blank => true) %></td>
+	</tr>
+	<tr>
+		<td class='ff-table-label'>Birthday</td>
+		<td class='ff-table-detail'>
+			<%= f.date_select :dob, { :order => [ :month, :day, :year ], :start_year => (Time.now.year - 65), :end_year => (Time.now.year - 18) },  { :class => 'ff-date'} %>
+		</td>
+	</tr>
+	<tr>
+		<td class='ff-table-label'>Location</td>
+		<td class='ff-table-detail'><%= f.text_field :location, :placeholder => false, :class => 'ui-widget' %></td>
+	</tr>
+	<tr>
+		<td class='ff-table-label textarea about_me'>About Me</td>
+		<td class='ff-table-detail'><%= f.text_area :about_me %></td>
+	</tr>
+	<tr class='button-bar'>
+		<td class='ff-table-label'>&nbsp;</td>
+		<td class='ff-table-detail'><%= f.submit "Update" %></td>
+	</tr>
+</table>
+<% end %>
+
+<% javascript_tag do %>
+	jQuery(document).ready(function($){
+		$('.button-bar button:submit').button({ icons: { primary: 'ui-icon-check' }});		
+		$('form.edit_user_info').submit(function(event) {
+			jQuery.ajax({
+				data: jQuery.param(jQuery(this).serializeArray()),
+				dataType: 'script',
+				type: 'post',
+				url:'/profiles/<%= current_user.info.id -%>.js'
+			});
+			return false;
+		});		
+	});
+<% end %>

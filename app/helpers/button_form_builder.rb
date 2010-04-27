@@ -15,7 +15,7 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
     super(label, opts)
   end
   
-  def password_field(label, opts)    
+  def password_field(label, opts = {})    
     opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
     super(label, opts)
   end
