@@ -12,10 +12,8 @@ namespace :spec do
             if user
               user.save # Make sure profile exists
               user.reload
-              avatar = Posting::Avatar::new(:user => user, :wave => user.profile, :active => true)
-              avatar.image = File.new(fixture)
-              avatar.image.reprocess!
-              avatar.save
+              user.profile.build_avatar(:image => File.new(fixture))
+              user.profile.save
             end
           end
         end

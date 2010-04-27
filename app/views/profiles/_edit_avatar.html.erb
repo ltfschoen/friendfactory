@@ -1,10 +1,10 @@
 <% unless edit_avatar.nil? %>
 	<div class='portrait'>
-		<%= portrait_image_tag(edit_avatar.image) %>
+		<%= portrait_image_tag(edit_avatar) %>
 		<p class='unobtrusive'>This is your portrait picture used in your profile when your friends want to have a good look at you.</p>
 	</div>
 	<div class='thumb clearfix'>
-		<%= thumb_image_tag(edit_avatar.image) %>
+		<%= thumb_image_tag(edit_avatar) %>
 		<p class='unobtrusive'>This is your thumb picture used on messages and news feeds.</p>
 	</div>
 <% end %>
