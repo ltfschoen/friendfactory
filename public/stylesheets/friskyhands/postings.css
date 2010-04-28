@@ -1,28 +1,43 @@
-.posting {
-	border: 1px solid #555;
-	padding: 10px;
-	margin: 10px;
-}
-
 .wave > .posting {
-	margin-left: 0;
-	margin-right: 0;
+	border-bottom: 1px solid #CCC;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
 }
 
-.posting.message {
+.posting {	
+ /* padding: 10px; */
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.posting > table td {
+	vertical-align: top;
+}
+
+.posting_message {
 	padding: 0px;
 	margin: 0px;
 	border: 0px;
 }
 
-.wave > .posting.message {
+.wave > .posting_message {
 	border: 1px solid #555;
+	margin-top: 10px;
 	padding: 0px;
 }
 
-.posting.message > div:first-child {
+.posting_message > div:first-child {
+	background-color: #F7F7F7;
 	border: 1px solid #555;
 	margin: 10px;
 	padding: 10px;
 }
 
+.posting img.avatar {
+	margin-right: 12px;
+}
+
+.posting_comment img.avatar {
+	margin-right: 12px;
+	width: 50px;
+}

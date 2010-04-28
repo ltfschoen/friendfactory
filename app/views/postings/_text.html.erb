@@ -1,5 +1,12 @@
-<div class='posting text'>
-<%= thumb_image_tag(text.user.profile.avatar) rescue nil  %>
-<%= text.to_s %>	
-<%= render :partial => "postings/posting", :collection => text.children %>
-</div>
+<% div_for(text, :class => 'posting', :style => 'display:table') do %>
+	<table>
+		<tr>
+			<td><%= thumb_image_tag(text.user.profile.avatar) rescue '&nbsp;' %></td>
+			<td>
+			<%= text.body %>
+			<%= render :partial => 'postings/posting', :collection => text.children.comments %>
+			</td>
+		</tr>
+	</table>	
+	<%= render :partial => 'postings/posting', :collection => text.children.postings %>
+<% end %>

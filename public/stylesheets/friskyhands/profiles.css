@@ -15,31 +15,31 @@ select {
 	width: 12em;
 }
 
-select.ff-date {
+select.date {
 	width: auto;
 }
 
-table.ff-table-user-info {
+table.user-info {
 	width: 100%;
 	background-color: #F7F7F7;
 	border-collapse: separate;
 	border-spacing: 0 8px;
 }
 
-td.ff-table-label {
+td.label {
 	width: 100px;
 	padding-right: 1em;
 	text-align: right;
 }
 
-td.ff-table-label.textarea {
+td.label.textarea {
 	padding-top: 10px;
 }
 
-td.ff-table-detail {
+td.detail {
 /*	padding: 0.6em 1em;*/
 }
 
-td.ff-table-label.about_me {
+td.label.about_me {
 	vertical-align: top;
 }

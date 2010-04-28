@@ -4,6 +4,7 @@ posting_1:
     parent_id: NULL
     wave_id: 1
     user_id: <%= Fixtures.identify(:adam) %>
+    body: <%= Faker::Lorem::sentences %>
 
 posting_2:
     id: 2
@@ -11,64 +12,81 @@ posting_2:
     parent_id: NULL
     wave_id: 1
     user_id: <%= Fixtures.identify(:bert) %>
+    body: <%= Faker::Lorem::sentences %>
 
 posting_3:
     id: 3
     type: Posting::Text
     parent_id: 2
+    # parent_id: NULL
     wave_id: 1
     user_id: <%= Fixtures.identify(:charlie) %>
+    body: <%= Faker::Lorem::sentences %>
 
 comment_4:
     id: 4
     type: Posting::Comment
-    parent_id: 3
+    parent_id: 2
     wave_id: 1
+    user_id: <%= Fixtures.identify(:duncan) %>    
+    body: <%= Faker::Lorem::sentence %>
 
 posting_5:
     id: 5
     type: Posting::Comment
-    parent_id: 3
+    parent_id: 2
     wave_id: 1
-
+    user_id: <%= Fixtures.identify(:charlie) %>
+    body: <%= Faker::Lorem::sentence %>
+    
 posting_6:
     id: 6
     type: Posting::Comment
-    parent_id: 3
+    parent_id: 2
     wave_id: 1
+    user_id: <%= Fixtures.identify(:duncan) %>    
+    body: <%= Faker::Lorem::sentence %>
 
 posting_7:
     id: 7
     type: Posting::Text
     parent_id: NULL
     wave_id: 1
+    body: <%= Faker::Lorem::sentence %>
 
 comment_8:
     id: 8
     type: Posting::Comment
     parent_id: 1
     wave_id: 1
+    body: <%= Faker::Lorem::sentence %>
+    user_id: <%= Fixtures.identify(:duncan) %>
 
 comment_9:
     id: 9
     type: Posting::Comment
     parent_id: 1
     wave_id: 1
+    body: <%= Faker::Lorem::sentences %>
+    user_id: <%= Fixtures.identify(:duncan) %>
 
 message_10:
     id: 10
     type: Posting::Message
     parent_id: NULL
     wave_id: 1
+    body: <%= Faker::Lorem::sentence %>
 
 message_11:
     id: 11
     type: Posting::Message
     parent_id: 10
     wave_id: 1
+    body: <%= Faker::Lorem::sentence %>
 
 message_12:
     id: 12
     type: Posting::Message
     parent_id: 11
     wave_id: 1
+    body: <%= Faker::Lorem::sentence %>

@@ -1,9 +1,9 @@
-<% content_tag_for(:div, message, :class => 'posting message') do %>
+<% content_tag_for(:div, message, :class => 'posting posting_message') do %>
 	<div>
 	<%# avatar_image_tag(message.sender.avatar, :class => 'small') -%>
-	<div class='full_namepo'><%# message.sender.full_name -%></div>
+	<div class='user-full_name'><%# message.sender.full_name -%></div>
 	<div class='created_at'><%# time_ago_in_words(message.created_at) -%>&nbsp;ago</div>
-	<div class='body'><%= message.to_s %>
+	<div class='posting-message-body'><%= message.to_s %>
 		<%# textilize(message.body) -%></div>
 	</div>
 	<%= render :partial => "postings/posting", :collection => message.children %>

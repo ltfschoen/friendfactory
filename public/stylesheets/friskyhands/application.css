@@ -52,10 +52,9 @@ p {
 	font-size: 0.9em;
 }
 
-img.ff-posting-avatar, img.ff-posting-photo {
+img.avatar, img.photo {
 	border: 1px solid lightgray;
 	padding: 2px;
-	margin: 2px;
 }
 
 input[type=text],

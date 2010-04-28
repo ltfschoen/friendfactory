@@ -4,7 +4,17 @@ class Posting::Base < ActiveRecord::Base
 
   acts_as_tree :order => 'created_at asc'
   
-  belongs_to :user  
+  has_many :children, :class_name => 'Posting::Base', :foreign_key => 'parent_id', :order => 'created_at' do
+    def postings
+      find :all, :conditions => [ "type <> 'Posting::Comment'" ]
+    end
+    def comments
+      find :all, :conditions => [ "type = 'Posting::Comment'" ]
+    end
+  end
+  
+  belongs_to :user
+  
   belongs_to :wave,
       :class_name  => 'Wave::Base',
       :foreign_key => 'wave_id'
