@@ -31,7 +31,10 @@
 		<td class='detail'><%= f.text_area :about_me %></td>
 	</tr>
 	<tr class='button-bar'>
-		<td class='label'>&nbsp;</td>
+		<td class='label'>
+		  <%= image_tag('icons/accept.png', :site => false, :id => 'user_info_ui_icon_check', :class => 'hidden') %>
+		  <%= image_tag('icons/cancel.png', :site => false, :id => 'user_info_ui_icon_cancel', :class => 'hidden') %>
+		</td>
 		<td class='detail'><%= f.submit "Update" %></td>
 	</tr>
 </table>

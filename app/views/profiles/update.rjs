@@ -1,0 +1,7 @@
+if @success
+  page['user_info_ui_icon_cancel'].hide
+  page['user_info_ui_icon_check'].show
+else
+  page['user_info_ui_icon_check'].hide
+  page['user_info_ui_icon_cancel'].show
+end
