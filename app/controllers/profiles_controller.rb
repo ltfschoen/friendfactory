@@ -18,11 +18,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def create
-    posting_type = params[:posting_type]
-    self.send("create_#{posting_type.to_sym}")
-  end
-
   def update
     @success = current_user.info.update_attributes(params[:user_info])
     respond_to do |format|
@@ -30,26 +25,4 @@ class ProfilesController < ApplicationController
     end
   end
   
-  private
-
-  def create_posting_avatar
-    @avatar = current_user.profile.build_avatar(params[:posting_avatar])
-    current_user.profile.save
-    respond_to_parent do
-      respond_to do |format|
-        format.js  { render :action => 'create_avatar' }
-      end
-    end
-  end
-  
-  def create_posting_photo
-    @photo = current_user.profile.photos.build(params[:posting_photo])
-    current_user.profile.save
-    respond_to_parent do      
-      respond_to do |format|
-        format.js { render :action => 'create_photo' }
-      end
-    end
-  end
-
 end

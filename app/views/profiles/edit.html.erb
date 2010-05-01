@@ -22,14 +22,11 @@
 		<div id='avatar' class='tab_content grid_16 alpha omega'>	
 			<h1><%= current_user.first_name %>&#146;s&nbsp;Avatar</h1>
 			<% form_for Posting::Avatar::new,
-						:url  => profiles_path(:format => :js),
+						:url  => avatars_path(:format => :js),
 						:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
-				<%= hidden_field_tag 'posting_type', 'posting_avatar',
-						:id    => 'posting_avatar_type',
-						:style => 'margin:0;padding:0;display:inline' %>
 				<div id='avatar_upload_error' class='hidden'></div>
 				<div id='avatar_upload_well' class='append-bottom clearfix'>
-					<%= render :partial => 'edit_avatar', :object => current_user.profile.avatar %>
+					<%= render :partial => 'avatars/edit', :object => current_user.profile.avatar %>
 				</div>
 				<div class='button_bar'><%= f.file_field :image %><%= f.submit 'Upload', :id => 'avatar_upload_submit' %><%= spinner %></div>
 			<% end %>
@@ -43,14 +40,11 @@
 		<div id="photos" class='tab_content grid_16 alpha omega'>
 			<h1>Photos of <%= current_user.first_name -%></h1>
 			<% form_for Posting::Photo::new,
-						:url  => profiles_path(:format => :js),
+						:url  => photos_path(:format => :js),
 						:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
-				<%= hidden_field_tag 'posting_type', 'posting_photo',
-						:id    => 'posting_photo_type',
-						:style => 'margin:0;padding:0;display:inline' %>
 				<div id='photo_upload_error' class='hidden'></div>
 				<div id='photo_upload_well' class='append-bottom clearfix'>
-					<%= render :partial => 'edit_photo', :collection => current_user.profile.photos %>
+					<%= render :partial => 'photos/edit', :collection => current_user.profile.photos %>
 				</div>
 				<div class='button_bar'><%= f.file_field :image %><%= f.submit 'Upload', :id => 'photo_upload_submit' %><%= spinner %></div>
 			<% end %>

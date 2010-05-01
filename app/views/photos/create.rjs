@@ -1,11 +1,10 @@
-if @avatar.valid?
-  # page['spinner'].hide
+# page['spinner'].hide
+if @photo.valid?
   # page['upload_error_well'].hide
-  page.replace_html 'avatar_upload_well', :partial => 'edit_avatar', :object => @avatar
-  page['new_posting_avatar'].get(0).reset
+  page.insert_html :bottom, 'photo_upload_well', :partial => 'photos/edit', :object => @photo
+  page['new_posting_photo'].get(0).reset
 else
-  page << "alert(#{@avatar.errors})"
-  # page['spinner'].hide
+  page << "alert(#{@photo.errors})"
   # page['upload_error_well'].show
   # page << "jQuery('#upload_error_well').addClass('error')"
   # if params[:posting].blank? || params[:posting][:image].blank?

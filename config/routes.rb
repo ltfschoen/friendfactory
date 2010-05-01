@@ -1,13 +1,24 @@
 ActionController::Routing::Routes.draw do |map|
   
-  # Waves Controller
-  # Subclass of Wave model have their own controllers 
-  map.resources :waves, :only => [ :show ], :collection => { :popular => :get }
-  
-  # Profiles Controller
-  map.resources :profiles, :only => [ :show, :edit, :create, :update ]
+  # Waves Controllers
+  map.resources :waves,    :only => [ :show ], :collection => { :popular => :get }  
+  map.resources :profiles, :only => [ :show, :edit, :update ]
   map.edit_profile '/profile', :controller => 'profiles', :action => 'edit'
+  
+  # # # # # # # # # # # # # # #
+  
+  # Postings Controllers
+  map.resources :avatars,  :only => [ :create ] 
+  map.resources :photos,   :only => [ :create ] 
+  map.resources :messages, :collection => { :sent => :get } do |message|
+    message.reply 'reply',
+        :controller => 'messages',
+        :action     => 'reply',
+        :conditions => { :method => :post }
+  end
 
+  # # # # # # # # # # # # # # #
+  
   # User Controller
   map.with_options :controller => 'users' do |users_controller|
     users_controller.resources :users
@@ -16,15 +27,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # Friendships Controller
   map.resources :friendships, :only => [ :create, :destroy ]
-  
-  # Messages Controller
-  map.resources :messages, :collection => { :sent => :get } do |message|
-    message.reply 'reply',
-        :controller => 'messages',
-        :action     => 'reply',
-        :conditions => { :method => :post }
-  end
 
+  
   # Welcome Controller
   map.with_options :controller => 'welcome' do |welcome_controller|
     welcome_controller.welcome 'welcome',
