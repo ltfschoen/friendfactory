@@ -22,7 +22,6 @@ Rails::Initializer.run do |config|
   
   config.gem 'aasm'
   config.gem 'authlogic'
-  config.gem 'RedCloth'
   config.gem 'paperclip', :version => '2.3.1.1'
   config.gem "responds_to_parent"
   config.gem "haml"
