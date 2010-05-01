@@ -1,10 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :waves, :collection => { :popular => :get }
-  # map.resources :postings
+  # Waves Controller
+  # Subclass of Wave model have their own controllers 
+  map.resources :waves, :only => [ :show ], :collection => { :popular => :get }
   
-  # Profiles controller
-  map.resources :profiles, :except => [ :index, :new, :edit, :destroy ]
+  # Profiles Controller
+  map.resources :profiles, :only => [ :show, :edit, :create, :update ]
   map.edit_profile '/profile', :controller => 'profiles', :action => 'edit'
 
   # User Controller
@@ -13,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
     users_controller.resource  :account
   end
 
+  # Friendships Controller
   map.resources :friendships, :only => [ :create, :destroy ]
   
   # Messages Controller
@@ -47,12 +49,13 @@ ActionController::Routing::Routes.draw do |map|
       :action     => 'destroy',
       :conditions => { :method => :get }
   
-  map.peek 'peek', :controller => 'welcome', :action => 'peek'
-  
+  # Root Controller
   map.root :controller => 'waves',
       :action     => 'popular',
       :conditions => { :method => :get }
-  
+
+  # Chat Debug
+  map.peek 'peek', :controller => 'welcome', :action => 'peek'  
   
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller

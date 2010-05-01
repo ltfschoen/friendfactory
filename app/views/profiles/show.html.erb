@@ -1,1 +1,8 @@
-show profile
+<div class='profile wave grid_12'>
+  <h1><%= @profile.user.first_name %>&#146;s Wave</h1>
+  <% if @profile.postings.empty? %>
+    <h3><%= @profile.user.first_name %>hasn't done anything with their profile. Put something here for them!</h3>
+  <% else %>
+    <%= render :partial => 'wave', :object => @profile %>
+  <% end %>
+</div>

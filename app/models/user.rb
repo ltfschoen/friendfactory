@@ -17,7 +17,13 @@ class User < ActiveRecord::Base
   has_many :postings, :class_name => 'Posting::Base'
   
   has_many :friendships
-  has_many :buddies, :through => :friendships
+  has_many :inverse_friendships,
+      :class_name  => 'Friendship',
+      :foreign_key => 'friend_id'
+
+  has_many :friends,  :through => :friendships            
+  has_many :buddies,  :through => :friendships
+  has_many :admirers, :through => :inverse_friendships, :source => :user
 
   # DefaultMessagePeriod = 10.days
   
@@ -61,7 +67,11 @@ class User < ActiveRecord::Base
   end
   
   def full_name
-    [ self.first_name, self.last_name ].compact * ' '
+    [ self[:first_name].humanize, self[:last_name].humanize ].compact * ' '
+  end
+  
+  def first_name
+    self[:first_name].humanize
   end
   
   def to_s

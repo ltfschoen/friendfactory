@@ -1,5 +1,7 @@
 class FriendshipsController < ApplicationController
 
+  before_filter :require_user
+  
   # GET /friendships
   # GET /friendships.xml
   # def index
@@ -38,18 +40,15 @@ class FriendshipsController < ApplicationController
   #   @friendship = Friendship.find(params[:id])
   # end
 
-  # POST /friendships
-  # POST /friendships.xml
   def create
-    @friendship = Friendship.new(params[:friendship])
+    unless params[:friend_id] == current_user.id
+      @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
+    end
     respond_to do |format|
-      if @friendship.save
-        flash[:notice] = 'Friendship was successfully created.'
+      if @friendship.try(:save)
         format.html { redirect_to(@friendship) }
-        format.xml  { render :xml => @friendship, :status => :created, :location => @friendship }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @friendship.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -71,11 +70,10 @@ class FriendshipsController < ApplicationController
   # end
 
   def destroy
-    @friendship = Friendship.find(params[:id])
+    @friendship = current_user.friendships.find(params[:id])
     @friendship.destroy
     respond_to do |format|
       format.html { redirect_to(friendships_url) }
-      format.xml  { head :ok }
     end
   end
 end

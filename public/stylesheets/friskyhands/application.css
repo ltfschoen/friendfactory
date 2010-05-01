@@ -19,8 +19,12 @@ h3 {
 }
 
 p {
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+}
+
+a {
+	text-decoration: none;
 }
 
 .unobtrusive {
@@ -81,6 +85,10 @@ textarea.placeholder {
 	left: .5em;
 }
 
+a.profile {
+	font-weight: bold;
+	color: #9C180C;
+}
 
 div.header { 
 	background: url(/images/friskyhands/header-background-red-24.png) no-repeat top center;

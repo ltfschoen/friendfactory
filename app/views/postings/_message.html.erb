@@ -1,10 +1,5 @@
-<% content_tag_for(:div, message, :class => 'posting posting_message') do %>
-	<div>
-	<%# avatar_image_tag(message.sender.avatar, :class => 'small') -%>
-	<div class='user-full_name'><%# message.sender.full_name -%></div>
-	<div class='created_at'><%# time_ago_in_words(message.created_at) -%>&nbsp;ago</div>
-	<div class='posting-message-body'><%= message.to_s %>
-		<%# textilize(message.body) -%></div>
-	</div>
-	<%= render :partial => "postings/posting", :collection => message.children %>
-<% end %>
+<div class='posting'>
+	<div>Private Conversation with <%= message.messaging_with(current_user).full_name -%></div>
+	<%= render :partial => "postings/message_reply", :object => message %>
+</div>
+<% reset_cycle('message_reply') %>

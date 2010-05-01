@@ -2,28 +2,12 @@ class ProfilesController < ApplicationController
 
   before_filter :require_user
   
-  # def index
-  #   @profiles = Profile.all
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.xml  { render :xml => @profiles }
-  #   end
-  # end
-
   def show
-    # @profile = current_user.profile
-    # current_user.save && current_user.reload if @profile.nil?
-    # respond_to do |format|
-    #   format.html
-    # end
+    @profile = Wave::Base.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
+    end
   end
-
-  # def new
-  #   @profile = Profile.new
-  #   respond_to do |format|
-  #     format.html
-  #   end
-  # end
 
   def edit
     @profile   = current_user.profile

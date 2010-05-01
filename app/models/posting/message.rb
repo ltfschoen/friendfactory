@@ -7,18 +7,22 @@ class Posting::Message < Posting::Base
   validates_presence_of :receiver
 
   belongs_to :receiver, :class_name => User.class_name, :foreign_key => 'receiver_id'
-
-  attr_accessible :sender, :receiver, :subject, :body
   
   named_scope :unread, :conditions => { :read_at => nil }
+
+  attr_accessible :sender, :receiver, :subject, :body
 
   def read?
     !!read_at
   end
   
+  def messaging_with(current_user)
+    [ sender, receiver ].detect{ |user| user != current_user }
+  end
+  
   def reply(attrs = {})
-    # TODO: 2010/4/17 Decide what the reply subject should be
-    subject = nil && reply_subject(attrs[:subject])
+    subject = nil 
+    # TODO: 2010/4/17 # subject = reply_subject(attrs[:subject])
     attrs.merge!(:sender => self.receiver, :receiver => self.sender, :subject => subject)
     self.children.create(attrs)
   end

@@ -13,8 +13,7 @@ class Posting::Base < ActiveRecord::Base
     end
   end
   
-  belongs_to :user
-  
+  belongs_to :user  
   belongs_to :wave,
       :class_name  => 'Wave::Base',
       :foreign_key => 'wave_id'

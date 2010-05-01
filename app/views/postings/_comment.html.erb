@@ -1,8 +1,11 @@
-<% div_for(comment, :class => 'posting')  do %>
+<% content_tag_for(:div, comment, :class => 'posting')  do %>
 	<table>
 		<tr>
-			<td><%= thumb_image_tag(comment.user.profile.avatar) rescue '&nbsp;' %></td>
-			<td><%= comment.body %></td>
+			<td><%= thumb_image_tag(comment.user.profile.avatar) rescue nil %></td>
+			<td>
+			<div><%= link_to_profile(comment.user) rescue nil -%>&nbsp;<%= distance_of_time_in_words_to_now(comment.created_at) %>&nbsp;ago</div>
+			<div><%= comment.body %></div>
+			</td>
 		</tr>
 	</table>
 	<%= render :partial => "postings/posting", :collection => comment.children %>

@@ -60,12 +60,16 @@ module ApplicationHelper
     image_tag('ajax-loader.gif', :size => size, :class => 'spinner', :id => 'spinner', :style => 'display:none')
   end
   
+  def link_to_profile(user)
+    link_to(user.full_name, profile_path(user.profile), :class => 'profile') if user.profile
+  end
+  
   def portrait_image_tag(avatar)
-    image_tag(avatar.image.url(:portrait), :class => 'avatar avatar-portrait', :site => false) unless avatar.nil?
+    image_tag(avatar.image.url(:portrait), :class => 'avatar avatar_portrait', :site => false) unless avatar.nil?
   end
   
   def thumb_image_tag(avatar)
-    image_tag(avatar.image.url(:thumb), :class => 'avatar avatar-thumb', :site => false) unless avatar.nil?
+    image_tag(avatar.image.url(:thumb), :class => 'avatar avatar_thumb', :site => false) unless avatar.nil?
   end
     
 end

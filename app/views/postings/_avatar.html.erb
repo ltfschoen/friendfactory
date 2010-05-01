@@ -1,3 +1,3 @@
-<div class='posting posting_avatar'>
-<%= portrait_image_tag(avatar) %>
-</div>
+<% content_tag_for(:div, avatar, :class => 'posting') do %>
+	<%= portrait_image_tag(avatar) %>
+<% end %>

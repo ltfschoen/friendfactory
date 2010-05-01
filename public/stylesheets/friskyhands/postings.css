@@ -1,43 +1,51 @@
 .wave > .posting {
 	border-bottom: 1px solid #CCC;
-	padding-bottom: 10px;
-	margin-bottom: 10px;
+	width: 100%;
+	padding: 20px 0;
 }
 
 .posting {	
- /* padding: 10px; */
-	margin-top: 10px;
-	margin-bottom: 10px;
+	display: table;
 }
 
-.posting > table td {
+.posting table td {
 	vertical-align: top;
 }
 
-.posting_message {
+.posting p.body {
+	margin-bottom: 10px;
+}
+
+.posting .posting_comment {
+	background-color: #F7F7F7;
+	width: 70%;
+	font-size: 0.9em;
+	margin: 8px 0;
+}
+
+/*.posting_message {
 	padding: 0px;
 	margin: 0px;
 	border: 0px;
+}*/
+
+.posting_message.left {	
 }
 
-.wave > .posting_message {
-	border: 1px solid #555;
-	margin-top: 10px;
-	padding: 0px;
+.posting_message.right {
 }
 
-.posting_message > div:first-child {
-	background-color: #F7F7F7;
-	border: 1px solid #555;
-	margin: 10px;
-	padding: 10px;
-}
 
 .posting img.avatar {
 	margin-right: 12px;
 }
 
 .posting_comment img.avatar {
-	margin-right: 12px;
+	margin-right: 10px;
 	width: 50px;
+}
+
+.posting_message img.avatar {
+	margin-right: 8px;
+	width: 32px;
 }

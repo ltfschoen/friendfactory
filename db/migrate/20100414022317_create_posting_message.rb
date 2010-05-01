@@ -1,4 +1,4 @@
-class CreatePostingPrivate < ActiveRecord::Migration
+class CreatePostingMessage < ActiveRecord::Migration
   def self.up
     add_column :postings, :private,             :boolean
     add_column :postings, :receiver_id,         :integer

@@ -11,17 +11,16 @@
 		</ul>
 		
 		<div id='home' class='tab_content grid_16 alpha omega'>
-			<h1><%= current_user.first_name.humanize %>&#146;s Wave</h1>
+			<h1><%= current_user.first_name %>&#146;s Wave</h1>
 			<% if @profile.postings.empty? %>	
 				<h3>Do something with your profile to meet friends!</h3>
 			<% else %>
- 				<%= render :partial => 'postings/posting', :collection => [ @profile.avatar ] %>
-				<%= render :partial => 'basic' %>
+			  <%= render :partial => 'wave', :object => current_user.profile %>
 			<% end %>
 		</div>
 					
 		<div id='avatar' class='tab_content grid_16 alpha omega'>	
-			<h1><%= current_user.first_name.humanize %>&#146;s&nbsp;Avatar</h1>
+			<h1><%= current_user.first_name %>&#146;s&nbsp;Avatar</h1>
 			<% form_for Posting::Avatar::new,
 						:url  => profiles_path(:format => :js),
 						:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
@@ -42,7 +41,7 @@
 		</div>
 
 		<div id="photos" class='tab_content grid_16 alpha omega'>
-			<h1>Photos of <%= current_user.first_name.humanize -%></h1>
+			<h1>Photos of <%= current_user.first_name -%></h1>
 			<% form_for Posting::Photo::new,
 						:url  => profiles_path(:format => :js),
 						:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
@@ -58,7 +57,7 @@
 		</div>
 
 		<div id="buddies" class='tab_content grid_16 alpha omega'>
-			<h1><%= current_user.first_name.humanize -%>&#146;s&nbsp;Buddies</h1>
+			<h1><%= current_user.first_name -%>&#146;s&nbsp;Buddies</h1>
 		</div>
 
 		<div id="links" class='tab_content grid_16 alpha omega'>
