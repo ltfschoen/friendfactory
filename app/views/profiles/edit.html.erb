@@ -1,22 +1,17 @@
 <% stylesheet 'profiles' %>
 <div class='profile wave grid_12'>
 	<div id="tabs">
-		<ul>
+		<ul>		  
 		   <li><a href="#home" class='current'>Home</a></li>
 		   <li><a href="#avatar">Avatar</a></li>
 		   <li><a href="#about">About Me</a></li>
 		   <li><a href="#photos">Photos</a></li>
 		   <li><a href="#buddies">Buddies</a></li>
-		   <% if false %><li><a href="#links">Links</a></li><% end %>
+		   <% if false %><li class='ajax'><a href="#links">Links</a></li><% end %>
 		</ul>
 		
 		<div id='home' class='tab_content grid_16 alpha omega'>
-			<h1><%= current_user.first_name %>&#146;s Wave</h1>
-			<% if @profile.postings.empty? %>	
-				<h3>Do something with your profile to meet friends!</h3>
-			<% else %>
-			  <%= render :partial => 'wave', :object => current_user.profile %>
-			<% end %>
+		  <%= render :partial => 'home' %>
 		</div>
 					
 		<div id='avatar' class='tab_content grid_16 alpha omega'>	
@@ -78,17 +73,29 @@
 		
 		$('#tabs ul li').click(function(){
 			if (!$(this).hasClass('current')) {
-				$(this).addClass('current').siblings('li.current').removeClass('current');
-				$($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
+				$(this)
+				  .addClass('current')
+				  .siblings('li.current')
+				  .removeClass('current');
+				$($(this)
+				  .find('a')
+				    .attr('href'))
+				    .show()
+				    .siblings('div.tab_content')
+				    .hide();
 				this.blur();
 				return false;
 			}
 		});
 		
+		$('#tabs ul li:first-child').click(function(){
+		  $('#home').load('<%= home_profile_path(current_user.profile) %>');
+		});
+		
 		// jQuery('#upload_submit').click(function(){
-			// jQuery('#spinner').show();
+	  //   jQuery('#spinner').show();
 		// });
 		
-		$('#tabs ul li:first a').click();
+		// $('#tabs ul li:first a').click();
 	});	
 <% end %>

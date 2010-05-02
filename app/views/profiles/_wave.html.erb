@@ -1,2 +1,3 @@
 <%= render :partial => 'postings/posting', :collection => [ wave.avatar ] %>
-<%= render :partial => 'basic' %>
+<%= render :partial => 'basic', :object => wave.user.info %>
+<%= render :partial => 'postings/posting', :collection => wave.photos %>

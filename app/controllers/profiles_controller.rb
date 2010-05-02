@@ -9,6 +9,12 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def home
+    respond_to do |format|
+      format.html { render :partial => 'home' }
+    end
+  end
+
   def edit
     @profile   = current_user.profile
     @user_info = current_user.info
