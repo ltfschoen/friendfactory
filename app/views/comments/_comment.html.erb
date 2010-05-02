@@ -1,0 +1,14 @@
+<% content_tag_for(:div, comment, :class => 'posting')  do %>
+	<table>
+		<tr>
+			<td class='avatar'><%= thumb_image_tag(comment.user.profile.avatar) rescue nil %></td>
+			<td>
+  			<div>
+  			  <%= link_to_profile(comment.user) if comment.user -%>
+  			  <%= distance_of_time_in_words_to_now(comment.created_at) %>
+  			</div>
+  			<p class='body'><%= comment.body %></p>
+			</td>
+		</tr>
+	</table>
+<% end %>

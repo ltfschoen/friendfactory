@@ -8,3 +8,24 @@
 	<hr/>
 	<%= render :partial => 'postings/posting', :collection => @wave.postings %>
 </div>
+
+<% javascript_tag do %>
+  jQuery(document).ready(function(){
+    $('form.new_posting_comment')
+      .find('textarea')
+      .keypress(function(){
+        $(this)
+          .height('3.6em')
+          .next().show()
+          .closest('table')
+          .find('img.avatar').show(); })
+      .blur(function(){
+        if ($(this).val() === $(this).attr('placeholder')) {
+          $(this)
+            .height('1.2em')
+            .next().hide()
+            .closest('table').find('img.avatar').hide();
+        }
+      });
+  });
+<% end %>      

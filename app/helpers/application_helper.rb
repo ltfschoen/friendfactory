@@ -68,8 +68,18 @@ module ApplicationHelper
     image_tag(avatar.image.url(:portrait), :class => 'avatar avatar_portrait', :site => false) unless avatar.nil?
   end
   
-  def thumb_image_tag(avatar)
-    image_tag(avatar.image.url(:thumb), :class => 'avatar avatar_thumb', :site => false) unless avatar.nil?
+  def thumb_image_tag(avatar, opts = {})
+    klass = [ 'avatar', 'avatar_thumb', opts[:class] ].compact * ' '
+    image_tag(avatar.image.url(:thumb), :class => klass, :site => false) unless avatar.nil?
+  end
+  
+  def distance_of_time_in_words_to_now(date)
+    content_tag(:span, :class => 'distance_of_time') do
+      returning String.new do |html|
+        html << super(date)
+        html << '&nbsp;ago'
+      end
+    end
   end
     
 end

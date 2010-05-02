@@ -8,20 +8,69 @@
 	display: table;
 }
 
-.posting table td {
+.posting > table td {
 	vertical-align: top;
 }
 
-.posting p.body {
-	margin-bottom: 10px;
+/* * * * * * * * * */
+
+.posting_text {
+	width: 100%;
 }
 
-.posting .posting_comment {
+.posting_text > posting_text {
+	width: 100%;
+}
+
+.posting_text > table p.body {
+	margin-bottom: 0.5em;
+}
+
+.posting_text > table td.avatar {
+	width: 106px;
+}
+
+.posting_text > table img.avatar {
+	margin-right: 12px;
+}
+
+/* * * * * * * * * */
+
+.posting_comment {
 	background-color: #F7F7F7;
 	width: 70%;
 	font-size: 0.9em;
 	margin: 8px 0;
 }
+
+.posting_comment > table {
+	width: 100%;
+}
+
+.posting_comment > table td div:first-child {
+	margin-top: 0.5em;
+}
+
+.posting_comment > table p.body {
+	margin-bottom: 0.5em;
+}
+
+.posting_comment > table textarea {
+	height: 1.2em;
+	width: 93%;
+}
+
+.posting_comment > table td.avatar {
+	width: 52px;
+}
+
+.posting_comment > table img.avatar {
+	border: 0px;
+	margin: 0.5em 10px 0.5em 4px;
+	width: 36px;
+}
+
+/* * * * * * * * * */
 
 /*.posting_message {
 	padding: 0px;
@@ -35,17 +84,10 @@
 .posting_message.right {
 }
 
-
-.posting img.avatar {
-	margin-right: 12px;
-}
-
-.posting_comment img.avatar {
-	margin-right: 10px;
-	width: 50px;
+.posting_message td.avatar {
 }
 
 .posting_message img.avatar {
 	margin-right: 8px;
-	width: 32px;
+	width: 28px;
 }

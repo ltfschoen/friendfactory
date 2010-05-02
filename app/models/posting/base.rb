@@ -4,12 +4,12 @@ class Posting::Base < ActiveRecord::Base
 
   acts_as_tree :order => 'created_at asc'
   
-  has_many :children, :class_name => 'Posting::Base', :foreign_key => 'parent_id', :order => 'created_at' do
+  has_many :children, :class_name => 'Posting::Base', :foreign_key => 'parent_id', :order => 'created_at asc' do
     def postings
-      find :all, :conditions => [ "type <> 'Posting::Comment'" ]
+      find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at asc'
     end
     def comments
-      find :all, :conditions => [ "type = 'Posting::Comment'" ]
+      find :all, :conditions => [ "type = 'Posting::Comment'" ], :order => 'created_at asc'
     end
   end
   

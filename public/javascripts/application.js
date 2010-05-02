@@ -22,8 +22,8 @@ var FF = {
 };
 
 jQuery(document).ready(function($) {
-	$('.header.secondary').hide();
-	$('.header.secondary').children().hide();
+	$('.header.secondary').hide().children().hide();
+	// $('.header.secondary').children().hide();
 	$('.header.primary #login').toggle(
 		function(){
 			$('.header.secondary').slideDown('normal', function(){ $(this).children().show(); })
@@ -34,4 +34,7 @@ jQuery(document).ready(function($) {
 			$('.header.secondary').slideUp('normal');
 			return false;
 		});
+	$('input[placeholder], textarea[placeholder]')
+		.placeholder({ className: 'placeholder' })
+		.addClass('placeholder');
 });

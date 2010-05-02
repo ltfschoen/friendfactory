@@ -34,7 +34,7 @@ Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
-  config.active_record.observers = :user_observer
+  config.active_record.observers = [ :user_observer, :'Posting::BaseObserver' ]
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.

@@ -56,6 +56,11 @@ a {
 	font-size: 0.9em;
 }
 
+.distance_of_time {
+	color: gray;
+	font-size: 0.9em;
+}
+
 img.avatar, img.photo {
 	border: 1px solid lightgray;
 	padding: 2px;
@@ -64,7 +69,7 @@ img.avatar, img.photo {
 input[type=text],
 input[type=password],
 textarea  {
-	padding: 5px;
+	padding: 0.4em;
 	width: 90%;
 	font-size: 1em;
 }

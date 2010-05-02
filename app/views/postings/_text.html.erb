@@ -1,11 +1,13 @@
 <% content_tag_for(:div, text, :class => 'posting') do %>
-	<table>
+	<table class='posting_text'>
 	<tr>
-		<td><%= thumb_image_tag(text.user.profile.avatar) rescue '&nbsp;' %></td>
+		<td class='avatar'><%= thumb_image_tag(text.user.profile.avatar) rescue '&nbsp;' %></td>
 		<td>
-			<div><%= link_to_profile(text.user) -%>&nbsp;<%= distance_of_time_in_words_to_now(text.created_at) -%>&nbsp;ago</div>
+			<div><%= link_to_profile(text.user) -%>&nbsp;<%= distance_of_time_in_words_to_now(text.created_at) -%></div>
 			<p class='body'><%= text.body %></p>
-			<%= render :partial => 'postings/posting', :collection => text.children.comments %>
+			<%= render :partial => 'comments/comment', :collection => text.children.comments %>
+			<div id='<%= "posting_#{text.id}_new_comment_well" %>'></div>
+			<%= render :partial => 'comments/new', :locals => { :parent_id => text.id } %>
 		</td>
 	</tr>
 	</table>

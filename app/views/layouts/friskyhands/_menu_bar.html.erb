@@ -1,12 +1,12 @@
 <ul id='menu_bar' class='menu_bar'>
-	<li><%= link_to 'Waves', popular_waves_path -%></li>
+	<li><%= link_to 'Wave', popular_waves_path -%></li>
 	<li><%= link_to 'Buddies' -%></li>
-	<li><%= link_to 'Locations' -%></li>
-	<li><%= link_to 'Events' -%></li>
-	<li class='secondary'><%= link_to('Tell a Friend!') -%></li>
+	<% if false %><li><%= link_to 'Locations' -%></li><% end %>
+	<% if false %><li><%= link_to 'Events' -%></li><% end %>
+	<% if false %><li class='secondary'><%= link_to('Tell a Friend!') -%></li><% end %>
 	<% if current_user %>
 	<li class='secondary'><%= link_to('Logout', logout_path) -%></li>
-	<li class='secondary'><%= link_to('Account', '#') -%></li>
+	<% if false %><li class='secondary'><%= link_to('Account', '#') -%></li><% end %>
 	<li class='secondary'><%= link_to('Profile', edit_profile_path) -%></li>
 	<% else %>
 	<li class='secondary'><%= link_to('Login', '#', :id => 'login') -%></li>

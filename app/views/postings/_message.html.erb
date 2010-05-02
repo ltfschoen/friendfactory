@@ -1,5 +1,5 @@
 <div class='posting'>
 	<div>Private Conversation with <%= message.messaging_with(current_user).full_name -%></div>
-	<%= render :partial => "postings/message_reply", :object => message %>
+	<%= render :partial => "messages/message", :object => message %>
 </div>
-<% reset_cycle('message_reply') %>
+<% reset_cycle('posting_message') %>

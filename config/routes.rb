@@ -10,6 +10,10 @@ ActionController::Routing::Routes.draw do |map|
   # Postings Controllers
   map.resources :avatars,  :only => [ :create ] 
   map.resources :photos,   :only => [ :create ] 
+  map.resources :postings, :only => [] do |posting|
+    posting.resources :comments, :only => [ :create ]
+  end
+  
   map.resources :messages, :collection => { :sent => :get } do |message|
     message.reply 'reply',
         :controller => 'messages',
@@ -28,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   # Friendships Controller
   map.resources :friendships, :only => [ :create, :destroy ]
 
+  # # # # # # # # # # # # # # #
   
   # Welcome Controller
   map.with_options :controller => 'welcome' do |welcome_controller|
