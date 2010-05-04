@@ -21,7 +21,6 @@
             type: 'post',
             url: '#{posting_comments_path(:posting_id => parent_id)}',
             success: function(response, status){
-              console.log(this);
               $('#posting_#{parent_id}_new_comment')
                 .find('textarea').blur();
             }

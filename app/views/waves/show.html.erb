@@ -5,13 +5,3 @@
   <% if false %><div id='log'></div><% end %>
 	<%= render :partial => 'postings/posting', :collection => @wave.postings %>
 </div>
-
-<% javascript_tag do %>
-jQuery(document).ready(function($) {
-	if (!$.browser.webkit) {	
-		$('input[placeholder], textarea[placeholder]')
-			.placeholder({ className: 'placeholder' })
-			.addClass('placeholder');
-	}
-}
-<% end %>

@@ -37,6 +37,10 @@ jQuery(document).ready(function($){
 });
 
 jQuery(document).ready(function($){
+	$('input[placeholder], textarea[placeholder]')
+		.placeholder({ className: 'placeholder' })
+		.addClass('placeholder');
+	
   $('form.new_posting_comment')
     .find('textarea')
     .keypress(function(){
@@ -44,7 +48,8 @@ jQuery(document).ready(function($){
         .height('3.6em')
         .next().show()
         .closest('table')
-        .find('img.avatar').show(); })
+        .find('img.avatar').show();
+		})
     .blur(function(){
       if ($(this).val() === $(this).attr('placeholder')) {
         $(this)

@@ -2,5 +2,5 @@ if @comment
   page.insert_html(:bottom, "posting_#{@comment.parent_id}_new_comment_well", { :partial => 'comments/comment', :object => @comment })
   page["posting_#{@comment.parent_id}_new_comment"].get(0).reset
 else
-  page << 'alert("Error: Couldn\t save your comment.")'
+  page << 'alert("Error: Couldn\'t save your comment.")'
 end
