@@ -7,7 +7,7 @@ body, p, h1, h2, h3, label, input, textarea, a, .formError {
 h1 {
 	font-size: 2em;	
 	margin-top: 0.6em;
-	margin-bottom: 0.4em;
+	margin-bottom: 0.6em;
 }
 
 h2 {
@@ -54,6 +54,10 @@ a {
 .formError {
 	padding-left: 6px;
 	font-size: 0.9em;
+}
+
+.flash {
+	color: green;
 }
 
 .distance_of_time {

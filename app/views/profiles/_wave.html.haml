@@ -1,0 +1,16 @@
+- javascript 'wave'
+.wave.grid_12
+  %div
+    %table
+      %tr
+        %td
+          = render :partial => 'postings/posting', :collection => [ wave.avatar ]
+        %td
+          = render :partial => 'basic', :object => wave.user.info
+  %div
+    %h2 Photos of #{current_user.first_name}      
+    = render :partial => 'postings/posting', :collection => wave.photos
+  %div
+    %h2 #{current_user.first_name}' Updates
+            
+    = render :partial => 'postings/posting', :collection => wave.postings

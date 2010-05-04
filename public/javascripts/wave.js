@@ -28,10 +28,29 @@ jQuery(document).ready(function($) {
 jQuery(document).ready(function($){
 	$(document).trigger('connect', {
 		// jid: 'mjbamford@jabber.rootbash.com',
-		// password: 'lee201'
+		// password: ''
 		// jid: 'mjbamford@jabber.co.nz',
-		// password: 'lee201'
+		// password: ''
 		jid: 'mjbamford@friskyhands.com',
-		password: 'lee201AA'
+		password: '' // use extended internet password
 	});
+});
+
+jQuery(document).ready(function($){
+  $('form.new_posting_comment')
+    .find('textarea')
+    .keypress(function(){
+      $(this)
+        .height('3.6em')
+        .next().show()
+        .closest('table')
+        .find('img.avatar').show(); })
+    .blur(function(){
+      if ($(this).val() === $(this).attr('placeholder')) {
+        $(this)
+          .height('1.2em')
+          .next().hide()
+          .closest('table').find('img.avatar').hide();
+      }
+    });
 });

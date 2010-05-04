@@ -1,5 +1,5 @@
 wave_wall:
   id: 1
   type: Wave::Shared
-  topic: Shared Wave
-  description: This is where we talk about things
+  topic: Everyone's Wave
+  description: Everyone's welcome to FriskyHands

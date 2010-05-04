@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
+        flash[:notice] = "Welcome to FriskyHands, #{@user.first_name}!"
         format.html { redirect_to root_path }
       else
         flash[:signup] = true

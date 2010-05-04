@@ -54,28 +54,30 @@
 		
 		if (!$.browser.webkit) {
 			$('#user_session_password').before('<%= text_field_tag(
-					:user_session_password_placeholder,
-					nil,
+					:user_session_password_placeholder, nil,
 					:value => placeholder_for(:password),
 					:class => 'placeholder ui-widget') -%>');
 			FF.password_prompt('#user_session_password', '#user_session_password_placeholder');
 			
 			$('#user_password').before('<%= text_field_tag(
-					:user_password_placeholder,
-					nil,
+					:user_password_placeholder, nil,
 					:value => placeholder_for(:password),
 					:class => 'placeholder ui-widget') %>');
 			FF.password_prompt('#user_password', '#user_password_placeholder');
 
 			$('#user_password_confirmation').before('<%= text_field_tag(
-					:user_password_confirmation_placeholder,
-					nil,
+					:user_password_confirmation_placeholder, nil,
 					:value => placeholder_for(:password_confirmation),
 					:class => 'placeholder ui-widget') %>');
 			FF.password_prompt('#user_password_confirmation', '#user_password_confirmation_placeholder');
 
-			$('#user_session_password, #user_password, #user_password_confirmation').removeAttr('placeholder').hide();
-			// $('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');			
+			$('input[type=password]')
+			  .removeAttr('placeholder')
+			  .hide();
+
+  		$('input[placeholder]')
+  			.placeholder({ className: 'placeholder' })
+  			.addClass('placeholder');
 		}
 		
 		$('button.toggle').click(function(){

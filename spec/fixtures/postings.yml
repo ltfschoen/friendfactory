@@ -16,31 +16,27 @@ posting_2:
     user_id: <%= Fixtures.identify(:bert) %>
     body: <%= Faker::Lorem::sentences %>
     created_at: <%= 7.days.ago %>
-
+      
 posting_3:
     id: 3
     type: Posting::Text
     parent_id: 2
-    # parent_id: NULL
-    wave_id: 1
     user_id: <%= Fixtures.identify(:charlie) %>
     body: <%= Faker::Lorem::sentences %>
     created_at: <%= 7.days.ago %>
-
+      
 comment_4:
     id: 4
     type: Posting::Comment
     parent_id: 2
-    wave_id: 1
     user_id: <%= Fixtures.identify(:duncan) %>    
     body: <%= Faker::Lorem::sentence %>
     created_at: <%= 6.days.ago %>
-
+      
 posting_5:
     id: 5
     type: Posting::Comment
     parent_id: 2
-    wave_id: 1
     user_id: <%= Fixtures.identify(:charlie) %>
     body: <%= Faker::Lorem::sentence %>
     created_at: <%= 5.days.ago %>
@@ -49,7 +45,6 @@ posting_6:
     id: 6
     type: Posting::Comment
     parent_id: 2
-    wave_id: 1
     user_id: <%= Fixtures.identify(:duncan) %>    
     body: <%= Faker::Lorem::sentence %>
     created_at: <%= 4.days.ago %>
@@ -67,7 +62,6 @@ comment_8:
     id: 8
     type: Posting::Comment
     parent_id: 1
-    wave_id: 1
     body: <%= Faker::Lorem::sentence %>
     user_id: <%= Fixtures.identify(:duncan) %>
     created_at: <%= 2.days.ago %>
@@ -76,7 +70,6 @@ comment_9:
     id: 9
     type: Posting::Comment
     parent_id: 1
-    wave_id: 1
     body: <%= Faker::Lorem::sentences %>
     user_id: <%= Fixtures.identify(:duncan) %>
     created_at: <%= Date.today %>
@@ -84,7 +77,6 @@ comment_9:
 message_10:
     id: 10
     type: Posting::Message
-    parent_id: NULL
     wave_id: 1
     user_id: <%= Fixtures.identify(:bert) %>
     receiver_id: <%= Fixtures.identify(:adam) %>
@@ -95,7 +87,6 @@ message_11:
     id: 11
     type: Posting::Message
     parent_id: 10
-    wave_id: 1
     user_id: <%= Fixtures.identify(:adam) %>
     receiver_id: <%= Fixtures.identify(:bert) %>
     body: <%= Faker::Lorem::sentence %>
@@ -105,7 +96,6 @@ message_12:
     id: 12
     type: Posting::Message
     parent_id: 11
-    wave_id: 1
     user_id: <%= Fixtures.identify(:bert) %>
     receiver_id: <%= Fixtures.identify(:adam) %>
     body: <%= Faker::Lorem::sentence %>

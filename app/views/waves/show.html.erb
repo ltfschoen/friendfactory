@@ -1,31 +1,17 @@
 <% javascript 'wave' %>
 <div class='wave grid_12'>
-	<h1>Wave</h1>
-	<p>Topic:&nbsp;<%= h @wave.topic %></p>
-	<p>Description:&nbsp;<%= h @wave.description %></p>
-	<hr/>
-	<div id='log'></div>
-	<hr/>
+	<h1><%= h @wave.topic %></h1>
+	<%= content_tag(:p, flash[:notice], :class => 'flash') if flash[:notice] %>
+  <% if false %><div id='log'></div><% end %>
 	<%= render :partial => 'postings/posting', :collection => @wave.postings %>
 </div>
 
 <% javascript_tag do %>
-  jQuery(document).ready(function(){
-    $('form.new_posting_comment')
-      .find('textarea')
-      .keypress(function(){
-        $(this)
-          .height('3.6em')
-          .next().show()
-          .closest('table')
-          .find('img.avatar').show(); })
-      .blur(function(){
-        if ($(this).val() === $(this).attr('placeholder')) {
-          $(this)
-            .height('1.2em')
-            .next().hide()
-            .closest('table').find('img.avatar').hide();
-        }
-      });
-  });
-<% end %>      
+jQuery(document).ready(function($) {
+	if (!$.browser.webkit) {	
+		$('input[placeholder], textarea[placeholder]')
+			.placeholder({ className: 'placeholder' })
+			.addClass('placeholder');
+	}
+}
+<% end %>

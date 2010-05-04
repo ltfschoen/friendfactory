@@ -15,5 +15,21 @@ class UserInfo < ActiveRecord::Base
   set_table_name 'user_info'
 
   belongs_to :user
-      
+
+  def gender_description
+    Gender.rassoc(self[:gender]).try(:first)
+  end
+  
+  def orientation_description
+    Orientation.rassoc(self[:orientation]).try(:first)
+  end
+
+  def relationship_description
+    Relationship.rassoc(self[:relationship]).try(:first)
+  end
+  
+  def deafness_description
+    Deafness.rassoc(self[:deafness]).try(:first)
+  end
+  
 end

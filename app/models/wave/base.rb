@@ -5,7 +5,8 @@ class Wave::Base < ActiveRecord::Base
   has_many :postings,
       :class_name  => 'Posting::Base',
       :foreign_key => 'wave_id',
-      :conditions  => 'parent_id is null'
+      :conditions  => 'parent_id is null',
+      :order       => 'created_at desc'
   
   belongs_to :user
   
