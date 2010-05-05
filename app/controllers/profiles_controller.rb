@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_user, :only => [ :edit, :update ]
   
   def show
     @profile = Wave::Base.find_by_id(params[:id])

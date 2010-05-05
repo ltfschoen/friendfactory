@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  
+
   include AASM
   
   aasm_column        :status
@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   aasm_state         :welcomed
   
   acts_as_authentic do |config|
-    config.logged_in_timeout = 30.minutes
+    config.logged_in_timeout = UserSession::Timeout
   end
   
   has_one  :info,     :class_name => 'UserInfo'
@@ -24,6 +24,17 @@ class User < ActiveRecord::Base
   has_many :friends,  :through => :friendships            
   has_many :buddies,  :through => :friendships
   has_many :admirers, :through => :inverse_friendships, :source => :user
+
+
+  named_scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]
+
+  def self.online?(user)
+    online.include?(user)
+  end
+  
+  def online?
+    User.online?(self)
+  end
 
   # DefaultMessagePeriod = 10.days
   

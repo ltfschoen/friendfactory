@@ -1,7 +1,7 @@
 <% content_tag_for(:div, text, :class => 'posting') do %>
 	<table class='posting_text'>
 	<tr>
-		<td class='avatar'><%= thumb_image_tag(text.user.profile.avatar) rescue '&nbsp;' %></td>
+		<td class='avatar'><%= thumb_image_tag(text.user.profile.avatar) %></td>
 		<td>
 			<div><%= link_to_profile(text.user) -%>&nbsp;<%= distance_of_time_in_words_to_now(text.created_at) -%></div>
 			<p class='body'><%= text.body %></p>

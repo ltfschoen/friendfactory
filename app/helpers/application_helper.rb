@@ -65,11 +65,19 @@ module ApplicationHelper
   end
   
   def portrait_image_tag(avatar)
-    image_tag(avatar.image.url(:portrait), :class => 'avatar avatar_portrait', :site => false) unless avatar.nil?
+    css = [
+        'avatar',
+        'avatar_portrait',
+        avatar.user.online? ? 'online' : nil ].compact * ' '
+    image_tag(avatar.image.url(:portrait), :class => css, :site => false) unless avatar.nil?
   end
   
   def thumb_image_tag(avatar, opts = {})
-    klass = [ 'avatar', 'avatar_thumb', opts[:class] ].compact * ' '
+    klass = [
+        'avatar',
+        'avatar_thumb',
+        avatar.user.online? ? 'online' : nil,
+        opts[:class] ].compact * ' '
     image_tag(avatar.image.url(:thumb), :class => klass, :site => false) unless avatar.nil?
   end
   

@@ -70,6 +70,11 @@ img.avatar, img.photo {
 	padding: 2px;
 }
 
+img.avatar.online {
+	padding: 1px;
+	border: 2px solid lightgreen;
+}
+
 input[type=text],
 input[type=password],
 textarea  {

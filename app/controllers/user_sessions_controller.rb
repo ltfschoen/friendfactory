@@ -24,6 +24,7 @@ class UserSessionsController < ApplicationController
   end
   
   def destroy
+    current_user.update_attribute(:current_login_at, nil)
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
     respond_to do |format|
