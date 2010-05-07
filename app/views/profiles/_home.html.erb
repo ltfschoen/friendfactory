@@ -1,6 +1,0 @@
-<h1><%= current_user.first_name %>&#146;s Wave</h1>
-<% if current_user.profile.postings.empty? %>	
-	<h3>Do something with your profile to meet friends!</h3>
-<% else %>
-  <%= render :partial => 'wave', :object => current_user.profile %>
-<% end %>

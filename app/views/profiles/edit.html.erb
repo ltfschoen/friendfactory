@@ -11,7 +11,12 @@
 		</ul>
 		
 		<div id='home' class='tab_content grid_16 alpha omega'>
-		  <%= render :partial => 'home' %>
+      <h1><%= current_user.first_name %>&#146;s Wave</h1>
+      <% if current_user.profile.postings.empty? %>	
+      	<h3>Do something with your profile to meet friends!</h3>
+      <% else %>
+        <%= render :partial => 'wave', :object => current_user.profile %>
+      <% end %>
 		</div>
 					
 		<div id='avatar' class='tab_content grid_16 alpha omega'>	
@@ -29,7 +34,7 @@
 		
 		<div id="about" class='tab_content grid_16 alpha omega'>
 			<h1>About Me</h1>
-			<%= render :partial => 'edit_basic' %>
+			<%= render :partial => 'user_info/edit' %>
 		</div>
 
 		<div id="photos" class='tab_content grid_16 alpha omega'>

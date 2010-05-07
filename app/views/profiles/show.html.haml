@@ -2,8 +2,8 @@
   %h1
     #{@profile.user.first_name}&#8217;s Wave
   - if @profile.postings.empty?
-  %h3
-    = @profile.user.first_name
-    hasn't done anything with their profile. Put something here for them!
+    %h3
+      = @profile.user.first_name
+      hasn't done anything with their profile. Put something here for them!
   - else
     = render :partial => 'wave', :object => @profile
