@@ -6,7 +6,11 @@ class Wave::Base < ActiveRecord::Base
       :class_name  => 'Posting::Base',
       :foreign_key => 'wave_id',
       :conditions  => 'parent_id is null',
-      :order       => 'created_at desc'
+      :order       => 'created_at desc' do
+    def narrow(*types)
+      find :all, :conditions => [ 'type in (?)', types.map(&:to_s) ]
+    end
+  end
   
   belongs_to :user
   

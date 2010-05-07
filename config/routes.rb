@@ -1,9 +1,17 @@
 ActionController::Routing::Routes.draw do |map|
   
   # Waves Controllers
-  map.resources :waves,    :only => [ :show ], :collection => { :popular => :get }  
-  map.resources :profiles, :only => [ :show, :edit, :update ], :member => { :home => :get }
-  map.edit_profile '/profile', :controller => 'profiles', :action => 'edit'
+  map.resources :waves,
+      :only       => [ :show ],
+      :collection => { :popular => :get }
+      
+  map.resources :profiles,
+      :only   => [ :show, :edit, :update ],
+      :member => { :home => :get }
+      
+  map.edit_profile '/profile',
+      :controller => 'profiles',
+      :action     => 'edit'
   
   # # # # # # # # # # # # # # #
   

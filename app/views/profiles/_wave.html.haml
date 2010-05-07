@@ -1,16 +1,14 @@
 - javascript 'wave'
-.wave.grid_12
+.wave.profile.grid_16
+  %table
+    %tr
+      %td.avatar.portrait= render :partial => 'postings/posting', :object => wave.avatar
+      %td.detail= render :partial => 'basic', :object => wave.user.info
+- unless wave.photos.empty?
   %div
-    %table
-      %tr
-        %td
-          = render :partial => 'postings/posting', :collection => [ wave.avatar ]
-        %td
-          = render :partial => 'basic', :object => wave.user.info
-  %div
-    %h2 Photos of #{current_user.first_name}      
+    %h2 Photos of #{@profile.user.first_name}      
     = render :partial => 'postings/posting', :collection => wave.photos
+- if false
   %div
-    %h2 #{current_user.first_name}' Updates
-            
+    %h2 #{@profile.user.first_name}&#8217;s Updates
     = render :partial => 'postings/posting', :collection => wave.postings

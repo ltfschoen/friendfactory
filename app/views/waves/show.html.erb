@@ -1,7 +1,0 @@
-<% javascript 'wave' %>
-<div class='wave grid_12'>
-	<h1><%= h @wave.topic %></h1>
-	<%= content_tag(:p, flash[:notice], :class => 'flash') if flash[:notice] %>
-  <% if false %><div id='log'></div><% end %>
-	<%= render :partial => 'postings/posting', :collection => @wave.postings %>
-</div>
