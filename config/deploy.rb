@@ -15,7 +15,8 @@ ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
 
 after "deploy:symlink", "deploy:config_symlinks"
-# after "deploy:symlink", "deploy:update_crontab"
+after "deploy:symlink", "deploy:update_crontab"
+after "deploy:symlink", "thinking_sphinx:index"
 
 task :staging do
   set :branch,         ENV['branch'] || 'master'
@@ -56,11 +57,6 @@ namespace :deploy do
     end
   end
 
-  # desc "Update crontab"
-  # task :update_crontab, :roles => :app do
-  #   run "cd #{release_path} && whenever --update-crontab #{application}"
-  # end
-  
   desc "Custom restart task for mongrel cluster"
   task :restart, :roles => :app, :except => { :no_release => true } do
     deploy.mongrel.restart
@@ -74,6 +70,11 @@ namespace :deploy do
   desc "Custom stop task for mongrel cluster"
   task :stop, :roles => :app do
     deploy.mongrel.stop
+  end  
+
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --update-crontab #{application}"
   end    
 end
 
