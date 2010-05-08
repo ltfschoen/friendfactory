@@ -1,7 +1,11 @@
 .DS_Store
 tmp/**/*
 log/*.log
+log/*.pid
+index/*
+db/sphinx/*
 config/database.yml
+config/development.sphinx.conf
 *.tmproj
 .idea
 

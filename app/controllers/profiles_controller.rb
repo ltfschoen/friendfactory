@@ -25,9 +25,9 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @success = current_user.info.update_attributes(params[:user_info])    
+    current_user.info.update_attributes(params[:user_info])    
     respond_to do |format|
-      format.js
+     format.json { render :json => { :errors => @current_user.info.errors } }
     end
   end
   

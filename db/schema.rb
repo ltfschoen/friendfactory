@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
   create_table "user_info", :force => true do |t|
     t.integer  "user_id"
     t.date     "dob"
+    t.string   "age"
     t.integer  "gender"
     t.integer  "orientation"
     t.integer  "relationship"

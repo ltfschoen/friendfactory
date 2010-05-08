@@ -18,6 +18,16 @@ class Posting::Base < ActiveRecord::Base
       :class_name  => 'Wave::Base',
       :foreign_key => 'wave_id'
   
+  define_index do
+    indexes body
+    indexes user.first_name
+    indexes user.last_name
+    indexes wave.topic
+    indexes wave.description
+    has created_at
+    has updated_at
+  end
+  
   def render
     children = self.children.inject([]) do |memo, child|
       memo += child.render
