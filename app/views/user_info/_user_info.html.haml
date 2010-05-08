@@ -1,0 +1,30 @@
+.posting[user_info]
+  %table{:cellspacing => "10"}
+    - unless user_info.deafness.blank?
+      %tr
+        %td.label Deafness
+        %td.detail= user_info.deafness_description
+    - unless user_info.gender.blank?
+      %tr
+        %td.label Gender
+        %td.detail= user_info.gender_description
+    - unless user_info.orientation.blank?
+      %tr
+        %td.label Orientation
+        %td.detail= user_info.orientation_description
+    - unless user_info.relationship.blank?
+      %tr
+        %td.label Relationship
+        %td.detail= user_info.relationship_description
+    - unless user_info.dob.blank?
+      %tr
+        %td.label Birthday
+        %td.detail= user_info.dob.strftime('%e %B')
+    - unless user_info.location.blank?
+      %tr
+        %td.label Location
+        %td.detail= user_info.location
+    - unless user_info.about_me.blank?
+      %tr
+        %td.label.textarea.about_me About Me
+        %td.detail= user_info.about_me

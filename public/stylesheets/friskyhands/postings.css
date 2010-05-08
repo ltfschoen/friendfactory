@@ -14,11 +14,73 @@
 
 /* * * * * * * * * */
 
-.posting_text {
+form.edit_user_info > table {
+	width: 100%;
+	background-color: #F7F7F7;
+	border-collapse: separate;
+	border-spacing: 0 8px;
+}
+
+form.edit_user_info > table td.label {
+	width: 100px;
+	padding-right: 1em;
+	text-align: right;
+}
+
+form.edit_user_info > table td.label.textarea {
+	padding-top: 10px;
+}
+
+form.edit_user_info > table td.label.about_me {
+	vertical-align: top;
+}
+
+
+/* * * * * * * * * */
+
+.wave_profile > table {
 	width: 100%;
 }
 
-.posting_text > posting_text {
+.wave_profile > table td {
+	vertical-align: top;
+}
+
+.wave_profile > table td.avatar {
+	width: 106px;
+}
+
+.posting.user_info {
+	width: 100%;
+}
+
+.posting.user_info > table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0 8px;	
+}
+
+.posting.user_info > table td.label {
+	width: 100px;
+	padding-left: 1em;	
+}
+
+/*.posting.user_info table td {
+	vertical-align: top;
+}
+*/
+
+/*.wave.profile > table {
+	width: 100%
+}	
+
+.wave.profile > table td {
+	vertical-align: top;
+}
+*/
+/* * * * * * * * * */
+
+.posting_text > table {
 	width: 100%;
 }
 
@@ -30,7 +92,7 @@
 	width: 106px;
 }
 
-.posting_text > table img.avatar {
+.posting_text > table td.avatar img.avatar {
 	margin-right: 12px;
 }
 
@@ -64,7 +126,7 @@
 	width: 52px;
 }
 
-.posting_comment > table img.avatar {
+.posting_comment > table td.avatar img.avatar {
 	border: 0px;
 	margin: 0.5em 10px 0.5em 4px;
 	width: 36px;
@@ -72,22 +134,16 @@
 
 /* * * * * * * * * */
 
-/*.posting_message {
-	padding: 0px;
-	margin: 0px;
-	border: 0px;
-}*/
-
 .posting_message.left {	
 }
 
 .posting_message.right {
 }
 
-.posting_message td.avatar {
+.posting_message > table td.avatar {
 }
 
-.posting_message img.avatar {
+.posting_message > table img.avatar {
 	margin-right: 8px;
 	width: 28px;
 }

@@ -1,0 +1,13 @@
+.posting[text]
+  %table
+    %tr
+      %td.avatar= thumb_image_tag(text.user.profile.avatar)
+      %td
+        %div
+          = link_to_profile(text.user)
+          \ #{distance_of_time_in_words_to_now(text.created_at)}
+        %p.body= text.body
+        = render :partial => 'comments/comment', :collection => text.children.comments
+        %div{:id => "posting_#{text.id}_new_comment_well"}
+        = render :partial => 'comments/new', :locals => { :parent_id => text.id }
+  = render :partial => 'postings/posting', :collection => text.children.postings

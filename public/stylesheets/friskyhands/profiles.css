@@ -18,28 +18,3 @@ select {
 select.date {
 	width: auto;
 }
-
-table.user-info {
-	width: 100%;
-	background-color: #F7F7F7;
-	border-collapse: separate;
-	border-spacing: 0 8px;
-}
-
-td.label {
-	width: 100px;
-	padding-right: 1em;
-	text-align: right;
-}
-
-td.label.textarea {
-	padding-top: 10px;
-}
-
-td.detail {
-/*	padding: 0.6em 1em;*/
-}
-
-td.label.about_me {
-	vertical-align: top;
-}

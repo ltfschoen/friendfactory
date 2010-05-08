@@ -1,0 +1,43 @@
+- form_for current_user.info, :url => profile_path(current_user.info, :format => :js) do |f|
+  %table{:cellspacing => "10"}
+    %tr
+      %td.label Deafness
+      %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
+    %tr
+      %td.label Gender
+      %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
+    %tr
+      %td.label Orientation
+      %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
+    %tr
+      %td.label Relationship
+      %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)
+    %tr
+      %td.label Birthday
+      %td.detail
+        = f.date_select :dob, { :order => [ :month, :day, :year ], :start_year => (Time.now.year - 65), :end_year => (Time.now.year - 18) },  { :class => 'date'}
+    %tr
+      %td.label Location
+      %td.detail= f.text_field :location, :placeholder => false, :class => 'ui-widget'
+    %tr
+      %td.label.textarea.about_me About Me
+      %td.detail= f.text_area :about_me
+    %tr.button-bar
+      %td.label
+        = image_tag('icons/accept.png', :site => false, :id => 'user_info_ui_icon_check', :class => 'hidden')
+        = image_tag('icons/cancel.png', :site => false, :id => 'user_info_ui_icon_cancel', :class => 'hidden')
+      %td.detail= f.submit "Update"
+
+:javascript
+  jQuery(document).ready(function($){
+  	$('.button-bar button:submit').button({ icons: { primary: 'ui-icon-check' }});		
+  	$('form.edit_user_info').submit(function(event) {
+  		jQuery.ajax({
+  			data: jQuery.param(jQuery(this).serializeArray()),
+  			dataType: 'script',
+  			type: 'post',
+  			url:'/profiles/<%= current_user.info.id -%>.js'
+  		});
+  		return false;
+  	});		
+  });
