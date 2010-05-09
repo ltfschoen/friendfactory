@@ -31,18 +31,6 @@ module ApplicationHelper
     content_for(:head, stylesheet_link_tag(File.join('960gs', 'fixed'), :media => 'screen'))
   end
 
-  def fluid_container
-    content_for(:current_container, 'container_16')
-  end
-  
-  def sidebar
-    render(:partial => "layouts/#{current_site}/sidebar")
-  end
-  
-  def gutter
-    render(:partial => "layouts/#{current_site}/gutter")
-  end
-  
   def button_tag(text = nil, opts = {})
     content_tag(:button, text, opts)
   end

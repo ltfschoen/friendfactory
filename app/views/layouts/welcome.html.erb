@@ -11,32 +11,20 @@
 	<%- end -%>
 	<%= javascript_include_tag 'jquery-ui' %>
 	<%= javascript_include_tag 'jquery.placeholder' %>
-	<%= javascript_include_tag 'jrails' %>
-	<%- if Rails.env.production? -%>
-	<%= javascript_include_tag 'strophe/strophe.min.js' %>	
-	<% else %>
-	<%= javascript_include_tag 'strophe/strophe.js' %>
-	<% end %>
-	<%= javascript_include_tag 'chat' %>
 	<%= javascript_include_tag 'application' %>
 	<%= stylesheet_link_tag 'reset', :media => 'screen, projection' %>
 	<%= stylesheet_link_tag 'forms', :media => 'screen, projection' %>	
-	<%= stylesheet_link_tag '960gs/fluid',  :media => 'screen' -%>
-	<%# stylesheet_link_tag '960gs/nav', :media => 'screen' -%>
+	<%= stylesheet_link_tag '960gs/fixed', :media => 'screen' %>
 	<!--[if IE 6]><%= stylesheet_link_tag '960gs/ie6' -%><![endif]-->
 	<!--[if IE 7]><%= stylesheet_link_tag '960gs/ie' -%><![endif]-->	
 	<%= stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen, projection' %>
 	<%= stylesheet_link_tag "#{current_site}/application", :media => 'screen, projection' %>
 	<!--[if lt IE 8]><%= stylesheet_link_tag "#{current_site}/ie", :media => 'screen, projection' %><![endif]-->
-	<%= stylesheet_link_tag "#{current_site}/postings", :media => 'screen, projection' %>
 	<%= yield(:head) %>
 </head>
 <body class='<%= [ current_site, current_layout ].compact * ' ' -%>'>
-	<%= render(:partial => "layouts/#{current_site}/#{current_layout}_header") rescue render(:partial => "layouts/#{current_site}/header") rescue nil -%>
-	<div class='container <%= yield(:current_container) || 'container_16' -%> clearfix'>
-    <%= render(:partial => "layouts/#{current_site}/sidebar") %>
-    <%= yield -%>
-		<%= render(:partial => "layouts/#{current_site}/gutter") %>
+	<div class='container container_16_fixed clearfix'>
+  <%= yield %>
 	</div>	
 	<%= render(:partial => "layouts/#{current_site}/footer") rescue nil -%>
 	<%= render(:partial => 'layouts/feedback') unless Rails.env.development? %>

@@ -12,6 +12,7 @@
 	<li class='secondary'><%= link_to('Login', '#', :id => 'login') -%></li>
 	<li class='secondary'><%= link_to('Sign Up', '#', :id => 'register') -%></li>	
 	<% end %>
+	<li class='secondary'><%= link_to 'Blog', 'http://blog.friskyhands.com' -%></li>
 	<li class='secondary search'>
 	 <% form_tag search_path, :method => :get do %>
 	  <%= text_field_tag :search, nil, :placeholder => 'Search' %>

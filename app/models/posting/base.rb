@@ -14,9 +14,7 @@ class Posting::Base < ActiveRecord::Base
   end
   
   belongs_to :user  
-  belongs_to :wave,
-      :class_name  => 'Wave::Base',
-      :foreign_key => 'wave_id'
+  belongs_to :wave, :class_name => 'Wave::Base', :foreign_key => 'wave_id'
   
   define_index do
     indexes body,             :as => :posting

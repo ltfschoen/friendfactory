@@ -169,6 +169,10 @@ div.header.secondary.login #form_errors {
 	display: inline;
 }
 
+div.footer span {
+	margin: 0 5px;
+}
+
 a.web_logos {
 	background: url(/images/web_logos.png);
 	width: 18px;

@@ -1,9 +1,7 @@
-<%= sidebar %>
-<div class='grid_12 messages'>
+<div class='grid_16 alpha omega messages'>
 	<h1>Messages</h1>
 	<%= render :partial => 'thread', :collection => @message_threads %>
 </div>
-<%= gutter %>
 
 <%- javascript_tag do -%>
 	jQuery(document).ready(function(){
