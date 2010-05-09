@@ -1,9 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
   # Waves Controllers
-  map.resources :waves,
-      :only       => [ :show ],
-      :collection => { :popular => :get }
+  map.resources :waves, :only => [ :index, :show ]
       
   map.resources :profiles,
       :only   => [ :show, :edit, :update ],
@@ -72,7 +70,7 @@ ActionController::Routing::Routes.draw do |map|
   
   # Root Controller
   map.root :controller => 'waves',
-      :action     => 'popular',
+      :action     => 'show',
       :conditions => { :method => :get }
 
   # Chat Debug

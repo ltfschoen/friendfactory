@@ -2,28 +2,20 @@ class WavesController < ApplicationController
 
   before_filter :require_lurker
 
-  # def index
-  #   @waves = Wave.all
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.xml  { render :xml => @waves }
-  #   end
-  # end
-
-  def show
-    @wave = Wave::Base::find(params[:id])
-    respond_to do |format|
-      format.html
-    end
-  end
-  
-  def popular
-    @wave = Wave::Base::popular
+  def index
+    @wave = Wave::Base::default
     respond_to do |format|
       format.html { render :action => 'show' }
     end
   end
 
+  def show    
+    @wave = Wave::Base::find_by_slug(params[:id]) || Wave::Base::default
+    respond_to do |format|
+      format.html
+    end
+  end
+  
   # GET /waves/new
   # GET /waves/new.xml
   # def new

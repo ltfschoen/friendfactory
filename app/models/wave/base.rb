@@ -2,6 +2,8 @@ class Wave::Base < ActiveRecord::Base
   
   set_table_name :waves
   
+  acts_as_slugable :source_column => :topic, :slug_column => :slug
+  
   has_many :postings,
       :class_name  => 'Posting::Base',
       :foreign_key => 'wave_id',
@@ -20,8 +22,8 @@ class Wave::Base < ActiveRecord::Base
     end
   end
   
-  def self.popular
-    Wave::Shared.first
+  def self.default
+    Wave::Base.first
   end
   
 end

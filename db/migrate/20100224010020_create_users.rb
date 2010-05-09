@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :handle
       t.string    :first_name
       t.string    :last_name
+      t.string    :slug      
       t.date      :dob
       t.string    :status
       t.timestamps 

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
 
   create_table "postings", :force => true do |t|
     t.string   "type"
+    t.string   "slug"
     t.integer  "user_id"
     t.integer  "wave_id"
     t.integer  "parent_id"
@@ -70,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
     t.string   "handle"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "slug"
     t.date     "dob"
     t.string   "status"
     t.datetime "created_at"
@@ -95,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
 
   create_table "waves", :force => true do |t|
     t.string   "type"
+    t.string   "slug"
     t.integer  "user_id"
     t.string   "topic"
     t.string   "description"
