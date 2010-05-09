@@ -89,5 +89,8 @@ module ApplicationHelper
       end
     end
   end
-    
+  
+  def link_to_facebook
+    link_to('', 'http://www.facebook.com/pages/Frisky-Hands/297300376633', :target => 'blank', :class => 'web_logos facebook')
+  end    
 end

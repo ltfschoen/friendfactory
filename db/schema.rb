@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "body"
-    t.boolean  "private"
+    t.boolean  "private",             :default => false
     t.integer  "receiver_id"
     t.text     "subject"
     t.datetime "read_at"

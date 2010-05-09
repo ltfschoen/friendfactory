@@ -19,22 +19,17 @@ class Posting::Base < ActiveRecord::Base
       :foreign_key => 'wave_id'
   
   define_index do
-    indexes body
-    indexes user.first_name
-    indexes user.last_name
-    indexes wave.topic
-    indexes wave.description
-    has created_at
-    has updated_at
+    indexes body,             :as => :posting
+    indexes wave.topic,       :as => :wave_topic
+    indexes wave.description, :as => :wave_description
+    indexes [ user.first_name, user.last_name], :as => :user_name
+    indexes user_id
+    has :created_at
+    has :updated_at
+    has [ :user_id, :receiver_id ], :as => :recipient_ids
+    has :private, :type => :boolean
   end
-  
-  def render
-    children = self.children.inject([]) do |memo, child|
-      memo += child.render
-    end
-    children.empty? ? [ self.to_s ] : [[ self.to_s, children ]]
-  end
-  
+    
   def to_s
     self[:type].to_s + ':' + self[:id].to_s
   end

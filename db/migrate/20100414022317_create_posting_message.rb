@@ -1,6 +1,6 @@
 class CreatePostingMessage < ActiveRecord::Migration
   def self.up
-    add_column :postings, :private,             :boolean
+    add_column :postings, :private,             :boolean, :default => false
     add_column :postings, :receiver_id,         :integer
     add_column :postings, :subject,             :text
     add_column :postings, :read_at,             :datetime

@@ -168,3 +168,17 @@ div.header.secondary.login {
 div.header.secondary.login #form_errors {
 	display: inline;
 }
+
+a.web_logos {
+	background: url(/images/web_logos.png);
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	position: relative;
+	top: 4px;
+	margin: 0 3px;
+}
+
+a.web_logos.facebook {
+	background-position: -96px 0;
+}
