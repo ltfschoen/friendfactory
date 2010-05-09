@@ -1,9 +1,9 @@
-.grid_12
+.wave.profile.grid_12[@wave]
   %h1
-    #{@profile.user.first_name}&#8217;s Wave
-  - if @profile.postings.empty?
+    #{@wave.user.first_name}&#8217;s Wave
+  - if @wave.postings.empty?
     %h3
-      = @profile.user.first_name
+      = @wave.user.first_name
       hasn't done anything with their profile. Put something here for them!
   - else
-    = render :partial => 'wave', :object => @profile
+    = render :partial => 'wave', :object => @wave

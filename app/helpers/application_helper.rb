@@ -52,20 +52,19 @@ module ApplicationHelper
     link_to(user.full_name, profile_path(user.profile), :class => 'profile') if user.profile
   end
   
-  def portrait_image_tag(avatar)
-    css = [
-        'avatar',
-        'avatar_portrait',
-        avatar.user.online? ? 'online' : nil ].compact * ' '
-    image_tag(avatar.image.url(:portrait), :class => css, :site => false) unless avatar.nil?
+  def portrait_image_tag(avatar, opts = {})
+    avatar = avatar.profile.avatar if avatar.is_a?(User)
+    online = nil
+    online = (avatar.user.online? ? 'online' : nil) unless opts[:online_badge] == false
+    klass  = [ 'avatar', 'portrait', online ].compact * ' '
+    image_tag(avatar.image.url(:portrait), :class => klass, :site => false) unless avatar.nil?
   end
   
   def thumb_image_tag(avatar, opts = {})
-    klass = [
-        'avatar',
-        'avatar_thumb',
-        avatar.user.online? ? 'online' : nil,
-        opts[:class] ].compact * ' '
+    avatar = avatar.profile.avatar if avatar.is_a?(User)
+    online = nil
+    online = (avatar.user.online? ? 'online' : nil) unless opts[:online_badge] == false
+    klass  = [ 'avatar', 'thumb', online, opts[:class] ].compact * ' '
     image_tag(avatar.image.url(:thumb), :class => klass, :site => false) unless avatar.nil?
   end
   

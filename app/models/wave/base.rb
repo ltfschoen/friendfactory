@@ -14,7 +14,7 @@ class Wave::Base < ActiveRecord::Base
       if user.nil?
         exclude('Posting::Message')
       else
-        find :all, :conditions => [ '(user_id = ?) or (receiver_id = ?)', user.id, user.id ]
+        find :all, :conditions => [ '(private = false or (private = true and ((user_id = ?) or (receiver_id = ?))))', user.id, user.id ]
       end
     end
     
@@ -28,12 +28,6 @@ class Wave::Base < ActiveRecord::Base
   end
   
   belongs_to :user
-  
-  # def render
-  #   postings.inject([]) do |memo, posting|
-  #     memo += posting.render
-  #   end
-  # end
   
   def self.default
     Wave::Base.first

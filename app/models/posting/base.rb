@@ -4,12 +4,17 @@ class Posting::Base < ActiveRecord::Base
 
   acts_as_tree :order => 'created_at asc'
   
-  has_many :children, :class_name => 'Posting::Base', :foreign_key => 'parent_id', :order => 'created_at asc' do
+  has_many :children,
+      :class_name  => 'Posting::Base',
+      :foreign_key => 'parent_id',
+      :order       => 'created_at asc' do
+    
     def postings
-      find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at asc'
+      find :all, :conditions => [ "type <> 'Posting::Comment'" ]
     end
+    
     def comments
-      find :all, :conditions => [ "type = 'Posting::Comment'" ], :order => 'created_at asc'
+      find :all, :conditions => [ "type = 'Posting::Comment'" ]
     end
   end
   
@@ -17,7 +22,7 @@ class Posting::Base < ActiveRecord::Base
   belongs_to :wave, :class_name => 'Wave::Base', :foreign_key => 'wave_id'
   
   define_index do
-    indexes body,             :as => :posting
+    indexes body
     indexes wave.topic,       :as => :wave_topic
     indexes wave.description, :as => :wave_description
     indexes [ user.first_name, user.last_name], :as => :user_name

@@ -1,10 +1,10 @@
 class ProfilesController < ApplicationController
 
-  before_filter :require_user,   :only => [ :edit, :update ]
   before_filter :require_lurker, :only => [ :show ]
+  before_filter :require_user,   :only => [ :edit, :update ]
 
   def show
-    @profile = Wave::Base.find_by_id(params[:id])
+    @wave = Wave::Base.find_by_id_and_type(params[:id], 'Wave::Profile')
     respond_to do |format|
       format.html
     end
