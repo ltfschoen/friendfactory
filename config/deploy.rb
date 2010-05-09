@@ -15,8 +15,8 @@ ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
 
 after "deploy:symlink", "deploy:config_symlinks"
+after "deploy:symlink", "deploy:thinking_sphinx"
 after "deploy:symlink", "deploy:update_crontab"
-after "deploy:symlink", "thinking_sphinx:index"
 
 task :staging do
   set :branch,         ENV['branch'] || 'master'
@@ -73,9 +73,15 @@ namespace :deploy do
   end  
 
   desc "Update the crontab file"
-  task :update_crontab, :roles => :db do
+  task :update_crontab, :roles => :app do
     run "cd #{release_path} && whenever --update-crontab #{application}"
-  end    
+  end
+  
+  desc "Full index of Sphinx models"
+  task :thinking_sphinx, :roles => :app do
+    run "cd #{current_path} && rake thinking_sphinx:stop RAILS_ENV=#{fetch(:rails_env)}"
+    run "cd #{current_path} && rake thinking_sphinx:rebuild RAILS_ENV=#{fetch(:rails_env)}"
+  end
 end
 
 namespace :local do
