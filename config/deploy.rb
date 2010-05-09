@@ -74,7 +74,7 @@ namespace :deploy do
 
   desc "Update the crontab file"
   task :update_crontab, :roles => :app do
-    run "cd #{release_path} && whenever --update-crontab #{application}"
+    run "cd #{release_path} && whenever --update-crontab #{application} --set environment=#{fetch(:rails_env)}"
   end
   
   desc "Full index of Sphinx models"

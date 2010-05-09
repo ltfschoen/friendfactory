@@ -133,6 +133,11 @@ div.header ul.menu_bar li.secondary {
 	float: right;
 }
 
+div.header ul.menu_bar li.search {
+	position: relative;
+	top: -10px;
+}
+
 div.header.primary {
 	height: 62px;
 	padding: 0 0.5em;

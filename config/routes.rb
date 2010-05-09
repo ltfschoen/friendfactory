@@ -66,6 +66,10 @@ ActionController::Routing::Routes.draw do |map|
       :action     => 'destroy',
       :conditions => { :method => :get }
   
+  map.search 'search',
+      :controller => 'search',
+      :action     => 'index'
+  
   # Root Controller
   map.root :controller => 'waves',
       :action     => 'popular',
