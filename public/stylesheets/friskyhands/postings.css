@@ -6,6 +6,7 @@
 
 .posting {	
 	display: table;
+	width: 100%;
 }
 
 .posting > table td {

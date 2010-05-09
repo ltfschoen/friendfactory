@@ -77,6 +77,7 @@ comment_9:
 message_10:
     id: 10
     type: Posting::Message
+    private: true
     wave_id: 1
     user_id: <%= Fixtures.identify(:bert) %>
     receiver_id: <%= Fixtures.identify(:adam) %>
@@ -86,6 +87,7 @@ message_10:
 message_11:
     id: 11
     type: Posting::Message
+    private: true
     parent_id: 10
     user_id: <%= Fixtures.identify(:adam) %>
     receiver_id: <%= Fixtures.identify(:bert) %>
@@ -95,6 +97,7 @@ message_11:
 message_12:
     id: 12
     type: Posting::Message
+    private: true
     parent_id: 11
     user_id: <%= Fixtures.identify(:bert) %>
     receiver_id: <%= Fixtures.identify(:adam) %>

@@ -4,4 +4,4 @@
   = content_tag(:p, flash[:notice], :class => 'flash') if flash[:notice]
   - if false
     #log
-  = render :partial => 'postings/posting', :collection => @wave.postings
+  = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)

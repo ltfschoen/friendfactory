@@ -10,6 +10,8 @@ class Posting::Message < Posting::Base
   
   named_scope :unread, :conditions => { :read_at => nil }
 
+  before_save { |message| message[:private] = true }
+
   attr_accessible :sender, :receiver, :subject, :body
 
   def read?

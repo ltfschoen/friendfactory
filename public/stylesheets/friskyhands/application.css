@@ -158,7 +158,7 @@ div.header.secondary {
 
 div.header.secondary > div {
 	position: relative;
-	top: -20px;
+	top: -12px;
 }
 
 div.header.secondary.login {	
