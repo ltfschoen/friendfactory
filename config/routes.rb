@@ -1,7 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   
   # Waves Controllers
-  map.resources :waves, :only => [ :index, :show ]
+  map.resources :waves, :only => [ :index, :show, :create ] do |wave|
+    wave.resources :texts, :only => [ :create ]
+  end
       
   map.resources :profiles,
       :only   => [ :show, :edit, :update ],

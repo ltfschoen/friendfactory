@@ -2,7 +2,7 @@ class Wave::Profile < Wave::Base
   
   has_many :avatars,
       :class_name  => 'Posting::Avatar',
-      :foreign_key => 'wave_id' do
+      :foreign_key => 'wave_id' do        
     def active
       find :first, :conditions => [ 'active = true' ]
     end

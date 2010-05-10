@@ -186,11 +186,3 @@ a.web_logos {
 a.web_logos.facebook {
 	background-position: -96px 0;
 }
-
-#tabs li.avatar {
-	display: inline;
-}
-
-#tabs li.avatar img {
-	height: 50px;
-}

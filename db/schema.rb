@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "subject"
     t.text     "body"
     t.boolean  "private",             :default => false
     t.integer  "receiver_id"
-    t.text     "subject"
     t.datetime "read_at"
     t.datetime "sender_deleted_at"
     t.datetime "receiver_deleted_at"

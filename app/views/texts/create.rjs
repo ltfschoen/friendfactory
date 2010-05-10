@@ -1,0 +1,3 @@
+if @posting.valid?
+  page << 'alert("crap!")'
+end

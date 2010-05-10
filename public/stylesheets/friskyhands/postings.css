@@ -36,7 +36,6 @@ form.edit_user_info > table td.label.about_me {
 	vertical-align: top;
 }
 
-
 /* * * * * * * * * */
 
 .wave_profile > table {
@@ -147,4 +146,10 @@ form.edit_user_info > table td.label.about_me {
 .posting_message > table img.avatar {
 	margin-right: 8px;
 	width: 28px;
+}
+
+/* * * * * * * * * */
+
+#text.tab_content textarea {
+	height: 5.8em;
 }

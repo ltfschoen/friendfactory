@@ -1,38 +1,66 @@
 - javascript 'wave'
 .wave.grid_12[@wave]
-  %ul#tabs
-    %li.avatar
-    / =thumb_image_tag(current_user, :online_badge => false, :class => 'button')
-    %li
-      %a{ :href => '#text', :class => 'current' } Text
-    %li
-      %a{ :href => '#photo' } Photo
-    %li
-      %a{ :href => '#video' } Video
-    %li
-      %a{ :href => '#chat' } Chat
-    %li
-      %a{ :href => '#hottie' } Hottie
-    %li
-      %a{ :href => '#link' } Link
-    %li
-      %a{ :href => '#link' } Event
-    %li
-      %a{ :href => '#link' } Poll
+  - if current_user
+    %ul#tabs
+      %li
+        %a{ :href => '#text' } Text
+      %li
+        %a{ :href => '#photo' } Photo
+      %li
+        %a{ :href => '#video' } Video
+      %li
+        %a{ :href => '#chat' } Chat
+      %li
+        %a{ :href => '#hottie' } Hottie
+      %li
+        %a{ :href => '#link' } Link
+      %li
+        %a{ :href => '#event' } Event
+      %li
+        %a{ :href => '#poll' } Poll
+        
   %h1= h @wave.topic
-  = content_tag(:p, flash[:notice], :class => 'flash') if flash[:notice]
+
+  - if current_user
+    #text.tab_content.hidden
+      - form_for Posting::Text.new, :url => wave_texts_path(:wave_id => @wave) do |f|
+        %div Write a Message to this Wave
+        = f.text_field :subject, :placeholder => 'Title (optional)'
+        = f.text_area :body
+        = f.submit :OK
+        = f.button :Cancel, :class => 'cancel'
+      
+    #photo.tab_content.hidden Photo
+    #video.tab_content.hidden Video
+    #chat.tab_content.hidden Chat
+    #hottie.tab_content.hidden Hottie
+    #link.tab_content.hidden Link
+    #event.tab_content.hidden Event
+    #poll.tab_content.hidden Poll
+    
   - if false
     #log
   = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
 
 :javascript
-  jQuery(document).ready(function($){		
-    $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-pencil' }});			
-    $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-image' }})	
-    $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-video' }});	
-    $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-comment' }});
-    $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-heart' }});
-    $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-link' }});
-    $('#tabs li:eq(7)').button({ icons: { primary: 'ui-icon-clock' }});
-    $('#tabs li:eq(8)').button({ icons: { primary: 'ui-icon-signal' }});
+  $('#text.tab_content form').submit(function(){
+    $(this).children('input[type=text]').each(function(child){
+      if ($(this).val().toLowerCase() === $(this).attr('placeholder').toLowerCase()) {
+      $(this).val('');
+      }
+    });
+    jQuery.ajax({
+      data: jQuery.param(jQuery(this).serializeArray()),
+      dataType: 'script',
+      cache: false,
+      type: 'post',
+      url: '#{wave_texts_path(:wave_id => @wave)}',
+      success: function(){
+        $('#text.tab_content form')
+        .reset()
+        .closest('.tab_content').hide();
+      $('ul#tabs li.current').removeClass('current');
+      }
+    });
+    return false;
   });
