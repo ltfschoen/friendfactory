@@ -2,16 +2,20 @@ ActionController::Routing::Routes.draw do |map|
   
   # Waves Controllers
   map.resources :waves, :only => [ :index, :show, :create ] do |wave|
-    wave.resources :texts, :only => [ :create ]
+    # Following used to add postings to a wave.
+    wave.resources :texts,  :only => [ :create ]
+    wave.resources :photos, :only => [ :create ]
+    wave.resources :videos, :only => [ :create ]
   end
       
   map.resources :profiles,
       :only   => [ :show, :edit, :update ],
-      :member => { :home => :get }
+      :member => { :home => :get }      
       
   map.edit_profile '/profile',
       :controller => 'profiles',
-      :action     => 'edit'
+      :action     => 'edit',
+      :conditions => { :method => :get }
   
   # # # # # # # # # # # # # # #
   
@@ -87,6 +91,6 @@ ActionController::Routing::Routes.draw do |map|
   #     products.resources :sales, :collection => { :recent => :get }
   #   end
 
-  # map.connect ':controller/:action/:id'
-  # map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
 end

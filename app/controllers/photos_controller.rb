@@ -3,13 +3,13 @@ class PhotosController < ApplicationController
   before_filter :require_user
   
   def create
-    @photo = current_user.profile.photos.build(params[:posting_photo])
-    current_user.profile.save
-    respond_to_parent do      
+    wave = Wave::Base.find_by_id(params[:wave_id])
+    @posting = Posting::Photo.create(params[:posting_photo].merge(:wave_id => wave, :user_id => current_user)) if wave.present?
+    respond_to_parent do
       respond_to do |format|
         format.js
       end
-    end
+    end    
   end
     
 end

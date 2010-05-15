@@ -4,7 +4,7 @@ jQuery.fn.log = function (msg) {
 };
 
 var FF = {	
-	inspect: function(obj) { 
+	inspect: function(obj){
 		var str = ''; 
 		for (var i in obj) {
 			str += (i + "='" + obj[i] + "',");
@@ -12,13 +12,13 @@ var FF = {
 		return str
 	},
 
-	log: function(message) {
+	log: function(message){
 		(function($) {
 			$('#log').append("<p>" + message + "</p>");
 		})(jQuery);	
 	},
 	
-	password_prompt: function(password_field, password_placeholder_field) {
+	password_prompt: function(password_field, password_placeholder_field){
 		(function($){
 			$(password_placeholder_field).focus(function() {
 				$(this).hide();
@@ -33,6 +33,14 @@ var FF = {
 				}
 			});			
 		})(jQuery);
+	},
+	
+	scrub_placeholders: function(form){
+	  $(form).children('input[type=text]').each(function(child){
+			if ($(this).val().toLowerCase() === $(this).attr('placeholder').toLowerCase()){
+			  $(this).val('');
+			}
+		});
 	}
 };
 

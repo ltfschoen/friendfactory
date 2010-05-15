@@ -62,6 +62,7 @@ jQuery(document).ready(function($){
 
 jQuery(document).ready(function($){		
   $('.tab_content:first').hide();
+
   $('button[type=submit]')
     .button({ icons: { primary: 'ui-icon-check' }});
 

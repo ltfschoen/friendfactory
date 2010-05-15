@@ -39,9 +39,16 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user
       store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to welcome_url
-      return false
+      if request.xhr?
+        render :update do |page|
+          page << "document.location='#{welcome_url}'"
+        end
+        return false
+      else
+        flash[:notice] = "You must be logged in to access this page"
+        redirect_to welcome_url
+        return false
+       end
     end
   end
 

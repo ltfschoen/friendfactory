@@ -1,16 +1,27 @@
-.wave > .posting {
+#posting_well > .posting {
 	border-bottom: 1px solid #CCC;
 	width: 100%;
 	padding: 20px 0;
 }
 
-.posting {	
+
+#posting_well .sidebar {
+    text-align: right;
+}
+
+.posting {
 	display: table;
 	width: 100%;
 }
 
 .posting > table td {
 	vertical-align: top;
+}
+
+/* * * * * * * * * */
+
+img.photo.medium {
+	width: 460px;
 }
 
 /* * * * * * * * * */
@@ -50,6 +61,8 @@ form.edit_user_info > table td.label.about_me {
 	width: 106px;
 }
 
+/* * * * * * * * * */
+
 .posting.user_info {
 	width: 100%;
 }
@@ -65,19 +78,6 @@ form.edit_user_info > table td.label.about_me {
 	padding-left: 1em;	
 }
 
-/*.posting.user_info table td {
-	vertical-align: top;
-}
-*/
-
-/*.wave.profile > table {
-	width: 100%
-}	
-
-.wave.profile > table td {
-	vertical-align: top;
-}
-*/
 /* * * * * * * * * */
 
 .posting_text > table {
@@ -88,19 +88,25 @@ form.edit_user_info > table td.label.about_me {
 	margin-bottom: 0.5em;
 }
 
-.posting_text > table td.avatar {
+/*.posting_text td.avatar {*/
+.posting td.avatar {	
 	width: 106px;
 }
 
-.posting_text > table td.avatar img.avatar {
+/*.posting_text img.avatar.thumb {*/
+.posting img.avatar.thumb {
 	margin-right: 12px;
+}
+
+.posting_text .subject {
+	font-weight: bold;
 }
 
 /* * * * * * * * * */
 
 .posting_comment {
 	background-color: #F7F7F7;
-	width: 70%;
+	width: 460px;
 	font-size: 0.9em;
 	margin: 8px 0;
 }
@@ -150,6 +156,84 @@ form.edit_user_info > table td.label.about_me {
 
 /* * * * * * * * * */
 
+
+.posting_video > table {
+    width: 100%
+}
+
+/* * * * * * * * * */
+
+.posting_photo > table {
+	width: 100%;
+}
+
+/* * * * * * * * * */
+
+.tab_content {
+	border-bottom: 1px solid #CCC;
+	width: 100%;
+	padding-bottom: 20px;
+}
+
+.tab_content > table {
+	width: 100%;
+}
+
+.tab_content > table td {
+	vertical-align: top;
+}
+
+.tab_content td.avatar {	
+	width: 106px;
+}
+
+.tab_content td.avatar img.avatar.thumb {
+	margin-right: 12px;
+}
+
+.tab_content h2 {
+	margin: 10px 0;
+}
+
+/* * * * * * * * * */
+
+#text.tab_content input[type=text] {
+	margin-top: 0;
+}
+
 #text.tab_content textarea {
 	height: 5.8em;
 }
+
+/* * * * * * * * * */
+
+#photo.tab_content table.button_bar {
+	border-spacing: 0px 4px;
+	border-collapse: separate;	
+	width: 70%
+}
+
+#photo.tab_content table.button_bar td {;
+	vertical-align: center;
+	background-color: #F7F7F7;
+}
+
+#photo.tab_content table.button_bar td.file_field {
+	padding: 8px 8px;
+}
+
+#photo.tab_content table.button_bar td.submit {
+	padding: 0px 8px;
+}
+
+/* * * * * * * * * */
+
+#video.tab_content input[type=text] {
+	margin-top: 0;
+}
+
+#video.tab_content textarea {
+	height: 5.8em;
+}
+
+

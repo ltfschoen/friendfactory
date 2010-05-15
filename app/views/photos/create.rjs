@@ -1,16 +1,8 @@
-# page['spinner'].hide
-if @photo.valid?
-  # page['upload_error_well'].hide
-  page.insert_html :bottom, 'photo_upload_well', :partial => 'photos/edit', :object => @photo
-  page['new_posting_photo'].get(0).reset
+# page['#photo_spinner'].hide
+if @posting.present? && @posting.valid?
+  page['#posting_well'].prepend(render(:partial => 'photo', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
+  page['#photo.tab_content form'].reset.closest('.tab_content').hide();
+  page['ul#tabs li.current'].removeClass('current')
 else
-  page << "alert(#{@photo.errors})"
-  # page['upload_error_well'].show
-  # page << "jQuery('#upload_error_well').addClass('error')"
-  # if params[:posting].blank? || params[:posting][:image].blank?
-  #   page.replace_html "upload_error_well", "Error: That photo is empty and really boring."
-  # else
-  #   page.replace_html "upload_error_well", "Error: Can't accept that photo."
-  # end
-  # page['new_posting'].get(0).reset
+  page['.flash'].text("Couldn't save your photo")  
 end

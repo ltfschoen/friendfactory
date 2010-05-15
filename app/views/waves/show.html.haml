@@ -1,66 +1,137 @@
 - javascript 'wave'
-.wave.grid_12[@wave]
-  - if current_user
-    %ul#tabs
-      %li
-        %a{ :href => '#text' } Text
-      %li
-        %a{ :href => '#photo' } Photo
-      %li
-        %a{ :href => '#video' } Video
-      %li
-        %a{ :href => '#chat' } Chat
-      %li
-        %a{ :href => '#hottie' } Hottie
-      %li
-        %a{ :href => '#link' } Link
-      %li
-        %a{ :href => '#event' } Event
-      %li
-        %a{ :href => '#poll' } Poll
-        
-  %h1= h @wave.topic
-
-  - if current_user
-    #text.tab_content.hidden
-      - form_for Posting::Text.new, :url => wave_texts_path(:wave_id => @wave) do |f|
-        %div Write a Message to this Wave
-        = f.text_field :subject, :placeholder => 'Title (optional)'
-        = f.text_area :body
-        = f.submit :OK
-        = f.button :Cancel, :class => 'cancel'
-      
-    #photo.tab_content.hidden Photo
-    #video.tab_content.hidden Video
-    #chat.tab_content.hidden Chat
-    #hottie.tab_content.hidden Hottie
-    #link.tab_content.hidden Link
-    #event.tab_content.hidden Event
-    #poll.tab_content.hidden Poll
-    
-  - if false
-    #log
-  = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
 
 :javascript
-  $('#text.tab_content form').submit(function(){
-    $(this).children('input[type=text]').each(function(child){
-      if ($(this).val().toLowerCase() === $(this).attr('placeholder').toLowerCase()) {
-      $(this).val('');
-      }
-    });
-    jQuery.ajax({
-      data: jQuery.param(jQuery(this).serializeArray()),
-      dataType: 'script',
-      cache: false,
-      type: 'post',
-      url: '#{wave_texts_path(:wave_id => @wave)}',
-      success: function(){
-        $('#text.tab_content form')
-        .reset()
-        .closest('.tab_content').hide();
-      $('ul#tabs li.current').removeClass('current');
-      }
-    });
-    return false;
+  jQuery(document).ready(function($){
+    $('.tab_content').hide();    
+  });
+    
+.wave.grid_15[@wave]
+  .grid_3.alpha.omega
+    %p.flash= flash[:notice]
+    &nbsp;
+  .grid_12.alpha.omega
+    - if current_user
+      %ul#tabs
+        %li
+          %a{ :href => '#text' } Text
+        %li
+          %a{ :href => '#photo' } Photo
+        %li
+          %a{ :href => '#video' } Video
+        %li
+          %a{ :href => '#chat' } Chat
+        %li
+          %a{ :href => '#hottie' } Hottie
+        %li
+          %a{ :href => '#link' } Link
+        %li
+          %a{ :href => '#event' } Event
+        %li
+          %a{ :href => '#poll' } Poll
+
+    %h1= h @wave.topic
+
+    - if current_user
+      #text.tab_content.hidden
+        %table
+          %tr
+            %td{ :colspan => '2' }
+              %h2 Write a Message to this Wave
+          %tr
+            %td.avatar.thumb= thumb_image_tag(current_user.profile.avatar)
+            %td
+              - form_for Posting::Text.new, :url => wave_texts_path(:wave_id => @wave) do |f|
+                = f.text_field :subject, :placeholder => 'Title (optional)'
+                = f.text_area :body
+                = f.submit :OK
+                = f.button :Cancel, :class => 'cancel'
+
+      #photo.tab_content.hidden
+        %table
+          %tr
+            %td{ :colspan => '2' }
+              %h2 Upload a Photo to the Wave
+          %tr
+            %td.avatar.thumb= thumb_image_tag(current_user.profile.avatar)
+            %td
+              - form_for(Posting::Photo.new, :url => wave_photos_path(:wave_id => @wave, :format => :js), :html => { :multipart => true, :target => 'upload_frame' }) do |f|
+                %table.button_bar
+                  %tr
+                    %td.file_field= f.file_field :image
+                  %tr
+                    %td.submit
+                      = f.submit 'Upload Photo', :id => 'photo_upload_submit'
+                      = f.button :Cancel, :class => 'cancel'
+                      = spinner
+
+      #video.tab_content.hidden
+        %table
+          %tr
+            %td{ :colspan => '2' }
+              %h2 Upload a Video to the Wave
+          %tr
+            %td.avatar.thumb= thumb_image_tag(current_user.profile.avatar)
+            %td
+              -form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave, :format => :json)) do |f|
+                %p.unobtrusive Paste the URL of the YouTube tube here.
+                = f.text_area :body
+                = f.text_field :subject, :placeholder => 'Caption (optional)'
+                = f.submit :OK
+                = f.button :Cancel, :class => 'cancel'
+        :javascript
+          $('#video.tab_content form').submit(function(){
+            FF.scrub_placeholders(this);
+            jQuery.ajax({
+              data: jQuery.param(jQuery(this).serializeArray()),
+              dataType: 'script',
+              cache: false,
+              type: 'post',
+              url: '#{wave_videos_path(:wave_id => @wave)}',
+              success: function(){
+                $('#video.tab_content form')
+                .reset()
+                .closest('.tab_content').hide();
+              $('ul#tabs li.current').removeClass('current');
+              }
+            });
+            return false;
+          });
+
+      #chat.tab_content.hidden Chat
+      #hottie.tab_content.hidden Hottie
+      #link.tab_content.hidden Link
+      #event.tab_content.hidden Event
+      #poll.tab_content.hidden Poll
+
+      %iframe#upload_frame{ :name => "upload_frame", :width => '1', :height => '1', :style => 'border:0px', :src => 'about:blank' }
+
+    - if false
+      #log
+
+  #posting_well
+    - @wave.postings.for(current_user).each do |posting|
+      - partial = render(:partial => 'postings/posting', :object => posting)
+      .grid_3.alpha.omega{ :class => 'sidebar' }
+        = yield("#{dom_id(posting)}_sidebar")
+      .grid_12.alpha.omega
+        = partial
+
+:javascript
+  jQuery(document).ready(function($){
+    $('#text.tab_content form').submit(function(){
+      jQuery.ajax({
+        data: jQuery.param(jQuery(this).serializeArray()),
+        dataType: 'script',
+        cache: false,
+        type: 'post',
+        url: '#{wave_texts_path(:wave_id => @wave)}',
+        success: function(){
+          $('#text.tab_content form')
+          .reset()
+          .closest('.tab_content').hide();
+        $('ul#tabs li.current').removeClass('current');
+        }
+      });
+      return false;
+    });      
   });

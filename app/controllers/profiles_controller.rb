@@ -33,5 +33,15 @@ class ProfilesController < ApplicationController
      format.json { render :json => { :errors => @current_user.info.errors }}
     end
   end
+
+  def edit_photo
+     @photo = current_user.profile.photos.build(params[:posting_photo])
+     current_user.profile.save
+     respond_to_parent do
+       respond_to do |format|
+         format.js
+       end
+     end
+  end
   
 end

@@ -4,7 +4,6 @@
 <% else %>
 <div class='grid_3'>
 <%# thumb_image_tag(current_user, :online_badge => false, :class => 'button') %>
-<%= content_tag(:p, flash[:notice], :class => 'flash') if flash[:notice] %>
-&nbsp;
+<p class='flash'><%= flash[:notice] || '&nbsp;' %></p>
 </div>
 <% end %>

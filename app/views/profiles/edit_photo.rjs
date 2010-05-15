@@ -1,0 +1,15 @@
+if @photo.valid?
+  page['upload_error_well'].hide
+  page.insert_html :bottom, 'photo_upload_well', :partial => 'photos/edit', :object => @photo
+  page['new_posting_photo'].get(0).reset
+else
+  page << "alert(#{@photo.errors})"
+  page['upload_error_well'].show
+  page << "jQuery('#upload_error_well').addClass('error')"
+  if params[:posting].blank? || params[:posting][:image].blank?
+    page.replace_html "upload_error_well", "Error: That photo is empty and really boring."
+  else
+    page.replace_html "upload_error_well", "Error: Can't accept that photo."
+  end
+  page['new_posting'].get(0).reset
+end

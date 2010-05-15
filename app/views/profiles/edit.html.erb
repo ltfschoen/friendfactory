@@ -33,14 +33,14 @@
 		</div>
 		
 		<div id="about" class='tab_content grid_16 alpha omega'>
-			<h1>About Me</h1>
+			<h1>About Adam</h1>
 			<%= render :partial => 'user_info/edit' %>
 		</div>
 
 		<div id="photos" class='tab_content grid_16 alpha omega'>
-			<h1>Photos of <%= current_user.first_name -%></h1>
+			<h1><%= current_user.first_name -%>&#146;s&nbsp;Photos</h1>
 			<% form_for Posting::Photo::new,
-						:url  => photos_path(:format => :js),
+						:url  => { :controller => 'profiles', :action => 'edit_photo', :format => :js }, #photos_path(:format => :js),
 						:html => { :multipart => true, :target => 'upload_frame' } do |f| %>
 				<div id='photo_upload_error' class='hidden'></div>
 				<div id='photo_upload_well' class='append-bottom clearfix'>

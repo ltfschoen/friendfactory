@@ -7,11 +7,15 @@ class Wave::Profile < Wave::Base
       find :first, :conditions => [ 'active = true' ]
     end
   end
-    
-  has_and_belongs_to_many :photos,
-    :class_name => 'Posting::Photo',
-    :join_table => 'postings_profiles',
-    :association_foreign_key => 'posting_id'
+
+  has_many :photos,
+      :class_name  => 'Posting::Photo',
+      :foreign_key => 'wave_id'
+      
+  # has_and_belongs_to_many :photos,
+  #   :class_name => 'Posting::Photo',
+  #   :join_table => 'postings_profiles',
+  #   :association_foreign_key => 'posting_id'
 
   def before_update
     active_avatar = self.avatar

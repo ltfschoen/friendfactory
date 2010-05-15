@@ -1,9 +1,9 @@
 <ul id='menu_bar' class='menu_bar'>
 	<li><%= link_to 'Wave', wave_path(:id => 'popular') -%></li>
 	<li><%= link_to 'Buddies' -%></li>
-	<% if false %><li><%= link_to 'Locations' -%></li><% end %>
-	<% if false %><li><%= link_to 'Events' -%></li><% end %>
-	<% if false %><li class='secondary'><%= link_to('Tell a Friend!') -%></li><% end %>
+	<% if true %><li><%= link_to 'Locations' -%></li><% end %>
+	<% if true %><li><%= link_to 'Events' -%></li><% end %>
+	<% if true %><li class='secondary'><%= link_to('Tell a Friend!') -%></li><% end %>
 	<% if current_user %>
 	<li class='secondary'><%= link_to('Logout', logout_path) -%></li>
 	<% if false %><li class='secondary'><%= link_to('Account', '#') -%></li><% end %>
