@@ -18,3 +18,8 @@ config.action_mailer.raise_delivery_errors = false
 
 # config.gem 'populator'
 # config.gem 'faker'
+
+config.gem 'factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
+config.gem 'rspec',        :lib => false, :version => '>= 1.2.0'
+config.gem 'rspec-rails',  :lib => false, :version => '>= 1.2.0'
+config.gem 'webrat',       :lib => false, :version => '>= 0.7.1'

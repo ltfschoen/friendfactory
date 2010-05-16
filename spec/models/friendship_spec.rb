@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Buddy do
+describe Friendship do
   before(:each) do
     @valid_attributes = {
       :user_id => 1,
@@ -9,6 +9,7 @@ describe Buddy do
   end
 
   it "should create a new instance given valid attributes" do
-    Buddy.create!(@valid_attributes)
+    pending
+    Friendship.create!(@valid_attributes)
   end
 end

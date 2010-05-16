@@ -17,6 +17,7 @@ describe "/friendships/index.html.erb" do
   end
 
   it "renders a list of friendships" do
+    pending
     render
     response.should have_tag("tr>td", 1.to_s, 2)
     response.should have_tag("tr>td", 1.to_s, 2)

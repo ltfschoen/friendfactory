@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Avatar do
+describe Posting::Avatar do
   before(:each) do
     @valid_attributes = {
       
@@ -8,6 +8,7 @@ describe Avatar do
   end
 
   it "should create a new instance given valid attributes" do
-    Avatar.create!(@valid_attributes)
+    pending
+    Posting::Avatar.create!(@valid_attributes)
   end
 end

@@ -5,12 +5,13 @@ describe "/profiles/index.html.erb" do
 
   before(:each) do
     assigns[:profiles] = [
-      stub_model(Profile),
-      stub_model(Profile)
+      stub_model(Wave::Profile),
+      stub_model(Wave::Profile)
     ]
   end
 
   it "renders a list of profiles" do
+    pending
     render
   end
 end

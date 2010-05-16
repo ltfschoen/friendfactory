@@ -76,10 +76,9 @@ jQuery(document).ready(function($){
   $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})	
   $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});	
   $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-comment' }});
-  $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-star' }});
-  $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-link' }});
-  $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-clock' }});
-  $('#tabs li:eq(7)').button({ icons: { primary: 'ui-icon-signal' }});
+  $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
+  $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
+  $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
   
   $('ul#tabs li').click(function(){
     if (!$(this).hasClass('current')) {

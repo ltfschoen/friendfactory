@@ -4,6 +4,7 @@ describe UsersController do
 
   #Delete these examples and add some real ones
   it "should use UsersController" do
+    pending
     controller.should be_an_instance_of(UsersController)
   end
 
