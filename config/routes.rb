@@ -22,15 +22,13 @@ ActionController::Routing::Routes.draw do |map|
   # Postings Controllers
   map.resources :avatars,  :only => [ :create ] 
   map.resources :photos,   :only => [ :create ] 
+
   map.resources :postings, :only => [] do |posting|
     posting.resources :comments, :only => [ :create ]
   end
-  
-  map.resources :messages, :collection => { :sent => :get } do |message|
-    message.reply 'reply',
-        :controller => 'messages',
-        :action     => 'reply',
-        :conditions => { :method => :post }
+
+  map.resources :messages, :only => [] do |message|
+    message.resource 'reply', :only => [ :create ], :controller => 'messages'
   end
 
   # # # # # # # # # # # # # # #

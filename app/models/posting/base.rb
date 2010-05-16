@@ -7,20 +7,25 @@ class Posting::Base < ActiveRecord::Base
   has_many :children,
       :class_name  => 'Posting::Base',
       :foreign_key => 'parent_id',
-      :order       => 'created_at asc' do
+      :order       => 'created_at desc' do
     
     def postings
-      find :all, :conditions => [ "type <> 'Posting::Comment'" ]
+      find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at desc'
     end
     
     def comments
-      find :all, :conditions => [ "type = 'Posting::Comment'" ]
+      find :all, :conditions => [ "type = 'Posting::Comment'" ], :order => 'created_at asc'
     end
   end
   
-  belongs_to :user  
-  belongs_to :wave, :class_name => 'Wave::Base', :foreign_key => 'wave_id'
+  belongs_to :user
   
+  belongs_to :wave, :class_name => 'Wave::Base', :foreign_key => 'wave_id'
+
+  validates_presence_of :user_id
+
+  attr_readonly :user_id, :wave_id
+    
   define_index do
     indexes body
     indexes wave.topic,       :as => :wave_topic

@@ -2,15 +2,25 @@ class MessagesController < ApplicationController
   
   before_filter :require_user
   
-  helper :users
-  
-  def index
-    @message_threads = current_user.message_threads
-    @reply = current_user.sent_messages.build
+#  helper :users
+
+  def create
+    @posting = Posting::Message.create(params[:posting_message])
+    @posting.parent = Posting::Message.find_by_id(params[:message_id]).try(:latest_reply)
+    @posting.user = current_user
+    @posting.save
     respond_to do |format|
-      format.html
+      format.js
     end
   end
+
+#  def index
+#    @message_threads = current_user.message_threads
+#    @reply = current_user.sent_messages.build
+#    respond_to do |format|
+#      format.html
+#    end
+#  end
   
   # def sent
   #   @messages = current_user.sent_messages
@@ -31,41 +41,24 @@ class MessagesController < ApplicationController
   #   end
   # end
 
-  # def new
-  #   @message = Message.new
-  #   respond_to do |format|
-  #     format.html
-  #   end
-  # end
 
   # GET /messages/1/edit
   # def edit
   #   @message = Message.find(params[:id])
   # end
 
-  # def create
-  #   @message = Message.new(params[:message])
-  #   respond_to do |format|
-  #     if @message.save
-  #       flash[:notice] = 'Message was successfully created.'
-  #       format.html { redirect_to(@message) }
-  #     else
-  #       format.html { render :action => "new" }
-  #     end
-  #   end
-  # end
-  
-  def reply
-    message = current_user.received_messages.find_by_id(params[:message_id])
-    @reply  = message.reply(params[:message]) if message
-    respond_to do |format|
-      if @reply
-        format.xml { head :ok }
-      else
-        format.xml { render :xml => 'Invalid message', :status => :unprocessable_entity }
-      end
-    end
-  end
+
+#  def reply
+#    message = current_user.received_messages.find_by_id(params[:message_id])
+#    @reply  = message.reply(params[:message]) if message
+#    respond_to do |format|
+#      if @reply
+#        format.xml { head :ok }
+#      else
+#        format.xml { render :xml => 'Invalid message', :status => :unprocessable_entity }
+#      end
+#    end
+#  end
 
   # PUT /messages/1
   # PUT /messages/1.xml

@@ -3,32 +3,33 @@ class Posting::Message < Posting::Base
   alias_attribute :sender,    :user
   alias_attribute :sender_id, :user_id
 
-  validates_presence_of :sender
-  validates_presence_of :receiver
-
   belongs_to :receiver, :class_name => User.class_name, :foreign_key => 'receiver_id'
   
   named_scope :unread, :conditions => { :read_at => nil }
 
   before_save { |message| message[:private] = true }
 
-  attr_accessible :sender, :receiver, :subject, :body
+  validates_presence_of :receiver_id
+  
+  attr_accessible :receiver_id, :subject, :body
 
   def read?
     !!read_at
   end
   
-  def messaging_with(current_user)
-    [ sender, receiver ].detect{ |user| user != current_user }
+  def recipient_for(user)
+    [ sender, receiver ].detect{ |recipient| recipient != user }
   end
-  
-  def reply(attrs = {})
-    subject = nil 
-    # TODO: 2010/4/17 # subject = reply_subject(attrs[:subject])
-    attrs.merge!(:sender => self.receiver, :receiver => self.sender, :subject => subject)
-    self.children.create(attrs)
+
+  def direction_for(user)
+    sender == user ? 'from' : 'to'
   end
-  
+
+  def latest_reply
+    leaf = self.children.last
+    leaf.nil? ? self : leaf.latest_reply
+  end
+
   def to_s
     "{ :id => #{self.id}, :sender => #{sender.to_s}, :receiver => #{receiver.to_s} :subject => '#{subject}' }"
   end

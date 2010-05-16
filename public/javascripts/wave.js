@@ -62,12 +62,8 @@ jQuery(document).ready(function($){
 
 jQuery(document).ready(function($){		
   $('.tab_content:first').hide();
-
-  $('button[type=submit]')
-    .button({ icons: { primary: 'ui-icon-check' }});
-
-  $('button.cancel')
-    .button({ icons: { primary: 'ui-icon-close' }})
+  $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+  $('.tab_content button.cancel')
     .click(function(){
       $(this)
         .parents('.tab_content').hide()
@@ -102,3 +98,42 @@ jQuery(document).ready(function($){
     }
   });  
 });
+
+jQuery(document).ready(function($) {
+  $('.posting_message')
+    .find('button.message_reply').button({ icons: { primary: 'ui-icon-mail-closed' }})
+      .click(function(event) {
+        $(this)
+          .css('visibility', 'hidden').closest('.posting_message').find('form.new_posting_message').show();
+          event.preventDefault();
+      })
+    .end()
+    .find('form.new_posting_message')
+      .hide()
+      .find('button.cancel')
+        .click(function(event) {
+          $(this)
+            .closest('form.new_posting_message').hide().reset()
+            .closest('.posting_message')
+            .find('button.message_reply').css('visibility', 'visible');
+          event.preventDefault();
+        })
+      .end()
+      .submit(function(event) {
+        var form = this;
+        event.preventDefault();
+        jQuery.ajax({
+          data: jQuery.param(jQuery(this).serializeArray()),
+          dataType: 'script',
+          cache: false,
+          type: 'post',
+          url: $(form).attr('action'),
+          success: function() {
+            $(form).hide().reset().closest('.posting_message')
+              .find('button.message_reply')
+                .css('visibility', 'visible');
+          }
+        });
+      });
+});
+

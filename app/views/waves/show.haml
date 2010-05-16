@@ -5,11 +5,11 @@
     $('.tab_content').hide();    
   });
     
-.wave.grid_15[@wave]
-  .grid_3.alpha.omega
+.wave[@wave]
+  .grid_3
     %p.flash= flash[:notice]
     &nbsp;
-  .grid_12.alpha.omega
+  .grid_12
     - if current_user
       %ul#tabs
         %li
@@ -45,6 +45,27 @@
                 = f.text_area :body
                 = f.submit :OK
                 = f.button :Cancel, :class => 'cancel'
+      :javascript
+        jQuery(document).ready(function($){
+          $('#text.tab_content form').submit(function(event){
+            form = this;
+            FF.scrub_placeholders(form);
+            jQuery.ajax({
+              data: jQuery.param(jQuery(this).serializeArray()),
+              dataType: 'script',
+              cache: false,
+              type: 'post',
+              url: '#{wave_texts_path(:wave_id => @wave)}',
+              success: function(){
+                $(form)
+                .reset()
+                .closest('.tab_content').hide();
+              $('ul#tabs li.current').removeClass('current');
+              }
+            });
+            event.preventDefault();
+          });
+        });
 
       #photo.tab_content.hidden
         %table
@@ -108,30 +129,7 @@
     - if false
       #log
 
-  #posting_well
-    - @wave.postings.for(current_user).each do |posting|
-      - partial = render(:partial => 'postings/posting', :object => posting)
-      .grid_3.alpha.omega{ :class => 'sidebar' }
-        = yield("#{dom_id(posting)}_sidebar")
-      .grid_12.alpha.omega
-        = partial
-
-:javascript
-  jQuery(document).ready(function($){
-    $('#text.tab_content form').submit(function(){
-      jQuery.ajax({
-        data: jQuery.param(jQuery(this).serializeArray()),
-        dataType: 'script',
-        cache: false,
-        type: 'post',
-        url: '#{wave_texts_path(:wave_id => @wave)}',
-        success: function(){
-          $('#text.tab_content form')
-          .reset()
-          .closest('.tab_content').hide();
-        $('ul#tabs li.current').removeClass('current');
-        }
-      });
-      return false;
-    });      
-  });
+    #postings
+      = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
+  .grid_1
+    &nbsp;

@@ -1,6 +1,6 @@
 # page['#video_spinner'].hide
 if @posting.present? && @posting.valid?
-  page['#posting_well'].prepend(render(:partial => 'video', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
+  page['#postings'].prepend(render(:partial => 'video', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
 else
   page['.flash'].text("Couldn't save your video")  
 end

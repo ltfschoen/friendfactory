@@ -2,9 +2,14 @@ class Posting::Photo < Posting::Base
 
   has_attached_file :image,
       :styles => {
-          :h480  => [ 'x480',     :png ],
-          :small => [ '130x130',  :png ],
-          :ad    => [ '300x250#', :png ]},
+          :h480     => [ 'x480',     :png ],
+          :w460     => [ '460',      :png ],
+          :iphone   => [ '320x480#',  :png ],
+          :iphoneR  => [ '480x320#',  :png ],
+          :iPad     => [ '768x1024#', :png ],
+          :iPadR    => [ '1024x768#', :png ],
+          :small    => [ '130x130',  :png ],
+          :ad       => [ '300x250#', :png ]},
       :default_style => :h480
   
   validates_attachment_presence     :image

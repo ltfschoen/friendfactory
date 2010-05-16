@@ -1,0 +1,11 @@
+.posting[message]
+  %table
+    %tr
+      %td.avatar.thumb
+        = thumb_image_tag(message.recipient_for(current_user).profile.avatar)
+      %td
+        %h3 Private Message with #{link_to_profile(message.recipient_for(current_user))}
+        %table
+          = render :partial => "messages/reply", :object => message, :locals => { :originator => message.sender, :render_form_after_leaf => true }
+      %td.button_bar
+        = button_tag('Reply', :class => 'message_reply')

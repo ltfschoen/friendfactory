@@ -1,5 +1,5 @@
 if @posting.valid?
-  page['#posting_well'].prepend(render(:partial => 'text', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
+  page['#postings'].prepend(render(:partial => 'text', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
 else
-  page['.flash'].text("Couldn't save your posting")  
+  page['.flash'].text("Couldn't save your posting - #{@posting.errors.full_messages}")  
 end

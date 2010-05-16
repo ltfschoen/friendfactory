@@ -35,7 +35,6 @@
 	<%= render(:partial => "layouts/#{current_site}/#{current_layout}_header") rescue render(:partial => "layouts/#{current_site}/header") rescue nil -%>
 	<div class='container <%= yield(:current_container) || 'container_16' -%> clearfix'>
     <%= yield -%>
-	<%= render(:partial => "layouts/#{current_site}/gutter") %>
 	</div>	
 	<%= render(:partial => "layouts/#{current_site}/footer") rescue nil -%>
 	<%= render(:partial => 'layouts/feedback') unless Rails.env.development? %>

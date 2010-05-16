@@ -1,6 +1,6 @@
 # page['#photo_spinner'].hide
 if @posting.present? && @posting.valid?
-  page['#posting_well'].prepend(render(:partial => 'photo', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
+  page['#postings'].prepend(render(:partial => 'photo', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
   page['#photo.tab_content form'].reset.closest('.tab_content').hide();
   page['ul#tabs li.current'].removeClass('current')
 else

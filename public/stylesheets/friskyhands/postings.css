@@ -1,17 +1,11 @@
-#posting_well > .posting {
-	border-bottom: 1px solid #CCC;
-	width: 100%;
-	padding: 20px 0;
-}
-
-
-#posting_well .sidebar {
-    text-align: right;
-}
-
 .posting {
 	display: table;
 	width: 100%;
+}
+
+#postings > .posting {
+	border-bottom: 1px solid #CCC;
+	padding: 20px 0;
 }
 
 .posting > table td {
@@ -22,6 +16,11 @@
 
 img.photo.medium {
 	width: 460px;
+}
+
+object {
+    border: 1px solid lightgray;
+    padding: 2px;
 }
 
 /* * * * * * * * * */
@@ -88,12 +87,10 @@ form.edit_user_info > table td.label.about_me {
 	margin-bottom: 0.5em;
 }
 
-/*.posting_text td.avatar {*/
-.posting td.avatar {	
-	width: 106px;
+.posting td.avatar {
+	width: 118px;
 }
 
-/*.posting_text img.avatar.thumb {*/
 .posting img.avatar.thumb {
 	margin-right: 12px;
 }
@@ -108,7 +105,7 @@ form.edit_user_info > table td.label.about_me {
 	background-color: #F7F7F7;
 	width: 460px;
 	font-size: 0.9em;
-	margin: 8px 0;
+	margin: 4px 0;
 }
 
 .posting_comment > table {
@@ -140,18 +137,29 @@ form.edit_user_info > table td.label.about_me {
 
 /* * * * * * * * * */
 
-.posting_message.left {	
+tr.posting_message td {
+    padding: 5px 0;
 }
 
-.posting_message.right {
+.posting_message > table td.button_bar {
+    vertical-align: bottom;
 }
 
-.posting_message > table td.avatar {
+.posting_message h3 {
+    margin-bottom: 10px;
 }
 
-.posting_message > table img.avatar {
+.posting_message td.avatar.small {
+	width: 40px;
+}
+
+.posting_message img.avatar.small {
 	margin-right: 8px;
 	width: 28px;
+}
+
+.posting_message textarea {
+    height: 5.8em;    
 }
 
 /* * * * * * * * * */

@@ -81,7 +81,7 @@ message_10:
     wave_id: 1
     user_id: <%= Fixtures.identify(:bert) %>
     receiver_id: <%= Fixtures.identify(:adam) %>
-    body: <%= Faker::Lorem::sentence %>
+    body: <%= Faker::Lorem::sentences(3) %>
     created_at: <%= Date.today %>
 
 message_11:
@@ -91,7 +91,7 @@ message_11:
     parent_id: 10
     user_id: <%= Fixtures.identify(:adam) %>
     receiver_id: <%= Fixtures.identify(:bert) %>
-    body: <%= Faker::Lorem::sentence %>
+    body: <%= Faker::Lorem::sentences(10) %>
     created_at: <%= Date.today %>
 
 message_12:
@@ -100,6 +100,56 @@ message_12:
     private: true
     parent_id: 11
     user_id: <%= Fixtures.identify(:bert) %>
+    receiver_id: <%= Fixtures.identify(:adam) %>
+    body: <%= Faker::Lorem::sentence %>
+    created_at: <%= Date.today %>
+
+message_13:
+    id: 13
+    type: Posting::Message
+    private: true
+    parent_id: 12
+    user_id: <%= Fixtures.identify(:adam) %>
+    receiver_id: <%= Fixtures.identify(:bert) %>
+    body: <%= Faker::Lorem::sentence(2) %>
+    created_at: <%= Date.today %>
+
+message_14:
+    id: 14
+    type: Posting::Message
+    private: true
+    wave_id: 1
+    user_id: <%= Fixtures.identify(:adam) %>
+    receiver_id: <%= Fixtures.identify(:duncan) %>
+    body: <%= Faker::Lorem::sentence %>
+    created_at: <%= Date.today %>
+
+message_15:
+    id: 15
+    type: Posting::Message
+    private: true
+    parent_id: 14
+    user_id: <%= Fixtures.identify(:duncan) %>
+    receiver_id: <%= Fixtures.identify(:adam) %>
+    body: <%= Faker::Lorem::sentences %>
+    created_at: <%= Date.today %>
+
+message_16:
+    id: 16
+    type: Posting::Message
+    private: true
+    parent_id: 15
+    user_id: <%= Fixtures.identify(:adam) %>
+    receiver_id: <%= Fixtures.identify(:duncan) %>
+    body: <%= Faker::Lorem::sentence %>
+    created_at: <%= Date.today %>
+
+message_17:
+    id: 17
+    type: Posting::Message
+    private: true
+    parent_id: 16
+    user_id: <%= Fixtures.identify(:duncan) %>
     receiver_id: <%= Fixtures.identify(:adam) %>
     body: <%= Faker::Lorem::sentence %>
     created_at: <%= Date.today %>

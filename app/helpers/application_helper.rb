@@ -48,8 +48,9 @@ module ApplicationHelper
     image_tag('ajax-loader.gif', :size => size, :class => 'spinner', :id => 'spinner', :style => 'display:none')
   end
   
-  def link_to_profile(user)
-    link_to(user.full_name, profile_path(user.profile), :class => 'profile') if user.profile
+  def link_to_profile(user, opts = {})
+    name = opts[:label] || user.full_name
+    link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
   end
   
   def portrait_image_tag(avatar, opts = {})
@@ -68,11 +69,14 @@ module ApplicationHelper
     image_tag(avatar.image.url(:thumb), :class => klass, :site => false) unless avatar.nil?
   end
   
-  def distance_of_time_in_words_to_now(date)
+  def distance_of_time_in_words_to_now(date, opts = {})
+    suffix = opts[:suffix] || 'ago'
+    prefix = opts[:prefix]
     content_tag(:span, :class => 'distance_of_time') do
       returning String.new do |html|
+        html << "#{prefix}&nbsp;"
         html << super(date)
-        html << '&nbsp;ago'
+        html << "&nbsp;#{suffix}"
       end
     end
   end

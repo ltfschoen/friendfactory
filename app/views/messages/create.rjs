@@ -1,0 +1,8 @@
+if @posting.valid?
+    page.insert_html :before, "new_#{dom_id(@posting.root)}_thread",
+            :partial => 'reply',
+            :object  => @posting,
+            :locals  => { :originator => @posting.root.sender, :render_form_after_leaf => false }
+else
+    page << "alert('#{@posting.errors.full_messages}')"  
+end

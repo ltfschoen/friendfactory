@@ -3,7 +3,7 @@
     %tr
       %td.avatar.thumb= thumb_image_tag(photo.user.profile.avatar)
       %td
-        = image_tag(photo.image.url, :site => false, :class => 'photo medium') unless photo.nil?
+        = image_tag(photo.image.url(:w460), :site => false, :class => 'photo medium') unless photo.nil?
         %p
           = link_to_profile(photo.user)
           \ #{distance_of_time_in_words_to_now(photo.created_at)}
