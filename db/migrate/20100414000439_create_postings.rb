@@ -4,7 +4,6 @@ class CreatePostings < ActiveRecord::Migration
       t.string    :type
       t.string    :slug
       t.integer   :user_id
-      t.integer   :wave_id
       t.integer   :parent_id
       t.timestamps
     end    

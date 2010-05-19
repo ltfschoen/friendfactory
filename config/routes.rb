@@ -7,11 +7,21 @@ ActionController::Routing::Routes.draw do |map|
     wave.resources :photos, :only => [ :create ]
     wave.resources :videos, :only => [ :create ]
   end
-      
+
+  map.wave_hotties '/hotties',
+      :controller => :hotties,
+      :action     => :show,
+      :conditions => { :method => :get }
+
   map.resources :profiles,
       :only   => [ :show, :edit, :update ],
-      :member => { :home => :get }      
-      
+      :member => { :home => :get } do |profile|
+    profile.photos 'photos',
+        :controller => 'profiles',
+        :action     => 'photo',
+        :conditions => { :method => :post } 
+  end
+
   map.edit_profile '/profile',
       :controller => 'profiles',
       :action     => 'edit',
@@ -20,13 +30,14 @@ ActionController::Routing::Routes.draw do |map|
   # # # # # # # # # # # # # # #
   
   # Postings Controllers
-  map.resources :avatars,  :only => [ :create ] 
-  map.resources :photos,   :only => [ :create ] 
+  map.resources :avatars,  :only => [ :create ] # TODO: remove once profiles wave works correctly
 
+  # TODO: Use a manual mapping
   map.resources :postings, :only => [] do |posting|
     posting.resources :comments, :only => [ :create ]
   end
 
+  # TODO: Use a manual mapping
   map.resources :messages, :only => [] do |message|
     message.resource 'reply', :only => [ :create ], :controller => 'messages'
   end
@@ -89,6 +100,6 @@ ActionController::Routing::Routes.draw do |map|
   #     products.resources :sales, :collection => { :recent => :get }
   #   end
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  # map.connect ':controller/:action/:id'
+  # map.connect ':controller/:action/:id.:format'
 end

@@ -3,12 +3,20 @@ class Wave::Base < ActiveRecord::Base
   set_table_name :waves
   
   acts_as_slugable :source_column => :topic, :slug_column => :slug
-  
-  has_many :postings,
-      :class_name  => 'Posting::Base',
-      :foreign_key => 'wave_id',
-      :conditions  => 'parent_id is null',
-      :order       => 'created_at desc' do
+
+  has_and_belongs_to_many :postings,
+      :class_name              => 'Posting::Base',
+      :foreign_key             => 'wave_id',
+      :association_foreign_key => 'posting_id',
+      :join_table              => 'postings_waves',
+      :conditions              => 'parent_id is null',
+      :order                   => 'created_at desc' do
+
+#  has_many :postings,
+#      :class_name  => 'Posting::Base',
+#      :foreign_key => 'wave_id',
+#      :conditions  => 'parent_id is null',
+#      :order       => 'created_at desc' do
 
     def for(user)
       if user.nil?

@@ -1,5 +1,5 @@
-wave_wall:
-  id: 1
+shared_wave:
+  id: <%= Fixtures.identify(:shared_wave) %>
   type: Wave::Shared
   topic: Everyone's Wave
   description: Everyone's Welcome at FriskyHands!

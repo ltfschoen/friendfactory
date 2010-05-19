@@ -1,9 +1,5 @@
 - javascript 'wave'
-
-:javascript
-  jQuery(document).ready(function($){
-    $('.tab_content').hide();    
-  });
+- javascript 'wave_shared'
     
 .wave[@wave]
   .grid_3
@@ -41,8 +37,9 @@
               - form_for Posting::Text.new, :url => wave_texts_path(:wave_id => @wave) do |f|
                 = f.text_field :subject, :placeholder => 'Title (optional)'
                 = f.text_area :body
-                = f.submit :OK
-                = f.button :Cancel, :class => 'cancel'
+                .button_bar
+                  = f.submit :OK
+                  = f.button :Cancel, :class => 'cancel'
       :javascript
         jQuery(document).ready(function($){
           $('#text.tab_content form').submit(function(event){
@@ -95,8 +92,9 @@
                 %p.unobtrusive Paste the URL of the YouTube tube here.
                 = f.text_area :body
                 = f.text_field :subject, :placeholder => 'Caption (optional)'
-                = f.submit :OK
-                = f.button :Cancel, :class => 'cancel'
+                .button_bar
+                  = f.submit :OK
+                  = f.button :Cancel, :class => 'cancel'
         :javascript
           $('#video.tab_content form').submit(function(){
             FF.scrub_placeholders(this);

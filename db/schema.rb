@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100427024309) do
+ActiveRecord::Schema.define(:version => 20100517002418) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
     t.string   "type"
     t.string   "slug"
     t.integer  "user_id"
-    t.integer  "wave_id"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -44,13 +43,13 @@ ActiveRecord::Schema.define(:version => 20100427024309) do
   add_index "postings", ["receiver_id"], :name => "index_postings_on_receiver_id"
   add_index "postings", ["user_id"], :name => "index_postings_on_user_id"
 
-  create_table "postings_profiles", :id => false, :force => true do |t|
+  create_table "postings_waves", :id => false, :force => true do |t|
     t.integer "posting_id"
-    t.integer "profile_id"
+    t.integer "wave_id"
   end
 
-  add_index "postings_profiles", ["posting_id", "profile_id"], :name => "index_postings_profiles_on_posting_id_and_profile_id"
-  add_index "postings_profiles", ["profile_id"], :name => "index_postings_profiles_on_profile_id"
+  add_index "postings_waves", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
+  add_index "postings_waves", ["wave_id"], :name => "index_postings_waves_on_wave_id"
 
   create_table "user_info", :force => true do |t|
     t.integer  "user_id"

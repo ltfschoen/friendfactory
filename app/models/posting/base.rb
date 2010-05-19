@@ -20,7 +20,13 @@ class Posting::Base < ActiveRecord::Base
   
   belongs_to :user
   
-  belongs_to :wave, :class_name => 'Wave::Base', :foreign_key => 'wave_id'
+  # belongs_to :wave, :class_name => 'Wave::Base', :foreign_key => 'wave_id'
+  has_and_belongs_to_many :waves,
+      :class_name              => 'Wave::Base',
+      :foreign_key             => 'posting_id',
+      :association_foreign_key => 'wave_id',
+      :join_table              => 'postings_waves',
+      :order                   => 'created_at desc'
 
   validates_presence_of :user_id
 
@@ -28,8 +34,9 @@ class Posting::Base < ActiveRecord::Base
     
   define_index do
     indexes body
-    indexes wave.topic,       :as => :wave_topic
-    indexes wave.description, :as => :wave_description
+    # TODO: Reestablish indexes on associated waves
+    # indexes wave.topic,       :as => :wave_topic
+    # indexes wave.description, :as => :wave_description
     indexes [ user.first_name, user.last_name], :as => :user_name
     indexes user_id
     has :created_at

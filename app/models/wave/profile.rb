@@ -1,21 +1,30 @@
 class Wave::Profile < Wave::Base
   
-  has_many :avatars,
-      :class_name  => 'Posting::Avatar',
-      :foreign_key => 'wave_id' do        
+#  has_many :avatars,
+#      :class_name  => 'Posting::Avatar',
+#      :foreign_key => 'wave_id' do
+#    def active
+#      find :first, :conditions => [ 'active = true' ]
+#    end
+#  end
+
+  has_and_belongs_to_many :avatars,
+      :class_name              => 'Posting::Avatar',
+      :foreign_key             => 'wave_id',
+      :association_foreign_key => 'posting_id',
+      :join_table              => 'postings_waves',
+      :order                   => 'created_at desc' do
     def active
       find :first, :conditions => [ 'active = true' ]
     end
   end
 
-  has_many :photos,
-      :class_name  => 'Posting::Photo',
-      :foreign_key => 'wave_id'
-      
-  # has_and_belongs_to_many :photos,
-  #   :class_name => 'Posting::Photo',
-  #   :join_table => 'postings_profiles',
-  #   :association_foreign_key => 'posting_id'
+  has_and_belongs_to_many :photos,
+      :class_name              => 'Posting::Photo',
+      :foreign_key             => 'wave_id',
+      :association_foreign_key => 'posting_id',
+      :join_table              => 'postings_waves',
+      :order                   => 'created_at desc'
 
   def before_update
     active_avatar = self.avatar
@@ -28,8 +37,8 @@ class Wave::Profile < Wave::Base
     self.avatars.active
   end
   
-  def build_avatar(avatar_attrs)
-    @built_avatar = self.avatars.build(avatar_attrs.merge(:active => true))
-  end
+#  def build_avatar(avatar_attrs)
+#    @built_avatar = self.avatars.build(avatar_attrs.merge(:active => true))
+#  end
       
 end

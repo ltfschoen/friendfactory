@@ -4,7 +4,11 @@ class PhotosController < ApplicationController
   
   def create
     wave = Wave::Base.find_by_id(params[:wave_id])
-    @posting = Posting::Photo.create(params[:posting_photo].merge(:wave_id => wave, :user_id => current_user)) if wave.present?
+    if wave.present?
+      @posting = Posting::Photo.create(params[:posting_photo])
+      current_user.postings << @posting
+      wave.postings << @posting
+    end
     respond_to_parent do
       respond_to do |format|
         format.js

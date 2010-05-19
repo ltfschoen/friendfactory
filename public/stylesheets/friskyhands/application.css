@@ -27,6 +27,11 @@ a {
 	text-decoration: none;
 }
 
+.grid_3.fixed {
+    width: 160px;
+    margin-right: 10px;
+}
+
 .unobtrusive {
 	color: gray;
 }
@@ -75,6 +80,16 @@ img.avatar.online {
 	border: 2px solid lightgreen;
 }
 
+div.posting_avatar {
+    position: relative;
+}
+
+div.posting_avatar img.flag_hottie {
+    position :absolute;
+    top: -9px;
+    left: -16px;
+}
+
 input[type=text],
 input[type=password],
 textarea  {
@@ -111,6 +126,8 @@ div.header {
 
 div.header ul.menu_bar {
 	padding-top: 20px;
+    height: 1.6em;
+    overflow: hidden;
 }
 
 div.header ul.menu_bar li {
@@ -121,7 +138,7 @@ div.header ul.menu_bar li {
 	list-style-type: none;
 	font-weight: normal;	
 	color: #ECC;
-	padding: 0 1em 0 0;
+	padding: 0 1em 1em 0;
 }
 
 div.header ul.menu_bar li a {

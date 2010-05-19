@@ -63,10 +63,11 @@ module ApplicationHelper
   
   def thumb_image_tag(avatar, opts = {})
     avatar = avatar.profile.avatar if avatar.is_a?(User)
-    online = nil
     online = (avatar.user.online? ? 'online' : nil) unless opts[:online_badge] == false
-    klass  = [ 'avatar', 'thumb', online, opts[:class] ].compact * ' '
-    image_tag(avatar.image.url(:thumb), :class => klass, :site => false) unless avatar.nil?
+    klass  = [ dom_class(avatar), dom_id(avatar), 'avatar', 'thumb', online, opts[:class] ].compact * ' '
+    unless avatar.nil?
+      link_to(image_tag(avatar.image.url(:thumb), :class => klass, :site => false))
+    end
   end
   
   def distance_of_time_in_words_to_now(date, opts = {})
