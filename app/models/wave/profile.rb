@@ -1,13 +1,5 @@
 class Wave::Profile < Wave::Base
   
-#  has_many :avatars,
-#      :class_name  => 'Posting::Avatar',
-#      :foreign_key => 'wave_id' do
-#    def active
-#      find :first, :conditions => [ 'active = true' ]
-#    end
-#  end
-
   has_and_belongs_to_many :avatars,
       :class_name              => 'Posting::Avatar',
       :foreign_key             => 'wave_id',
