@@ -27,11 +27,6 @@ a {
 	text-decoration: none;
 }
 
-.grid_3.fixed {
-    width: 160px;
-    margin-right: 10px;
-}
-
 .unobtrusive {
 	color: gray;
 }

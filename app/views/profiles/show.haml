@@ -1,10 +1,8 @@
-- stylesheet 'wave'
 - stylesheet 'profiles'
-
 - javascript 'wave'
 
-.wave.profile[@wave]
-  .grid_3.fixed
+.wave[@wave]
+  .grid_3.sidebar
     .avatar= render :partial => 'avatars/portrait', :object => @wave.avatar
   .grid_12
     - if @wave.user == current_user

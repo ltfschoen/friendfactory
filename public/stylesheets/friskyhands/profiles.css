@@ -1,3 +1,12 @@
+.wave_profile .sidebar .posting_avatar {
+    margin: 1em 0;
+}
+
+.wave_profile .sidebar img.avatar {
+    width: 100%;
+}
+
+
 #avatar_upload_well > div {
 	float: left;
 	margin-right: 1em;
