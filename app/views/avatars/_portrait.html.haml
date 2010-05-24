@@ -1,2 +1,5 @@
-.posting[portrait]
-  = portrait_image_tag(portrait)
+- if portrait.nil?
+  &nbsp;
+- else
+  .posting[portrait]
+    = portrait_image_tag(portrait)

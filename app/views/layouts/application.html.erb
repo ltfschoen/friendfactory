@@ -13,11 +13,19 @@
 	<%= javascript_include_tag 'jquery.placeholder' %>
 	<%= javascript_include_tag 'jrails' %>
 	<%- if Rails.env.production? -%>
-	<%= javascript_include_tag 'strophe/strophe.min.js' %>	
+	<%# javascript_include_tag 'strophe/strophe.min.js' %>
 	<% else %>
-	<%= javascript_include_tag 'strophe/strophe.js' %>
+	<%# javascript_include_tag 'strophe/strophe.js' %>
 	<% end %>
-	<%= javascript_include_tag 'chat' %>
+	<%# javascript_include_tag 'chat' %>
+    <%- if Rails.env.production? %>
+    <script type='text/javascript' src='http://js.pusherapp.com/1.2/pusher.min.js'></script>
+    <% else %>
+    <%= javascript_include_tag 'pusher' %>
+    <% end %>
+    <% javascript_tag do %>
+      WebSocket.__swfLocation = "/WebSocketMain.swf";  
+    <% end %>
 	<%= javascript_include_tag 'application' %>
 	<%= stylesheet_link_tag 'reset', :media => 'screen, projection' %>
 	<%= stylesheet_link_tag 'forms', :media => 'screen, projection' %>	

@@ -3,13 +3,11 @@
 
 .wave[@wave]
   .grid_3.sidebar
-    .avatar= render :partial => 'avatars/portrait', :object => @wave.avatar
+    = (render :partial => 'avatars/portrait', :object => @wave.avatar)
   .grid_12
     - if @wave.user == current_user
       #tabs
         %ul
-          %li
-            %a{:href => "#wave"} Wave
           %li
             %a{:href => "#avatar"} Avatar
           %li
@@ -23,19 +21,17 @@
       :javascript
         jQuery(document).ready(function($){
           // $('.button_bar button:submit').button({ icons: { primary: 'ui-icon-check' }});
-          $('#tabs li:eq(0)').button({ text: false, icons: { primary: 'ui-icon-home' }});
-          $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-person' }})
-          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-script' }});
-          $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-image' }});
-          $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-heart' }});
-          $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-link' }});
+          // $('#tabs li:eq(0)').button({ text: false, icons: { primary: 'ui-icon-home' }});
+          $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-person' }})
+          $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-script' }});
+          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-image' }});
+          $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-heart' }});
+          $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
         });
 
     - else
       #tabs
         %ul
-          %li
-            %a{:href => "#wave"} Wave
           %li
             %a{:href => "#photos"} Upload Photos
           %li
@@ -44,33 +40,38 @@
             %a{:href => "#be_buddies"} Be Buddies
       :javascript
         jQuery(document).ready(function($){
-          $('#tabs li:eq(0)').button({ text: false, icons: { primary: 'ui-icon-home' }});
-          $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }});
-          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-star' }});
-          $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-heart' }});
+          // $('#tabs li:eq(0)').button({ text: false, icons: { primary: 'ui-icon-home' }});
+          $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-image' }});
+          $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-star' }});
+          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-heart' }});
         });
 
     %h1
       #{@wave.user.first_name}&#8217;s Wave
 
-    %p.flash= flash[:notice]
-
     - if @wave.postings.empty?
       .empty_wave
         %h3
           - if @wave.user == current_user
-            Do something with your profile to meet friends!
+            = render :partial => 'welcome', :locals => { :user => current_user }
           - else
             = @wave.user.first_name
             hasn't done anything with their profile. Put something here for them!
-    - else
 
       #avatar.tab_content
         %h2 Upload an Avatar
-        - form_for Posting::Avatar::new, :url  => avatars_path(:format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
+        - form_for Posting::Avatar.new, :url  => avatars_path(:format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
           #avatar_upload_error.hidden
           #avatar_upload_well.append-bottom.clearfix
-            = render :partial => 'avatars/edit', :object => current_user.profile.avatar
+            =# render :partial => 'avatars/edit', :object => current_user.profile.avatar
+            - unless current_user.profile.avatar.nil?
+              .portrait
+                = portrait_image_tag(current_user.profile.avatar)
+                %p.unobtrusive This is your portrait picture used in your profile when your friends want to have a good look at you.
+              .thumb.clearfix
+                = thumb_image_tag(current_user.profile.avatar)
+                %p.unobtrusive This is your thumb picture used on messages and news feeds.
+
           .button_bar
             = f.file_field :image
             = f.submit 'Upload', :id => 'avatar_upload_submit'

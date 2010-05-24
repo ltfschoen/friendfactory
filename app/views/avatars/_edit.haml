@@ -1,0 +1,8 @@
+- avatar = edit
+- unless avatar.nil?
+  .portrait
+    = portrait_image_tag(avatar)
+    %p.unobtrusive This is your portrait picture used in your profile when your friends want to have a good look at you.
+  .thumb.clearfix
+    = thumb_image_tag(avatar)
+    %p.unobtrusive This is your thumb picture used on messages and news feeds.

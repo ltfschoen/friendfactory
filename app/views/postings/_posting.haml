@@ -1,3 +1,2 @@
 - posting_type = posting.class.name.demodulize.tableize
-- # content_for "#{dom_id(posting)}_sidebar", posting_sidebar(posting)
 = render(:partial => "#{posting_type}/#{posting_type.singularize}", :object => posting) unless posting.nil?

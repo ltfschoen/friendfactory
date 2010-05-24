@@ -7,8 +7,8 @@ class WelcomeController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
-        flash[:notice] = "Welcome to FriskyHands, #{@user.first_name}!"
-        format.html { redirect_to root_path }
+        Pusher['wave'].trigger('user-register', { :full_name => @user.full_name })      
+        format.html { redirect_to edit_profile_path}
       else
         flash[:signup] = true
         @user_session  = UserSession.new
@@ -22,7 +22,14 @@ class WelcomeController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     respond_to do |format|
       if @user_session.save
-        flash[:notice] = "Login successful!"        
+        user = @user_session.record
+        avatar = user.profile.avatar
+        Pusher['wave'].trigger('user-online', {
+            :full_name => user.full_name,
+            :avatar    => {
+                :id        => avatar.try(:id),
+                :file_name => avatar.try(:image_file_name) }})
+        flash[:notice] = "Login successful!"
         format.html { redirect_to root_path }
       else
         @user = User.new
@@ -34,6 +41,7 @@ class WelcomeController < ApplicationController
   def lurk
     session[:lurker] = true
     respond_to do |format|
+      Pusher['wave'].trigger('lurker-online', {})
       format.html { redirect_to root_path }
     end
   end

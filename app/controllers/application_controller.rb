@@ -1,7 +1,12 @@
 require 'exceptions'
+require 'pusher'
 
 class ApplicationController < ActionController::Base  
-  
+
+  Pusher.app_id = '990'
+  Pusher.key = '064cfff6a7f7e44b07ae'
+  Pusher.secret = 'bea582cd929821f3f0f0'
+
   include ActionController::Sites
   
   helper :application, :placeholder_text
