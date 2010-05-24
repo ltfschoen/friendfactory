@@ -3,7 +3,7 @@
 
 .wave[@wave]
   .grid_3.sidebar
-    = (render :partial => 'avatars/portrait', :object => @wave.avatar)
+    = render :partial => 'avatars/portrait', :object => @wave.avatar, :locals => { :online_badge => false }
   .grid_12
     - if @wave.user == current_user
       #tabs
@@ -61,46 +61,47 @@
             = @wave.current_user.first_name
             hasn't done anything with their profile. Put something here for them!
 
-      #avatar.tab_content
-        %h2 Upload an Avatar
-        =render :partial => 'avatars/edit'
+    #avatar.tab_content
+      %h2 Upload an Avatar
+      =render :partial => 'avatars/edit', :locals => { :online_badge => false }
         
-      #about.tab_content
-        = render :partial => 'user_info/edit'
+    #about.tab_content
+      = render :partial => 'user_info/edit'
 
-      #photos.tab_content
-        %h3 Upload Photos to #{current_user.first_name}'s Wave
-        - form_for Posting::Photo::new, :url => profile_photos_path(:profile_id => current_user.profile, :format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
-          #photo_upload_error.hidden
-          #photo_upload_well.append-bottom.clearfix
-            = render :partial => 'photos/edit', :collection => current_user.profile.photos
-          .button_bar
-            = f.file_field :image
-            = f.submit 'Upload', :id => 'photo_upload_submit'
-            = f.button :Cancel, :class => 'cancel'
-            = spinner
+    #photos.tab_content
+      %h3 Upload Photos to #{current_user.first_name}'s Wave
+      - form_for Posting::Photo::new, :url => profile_photos_path(:profile_id => current_user.profile, :format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
+        #photo_upload_error.hidden
+        #photo_upload_well.append-bottom.clearfix
+          = render :partial => 'photos/edit', :collection => current_user.profile.photos
+        .button_bar
+          = f.file_field :image
+          = f.submit 'Upload', :id => 'photo_upload_submit'
+          = f.button :Cancel, :class => 'cancel'
+          = spinner
 
-      #buddies.tab_content
-        - if current_user != @wave.user
-          %h3= current_user.first_name + '&#8217;s Buddies'
+    #buddies.tab_content
+      - if current_user != @wave.user
+        %h3= current_user.first_name + '&#8217;s Buddies'
 
-      #links.tab_content
-        %h3 Links
+    #links.tab_content
+      %h3 Links
 
-      %iframe#upload_frame{:height => "1", :name => "upload_frame", :src => "about:blank", :style => "border:0px", :width => "1"}
+    %iframe#upload_frame{:height => "1", :name => "upload_frame", :src => "about:blank", :style => "border:0px", :width => "1"}
 
-      .postings
-        = render :partial => 'user_info/user_info', :object => @wave.user.info
+    .postings
+      = render :partial => 'user_info/user_info', :object => @wave.user.info
 
-        - unless @wave.photos.empty?
-          %div
-            %h2 Photos of #{@wave.user.first_name}
-            = render :partial => 'postings/posting', :collection => @wave.photos
+      - unless @wave.photos.empty?
+        %div
+          %h2 Photos of #{@wave.user.first_name}
+          = render :partial => 'postings/posting', :collection => @wave.photos
 
-        - if false
-          %div
-            %h2 #{@wave.user.first_name}&#8217;s Updates
-            = render :partial => 'postings/posting', :collection => @wave.postings
+      - if false
+        %div
+          %h2 #{@wave.user.first_name}&#8217;s Updates
+          = render :partial => 'postings/posting', :collection => @wave.postings
+
   .grid_1
     &nbsp;
 
@@ -111,21 +112,34 @@
       $(this).closest('.tab_content').hide();
       event.preventDefault();
     });
+
     $('#tabs ul li').click(function(event) {
-      if (!$(this).hasClass('current')) {
-        $(this)
-          .addClass('current')
-          .siblings('li.current')
-          .removeClass('current');
+      // if (!$(this).hasClass('current')) {
+      //  $(this)
+      //    .addClass('current')
+      //    .siblings('li.current')
+      //    .removeClass('current');
         $($(this)
           .find('a')
             .attr('href'))
-            .show()
-            .siblings('div.tab_content')
-            .hide();
+          .show()
+          .siblings('div.tab_content')
+          .hide();
         this.blur();
         event.preventDefault();
-      }
+      // }
+    });
+
+    $('#tabs li:eq(0)').click(function(event) {
+      $('.sidebar img').hide();
+    });
+
+    $('#tabs li').not('#tabs li:eq(0)').click(function(event) {
+      $('.sidebar img').show();
+    });
+
+    $('#avatar.tab_content button.cancel').click(function(event) {
+      $('.sidebar img').show();
     });
 
     // $('#tabs ul li:first-child').click(function(){

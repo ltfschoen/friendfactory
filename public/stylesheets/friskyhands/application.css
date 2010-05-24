@@ -65,21 +65,25 @@ a {
 	font-size: 0.9em;
 }
 
-img.avatar, img.photo {
+.container {
+    min-height: 60em;
+}
+
+img.thumb, img.portrait, img.photo {
 	border: 1px solid lightgray;
 	padding: 2px;
 }
 
-img.avatar.online {
+img.online {
 	padding: 1px;
 	border: 2px solid lightgreen;
 }
 
-div.posting_avatar {
+.posting_avatar {
     position: relative;
 }
 
-div.posting_avatar img.flag_hottie {
+.posting_avatar img.flag_hottie {
     position :absolute;
     top: -9px;
     left: -16px;
