@@ -215,23 +215,27 @@ tr.posting_message td {
 
 /* * * * * * * * * */
 
-#photo.tab_content table.button_bar {
+#photo.tab_content table.button_bar,
+#avatar.tab_content table.button_bar {
 	border-spacing: 0px 4px;
 	border-collapse: separate;	
 	width: 70%
 }
 
-#photo.tab_content table.button_bar td {;
+#photo.tab_content table.button_bar td,
+#avatar.tab_content table.button_bar td {
 	vertical-align: center;
 	background-color: #F7F7F7;
 }
 
-#photo.tab_content table.button_bar td.file_field {
+#photo.tab_content table.button_bar td.file_field,
+#avatar.tab_content table.button_bar td.file_field {
 	padding: 8px 8px;
 }
 
-#photo.tab_content table.button_bar td.submit {
-	padding: 0px 8px;
+#photo.tab_content table.button_bar td.submit,
+#avatar.tab_content table.button_bar td.submit {
+	padding: 0 8px;
 }
 
 /* * * * * * * * * */

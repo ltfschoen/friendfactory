@@ -1,0 +1,20 @@
+<% avatar = edit %>
+#avatar_upload_error.hidden
+#avatar_upload_well.append-bottom.clearfix
+  - unless current_user.profile.avatar.nil?
+    .portrait
+      = portrait_image_tag(current_user.profile.avatar)
+      %p.unobtrusive This is your portrait picture used in your profile when your friends want to have a good look at you.
+    .thumb.clearfix
+      = thumb_image_tag(current_user.profile.avatar)
+      %p.unobtrusive This is your thumb picture used on messages and news feeds.
+
+- form_for Posting::Avatar.new, :url  => avatars_path(:format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
+  %table.button_bar
+    %tr
+      %td.file_field= f.file_field :image
+    %tr
+      %td.submit
+        = f.submit 'Upload', :id => 'avatar_upload_submit'
+        = f.button :Cancel, :class => 'cancel'
+        = spinner

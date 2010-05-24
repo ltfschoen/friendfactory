@@ -53,31 +53,18 @@
       .empty_wave
         %h3
           - if @wave.user == current_user
-            = render :partial => 'welcome', :locals => { :user => current_user }
+            %h2
+              Welcome to FriskyHands#{ ", #{current_user.first_name}" unless current_user.first_name.blank? }!
+            %p
+              You'll want to meet new friends, right? Upload an avatar and say what you're into!
           - else
-            = @wave.user.first_name
+            = @wave.current_user.first_name
             hasn't done anything with their profile. Put something here for them!
 
       #avatar.tab_content
         %h2 Upload an Avatar
-        - form_for Posting::Avatar.new, :url  => avatars_path(:format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
-          #avatar_upload_error.hidden
-          #avatar_upload_well.append-bottom.clearfix
-            =# render :partial => 'avatars/edit', :object => current_user.profile.avatar
-            - unless current_user.profile.avatar.nil?
-              .portrait
-                = portrait_image_tag(current_user.profile.avatar)
-                %p.unobtrusive This is your portrait picture used in your profile when your friends want to have a good look at you.
-              .thumb.clearfix
-                = thumb_image_tag(current_user.profile.avatar)
-                %p.unobtrusive This is your thumb picture used on messages and news feeds.
-
-          .button_bar
-            = f.file_field :image
-            = f.submit 'Upload', :id => 'avatar_upload_submit'
-            = f.button :Cancel, :class => 'cancel'
-            = spinner
-
+        =render :partial => 'avatars/edit'
+        
       #about.tab_content
         = render :partial => 'user_info/edit'
 

@@ -4,9 +4,8 @@ class AvatarsController < ApplicationController
 
   def create
     @avatar = Posting::Avatar.new(params[:posting_avatar].merge(:active => true))
+    current_user.postings << @avatar
     current_user.profile.avatars << @avatar
-    #@avatar = current_user.profile.build_avatar(params[:posting_avatar])
-    #current_user.profile.save
     respond_to_parent do
       respond_to do |format|
         format.js

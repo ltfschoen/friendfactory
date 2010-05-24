@@ -28,9 +28,4 @@ class Wave::Profile < Wave::Base
   def avatar
     self.avatars.active
   end
-  
-#  def build_avatar(avatar_attrs)
-#    @built_avatar = self.avatars.build(avatar_attrs.merge(:active => true))
-#  end
-      
 end

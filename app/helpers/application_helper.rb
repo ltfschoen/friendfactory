@@ -57,8 +57,7 @@ module ApplicationHelper
     return if avatar.nil?
     avatar = avatar.profile.avatar if avatar.is_a?(User)
     online = (avatar.user.online? ? 'online' : nil) unless opts[:online_badge] == false
-    klass  = [ online, dom_class(avatar) ].compact * ' '
-    image_tag(avatar.image.url(:portrait), :class => klass, :site => false)
+    image_tag(avatar.image.url(:portrait), :class => online, :site => false)
   end
   
   def thumb_image_tag(avatar, opts = {})
