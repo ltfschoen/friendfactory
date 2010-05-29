@@ -42,6 +42,7 @@ body.welcome div#creative {
 
 body.welcome div#login,
 body.welcome div#signup {
+	padding-top: 1em;
 	width: 100%;
 }
 
