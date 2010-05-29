@@ -12,8 +12,8 @@ namespace :spec do
             if user
               user.save # Make sure profile exists
               user.reload
-              user.profile.build_avatar(:image => File.new(fixture), :user => user)
-              user.profile.save
+              avatar = Posting::Avatar.new(:image => File.new(fixture), :active => true, :user => user)
+              user.profile.avatars << avatar
             end
           end
         end
