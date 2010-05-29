@@ -57,7 +57,7 @@ module ApplicationHelper
     return if avatar.nil?
     avatar = avatar.profile.avatar if avatar.is_a?(User)
     online = 'online' if (avatar.user.online? && !(opts[:online_badge] == false))
-    klass  = [ 'portrait', online, opts[:class] ].compact * ' '
+    klass  = [ 'avatar', 'portrait', online, opts[:class] ].compact * ' '
     image_tag(avatar.image.url(:portrait), :alt => avatar.user.full_name, :class => klass, :site => false)
   end
   
@@ -65,7 +65,7 @@ module ApplicationHelper
     return if avatar.nil?
     avatar = avatar.profile.avatar if avatar.is_a?(User)
     online = (avatar.user.online? ? 'online' : nil) unless opts[:online_badge] == false
-    klass  = [ 'thumb', online, opts[:class] ].compact * ' '
+    klass  = [ 'avatar', 'thumb', online, opts[:class] ].compact * ' '
     link_to(image_tag(avatar.image.url(:thumb), :class => klass, :site => false))
   end
   

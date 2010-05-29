@@ -137,6 +137,10 @@ form.edit_user_info > table td.label.about_me {
 
 /* * * * * * * * * */
 
+.posting_message > table {
+	width: 100%;
+}
+
 tr.posting_message td {
     padding: 5px 0;
 }
