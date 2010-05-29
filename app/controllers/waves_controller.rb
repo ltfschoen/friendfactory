@@ -3,13 +3,15 @@ class WavesController < ApplicationController
   before_filter :require_lurker
 
   def index
+    store_location   
     @wave = Wave::Base::default
     respond_to do |format|
       format.html { render :action => 'show' }
     end
   end
 
-  def show    
+  def show
+    store_location   
     @wave = Wave::Base::find_by_slug(params[:id]) || Wave::Base::default
     respond_to do |format|
       format.html

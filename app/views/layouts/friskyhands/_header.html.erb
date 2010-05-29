@@ -8,57 +8,10 @@
 		</div>
 	</div>
 </div>
-
-<% unless current_user %>
-	<div id='secondary_header' class='header secondary login'>
-		<div class='container_16'>
-			<div class='prefix_11 grid_5'>
-				<% form_for UserSession.new, :url => login_path do |f| %>
-					<%= f.text_field :email, :class => 'ui-widget' %>
-				  <%= f.password_field :password, :class => 'ui-widget' %>
-					<%= f.submit 'Login!' %>
-					<%= f.button 'Just Lurk&hellip;', :class => 'lurk' %>
-					<div id='form_errors'></div>
-				<% end %>
-			</div>
-		</div>
+<div id='secondary_header' class='header secondary'>
+	<div class='container_16'>
+		<div class='grid_3'></div>
+		<div class='grid_12'></div>
+		<div class='grid_1'></div>
 	</div>
-<% end %>
-
-<% javascript_tag do %>
-	jQuery(function($){
-		$('form#new_user_session')
-				.submit(function(){
-					$.ajax({ 
-						data: $.param($(this).serializeArray()) +'&authenticity_token=' + encodeURIComponent('<%= form_authenticity_token %>'),
-						dataType: 'script',
-						type: 'post',
-						url: '<%= user_sessions_url %>'
-					});
-					return false;					
-				})
-				.find('button')
-				.button()
-				.filter('button[class*=lurk]')
-				.click(function(){
-					$('.header.primary #login').click();
-					return false;
-				});
-
-		if (!$.browser.webkit) {
-			$('#user_session_password').before('<%= text_field_tag(
-					:user_session_password_placeholder,
-					nil,
-					:value => placeholder_for(:password),
-					:class => 'placeholder ui-widget') -%>');
-			FF.password_prompt('#user_session_password', '#user_session_password_placeholder');
-			
-			$('#user_session_password').removeAttr('placeholder').hide();
-			$('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');			
-		}
-
-				
-		$('form#new_user_session input[type=submit]')
-				.button({ icons: { primary: 'ui-icon-check' }});				
-	});	
-<% end unless current_user %>
+</div>

@@ -78,7 +78,7 @@
         jQuery(document).ready(function($) {
           $('#text.tab_content form').submit(function(event) {
             form = this;
-            FF.scrub_placeholders(form);
+            FF.scrubPlaceholders(form);
             jQuery.ajax({
               data: jQuery.param(jQuery(this).serializeArray()),
               dataType: 'script',
@@ -131,7 +131,7 @@
                   = f.button :Cancel, :class => 'cancel'
         :javascript
           $('#video.tab_content form').submit(function(){
-            FF.scrub_placeholders(this);
+            FF.scrubPlaceholders(this);
             jQuery.ajax({
               data: jQuery.param(jQuery(this).serializeArray()),
               dataType: 'script',

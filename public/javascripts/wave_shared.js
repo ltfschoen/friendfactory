@@ -1,5 +1,6 @@
 jQuery(document).ready(function($){
   $('.tab_content:first').hide();
+	// TODO: Namespace the following to posting
   $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
   $('.tab_content button.cancel')
     .click(function(){

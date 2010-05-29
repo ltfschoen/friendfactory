@@ -18,7 +18,7 @@ var FF = {
 		})(jQuery);	
 	},
 	
-	password_prompt: function(password_field, password_placeholder_field){
+	passwordPrompt: function(password_field, password_placeholder_field){
 		(function($){
 			$(password_placeholder_field).focus(function() {
 				$(this).hide();
@@ -35,7 +35,7 @@ var FF = {
 		})(jQuery);
 	},
 	
-	scrub_placeholders: function(form){
+	scrubPlaceholders: function(form) {
 	  $(form).children('input[type=text]').each(function(child){
 			if ($(this).val().toLowerCase() === $(this).attr('placeholder').toLowerCase()){
 			  $(this).val('');
@@ -45,16 +45,6 @@ var FF = {
 };
 
 jQuery(document).ready(function($) {
-    $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
+  $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 	$('.header.secondary').hide().children().hide();
-	$('.header.primary #login').toggle(
-		function(){
-			$('.header.secondary').slideDown('normal', function(){ $(this).children().show(); })
-			return false;
-		},
-		function(){
-			$('.header.secondary').children().hide();
-			$('.header.secondary').slideUp('normal');
-			return false;
-		});		
 });

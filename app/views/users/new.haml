@@ -1,0 +1,15 @@
+#signup
+  %h3 Sign up, right now
+  - form_for User.new, :url => users_path do |f|
+    = f.text_field :first_name, :class => 'ui-widget'
+    = f.error_message_on :first_name, :prepend_text => 'Your first name '
+    = f.text_field :last_name, :class => 'ui-widget'
+    = f.error_message_on :last_name, :prepend_text => 'Your last name '
+    = f.text_field :email, :class => 'ui-widget'
+    = f.error_message_on :email, :prepend_text => 'Your email address '
+    = f.password_field :password, :class => 'ui-widget'
+    = f.error_message_on :password, :prepend_text => 'Your password '
+    = f.password_field :password_confirmation, :class => 'ui-widget'
+    = f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation '
+    = f.submit 'Register'
+    = f.button 'Back', :class => 'toggle'

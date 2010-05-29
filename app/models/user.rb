@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     config.logged_in_timeout = UserSession::Timeout
   end
   
+  validates_presence_of :first_name
+
   has_one  :info,     :class_name => 'UserInfo'
   
   has_many :waves,    :class_name => 'Wave::Base'
@@ -26,7 +28,7 @@ class User < ActiveRecord::Base
   has_many :admirers, :through => :inverse_friendships, :source => :user
 
   named_scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]
-
+  
   def self.online?(user)
     online.include?(user)
   end

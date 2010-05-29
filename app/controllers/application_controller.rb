@@ -1,11 +1,6 @@
 require 'exceptions'
-require 'pusher'
 
 class ApplicationController < ActionController::Base  
-
-  Pusher.app_id = '990'
-  Pusher.key = '064cfff6a7f7e44b07ae'
-  Pusher.secret = 'bea582cd929821f3f0f0'
 
   include ActionController::Sites
   
@@ -21,12 +16,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
-  end
-  
-  protected
-  
-  def helpers
-    self.class.helpers
   end
   
   private
@@ -58,7 +47,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_lurker
-    unless current_user || session[:lurker]
+    unless current_user || lurker
       store_location
       redirect_to welcome_url
       return false
@@ -69,7 +58,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:notice] = "You must be logged out to access this page"
-      redirect_to root_url
+      redirect_to logout_url
       return false
     end
   end
@@ -77,12 +66,34 @@ class ApplicationController < ActionController::Base
   def store_location
     session[:return_to] = request.request_uri
   end
-  
+
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+    session[:reentry_to] = nil
+  end
+  
+  def store_reentry_location
+    session[:reentry_to] = request.request_uri
+  end
+
+  def redirect_back_to_reentry
+    redirect_to(session[:reentry_to])
+    session[:reentry_to] = nil
+  end
+  
+  def store_lurker
+    session[:lurker] = true
+  end
+    
+  def clear_lurker
+    session[:lurker] = nil
   end
       
+  def lurker
+    session[:lurker].present? && session[:lurker] == true
+  end
+        
   def presenter
     @presenter ||= ApplicationPresenter.new(params)
   end

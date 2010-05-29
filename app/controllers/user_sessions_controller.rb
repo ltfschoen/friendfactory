@@ -1,36 +1,43 @@
 class UserSessionsController < ApplicationController
   
-  before_filter :require_no_user, :only => [ :new, :create ]
-  before_filter :require_user,    :only => :destroy
-  
-  def new
-    @user_session = UserSession.new
-  end
+  before_filter :require_lurker, :only => :new
+  before_filter :require_user,   :only => :destroy
+    
+  def new    
+    store_reentry_location
+  end  
   
   def create
-    params[:user_session][:email] = nil if params[:user_session].try(:[], :email) == helpers.placeholder_for(:email)
     @user_session = UserSession.new(params[:user_session])
     respond_to do |format|
-      if @user_session.save
-        @current_user = UserSession.find
-        Pusher['wave'].trigger('user-online', { :full_name => current_user.full_name })
-        flash[:notice] = "Login successful!"
-        format.html { redirect_to root_path }
-        format.js
+      if @user_session.save        
+        user = @user_session.record        
+        clear_lurker
+        Broadcast.user_online('friskyhands', user)
+        flash[:notice] = "Welcome back" + (user.first_name? ? ", #{user.first_name}" : '') + '!'
+        format.html { redirect_back_or_default(root_path) }
       else
-        format.html { render :action => :new }
-        format.js
-      end      
+        format.html { redirect_back_to_reentry }
+      end
     end
   end
   
+  def lurk
+    store_lurker
+    respond_to do |format|
+      Pusher['wave'].trigger('lurker-online', {})
+      format.html { redirect_back_or_default(root_path) }
+    end
+  end
+
   def destroy
     current_user.update_attribute(:current_login_at, nil)
     current_user_session.destroy
-    Pusher['wave'].trigger('user-offline', { :full_name => current_user.full_name })
-    flash[:notice] = "Logout successful!"
+    clear_lurker
+    Broadcast.user_offline('friskyhands', current_user)
     respond_to do |format|
       format.html { redirect_to welcome_url }
     end
   end
+
 end
