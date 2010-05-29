@@ -5,16 +5,19 @@ body, p, h1, h2, h3, label, input, textarea, a, .formError {
 }
 
 h1 {
+	color: #501508;
 	font-size: 2em;	
 	margin-top: 0.6em;
 	margin-bottom: 0.6em;
 }
 
 h2 {
+	color: #501508;
 	font-size: 1.6em;
 }
 
 h3 {
+	color: #501508;
 	font-size: 1.2em;
 }
 
@@ -57,7 +60,7 @@ a {
 }
 
 .flash {
-	color: green;
+	color: #501508;
 }
 
 .distance_of_time {

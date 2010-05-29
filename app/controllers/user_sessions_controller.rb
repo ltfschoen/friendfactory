@@ -13,7 +13,6 @@ class UserSessionsController < ApplicationController
       if @user_session.save        
         user = @user_session.record        
         clear_lurker
-        Broadcast.user_online('friskyhands', user)
         flash[:notice] = "Welcome back" + (user.first_name? ? ", #{user.first_name}" : '') + '!'
         format.html { redirect_back_or_default(root_path) }
       else
@@ -25,7 +24,6 @@ class UserSessionsController < ApplicationController
   def lurk
     store_lurker
     respond_to do |format|
-      Pusher['wave'].trigger('lurker-online', {})
       format.html { redirect_back_or_default(root_path) }
     end
   end

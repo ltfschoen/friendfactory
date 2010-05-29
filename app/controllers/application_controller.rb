@@ -67,16 +67,16 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.request_uri
   end
 
+  def store_reentry_location
+    session[:reentry_to] = request.request_uri
+  end
+
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
     session[:reentry_to] = nil
   end
   
-  def store_reentry_location
-    session[:reentry_to] = request.request_uri
-  end
-
   def redirect_back_to_reentry
     redirect_to(session[:reentry_to])
     session[:reentry_to] = nil

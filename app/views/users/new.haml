@@ -1,15 +1,65 @@
-#signup
-  %h3 Sign up, right now
-  - form_for User.new, :url => users_path do |f|
-    = f.text_field :first_name, :class => 'ui-widget'
-    = f.error_message_on :first_name, :prepend_text => 'Your first name '
-    = f.text_field :last_name, :class => 'ui-widget'
-    = f.error_message_on :last_name, :prepend_text => 'Your last name '
-    = f.text_field :email, :class => 'ui-widget'
-    = f.error_message_on :email, :prepend_text => 'Your email address '
-    = f.password_field :password, :class => 'ui-widget'
-    = f.error_message_on :password, :prepend_text => 'Your password '
-    = f.password_field :password_confirmation, :class => 'ui-widget'
-    = f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation '
-    = f.submit 'Register'
-    = f.button 'Back', :class => 'toggle'
+.grid_3
+  &nbsp;
+.grid_12  
+  %h1 Sign up, right now!
+  .grid_7.alpha
+    - form_for User.new, :url => users_path do |f|
+      = f.text_field :first_name, :class => 'ui-widget'
+      = f.error_message_on :first_name, :prepend_text => 'Your first name '
+      = f.text_field :last_name, :class => 'ui-widget'
+      = f.error_message_on :last_name, :prepend_text => 'Your last name '
+      = f.text_field :email, :class => 'ui-widget'
+      = f.error_message_on :email, :prepend_text => 'Your email address '
+      = f.password_field :password, :class => 'ui-widget'
+      = f.error_message_on :password, :prepend_text => 'Your password '
+      = f.password_field :password_confirmation, :class => 'ui-widget'
+      = f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation '
+      = f.submit 'Register'
+      = link_to 'Back', :back, :class => 'button'
+  .grid_9.omega
+    - if flash[:errors]
+      %h2.flash Oh no! Can you fix this?
+      %ul.flash
+        - flash[:errors].each do |error|
+          %li= error
+.grid_1
+  &nbsp;
+
+- content_for :pagecss do
+  :plain
+    h2.flash {
+      margin: 0.2em 0 0.2em 0.1em;
+    }
+    
+    ul.flash {
+      margin-left: 2em;
+      list-style: disc outside url('/images/icons/asterisk_orange.png');
+      marker-offset: auto;
+    }
+
+    ul.flash li {
+      color: #501518;
+      font-size: 1.2em;
+      margin: auto;
+      padding: auto;
+    }
+
+- content_for :pagejs do
+  :plain
+    $('form#new_user button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+    $('form#new_user a[class=button]').button();
+		
+    if (!$.browser.webkit) {
+      $('#user_session_password').before('#{text_field_tag(:user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
+      FF.passwordPrompt('#user_session_password', '#user_session_password_placeholder');
+
+      $('#user_password').before('#{text_field_tag(:user_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
+      FF.passwordPrompt('#user_password', '#user_password_placeholder');
+
+      $('#user_password_confirmation').before('#{text_field_tag(:user_password_confirmation_placeholder, nil, :value => placeholder_for(:password_confirmation), :class => 'placeholder ui-widget')}');
+      FF.passwordPrompt('#user_password_confirmation', '#user_password_confirmation_placeholder');
+
+      $('input[type=password]').removeAttr('placeholder').hide();
+      $('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');  			
+    }
+  

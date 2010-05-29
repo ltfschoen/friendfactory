@@ -40,9 +40,12 @@ WebSocket.__swfLocation = "/WebSocketMain.swf";
 <%= yield(:head) %>
 <% javascript_tag do %>
 jQuery(document).ready(function($) {
-  <%= yield(:pagejs) %>
+  <%= yield(:pagejs) %>  
 });
 <% end %>
+<style type='text/css'>
+  <%= yield(:pagecss) %>
+</style>  
 </head>
 <body class='<%= [ current_site, current_layout ].compact * ' ' -%>'>
 	<%= render :partial => "layouts/#{current_site}/header" -%>

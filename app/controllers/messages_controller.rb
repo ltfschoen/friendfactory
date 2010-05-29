@@ -7,7 +7,6 @@ class MessagesController < ApplicationController
     @posting.parent = Posting::Message.find_by_id(params[:message_id]).try(:latest_reply)
     @posting.user = current_user
     @posting.save
-    # Pusher['wave'].trigger('thing-create', { :name => "Bloody Great!" })
     respond_to do |format|
       format.js
     end
