@@ -70,7 +70,7 @@ module ApplicationHelper
     return '&nbsp;' unless user.present? && avatar.present?
     online = 'online' if (user.online? && !(opts[:online_badge] == false))
     klass  = [ 'avatar', opts[:size], online, opts[:class] ].compact * ' '
-    link_to(image_tag(avatar.image.url(opts[:size].to_sym), :alt => user.full_name, :class => klass, :site => false), profile_path(user))
+    link_to(image_tag(avatar.image.url(opts[:size].to_sym), :alt => user.full_name, :class => klass, :site => false), profile_path(user.profile))
   end      
   
   def distance_of_time_in_words_to_now(date, opts = {})
