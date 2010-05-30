@@ -25,14 +25,14 @@
             %a{:href => "#links"} Links
       - content_for :pagejs do
         :plain
-          $('#tabs li:eq(0)').click(function(event) {
+          $('#tabs li:eq(0), #tabs li:eq(1)').click(function() {
             $('.sidebar .posting').hide();
           });
 
-          $('#tabs li').not('#tabs li:eq(0)').click(function(event) {
+          $('#tabs li').not('#tabs li:eq(0), #tabs li:eq(1)').click(function() {
             $('.sidebar .posting').show();
           });
-
+          
           $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-person' }})
           $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-script' }});
           $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-pencil' }});
@@ -74,6 +74,15 @@
     - if @wave.user == current_user
       #about.tab_content
         = render :partial => 'user_info/edit'
+        - content_for :pagejs do
+          :plain
+            $('form.edit_user_info').submit(function(){
+              $(this).closest('.tab_content').hide();
+            })
+            .find('button.cancel').click(function(event){
+              event.preventDefault();
+              $('.sidebar .posting').show();
+            });
         
     - if current_user
       #text.tab_content
@@ -133,7 +142,7 @@
       $(this).closest('.tab_content').hide();
     });
 
-    $('#tabs li a').click(function(event) {
+    $('#tabs li').click(function(event) {
       event.preventDefault();
-      $($(this).attr('href')).show().siblings('div.tab_content').hide();
+      $($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
     });

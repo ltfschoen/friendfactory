@@ -28,15 +28,15 @@
       %td.detail= f.text_area :about_me
     %tr.button_bar
       %td.label
-        = image_tag('icons/accept.png', :site => false, :class => 'ui_icon ui_icon_check hidden')
-        = image_tag('icons/cancel.png', :site => false, :class => 'ui_icon ui_icon_cancel hidden')
+        &nbsp;
       %td.detail
         = f.submit "Update"
         = f.button :Cancel, :class => 'cancel'
+        = image_tag('icons/accept.png', :site => false, :class => 'ui_icon ui_icon_check hidden')
+        = image_tag('icons/cancel.png', :site => false, :class => 'ui_icon ui_icon_cancel hidden')
 
-:javascript
-  jQuery(document).ready(function($) {
-    $('.button_bar button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+- content_for :pagejs do
+  :plain
     $('form.edit_user_info select').change(function() {
       $('form.edit_user_info .ui_icon').hide();
     });
@@ -46,19 +46,18 @@
     $('form.edit_user_info').submit(function(event) {
       jQuery.ajax({
         data: jQuery.param(jQuery(this).serializeArray()),
-        dataType: 'json',
+        dataType: 'script',
         cache: false,
         type: 'post',
         url:'/profiles/#{current_user.info.id}',
         success: function(data, status, request) {
-          if (data['errors'].length == 0) {
-            $('form.edit_user_info .ui_icon_check').show();
-            $('form.edit_user_info .button_bar button:submit');
-          } else {
-            $('form.edit_user_info .ui_icon_cancel').show();
-          }
+          //if (data['errors'].length == 0) {
+          //  $('form.edit_user_info .ui_icon_check').show();
+          //  $('form.edit_user_info .button_bar button:submit');
+          //} else {
+          //  $('form.edit_user_info .ui_icon_cancel').show();
+          //}
         }
       });
       return false;
     });
-  });

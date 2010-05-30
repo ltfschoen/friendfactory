@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
   def update
     current_user.info.update_attributes(params[:user_info])    
     respond_to do |format|
-     format.json { render :json => { :errors => @current_user.info.errors }}
+     format.js
     end
   end
 

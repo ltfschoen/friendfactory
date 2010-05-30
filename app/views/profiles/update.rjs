@@ -1,0 +1,7 @@
+if current_user.info.present? && current_user.info.valid?
+  page.replace '.sidebar .user_info', :partial => 'user_info/show', :object => current_user.info
+  page['.sidebar .posting'].show()
+else
+  page['#about.table_content'].show()
+  page << 'alert("errors!");'
+end
