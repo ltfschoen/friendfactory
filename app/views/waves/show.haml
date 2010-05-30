@@ -96,13 +96,7 @@
 
 - content_for :pagejs do
   :plain
-    // TODO Duplication
-    $('.tab_content:first').hide();
-    $('.tab_content').hide();
-
-    // TODO: Namespace the following to be enclosed by posting
-    $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
-    
+    $('.tab_content').hide();    
     $('.tab_content button.cancel').click(function() {
       $(this).parents('.tab_content').hide().parents('form').reset();
       $('ul#tabs li.current').removeClass('current');

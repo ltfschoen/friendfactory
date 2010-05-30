@@ -41,13 +41,14 @@ WebSocket.__swfLocation = "/WebSocketMain.swf";
 <% javascript_tag do %>
 jQuery(document).ready(function($) {
   <%= yield(:pagejs) %>  
+  $('body').removeClass('hidden').show();
 });
 <% end %>
 <style type='text/css'>
   <%= yield(:pagecss) %>
 </style>  
 </head>
-<body class='<%= [ current_site, current_layout ].compact * ' ' -%>'>
+<body class='<%= [ current_site, current_layout ].compact * ' ' -%> hidden'>
 	<%= render :partial => "layouts/#{current_site}/header" -%>
 	<div class='container <%= yield(:current_container) || 'container_16' -%> clearfix'>
   <%= yield %>

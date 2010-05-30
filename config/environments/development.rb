@@ -23,4 +23,4 @@ config.gem 'factory_girl', :lib => 'factory_girl', :source => 'http://gems.githu
 config.gem 'rspec',        :lib => false, :version => '>= 1.2.0'
 config.gem 'rspec-rails',  :lib => false, :version => '>= 1.2.0'
 config.gem 'webrat',       :lib => false, :version => '>= 0.7.1'
-config.gem "rails-footnotes"
+# config.gem "rails-footnotes"

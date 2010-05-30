@@ -1,30 +1,34 @@
 jQuery(document).ready(function($) {
 	$('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
+  $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+  $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 	
   $('form.new_posting_comment')
-    .find('textarea')
-    .live('click', function() {
-      $(this).height('3.6em').next().show().closest('table').find('img.avatar').show();
-  		})
-    .blur(function() {
-      if ($(this).val() === $(this).attr('placeholder')) {
-        $(this).height('1.2em').next().hide().closest('table').find('img.avatar').hide();
-      }
+    .find('textarea').bind('focus', function() {
+      $(this).height('3.6em').siblings().show().closest('table').find('img.avatar').show();
+  	}).end()
+		.find('button.cancel').click(function(event) {
+			event.preventDefault();
+			$(this).hide()				
+			.closest('form').reset().end()
+			.siblings('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
+			.siblings('button').hide().end()
+			.closest('table').find('img.avatar').hide()
     });
 
   $('.posting_message')
-    .find('button.message_reply').button({ icons: { primary: 'ui-icon-mail-closed' }})
-     .click(function(event) {
+		.find('button.message_reply').button({ icons: { primary: 'ui-icon-mail-closed' }})
+    .click(function(event) {
        $(this).css('visibility', 'hidden').closest('.posting_message').find('form.new_posting_message').show();
        event.preventDefault();
-     })
+    })
     .end()
     .find('form.new_posting_message')
     .hide()
     .find('button.cancel').click(function(event) {
 	     $(this).closest('form.new_posting_message').hide().reset().closest('.posting_message').find('button.message_reply').css('visibility', 'visible');
 	     event.preventDefault();
-     })
+    })
     .end()
     .submit(function(event) {
       var form = this;

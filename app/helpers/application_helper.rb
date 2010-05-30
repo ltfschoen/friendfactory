@@ -54,7 +54,7 @@ module ApplicationHelper
   end
   
   def portrait_image_tag(avatar, opts = {})
-    return if avatar.nil?
+    return '&nbsp;' if avatar.nil?
     avatar = avatar.profile.avatar if avatar.is_a?(User)
     online = 'online' if (avatar.user.online? && !(opts[:online_badge] == false))
     klass  = [ 'avatar', 'portrait', online, opts[:class] ].compact * ' '
@@ -62,7 +62,7 @@ module ApplicationHelper
   end
   
   def thumb_image_tag(avatar, opts = {})
-    return if avatar.nil?
+    return '&nbsp;' if avatar.nil?
     avatar = avatar.profile.avatar if avatar.is_a?(User)
     online = (avatar.user.online? ? 'online' : nil) unless opts[:online_badge] == false
     klass  = [ 'avatar', 'thumb', online, opts[:class] ].compact * ' '
