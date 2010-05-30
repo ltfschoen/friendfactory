@@ -4,6 +4,7 @@
 .wave[@wave]
   .grid_3.sidebar
     = render :partial => 'avatars/portrait', :object => @wave.avatar, :locals => { :online_badge => false }
+    = render :partial => 'user_info/show', :object => @wave.user.info
   .grid_12
     - if @wave.user == current_user
       #tabs
@@ -32,10 +33,10 @@
 
           $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-person' }})
           $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-script' }});
-          $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
-          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-image' }});
-          $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-heart' }});
-          $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
+          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-pencil' }});
+          $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-image' }});
+          $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-heart' }});
+          $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-link' }});
 
     - elsif current_user
       #tabs
@@ -51,16 +52,6 @@
 
     %h1
       #{@wave.user.first_name}&#8217;s Wave
-
-    - if @wave.postings.empty?
-      .empty_wave
-        %h3
-          - if @wave.user == current_user
-            %h2
-              You'll want to meet new friends, right? Put something on your wave! 
-          - else
-            = @wave.user.first_name
-            hasn't done anything with their profile. Put something here for them!
 
     - if @wave.user == current_user
       #avatar.tab_content
@@ -103,11 +94,20 @@
         %h3 Links
 
     %iframe#upload_frame{:height => "1", :name => "upload_frame", :src => "about:blank", :style => "border:0px", :width => "1"}
-
-    = render :partial => 'user_info/show', :object => @wave.user.info
     
-    .postings
-      = render :partial => 'postings/posting', :collection => @wave.postings.exclude(Posting::Avatar)
+    - if @wave.postings.exclude(Posting::Avatar).empty?
+      .postings.empty
+        %h3
+          - if @wave.user == current_user
+            You'll want to meet new friends, right? Put something on your wave! 
+          - else
+            = @wave.user.first_name
+            hasn't done anything with their wave.
+            - if current_user
+              Put something here for them!
+    - else
+      .postings
+        = render :partial => 'postings/posting', :collection => @wave.postings.exclude(Posting::Avatar)
 
   .grid_1
     &nbsp;
