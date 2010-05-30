@@ -7,8 +7,7 @@ class Posting::Base < ActiveRecord::Base
   has_many :children,
       :class_name  => 'Posting::Base',
       :foreign_key => 'parent_id',
-      :order       => 'created_at desc' do
-    
+      :order       => 'created_at desc' do    
     def postings
       find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at desc'
     end
@@ -20,7 +19,6 @@ class Posting::Base < ActiveRecord::Base
   
   belongs_to :user
   
-  # belongs_to :wave, :class_name => 'Wave::Base', :foreign_key => 'wave_id'
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :foreign_key             => 'posting_id',
@@ -31,7 +29,7 @@ class Posting::Base < ActiveRecord::Base
   validates_presence_of :user_id
 
   attr_readonly :user_id, :wave_id
-    
+
   define_index do
     indexes body
     # TODO: Reestablish indexes on associated waves
@@ -48,5 +46,5 @@ class Posting::Base < ActiveRecord::Base
   def to_s
     self[:type].to_s + ':' + self[:id].to_s
   end
-  
+
 end

@@ -35,7 +35,7 @@
             %td{ :colspan => '2' }
               %h2 Write a Message to this Wave
           %tr
-            %td.avatar.thumb= thumb_image_tag(current_user.profile.avatar)
+            %td.avatar.thumb= thumb_image_tag(current_user)
             %td
               - form_for Posting::Text.new, :url => wave_texts_path(:wave_id => @wave) do |f|
                 = f.text_field :subject, :placeholder => 'Title (optional)'
@@ -50,7 +50,7 @@
             %td{ :colspan => '2' }
               %h2 Upload a Photo to the Wave
           %tr
-            %td.avatar.thumb= thumb_image_tag(current_user.profile.avatar)
+            %td.avatar.thumb= thumb_image_tag(current_user)
             %td
               - form_for(Posting::Photo.new, :url => wave_photos_path(:wave_id => @wave, :format => :js), :html => { :multipart => true, :target => 'upload_frame' }) do |f|
                 %table.button_bar
@@ -68,9 +68,9 @@
             %td{ :colspan => '2' }
               %h2 Upload a Video to the Wave
           %tr
-            %td.avatar.thumb= thumb_image_tag(current_user.profile.avatar)
+            %td.avatar.thumb= thumb_image_tag(current_user)
             %td
-              -form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave, :format => :json)) do |f|
+              -form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave)) do |f|
                 %p.unobtrusive Paste the URL of the YouTube tube here.
                 = f.text_area :body
                 = f.text_field :subject, :placeholder => 'Caption (optional)'
@@ -79,8 +79,22 @@
                   = f.button :Cancel, :class => 'cancel'
 
       #chat.tab_content.hidden Chat
-      #hottie.tab_content.hidden Hottie
-      #link.tab_content.hidden Link
+      
+      #link.tab_content.hidden
+        %table
+          %tr
+            %td{ :colspan => '2' }
+              %h2 Add a Link to the Wave
+          %tr
+            %td.avatar.thumb= thumb_image_tag(current_user)
+            %td
+              - form_for(Posting::Link.new, :url => wave_links_path(:wave_id => @wave)) do |f|
+                = f.text_field :subject, :placeholder => 'Caption'
+                = f.text_field :body, :placeholder => 'URL'
+                .button_bar
+                  = f.submit :OK
+                  = f.button :Cancel, :class => 'cancel'
+      
       #event.tab_content.hidden Event
       #poll.tab_content.hidden Poll
 
@@ -111,6 +125,7 @@
     $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
     // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
     // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
+    
     $('ul#tabs li').click(function(){
       if (!$(this).hasClass('current')) {
         $(this).addClass('current').siblings('li.current').removeClass('current');
@@ -121,7 +136,8 @@
     });
 
     // Text Tab
-    $('#text.tab_content form').submit(function(event) {
+    $('#text.tab_content form').submit(function(event){
+      event.preventDefault();
       form = this;
       FF.scrubPlaceholders(form);
       jQuery.ajax({
@@ -135,11 +151,11 @@
           $('ul#tabs li.current').removeClass('current');
         }
       });
-      event.preventDefault();
     });
     
     // Video Tab
-    $('#video.tab_content form').submit(function() {
+    $('#video.tab_content form').submit(function(event){
+      event.preventDefault()
       FF.scrubPlaceholders(this);
       jQuery.ajax({
         data: jQuery.param(jQuery(this).serializeArray()),
@@ -151,6 +167,22 @@
           $('#video.tab_content form').reset().closest('.tab_content').hide();
           $('ul#tabs li.current').removeClass('current');
         }
-      });
-      return false;
+      });      
+    });
+    
+    // Link Tab
+    $('#link.tab_content form').submit(function(event){
+      event.preventDefault();
+      FF.scrubPlaceholders(this);
+      jQuery.ajax({
+        data: jQuery.param(jQuery(this).serializeArray()),
+        dataType: 'script',
+        cache: false,
+        type: 'post',
+        url: '#{wave_links_path(:wave_id => @wave)}',
+        success: function() {
+          $('#link.tab_content form').reset().closest('.tab_content').hide();
+          $('ul#tabs li.current').removeClass('current');
+        }
+      });      
     });

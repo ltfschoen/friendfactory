@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     wave.resources :texts,  :only => [ :create ]
     wave.resources :photos, :only => [ :create ]
     wave.resources :videos, :only => [ :create ]
+    wave.resources :links,  :only => [ :create ]
   end
 
   map.wave_hotties 'hotties', :controller => :hotties, :action => :show, :conditions => { :method => :get }

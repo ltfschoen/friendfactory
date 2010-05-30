@@ -219,6 +219,16 @@ tr.posting_message td {
 
 /* * * * * * * * * */
 
+.posting_link > table {
+	width: 100%;
+}
+
+.posting_link h2.link a {
+	color: #501518;
+}
+
+/* * * * * * * * * */
+
 #photo.tab_content table.button_bar,
 #avatar.tab_content table.button_bar {
 	border-spacing: 0px 4px;
