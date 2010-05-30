@@ -1,37 +1,5 @@
 - javascript 'wave'
-- javascript 'wave_shared'
-
-:javascript
-  var PusherEvent = {
-    log: function(message, avatar) {
-      message = '<p>' + message
-      if (avatar) {
-        // message = message + avatar.id + avatar.image_file_name
-      }
-      message = message + '</p>'
-      $('#events').prepend(message);
-    }
-  };
-
-  jQuery(document).ready(function($) {
-    var server = new Pusher('064cfff6a7f7e44b07ae', 'wave');
-    server.bind('user-online', function(user) {
-      var avatar_url;
-      // if (user.avatar !== undefined) {
-        // avatar_url = '/system/images/' + avatar.id + '/thumb/' + avatar.file_name
-      // }
-      PusherEvent.log(user.full_name + ' arrived', avatar);
-    });
-    server.bind('user-register', function(user) {
-      PusherEvent.log(user.full_name + ' registered!');
-    });
-    server.bind('lurker-online', function(user) {
-      PusherEvent.log('A lurker arrived');
-    });
-    server.bind('user-offline', function(user) {
-      PusherEvent.log(user.full_name + ' logged out');
-    });
-  });
+- javascript 'broadcast'
 
 .wave[@wave]
   .grid_3
@@ -52,10 +20,11 @@
           %a{ :href => '#chat' } Chat
         %li
           %a{ :href => '#link' } Link
-        %li
-          %a{ :href => '#event' } Event
-        %li
-          %a{ :href => '#poll' } Poll
+        - if false  
+          %li
+            %a{ :href => '#event' } Event
+          %li
+            %a{ :href => '#poll' } Poll
 
     %h1= h @wave.topic
 
@@ -74,27 +43,6 @@
                 .button_bar
                   = f.submit :OK
                   = f.button :Cancel, :class => 'cancel'
-      :javascript
-        jQuery(document).ready(function($) {
-          $('#text.tab_content form').submit(function(event) {
-            form = this;
-            FF.scrubPlaceholders(form);
-            jQuery.ajax({
-              data: jQuery.param(jQuery(this).serializeArray()),
-              dataType: 'script',
-              cache: false,
-              type: 'post',
-              url: '#{wave_texts_path(:wave_id => @wave)}',
-              success: function() {
-                $(form)
-                .reset()
-                .closest('.tab_content').hide();
-              $('ul#tabs li.current').removeClass('current');
-              }
-            });
-            event.preventDefault();
-          });
-        });
 
       #photo.tab_content.hidden
         %table
@@ -129,24 +77,6 @@
                 .button_bar
                   = f.submit :OK
                   = f.button :Cancel, :class => 'cancel'
-        :javascript
-          $('#video.tab_content form').submit(function(){
-            FF.scrubPlaceholders(this);
-            jQuery.ajax({
-              data: jQuery.param(jQuery(this).serializeArray()),
-              dataType: 'script',
-              cache: false,
-              type: 'post',
-              url: '#{wave_videos_path(:wave_id => @wave)}',
-              success: function(){
-                $('#video.tab_content form')
-                .reset()
-                .closest('.tab_content').hide();
-              $('ul#tabs li.current').removeClass('current');
-              }
-            });
-            return false;
-          });
 
       #chat.tab_content.hidden Chat
       #hottie.tab_content.hidden Hottie
@@ -163,3 +93,70 @@
       = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
   .grid_1
     &nbsp;
+
+- content_for :pagejs do
+  :plain
+    // TODO Duplication
+    $('.tab_content:first').hide();
+    $('.tab_content').hide();
+
+    // TODO: Namespace the following to be enclosed by posting
+    $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+    
+    $('.tab_content button.cancel').click(function() {
+      $(this).parents('.tab_content').hide().parents('form').reset();
+      $('ul#tabs li.current').removeClass('current');
+      return false;
+    });
+
+    // Tabs
+    $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
+    $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
+    $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});
+    $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-comment' }});
+    $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
+    // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
+    // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
+    $('ul#tabs li').click(function(){
+      if (!$(this).hasClass('current')) {
+        $(this).addClass('current').siblings('li.current').removeClass('current');
+        $($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
+        this.blur();
+        return false;
+      }
+    });
+
+    // Text Tab
+    $('#text.tab_content form').submit(function(event) {
+      form = this;
+      FF.scrubPlaceholders(form);
+      jQuery.ajax({
+        data: jQuery.param(jQuery(this).serializeArray()),
+        dataType: 'script',
+        cache: false,
+        type: 'post',
+        url: '#{wave_texts_path(:wave_id => @wave)}',
+        success: function() {
+          $(form).reset().closest('.tab_content').hide();
+          $('ul#tabs li.current').removeClass('current');
+        }
+      });
+      event.preventDefault();
+    });
+    
+    // Video Tab
+    $('#video.tab_content form').submit(function() {
+      FF.scrubPlaceholders(this);
+      jQuery.ajax({
+        data: jQuery.param(jQuery(this).serializeArray()),
+        dataType: 'script',
+        cache: false,
+        type: 'post',
+        url: '#{wave_videos_path(:wave_id => @wave)}',
+        success: function() {
+          $('#video.tab_content form').reset().closest('.tab_content').hide();
+          $('ul#tabs li.current').removeClass('current');
+        }
+      });
+      return false;
+    });
