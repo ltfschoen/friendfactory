@@ -3,8 +3,10 @@
 
 .wave[@wave]
   .grid_3.sidebar
+    = spinner :id => 'posting_avatar_spinner', :size => :big
     = render :partial => 'avatars/portrait', :object => @wave.avatar, :locals => { :online_badge => false }
     = render :partial => 'user_info/show', :object => @wave.user.info
+    &nbsp;
   .grid_12
     - if @wave.user == current_user
       #tabs
@@ -24,11 +26,11 @@
       - content_for :pagejs do
         :plain
           $('#tabs li:eq(0)').click(function(event) {
-            $('.sidebar img').hide();
+            $('.sidebar .posting').hide();
           });
 
           $('#tabs li').not('#tabs li:eq(0)').click(function(event) {
-            $('.sidebar img').show();
+            $('.sidebar .posting').show();
           });
 
           $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-person' }})
@@ -55,8 +57,19 @@
 
     - if @wave.user == current_user
       #avatar.tab_content
-        %h2 Upload an Avatar
-        =render :partial => 'avatars/edit', :locals => { :online_badge => false }
+        %h2 Upload an Avatar        
+        = render :partial => 'avatars/edit', :locals => { :online_badge => false }
+        = render :partial => 'avatars/form'
+        - content_for :pagejs do
+          :plain
+            $('form#new_posting_avatar').submit(function(){   
+              $(this).closest('.tab_content').hide();
+              $('#posting_avatar_spinner').show();
+            })
+            .find('button.cancel').click(function(event){
+              event.preventDefault();              
+              $('.sidebar .posting').show();
+            });
         
     - if @wave.user == current_user
       #about.tab_content
@@ -115,7 +128,7 @@
 - content_for :pagejs do
   :plain
     $('div.tab_content').hide();
-    $('button.cancel').click(function(event){
+    $('.tab_content button.cancel').click(function(event){
       event.preventDefault();
       $(this).closest('.tab_content').hide();
     });
@@ -123,8 +136,4 @@
     $('#tabs li a').click(function(event) {
       event.preventDefault();
       $($(this).attr('href')).show().siblings('div.tab_content').hide();
-    });
-
-    $('#avatar.tab_content button.cancel').click(function(event) {
-      $('.sidebar img').show();
     });

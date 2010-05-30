@@ -242,6 +242,10 @@ tr.posting_message td {
 	background-color: #F7F7F7;
 }
 
+#avatar.tab_content table.button_bar .error {
+	margin-bottom: 0;
+}
+
 #photo.tab_content table.button_bar td.file_field,
 #avatar.tab_content table.button_bar td.file_field {
 	padding: 8px 8px;

@@ -26,3 +26,8 @@ select {
 select.date {
 	width: auto;
 }
+
+#posting_avatar_spinner {
+	margin-top: 120px;
+	margin-left: 60px;
+}
