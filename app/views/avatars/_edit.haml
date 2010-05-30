@@ -3,7 +3,7 @@
 #avatar_upload_well.append-bottom.clearfix
   - unless current_user.profile.avatar.nil?
     .portrait[]
-      = portrait_image_tag(current_user.profile.avatar, :online_badge => online_badge)
+      = portrait_image_tag(current_user, :online_badge => online_badge)
       %p.unobtrusive This is your portrait picture used in your profile when your friends want to have a good look at you.
     .thumb.clearfix
       = thumb_image_tag(current_user.profile.avatar, :online_badge => online_badge)

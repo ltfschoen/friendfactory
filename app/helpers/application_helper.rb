@@ -53,21 +53,25 @@ module ApplicationHelper
     link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
   end
   
-  def portrait_image_tag(avatar, opts = {})
-    return '&nbsp;' if avatar.nil?
-    avatar = avatar.profile.avatar if avatar.is_a?(User)
-    online = 'online' if (avatar.user.online? && !(opts[:online_badge] == false))
-    klass  = [ 'avatar', 'portrait', online, opts[:class] ].compact * ' '
-    image_tag(avatar.image.url(:portrait), :alt => avatar.user.full_name, :class => klass, :site => false)
+  def portrait_image_tag(user_or_avatar, opts = {})
+    avatar_image_tag(user_or_avatar, opts.merge(:size => 'portrait'))
   end
   
-  def thumb_image_tag(avatar, opts = {})
-    return '&nbsp;' if avatar.nil?
-    avatar = avatar.profile.avatar if avatar.is_a?(User)
-    online = (avatar.user.online? ? 'online' : nil) unless opts[:online_badge] == false
-    klass  = [ 'avatar', 'thumb', online, opts[:class] ].compact * ' '
-    link_to(image_tag(avatar.image.url(:thumb), :class => klass, :site => false))
+  def thumb_image_tag(user_or_avatar, opts = {})
+    avatar_image_tag(user_or_avatar, opts.merge(:size => 'thumb'))
   end
+
+  def avatar_image_tag(user_or_avatar, opts = {})    
+    user, avatar = if user_or_avatar.present? && user_or_avatar.is_a?(User)
+      [ user_or_avatar, user_or_avatar.profile.avatar ]
+    else
+      [ user_or_avatar.user, user_or_avatar ]
+    end
+    return '&nbsp;' unless user.present? && avatar.present?
+    online = 'online' if (user.online? && !(opts[:online_badge] == false))
+    klass  = [ 'avatar', opts[:size], online, opts[:class] ].compact * ' '
+    link_to(image_tag(avatar.image.url(opts[:size].to_sym), :alt => user.full_name, :class => klass, :site => false), profile_path(user))
+  end      
   
   def distance_of_time_in_words_to_now(date, opts = {})
     suffix = opts[:suffix] || 'ago'
@@ -83,5 +87,6 @@ module ApplicationHelper
   
   def link_to_facebook
     link_to('', 'http://www.facebook.com/pages/Frisky-Hands/297300376633', :target => 'blank', :class => 'web_logos facebook')
-  end    
+  end
+    
 end
