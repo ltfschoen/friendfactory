@@ -1,0 +1,33 @@
+- if current_user
+  .posting.posting_comment
+    %table
+      %tr
+        %td.avatar
+          = thumb_image_tag(current_user, :class => 'hidden')
+        %td
+          - form_for Posting::Comment::new(:body => ''), :url => posting_comments_path(:posting_id => parent_id), :html => { :id => "posting_#{parent_id}_new_comment" }  do |f|
+            = f.text_area :body, :placeholder => 'Add a comment'          
+            = f.submit 'Send', :class => 'hidden'  
+            = button_tag 'Cancel', :class => 'hidden cancel'
+  :javascript    
+    jQuery(document).ready(function($) {
+      $('form#posting_#{parent_id}_new_comment')
+        .submit(function(event) {
+          event.preventDefault();
+          FF.scrubPlaceholders(this);
+          if ($(this).find('textarea').val().length > 0) {
+            $.ajax({
+              data: jQuery.param(jQuery(this).serializeArray()),
+              dataType: 'script',
+              type: 'post',
+              url: '#{posting_comments_path(:posting_id => parent_id)}',
+              success: function(response, status) {
+              }
+            });
+          }
+          $('form#posting_#{parent_id}_new_comment').reset()
+          .find('button').hide().end()
+          .find('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
+          .closest('table').find('img.avatar').hide();
+        });
+    });

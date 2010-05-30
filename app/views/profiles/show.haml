@@ -13,38 +13,41 @@
           %li
             %a{:href => "#about"} About Me
           %li
+            %a{:href => "#text"} Text
+          %li
             %a{:href => "#photos"} Photos
           %li
             %a{:href => "#buddies"} Buddies
           %li.ajax
             %a{:href => "#links"} Links
-      :javascript
-        jQuery(document).ready(function($){
-          // $('.button_bar button:submit').button({ icons: { primary: 'ui-icon-check' }});
-          // $('#tabs li:eq(0)').button({ text: false, icons: { primary: 'ui-icon-home' }});
+      - content_for :pagejs do
+        :plain
+          $('#tabs li:eq(0)').click(function(event) {
+            $('.sidebar img').hide();
+          });
+
+          $('#tabs li').not('#tabs li:eq(0)').click(function(event) {
+            $('.sidebar img').show();
+          });
+
           $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-person' }})
           $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-script' }});
+          $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
           $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-image' }});
           $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-heart' }});
           $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
-        });
 
-    - else
+    - elsif current_user
       #tabs
         %ul
           %li
-            %a{:href => "#photos"} Upload Photos
+            %a{:href => "#text"} Text
           %li
-            %a{:href => "#hottie"} Make Hottie
-          %li
-            %a{:href => "#be_buddies"} Be Buddies
-      :javascript
-        jQuery(document).ready(function($){
-          // $('#tabs li:eq(0)').button({ text: false, icons: { primary: 'ui-icon-home' }});
-          $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-image' }});
-          $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-star' }});
-          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-heart' }});
-        });
+            %a{:href => "#photos"} Photo
+      - content_for :pagejs do
+        :plain
+          $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
+          $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }});
 
     %h1
       #{@wave.user.first_name}&#8217;s Wave
@@ -54,101 +57,74 @@
         %h3
           - if @wave.user == current_user
             %h2
-              Welcome to FriskyHands#{ ", #{current_user.first_name}" unless current_user.first_name.blank? }!
-            %p
-              You'll want to meet new friends, right? Upload an avatar and say what you're into!
+              You'll want to meet new friends, right? Put something on your wave! 
           - else
-            = @wave.current_user.first_name
+            = @wave.user.first_name
             hasn't done anything with their profile. Put something here for them!
 
-    #avatar.tab_content
-      %h2 Upload an Avatar
-      =render :partial => 'avatars/edit', :locals => { :online_badge => false }
+    - if @wave.user == current_user
+      #avatar.tab_content
+        %h2 Upload an Avatar
+        =render :partial => 'avatars/edit', :locals => { :online_badge => false }
         
-    #about.tab_content
-      = render :partial => 'user_info/edit'
+    - if @wave.user == current_user
+      #about.tab_content
+        = render :partial => 'user_info/edit'
+        
+    - if current_user
+      #text.tab_content
+        %h2
+          Write a Message on
+          = (@wave.user == current_user) ? "your" : "#{@wave.user.first_name}&#8217;s"
+          Wave
 
-    #photos.tab_content
-      %h3 Upload Photos to #{current_user.first_name}'s Wave
-      - form_for Posting::Photo::new, :url => profile_photos_path(:profile_id => current_user.profile, :format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
-        #photo_upload_error.hidden
-        #photo_upload_well.append-bottom.clearfix
-          = render :partial => 'photos/edit', :collection => current_user.profile.photos
-        .button_bar
-          = f.file_field :image
-          = f.submit 'Upload', :id => 'photo_upload_submit'
-          = f.button :Cancel, :class => 'cancel'
-          = spinner
+    - if current_user
+      #photos.tab_content
+        %h2
+          Upload a Photo to
+          = (@wave.user == current_user) ? "your" : "#{@wave.user.first_name}&#8217;s"
+          Wave
+        - form_for Posting::Photo::new, :url => profile_photos_path(:profile_id => @wave.user.profile, :format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
+          #photo_upload_error.hidden
+          #photo_upload_well.append-bottom.clearfix
+            =# render :partial => 'photos/edit', :collection => @wave.user.profile.photos
+          .button_bar
+            = f.file_field :image
+            = f.submit 'Upload', :id => 'photo_upload_submit'
+            = f.button :Cancel, :class => 'cancel'
+            = spinner
 
-    #buddies.tab_content
-      - if current_user != @wave.user
-        %h3= current_user.first_name + '&#8217;s Buddies'
+    - if @wave.user == current_user
+      #buddies.tab_content
+        %h3= @wave.user.first_name + '&#8217;s Buddies'
 
-    #links.tab_content
-      %h3 Links
+    - if @wave.user == current_user
+      #links.tab_content
+        %h3 Links
 
     %iframe#upload_frame{:height => "1", :name => "upload_frame", :src => "about:blank", :style => "border:0px", :width => "1"}
 
+    = render :partial => 'user_info/show', :object => @wave.user.info
+    
     .postings
-      = render :partial => 'user_info/user_info', :object => @wave.user.info
-
-      - unless @wave.photos.empty?
-        %div
-          %h2 Photos of #{@wave.user.first_name}
-          = render :partial => 'postings/posting', :collection => @wave.photos
-
-      - if false
-        %div
-          %h2 #{@wave.user.first_name}&#8217;s Updates
-          = render :partial => 'postings/posting', :collection => @wave.postings
+      = render :partial => 'postings/posting', :collection => @wave.postings.exclude(Posting::Avatar)
 
   .grid_1
     &nbsp;
 
-:javascript
-  jQuery(document).ready(function($) {
+- content_for :pagejs do
+  :plain
     $('div.tab_content').hide();
     $('button.cancel').click(function(event){
-      $(this).closest('.tab_content').hide();
       event.preventDefault();
+      $(this).closest('.tab_content').hide();
     });
 
-    $('#tabs ul li').click(function(event) {
-      // if (!$(this).hasClass('current')) {
-      //  $(this)
-      //    .addClass('current')
-      //    .siblings('li.current')
-      //    .removeClass('current');
-        $($(this)
-          .find('a')
-            .attr('href'))
-          .show()
-          .siblings('div.tab_content')
-          .hide();
-        this.blur();
-        event.preventDefault();
-      // }
-    });
-
-    $('#tabs li:eq(0)').click(function(event) {
-      $('.sidebar img').hide();
-    });
-
-    $('#tabs li').not('#tabs li:eq(0)').click(function(event) {
-      $('.sidebar img').show();
+    $('#tabs li a').click(function(event) {
+      event.preventDefault();
+      $($(this).attr('href')).show().siblings('div.tab_content').hide();
     });
 
     $('#avatar.tab_content button.cancel').click(function(event) {
       $('.sidebar img').show();
     });
-
-    // $('#tabs ul li:first-child').click(function(){
-    //  $('#home').load('<%= home_profile_path(current_user.profile) %>');
-    // });
-
-    // jQuery('#upload_submit').click(function(){
-    //   jQuery('#spinner').show();
-    // });
-
-    // $('#tabs ul li:first a').click();
-  });

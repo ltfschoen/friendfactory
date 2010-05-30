@@ -11,13 +11,7 @@ class Wave::Base < ActiveRecord::Base
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
       :order                   => 'created_at desc' do
-
-#  has_many :postings,
-#      :class_name  => 'Posting::Base',
-#      :foreign_key => 'wave_id',
-#      :conditions  => 'parent_id is null',
-#      :order       => 'created_at desc' do
-
+        
     def for(user)
       if user.nil?
         exclude('Posting::Message')

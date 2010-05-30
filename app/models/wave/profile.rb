@@ -11,12 +11,12 @@ class Wave::Profile < Wave::Base
     end
   end
 
-  has_and_belongs_to_many :photos,
-      :class_name              => 'Posting::Photo',
-      :foreign_key             => 'wave_id',
-      :association_foreign_key => 'posting_id',
-      :join_table              => 'postings_waves',
-      :order                   => 'created_at desc'
+  # has_and_belongs_to_many :photos,
+  #     :class_name              => 'Posting::Photo',
+  #     :foreign_key             => 'wave_id',
+  #     :association_foreign_key => 'posting_id',
+  #     :join_table              => 'postings_waves',
+  #     :order                   => 'created_at desc'
 
   def before_update
     active_avatar = self.avatar

@@ -40,8 +40,8 @@ WebSocket.__swfLocation = "/WebSocketMain.swf";
 <%= yield(:head) %>
 <% javascript_tag do %>
 jQuery(document).ready(function($) {
-  <%= yield(:pagejs) %>  
-  $('body').removeClass('hidden').show();
+<%= yield(:pagejs) %>  
+$('body').removeClass('hidden').show();
 });
 <% end %>
 <style type='text/css'>
