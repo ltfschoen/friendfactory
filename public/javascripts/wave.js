@@ -1,13 +1,13 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function($){
 	$('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
   $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
   $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 	
   $('form.new_posting_comment')
-    .find('textarea').bind('focus', function() {
+    .find('textarea').live('focus', function(){
       $(this).height('3.6em').siblings().show().closest('table').find('img.avatar').show();
   	}).end()
-		.find('button.cancel').click(function(event) {
+		.find('button.cancel').live('click', function(event){
 			event.preventDefault();
 			$(this).hide()				
 			.closest('form').reset().end()
@@ -15,6 +15,28 @@ jQuery(document).ready(function($) {
 			.siblings('button').hide().end()
 			.closest('table').find('img.avatar').hide()
     });
+
+	$('form.new_posting_comment').live('submit', function(event){
+	    event.preventDefault();
+	    FF.scrubPlaceholders(this);
+
+	    if ($(this).find('textarea').val().length > 0) {
+				var action = $(this).attr('action');
+	      $.ajax({
+	        data: jQuery.param(jQuery(this).serializeArray()),
+	        dataType: 'script',
+	        type: 'post',
+	        url: action,
+	        success: function(response, status) {
+	        }
+	      });
+	    }
+	
+	    $(this).reset()
+	    .find('button').hide().end()
+	    .find('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
+	    .closest('table').find('img.avatar').hide();
+	  });
 
   $('.posting_message')
 		.find('button.message_reply').button({ icons: { primary: 'ui-icon-mail-closed' }})

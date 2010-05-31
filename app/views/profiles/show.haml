@@ -1,11 +1,12 @@
 - stylesheet 'profiles'
 - javascript 'wave'
+- javascript 'broadcast'
 
 .wave[@wave]
   .grid_3.sidebar
     = spinner :id => 'posting_avatar_spinner', :size => :big
     = render :partial => 'avatars/portrait', :object => @wave.avatar, :locals => { :online_badge => false }
-    = render :partial => 'user_info/show', :object => @wave.user.info
+    = render :partial => 'user_info/user_info', :object => @wave.user.info
     &nbsp;
   .grid_12
     - if @wave.user == current_user
@@ -86,10 +87,8 @@
         
     - if current_user
       #text.tab_content
-        %h2
-          Write a Message on
-          = (@wave.user == current_user) ? "your" : "#{@wave.user.first_name}&#8217;s"
-          Wave
+        - label = 'Write a Message on ' + ((@wave.user == current_user) ? 'Your' : "#{@wave.user.first_name}&#8217;s") + ' Wave'
+        = render :partial => 'texts/form', :locals => { :label => label, :wave => @wave }
 
     - if current_user
       #photos.tab_content
@@ -128,7 +127,7 @@
             - if current_user
               Put something here for them!
     - else
-      .postings
+      #postings
         = render :partial => 'postings/posting', :collection => @wave.postings.exclude(Posting::Avatar)
 
   .grid_1

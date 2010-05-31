@@ -66,15 +66,21 @@ form.edit_user_info > table td.label.about_me {
 	width: 100%;
 }
 
-.posting.user_info > table {
-	width: 100%;
-	border-collapse: separate;
-	border-spacing: 0 8px;	
+.posting.user_info dt {
+	font-weight: bold;
 }
 
-.posting.user_info > table td.label {
-	width: 100px;
-	padding-left: 1em;	
+.posting.user_info dd {
+	margin-bottom: 1em;	
+}
+
+.posting.user_info dd.birthday,
+.posting.user_info dt.birthday,
+.posting.user_info dd.age,
+.posting.user_info dt.age,
+.posting.user_info dd.location,
+.posting.user_info dt.location {
+	display: inline-block;
 }
 
 /* * * * * * * * * */
