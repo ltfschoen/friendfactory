@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.wave_hotties 'hotties', :controller => :hotties, :action => :show, :conditions => { :method => :get }
   
-  map.resources :profiles, :only => [ :show, :edit, :update ], :member => { :home => :get }
+  map.resources :profiles, :only => [ :show, :edit, :update ]
   map.edit_profile 'profile', :controller => 'profiles', :action => 'edit', :conditions => { :method => :get }
   
   # # # # # # # # # # # # # # # 
