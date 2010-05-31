@@ -5,7 +5,8 @@ class FriendshipsController < ApplicationController
   def create    
     @friend = User.find_by_id(params[:friend_id])
     if @friend != current_user
-      current_user.friendships.create(:friend => @friend)
+      friendship = current_user.friendships.create(:friend => @friend)
+      @posting = friendship.posting if friendship
     end
     respond_to do |format|
       format.js

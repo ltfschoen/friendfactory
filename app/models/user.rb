@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
   
   has_many :friendships
   has_many :friends,  :through => :friendships            
-  has_many :buddies,  :through => :friendships
 
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :admirers, :through => :inverse_friendships, :source => :user
@@ -33,6 +32,10 @@ class User < ActiveRecord::Base
   
   def online?
     User.online?(self)
+  end
+  
+  def has_friend?(buddy)
+    self.friendships.map(&:friend_id).include?(buddy.id)
   end
 
   # DefaultMessagePeriod = 10.days

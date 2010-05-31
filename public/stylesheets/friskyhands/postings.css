@@ -18,6 +18,10 @@ img.photo.medium {
 	width: 460px;
 }
 
+img.photo.small.fluid {
+	width: 31%;
+}
+
 object {
     border: 1px solid lightgray;
     padding: 2px;
@@ -97,7 +101,11 @@ form.edit_user_info > table td.label.about_me {
 	width: 118px;
 }
 
-.posting img.avatar.thumb {
+.posting td.avatar.portrait {
+	width: 206px;
+}
+
+.posting img.avatar {
 	margin-right: 12px;
 }
 
@@ -182,6 +190,12 @@ tr.posting_message td {
 /* * * * * * * * * */
 
 .posting_photo > table {
+	width: 100%;
+}
+
+/* * * * * * * * * */
+
+.posting_buddy > table {
 	width: 100%;
 }
 

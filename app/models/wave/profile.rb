@@ -10,6 +10,10 @@ class Wave::Profile < Wave::Base
       find :first, :conditions => [ 'active = true' ]
     end
   end
+  
+  def photos
+    self.postings.only(Posting::Photo)
+  end
 
   def avatar
     self.avatars.active

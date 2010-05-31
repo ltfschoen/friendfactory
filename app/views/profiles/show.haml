@@ -63,8 +63,10 @@
             %a{:href => "#text"} Text
           %li
             %a{:href => "#photos"} Photo
-          %li
-            %a{:href => "#make_buddy"} Make Buddy
+            
+          - unless current_user.has_friend?(@wave.user)
+            %li
+              %a{:href => "#make_buddy"} Make Buddy
 
       - content_for :pagejs do
         :plain
