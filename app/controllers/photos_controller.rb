@@ -4,11 +4,8 @@ class PhotosController < ApplicationController
   
   def create
     wave = Wave::Base.find_by_id(params[:wave_id])
-    if wave.present?
-      @posting = Posting::Photo.create(params[:posting_photo])
-      current_user.postings << @posting
-      wave.postings << @posting
-    end
+    @posting = Posting::Photo.create(params[:posting_photo])
+    wave.postings << @posting rescue nil if wave
     respond_to_parent do
       respond_to do |format|
         format.js

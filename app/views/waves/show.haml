@@ -33,22 +33,7 @@
         = render :partial => 'texts/form', :locals => { :label => 'Write a Message to this Wave', :wave => @wave }
 
       #photo.tab_content.hidden
-        %table
-          %tr
-            %td{ :colspan => '2' }
-              %h2 Upload a Photo to the Wave
-          %tr
-            %td.avatar.thumb= thumb_image_tag(current_user)
-            %td
-              - form_for(Posting::Photo.new, :url => wave_photos_path(:wave_id => @wave, :format => :js), :html => { :multipart => true, :target => 'upload_frame' }) do |f|
-                %table.button_bar
-                  %tr
-                    %td.file_field= f.file_field :image
-                  %tr
-                    %td.submit
-                      = f.submit 'Upload Photo', :id => 'photo_upload_submit'
-                      = f.button :Cancel, :class => 'cancel'
-                      = spinner
+        = render :partial => 'photos/form', :locals => { :label => 'Upload a Photo to this Wave', :wave => @wave }
 
       #video.tab_content.hidden
         %table

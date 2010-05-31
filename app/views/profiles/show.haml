@@ -19,11 +19,11 @@
           %li
             %a{:href => "#text"} Text
           %li
-            %a{:href => "#photos"} Photos
+            %a{:href => "#photo"} Photo
           %li
-            %a{:href => "#buddies"} Buddies
+            %a{:href => "#buddy"} Buddies
           %li.ajax
-            %a{:href => "#links"} Links
+            %a{:href => "#link"} Link
       - content_for :pagejs do
         :plain
           $('#tabs li:eq(0), #tabs li:eq(1)').click(function() {
@@ -91,27 +91,16 @@
         = render :partial => 'texts/form', :locals => { :label => label, :wave => @wave }
 
     - if current_user
-      #photos.tab_content
-        %h2
-          Upload a Photo to
-          = (@wave.user == current_user) ? "your" : "#{@wave.user.first_name}&#8217;s"
-          Wave
-        - form_for Posting::Photo::new, :url => profile_photos_path(:profile_id => @wave.user.profile, :format => :js), :html => { :multipart => true, :target => 'upload_frame' } do |f|
-          #photo_upload_error.hidden
-          #photo_upload_well.append-bottom.clearfix
-            =# render :partial => 'photos/edit', :collection => @wave.user.profile.photos
-          .button_bar
-            = f.file_field :image
-            = f.submit 'Upload', :id => 'photo_upload_submit'
-            = f.button :Cancel, :class => 'cancel'
-            = spinner
+      #photo.tab_content
+        - label = 'Upload a Photo to ' + ((@wave.user == current_user) ? "your" : "#{@wave.user.first_name}&#8217;s") + ' Wave'
+        = render :partial => 'photos/form', :locals => { :label => label, :wave => @wave }
 
     - if @wave.user == current_user
-      #buddies.tab_content
+      #buddy.tab_content
         %h3= @wave.user.first_name + '&#8217;s Buddies'
 
     - if @wave.user == current_user
-      #links.tab_content
+      #link.tab_content
         %h3 Links
 
     %iframe#upload_frame{:height => "1", :name => "upload_frame", :src => "about:blank", :style => "border:0px", :width => "1"}
