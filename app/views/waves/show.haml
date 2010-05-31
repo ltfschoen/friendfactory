@@ -54,22 +54,24 @@
       #chat.tab_content.hidden Chat
       
       #link.tab_content.hidden
-        %table
-          %tr
-            %td{ :colspan => '2' }
-              %h2 Add a Link to the Wave
-          %tr
-            %td.avatar.thumb= thumb_image_tag(current_user)
-            %td
-              - form_for(Posting::Link.new, :url => wave_links_path(:wave_id => @wave)) do |f|
-                = f.text_field :subject, :placeholder => 'Caption'
-                = f.text_field :body, :placeholder => 'URL'
-                .button_bar
-                  = f.submit :OK
-                  = f.button :Cancel, :class => 'cancel'
-      
-      #event.tab_content.hidden Event
-      #poll.tab_content.hidden Poll
+        = render :partial => 'links/form', :locals => { :label => 'Add a Link to the Wave', :wave => @wave }
+        - content_for :pagejs do
+          :plain        
+            $('#link.tab_content form').submit(function(event){
+              event.preventDefault();
+              FF.scrubPlaceholders(this);
+              jQuery.ajax({
+                data: jQuery.param(jQuery(this).serializeArray()),
+                dataType: 'script',
+                cache: false,
+                type: 'post',
+                url: '#{wave_links_path(:wave_id => @wave)}'
+              });      
+            });
+            
+      - if false
+        #event.tab_content.hidden Event
+        #poll.tab_content.hidden Poll
 
       %iframe#upload_frame{ :name => "upload_frame", :width => '1', :height => '1', :style => 'border:0px', :src => 'about:blank' }
 
@@ -138,23 +140,6 @@
         url: '#{wave_videos_path(:wave_id => @wave)}',
         success: function() {
           $('#video.tab_content form').reset().closest('.tab_content').hide();
-          $('ul#tabs li.current').removeClass('current');
-        }
-      });      
-    });
-    
-    // Link Tab
-    $('#link.tab_content form').submit(function(event){
-      event.preventDefault();
-      FF.scrubPlaceholders(this);
-      jQuery.ajax({
-        data: jQuery.param(jQuery(this).serializeArray()),
-        dataType: 'script',
-        cache: false,
-        type: 'post',
-        url: '#{wave_links_path(:wave_id => @wave)}',
-        success: function() {
-          $('#link.tab_content form').reset().closest('.tab_content').hide();
           $('ul#tabs li.current').removeClass('current');
         }
       });      

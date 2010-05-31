@@ -1,0 +1,13 @@
+%table
+  %tr
+    %td{ :colspan => '2' }
+      %h2= label
+  %tr
+    %td.avatar.thumb= thumb_image_tag(current_user)
+    %td
+      - form_for(Posting::Link.new, :url => wave_links_path(:wave_id => wave)) do |f|
+        = f.text_field :subject, :placeholder => 'Caption'
+        = f.text_field :body, :placeholder => 'URL'
+        .button_bar
+          = f.submit :OK
+          = f.button :Cancel, :class => 'cancel'

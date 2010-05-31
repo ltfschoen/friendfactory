@@ -1,7 +1,7 @@
 if @posting.present? && @posting.valid?
   page['#postings'].prepend(render(:partial => 'photo', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
   page['#photo.tab_content form'].reset.closest('.tab_content').hide();
-  page['ul#tabs li.current'].removeClass('current')
+  reset_new_posting_comment_form
 else
   page['.flash'].text("Couldn't save your photo")  
 end
