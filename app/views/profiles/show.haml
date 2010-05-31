@@ -2,12 +2,26 @@
 - javascript 'wave'
 - javascript 'broadcast'
 
+- content_for :pagejs do
+  :plain
+    $('div.tab_content').hide();
+    $('.tab_content button.cancel').click(function(event){
+      event.preventDefault();
+      $(this).closest('.tab_content').hide();
+    });
+
+    $('#tabs li').click(function(event) {
+      event.preventDefault();
+      $($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
+    });
+
 .wave[@wave]
   .grid_3.sidebar
     = spinner :id => 'posting_avatar_spinner', :size => :big
     = render :partial => 'avatars/portrait', :object => @wave.avatar, :locals => { :online_badge => false }
     = render :partial => 'user_info/user_info', :object => @wave.user.info
     &nbsp;
+
   .grid_12
     - if @wave.user == current_user
       #tabs
@@ -21,9 +35,10 @@
           %li
             %a{:href => "#photo"} Photo
           %li
-            %a{:href => "#buddy"} Buddies
-          %li.ajax
             %a{:href => "#link"} Link
+          %li
+            %a{:href => "#buddy"} Buddies
+            
       - content_for :pagejs do
         :plain
           $('#tabs li:eq(0), #tabs li:eq(1)').click(function() {
@@ -38,8 +53,8 @@
           $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-script' }});
           $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-pencil' }});
           $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-image' }});
-          $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-heart' }});
-          $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-link' }});
+          $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
+          $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-heart' }});
 
     - elsif current_user
       #tabs
@@ -48,10 +63,14 @@
             %a{:href => "#text"} Text
           %li
             %a{:href => "#photos"} Photo
+          %li
+            %a{:href => "#make_buddy"} Make Buddy
+
       - content_for :pagejs do
         :plain
           $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
           $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }});
+          $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-heart' }});
 
     %h1
       #{@wave.user.first_name}&#8217;s Wave
@@ -92,16 +111,50 @@
 
     - if current_user
       #photo.tab_content
-        - label = 'Upload a Photo to ' + ((@wave.user == current_user) ? "your" : "#{@wave.user.first_name}&#8217;s") + ' Wave'
+        - label = 'Upload a Photo to ' + ((@wave.user == current_user) ? "Your" : "#{@wave.user.first_name}&#8217;s") + ' Wave'
         = render :partial => 'photos/form', :locals => { :label => label, :wave => @wave }
 
     - if @wave.user == current_user
+      #link.tab_content
+        = render :partial => 'links/form', :locals => { :label => 'Add a Link to Your Wave', :wave => @wave }
+        - content_for :pagejs do
+          :plain        
+            $('#link.tab_content form').submit(function(event){
+              event.preventDefault();
+              FF.scrubPlaceholders(this);
+              jQuery.ajax({
+                data: jQuery.param(jQuery(this).serializeArray()),
+                dataType: 'script',
+                cache: false,
+                type: 'post',
+                url: '#{wave_links_path(:wave_id => @wave)}',
+                success: function() {
+                  $('#link.tab_content form').reset().closest('.tab_content').hide();
+                  $('ul#tabs li.current').removeClass('current');
+                }
+              });      
+            });
+            
+    - if @wave.user == current_user
       #buddy.tab_content
         %h3= @wave.user.first_name + '&#8217;s Buddies'
-
-    - if @wave.user == current_user
-      #link.tab_content
-        %h3 Links
+    
+    - if current_user && current_user != @wave.user
+      #make_buddy.tab_content
+        %h3 Make #{@wave.user.first_name} a Buddy?
+        = button_tag 'Yes, Please!', :class => 'submit'
+        = button_tag 'Cancel', :class => 'cancel'
+      - content_for :pagejs do
+        :plain
+          $('#make_buddy.tab_content button[class=submit]').button({ icons: { primary: 'ui-icon-check' }}).click(function(){
+            jQuery.ajax({
+              data: jQuery.param({ 'friend_id': '#{@wave.user.id}' }),
+              dataType: 'script',
+              cache: false,
+              type: 'post',
+              url: '#{friendships_path}'
+            });
+          });
 
     %iframe#upload_frame{:height => "1", :name => "upload_frame", :src => "about:blank", :style => "border:0px", :width => "1"}
     
@@ -121,16 +174,3 @@
 
   .grid_1
     &nbsp;
-
-- content_for :pagejs do
-  :plain
-    $('div.tab_content').hide();
-    $('.tab_content button.cancel').click(function(event){
-      event.preventDefault();
-      $(this).closest('.tab_content').hide();
-    });
-
-    $('#tabs li').click(function(event) {
-      event.preventDefault();
-      $($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
-    });

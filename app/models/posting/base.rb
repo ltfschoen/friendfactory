@@ -19,6 +19,8 @@ class Posting::Base < ActiveRecord::Base
   
   belongs_to :user
   
+  belongs_to :resource, :polymorphic => true
+  
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :foreign_key             => 'posting_id',

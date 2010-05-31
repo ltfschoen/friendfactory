@@ -5,10 +5,13 @@ class CreatePostings < ActiveRecord::Migration
       t.string    :slug
       t.integer   :user_id
       t.integer   :parent_id
+      t.integer   :resource_id
+      t.string    :resource_type
       t.timestamps
     end    
     add_index :postings, :user_id
     add_index :postings, :parent_id
+    add_index :postings, [ :resource_id, :resource_type ]
   end
 
   def self.down

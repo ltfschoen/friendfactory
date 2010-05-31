@@ -19,12 +19,10 @@ class User < ActiveRecord::Base
   has_many :postings, :class_name => 'Posting::Base'
   
   has_many :friendships
-  has_many :inverse_friendships,
-      :class_name  => 'Friendship',
-      :foreign_key => 'friend_id'
-
   has_many :friends,  :through => :friendships            
   has_many :buddies,  :through => :friendships
+
+  has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :admirers, :through => :inverse_friendships, :source => :user
 
   named_scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]

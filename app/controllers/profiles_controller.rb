@@ -26,16 +26,5 @@ class ProfilesController < ApplicationController
      format.js
     end
   end
-
-  def photo
-    @photo = Posting::Photo.new(params[:posting_photo])
-    current_user.postings << @photo
-    current_user.profile.postings << @photo
-    respond_to_parent do
-      respond_to do |format|
-        format.js
-      end
-    end
-  end
   
 end
