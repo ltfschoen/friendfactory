@@ -36,8 +36,9 @@
             %a{:href => "#photo"} Photo
           %li
             %a{:href => "#link"} Link
-          %li
-            %a{:href => "#buddy"} Buddies
+          - if false
+            %li
+              %a{:href => "#buddy"} Buddies
             
       - content_for :pagejs do
         :plain
@@ -54,7 +55,7 @@
           $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-pencil' }});
           $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-image' }});
           $('#tabs li:eq(4)').button({ icons: { primary: 'ui-icon-link' }});
-          $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-heart' }});
+          // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-heart' }});
 
     - elsif current_user
       #tabs
