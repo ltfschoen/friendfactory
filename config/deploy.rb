@@ -84,16 +84,15 @@ namespace :deploy do
   end
 end
 
-namespace :local do
-  desc "Dump production to sql file"
-  task :production do
-    run "mysqldump -u dpu -pdpu123 --ignore-table omgc_production.schema_migrations --complete-insert --no-create-info --skip-add-drop-table deeppool_production > #{deploy_to}/current/db/production.sql"
-    get "#{deploy_to}/current/db/production.sql", "db/production.sql"
-    #system "mysql -u dpu -pdpu123 deeppool_development < db/production.sql"
-  end
-  
-  desc "Load production into development"
-  task :reload do
-    system "mysql -u omgcu -pomgcu123 omgc_development < db/production.sql"
+namespace :ff do
+  namespace :dump do
+    desc "Dump production to local sql file"
+    task :production do
+      run "mysqldump -u ffu -pffu123 --ignore-table friskyfactory_production.schema_migrations --ignore_table friskyfactory_production.users_prelaunch --complete-insert --no-create-info --skip-add-drop-table friskyfactory_production > #{deploy_to}/current/db/production.sql"
+      get "#{deploy_to}/current/db/production.sql", "db/production.sql"
+      download "#{current_path}/public/system/images", "public/system", :via => :scp, :recursive => true, :preserve => true
+      system "rake db:migrate VERSION=0 && rake db:migrate"
+      system "mysql -u ffu -pffu123 friskyfactory_development < db/production.sql"
+    end      
   end
 end
