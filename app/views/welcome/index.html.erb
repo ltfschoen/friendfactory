@@ -26,9 +26,9 @@
 				<%= f.error_message_on :email, :prepend_text => 'Your email address ' %>
 			  <%= f.password_field :password %>
 				<%= f.error_message_on :password, :prepend_text => 'Your password ' %>
-				<%= f.submit 'Login!' %>
-				<%= f.button 'Sign Up', :class => 'toggle' %>
-				<%= link_to 'Lurk&hellip', lurk_new_user_session_path, :class => 'button' %>
+	      <%= f.submit 'Login!' %>
+	      <%= f.button 'Sign Up', :class => 'toggle' %>
+	      <%= link_to 'Lurk&hellip;', lurk_new_user_session_path, :class => 'button' %>
 			<% end %>
 		</div>
 		<div id='signup'>

@@ -6,3 +6,16 @@
 .ui-button {
 	margin-right: 0.4em;
 }
+
+#login a.button {
+	position: relative;
+	margin: 0.5em 0.4em 0.5em 0;
+	zoom: 1;
+	top: -3px;
+	left: -4px;
+	height: 27px;
+}
+
+#login button {
+	vertical-align: baseline;
+}
