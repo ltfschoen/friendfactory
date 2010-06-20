@@ -1,5 +1,13 @@
-shared_wave:
-  id: <%= Fixtures.identify(:shared_wave) %>
+popular_wave:
+  id: <%= Fixtures.identify(:popular_wave) %>
   type: Wave::Shared
   topic: Everyone's Wave
+  slug: popular
   description: Everyone's Welcome at FriskyHands!
+
+hottie_wave:
+  id: <%= Fixtures.identify(:hottie_wave) %>
+  type: Wave::Shared
+  topic: Hotties
+  slug: hotties
+  description: Hotties!

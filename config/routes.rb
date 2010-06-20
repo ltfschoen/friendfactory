@@ -3,6 +3,10 @@ ActionController::Routing::Routes.draw do |map|
   # # # # # # # # # # # # # # # 
   # Waves Controllers
 
+  map.slug_wave 'waves/:slug', :controller => :waves, :action => :show,
+      :requirements => { :slug => /\D\w*/ },
+      :conditions   => { :method => :get  }
+
   map.resources :waves, :only => [ :index, :show, :create ] do |wave|
     # Used to add postings to a wave...
     wave.resources :texts,  :only => [ :create ]
@@ -63,7 +67,8 @@ ActionController::Routing::Routes.draw do |map|
   # # # # # # # # # # # # # # # 
   # Root Controller
 
-  map.root :controller => 'waves', :action => 'show', :conditions => { :method => :get }
+  map.root :wave
+  
   # map.peek 'peek', :controller => 'welcome', :action => 'peek'  # Chat Debug
   
   # Sample resource route with sub-resources:

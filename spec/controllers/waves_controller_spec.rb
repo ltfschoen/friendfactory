@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe WavesController do
-
+  
   def mock_wave(stubs={})
-    @mock_wave ||= mock_model(Wave, stubs)
+    @mock_wave ||= mock_model(Wave::Base, stubs)
   end
 
   # describe "GET index" do
@@ -15,17 +15,21 @@ describe WavesController do
   #     end
   #   end
   # end
-  # 
-  # describe "GET show" do
-  #   it "assigns the requested wave as @wave" do
-  #     pending do
-  #       Wave.stub(:find).with("37").and_return(mock_wave)
-  #       get :show, :id => "37"
-  #       assigns[:wave].should equal(mock_wave)
-  #     end
-  #   end
-  # end
-  # 
+  
+  describe "GET show" do
+    it "assigns the requested wave with id as @wave" do
+      Wave::Base.should_receive(:find_by_id).with("37").and_return(mock_wave)
+      get :show, { :id => "37" }, { :lurker => true }
+      assigns[:wave].should equal(mock_wave)
+    end
+
+    it "assigns the requested wave with slug as @wave" do
+      Wave::Base.should_receive(:find_by_slug).with("hotties").and_return(mock_wave)
+      get :show, { :slug => "hotties" }, { :lurker => true }
+      assigns[:wave].should equal(mock_wave)
+    end
+  end
+  
   # describe "GET new" do
   #   it "assigns a new wave as @wave" do
   #     pending do

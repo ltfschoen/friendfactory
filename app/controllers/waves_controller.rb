@@ -1,18 +1,16 @@
 class WavesController < ApplicationController
 
+  DefaultWaveSlug = 'popular'
+  
   before_filter :require_lurker
 
-  def index
-    store_location   
-    @wave = Wave::Base::default
-    respond_to do |format|
-      format.html { render :action => 'show' }
-    end
-  end
-
   def show
-    store_location   
-    @wave = Wave::Base::find_by_slug(params[:id]) || Wave::Base::default
+    store_location
+    @wave = case 
+      when params[:id].present?   then Wave::Base.find_by_id(params[:id]) 
+      when params[:slug].present? then Wave::Base.find_by_slug(params[:slug])
+      else Wave::Base.find_by_slug(DefaultWaveSlug)
+    end
     respond_to do |format|
       format.html
     end

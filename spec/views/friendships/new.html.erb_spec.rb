@@ -12,6 +12,7 @@ describe "/friendships/new.html.erb" do
   end
 
   it "renders new friendship form" do
+    pending
     render
 
     response.should have_tag("form[action=?][method=post]", friendships_path) do
