@@ -8,4 +8,5 @@ config/database.yml
 config/development.sphinx.conf
 *.tmproj
 .idea
-db/production.sql
+db/schema.rb
+db/dumps/*

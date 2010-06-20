@@ -85,14 +85,28 @@ namespace :deploy do
 end
 
 namespace :ff do
-  namespace :dump do
-    desc "Dump production to local sql file"
-    task :production do
-      run "mysqldump -u ffu -pffu123 --ignore-table friskyfactory_production.schema_migrations --ignore_table friskyfactory_production.users_prelaunch --complete-insert --no-create-info --skip-add-drop-table friskyfactory_production > #{deploy_to}/current/db/production.sql"
-      get "#{deploy_to}/current/db/production.sql", "db/production.sql"
-      download "#{current_path}/public/system/images", "public/system", :via => :scp, :recursive => true, :preserve => true
-      system "rake db:migrate VERSION=0 && rake db:migrate"
-      system "mysql -u ffu -pffu123 friskyfactory_development < db/production.sql"
-    end      
-  end
+  desc "Dump production to local sql file"
+  task :dump do
+    require 'yaml'
+    
+    database  = YAML::load_file("config/database.yml")
+    timestamp = Time.now.strftime('%Y%m%d')
+    dump_filename = "dump.#{timestamp}.sql"
+    tar_filename  = "images.#{timestamp}.tar.gz"
+          
+    on_rollback do
+      delete "#{shared_path}/dumps/#{dump_filename}"
+      delete "#{shared_path}/dumps/#{tar_filename}"
+    end
+    
+    run "mysqldump -u #{database['production']['username']} -p#{database['production']['password']} -h #{database['production']['host']} #{database['production']['database']} > #{shared_path}/dumps/#{dump_filename}"
+    run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
+        
+    get "#{shared_path}/dumps/#{dump_filename}", "db/#{dump_filename}"
+    get "#{shared_path}/dumps/#{tar_filename}", "db/#{tar_filename}"
+    # download "#{current_path}/public/system/images", "public/system", :via => :scp, :recursive => true, :preserve => true
+        
+    system "mysql -u #{database['development']['username']} -p#{database['development']['password']} #{database['development']['database']} < db/#{dump_filename}"
+    system "tar -xf db/#{tar_filename} -C public/system"
+  end  
 end
