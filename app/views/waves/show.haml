@@ -1,5 +1,6 @@
 - javascript 'wave'
 - javascript 'broadcast'
+- stylesheet 'waves'
 
 .wave[@wave]
   .grid_3
@@ -77,11 +78,9 @@
 
       %iframe#upload_frame{ :name => "upload_frame", :width => '1', :height => '1', :style => 'border:0px', :src => 'about:blank' }
 
-    - if false
-      #log
-
-    #postings
+    %ul.postings
       = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
+      
   .grid_1
     &nbsp;
 

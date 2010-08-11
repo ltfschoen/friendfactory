@@ -2,8 +2,8 @@ class Posting::Photo < Posting::Base
 
   has_attached_file :image,
       :styles => {
-          :polaroid => [ '350x425#',  :png ],
-          :'4x6'    => [ '600x400#',  :png ],
+          :polaroid => [ '312x312#',  :png ],
+          :'4x6'    => [ '400x260#',  :png ],
           :h480     => [ 'x480',      :png ], # For horizontal grid display
           :w460     => [ '460',       :png ], # For album
           :iphone   => [ '320x480#',  :png ],

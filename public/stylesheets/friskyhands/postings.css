@@ -3,25 +3,71 @@
 	width: 100%;
 }
 
-#postings > .posting {
+/*#postings > .posting {
 	border-bottom: 1px solid #CCC;
 	padding: 20px 0;
-}
+}*/
 
-.posting > table td {
+/*.posting > table td {
 	vertical-align: top;
-}
+}*/
 
 /* * * * * * * * * */
 
-img.photo.medium {
+.posting.photo a:after {
+	content: attr(title);
+}
+
+.posting.photo a {
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+}
+
+ul.postings li.posting.photo:nth-child(even) a {
+	-webkit-transform: rotate(2deg);
+	-moz-transform: rotate(2deg);
+}
+
+ul.postings li.posting.photo:nth-child(3n) a {
+	-webkit-transform: none;
+	-moz-transform: none;
+	postition: relative;
+	top: -5px;
+}
+
+ul.postings li.posting.photo:nth-child(5n) a {
+	-webkit-transform: rotate(5deg);
+	-moz-transform: rotate(5deg);
+	postition: relative;
+	right: 5px;
+}
+
+ul.postings li.posting.photo:nth-child(8n) a {
+	postition: relative;
+	top: 8px;
+	right: 5px;
+}
+
+ul.postings li.posting.photo:nth-child(11n) a {
+	postition: relative;
+	top: 3px;
+	right: -5px;
+}
+
+ul.postings a {
+	-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/*img.photo.medium {
 	width: 460px;
 }
 
 img.photo.small.fluid {
 	width: 31%;
 }
-
+*/
 object {
     border: 1px solid lightgray;
     padding: 2px;
