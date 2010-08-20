@@ -4,17 +4,6 @@
 	font-weight: normal;
 }
 
-body 
-{
-	margin: 0px;
-	-webkit-user-select: none;
-	background: url('/images/friskyhands/golden-fibers.jpg') repeat-y top center #CEC2A2;
-}
-
-.hidden {
-	display: none;
-}
-
 /* Styles the "Card Flip" page and creates a placeholder for the card */
 .polaroid-container {
 	/* Set these dimensions so the card can be properly displayed in Safari on iPhone */

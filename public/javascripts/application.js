@@ -1,8 +1,3 @@
-if (/chrome/.test(navigator.userAgent.toLowerCase())) {
-  jQuery.browser.chrome = true;
-  jQuery.browser.safari = false;
-}
-
 jQuery.fn.log = function (msg) {
     console.log("%s: %o", msg, this);
     return this;

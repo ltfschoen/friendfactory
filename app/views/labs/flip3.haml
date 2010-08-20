@@ -4,15 +4,19 @@
     %title Card Flip
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
     %link{:href => "/stylesheets/friskyhands/labs.css", :media => "screen", :rel => "stylesheet"}
-    %link{:href => "/stylesheets/friskyhands/polaroid.css", :media => "screen", :rel => "stylesheet"}
+    %link{:href => "/stylesheets/friskyhands/polaroid-sans3d.css", :media => "screen", :rel => "stylesheet"}
     %link{:href => "/stylesheets/friskyhands/buddy-bar.css", :media => "screen", :rel => "stylesheet"}
     %link{:href => "/stylesheets/friskyhands/scrollable.css", :media => "screen", :rel => "stylesheet"}
     = javascript_include_tag "http://cdn.jquerytools.org/1.2.4/full/jquery.tools.min.js"
-    = javascript_include_tag "chrome"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js"
+    =# javascript_include_tag "jquery-ui-1.7.2.custom.min.flip"
+    = javascript_include_tag "jquery.flip"    
+    = javascript_include_tag "flip3"    
+    =# javascript_include_tag "chrome"
     
   %body
     .polaroid-container
-      .polaroid
+      #polaroid-front_face.polaroid
         .front.face
           %img.headshot{ :alt => "Carlos", :src => "/images/friskyhands/carlos.jpg" }
           %table.header
@@ -39,6 +43,7 @@
               = link_to 'Photos', 'photos', :class => 'flip photos icon'
             %li
               = link_to 'Profile', 'profile', :class => 'flip profile icon last'
+      #polaroid-back_face.polaroid.hidden
         .back.face
           .scrollable
             .items
@@ -62,28 +67,3 @@
               = link_to 'Photos', 'photos', :class => 'photos icon'
             %li
               = link_to 'Profile', 'profile', :class => 'profile icon last'
-
-    :javascript
-      $(function(){
-        $('.scrollable').scrollable({
-          items: 'items',
-          keyboard: false,
-          next: '',
-          prev: ''
-        }).navigator({
-          navi: ".back.face .buddy-bar.primary",
-          naviItem: 'a',
-          activeClass: 'current'
-        });
-        
-        $('.polaroid')[0].addEventListener('webkitTransitionEnd', function(event){
-          var $current = $('.front.face .buddy-bar .current');
-          $('.back.face .buddy-bar .' + $current.attr('href')).click();
-          $current.removeClass('current');
-        });
-        
-        $('.buddy-bar a.flip').click(function(event){
-          event.preventDefault();
-          $(this).addClass('current').closest('.polaroid').toggleClass('flipped');
-        });        
-      });

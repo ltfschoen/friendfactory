@@ -6,11 +6,11 @@
 }
 
 .scrollable .items {
-	width: 1400px;
+	width: 1600px;
 	position: absolute;
 }
 
 .scrollable .items div {
 	float: left;
-	width: 300px;
+	width: 260px;
 }
