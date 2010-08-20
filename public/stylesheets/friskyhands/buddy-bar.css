@@ -1,0 +1,83 @@
+ul.buddy-bar {
+	list-style-type: none;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+ul.buddy-bar.primary {
+	float: right;
+}
+
+ul.buddy-bar.secondary {
+	float: left;
+}
+
+ul.buddy-bar li {
+	float: left;
+}
+
+ul.buddy-bar a {
+	text-decoration: none;
+	display: block;
+	text-indent: -5000px;
+}
+
+ul.buddy-bar li.comment-count {	
+	font-family: Gill Sans, Trebuchet MS, Verdana, Arial;
+	font-size: 12px;
+	color: #666;
+	padding-top: 4px;
+}
+
+a.icon {
+	display: block;
+	margin-right: 6px;
+	width: 18px;
+	height: 20px;
+	background: url(/images/friskyhands/buddy-bar.png) top left no-repeat;	
+}
+
+a.icon.last {
+	margin-right: 0px;
+}
+
+a.icon.comment {
+	width: 18px;
+	background-position: 0 -3px;
+}
+
+a.icon.block {
+	background-position: -24px -1px;
+}
+
+a.icon.buddy {
+	background-position: -49px -1px;
+}
+
+a.icon.pin {
+	background-position: -70px -1px;
+}
+
+a.icon.chat {
+	width: 24px;
+	background-position: -92px -1px;
+}
+
+a.icon.message {
+	width: 26px;
+	background-position: -120px -1px;
+}
+
+a.icon.photos {
+	width: 24px;
+	background-position: -150px -1px;
+}
+
+a.icon.profile {
+	background-position: -180px -1px;
+}
+
+a.icon.headshot {
+	width: 22px;
+	background-position: -200px -1px;
+}

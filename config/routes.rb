@@ -63,12 +63,17 @@ ActionController::Routing::Routes.draw do |map|
   # Search Controller
   
   map.search 'search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
-  
+    
   # # # # # # # # # # # # # # # 
   # Root Controller
 
   map.root :wave
   
+  # # # # # # # # # # # # # # # 
+  # Crap Here On In
+  
+  map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
+
   # map.peek 'peek', :controller => 'welcome', :action => 'peek'  # Chat Debug
   
   # Sample resource route with sub-resources:

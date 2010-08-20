@@ -15,8 +15,8 @@ ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
 
 after "deploy:symlink", "deploy:config_symlinks"
-after "deploy:symlink", "deploy:thinking_sphinx"
-after "deploy:symlink", "deploy:update_crontab"
+# after "deploy:symlink", "deploy:thinking_sphinx"
+# after "deploy:symlink", "deploy:update_crontab"
 
 task :staging do
   set :branch,         ENV['branch'] || 'master'

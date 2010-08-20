@@ -1,0 +1,16 @@
+.scrollable {
+	position: relative;
+	overflow: hidden;
+	width: 260px;
+	height: 300px;
+}
+
+.scrollable .items {
+	width: 1040px;
+	position: absolute;
+}
+
+.scrollable .items div {
+	float: left;
+	width: 260px;
+}
