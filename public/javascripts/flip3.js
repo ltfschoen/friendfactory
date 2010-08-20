@@ -1,7 +1,8 @@
 $(function(){
   $('.front.face .buddy-bar a.flip').live('click', function(event){
     event.preventDefault();
-    $(this).closest('.polaroid').flip({
+		$this = $(this);
+    $this.closest('.polaroid').flip({
       direction: 'lr',
       color: '#FFF',
       content: $('#polaroid-back_face'),
@@ -21,6 +22,8 @@ $(function(){
 					naviItem: 'a',
 					activeClass: 'current'
 				});
+				
+        $('#polaroid-front_face .back.face .buddy-bar .' + $this.attr('href')).click();
       }
     });          
   });
