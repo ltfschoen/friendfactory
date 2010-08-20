@@ -7,7 +7,13 @@
     %link{:href => "/stylesheets/friskyhands/flip.css", :media => "screen", :rel => "stylesheet"}
     %link{:href => "/stylesheets/friskyhands/scrollable.css", :media => "screen", :rel => "stylesheet"}
     = javascript_include_tag "http://cdn.jquerytools.org/1.2.4/full/jquery.tools.min.js"
+    = javascript_include_tag "application"
+    
   %body
+    :javascript
+      alert("#{request.user_agent}");
+      alert("#{browser}");
+      
     .polaroid-container
       .polaroid
         .front.face
