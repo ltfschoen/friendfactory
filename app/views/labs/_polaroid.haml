@@ -1,0 +1,51 @@
+.polaroid-container
+  .polaroid
+    .front.face
+      %img.headshot{ :alt => "Carlos", :src => "/images/friskyhands/carlos.jpg" }
+      %table.header
+        %tr
+          %td.username Carlos
+          %td.status Looking for fun
+      %ul.buddy-bar.secondary
+        %li
+          = link_to 'Comment', '#', :class => 'comment icon'
+        %li.comment-count
+          4
+      %ul.buddy-bar.primary
+        %li
+          = link_to 'Block', '#', :class => 'block icon'
+        %li
+          = link_to 'Buddy', '#', :class => 'buddy icon'
+        %li
+          = link_to 'Pin', '#', :class => 'pin icon'
+        %li
+          = link_to 'Chat', 'chat', :class => 'flip chat icon'
+        %li
+          = link_to 'Message', 'message', :class => 'flip message icon'
+        %li
+          = link_to 'Photos', 'photos', :class => 'flip photos icon'
+        %li
+          = link_to 'Profile', 'profile', :class => 'flip profile icon last'
+    .back.face
+      .scrollable
+        .items
+          %div
+            = image_tag 'chat-b-side.png', :width=>'260px'
+          %div
+            = image_tag 'message-b-side.png', :width=>'260px'
+          %div
+            = image_tag 'photos-b-side.png', :width=>'260px'
+          %div
+            = image_tag 'profile-b-side.png', :width=>'260px'      
+      %ul.buddy-bar.secondary
+        %li
+          = link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
+      %ul.buddy-bar.primary.navi
+        %li
+          = link_to 'Chat', 'chat', :class => 'chat icon'
+        %li
+          = link_to 'Message', 'message', :class => 'message icon'
+        %li
+          = link_to 'Photos', 'photos', :class => 'photos icon'
+        %li
+          = link_to 'Profile', 'profile', :class => 'profile icon last'

@@ -16,12 +16,10 @@ ul.buddy-bar li {
 	float: left;
 }
 
-ul.buddy-bar a {
-	text-decoration: none;
+/*ul.buddy-bar a {
 	display: block;
-	text-indent: -5000px;
 }
-
+*/
 ul.buddy-bar li.comment-count {	
 	font-family: Gill Sans, Trebuchet MS, Verdana, Arial;
 	font-size: 12px;
@@ -29,8 +27,11 @@ ul.buddy-bar li.comment-count {
 	padding-top: 4px;
 }
 
+.navi a,
 a.icon {
 	display: block;
+	text-decoration: none;
+	text-indent: -5000px;
 	margin-right: 6px;
 	width: 18px;
 	height: 20px;
