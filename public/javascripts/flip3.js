@@ -3,6 +3,7 @@ $(function(){
     event.preventDefault();
 		$this = $(this);
     $this.closest('.polaroid').flip({
+			speed: 240,
       direction: 'lr',
       color: '#FFF',
       content: $('#polaroid-back_face'),
