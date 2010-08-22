@@ -4,6 +4,24 @@ body, p, h1, h2, h3, label, input, textarea, a, .formError {
 	font-family: "Gill Sans MT", "Gill Sans", "Lucida Sans", Tahoma, Helvetica, sans-serif;
 }
 
+body {
+	-webkit-user-select: none;
+	background: url('/images/friskyhands/golden-fibers.jpg') repeat-y top center #CEC2A2;
+}
+
+.hidden {
+	display: none;
+}
+
+a:focus {
+	outline: none;
+	-moz-outline: none;
+}
+
+
+/* * * * * * * * * * * * *
+/* Legacy */
+
 h1 {
 	color: #501508;
 	font-size: 2em;	
@@ -32,10 +50,6 @@ a {
 
 .unobtrusive {
 	color: gray;
-}
-
-.hidden {
-	display: none;
 }
 
 .prepend-top {

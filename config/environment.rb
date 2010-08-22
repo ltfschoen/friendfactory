@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem 'responds_to_parent'
   config.gem 'haml'
   config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.16'
+  config.gem 'pusher'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

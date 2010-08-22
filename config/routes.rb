@@ -15,9 +15,11 @@ ActionController::Routing::Routes.draw do |map|
     wave.resources :links,  :only => [ :create ]
   end
 
-  map.wave_hotties 'hotties', :controller => :hotties, :action => :show, :conditions => { :method => :get }
-  
+  map.wave_hotties 'hotties', :controller => :hotties, :action => :show, :conditions => { :method => :get }  
   map.resources :profiles, :only => [ :show, :edit, :update ]
+  
+  # # # # # # # # # # # # # # # 
+  
   map.edit_profile 'profile', :controller => 'profiles', :action => 'edit', :conditions => { :method => :get }
   
   # # # # # # # # # # # # # # # 
@@ -35,45 +37,25 @@ ActionController::Routing::Routes.draw do |map|
     message.resource 'reply', :only => [ :create ], :controller => 'messages'
   end
 
-  # # # # # # # # # # # # # # #  
-  # User Controller
-  
-  map.resources :users, :only => [ :new, :create ]
-
   # # # # # # # # # # # # # # # 
-  # Friendships Controller
-  
+
+  map.resources :chats, :only => [ :index ]  
+  map.resources :users, :only => [ :new, :create ]
   map.resources :friendships, :only => [ :create, :destroy ]
 
-  # # # # # # # # # # # # # # #
-  # Welcome Controller
-  
-  map.welcome 'welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
-
-  # # # # # # # # # # # # # # # 
-  # UserSession Controller
-  
-  map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }
-  
-  # Convenience routes
+  map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }  
   map.login  'login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :delete }
   
-  # # # # # # # # # # # # # # # 
-  # Search Controller
-  
   map.search 'search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
     
-  # # # # # # # # # # # # # # # 
-  # Root Controller
-
+  map.welcome 'welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
   map.root :wave
   
   # # # # # # # # # # # # # # # 
-  # Crap Here On In
-  
+  # Miscellaneous
+    
   map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
-
   # map.peek 'peek', :controller => 'welcome', :action => 'peek'  # Chat Debug
   
   # Sample resource route with sub-resources:

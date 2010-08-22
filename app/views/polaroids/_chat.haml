@@ -1,0 +1,11 @@
+%div
+  %p Chat
+  =# image_tag 'chat-b-side.png', :width=>'260px'
+  :javascript
+    // Create a Pusher server object with your app's key
+    var server = new Pusher('064cfff6a7f7e44b07ae', 'test_channel');
+    
+    // Bind to server events
+    server.bind('my_event', function(data) {
+      alert(data);
+    });
