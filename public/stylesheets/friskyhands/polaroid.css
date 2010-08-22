@@ -13,39 +13,20 @@
 	-webkit-perspective: 1200;
 }
 
-
-/* Applies 3D transform and transition effects to the card. The card has two states: regular and flipped.
-   A card is in a regular state when there is an empty transform applied to it, and otherwise in a flipped
-   state, where there is a rotational transformation applied. This class is used when the card is in the regular state.
-   The "card flipped" class is used when the card is in the flipped state. 
-*/
-.polaroid 
-{
+.polaroid  {
 	position: absolute;
 	height: 350px;
-	width: 290px;
-	
-	/* Ensure that the card lives correctly in 3D space */
-	-webkit-transform-style: preserve-3d;
-	
-	/* We apply this property to the card so it can smoothly flip between its sides */
+	width: 290px;	
+	-webkit-transform-style: preserve-3d;	
 	-webkit-transition-property: -webkit-transform;
-	
-	/* Make the animation occur over a period of 1.5 seconds */
-	-webkit-transition-duration: 1s;
-	
+	-webkit-transition-duration: 1s;	
 	-webkit-transform: rotate(2deg);
 	-moz-transform: rotate(2deg);
 }
 
-
-/* Applies the flip animation to the card */
 .polaroid.flipped {
-	/* Rotate the card 180 degrees along the y-axis. This animation allows the card to
-	  toggle between its regular and flipped states. */
 	-webkit-transform: rotate(2deg) rotateY(180deg);
 }
-
 
 .face {
 	position: absolute;
@@ -86,6 +67,6 @@
 
 .back.face {
 	color: rgb(34,65,108);
-	-webkit-transform: rotateY(180deg);
-	-moz-transform: rotateY(180deg);
+/*	-webkit-transform: rotateY(180deg);*/
+/*	-moz-transform: rotateY(180deg);*/
 }

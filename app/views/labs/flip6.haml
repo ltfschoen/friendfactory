@@ -4,20 +4,15 @@
     %title Card Flip
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
     %link{:href => "/stylesheets/friskyhands/labs.css", :media => "screen", :rel => "stylesheet"}
-    %link{:href => "/stylesheets/friskyhands/polaroid-sans3d.css", :media => "screen", :rel => "stylesheet"}
+    %link{:href => "/stylesheets/friskyhands/polaroid.css", :media => "screen", :rel => "stylesheet"}
     %link{:href => "/stylesheets/friskyhands/buddy-bar.css", :media => "screen", :rel => "stylesheet"}
     %link{:href => "/stylesheets/friskyhands/scrollable.css", :media => "screen", :rel => "stylesheet"}
     = javascript_include_tag "http://cdn.jquerytools.org/1.2.4/full/jquery.tools.min.js"
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js"
     = javascript_include_tag "jquery.flip"    
-    = javascript_include_tag "flip3"    
+    = javascript_include_tag "chrome"
+    = javascript_include_tag "flip6"
     
   %body
     = render :partial => 'polaroid3'
     = render :partial => 'polaroid3'
-
-:javascript
-  jQuery(function($){
-    $('.polaroid').find('.face-container:eq(1)').hide();
-  });
-  

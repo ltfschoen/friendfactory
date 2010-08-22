@@ -1,32 +1,27 @@
 $(function(){
-  $('.front.face .buddy-bar a.flip').live('click', function(event){
+  $('.polaroid .front .buddy-bar a.flip').live('click', function(event){
     event.preventDefault();
-		$this = $(this);
-    $this.closest('.polaroid').flip({
-			speed: 240,
+		var $this = $(this), $polaroid = $this.closest('.polaroid');
+    $polaroid.flip({
+			speed: 280,
       direction: 'lr',
       color: '#FFF',
-      content: $('#polaroid-back_face'),
+      content: $polaroid.find('.face-container:hidden'),
       onEnd: function(){
-				$('.back.face .buddy-bar a.flip').click(function(event){
+				$polaroid.find('.buddy-bar a.flip').click(function(event){
 					event.preventDefault();
-					$('#polaroid-front_face').revertFlip();
+					$polaroid.revertFlip();
 				});
 
-				$('#polaroid-front_face .scrollable').scrollable({
+				$polaroid.find('.scrollable').scrollable({
 					items: 'items',
 					keyboard: false,
 					next: '',
 					prev: ''
-				}).navigator({
-					navi: "#polaroid-front_face .back.face .buddy-bar.primary",
-					naviItem: 'a',
-					activeClass: 'current'
-				});
+				}).navigator();
 				
-        $('#polaroid-front_face .back.face .buddy-bar .' + $this.attr('href')).click();
+       	$polaroid.find('.buddy-bar .' + $this.attr('href')).click();
       }
-    });          
+    });
   });
-
 });

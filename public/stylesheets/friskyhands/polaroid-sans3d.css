@@ -20,8 +20,7 @@
    state, where there is a rotational transformation applied. This class is used when the card is in the regular state.
    The "card flipped" class is used when the card is in the flipped state. 
 */
-.polaroid 
-{
+.polaroid {
 	position: absolute;
 	height: 350px;
 	width: 290px;
@@ -32,37 +31,28 @@
 
 
 /* Applies the flip animation to the card */
-.polaroid.flipped
-{
+.polaroid.flipped {
 
 	/* Rotate the card 180 degrees along the y-axis. This animation allows the card to
 	  toggle between its regular and flipped states. */
 	-webkit-transform: rotate(2deg);
 }
 
-
-/* Styles the card and hides its "back side" when the card is flipped */
-.face 
-{
+.face {
 	position: absolute;
 	height: 320px;
 	width: 260px;
 	padding: 15px;
-	/* Give a round layout to the card */
+	background: url(/images/friskyhands/polariod.jpg);
+
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	
-	/* Drop shadow around the card */
     -webkit-box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
-
 }
 
-.face {
-	background: url(/images/friskyhands/polariod.jpg);
-}
-
-.front.face .header {
+.polaroid .front .header {
 	font-size: 18px;
 	font-family: Chalkduster;
 	color: rgb(0, 0, 0);
@@ -70,12 +60,12 @@
 	width: 100%;
 }
 
-.front.face table.header .username {
+.polaroid .front table.header .username {
 	text-align: left;
 	vertical-align: top;
 }
 
-.front.face table.header .status {
+.polaroid .front table.header .status {
 	vertical-align: top;
 	padding-top: 6px;
 	text-align: right;
@@ -84,7 +74,6 @@
 	color: #666;
 }
 
-.back.face
-{
+.polaroid .back {
 	color: rgb(34,65,108);
 }
