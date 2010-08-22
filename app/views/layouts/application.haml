@@ -1,0 +1,45 @@
+!!!
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
+    %title FriskyHands
+    = stylesheet_link_tag 'reset', :media => 'screen, projection'
+    = stylesheet_link_tag 'forms', :media => 'screen, projection'
+    = stylesheet_link_tag '960gs/fluid',  :media => 'screen'    
+    / [if IE 6]
+      = stylesheet_link_tag '960gs/ie6'
+    / [if IE 7]
+      = stylesheet_link_tag '960gs/ie'
+      
+    = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen, projection'
+    = stylesheet_link_tag "#{current_site}/application", :media => 'screen, projection'
+    = stylesheet_link_tag "#{current_site}/postings", :media => 'screen, projection'
+    
+    / [if IE]
+      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen, projection'
+            
+    :css
+      #{yield(:pagecss)}
+
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.4/full/jquery.tools.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js'
+    = javascript_include_tag 'http://js.pusherapp.com/1.5/pusher.min.js'
+    = javascript_tag "WebSocket.__swfLocation = '/WebSocketMain.swf';"
+    = javascript_include_tag 'jquery.placeholder'
+    = javascript_include_tag 'jrails'
+    = javascript_include_tag 'application'
+    
+    = yield(:head)
+    
+    :javascript
+      jQuery(function($){
+        #{yield(:pagejs)}
+        $('body').removeClass('hidden').show();
+      });
+      
+  %body{ :class => "#{[ current_site, current_layout, 'hidden' ].compact * ' '}"}
+    = render :partial => "layouts/#{current_site}/header"
+    %div{ :class => "#{[ 'container', (yield(:current_container) || 'container_16'), 'clearfix' ].compact * '*' }"}
+    = yield
+    = render(:partial => "layouts/#{current_site}/footer") rescue nil
+    = render(:partial => 'layouts/feedback') unless Rails.env.development?
