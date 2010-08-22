@@ -1,4 +1,5 @@
 jQuery(function($){
+  $('.polaroid').draggable();
 	if ($.browser.safari){
 		$('.polaroid .back').css('-webkit-transform', 'rotateY(180deg)');
 	  $('.polaroid .back .scrollable').scrollable({
@@ -34,7 +35,7 @@ jQuery(function($){
 	      color: '#FFF',
 	      content: $polaroid.find('.face-container:hidden'),
 	      onEnd: function(){
-					$polaroid.find('.buddy-bar a.flip').click(function(event){
+					$polaroid.draggable().find('.buddy-bar a.flip').click(function(event){
 						event.preventDefault();
 						$polaroid.revertFlip();
 					});

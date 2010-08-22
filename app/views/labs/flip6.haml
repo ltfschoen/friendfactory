@@ -16,3 +16,8 @@
   %body
     = render :partial => 'polaroid3'
     = render :partial => 'polaroid3'
+
+:javascript
+  jQuery(function($){
+    $('.polaroid').draggable();
+  });
