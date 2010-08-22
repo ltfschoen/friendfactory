@@ -25,7 +25,9 @@ jQuery(function($){
 		$('.polaroid').find('.face-container:eq(1)').hide();
 	  $('.polaroid .front .buddy-bar a.flip').live('click', function(event){
 	    event.preventDefault();
-			var $this = $(this), $polaroid = $this.closest('.polaroid');
+			var $polaroid = $(this).closest('.polaroid');			
+			$polaroid.data('current', $(this).attr('href'));
+			
 	    $polaroid.flip({
 				speed: 280,
 	      direction: 'lr',
@@ -44,7 +46,7 @@ jQuery(function($){
 						prev: ''
 					}).navigator();
 				
-	       	$polaroid.find('.buddy-bar .' + $this.attr('href')).click();
+	       	$polaroid.find('.navi .' + $polaroid.data('current')).click();
 	      }
 	    });
 	  });
