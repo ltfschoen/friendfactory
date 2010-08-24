@@ -24,6 +24,10 @@ ActionController::Routing::Routes.draw do |map|
   
   # # # # # # # # # # # # # # # 
   # Postings Controllers
+
+  map.namespace(:posting) do |posting|
+    posting.resources :chats
+  end
   
   map.resources :avatars,  :only => [ :create ] # TODO: remove once profiles wave works correctly
 
@@ -39,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # # # # # # # # # # # # # # # 
 
-  map.resources :chats, :only => [ :index ]  
+  # map.resources :chats, :only => [ :index ]  
   map.resources :users, :only => [ :new, :create ]
   map.resources :friendships, :only => [ :create, :destroy ]
 

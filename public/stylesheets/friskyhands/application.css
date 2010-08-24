@@ -109,9 +109,9 @@ img.online {
 input[type=text],
 input[type=password],
 textarea  {
-	padding: 0.4em;
+	padding: 6px;
 	width: 90%;
-	font-size: 1em;
+	font-size: 12px;
 }
 
 input.placeholder,

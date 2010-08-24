@@ -1,5 +1,5 @@
 jQuery(function($){
-  $('.polaroid').draggable();
+  $('.polaroid').draggable({ handle: '.gripper' })
 	if ($.browser.safari){
 		$('.polaroid .back').css('-webkit-transform', 'rotateY(180deg)');
 	  $('.polaroid .back .scrollable').scrollable({
@@ -9,15 +9,25 @@ jQuery(function($){
 	    prev: ''
 	  }).navigator();
           
-	  $('.polaroid .buddy-bar a.flip').click(function(event){
-	    event.preventDefault();
-	    $(this).addClass('current').closest('.polaroid').toggleClass('flipped');
+	  $('.polaroid .front .buddy-bar a.flip').click(function(event){
+	    event.preventDefault();	
+	    $(this).addClass('current').closest('.polaroid').toggleClass('flipped').find('.gripper').hide();
+	  });
+
+	  $('.polaroid .back .buddy-bar a.flip').click(function(event){
+	    event.preventDefault();	
+	    $(this).closest('.polaroid').toggleClass('flipped').find('.gripper').hide();
 	  });
     
 	  $('.polaroid').each(function(idx, polaroid){
 	    polaroid.addEventListener('webkitTransitionEnd', function(event){
-	      var $current = $(event.target).find('.front.face .buddy-bar .current')
-	      $(event.target).find('.back .buddy-bar .' + $current.attr('href')).click();
+				var $polaroid = $(event.target);
+	      var $current = $polaroid.find('.front.face .buddy-bar .current')
+	      $polaroid.find('.back .buddy-bar .' + $current.attr('href')).click();
+				$polaroid.find('.back .gripper').show();				
+				if (!$polaroid.hasClass('flipped')) {
+					$polaroid.find('.front .gripper').show();
+				}
 	      $current.removeClass('current');
 	    });
 	  });

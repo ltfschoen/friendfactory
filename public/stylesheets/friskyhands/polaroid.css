@@ -8,7 +8,7 @@
 	height: 356px;
 	width: 320px;
 	position: relative;	
-	margin: 5em auto;
+	z-index: 1000;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);	
 	-webkit-perspective: 1200;
 }
@@ -28,7 +28,7 @@
 	-webkit-transform: rotate(2deg) rotateY(180deg);
 }
 
-.face {
+.polaroid .face {
 	position: absolute;
 	height: 320px;
 	width: 260px;

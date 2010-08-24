@@ -1,0 +1,12 @@
+- stylesheet('polaroid', 'buddy-bar', 'scrollable', 'chat')
+- javascript('jquery.flip', 'flip6', 'chat')
+
+.chat
+  .grid_16
+    - [[ 'mich', 'carlos' ]].each do |(user, receiver)|
+      = render :partial => 'polaroids/polaroid', :locals => { :user => user, :receiver => receiver }
+
+- content_for(:pagejs) do
+  :plain
+    setTimeout("$('.polaroid .front a.flip.chat').click();", 1200)
+    

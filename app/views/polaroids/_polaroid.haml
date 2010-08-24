@@ -1,12 +1,14 @@
 .polaroid-container
-  .polaroid
+  .polaroid{ :id => user }
     .face-container
       .front.face
-        %img.headshot{ :alt => "Carlos", :src => "/images/friskyhands/carlos.jpg" }
-        %table.header
-          %tr
-            %td.username Carlos
-            %td.status Looking for fun
+        .gripper
+        .content
+          %img.headshot{ :alt => "Carlos", :src => "/images/friskyhands/carlos.jpg" }
+          %table.header
+            %tr
+              %td.username Carlos
+              %td.status Looking for fun
         %ul.buddy-bar.secondary
           %li
             = link_to 'Comment', '#', :class => 'comment icon'
@@ -29,15 +31,19 @@
             = link_to 'Profile', 'profile', :class => 'flip profile icon last'
     .face-container
       .back.face
-        .scrollable
+        .gripper
+        .content.scrollable
           .items
-            = render :partial => 'chat'
+            = render :partial => 'polaroids/chat', :locals => { :user => user, :receiver => receiver }
             %div
-              = image_tag 'message-b-side.png', :width=>'260px'
+              Messaging
+              =# image_tag 'message-b-side.png', :width=>'260px'
             %div
-              = image_tag 'photos-b-side.png', :width=>'260px'
+              Photos
+              =# image_tag 'photos-b-side.png', :width=>'260px'
             %div
-              = image_tag 'profile-b-side.png', :width=>'260px'
+              Profile
+              =# image_tag 'profile-b-side.png', :width=>'260px'
         %ul.buddy-bar.secondary
           %li
             = link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'

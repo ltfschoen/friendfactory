@@ -15,12 +15,12 @@ module ApplicationHelper
   end
   
   def javascript(*files)
-    content_for(:head) { javascript_include_tag(*files) }
+    content_for(:javascripts) { javascript_include_tag(*files) }
   end
   
   def stylesheet(*files)
-    files.map! { |file| File.join(current_site.name, file) }
-    content_for(:head) { stylesheet_link_tag(*files) }
+    files.map! { |file| File.join(current_site.name,*file) }
+    content_for(:stylesheets) { stylesheet_link_tag(files) }
   end
   
   def image_tag(source, opts = {})    
@@ -30,7 +30,7 @@ module ApplicationHelper
   
   def fixed_container
     content_for(:current_container, 'container_16_fixed')
-    content_for(:head, stylesheet_link_tag(File.join('960gs', 'fixed'), :media => 'screen'))
+    content_for(:stylesheets, stylesheet_link_tag(File.join('960gs', 'fixed'), :media => 'screen'))
   end
 
   def button_tag(text = nil, opts = {})

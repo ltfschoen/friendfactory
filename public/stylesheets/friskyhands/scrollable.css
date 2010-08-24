@@ -1,8 +1,12 @@
+.content {
+	width: 260px;
+	height: 300px;
+	margin-bottom: 5px;
+}
+
 .scrollable {
 	position: relative;
 	overflow: hidden;
-	width: 260px;
-	height: 300px;
 }
 
 .scrollable .items {

@@ -1,6 +1,6 @@
 ul.buddy-bar {
 	list-style-type: none;
-	margin: 10px 0 0 0;
+	margin: 0;
 	padding: 0;
 }
 
@@ -16,10 +16,6 @@ ul.buddy-bar li {
 	float: left;
 }
 
-/*ul.buddy-bar a {
-	display: block;
-}
-*/
 ul.buddy-bar li.comment-count {	
 	font-family: Gill Sans, Trebuchet MS, Verdana, Arial;
 	font-size: 12px;
@@ -81,4 +77,15 @@ a.icon.profile {
 a.icon.headshot {
 	width: 22px;
 	background-position: -200px -1px;
+}
+
+div.gripper {
+	background: url(/images/friskyhands/buddy-bar.png) top left no-repeat;	
+	background-position: -220px -1px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 18px;
+	height: 18px;
+	cursor: move;
 }
