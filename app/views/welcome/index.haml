@@ -3,16 +3,16 @@
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
     %title FriskyHands
-    = stylesheet_link_tag 'reset', :media => 'screen, projection'
-    = stylesheet_link_tag 'forms', :media => 'screen, projection'
+    = stylesheet_link_tag 'reset', :media => 'screen'
+    = stylesheet_link_tag 'forms', :media => 'screen'
     = stylesheet_link_tag '960gs/fixed', :media => 'screen'
     / [if IE 6]
       = stylesheet_link_tag '960gs/ie6'
     / [if IE 7]
       = stylesheet_link_tag '960gs/ie'
-    = stylesheet_link_tag "#{current_site}/jquery-ui-1.8.4.custom.css", :media => 'screen, projection'
-    = stylesheet_link_tag "#{current_site}/application", :media => 'screen, projection'
-    = stylesheet_link_tag "#{current_site}/welcome", :media => 'screen, projection'
+    = stylesheet_link_tag "#{current_site}/jquery-ui-1.8.4.custom.css", :media => 'screen'
+    = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
+    = stylesheet_link_tag "#{current_site}/welcome", :media => 'screen'
     /[if IE]
       = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
 
@@ -45,7 +45,7 @@
               = f.error_message_on :email, :prepend_text => 'Your email address '
               = f.password_field :password
               = f.error_message_on :password, :prepend_text => 'Your password '
-              = f.submit 'Login!'
+              = f.submit 'Login'
               = f.button 'Sign Up', :class => 'toggle'
               = link_to 'Lurk…', lurk_new_user_session_path, :class => 'button'
           #signup
@@ -70,35 +70,34 @@
         %span
           About Us
     = render(:partial => 'layouts/feedback') unless Rails.env.development?
-    
-    :javascript
-      jQuery(function($) {
-        $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
-        $('button[class=toggle]').button();
-        $('a[class=button]').button();
-        #{flash[:errors].present? ? "$('#login').hide();" : "$('#signup').hide();"}
 
-        if (!$.browser.webkit) {
-          $('#user_session_password').before('#{text_field_tag( :user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
-          FF.passwordPrompt('#user_session_password', '#user_session_password_placeholder');
+  :javascript
+    jQuery(function($){
+      $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+      $('button[class=toggle], a[class=button]').button();
+      #{flash[:errors].present? ? "$('#login').hide();" : "$('#signup').hide();"}
 
-          $('#user_password').before('#{text_field_tag( :user_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
-          FF.passwordPrompt('#user_password', '#user_password_placeholder');
+      if (!$.browser.webkit) {
+        $('#user_session_password').before('#{text_field_tag( :user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
+        FF.passwordPrompt('#user_session_password', '#user_session_password_placeholder');
 
-          $('#user_password_confirmation').before('#{text_field_tag( :user_password_confirmation_placeholder, nil, :value => placeholder_for(:password_confirmation), :class => 'placeholder ui-widget')}');
-          FF.passwordPrompt('#user_password_confirmation', '#user_password_confirmation_placeholder');
+        $('#user_password').before('#{text_field_tag( :user_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
+        FF.passwordPrompt('#user_password', '#user_password_placeholder');
 
-          $('input[type=password]').removeAttr('placeholder').hide();
+        $('#user_password_confirmation').before('#{text_field_tag( :user_password_confirmation_placeholder, nil, :value => placeholder_for(:password_confirmation), :class => 'placeholder ui-widget')}');
+        FF.passwordPrompt('#user_password_confirmation', '#user_password_confirmation_placeholder');
 
-          $('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
+        $('input[type=password]').removeAttr('placeholder').hide();
 
-          $('form#new_user_session, form#new_user').submit(function(){
-            FF.scrubPlaceholders(this);
-          });
-        }
+        $('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
 
-        $('button.toggle').click(function(){
-          $('div#login, div#signup').toggle();
-          return false;
+        $('form#new_user_session, form#new_user').submit(function(){
+          FF.scrubPlaceholders(this);
         });
+      }
+
+      $('button.toggle').click(function(event){
+        event.preventDefault();
+        $('div#login, div#signup').toggle();
       });
+    });
