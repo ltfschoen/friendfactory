@@ -16,7 +16,8 @@
     
     :javascript
       $(function(){
-        $('.polaroid .back.face .scrollable').scrollable({
+      	$('.polaroid .back').css('-webkit-transform', 'rotateY(180deg)');
+        $('.polaroid .back .scrollable').scrollable({
           items: 'items',
           keyboard: false,
           next: '',
