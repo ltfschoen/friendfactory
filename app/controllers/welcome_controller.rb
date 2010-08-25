@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
     
   def index
     store_reentry_location
+    render :layout => false
   end
   
 end

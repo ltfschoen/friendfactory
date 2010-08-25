@@ -1,0 +1,104 @@
+!!! 5
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
+    %title FriskyHands
+    = stylesheet_link_tag 'reset', :media => 'screen, projection'
+    = stylesheet_link_tag 'forms', :media => 'screen, projection'
+    = stylesheet_link_tag '960gs/fixed', :media => 'screen'
+    / [if IE 6]
+      = stylesheet_link_tag '960gs/ie6'
+    / [if IE 7]
+      = stylesheet_link_tag '960gs/ie'
+    = stylesheet_link_tag "#{current_site}/jquery-ui-1.8.4.custom.css", :media => 'screen, projection'
+    = stylesheet_link_tag "#{current_site}/application", :media => 'screen, projection'
+    = stylesheet_link_tag "#{current_site}/welcome", :media => 'screen, projection'
+    /[if IE]
+      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
+
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js'
+    = javascript_include_tag 'jquery.placeholder'
+    = javascript_include_tag 'application'
+    
+  %body{ :class => "#{[ current_site, current_layout ].compact * ' '}" }
+    .container.container_16_fixed.clearfix
+      .prefix_3.grid_10.suffix_3
+        = image_tag 'logo-big-24t.png'
+        %h1 Welcome!
+        %h2 We&#146;ve been waiting for you.
+      #creative.prepend-top.prefix_2.grid_12.suffix_2
+        #blurb.grid_7.alpha
+          - if flash[:errors]
+            %p Oh no! Can you fix this?
+            %ul.flash_errors
+              - flash[:errors].each do |error|
+                %li= error
+          - else
+            %p FriskyHands is the social networking site designed especially for the Deaf GLBTQ Community and their Friends
+            %p.small We're busily building the best site for our community. New great features every Monday!
+        .grid_5.omega
+          #login
+            %h3 Log in, right now
+            - form_for UserSession.new, :url => user_sessions_path do |f|
+              = f.text_field :email
+              = f.error_message_on :email, :prepend_text => 'Your email address '
+              = f.password_field :password
+              = f.error_message_on :password, :prepend_text => 'Your password '
+              = f.submit 'Login!'
+              = f.button 'Sign Up', :class => 'toggle'
+              = link_to 'Lurk…', lurk_new_user_session_path, :class => 'button'
+          #signup
+            %h3 Sign up, right now
+            - form_for User.new, :url => users_path do |f|
+              = f.text_field :first_name, :class => 'ui-widget'
+              = f.error_message_on :first_name, :prepend_text => 'Your first name '
+              = f.text_field :last_name, :class => 'ui-widget'
+              = f.error_message_on :last_name, :prepend_text => 'Your last name '
+              = f.text_field :email, :class => 'ui-widget'
+              = f.error_message_on :email, :prepend_text => 'Your email address '
+              = f.password_field :password, :class => 'ui-widget'
+              = f.error_message_on :password, :prepend_text => 'Your password '
+              = f.password_field :password_confirmation, :class => 'ui-widget'
+              = f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation '
+              = f.submit 'Register'
+              = f.button 'Back', :class => 'toggle'
+    .footer
+      %p
+        %span
+          &copy;&nbsp;#{Date.today.year} Frisky Factory LLC, New York, NY
+        %span
+          About Us
+    = render(:partial => 'layouts/feedback') unless Rails.env.development?
+    
+    :javascript
+      jQuery(function($) {
+        $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+        $('button[class=toggle]').button();
+        $('a[class=button]').button();
+        #{flash[:errors].present? ? "$('#login').hide();" : "$('#signup').hide();"}
+
+        if (!$.browser.webkit) {
+          $('#user_session_password').before('#{text_field_tag( :user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
+          FF.passwordPrompt('#user_session_password', '#user_session_password_placeholder');
+
+          $('#user_password').before('#{text_field_tag( :user_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
+          FF.passwordPrompt('#user_password', '#user_password_placeholder');
+
+          $('#user_password_confirmation').before('#{text_field_tag( :user_password_confirmation_placeholder, nil, :value => placeholder_for(:password_confirmation), :class => 'placeholder ui-widget')}');
+          FF.passwordPrompt('#user_password_confirmation', '#user_password_confirmation_placeholder');
+
+          $('input[type=password]').removeAttr('placeholder').hide();
+
+          $('input[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
+
+          $('form#new_user_session, form#new_user').submit(function(){
+            FF.scrubPlaceholders(this);
+          });
+        }
+
+        $('button.toggle').click(function(){
+          $('div#login, div#signup').toggle();
+          return false;
+        });
+      });

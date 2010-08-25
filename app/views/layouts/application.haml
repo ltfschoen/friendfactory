@@ -14,27 +14,23 @@
     = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/postings", :media => 'screen'
-    = yield(:stylesheets)
     / [if IE]
       = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
-      
+    = yield(:stylesheets)      
     :css
       #{yield(:pagecss)}
 
     = javascript_include_tag 'http://cdn.jquerytools.org/1.2.4/full/jquery.tools.min.js'
-    = javascript_include_tag 'jrails'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
     = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'
+    = javascript_include_tag 'jrails'
     = javascript_include_tag 'jquery.placeholder'
-    = javascript_include_tag "chrome"
+    = javascript_include_tag 'chrome'
     = javascript_include_tag 'application'
     = yield(:javascripts)
-    
-    =# yield(:head)
-    
     :javascript
       jQuery(function($){
-        $('body').removeClass('hidden').show();
+        $('body').removeClass('hidden');
         #{yield(:pagejs)}        
       });
       
@@ -42,5 +38,5 @@
     = render :partial => "layouts/#{current_site}/header"
     %div{ :class => "#{[ 'container', (yield(:current_container) || 'container_16'), 'clearfix' ].compact * '*' }"}
     = yield
-    = render(:partial => "layouts/#{current_site}/footer") rescue nil
-    = render(:partial => 'layouts/feedback') unless Rails.env.development?
+    = render :partial => "layouts/#{current_site}/footer" rescue nil
+    = render :partial => 'layouts/feedback' unless Rails.env.development?
