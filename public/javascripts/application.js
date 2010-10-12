@@ -22,9 +22,7 @@ var FF = {
 		(function($){
 			$(password_placeholder_field).focus(function() {
 				$(this).hide();
-				$(password_field)
-					.show()
-					.focus();
+				$(password_field).show().focus();
 			});
 			$(password_field).blur(function() {
 				if ($(this).val() == '') {
