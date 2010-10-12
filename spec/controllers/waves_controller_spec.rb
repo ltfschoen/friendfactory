@@ -18,15 +18,27 @@ describe WavesController do
   
   describe "GET show" do
     it "assigns the requested wave with id as @wave" do
-      Wave::Base.should_receive(:find_by_id).with("37").and_return(mock_wave)
+      Wave::Base.should_receive(:find_by_id).once.with("37").and_return(mock_wave)
       get :show, { :id => "37" }, { :lurker => true }
       assigns[:wave].should equal(mock_wave)
     end
 
     it "assigns the requested wave with slug as @wave" do
-      Wave::Base.should_receive(:find_by_slug).with("hotties").and_return(mock_wave)
+      Wave::Base.should_receive(:find_by_slug).once.with("hotties").and_return(mock_wave)
       get :show, { :slug => "hotties" }, { :lurker => true }
       assigns[:wave].should equal(mock_wave)
+    end
+    
+    it "assigns the default wave when given no parameters" do
+      wave = Factory.build(:wave)
+      Wave::Base.should_receive(:find_by_slug).with(WavesController::DefaultWaveSlug).and_return(wave)
+      get :show, nil, { :lurker => true }
+      assigns[:wave].should equal(wave)
+    end
+    
+    it "raises an exception when there's no default wave" do
+      Wave::Base.should_receive(:find_by_slug).with(WavesController::DefaultWaveSlug).and_return(nil)
+      expect { get :show, nil, { :lurker => true } }.to raise_error(ConfigurationException)
     end
   end
   

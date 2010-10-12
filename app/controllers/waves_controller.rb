@@ -6,11 +6,17 @@ class WavesController < ApplicationController
 
   def show
     store_location
+    
     @wave = case 
       when params[:id].present?   then Wave::Base.find_by_id(params[:id]) 
       when params[:slug].present? then Wave::Base.find_by_slug(params[:slug])
       else Wave::Base.find_by_slug(DefaultWaveSlug)
     end
+    
+    unless @wave.present?
+      raise ConfigurationException, "Unknown wave: #{params[:id] || params[:slug] || DefaultWaveSlug}"
+    end
+    
     respond_to do |format|
       format.html
     end

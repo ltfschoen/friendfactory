@@ -4,3 +4,6 @@ class UnauthorizedException < StandardError
     @user = user
   end
 end
+
+class ConfigurationException < RuntimeError
+end
