@@ -1,23 +1,24 @@
-set :application, "friskyfactory"
+set :application, 'friskyfactory'
 
-set :scm,        "git"
-set :repository, "git@github.com:mjbamford/friskyfactory.git"
-set :user,       "mrcap"
-set :runner,     "mrcap"
+set :scm,        'git'
+set :repository, 'git@github.com:mjbamford/friskyfactory.git'
+set :user,       'mrcap'
+set :runner,     'mrcap'
 
-role :app, "friskyfactory.tagwaymedia.com"
-role :web, "friskyfactory.tagwaymedia.com"
-role :db,  "friskyfactory.tagwaymedia.com", :primary => true
+role :app, 'friskyhands.com'
+role :web, 'friskyhands.com'
+role :db,  'friskyhands.com', :primary => true
 
-set :use_sudo,  false
+set :use_sudo, false
 
 ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
 
-after "deploy:symlink", "deploy:config_symlinks"
+after 'deploy:symlink', 'deploy:config_symlinks'
 # after "deploy:symlink", "deploy:thinking_sphinx"
 # after "deploy:symlink", "deploy:update_crontab"
-
+ 
+desc 'Set staging environment'
 task :staging do
   set :branch,         ENV['branch'] || 'master'
   set :rails_env,      'staging'
@@ -25,12 +26,18 @@ task :staging do
   set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
 end
 
+desc 'Set production environment'
 task :production do
   set :branch,         ENV['release']
   set :rails_env,      'production'
   set :deploy_to,      '/home/mrcap/friskyfactory/production'
   set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
 end
+
+# unless exists?(:rails_env)
+#   puts 'Usage: cap <environment> task'
+#   exit
+# end
 
 namespace :deploy do
   task :config_symlinks do
@@ -44,8 +51,8 @@ namespace :deploy do
     [ :stop, :start ].each do |t|
       desc "#{t.to_s.capitalize} the mongrel appserver"
       task t, :roles => :app do
-        # invoke_command checks the use_sudo variable
-        # to determine how to run the mongrel_rails command
+        # invoke_command checks the use_sudo variable to
+        # determine how to run the mongrel_rails command
         invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_config}"
       end
     end
@@ -85,10 +92,9 @@ namespace :deploy do
 end
 
 namespace :ff do
+  require 'yaml'
   desc "Dump production to local sql file"
   task :dump do
-    require 'yaml'
-    
     database  = YAML::load_file("config/database.yml")
     timestamp = Time.now.strftime('%Y%m%d')
     dump_filename = "dump.#{timestamp}.sql"
@@ -101,12 +107,7 @@ namespace :ff do
     
     run "mysqldump -u #{database['production']['username']} -p#{database['production']['password']} -h #{database['production']['host']} #{database['production']['database']} > #{shared_path}/dumps/#{dump_filename}"
     run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
-        
-    get "#{shared_path}/dumps/#{dump_filename}", "db/#{dump_filename}"
-    get "#{shared_path}/dumps/#{tar_filename}", "db/#{tar_filename}"
-    # download "#{current_path}/public/system/images", "public/system", :via => :scp, :recursive => true, :preserve => true
-        
-    system "mysql -u #{database['development']['username']} -p#{database['development']['password']} #{database['development']['database']} < db/#{dump_filename}"
-    system "tar -xf db/#{tar_filename} -C public/system"
+    get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
+    get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"        
   end  
 end

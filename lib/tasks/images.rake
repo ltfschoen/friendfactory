@@ -2,6 +2,7 @@ namespace :spec do
   namespace :db do
     namespace :fixtures do
       namespace :images do
+
         desc "Load images into database using paperclip"
         task :load => :environment do
           require 'active_record/fixtures'
@@ -17,6 +18,7 @@ namespace :spec do
             end
           end
         end
+        
       end
     end
   end
