@@ -54,6 +54,7 @@ ActionController::Routing::Routes.draw do |map|
   map.search 'search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
     
   map.welcome 'welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
+  
   map.root :wave
   
   # # # # # # # # # # # # # # # 

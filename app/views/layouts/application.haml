@@ -6,11 +6,11 @@
     - if Rails.env.development?
       = stylesheet_link_tag 'uncompressed/reset', :media => 'screen'
       = stylesheet_link_tag 'uncompressed/forms', :media => 'screen'
-      = stylesheet_link_tag 'uncompressed/960gs', :media => 'screen'
+      = stylesheet_link_tag 'uncompressed/960', :media => 'screen'
     - else
       = stylesheet_link_tag 'reset', :media => 'screen'
       = stylesheet_link_tag 'forms', :media => 'screen'
-      = stylesheet_link_tag '960gs', :media => 'screen'
+      = stylesheet_link_tag '960', :media => 'screen'
 
     = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
@@ -38,7 +38,7 @@
       
   %body{ :class => "#{[ current_site, current_layout, 'hidden' ].compact * ' '}"}
     = render :partial => "layouts/#{current_site}/header"
-    %div{ :class => "container container_16 clearfix" }
-    = yield
-    = render :partial => "layouts/#{current_site}/footer" rescue nil
-    = render :partial => 'layouts/feedback' unless Rails.env.development?
+    .container.container_16.clearfix
+      = yield
+      = render :partial => "layouts/#{current_site}/footer" rescue nil
+      = render :partial => 'layouts/feedback' unless Rails.env.development?

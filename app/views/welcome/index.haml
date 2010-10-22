@@ -3,14 +3,16 @@
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
     %title FriskyHands
-    = stylesheet_link_tag 'reset', :media => 'screen'
-    = stylesheet_link_tag 'forms', :media => 'screen'
-    = stylesheet_link_tag '960gs/fixed', :media => 'screen'
-    / [if IE 6]
-      = stylesheet_link_tag '960gs/ie6'
-    / [if IE 7]
-      = stylesheet_link_tag '960gs/ie'
-    = stylesheet_link_tag "#{current_site}/jquery-ui-1.8.4.custom.css", :media => 'screen'
+    - if Rails.env.development?
+      = stylesheet_link_tag 'uncompressed/reset', :media => 'screen'
+      = stylesheet_link_tag 'uncompressed/forms', :media => 'screen'
+      = stylesheet_link_tag 'uncompressed/960', :media => 'screen'
+    - else
+      = stylesheet_link_tag 'reset', :media => 'screen'
+      = stylesheet_link_tag 'forms', :media => 'screen'
+      = stylesheet_link_tag '960', :media => 'screen'
+    
+    = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/welcome", :media => 'screen'
     /[if IE]
@@ -22,7 +24,7 @@
     = javascript_include_tag 'application'
     
   %body{ :class => "#{[ current_site, current_layout ].compact * ' '}" }
-    .container.container_16_fixed.clearfix
+    .container.container_16.clearfix
       .prefix_3.grid_10.suffix_3
         = image_tag 'logo-big-24t.png'
         %h1 Welcome!
@@ -36,7 +38,6 @@
                 %li= error
           - else
             %p FriskyHands is the social networking site designed especially for the Deaf GLBTQ Community and their Friends
-            %p.small We're busily building the best site for our community. New great features every Monday!
         .grid_5.omega
           #login
             %h3 Log in, right now
@@ -67,8 +68,6 @@
       %p
         %span
           &copy;&nbsp;#{Date.today.year} Frisky Factory LLC, New York, NY
-        %span
-          About Us
     = render(:partial => 'layouts/feedback') unless Rails.env.development?
 
   :javascript
