@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20100823042929) do
     t.text    "body"
   end
 
+  add_index "posting_chats", ["receiver_id"], :name => "index_posting_chats_on_receiver_id"
+
   create_table "postings", :force => true do |t|
     t.string   "type"
     t.string   "slug"

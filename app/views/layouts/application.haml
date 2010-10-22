@@ -1,27 +1,29 @@
-!!!
-%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+!!! 5
+%html
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
-    %title FriskyHands
-    = stylesheet_link_tag 'reset', :media => 'screen'
-    = stylesheet_link_tag 'forms', :media => 'screen'
-    = stylesheet_link_tag '960gs/fluid',  :media => 'screen'    
-    / [if IE 6]
-      = stylesheet_link_tag '960gs/ie6'
-    / [if IE 7]
-      = stylesheet_link_tag '960gs/ie'
+    %title FriskyHands    
+    - if Rails.env.development?
+      = stylesheet_link_tag 'uncompressed/reset', :media => 'screen'
+      = stylesheet_link_tag 'uncompressed/forms', :media => 'screen'
+      = stylesheet_link_tag 'uncompressed/960gs', :media => 'screen'
+    - else
+      = stylesheet_link_tag 'reset', :media => 'screen'
+      = stylesheet_link_tag 'forms', :media => 'screen'
+      = stylesheet_link_tag '960gs', :media => 'screen'
 
     = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/postings", :media => 'screen'
     / [if IE]
       = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
-    = yield(:stylesheets)      
+    = yield(:stylesheets)
     :css
       #{yield(:pagecss)}
 
-    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.4/full/jquery.tools.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
     = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'
     = javascript_include_tag 'jrails'
     = javascript_include_tag 'jquery.placeholder'
@@ -36,7 +38,7 @@
       
   %body{ :class => "#{[ current_site, current_layout, 'hidden' ].compact * ' '}"}
     = render :partial => "layouts/#{current_site}/header"
-    %div{ :class => "#{[ 'container', (yield(:current_container) || 'container_16'), 'clearfix' ].compact * '*' }"}
+    %div{ :class => "container container_16 clearfix" }
     = yield
     = render :partial => "layouts/#{current_site}/footer" rescue nil
     = render :partial => 'layouts/feedback' unless Rails.env.development?

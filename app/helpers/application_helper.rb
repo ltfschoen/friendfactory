@@ -28,11 +28,6 @@ module ApplicationHelper
     super(source, opts)
   end
   
-  def fixed_container
-    content_for(:current_container, 'container_16_fixed')
-    content_for(:stylesheets, stylesheet_link_tag(File.join('960gs', 'fixed'), :media => 'screen'))
-  end
-
   def button_tag(text = nil, opts = {})
     content_tag(:button, text, opts)
   end
