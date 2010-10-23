@@ -1,9 +1,10 @@
 .posting[photo]
   = thumb_image_tag(photo.user.profile.avatar)
-  - unless photo.nil?
-    = link_to image_tag(photo.image.url(:poloroid), :site => false, :class => 'polariod')   
-  
   - if false
+    - unless photo.nil?
+      = link_to image_tag(photo.image.url(:poloroid), :site => false, :class => 'polariod')   
+  
+  - if true
     %table
       %tr
         %td.avatar.thumb= thumb_image_tag(photo.user.profile.avatar)
