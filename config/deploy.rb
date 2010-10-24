@@ -18,27 +18,6 @@ after 'deploy:symlink', 'deploy:config_symlinks'
 # after "deploy:symlink", "deploy:thinking_sphinx"
 # after "deploy:symlink", "deploy:update_crontab"
  
-desc 'Set staging environment'
-task :staging do
-  set :branch,         ENV['branch'] || 'master'
-  set :rails_env,      'staging'
-  set :deploy_to,      '/home/mrcap/friskyfactory/staging'
-  set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
-end
-
-desc 'Set production environment'
-task :production do
-  set :branch,         ENV['release']
-  set :rails_env,      'production'
-  set :deploy_to,      '/home/mrcap/friskyfactory/production'
-  set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
-end
-
-# unless exists?(:rails_env)
-#   puts 'Usage: cap <environment> task'
-#   exit
-# end
-
 namespace :deploy do
   task :config_symlinks do
     run <<-CMD
@@ -91,20 +70,44 @@ namespace :deploy do
   end
 end
 
-namespace :ff do
-  require 'yaml'
+# unless exists?(:rails_env)
+#   puts 'Usage: cap <environment> task'
+#   exit
+# end
+
+namespace :staging do  
+  desc 'Set staging environment'
+  task :default do
+    set :branch, ENV['branch'] || 'master'
+    set :rails_env, 'staging'
+    set :deploy_to, '/home/mrcap/friskyfactory/staging'
+    set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
+  end
+end
+
+namespace :production do  
+  desc "Set production environment"
+  task :default do
+    set :branch, ENV['release']
+    set :rails_env, 'production'
+    set :deploy_to, '/home/mrcap/friskyfactory/production'
+    set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
+  end
+
   desc "Dump production to local sql file"
   task :dump do
+    require 'yaml'
+    production.default
     database  = YAML::load_file("config/database.yml")
     timestamp = Time.now.strftime('%Y%m%d')
     dump_filename = "dump.#{timestamp}.sql"
     tar_filename  = "images.#{timestamp}.tar.gz"
-          
+        
     on_rollback do
       delete "#{shared_path}/dumps/#{dump_filename}"
       delete "#{shared_path}/dumps/#{tar_filename}"
     end
-    
+  
     run "mysqldump -u #{database['production']['username']} -p#{database['production']['password']} -h #{database['production']['host']} #{database['production']['database']} > #{shared_path}/dumps/#{dump_filename}"
     run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
     get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
