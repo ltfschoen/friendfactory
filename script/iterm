@@ -1,0 +1,42 @@
+#!/bin/sh
+
+if [[ $# == 0 ]]; then
+  PROJECT_DIR=$PWD
+elif [[ $# == 1 && -d "$1" ]]; then
+  PROJECT_DIR="$@"
+else
+  print "usage: iterm.sh [rails project directory]"
+  return 1
+fi
+
+# how to make new terminal (make new terminal)
+
+osascript <<-eof
+  tell application "iTerm"
+
+    tell the last terminal
+
+      activate current session
+      tell the last session
+          set name to "server"
+          write text "cd \"$PROJECT_DIR\""
+          write text "./script/server"
+      end tell
+
+      launch session "Default Session"
+      tell the last session
+          set name to "console"
+          write text "cd \"$PROJECT_DIR\""
+          write text "./script/console"
+      end tell
+
+      launch session "Default Session"
+      # tell the last session
+      #     set name to "app"
+      #     write text "cd \"$PROJECT_DIR\""
+      #     write text "open http://localhost:3000/"
+      # end tell
+
+    end tell
+  end tell
+eof
