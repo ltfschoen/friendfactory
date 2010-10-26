@@ -19,10 +19,16 @@ after 'deploy:symlink', 'deploy:config_symlinks'
 # after "deploy:symlink", "deploy:update_crontab"
  
 namespace :deploy do
+  # task :config_symlinks do
+  #   run <<-CMD
+  #     ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
+  #     ln -s #{shared_path}/config/mongrel_cluster.yml #{mongrel_config}
+  #   CMD
+  # end
+
   task :config_symlinks do
     run <<-CMD
-      ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
-      ln -s #{shared_path}/config/mongrel_cluster.yml #{mongrel_config}
+      ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml
     CMD
   end
   
