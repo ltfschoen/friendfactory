@@ -1,11 +1,8 @@
-#primary_header.header.primary
-  .container_16
-    .grid_3
-      = image_tag 'logo-24t.png'
-    .grid_13
-      = render :partial => "layouts/#{current_site}/menu_bar"
-#secondary_header.header.secondary
-  .container_16
-    .grid_3
-    .grid_12
-    .grid_1
+.header.primary
+  %ul.nav
+    %li#nav-wave.current
+      = link_to 'Wave', root_path
+    %li#nav-inbox
+      = link_to 'Inbox', '#'
+    %li#nav-profile
+      = link_to 'Profile', '#'
