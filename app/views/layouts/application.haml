@@ -21,13 +21,16 @@
     :css
       #{yield(:pagecss)}
 
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
-    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
     - if Rails.env.development?
+      = javascript_include_tag 'jquery.min.js'
+      = javascript_include_tag 'jquery-ui.min.js'
+      = javascript_include_tag 'jquery.tools.min.js'
       = javascript_include_tag 'pusher.min.js'
     - else
-      = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'    
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
+      = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
+      = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'      
     = javascript_include_tag 'jrails'
     = javascript_include_tag 'jquery.placeholder'
     = javascript_include_tag 'chrome'
