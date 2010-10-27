@@ -32,18 +32,19 @@ class Posting::Base < ActiveRecord::Base
 
   attr_readonly :user_id, :wave_id
 
-  define_index do
-    indexes body
-    # TODO: Reestablish indexes on associated waves
-    # indexes wave.topic,       :as => :wave_topic
-    # indexes wave.description, :as => :wave_description
-    indexes [ user.first_name, user.last_name], :as => :user_name
-    indexes user_id
-    has :created_at
-    has :updated_at
-    has [ :user_id, :receiver_id ], :as => :recipient_ids
-    has :private, :type => :boolean
-  end
+  # Thinking-Sphinx
+  # define_index do
+  #   indexes body
+  #   # TODO: Reestablish indexes on associated waves
+  #   # indexes wave.topic,       :as => :wave_topic
+  #   # indexes wave.description, :as => :wave_description
+  #   indexes [ user.first_name, user.last_name], :as => :user_name
+  #   indexes user_id
+  #   has :created_at
+  #   has :updated_at
+  #   has [ :user_id, :receiver_id ], :as => :recipient_ids
+  #   has :private, :type => :boolean
+  # end
     
   def to_s
     self[:type].to_s + ':' + self[:id].to_s

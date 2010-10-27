@@ -1,7 +1,7 @@
 <div class='grid_12 profile'>
 	<h1>Account</h1>
 
-	<% form_for :user, :url => postings_path(:format => :js), :html => { :id => 'new_posting', :multipart => true, :target => 'upload_frame' } do |f| %>
+	<%= form_for :user, :url => postings_path(:format => :js), :html => { :id => 'new_posting', :multipart => true, :target => 'upload_frame' } do |f| %>
 		<div class='span-12 last'>		
 		  <h3 class='span-12 last'>Upload Photos</h3>
 			<div id='upload_error_well' class='clear last' style='display:none'></div>

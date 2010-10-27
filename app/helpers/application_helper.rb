@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  
   def current_layout    
     controller_name.singularize
   end
@@ -90,5 +90,5 @@ module ApplicationHelper
     page['#postings .posting:first-child .posting_comment button.cancel'].button({:icons => { :primary => 'ui-icon-close' }})
     page['ul#tabs li.current'].removeClass('current')
   end
-    
+
 end

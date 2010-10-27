@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :admirers, :through => :inverse_friendships, :source => :user
 
-  named_scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]
+  scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]
   
   def self.online?(user)
     online.include?(user)
@@ -80,11 +80,12 @@ class User < ActiveRecord::Base
   end
   
   def full_name
-    [ self[:first_name].humanize, self[:last_name].humanize ].compact * ' '
+    lname = self[:last_name].humanize if self[:last_name].present?
+    [ first_name, lname ].compact * ' '
   end
   
   def first_name
-    self[:first_name].humanize
+    self[:first_name].humanize if self[:first_name].present?
   end
   
   def to_s

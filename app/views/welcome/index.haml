@@ -41,7 +41,7 @@
         .grid_5.omega
           #login
             %h3 Log in, right now
-            - form_for UserSession.new, :url => user_sessions_path do |f|
+            = form_for UserSession.new, :url => user_sessions_path do |f|
               = f.text_field :email
               = f.error_message_on :email, :prepend_text => 'Your email address '
               = f.password_field :password
@@ -51,7 +51,7 @@
               = link_to 'Lurk…', lurk_new_user_session_path, :class => 'button'
           #signup
             %h3 Sign up, right now
-            - form_for User.new, :url => users_path do |f|
+            = form_for User.new, :url => users_path do |f|
               = f.text_field :first_name, :class => 'ui-widget'
               = f.error_message_on :first_name, :prepend_text => 'Your first name '
               = f.text_field :last_name, :class => 'ui-widget'

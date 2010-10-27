@@ -5,7 +5,7 @@ class Posting::Message < Posting::Base
 
   belongs_to :receiver, :class_name => User.class_name, :foreign_key => 'receiver_id'
   
-  named_scope :unread, :conditions => { :read_at => nil }
+  scope :unread, :conditions => { :read_at => nil }
 
   before_save { |message| message[:private] = true }
 

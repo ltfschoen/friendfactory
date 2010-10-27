@@ -1,18 +1,17 @@
 require 'exceptions'
 
-class ApplicationController < ActionController::Base  
+class ApplicationController < ActionController::Base
 
   include ActionController::Sites
-  
-  helper :application, :placeholder_text
-
-  helper_method :current_user_session, :current_user, :current_site
-  helper_method :presenter
-
-  filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
-  
+    
   protect_from_forgery
 
+  filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
+
+  helper :application, :placeholder_text
+  helper_method :current_user_session, :current_user, :current_site
+  helper_method :presenter
+  
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
   end
@@ -63,11 +62,11 @@ class ApplicationController < ActionController::Base
   end
   
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.fullpath
   end
 
   def store_reentry_location
-    session[:reentry_to] = request.request_uri
+    session[:reentry_to] = request.fullpath
   end
 
   def redirect_back_or_default(default)
@@ -96,5 +95,5 @@ class ApplicationController < ActionController::Base
   def presenter
     @presenter ||= ApplicationPresenter.new(params)
   end
-  
+
 end

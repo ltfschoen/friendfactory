@@ -31,9 +31,9 @@
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
       = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
       = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'      
-    = javascript_include_tag 'jrails'
     = javascript_include_tag 'jquery.placeholder'
     = javascript_include_tag 'chrome'
+    = javascript_include_tag 'rails'
     = javascript_include_tag 'application'
     = yield(:javascripts)
     :javascript
@@ -41,7 +41,7 @@
         $('body').removeClass('hidden');
         #{yield(:pagejs)}        
       });
-      
+    = csrf_meta_tag    
   %body{ :class => "#{[ current_site, current_layout, 'hidden' ].compact * ' '}"}
     = render :partial => "layouts/#{current_site}/header"
     .container.container_16.clearfix

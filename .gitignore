@@ -1,12 +1,13 @@
 .DS_Store
-tmp/**/*
+.bundle
+db/*.sqlite3
 log/*.log
 log/*.pid
+tmp/**/*
 index/*
 db/sphinx/*
 config/database.yml
-config/development.sphinx.conf
+config/*.sphinx.conf
 *.tmproj
-.idea
-db/schema.rb
 db/dumps/*
+

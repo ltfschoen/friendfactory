@@ -1,7 +1,7 @@
 <% thread.flatten! %>
 <% head = thread.shift %>
 
-<% content_tag_for(:div, head) do %>
+<%= content_tag_for(:div, head) do %>
 	<div class='grid_4 alpha'>
 		<%= avatar_image_tag(head.sender.avatar) -%>
 		<div class='full_name'><%= head.sender.full_name -%></div>
