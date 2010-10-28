@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/thoughtbot/factory_girl.git
+  revision: 5c88bb058b876107d6d93dd8ac48c5cd46dc566f
+  specs:
+    factory_girl (2.0.0.beta1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -35,6 +41,7 @@ GEM
       activesupport
     builder (2.1.2)
     crack (0.1.8)
+    diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     haml (3.0.22)
@@ -47,6 +54,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql2 (0.2.6)
+    nokogiri (1.4.3.1)
     paperclip (2.3.5)
       activerecord
       activesupport
@@ -76,13 +84,30 @@ GEM
       thor (~> 0.14.0)
     rake (0.8.7)
     responds_to_parent (1.0.20091013)
+    rspec (2.0.1)
+      rspec-core (~> 2.0.1)
+      rspec-expectations (~> 2.0.1)
+      rspec-mocks (~> 2.0.1)
+    rspec-core (2.0.1)
+    rspec-expectations (2.0.1)
+      diff-lcs (>= 1.1.2)
+    rspec-mocks (2.0.1)
+      rspec-core (~> 2.0.1)
+      rspec-expectations (~> 2.0.1)
+    rspec-rails (2.0.1)
+      rspec (~> 2.0.0)
     ruby-hmac (0.4.0)
     signature (0.1.1)
       ruby-hmac
+    test-unit (2.1.1)
     thor (0.14.3)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    webrat (0.7.2)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
 
 PLATFORMS
   ruby
@@ -90,9 +115,13 @@ PLATFORMS
 DEPENDENCIES
   aasm
   authlogic
+  factory_girl!
   haml
   mysql2
   paperclip (>= 2.3.1.1)
   pusher
   rails (= 3.0.1)
   responds_to_parent
+  rspec-rails (~> 2.0.1)
+  test-unit
+  webrat

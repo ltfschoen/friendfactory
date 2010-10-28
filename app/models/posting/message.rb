@@ -3,7 +3,7 @@ class Posting::Message < Posting::Base
   alias_attribute :sender,    :user
   alias_attribute :sender_id, :user_id
 
-  belongs_to :receiver, :class_name => User.class_name, :foreign_key => 'receiver_id'
+  belongs_to :receiver, :class_name => User.name, :foreign_key => 'receiver_id'
   
   scope :unread, :conditions => { :read_at => nil }
 

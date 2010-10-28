@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "/waves/show.haml" do
   
+  include Authlogic::TestCase
   include WavesHelper
   
   before(:each) do
