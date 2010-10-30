@@ -1,0 +1,48 @@
+- if current_user
+  %ul#tabs
+    %li
+      %a{ :href => '#text' } Message
+    %li
+      %a{ :href => '#photo' } Photo
+    / %li
+    /   %a{ :href => '#video' } Video
+    / %li
+    /   %a{ :href => '#chat' } Chat
+    / %li
+    /   %a{ :href => '#link' } Link
+    / %li
+    /   %a{ :href => '#event' } Event
+    / %li
+    /   %a{ :href => '#poll' } Poll
+
+  #text.tab_content.hidden
+    = render :partial => 'texts/form', :locals => { :label => 'Write a Message to this Wave', :wave => @wave }
+
+  #photo.tab_content.hidden
+    = render :partial => 'photos/form', :locals => { :label => 'Upload a Photo to this Wave', :wave => @wave }
+
+  #video.tab_content.hidden
+    %table
+      %tr
+        %td{ :colspan => '2' }
+          %h2 Upload a Video to the Wave
+      %tr
+        %td.avatar.thumb= thumb_image_tag(current_user)
+        %td
+          = form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave)) do |f|
+            %p.unobtrusive Paste the URL of the YouTube tube here.
+            = f.text_area :body
+            = f.text_field :subject, :placeholder => 'Caption (optional)'
+            .button_bar
+              = f.submit :OK
+              = f.button :Cancel, :class => 'cancel'
+
+  / #chat.tab_content.hidden Chat
+
+  #link.tab_content.hidden
+    = render :partial => 'links/form', :locals => { :label => 'Add a Link to the Wave', :wave => @wave }
+      
+  / #event.tab_content.hidden Event
+  / #poll.tab_content.hidden Poll
+
+  %iframe#upload_frame{ :name => "upload_frame", :width => '1', :height => '1', :style => 'border:0px', :src => 'about:blank' }

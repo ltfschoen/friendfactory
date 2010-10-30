@@ -5,145 +5,14 @@
 .wave[@wave]
   .grid_3
     %p.flash= flash[:notice]
-    &nbsp;
     #events
-
+    &nbsp;
+    
   .grid_12
-    - if current_user
-      %ul#tabs
-        %li
-          %a{ :href => '#text' } Text
-        %li
-          %a{ :href => '#photo' } Photo
-        - if false
-          %li
-            %a{ :href => '#video' } Video
-        - if false
-          %li
-            %a{ :href => '#chat' } Chat
-        - if false
-          %li
-            %a{ :href => '#link' } Link
-        - if false  
-          %li
-            %a{ :href => '#event' } Event
-          %li
-            %a{ :href => '#poll' } Poll
-
-    %h1= h @wave.topic
-
-    - if current_user
-      #text.tab_content.hidden
-        = render :partial => 'texts/form', :locals => { :label => 'Write a Message to this Wave', :wave => @wave }
-
-      #photo.tab_content.hidden
-        = render :partial => 'photos/form', :locals => { :label => 'Upload a Photo to this Wave', :wave => @wave }
-
-      #video.tab_content.hidden
-        %table
-          %tr
-            %td{ :colspan => '2' }
-              %h2 Upload a Video to the Wave
-          %tr
-            %td.avatar.thumb= thumb_image_tag(current_user)
-            %td
-              -form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave)) do |f|
-                %p.unobtrusive Paste the URL of the YouTube tube here.
-                = f.text_area :body
-                = f.text_field :subject, :placeholder => 'Caption (optional)'
-                .button_bar
-                  = f.submit :OK
-                  = f.button :Cancel, :class => 'cancel'
-
-      -if false
-        #chat.tab_content.hidden Chat
-      
-      #link.tab_content.hidden
-        = render :partial => 'links/form', :locals => { :label => 'Add a Link to the Wave', :wave => @wave }
-        - content_for :pagejs do
-          :plain        
-            $('#link.tab_content form').submit(function(event){
-              event.preventDefault();
-              FF.scrubPlaceholders(this);
-              jQuery.ajax({
-                data: jQuery.param(jQuery(this).serializeArray()),
-                dataType: 'script',
-                cache: false,
-                type: 'post',
-                url: '#{wave_links_path(:wave_id => @wave)}'
-              });      
-            });
-            
-      - if false
-        #event.tab_content.hidden Event
-        #poll.tab_content.hidden Poll
-
-      %iframe#upload_frame{ :name => "upload_frame", :width => '1', :height => '1', :style => 'border:0px', :src => 'about:blank' }
-
+    %h1= @wave.topic
+    = render :partial => 'nav'
     %ul.postings
       = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
       
   .grid_1
     &nbsp;
-
-- content_for :pagejs do
-  :plain
-    $('.tab_content').hide();    
-    $('.tab_content button.cancel').click(function() {
-      $(this).parents('.tab_content').hide().parents('form').reset();
-      $('ul#tabs li.current').removeClass('current');
-      return false;
-    });
-
-    // Tabs
-    $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
-    $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
-    $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});
-    // $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-comment' }});
-    $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-link' }});
-    // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
-    // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
-    
-    $('ul#tabs li').click(function(){
-      if (!$(this).hasClass('current')) {
-        $(this).addClass('current').siblings('li.current').removeClass('current');
-        $($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
-        this.blur();
-        return false;
-      }
-    });
-
-    // Text Tab
-    $('#text.tab_content form').submit(function(event){
-      event.preventDefault();
-      form = this;
-      FF.scrubPlaceholders(form);
-      jQuery.ajax({
-        data: jQuery.param(jQuery(this).serializeArray()),
-        dataType: 'script',
-        cache: false,
-        type: 'post',
-        url: '#{wave_texts_path(:wave_id => @wave)}',
-        success: function() {
-          $(form).reset().closest('.tab_content').hide();
-          $('ul#tabs li.current').removeClass('current');
-        }
-      });
-    });
-    
-    // Video Tab
-    $('#video.tab_content form').submit(function(event){
-      event.preventDefault()
-      FF.scrubPlaceholders(this);
-      jQuery.ajax({
-        data: jQuery.param(jQuery(this).serializeArray()),
-        dataType: 'script',
-        cache: false,
-        type: 'post',
-        url: '#{wave_videos_path(:wave_id => @wave)}',
-        success: function() {
-          $('#video.tab_content form').reset().closest('.tab_content').hide();
-          $('ul#tabs li.current').removeClass('current');
-        }
-      });      
-    });

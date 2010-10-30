@@ -5,7 +5,7 @@
   %tr
     %td.avatar.thumb= thumb_image_tag(current_user)
     %td
-      - form_for Posting::Text.new, :url => wave_texts_path(:wave_id => wave) do |f|
+      = form_for Posting::Text.new, :url => wave_texts_path(:wave_id => wave) do |f|
         = f.text_field :subject, :placeholder => 'Title (optional)'
         = f.text_area :body
         .button_bar

@@ -1,10 +1,88 @@
 jQuery(document).ready(function($){
+
+	// Placeholders
 	$('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
+	
+	// Buttons
   $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
   $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
+
+  $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
+  $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
+  $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});
+  // $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-comment' }});
+  $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-link' }});
+  // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
+  // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
+
+	// Tabs
+  $('.tab_content').hide();    
+  $('.tab_content button.cancel').click(function() {
+    $(this).parents('.tab_content').hide().parents('form').reset();
+    $('ul#tabs li.current').removeClass('current');
+    return false;
+  });
+
+  $('ul#tabs li').click(function() {
+    if (!$(this).hasClass('current')) {
+      $(this).addClass('current').siblings('li.current').removeClass('current');
+      $($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
+      this.blur();
+      return false;
+    }
+  });
+
+  // Text form
+  $('#text.tab_content form').submit(function(event){
+    event.preventDefault();
+    form = this;
+    FF.scrubPlaceholders(form);
+    jQuery.ajax({
+      data: jQuery.param(jQuery(this).serializeArray()),
+      dataType: 'script',
+      cache: false,
+      type: 'post',
+      url: $(this).attr('action'),
+      success: function() {
+        $(form).reset().closest('.tab_content').hide();
+        $('ul#tabs li.current').removeClass('current');
+      }
+    });
+  });
+
+  // Video form
+  $('#video.tab_content form').submit(function(event){
+    event.preventDefault()
+    FF.scrubPlaceholders(this);
+    jQuery.ajax({
+      data: jQuery.param(jQuery(this).serializeArray()),
+      dataType: 'script',
+      cache: false,
+      type: 'post',
+      url: $(this).attr('action'),
+      success: function() {
+        $('#video.tab_content form').reset().closest('.tab_content').hide();
+        $('ul#tabs li.current').removeClass('current');
+      }
+    });      
+  });
 	
+  // Link form
+  $('#link.tab_content form').submit(function(event){
+    event.preventDefault();
+    FF.scrubPlaceholders(this);
+    jQuery.ajax({
+      data: jQuery.param(jQuery(this).serializeArray()),
+      dataType: 'script',
+      cache: false,
+      type: 'post',
+      url: $(this).attr('action')
+    });      
+  });
+
+	// Comment forms
   $('form.new_posting_comment')
-    .find('textarea').live('focus', function(){
+    .find('textarea').live('focus', function() {
       $(this).height('3.6em').siblings().show().closest('table').find('img.avatar').show();
   	}).end()
 		.find('button.cancel').live('click', function(event){
@@ -16,30 +94,31 @@ jQuery(document).ready(function($){
 			.closest('table').find('img.avatar').hide()
     });
 
-	$('form.new_posting_comment').live('submit', function(event){
-	    event.preventDefault();
-	    FF.scrubPlaceholders(this);
+  $('form.new_posting_comment').live('submit', function(event) {
+    event.preventDefault();
+    FF.scrubPlaceholders(this);
 
-	    if ($(this).find('textarea').val().length > 0) {
-				var action = $(this).attr('action');
-	      $.ajax({
-	        data: jQuery.param(jQuery(this).serializeArray()),
-	        dataType: 'script',
-	        type: 'post',
-	        url: action,
-	        success: function(response, status) {
-	        }
-	      });
-	    }
-	
-	    $(this).reset()
-	    .find('button').hide().end()
-	    .find('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
-	    .closest('table').find('img.avatar').hide();
-	  });
+    if ($(this).find('textarea').val().length > 0) {
+			var action = $(this).attr('action');
+      $.ajax({
+        data: jQuery.param(jQuery(this).serializeArray()),
+        dataType: 'script',
+        type: 'post',
+        url: action,
+        success: function(response, status) {
+        }
+      });
+    }
 
+    $(this).reset()
+      .find('button').hide().end()
+      .find('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
+      .closest('table').find('img.avatar').hide();
+  });
+
+	// Message forms
   $('.posting_message')
-		.find('button.message_reply').button({ icons: { primary: 'ui-icon-mail-closed' }})
+  	.find('button.message_reply').button({ icons: { primary: 'ui-icon-mail-closed' }})
     .click(function(event) {
        $(this).css('visibility', 'hidden').closest('.posting_message').find('form.new_posting_message').show();
        event.preventDefault();
@@ -48,8 +127,8 @@ jQuery(document).ready(function($){
     .find('form.new_posting_message')
     .hide()
     .find('button.cancel').click(function(event) {
-	     $(this).closest('form.new_posting_message').hide().reset().closest('.posting_message').find('button.message_reply').css('visibility', 'visible');
-	     event.preventDefault();
+       $(this).closest('form.new_posting_message').hide().reset().closest('.posting_message').find('button.message_reply').css('visibility', 'visible');
+       event.preventDefault();
     })
     .end()
     .submit(function(event) {
