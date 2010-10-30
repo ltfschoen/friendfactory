@@ -46,6 +46,8 @@ GEM
       abstract (>= 1.0.0)
     haml (3.0.22)
     i18n (0.4.2)
+    jquery-rails (0.2.4)
+      rails (~> 3.0)
     json (1.4.6)
     mail (2.2.9)
       activesupport (>= 2.3.6)
@@ -117,6 +119,7 @@ DEPENDENCIES
   authlogic
   factory_girl!
   haml
+  jquery-rails
   mysql2
   paperclip (>= 2.3.1.1)
   pusher

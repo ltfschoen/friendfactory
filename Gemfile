@@ -22,6 +22,7 @@ gem 'mysql2'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
+gem 'jquery-rails'
 gem 'aasm'
 gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
