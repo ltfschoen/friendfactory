@@ -29,7 +29,7 @@ end
 
 namespace :production do  
   desc "Load production from local sql file"
-  task :load => :environment do
+  task :refresh => :environment do
     require 'yaml'
     database  = YAML::load_file("config/database.yml")
     timestamp = ENV['DUMP_DATE'] || Time.now.strftime('%Y%m%d')
