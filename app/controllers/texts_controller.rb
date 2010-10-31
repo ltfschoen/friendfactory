@@ -1,5 +1,5 @@
 class TextsController < ApplicationController
-
+  
   before_filter :require_user
   
   def create
@@ -9,8 +9,9 @@ class TextsController < ApplicationController
       current_user.postings << @posting
       wave.postings << @posting
     end
+    
     respond_to do |format|
-      format.js
+      format.js { render :layout => false }
     end
   end
 

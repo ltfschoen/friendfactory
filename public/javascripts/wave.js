@@ -15,70 +15,57 @@ jQuery(document).ready(function($){
   // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
   // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
 
-	// Tabs
-  $('.tab_content').hide();    
-  $('.tab_content button.cancel').click(function() {
-    $(this).parents('.tab_content').hide().parents('form').reset();
+	// Tabs and tab content
+  $('ul#tabs li').click(function() {
+    if (!$(this).hasClass('current')) {
+      $(this).addClass('current').siblings('li.current').removeClass('current');
+      $($(this).find('a').attr('href')).show().siblings('.tab_content').hide();
+      this.blur();
+    }
+    return false;
+  });
+
+  $('button.cancel', '.tab_content').click(function() {
+    $(this).parents('.tab_content').hide().end().parents('form')[0].reset();
     $('ul#tabs li.current').removeClass('current');
     return false;
   });
 
-  $('ul#tabs li').click(function() {
-    if (!$(this).hasClass('current')) {
-      $(this).addClass('current').siblings('li.current').removeClass('current');
-      $($(this).find('a').attr('href')).show().siblings('div.tab_content').hide();
-      this.blur();
-      return false;
-    }
-  });
-
-  // Text form
-  $('#text.tab_content form').submit(function(event){
-    event.preventDefault();
-    form = this;
-    FF.scrubPlaceholders(form);
-    jQuery.ajax({
-      data: jQuery.param(jQuery(this).serializeArray()),
-      dataType: 'script',
-      cache: false,
-      type: 'post',
-      url: $(this).attr('action'),
-      success: function() {
-        $(form).reset().closest('.tab_content').hide();
-        $('ul#tabs li.current').removeClass('current');
-      }
-    });
+  $('.tab_content form').bind('ajax:complete', function(event) {
+    // this.reset();
+    // $(this).closest('.tab_content').hide();
+    // $('ul#tabs li.current').removeClass('current');    
   });
 
   // Video form
-  $('#video.tab_content form').submit(function(event){
-    event.preventDefault()
-    FF.scrubPlaceholders(this);
-    jQuery.ajax({
-      data: jQuery.param(jQuery(this).serializeArray()),
-      dataType: 'script',
-      cache: false,
-      type: 'post',
-      url: $(this).attr('action'),
-      success: function() {
-        $('#video.tab_content form').reset().closest('.tab_content').hide();
-        $('ul#tabs li.current').removeClass('current');
-      }
-    });      
-  });
+  // $('#video.tab_content form').submit(function(event){
+  //   event.preventDefault()
+  //   FF.scrubPlaceholders(this);
+  //   jQuery.ajax({
+  //     data: jQuery.param(jQuery(this).serializeArray()),
+  //     dataType: 'script',
+  //     cache: false,
+  //     type: 'post',
+  //     url: $(this).attr('action'),
+  //     success: function() {
+  //       $('#video.tab_content form').reset().closest('.tab_content').hide();
+  //       $('ul#tabs li.current').removeClass('current');
+  //     }
+  //   });      
+  // });
 	
   // Link form
-  $('#link.tab_content form').submit(function(event){
-    event.preventDefault();
-    FF.scrubPlaceholders(this);
-    jQuery.ajax({
-      data: jQuery.param(jQuery(this).serializeArray()),
-      dataType: 'script',
-      cache: false,
-      type: 'post',
-      url: $(this).attr('action')
-    });      
-  });
+  // $('#link.tab_content form').submit(function(event){
+  //   event.preventDefault();
+  //   FF.scrubPlaceholders(this);
+  //   jQuery.ajax({
+  //     data: jQuery.param(jQuery(this).serializeArray()),
+  //     dataType: 'script',
+  //     cache: false,
+  //     type: 'post',
+  //     url: $(this).attr('action')
+  //   });      
+  // });
 
 	// Comment forms
   $('form.new_posting_comment')
@@ -110,7 +97,8 @@ jQuery(document).ready(function($){
       });
     }
 
-    $(this).reset()
+    this.reset();
+    $(this)
       .find('button').hide().end()
       .find('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
       .closest('table').find('img.avatar').hide();

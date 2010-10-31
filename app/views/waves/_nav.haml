@@ -16,7 +16,7 @@
     /   %a{ :href => '#poll' } Poll
 
   #text.tab_content.hidden
-    = render :partial => 'texts/form', :locals => { :label => 'Write a Message to this Wave', :wave => @wave }
+    = render :partial => 'posting/texts/new', :locals => { :wave => @wave }
 
   #photo.tab_content.hidden
     = render :partial => 'photos/form', :locals => { :label => 'Upload a Photo to this Wave', :wave => @wave }
