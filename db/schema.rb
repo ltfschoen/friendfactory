@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100823042929) do
+ActiveRecord::Schema.define(:version => 20101101042055) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(:version => 20100823042929) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "width"
+    t.integer  "height"
+    t.boolean  "horizontal"
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"
