@@ -29,6 +29,10 @@ class Posting::Base < ActiveRecord::Base
       :order                   => 'created_at desc'
 
   validates_presence_of :user_id
+  
+  before_validation(:on => :create) do
+    self.user = UserSession.find.record if Authlogic::Session::Base.activated?
+  end
 
   attr_readonly :user_id, :wave_id
 
@@ -49,5 +53,5 @@ class Posting::Base < ActiveRecord::Base
   def to_s
     self[:type].to_s + ':' + self[:id].to_s
   end
-
+  
 end

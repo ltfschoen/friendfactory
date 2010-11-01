@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
   
   validates_presence_of :first_name
 
+  after_save do
+    Wave::Profile::create(:user => self) if self.profile.nil?
+    UserInfo.create(:user => self) if self.info.nil?
+  end
+
   has_one  :info,     :class_name => 'UserInfo'
   
   has_many :waves,    :class_name => 'Wave::Base'

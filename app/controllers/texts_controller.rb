@@ -8,8 +8,7 @@ class TextsController < ApplicationController
       @posting = Posting::Text.new(params[:posting_text])
       current_user.postings << @posting
       wave.postings << @posting
-    end
-    
+    end    
     respond_to do |format|
       format.js { render :layout => false }
     end

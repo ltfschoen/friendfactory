@@ -26,9 +26,10 @@ gem 'jquery-rails'
 gem 'aasm'
 gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
-gem 'responds_to_parent'
+gem 'remotipart'
 gem 'haml'
 gem 'pusher'
+
 # gem 'thinking-sphinx', '>= 1.3.16', :require => 'thinking_sphinx'
 
 # Bundle gems for the local environment. Make sure to

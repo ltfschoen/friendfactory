@@ -5,7 +5,7 @@
   %tr
     %td.avatar.thumb= thumb_image_tag(current_user)
     %td
-      - form_for(Posting::Photo.new, :url => wave_photos_path(:wave_id => wave, :format => :js), :html => { :multipart => true, :target => 'upload_frame' }) do |f|
+      = form_for Posting::Photo.new, :url => wave_photos_path(:wave_id => wave), :html => { :multipart => true }, :remote => true do |f|
         %table.button_bar
           %tr
             %td.file_field= f.file_field :image

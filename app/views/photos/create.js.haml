@@ -1,0 +1,9 @@
+var $currentTab = $('ul#tabs li.current');
+= remotipart_response do
+  - if @posting.present? && @posting.valid?
+    $('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}"); // .find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
+    $currentTab.removeClass('current');
+    $($('a', $currentTab).attr('href')).find('form')[0].reset();
+  - else
+    alert("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}");    
+    $($('a', $currentTab).attr('href')).show();

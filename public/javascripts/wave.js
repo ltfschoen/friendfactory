@@ -15,7 +15,7 @@ jQuery(document).ready(function($){
   // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
   // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
 
-	// Tabs and tab content
+	// Tabs and their contents
   $('ul#tabs li').click(function() {
     if (!$(this).hasClass('current')) {
       $(this).addClass('current').siblings('li.current').removeClass('current');
@@ -31,10 +31,8 @@ jQuery(document).ready(function($){
     return false;
   });
 
-  $('.tab_content form').bind('ajax:complete', function(event) {
-    // this.reset();
-    // $(this).closest('.tab_content').hide();
-    // $('ul#tabs li.current').removeClass('current');    
+  $('#photo.tab_content form').bind('ajax:before', function(event) {
+    $(this).closest('.tab_content').hide();
   });
 
   // Video form
