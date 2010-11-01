@@ -2,14 +2,15 @@ class Posting::Photo < Posting::Base
 
   has_attached_file :image,
       :styles => {
-          :polaroid => [ '312x312#',  :png ],
-          :'4x6'    => [ '400x260#',  :png ],
-          :h480     => [ 'x480',      :png ], # For horizontal grid display
-          :w460     => [ '460',       :png ], # For album
-          :iphone   => [ '320x480#',  :png ],
-          :iphoneR  => [ '480x320#',  :png ]},
-      :default_style => :polaroid
-  
+          :'4x6'    => [ '400x260#', :jpg ],
+          :h480     => [ 'x480',     :jpg ], # For horizontal grid display
+          :w460     => [ '460',      :jpg ], # For album
+          :iphone   => [ '320x480#', :jpg ],
+          :iphoneR  => [ '480x320#', :jpg ],
+          :ad       => [ '300x250#', :jpg ]},
+      :default_style => :'4x6',
+      :convert_options => { :all => [ '-strip', '-depth 8' ] }
+
   validates_attachment_presence     :image
   validates_attachment_size         :image, :less_than => 5.megabytes
   validates_attachment_content_type :image, :content_type => [ 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png' ]

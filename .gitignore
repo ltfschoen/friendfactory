@@ -10,4 +10,4 @@ config/database.yml
 config/*.sphinx.conf
 *.tmproj
 db/dumps/*
-
+public/system
