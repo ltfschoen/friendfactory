@@ -7,7 +7,8 @@
   - if true
     %table
       %tr
-        %td.avatar.thumb= thumb_image_tag(photo.user.profile.avatar)
+        %td.avatar.thumb
+          = render :partial => 'posting/post_it', :locals => { :posting => photo }
         %td
           = image_tag(photo.image.url(:w460), :site => false, :class => 'photo medium') unless photo.nil?
           %p

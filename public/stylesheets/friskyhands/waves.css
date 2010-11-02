@@ -5,3 +5,28 @@ body {
 	background:	-moz-linear-gradient(top, #593F30, #FAF3E1 20);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#593F30', endColorstr='#FAF3E1') */
 }
+
+.wave_shared .post_it {
+    position: relative;
+}
+
+.wave_shared .post_it img.thumb {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    width: 50px;
+    height: 50px;
+}
+
+.wave_shared .post_it p {
+    margin-left: 15px;
+    margin-top: -70px;
+    line-height: 1.2em;
+    color: gray;
+}
+
+.wave_shared .post_it p span {
+    display: block;
+}
+
+

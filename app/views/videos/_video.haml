@@ -3,11 +3,11 @@
     %tr
       %td.avatar.thumb= thumb_image_tag(video.user.profile.avatar)
       %td
-        = video.body
+        = video.body.html_safe
         %p= h video.subject
         %p
           = link_to_profile(video.user)
-          \ #{distance_of_time_in_words_to_now(video.created_at)}
+          #{distance_of_time_in_words_to_now(video.created_at)}
         = render :partial => 'comments/comment', :collection => video.children.comments
         %div{:id => "posting_#{video.id}_new_comment_well"}
         = render :partial => 'comments/new', :locals => { :parent_id => video.id }

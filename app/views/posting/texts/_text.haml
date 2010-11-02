@@ -1,7 +1,8 @@
 %li.posting[text]
   %table
     %tr
-      %td.avatar.thumb= thumb_image_tag(text.user.profile.avatar)
+      %td.avatar.thumb
+        = render 'posting/post_it', :locals => { :posting => text }
       %td
         %div
           = link_to_profile(text.user)

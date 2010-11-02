@@ -60,10 +60,10 @@ module ApplicationHelper
   end
 
   def avatar_image_tag(user_or_avatar, opts = {})
-    return '&nbsp;' unless user_or_avatar.present?
+    return '&nbsp;'.html_safe unless user_or_avatar.present?
     user, avatar = user_or_avatar.is_a?(User) ?
         [ user_or_avatar, user_or_avatar.profile.avatar ] : [ user_or_avatar.user, user_or_avatar ]
-    return '&nbsp;' unless user.present? && avatar.present?
+    return '&nbsp;'.html_safe unless user.present? && avatar.present?
     online = 'online' if (user.online? && !(opts[:online_badge] == false))
     klass  = [ 'avatar', opts[:size], online, opts[:class] ].compact * ' '
     link_to(image_tag(avatar.image.url(opts[:size].to_sym), :alt => user.full_name, :class => klass, :site => false), profile_path(user.profile))
