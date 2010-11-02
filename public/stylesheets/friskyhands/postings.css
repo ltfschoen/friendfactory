@@ -151,9 +151,9 @@ form.edit_user_info > table td.label.about_me {
 	width: 206px;
 }
 
-.posting img.avatar {
-	margin-right: 12px;
-}
+/*.posting img.avatar {
+    margin-right: 12px;
+}*/
 
 .posting_text .subject {
 	font-weight: bold;

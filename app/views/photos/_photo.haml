@@ -12,8 +12,6 @@
         %td
           = image_tag(photo.image.url(:w460), :site => false, :class => 'photo medium') unless photo.nil?
           %p
-            = link_to_profile(photo.user)
-            \ #{distance_of_time_in_words_to_now(photo.created_at)}
           = render :partial => 'comments/comment', :collection => photo.children.comments
           %div{:id => "posting_#{photo.id}_new_comment_well"}
           = render :partial => 'comments/new', :locals => { :parent_id => photo.id }

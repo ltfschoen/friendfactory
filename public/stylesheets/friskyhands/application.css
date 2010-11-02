@@ -75,23 +75,14 @@ a {
 	color: #501508;
 }
 
-.distance_of_time {
-	color: gray;
-	font-size: 0.9em;
-}
-
-/*.container {
-    min-height: 30em;
-}*/
-
 img.thumb, img.portrait, img.photo {
-	border: 1px solid lightgray;
-	padding: 2px;
+	padding: 0px;
+	border: 2px solid darkgray;
 }
 
 img.online {
-	padding: 1px;
-	border: 2px solid lightgreen;
+	padding: 0px;
+	border: 2px solid green;
 }
 
 .posting_avatar {

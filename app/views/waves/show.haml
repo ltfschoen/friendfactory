@@ -3,15 +3,14 @@
 - javascript 'broadcast'
 
 .wave[@wave]
-  .grid_3
-    %p.flash= flash[:notice] || '&nbsp;'.html_safe
-    #events
-  
-  .grid_12
+  .grid_13
     %h1= @wave.topic
+    - if flash[:notice].present?
+      %p.flash= flash[:notice]
+    #events
     = render :partial => 'nav'
     %ul.postings
       = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
 
-  .grid_1
+  .grid_3
     &nbsp;

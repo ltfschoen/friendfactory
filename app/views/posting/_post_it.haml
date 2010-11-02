@@ -1,13 +1,15 @@
 - if defined?(posting) && posting.present?
-  .post_it
-    = image_tag('post-it.png')
-    = thumb_image_tag(posting.user.profile.avatar) rescue '&nbsp;'.html_safe
-    %p
-      %span
+  .post_it<
+    - if posting.user.profile.avatar.present?
+      = thumb_image_tag(posting.user.profile.avatar)
+      %p.header
         Posted
-        - if posting.user.first_name.present?
-          = "by #{posting.user.first_name}"
-      %span
         = distance_of_time_in_words_to_now(posting.created_at)
+    - else
+      %p.header_no_avatar
+        Posted
+        = " by #{posting.user.first_name}" if posting.user.first_name
+        = distance_of_time_in_words_to_now(posting.created_at)
+    %p.body
 - else
   &nbsp;
