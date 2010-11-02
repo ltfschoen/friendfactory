@@ -12,11 +12,6 @@
     float: left;
     margin-left: 18px;
     margin-right: 12px;
-    width: 60px;
-    height: 60px;
-    -webkit-box-shadow: 3px 3px 6px #873;
-    -moz-box-shadow: 3px 3px 6px #873;
-    box-shadow: 3px 3px 6px #873;
 }
 
 .wave_shared .post_it p {
