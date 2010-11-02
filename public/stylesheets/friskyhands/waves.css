@@ -14,15 +14,9 @@
     margin-right: 12px;
     width: 60px;
     height: 60px;
-    -webkit-box-shadow: 0px 0px 10px darkgrey;
-    -moz-box-shadow: 0px 0px 10px darkgrey;
-    box-shadow: 0px 0px 10px darkgrey;
-}
-
-.wave_shared .post_it img.avatar.online {
-    -webkit-box-shadow: 0px 0px 10px green;
-    -moz-box-shadow: 0px 0px 10px green;
-    box-shadow: 0px 0px 10px green;
+    -webkit-box-shadow: 3px 3px 6px #873;
+    -moz-box-shadow: 3px 3px 6px #873;
+    box-shadow: 3px 3px 6px #873;
 }
 
 .wave_shared .post_it p {

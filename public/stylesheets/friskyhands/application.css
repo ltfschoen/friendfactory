@@ -75,25 +75,30 @@ a {
 	color: #501508;
 }
 
-img.thumb, img.portrait, img.photo {
+img.avatar.thumb {
 	padding: 0px;
-	border: 2px solid darkgray;
+	border: 3px solid darkgray;
+    width: 60px;
+    height: 60px;
+    -webkit-box-shadow: 3px 3px 6px #873;
+    -moz-box-shadow: 3px 3px 6px #873;
+    box-shadow: 3px 3px 6px #873;
 }
 
-img.online {
+img.avatar.thumb.online {
 	padding: 0px;
-	border: 2px solid green;
+	border: 3px solid lightgreen;
 }
 
-.posting_avatar {
+/*.posting_avatar {
     position: relative;
-}
+}*/
 
-.posting_avatar img.flag_hottie {
+/*.posting_avatar img.flag_hottie {
     position :absolute;
     top: -9px;
     left: -16px;
-}
+}*/
 
 input[type=text],
 input[type=password],
