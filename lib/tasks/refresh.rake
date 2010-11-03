@@ -30,7 +30,7 @@ namespace :ff do
 
   namespace :db do    
     desc "Refresh development with production db and images from local dumps. Use DUMP_DATE=yyyymmdd"
-    task :refresh => [ :'refresh:db', :'refresh:images' ]
+    task :refresh => [ :'refresh:db', :'refresh:images', :'refresh:default_wave' ]
   
     namespace :refresh do
       task :db => :environment do
@@ -44,6 +44,15 @@ namespace :ff do
       task :images => :environment do
         tar_filename = "images.#{timestamp}.tar.gz"
         sh "rm -rf public/system/images/* && tar -xf db/dumps/#{tar_filename} -C public/system"
+      end
+      
+      desc "Set the default wave"
+      task :default_wave => :environment do      
+        wave = Wave::Base.find_by_slug('shared')
+        if wave.present?
+          wave.slug = ::WavesController::DefaultWaveSlug
+          wave.save
+        end
       end
     end
   end
