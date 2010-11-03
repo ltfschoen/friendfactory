@@ -1,3 +1,5 @@
+require 'bundler/capistrano'
+
 set :application, 'friskyfactory'
 set :domain, 'friskyhands.com'
 
@@ -84,58 +86,95 @@ end
 #   exit
 # end
 
-namespace :staging do  
-  desc 'Set staging environment'
-  task :default do
-    set :branch, ENV['branch'] || 'master'
-    set :rails_env, 'staging'
-    set :deploy_to, '/home/mrcap/friskyfactory/staging'
-  end
-  
-  task :refresh do
-    require 'yaml'
-    staging.default
-    database  = YAML::load_file("config/database.yml")
-    timestamp = ENV['DUMP_DATE'] || Time.now.strftime('%Y%m%d')
-    dump_filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "dump.#{timestamp}.sql")
-    run "mysql -u #{database['staging']['username']} -p#{database['staging']['password']} #{database['staging']['database']} < #{dump_filename}"
+desc 'Set staging environment'
+task :staging do
+  set :branch, ENV['branch'] || 'master'
+  set :rails_env, 'staging'
+  set :deploy_to, '/home/mrcap/friskyfactory/staging'
+end
+
+desc "Set production environment"
+task :production do
+  set :branch, ENV['release']
+  set :rails_env, 'production'
+  set :deploy_to, '/home/mrcap/friskyfactory/production'
+  set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
+end
+
+namespace :ff do
+  namespace :db do
+    namespace :refresh do
+      task :staging do
+        require 'yaml'
+        staging
+        database = YAML::load_file("config/database.yml")
+        timestamp = ENV['DUMP_DATE'] || Time.now.strftime('%Y%m%d')
+        filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "dump.#{timestamp}.sql")
+        run "mysql -u #{database['staging']['username']} -p#{database['staging']['password']} #{database['staging']['database']} < #{filename}"
+      end      
+    end
+
+    namespace :dumps do
+      desc "Show available production dumps"
+      task :default do
+        production
+        db_dumps = capture("ls #{File.join(shared_path, 'dumps', '*.sql')}").strip
+        image_dumps = capture("ls #{File.join(shared_path, 'dumps', '*.tar.gz')}").strip
+        puts db_dumps, image_dumps
+      end
+
+      task :cleanup do
+        production
+        if ENV['DUMP_DATE'].nil?
+          puts "  * Usage: DUMP_DATE=yyyymmdd"
+          exit
+        end
+        run "rm #{shared_path}/dumps/#{dump_filename}"
+        run "rm #{shared_path}/dumps/#{tar_filename}"
+      end
+    end
+
+    namespace :dump do
+      desc "Dump production db and images to system/dumps"
+      task :default do
+        ff.db.dump.db
+        ff.db.dump.images
+      end
+      
+      desc "Dump production db to system/dumps"
+      task :db do
+        require 'yaml'
+        production
+        database = YAML::load_file("config/database.yml")
+        on_rollback { delete "#{shared_path}/dumps/#{dump_filename}" }
+        run "mysqldump -u #{database['production']['username']} -p#{database['production']['password']} -h #{database['production']['host']} #{database['production']['database']} > #{shared_path}/dumps/#{dump_filename}"
+      end
+      
+      desc "Dump production images to system/dumps"
+      task :images do
+        production        
+        on_rollback { delete "#{shared_path}/dumps/#{tar_filename}" }
+        run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
+      end      
+      
+      desc "Download dumped production db and images to local"
+      task :download do
+        production
+        get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
+        get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"        
+      end
+    end    
   end
 end
 
-namespace :production do  
-  desc "Set production environment"
-  task :default do
-    set :branch, ENV['release']
-    set :rails_env, 'production'
-    set :deploy_to, '/home/mrcap/friskyfactory/production'
-    set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
-  end
+def dump_filename
+  "dump.#{dump_date}.sql"
+end
 
-  desc "Show available database dumps"
-  task :dumps do
-    production.default
-    puts File.join(shared_path, 'dumps', '*')
-    dumps = capture("ls #{File.join(shared_path, 'dumps', '*.sql')}").strip
-    puts dumps
-  end
+def tar_filename
+  "images.#{dump_date}.tar.gz"
+end
 
-  desc "Dump production to local sql file"
-  task :dump do
-    require 'yaml'
-    production.default
-    database  = YAML::load_file("config/database.yml")
-    timestamp = Time.now.strftime('%Y%m%d')
-    dump_filename = "dump.#{timestamp}.sql"
-    tar_filename  = "images.#{timestamp}.tar.gz"
-        
-    on_rollback do
-      delete "#{shared_path}/dumps/#{dump_filename}"
-      delete "#{shared_path}/dumps/#{tar_filename}"
-    end
-  
-    run "mysqldump -u #{database['production']['username']} -p#{database['production']['password']} -h #{database['production']['host']} #{database['production']['database']} > #{shared_path}/dumps/#{dump_filename}"
-    run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
-    get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
-    get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"        
-  end
+def dump_date
+  @dump_date ||= (ENV['DUMP_DATE'] || Time.now.strftime('%Y%m%d'))
 end

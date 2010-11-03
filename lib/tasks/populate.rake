@@ -1,47 +1,45 @@
-namespace :db do  
-
-  desc 'Populate the database'
-  task :populate => 'populate:all'  
+namespace :ff do
+  namespace :db do    
+    desc 'Populate the database'
+    task :populate => [ :'populate:users', :'populate:waves' ]
   
-  namespace :populate do
-    
-    task :all => [ :users, :waves ]
-
-    desc 'Populate the database with user data'
-    task :users => :environment do
-      User.delete_all
-      User.create(adam_attrs)
-      ids = []
-      User.populate(3) do |user|
-        user.email      = Faker::Internet.email
-        user.first_name = Faker::Name.first_name
-        user.last_name  = Faker::Name.last_name      
-        ids << user.id
+    namespace :populate do    
+      desc 'Populate the database with user data'
+      task :users => :environment do
+        User.delete_all
+        User.create(adam_attrs)
+        ids = []
+        User.populate(3) do |user|
+          user.email      = Faker::Internet.email
+          user.first_name = Faker::Name.first_name
+          user.last_name  = Faker::Name.last_name      
+          ids << user.id
+        end
+        User.find_all_by_id(ids).each do |user|
+          user.password = 'test'
+          user.password_confirmation = 'test'
+          user.save
+        end
       end
-      User.find_all_by_id(ids).each do |user|
-        user.password = 'test'
-        user.password_confirmation = 'test'
-        user.save
-      end
-    end
   
-    desc 'Populate the database with some data'
-    task :waves => :environment do
-      adam  = User.find_by_email(adam_attrs[:email])
-      users = User.all - adam
-      if adam && !users.empty?        
-        Message.delete_all
+      desc 'Populate the database with some data'
+      task :waves => :environment do
+        adam  = User.find_by_email(adam_attrs[:email])
+        users = User.all - adam
+        if adam && !users.empty?        
+          Message.delete_all
         
-        # Adam's received messages
-        create_message(users[rand(users.length)], adam)
-        create_thread(users[rand(users.length)], adam, :length => 3)
-        create_thread(users[rand(users.length)], adam, :length => 5)
+          # Adam's received messages
+          create_message(users[rand(users.length)], adam)
+          create_thread(users[rand(users.length)], adam, :length => 3)
+          create_thread(users[rand(users.length)], adam, :length => 5)
         
-        # create_message(adam, users[rand(users.length)])
-        # create_thread(adam, users[rand(users.length)], :length => 2)
-        # create_thread(adam, users[rand(users.length)], :length => 3)
-        # create_thread(users[rand(users.length)], adam, :length => 2)
-        # create_thread(users[rand(users.length)], adam, :length => 3)
+          # create_message(adam, users[rand(users.length)])
+          # create_thread(adam, users[rand(users.length)], :length => 2)
+          # create_thread(adam, users[rand(users.length)], :length => 3)
+          # create_thread(users[rand(users.length)], adam, :length => 2)
+          # create_thread(users[rand(users.length)], adam, :length => 3)
+        end
       end
     end
   end
