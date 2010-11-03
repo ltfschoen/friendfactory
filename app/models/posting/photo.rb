@@ -1,14 +1,14 @@
 class Posting::Photo < Posting::Base
-
+  
   has_attached_file :image,
       :styles => {
-          :'4x6'    => [ '400x260#', :jpg ],
-          :h480     => [ 'x480',     :jpg ], # For horizontal grid display
-          :w460     => [ '460',      :jpg ], # For album
-          :iphone   => [ '320x480#', :jpg ],
-          :iphoneR  => [ '480x320#', :jpg ],
-          :ad       => [ '300x250#', :jpg ]},
-      :default_style => :'4x6',
+          :h4x6    => [ '460x310#', :jpg ],
+          :v4x6    => [ '310x460#', :jpg ],
+          :w460    => [ '460',      :jpg ], # Slideshow
+          :iphone  => [ '320x480#', :jpg ],
+          :iphoneR => [ '480x320#', :jpg ],
+          :ad      => [ '300x250#', :jpg ]},
+      :default_style => :'6x4',
       :convert_options => { :all => [ '-strip', '-depth 8' ] }
 
   validates_attachment_presence     :image
