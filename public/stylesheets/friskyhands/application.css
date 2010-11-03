@@ -54,9 +54,9 @@ a {
 	margin-bottom:1.5em;
 }
 
-/*.container_16 {
-	background: #fff url(../../img/16_col.gif) repeat-y;
-}*/
+.grid {
+    background: #fff url(/stylesheets/16_col.gif) repeat-y;
+}
 
 .footer {
 	clear: both;
