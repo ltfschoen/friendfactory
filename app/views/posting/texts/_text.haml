@@ -2,7 +2,7 @@
   %table
     %tr
       %td.avatar.thumb
-        = render 'posting/post_it', :locals => { :posting => text }
+        = render_post_it(text)
       %td
         %div
           = link_to_profile(text.user)

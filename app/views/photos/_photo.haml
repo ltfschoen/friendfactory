@@ -1,17 +1,1 @@
-.posting[photo]
-  - if false
-    - unless photo.nil?
-      = thumb_image_tag(photo.user.profile.avatar)
-      = link_to image_tag(photo.image.url(:poloroid), :site => false, :class => 'polariod')   
-  
-  - if true
-    %table
-      %tr
-        %td.avatar.thumb
-          = render :partial => 'posting/post_it', :locals => { :posting => photo }
-        %td
-          = image_tag(photo.image.url(:w460), :site => false, :class => 'photo medium') unless photo.nil?
-          %p
-          = render :partial => 'comments/comment', :collection => photo.children.comments
-          %div{:id => "posting_#{photo.id}_new_comment_well"}
-          = render :partial => 'comments/new', :locals => { :parent_id => photo.id }
+= render :partial => 'posting/photos/photo', :object => photo

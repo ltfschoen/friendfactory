@@ -1,7 +1,7 @@
 .wave_shared .post_it {
     position: relative;
     background: url('/images/friskyhands/post-it.png') no-repeat top left;
-    width: 190px;
+    width: 210px;
     height: 130px;
     -webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
@@ -10,8 +10,11 @@
 .wave_shared .post_it img.avatar {
     position: relative;
     float: left;
-    margin-left: 18px;
+    top: -6px;
+    margin-left: 16px;
     margin-right: 12px;
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
 }
 
 .wave_shared .post_it p {
