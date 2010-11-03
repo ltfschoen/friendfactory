@@ -104,15 +104,30 @@ end
 namespace :ff do
   namespace :db do
     namespace :refresh do
-      desc "Refresh db and images on staging. DUMP_DATE=yyyymmdd"
-      task :staging do
-        require 'yaml'
-        staging
-        database = YAML::load_file("config/database.yml")
-        timestamp = ENV['DUMP_DATE'] || Time.now.strftime('%Y%m%d')
-        filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "dump.#{timestamp}.sql")
-        run "mysql -u #{database['staging']['username']} -p#{database['staging']['password']} #{database['staging']['database']} < #{filename}"
-      end      
+      namespace :staging do
+        desc "Refresh sql and images on staging. DUMP_DATE=yyyymmdd"
+        task :default do
+          sql
+          images          
+        end
+
+        desc "Refresh sql on staging. DUMP_DATE=yyyymmdd"
+        task :sql do
+          require 'yaml'
+          staging
+          database = YAML::load_file("config/database.yml")
+          filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "dump.#{dump_date}.sql")
+          puts filename
+          # run "mysql -u #{database['staging']['username']} -p#{database['staging']['password']} #{database['staging']['database']} < #{filename}"
+        end
+        
+        desc "Refresh images on staging. DUMP_DATE=yyyymmdd"
+        task :images do
+          staging
+          filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "images.#{dump_date}.tar.gz")
+          run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{filename} images/*"
+        end
+      end
     end
 
     namespace :dumps do
@@ -124,6 +139,7 @@ namespace :ff do
         puts db_dumps, image_dumps
       end
 
+      desc "Remove old dumps. DUMP_DATE=yyyymmdd"
       task :cleanup do
         production
         if ENV['DUMP_DATE'].nil?
@@ -138,12 +154,12 @@ namespace :ff do
     namespace :dump do
       desc "Dump production db and images to system/dumps"
       task :default do
-        ff.db.dump.db
+        ff.db.dump.sql
         ff.db.dump.images
       end
       
-      desc "Dump production db to system/dumps"
-      task :db do
+      desc "Dump production sql to system/dumps"
+      task :sql do
         require 'yaml'
         production
         database = YAML::load_file("config/database.yml")
