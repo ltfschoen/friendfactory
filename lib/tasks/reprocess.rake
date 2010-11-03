@@ -9,6 +9,7 @@ namespace :ff do
           posting.send(:image).reprocess!
         end
       end
+      puts "Done"
     end  
   
     desc "Reprocess posting image attachments geometry"
@@ -24,6 +25,7 @@ namespace :ff do
           posting.save
         end
       end      
+      puts "Done"
     end
   
     desc "Delete all (except the original) posting image attachments"
