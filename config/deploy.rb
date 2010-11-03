@@ -104,6 +104,7 @@ end
 namespace :ff do
   namespace :db do
     namespace :refresh do
+      desc "Refresh db and images on staging. DUMP_DATE=yyyymmdd"
       task :staging do
         require 'yaml'
         staging
@@ -157,11 +158,24 @@ namespace :ff do
         run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
       end      
       
-      desc "Download dumped production db and images to local"
-      task :download do
-        production
-        get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
-        get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"        
+      namespace :download do
+        desc "Download dumped production db and images to local. DUMP_DATE=yyyymmdd"
+        task :default do
+          sql
+          images
+        end
+        
+        desc "Download dumped production sql to local. DUMP_DATE=yyyymmdd"
+        task :sql do
+          production
+          get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
+        end
+        
+        desc "Download dumped production images to local. DUMP_DATE=yyyymmdd"
+        task :images do
+          production
+          get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"
+        end
       end
     end    
   end

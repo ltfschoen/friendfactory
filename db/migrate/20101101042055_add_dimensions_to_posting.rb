@@ -2,15 +2,22 @@ require 'rake'
 
 class AddDimensionsToPosting < ActiveRecord::Migration
   def self.up
-    add_column :postings, :width, :integer
-    add_column :postings, :height, :integer
-    add_column :postings, :horizontal, :boolean
+    unless column_exists?(:postings, :width)
+      add_column(:postings, :width, :integer)
+    end
+    
+    unless column_exists?(:postings, :height)
+      add_column(:postings, :height, :integer)
+    end
+    
+    unless column_exists?(:postings, :horizontal)
+      add_column(:postings, :horizontal, :boolean)
+    end
 
-    puts '-- Now perform the following rake tasks:'
-    puts '--  ff:attachments:delete!'
-    puts '--  ff:attachments:reprocess!'
-    puts '--  ff:attachments:geometry!'
-    puts '--  ff:db:refresh:default_wave'
+    say 'now perform the following rake tasks:'
+    say 'ff:attachments:delete!', true
+    say 'ff:attachments:reprocess!', true
+    say 'ff:attachments:geometry!', true
   end
 
   def self.down

@@ -19,4 +19,8 @@ class Wave::Profile < Wave::Base
     self.avatars.active
   end
   
+  def avatar_id
+    self.avatar.id
+  end
+  
 end

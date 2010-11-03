@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
   has_one  :info,     :class_name => 'UserInfo'
   
   has_many :waves,    :class_name => 'Wave::Base'
-  has_one  :profile,  :class_name => 'Wave::Profile'  
+  has_one  :profile,  :class_name => 'Wave::Profile'
+   
   has_many :postings, :class_name => 'Posting::Base'
   
   has_many :friendships

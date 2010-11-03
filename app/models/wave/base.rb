@@ -10,8 +10,7 @@ class Wave::Base < ActiveRecord::Base
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
-      :order                   => 'created_at desc' do
-        
+      :order                   => 'created_at desc' do        
     def for(user)
       if user.nil?
         exclude('Posting::Message')
