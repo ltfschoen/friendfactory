@@ -104,29 +104,26 @@ end
 namespace :ff do
   namespace :db do
     namespace :refresh do
-      namespace :staging do
-        desc "Refresh sql and images on staging. DUMP_DATE=yyyymmdd"
-        task :default do
-          sql
-          images          
-        end
+      desc "Refresh sql and images on staging. DUMP_DATE=yyyymmdd"
+      task :default do
+        sql
+        images          
+      end
 
-        desc "Refresh sql on staging. DUMP_DATE=yyyymmdd"
-        task :sql do
-          require 'yaml'
-          staging
-          database = YAML::load_file("config/database.yml")
-          filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "dump.#{dump_date}.sql")
-          puts filename
-          # run "mysql -u #{database['staging']['username']} -p#{database['staging']['password']} #{database['staging']['database']} < #{filename}"
-        end
-        
-        desc "Refresh images on staging. DUMP_DATE=yyyymmdd"
-        task :images do
-          staging
-          filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "images.#{dump_date}.tar.gz")
-          run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{filename} images/*"
-        end
+      desc "Refresh sql on staging. DUMP_DATE=yyyymmdd"
+      task :sql do
+        require 'yaml'
+        staging
+        database = YAML::load_file("config/database.yml")
+        filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "dump.#{dump_date}.sql")
+        run "mysql -u #{database['staging']['username']} -p#{database['staging']['password']} #{database['staging']['database']} < #{filename}"
+      end
+      
+      desc "Refresh images on staging. DUMP_DATE=yyyymmdd"
+      task :images do
+        staging
+        filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "images.#{dump_date}.tar.gz")
+        run "cd #{current_path}/public/system && tar -czf #{filename} images/*"
       end
     end
 
