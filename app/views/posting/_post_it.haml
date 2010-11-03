@@ -1,12 +1,11 @@
 - if defined?(posting) && posting.present?
-  .post_it{ :class => (posting.user.profile.avatar.present? ? 'with_avatar' : 'without_avatar' ) }<
-    - if posting.user.profile.avatar.present?
-      = thumb_image_tag(posting.user.profile.avatar)
-      %p.header
+  .post_it{ :class => (avatar_present = posting.user.profile.avatar.present? ? 'with_avatar' : 'without_avatar' ) }<
+    = thumb_image_tag(posting.user.profile.avatar)
+    %p.header
+      - if avatar_present
         Posted
         = distance_of_time_in_words_to_now(posting.created_at)
-    - else
-      %p.header_no_avatar
+      - else
         Posted
         = " by #{posting.user.first_name}" if posting.user.first_name
         = distance_of_time_in_words_to_now(posting.created_at)

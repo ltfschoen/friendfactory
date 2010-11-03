@@ -23,13 +23,13 @@
     color: gray;
 }
 
-.wave_shared .post_it p.header {
+.wave_shared .post_it.with_avatar p.header {
     float: left;
     width: 80px;
     padding-top: 14px;
 }
 
-.wave_shared .post_it p.header_no_avatar {
+.wave_shared .post_it.without_avatar p.header {
     float: left;
     width: 150px;
     padding-top: 20px;
