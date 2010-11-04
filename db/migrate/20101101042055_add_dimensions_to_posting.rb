@@ -14,10 +14,12 @@ class AddDimensionsToPosting < ActiveRecord::Migration
       add_column(:postings, :horizontal, :boolean)
     end
 
+    say 'ff:attachments:geometry!'
+    Rake::Task[:'ff:attachments:geometry!'].invoke
+    
     say 'now perform the following rake tasks:'
     say 'ff:attachments:delete!', true
     say 'ff:attachments:reprocess!', true
-    say 'ff:attachments:geometry!', true
   end
 
   def self.down
