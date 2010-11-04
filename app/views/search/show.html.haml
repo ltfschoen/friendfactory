@@ -4,4 +4,4 @@
     %p
       Bummer. This wave is empty.
   - else
-    = render :partial => 'postings/posting', :collection => @wave.postings
+    = render_postings(@wave.postings)

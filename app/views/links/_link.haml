@@ -14,4 +14,4 @@
         = render :partial => 'comments/comment', :collection => link.children.comments
         %div{:id => "posting_#{link.id}_new_comment_well"}
         = render :partial => 'comments/new', :locals => { :parent_id => link.id }
-  = render :partial => 'postings/posting', :collection => link.children.postings
+  = render_postings(link.children.postings)

@@ -13,7 +13,7 @@
     #events
     = render :partial => 'nav'
     %ul.postings
-      = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
+      = render_postings(@wave.postings.for(current_user))
 
   .grid_3
     &nbsp;

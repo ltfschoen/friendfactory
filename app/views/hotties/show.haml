@@ -12,6 +12,6 @@
   .grid_12
     %h1= h @wave.topic
     #postings
-      = render :partial => 'postings/posting', :collection => @wave.postings.for(current_user)
+      = render_postings(@wave.postings.for(current_user))
   .grid_1
     &nbsp;

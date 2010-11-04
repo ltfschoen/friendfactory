@@ -6,7 +6,7 @@
 		  <h3 class='span-12 last'>Upload Photos</h3>
 			<div id='upload_error_well' class='clear last' style='display:none'></div>
 			<ul id='upload_well' class='postings index append-bottom last'>
-				<%= render :partial => 'postings/posting', :collection => current_user.postings %>
+			  <%= render_postings(current_user.postings) %>
 			</ul>
 			<div class='button_bar span-12 last'><%= f.file_field :image %><%= f.submit 'Upload', :id => 'upload_submit' %><%= spinner %></div>
 		</div>
