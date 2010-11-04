@@ -1,9 +1,9 @@
 img.photo {
     padding: 10px;
     background: #FFF;
-    -webkit-box-shadow: 3px 3px 10px #653;
-    -moz-box-shadow: 3px 3px 10px #653;
-    box-shadow: 3px 3px 10px #653;
+    -webkit-box-shadow: 3px 3px 10px #764;
+    -moz-box-shadow: 3px 3px 10px #764;
+    box-shadow: 3px 3px 10px #764;
 }
 
 img.photo.h4x6 {
@@ -35,9 +35,9 @@ img.photo.v4x6.small {
 .posting_video object {
     padding: 8px;
     background: #000;
-    -webkit-box-shadow: 3px 3px 10px #653;
-    -moz-box-shadow: 3px 3px 10px #653;
-    box-shadow: 3px 3px 10px #653;    
+    -webkit-box-shadow: 3px 3px 10px #764;
+    -moz-box-shadow: 3px 3px 10px #764;
+    box-shadow: 3px 3px 10px #764;
 }
 
 
