@@ -20,7 +20,7 @@ class Wave::Profile < Wave::Base
   end
   
   def avatar_id
-    self.avatar.id
+    self.avatar.id if self.avatar.present?
   end
   
 end

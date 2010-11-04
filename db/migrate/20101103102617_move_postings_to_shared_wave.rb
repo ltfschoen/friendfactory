@@ -16,15 +16,12 @@ class MovePostingsToSharedWave < ActiveRecord::Migration
       say "kept  #{user.profile.posting_ids.sort * ' '}", true
     end
     
-    say 'moving avatars from profile waves to shared wave (id=1)'
-    moved_ids = []
-    Wave::Profile.all.each do |profile|
-      unless profile.avatar.nil?
-        shared_wave.posting_ids = (shared_wave.posting_ids + [ profile.avatar_id ]).uniq
-        moved_ids << profile.avatar_id
-      end
-    end
-    say "moved #{moved_ids * ' '}", true
+    say 'copying active avatars from all profile waves to shared wave (id=1)'
+    avatar_ids = Wave::Profile.all.map{ |profile| profile.avatar_id }.compact
+    copied_ids = (shared_wave.posting_ids + avatar_ids).uniq - shared_wave.posting_ids
+    shared_wave.posting_ids = (shared_wave.posting_ids + avatar_ids).uniq
+    say "found  #{avatar_ids.sort * ' '}", true
+    say "copied #{copied_ids.sort * ' '}", true
   end
 
   def self.down
