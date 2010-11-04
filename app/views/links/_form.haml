@@ -3,7 +3,7 @@
     %td{ :colspan => '2' }
       %h2= label
   %tr
-    %td.avatar.thumb= thumb_image_tag(current_user)
+    %td.avatar.thumb= avatar_image_tag(current_user, :style => :thumb)
     %td
       - form_for(Posting::Link.new, :url => wave_links_path(:wave_id => wave)) do |f|
         = f.text_field :subject, :placeholder => 'Caption'

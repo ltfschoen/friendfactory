@@ -50,27 +50,7 @@ module ApplicationHelper
     name = opts[:label] || user.full_name
     link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
   end
-  
-  def portrait_image_tag(user_or_avatar, opts = {})
-    avatar_image_tag(user_or_avatar, opts.merge(:size => 'portrait'))
-  end
-  
-  def thumb_image_tag(user_or_avatar, opts = {})
-    avatar_image_tag(user_or_avatar, opts.merge(:size => 'thumb'))
-  end
-
-  def avatar_image_tag(user_or_avatar, opts = {})
-    if user_or_avatar.present?
-      user, avatar = user_or_avatar.is_a?(User) ?
-          [ user_or_avatar, user_or_avatar.profile.avatar ] : [ user_or_avatar.user, user_or_avatar ]        
-      if user.present? && avatar.present?    
-        online = 'online' if (user.online? && !(opts[:online_badge] == false))
-        klass  = [ 'avatar', opts[:size], online, opts[:class] ].compact * ' '
-        link_to(image_tag(avatar.image.url(opts[:size].to_sym), :alt => user.full_name, :class => klass, :site => false), profile_path(user.profile))
-      end
-    end
-  end      
-  
+    
   def distance_of_time_in_words_to_now(date, opts = {})
     suffix = opts[:suffix] || 'ago'
     prefix = opts[:prefix]

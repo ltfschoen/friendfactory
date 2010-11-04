@@ -1,6 +1,6 @@
 - if defined?(posting) && posting.present?
   .post_it{ :class => (avatar_present = posting.user.profile.avatar.present? ? 'with_avatar' : 'without_avatar' ) }<
-    = thumb_image_tag(posting.user.profile.avatar)
+    = avatar_image_tag(posting.user.profile.avatar, :style => :thumb)
     %p.header
       - if avatar_present
         Posted

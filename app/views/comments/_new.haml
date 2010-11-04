@@ -3,7 +3,7 @@
     %table
       %tr
         %td.avatar
-          = thumb_image_tag(current_user, :class => 'hidden')
+          = avatar_image_tag(current_user, :style => :thumb, :class => 'hidden')
         %td
           - form_for Posting::Comment::new(:body => ''), :url => posting_comments_path(:posting_id => parent_id), :html => { :id => "posting_#{parent_id}_new_comment" }  do |f|
             = f.text_area :body, :placeholder => 'Add a comment'          

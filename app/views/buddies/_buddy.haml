@@ -2,7 +2,8 @@
 .posting[buddy]
   %table
     %tr
-      %td.avatar.portrait= portrait_image_tag(friend)
+      %td.avatar.portrait
+        = avatar_image_tag(friend, :style => :portrait)
       %td
         %h3 Buddy with #{link_to_profile(friend)}
         %p= distance_of_time_in_words_to_now(buddy.created_at)    

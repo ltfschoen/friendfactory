@@ -2,7 +2,7 @@
   %table
     %tr
       %td.avatar.thumb
-        = thumb_image_tag(message.recipient_for(current_user).profile.avatar)
+        = avatar_image_tag(message.recipient_for(current_user).profile.avatar, :style => :thumb)
       %td
         %h3 Private Wave with #{link_to_profile(message.recipient_for(current_user))}
         %table

@@ -3,7 +3,7 @@
 <%= content %>
 <% else %>
 <div class='grid_3'>
-<%# thumb_image_tag(current_user, :online_badge => false, :class => 'button') %>
+<%# avatar_image_tag(current_user, :style => :thumb, :online_badge => false, :class => 'button') %>
 <p class='flash'><%= flash[:notice] || '&nbsp;' %></p>
 </div>
 <% end %>

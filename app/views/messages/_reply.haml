@@ -1,7 +1,7 @@
 %tr[reply]
   - if reply.sender == originator
     %td.avatar.thumb.small
-      = thumb_image_tag(reply.sender.profile.avatar, :class => 'small')
+      = avatar_image_tag(reply.sender.profile.avatar, :style => :thumb, :class => 'small')
     %td.envelope{ :colspan => '2' }
       = link_to_profile(reply.sender, :label => reply.sender.first_name)
       = distance_of_time_in_words_to_now(reply.created_at, :prefix => 'wrote')
@@ -10,7 +10,7 @@
     %td.avatar.thumb.small
       &nbsp;
     %td.avatar.thumb.small
-      = thumb_image_tag(reply.sender.profile.avatar, :class => 'small')
+      = avatar_image_tag(reply.sender.profile.avatar, :style => :thumb, :class => 'small')
     %td.envelope
       = link_to_profile(reply.sender, :label => reply.sender.first_name)
       = distance_of_time_in_words_to_now(reply.created_at, :prefix => 'wrote')

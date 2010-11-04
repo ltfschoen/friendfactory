@@ -3,7 +3,7 @@
     %td{ :colspan => '2' }
       %h2= label || "Upload a Photo to the Wave"
   %tr
-    %td.avatar.thumb= thumb_image_tag(current_user)
+    %td.avatar.thumb= avatar_image_tag(current_user, :style => :thumb)
     %td
       = form_for Posting::Photo.new, :url => wave_photos_path(:wave_id => wave), :html => { :multipart => true }, :remote => true do |f|
         %table.button_bar

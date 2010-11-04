@@ -3,14 +3,14 @@
 
 <%= content_tag_for(:div, head) do %>
 	<div class='grid_4 alpha'>
-		<%= avatar_image_tag(head.sender.avatar) -%>
+		<%= avatar_image_tag(head.sender.avatar, :style => :thumb) -%>
 		<div class='full_name'><%= head.sender.full_name -%></div>
 		<div class='created_at'><%= time_ago_in_words(head.created_at) -%>&nbsp;ago</div>
 	</div>
 	<div class='grid_9 body'>
 		<%= textilize(head.body) -%>
 		<div class='reply' class='grid_16 alpha omega' style='display:none'>
-			<%= avatar_image_tag(current_user.avatar, :class => 'small') %>			
+			<%= avatar_image_tag(current_user.avatar, :style => :thumb, :class => 'small') %>
 			<% form_for @reply, :url => message_reply_url(head) do |f| %>
 				<%= f.text_area :body, :class => 'grid_16 alpha omega' %>
 				<%= f.submit 'Send' %>

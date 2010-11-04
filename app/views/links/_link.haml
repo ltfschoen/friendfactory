@@ -1,7 +1,8 @@
 .posting[link]
   %table
     %tr
-      %td.avatar.thumb= thumb_image_tag(link.user)
+      %td.avatar.thumb
+        = avatar_image_tag(link.user, :style => :thumb)
       %td
         %div
           = link_to_profile(link.user)
