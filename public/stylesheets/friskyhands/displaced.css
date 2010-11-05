@@ -1,0 +1,52 @@
+div.posting .displaced {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    postition: relative;
+}
+
+div.posting .displaced.post_it {
+    -webkit-transform: none;
+    -moz-transform: none;
+}
+
+div.posting:nth-child(even) .displaced {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+div.posting:nth-child(3n) .displaced {
+    -webkit-transform: none;
+    -moz-transform: none;
+    top: -5px;
+    right: 10px;
+}
+
+div.posting:nth-child(3n) .displaced.post_it {
+    -webkit-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
+    right: 30px;
+}
+
+div.posting:nth-child(5n) .displaced {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    right: 5px;
+}
+
+div.posting:nth-child(5n) .displaced.post_it {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    right: -20px;
+}
+
+div.posting:nth-child(8n) .displaced {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    top: 8px;
+    right: 5px;
+}
+
+div.posting:nth-child(11n) .displaced {
+    top: 3px;
+    right: -5px;
+}

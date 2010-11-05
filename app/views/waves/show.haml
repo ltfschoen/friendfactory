@@ -8,7 +8,7 @@
       %p.flash= flash[:notice]
     #events
     = render :partial => 'nav'
-    %ul.postings
+    %div.postings
       = render_postings(@wave.postings.for(current_user))
 
   .grid_3

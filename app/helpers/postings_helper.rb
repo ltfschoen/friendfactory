@@ -1,5 +1,5 @@
 module PostingsHelper
-  def render_post_it(object)
+  def render_post_it(object, opts={})
     render(:partial => '/posting/post_it', :locals => { :posting => object })
   end
   

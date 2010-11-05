@@ -15,8 +15,8 @@
     = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/waves", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/postings", :media => 'screen'
-    = stylesheet_link_tag "#{current_site}/buddy-bar", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/scrollable", :media => 'screen'
+    = stylesheet_link_tag "#{current_site}/displaced", :media => 'screen'
     / [if IE]
       = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
     = yield(:stylesheets)
@@ -39,10 +39,10 @@
     = javascript_include_tag 'jquery.placeholder'
     = javascript_include_tag "jquery.flip"    
     = javascript_include_tag 'chrome'
-    = javascript_include_tag 'flip6'
     = javascript_include_tag 'application'
     = javascript_include_tag 'wave'
     = javascript_include_tag 'broadcast'  
+    = javascript_include_tag 'flip6'
     = yield(:javascripts)
     :javascript
       jQuery(function($){

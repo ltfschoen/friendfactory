@@ -3,8 +3,6 @@
     background: url('/images/friskyhands/post-it.png') no-repeat top left;
     width: 210px;
     height: 130px;
-    -webkit-transform: rotate(-3deg);
-    -moz-transform: rotate(-3deg);
 }
 
 .wave_shared .post_it img.avatar {
@@ -13,8 +11,6 @@
     top: -6px;
     margin-left: 16px;
     margin-right: 12px;
-    -webkit-transform: rotate(-3deg);
-    -moz-transform: rotate(-3deg);
 }
 
 .wave_shared .post_it p {
