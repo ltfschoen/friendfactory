@@ -1,5 +1,5 @@
 jQuery(function($){
-  $('.polaroid').draggable({ handle: '.gripper' })
+  // $('.polaroid').draggable({ handle: '.gripper' })
 	if ($.browser.safari){
 		$('.polaroid .back').css('-webkit-transform', 'rotateY(180deg)');
 	  $('.polaroid .back .scrollable').scrollable({
@@ -45,7 +45,8 @@ jQuery(function($){
 	      color: '#FFF',
 	      content: $polaroid.find('.face-container:hidden'),
 	      onEnd: function(){
-					$polaroid.draggable().find('.buddy-bar a.flip').click(function(event){
+					// $polaroid.draggable().find('.buddy-bar a.flip').click(function(event){
+				  $polaroid.find('.buddy-bar a.flip').click(function(event){
 						event.preventDefault();
 						$polaroid.revertFlip();
 					});

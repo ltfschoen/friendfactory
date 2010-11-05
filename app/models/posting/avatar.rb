@@ -4,7 +4,7 @@ class Posting::Avatar < Posting::Base
       :styles => {
           :thumb    => [ '100x100#', :jpg ],
           :portrait => [ '200x280#', :jpg ],
-          :polariod => [ '260x280#', :jpg ],
+          :polaroid => [ '260x280#', :jpg ],
           :iphone   => [ '320x480#', :jpg ],
           :iphoneR  => [ '480x320#', :jpg ],
           :ad       => [ '300x250#', :jpg ]},

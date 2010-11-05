@@ -1,2 +1,10 @@
-= content_tag_for(:div, avatar, :class => 'posting polariod') do
-  = avatar_image_tag(avatar, :style => :polariod)
+.posting[avatar]
+  %table
+    %tr
+      %td.avatar.thumb
+        = render_post_it(avatar)
+      %td
+        = render :partial => 'posting/avatars/polaroid', :object => avatar
+        / = render :partial => 'comments/comment', :collection => avatar.children.comments
+        / %div{:id => "posting_#{avatar.id}_new_comment_well"}
+        / = render :partial => 'comments/new', :locals => { :parent_id => avatar.id }
