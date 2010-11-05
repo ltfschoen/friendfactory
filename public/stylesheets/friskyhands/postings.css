@@ -32,6 +32,38 @@ img.photo.v4x6.small {
     height: 220px;
 }
 
+img.avatar.thumb {
+	padding: 0px;
+	border: 3px solid darkgray;
+    width: 60px;
+    height: 60px;
+    -webkit-box-shadow: 3px 3px 4px #873;
+    -moz-box-shadow: 3px 3px 4px #873;
+    box-shadow: 3px 3px 4px #873;
+}
+
+img.avatar.thumb.online {
+	padding: 0px;
+	border: 3px solid lightgreen;
+}
+
+.posting_avatar.polariod {
+    position: relative;
+    width: 290px;
+    height: 350px;
+    background: #FFF url(/images/friskyhands/polariod.png) no-repeat top left; 
+    -webkit-box-shadow: 3px 3px 10px #873;
+    -moz-box-shadow: 3px 3px 10px #873;
+    box-shadow: 3px 3px 10px #873;
+}
+
+.posting_avatar.polariod img.polariod {
+    position: relative;
+    top: 15px;
+    left: 15px;
+    border: 1px solid lightgray;
+}
+
 .posting_video object {
     padding: 8px;
     background: #000;
@@ -53,8 +85,7 @@ img.photo.v4x6.small {
 }
 
 .postings > .posting {
-/*	border-bottom: 1px solid #CCC;*/
-	padding: 20px 0;
+    margin-top: 30px;
 }
 
 .posting > table td {
