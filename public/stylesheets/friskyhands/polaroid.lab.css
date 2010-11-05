@@ -4,31 +4,34 @@
 	font-weight: normal;
 }
 
-.polaroid-container {
+div.polaroid-container {
 	height: 356px;
 	width: 320px;
 	position: relative;	
 	z-index: 1000;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);	
 	-webkit-perspective: 1200;
-}
-
-.polaroid  {
-	position: absolute;
-	height: 350px;
-	width: 290px;	
-	-webkit-transform-style: preserve-3d;	
-	-webkit-transition-property: -webkit-transform;
-	-webkit-transition-duration: 1s;	
 	-webkit-transform: rotate(2deg);
 	-moz-transform: rotate(2deg);
 }
 
-.polaroid.flipped {
-	-webkit-transform: rotate(2deg) rotateY(180deg);
+div.polaroid  {
+	position: absolute;
+	height: 350px;
+	width: 290px;	
+	-webkit-transform-style: preserve-3d;	
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;        
+/*  -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);*/
 }
 
-.polaroid .face {
+div.polaroid.flipped {
+/*  -webkit-transform: rotate(2deg) rotateY(180deg);*/
+	-webkit-transform: rotateY(180deg);
+}
+
+div.polaroid .face {
 	position: absolute;
 	height: 320px;
 	width: 260px;

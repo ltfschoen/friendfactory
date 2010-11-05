@@ -1,0 +1,10 @@
+.post_id { 
+    position: relative;
+    z-index: 10;
+}
+
+.post_it img.avatar.thumb {
+    -webkit-box-shadow: 3px 3px 4px #873;
+    -moz-box-shadow: 3px 3px 4px #873;
+    box-shadow: 3px 3px 4px #873;    
+}

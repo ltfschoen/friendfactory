@@ -11,25 +11,25 @@ jQuery(function($){
           
 	  $('.polaroid .front .buddy-bar a.flip').click(function(event){
 	    event.preventDefault();	
-	    $(this).addClass('current').closest('.polaroid').toggleClass('flipped').find('.gripper').hide();
+	    $(this).addClass('current').closest('.polaroid').toggleClass('flipped') // .find('.gripper').hide();
 	  });
 
 	  $('.polaroid .back .buddy-bar a.flip').click(function(event){
 	    event.preventDefault();	
-	    $(this).closest('.polaroid').toggleClass('flipped').find('.gripper').hide();
+	    $(this).closest('.polaroid').toggleClass('flipped') // .find('.gripper').hide();
 	  });
     
 	  $('.polaroid').each(function(idx, polaroid){
-	    polaroid.addEventListener('webkitTransitionEnd', function(event){
-				var $polaroid = $(event.target);
-	      var $current = $polaroid.find('.front.face .buddy-bar .current')
-	      $polaroid.find('.back .buddy-bar .' + $current.attr('href')).click();
-				$polaroid.find('.back .gripper').show();				
-				if (!$polaroid.hasClass('flipped')) {
-					$polaroid.find('.front .gripper').show();
-				}
-	      $current.removeClass('current');
-	    });
+        //      polaroid.addEventListener('webkitTransitionEnd', function(event){
+        // var $polaroid = $(event.target);
+        //        var $current = $polaroid.find('.front.face .buddy-bar .current')
+        //        $polaroid.find('.back .buddy-bar .' + $current.attr('href')).click();
+        // $polaroid.find('.back .gripper').show();       
+        // if (!$polaroid.hasClass('flipped')) {
+        //  $polaroid.find('.front .gripper').show();
+        // }
+        //        $current.removeClass('current');
+        //      });
 	  });
 	
 	} else {
