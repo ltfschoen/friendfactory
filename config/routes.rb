@@ -1,12 +1,9 @@
 Friskyfactory::Application.routes.draw do |map|
 
-  # # # # # # # # # # # # # # # 
   # Waves Controllers
-
-  map.slug_wave 'waves/:slug', :controller => :waves, :action => :show,
-      :requirements => { :slug => /\D\w*/ },
-      :conditions   => { :method => :get  }
-
+  
+  get '/waves/:slug' => 'waves#show', :as => 'slug_wave', :constraints => { :slug => /\D\w*/ }  
+  
   map.resources :waves, :only => [ :index, :show, :create ] do |wave|
     # Used to add postings to a wave...
     wave.resources :texts,  :only => [ :create ]
@@ -59,9 +56,10 @@ Friskyfactory::Application.routes.draw do |map|
   
   # # # # # # # # # # # # # # # 
   # Miscellaneous
-    
-  map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
-  # map.peek 'peek', :controller => 'welcome', :action => 'peek'  # Chat Debug
+  
+  if [ 'development', 'staging' ].include?(Rails.env)
+    map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
+  end
   
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
