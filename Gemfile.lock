@@ -101,7 +101,6 @@ GEM
     ruby-hmac (0.4.0)
     signature (0.1.1)
       ruby-hmac
-    test-unit (2.1.1)
     thor (0.14.3)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
@@ -126,5 +125,4 @@ DEPENDENCIES
   rails (= 3.0.1)
   remotipart
   rspec-rails (~> 2.0.1)
-  test-unit
   webrat

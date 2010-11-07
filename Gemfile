@@ -37,7 +37,6 @@ gem 'pusher'
 # and rake tasks are available in development mode:
 
 group :development, :test do
-  gem 'test-unit'
   gem 'rspec-rails', '~> 2.0.1'
   gem 'webrat'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
