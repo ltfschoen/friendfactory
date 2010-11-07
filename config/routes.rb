@@ -52,7 +52,7 @@ Friskyfactory::Application.routes.draw do |map|
     
   map.welcome 'welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
   
-  map.root :wave
+  root :to => 'waves#show'
   
   # # # # # # # # # # # # # # # 
   # Miscellaneous
