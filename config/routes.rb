@@ -52,23 +52,14 @@ Friskyfactory::Application.routes.draw do |map|
     
   map.welcome 'welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
   
-  root :to => 'waves#show'
+  root :to => 'waves#show', :via => :get
   
-  # # # # # # # # # # # # # # # 
   # Miscellaneous
   
   if [ 'development', 'staging' ].include?(Rails.env)
     map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
   end
   
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
-  # map.connect ':controller/:action/:id'
-  # map.connect ':controller/:action/:id.:format'
-
-  # # # # # # # # # # # # # # # 
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
