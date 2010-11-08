@@ -18,6 +18,8 @@ class Waves::PolaroidsController < Waves::BaseController
     end
   end
   
+  private
+  
   def dynamic_id
     @@dynamic_id += 1
   end
