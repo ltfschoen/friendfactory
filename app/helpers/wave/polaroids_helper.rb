@@ -1,0 +1,2 @@
+module Wave::PolaroidsHelper
+end

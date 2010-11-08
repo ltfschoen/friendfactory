@@ -10,17 +10,14 @@ class Posting::Base < ActiveRecord::Base
       :order       => 'created_at desc' do    
     def postings
       find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at desc'
-    end
-    
+    end    
     def comments
       find :all, :conditions => [ "type = 'Posting::Comment'" ], :order => 'created_at asc'
     end
   end
-  
-  belongs_to :user
-  
-  belongs_to :resource, :polymorphic => true
-  
+    
+  belongs_to :user  
+  belongs_to :resource, :polymorphic => true  
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :foreign_key             => 'posting_id',
@@ -28,8 +25,7 @@ class Posting::Base < ActiveRecord::Base
       :join_table              => 'postings_waves',
       :order                   => 'created_at desc'
 
-  validates_presence_of :user_id
-  
+  validates_presence_of :user_id  
   before_validation(:on => :create) do
     self.user = UserSession.find.record if Authlogic::Session::Base.activated?
   end

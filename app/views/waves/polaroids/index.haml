@@ -1,0 +1,12 @@
+- stylesheet('wave/polaroid')
+
+.wave[@wave]
+  .grid_16
+    - if flash[:notice].present?
+      %p.flash= flash[:notice]
+    %div.postings
+      - @wave.postings.in_groups_of(3) do |group|
+        - group.each_with_index do |posting, i|
+          - if posting.is_a?(Posting::Avatar)
+            - css_class = (i == 2 ? 'omega' : '')
+            = render :partial => 'posting/avatars/polaroid', :locals => { :avatar => posting, :css_class => css_class }

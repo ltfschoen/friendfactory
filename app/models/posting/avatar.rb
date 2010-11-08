@@ -18,6 +18,10 @@ class Posting::Avatar < Posting::Base
 
   before_create :set_dimensions
 
+  def self.active
+    find :all, :conditions => [ 'active = ?', true ], :order => [ 'created_at DESC' ]
+  end
+
   private
   
   def set_dimensions

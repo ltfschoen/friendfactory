@@ -1,8 +1,8 @@
 class MovePostingsToSharedWave < ActiveRecord::Migration
   def self.up
     say 'ff:db:default_wave'
-    Rake::Task[:'ff:db:default_wave'].invoke
-
+    Rake::Task[:'ff:db:slugs'].invoke
+    
     user = User.find_by_email('michael@michaelbamford.com')
     shared_wave = Wave::Base.find_by_slug(WavesController::DefaultWaveSlug)
     say "moving postings from profile wave (id=#{user.profile.id}) to shared wave (id=#{shared_wave.id})"

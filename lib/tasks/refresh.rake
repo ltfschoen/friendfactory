@@ -29,18 +29,18 @@ namespace :ff do
   end
 
   namespace :db do
+    desc "Refresh development with production db and images from local dumps. DUMP_DATE=yyyymmdd"
+    task :refresh => [ :'refresh:sql', :'refresh:images', :slugs ]
+
     desc "Set the default wave"
-    task :default_wave => :environment do      
+    task :slugs => :environment do      
       wave = Wave::Base.find_by_slug('shared')
       if wave.present?
         wave.slug = ::WavesController::DefaultWaveSlug
         wave.save
       end
     end
-    
-    desc "Refresh development with production db and images from local dumps. DUMP_DATE=yyyymmdd"
-    task :refresh => [ :'refresh:sql', :'refresh:images', :default_wave ]
-  
+      
     namespace :refresh do
       desc "Refresh development with production sql from local. DUMP_DATE=yyyymmdd"
       task :sql => :environment do

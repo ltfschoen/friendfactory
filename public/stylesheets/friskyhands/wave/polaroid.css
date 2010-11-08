@@ -1,0 +1,14 @@
+.wave.struct_polaroid_wave .postings {
+    width: 961px;
+    margin-left: 6px;
+}
+.wave.struct_polaroid_wave .polaroid-container {
+    float: left;
+    height: 376px;
+}
+
+div.posting:nth-child(even) .polaroid-container {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+

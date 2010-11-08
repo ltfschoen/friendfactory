@@ -1,18 +1,20 @@
 Friskyfactory::Application.routes.draw do |map|
 
   # Waves Controllers
-  
-  get '/waves/:slug' => 'waves#show', :as => 'slug_wave', :constraints => { :slug => /\D\w*/ }  
-  
-  map.resources :waves, :only => [ :index, :show, :create ] do |wave|
+  namespace :waves do
+    resources :polaroids, :only => [ :index, :show ]
+    get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
+  end
+
+  map.resources :waves, :only => [ :index, :show, :create ], :controller => 'waves/base' do |wave|
     # Used to add postings to a wave...
     wave.resources :texts,  :only => [ :create ]
     wave.resources :photos, :only => [ :create ]
     wave.resources :videos, :only => [ :create ]
     wave.resources :links,  :only => [ :create ]
   end
-
-  map.wave_hotties 'hotties', :controller => :hotties, :action => :show, :conditions => { :method => :get }  
+  
+  # map.wave_hotties 'hotties', :controller => :hotties, :action => :show, :conditions => { :method => :get }  
   map.resources :profiles, :only => [ :show, :edit, :update ]
   
   # # # # # # # # # # # # # # # 
@@ -51,8 +53,10 @@ Friskyfactory::Application.routes.draw do |map|
   map.search 'search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
     
   map.welcome 'welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
-  
-  root :to => 'waves#show', :via => :get
+
+  root :to => 'waves/base#show', :via => :get
+
+  get '/:slug', :to => 'waves#show', :constraints => { :slug => /\D\w*/ }
   
   # Miscellaneous
   

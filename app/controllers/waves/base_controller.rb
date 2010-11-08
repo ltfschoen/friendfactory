@@ -1,4 +1,4 @@
-class WavesController < ApplicationController
+class Waves::BaseController < ApplicationController
 
   DefaultWaveSlug = 'popular'
   
@@ -6,22 +6,19 @@ class WavesController < ApplicationController
 
   def show
     store_location
-    
-    @wave = case 
-      when params[:id].present?   then Wave::Base.find_by_id(params[:id]) 
-      when params[:slug].present? then Wave::Base.find_by_slug(params[:slug])
-      else Wave::Base.find_by_slug(DefaultWaveSlug)
+    if params[:id]
+      @wave = Wave::Base.find(params[:id])
+    else
+      @wave = Wave::Base.find_by_slug(params[:slug] || DefaultWaveSlug)
+      unless @wave.present?
+        raise ConfigurationException, "Unknown wave: #{params[:slug] || DefaultWaveSlug}"
+      end
     end
-    
-    unless @wave.present?
-      raise ConfigurationException, "Unknown wave: #{params[:id] || params[:slug] || DefaultWaveSlug}"
-    end
-    
     respond_to do |format|
       format.html
     end
   end
-  
+    
   # GET /waves/new
   # GET /waves/new.xml
   # def new
