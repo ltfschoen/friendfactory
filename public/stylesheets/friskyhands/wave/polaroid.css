@@ -7,8 +7,24 @@
     height: 376px;
 }
 
-div.posting:nth-child(even) .polaroid-container {
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
+.polaroid-container:nth-child(2) {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
 }
 
+.polaroid-container:nth-child(5n) {
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+
+.polaroid-container:nth-child(7n) {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+}
+
+.polaroid-container:nth-child(10n) {
+    position: relative;
+    top: 5px;
+    right: 10px;
+}
