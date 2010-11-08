@@ -36,7 +36,7 @@ namespace :ff do
     task :slugs => :environment do      
       wave = Wave::Base.find_by_slug('shared')
       if wave.present?
-        wave.slug = ::WavesController::DefaultWaveSlug
+        wave.slug = Waves::BaseController::DefaultWaveSlug
         wave.save
       end
     end

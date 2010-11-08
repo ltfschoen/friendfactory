@@ -32,14 +32,14 @@ describe Wave::BaseController do
     it "assigns the default wave as @wave when given no parameters" do
       pending
       wave = Factory.build(:wave)
-      Wave::Base.should_receive(:find_by_slug).with(WavesController::DefaultWaveSlug).and_return(wave)
+      Wave::Base.should_receive(:find_by_slug).with(Waves::BaseController::DefaultWaveSlug).and_return(wave)
       get :show, nil, { :lurker => true }
       assigns[:wave].should equal(wave)
     end
     
     it "raises an exception when there's no default wave" do
       pending
-      Wave::Base.should_receive(:find_by_slug).with(WavesController::DefaultWaveSlug).and_return(nil)
+      Wave::Base.should_receive(:find_by_slug).with(Waves::BaseController::DefaultWaveSlug).and_return(nil)
       expect { get :show, nil, { :lurker => true } }.to raise_error(ConfigurationException)
     end
   end
