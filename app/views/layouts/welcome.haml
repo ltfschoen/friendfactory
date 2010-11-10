@@ -1,0 +1,43 @@
+!!! 5
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
+    %title FriskyHands
+    - if Rails.env.development?
+      = stylesheet_link_tag 'uncompressed/reset', :media => 'screen'
+      = stylesheet_link_tag 'uncompressed/forms', :media => 'screen'
+      = stylesheet_link_tag 'uncompressed/960', :media => 'screen'
+    - else
+      = stylesheet_link_tag 'reset', :media => 'screen'
+      = stylesheet_link_tag 'forms', :media => 'screen'
+      = stylesheet_link_tag '960', :media => 'screen'    
+    = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen'
+    = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
+    = stylesheet_link_tag "#{current_site}/welcome", :media => 'screen'
+    / [if IE]
+      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
+
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js'
+    = javascript_include_tag 'jquery.placeholder'
+    = javascript_include_tag 'application'
+    
+  %body{ :class => "#{[ current_site, current_layout ].compact * ' '}" }
+    .container.container_16.clearfix
+      .badge.prefix_3.grid_10.suffix_3
+        = image_tag 'badge.png', :size => '520x220'
+        %h1 Sign of a Good Time
+        %h4 FriskyHands is the social networking site designed especially for the Deaf GLBTQ Community and their Friends.
+      .creative.prepend-top.prefix_2.grid_12.suffix_2
+        = yield
+    .footer
+      %p
+        %span
+          &copy;&nbsp;#{Date.today.year} Frisky Factory LLC, New York, NY
+        = render :partial => '/layouts/grid'
+
+    :javascript
+      jQuery(function($){
+        $('button, .button').button();
+        $("button[type='submit']").button({ icons: { primary: 'ui-icon-check' }});
+      });

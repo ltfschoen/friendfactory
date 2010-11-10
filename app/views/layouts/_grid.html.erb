@@ -1,0 +1,11 @@
+<% if Rails.env.development? %>
+| <%= link_to 'Show Grid', '#', :id => 'show_grid' %>
+  <% javascript_tag do %>
+    jQuery(document).ready(function($) {
+      $('a#show_grid').click(function() {
+        $('.container_16').toggleClass('grid');
+        return false;
+      });
+    });
+  <% end %>
+<% end %>

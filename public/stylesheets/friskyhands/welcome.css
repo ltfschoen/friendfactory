@@ -1,87 +1,56 @@
-body.welcome {
-	background: url(/images/friskyhands/background-red-24.png) no-repeat top center;	
-	background-color: #9C180C;
-}
-
-body.welcome .container {
+.container {
 	padding-top: 4em;
 	text-align: center;
 }
 
-body.welcome img {
+body {
+	background: url(/images/friskyhands/background-red-24.png) no-repeat top center;	
+	background-color: #9C180C;
+}
+
+p {
+    font-size: 1.2em;
+    color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    line-height: 1.4em;    
+}
+
+ul.flash.error li {
+    font-size: 1.1em;
+    color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    line-height: 1.4em;
+}
+
+img {
 	width: 100%;
 }
 
-body.welcome a {
+a {
     border-bottom: 1px dotted #FFF;
 }
 
-body.welcome h1 {
-	font-size: 4em;
+h1 {
+	font-size: 3em;
 	text-shadow: 1px 2px 1px #701518;
 	color: #FFF;
 }
 
-body.welcome h2 {
+h2 {
 	font-size: 2em;
 	line-height: 1.4em;
 	color: #501518;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-body.welcome h3 {
+h3 {
 	color: #FFF;
 	font-size: 1.4em;
 	text-shadow: 1px 2px 1px #701518;
 	margin-bottom: 12px;
 }
 
-body .formError {
-	color: #FFF;
-}
-
-body.welcome #creative {
-	text-align: left;
-	padding-bottom: 4em;
-}
-
-body.welcome .panel.login,
-body.welcome .panel.signup,
-body.welcome .panel.new_password {
-	padding-top: 1em;
-	width: 100%;
-}
-
-body.welcome input[type='text'],
-body.welcome input[type='password'] {
-    width: 268px;
-}
-
-body.welcome button {
-    float: left;
-    margin-right: 6px;
-}
-
-body.welcome .panel.login a.lurk {
-    float: right;
-    margin-right: 0;
-    color: #FFF;
-    font-size: small;
-    margin-top: 12px;
-}
-
-body.welcome .panel.login h3 {
-    float: left;
-}
-
-body.welcome .panel.login a.new_password {
-    float: right;
-    color: #FFF;
-    margin-top: 6px;
-    font-size: small;
-}
-
-body.welcome h4 {
+h4 {
 	padding-right: 1em;
 	font-size: 1.8em;
 	color: #501518;
@@ -90,21 +59,71 @@ body.welcome h4 {
 	font-weight: normal;
 }
 
-body.welcome p,
-body.welcome .flash_errors li {
-    padding-right: 1em;
-    font-size: 1.2em;
-    color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-    line-height: 1.4em;
+input[type='text'],
+input[type='password'] {
+    width: 210px;
 }
 
-body.welcome p {
+/*.formError {
+    color: #FFF;
+}*/
+
+.creative {
+	text-align: left;
+	padding-bottom: 4em;
+}
+
+.blurb p {
+    padding-right: 20px;
+    font-size: 1.4em;
+}
+
+.panel.login,
+.panel.signup,
+.panel.new_password {
+	padding-top: 1em;
+	width: 100%;
+}
+
+.button-bar button {
+    float: left;
+    margin-right: 8px;
+}
+
+.button-bar a {
+    margin-top: 0.5em;
+}
+
+.panel.login h3 {
+    float: left;
+}
+
+.panel.login a.lurk {
+    float: right;
+    margin-right: 0;
+    color: #FFF;
+    font-size: small;
+    margin-top: 12px;
+}
+
+.panel.login a.new_password {
+    float: right;
+    color: #FFF;
+    margin-top: 6px;
+    font-size: small;
+}
+
+.button-bar {
+    height: 2em;
+}
+
+.panel p {
     clear: both;
+    margin-top: 0.6em;
 }
 
-body.welcome ul.flash_errors {
+ul.flash.error {
 	margin-left: 1em;
-	list-style: disc outside url('/images/icons/asterisk_orange.png');
+	list-style: disc outside;
 	marker-offset: auto;
 }

@@ -4,10 +4,8 @@
     :css
       h1 { font-size: 1em; }
   %body
-    %h1
-      Q: How do I reset my FriskyHands' password?
     %p
-      = "A: Hey #{@user.first_name},"
+      = "Hey #{@user.first_name},"
     %p
       A request was sent to FriskyHands to reset your FriskyHands' password. To do so, click the following link:
     %p
@@ -16,4 +14,5 @@
       (If you didn't request to reset your FriskyHands' password, you can safely ignore this email).
     %p
       From Michael
+      %br/
       michael@friskyhands.com

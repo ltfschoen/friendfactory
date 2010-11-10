@@ -2,10 +2,6 @@ class UsersController < ApplicationController
 
   before_filter :require_no_user, :only => [ :new, :create ]
 
-  # def show
-  #   @profile = current_user    
-  # end
-
   def new
     store_reentry_location
   end
@@ -17,7 +13,7 @@ class UsersController < ApplicationController
         flash[:internal] = 'user-create'
         format.html { redirect_to root_path }
       else
-        flash[:errors] = @user.errors.full_messages
+        flash[:error] = @user.errors.full_messages
         format.html { redirect_back_to_reentry }
       end
     end

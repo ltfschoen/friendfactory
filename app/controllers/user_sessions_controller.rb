@@ -16,7 +16,7 @@ class UserSessionsController < ApplicationController
         flash[:notice] = "Welcome back" + (user.first_name? ? ", #{user.first_name}" : '') + '!'
         format.html { redirect_back_or_default(root_path) }
       else
-        flash[:notice] = 'Sorry, but that email is not being used at FriskyHands'
+        flash[:notice] = 'Sorry, but that email is not being used at FriskyHands.'
         format.html { redirect_back_to_reentry }
       end
     end
