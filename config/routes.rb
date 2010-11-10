@@ -53,7 +53,7 @@ Friskyfactory::Application.routes.draw do |map|
 
   map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }  
   map.login  '/login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }
-  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :delete }
+  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => [ :get, :delete ] }
   
   map.search '/search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
     

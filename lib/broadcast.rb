@@ -16,15 +16,15 @@ class Broadcast
       #  { :full_name => user.full_name,
       #    :avatar => { :id => avatar.try(:id),
       #    :file_name => avatar.try(:image_file_name) }})            
-      Pusher['wave'].trigger('user-online', { :full_name => user.full_name })            
+      # Pusher['wave'].trigger('user-online', { :full_name => user.full_name })            
     end
   
     def user_offline(domain, user)
-      Pusher['wave'].trigger('user-offline', { :full_name => user.full_name })
+      # Pusher['wave'].trigger('user-offline', { :full_name => user.full_name })
     end
   
     def user_create(domain, user)
-      Pusher['wave'].trigger('user-register', { :full_name => user.full_name })      
+      # Pusher['wave'].trigger('user-register', { :full_name => user.full_name })      
     end  
   end
 end
