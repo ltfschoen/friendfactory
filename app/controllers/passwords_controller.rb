@@ -9,9 +9,10 @@ class PasswordsController < ApplicationController
       @user.reset_password!
       PasswordsMailer.reset(@user).deliver
       flash[:notice] = 'Thanks! Instructions to reset your password have been emailed to you.'
+      redirect_to welcome_path
     else
       flash[:notice] = 'Sorry, but that email is not being used at FriskyHands.'
-      render :action => 'new'
+      redirect_to welcome_path
     end
   end
   

@@ -40,7 +40,7 @@
             %h4 FriskyHands is the social networking site designed especially for the Deaf GLBTQ Community and their Friends.
             %p Your privacy and safety are our number-one concerns. No search engine nor any other web site can access your FriskyHands' secured profile.
         .grid_5.omega
-          #login
+          .panel.login
             %h3 Log in, right now!
             = link_to 'Password?', new_password_path, :class => 'new_password'
             = form_for UserSession.new, :url => user_sessions_path do |f|
@@ -51,10 +51,10 @@
               .button-bar
                 = f.submit 'Login'
                 = f.button 'Sign Up', :class => 'toggle'
-                = link_to 'Browse', lurk_new_user_session_path
-              %p.flash
-                = flash[:notice]
-          #signup
+                = link_to 'Browse', lurk_new_user_session_path, :class => 'lurk'
+            %p.flash
+              = flash[:notice]
+          .panel.signup
             %h3 Sign up, right now!
             = form_for User.new, :url => users_path do |f|
               = f.text_field :first_name, :class => 'ui-widget'
@@ -70,16 +70,13 @@
               .button-bar
                 = f.submit 'Register'
                 = f.button 'Back', :class => 'toggle'
-              %p.flash
-                = flash[:notice]
-          #password_new
+          .panel.new_password
             %h3 Reset Password
             = form_tag passwords_path do
               = text_field_tag 'email', '', :placeholder => 'email'
-              %p
-                .button-bar
-                  = button_tag 'Reset my password', :class => 'reset button'
-                  = button_tag 'Back', :class => 'back button'
+              .button-bar
+                = button_tag 'Reset my password', :class => 'reset button'
+                = button_tag 'Back', :class => 'back button'
               %p
                 Provide your email to get instructions to reset your password
               %p.flash
@@ -95,8 +92,24 @@
     jQuery(function($){
       $('button, .button').button();
       $("button[type='submit']").button({ icons: { primary: 'ui-icon-check' }});
-      #{ flash[:errors].present? ? "$('#login').hide();" : "$('#signup').hide();" }
-      $('#password_new').hide();
+      #{ flash[:errors].present? ? "$('.panel.login').hide();" : "$('.panel.signup').hide();" }
+      $('.panel.new_password').hide();
+
+      $('button.toggle').click(function(event){
+        event.preventDefault();
+        $('.panel.login, .panel.signup').toggle();
+      });
+      
+      $('a.new_password').click(function(){
+        event.preventDefault();
+        $('.panel.login:visible, .panel.signup:visible').hide();
+        $('.panel.new_password').show();
+      });
+      
+      $('.new_password button.back').click(function(event){
+        event.preventDefault();
+        $(event.target).closest('.panel.new_password').hide().siblings('.panel.login').show();        
+      });
 
       if (!$.browser.webkit) {
         $('#user_session_password').before('#{text_field_tag( :user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
@@ -116,20 +129,4 @@
           FF.scrubPlaceholders(this);
         });
       }
-
-      $('button.toggle').click(function(event){
-        event.preventDefault();
-        $('div#login, div#signup').toggle();
-      });
-      
-      $('a.new_password').click(function(){
-        event.preventDefault();
-        $('div#login:visible, div#signup:visible').hide();
-        $('div#password_new').show();
-      });
-      
-      $('#password_new button.back').click(function(event){
-        event.preventDefault();
-        $(event.target).closest('#password_new').hide().siblings('#login').show();        
-      });
     });

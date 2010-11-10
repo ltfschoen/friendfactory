@@ -45,9 +45,9 @@ body.welcome #creative {
 	padding-bottom: 4em;
 }
 
-body.welcome #login,
-body.welcome #signup,
-body.welcome #password_new {
+body.welcome .panel.login,
+body.welcome .panel.signup,
+body.welcome .panel.password_new {
 	padding-top: 1em;
 	width: 100%;
 }
@@ -62,7 +62,7 @@ body.welcome button {
     margin-right: 6px;
 }
 
-body.welcome #login a[href$='lurk'] {
+body.welcome .panel.login a.lurk {
     float: right;
     margin-right: 0;
     color: #FFF;
@@ -70,11 +70,11 @@ body.welcome #login a[href$='lurk'] {
     margin-top: 12px;
 }
 
-body.welcome #login h3 {
+body.welcome .panel.login h3 {
     float: left;
 }
 
-body.welcome #login a[href='/passwords/new'] {
+body.welcome .panel.login a.new_password {
     float: right;
     color: #FFF;
     margin-top: 6px;
@@ -103,8 +103,8 @@ body.welcome p.flash {
     clear: both;
 }
 
-body.welcome .flash_errors {
-	margin-left: 2em;
+body.welcome ul.flash_errors {
+	margin-left: 1em;
 	list-style: disc outside url('/images/icons/asterisk_orange.png');
 	marker-offset: auto;
 }
