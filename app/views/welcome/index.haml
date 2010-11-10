@@ -15,7 +15,7 @@
     = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
     = stylesheet_link_tag "#{current_site}/welcome", :media => 'screen'
-    /[if IE]
+    / [if IE]
       = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
 
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'
@@ -41,17 +41,21 @@
             %p Your privacy and safety are our number-one concerns. No search engine nor any other web site can access your FriskyHands' secured profile.
         .grid_5.omega
           #login
-            %h3 Log in, right now
+            %h3 Log in, right now!
+            = link_to 'Password?', new_password_path, :class => 'new_password'
             = form_for UserSession.new, :url => user_sessions_path do |f|
               = f.text_field :email
               = f.error_message_on :email, :prepend_text => 'Your email address '
               = f.password_field :password
               = f.error_message_on :password, :prepend_text => 'Your password '
-              = f.submit 'Login'
-              = f.button 'Sign Up', :class => 'toggle'
-              = link_to 'Just Browse…', lurk_new_user_session_path, :class => 'button'
+              .button-bar
+                = f.submit 'Login'
+                = f.button 'Sign Up', :class => 'toggle'
+                = link_to 'Browse', lurk_new_user_session_path
+              %p.flash
+                = flash[:notice]
           #signup
-            %h3 Sign up, right now
+            %h3 Sign up, right now!
             = form_for User.new, :url => users_path do |f|
               = f.text_field :first_name, :class => 'ui-widget'
               = f.error_message_on :first_name, :prepend_text => 'Your first name '
@@ -63,8 +67,24 @@
               = f.error_message_on :password, :prepend_text => 'Your password '
               = f.password_field :password_confirmation, :class => 'ui-widget'
               = f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation '
-              = f.submit 'Register'
-              = f.button 'Back', :class => 'toggle'
+              .button-bar
+                = f.submit 'Register'
+                = f.button 'Back', :class => 'toggle'
+              %p.flash
+                = flash[:notice]
+          #password_new
+            %h3 Reset Password
+            = form_tag passwords_path do
+              = text_field_tag 'email', '', :placeholder => 'email'
+              %p
+                .button-bar
+                  = button_tag 'Reset my password', :class => 'reset button'
+                  = button_tag 'Back', :class => 'back button'
+              %p
+                Provide your email to get instructions to reset your password
+              %p.flash
+                = flash[:notice]
+          
     .footer
       %p
         %span
@@ -73,9 +93,10 @@
 
   :javascript
     jQuery(function($){
-      $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
-      $('button[class=toggle], a[class=button]').button();
-      #{flash[:errors].present? ? "$('#login').hide();" : "$('#signup').hide();"}
+      $('button, .button').button();
+      $("button[type='submit']").button({ icons: { primary: 'ui-icon-check' }});
+      #{ flash[:errors].present? ? "$('#login').hide();" : "$('#signup').hide();" }
+      $('#password_new').hide();
 
       if (!$.browser.webkit) {
         $('#user_session_password').before('#{text_field_tag( :user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
@@ -99,5 +120,16 @@
       $('button.toggle').click(function(event){
         event.preventDefault();
         $('div#login, div#signup').toggle();
+      });
+      
+      $('a.new_password').click(function(){
+        event.preventDefault();
+        $('div#login:visible, div#signup:visible').hide();
+        $('div#password_new').show();
+      });
+      
+      $('#password_new button.back').click(function(event){
+        event.preventDefault();
+        $(event.target).closest('#password_new').hide().siblings('#login').show();        
       });
     });
