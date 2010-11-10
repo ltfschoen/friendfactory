@@ -1,32 +1,28 @@
 class User < ActiveRecord::Base
 
   include AASM
-  
-  aasm_column        :status
-  aasm_initial_state :welcomed
-  aasm_state         :welcomed
-  
+
   acts_as_authentic do |config|
     config.logged_in_timeout = UserSession::Timeout
   end
-  
-  validates_presence_of :first_name
 
+  aasm_column        :status
+  aasm_initial_state :welcomed
+  aasm_state         :welcomed
+    
+  validates_presence_of :first_name
+  
   after_save do
     Wave::Profile::create(:user => self) if self.profile.nil?
     UserInfo.create(:user => self) if self.info.nil?
   end
 
   has_one  :info,     :class_name => 'UserInfo'
-  
   has_many :waves,    :class_name => 'Wave::Base'
   has_one  :profile,  :class_name => 'Wave::Profile'
-   
   has_many :postings, :class_name => 'Posting::Base'
-  
   has_many :friendships
-  has_many :friends,  :through => :friendships            
-
+  has_many :friends,  :through => :friendships
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :admirers, :through => :inverse_friendships, :source => :user
 
@@ -96,6 +92,10 @@ class User < ActiveRecord::Base
   
   def to_s
     "{ :id => #{self.id}, :full_name => #{full_name} }"
+  end
+  
+  def reset_password!
+    reset_perishable_token!
   end
     
 end

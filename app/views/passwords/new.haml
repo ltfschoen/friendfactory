@@ -1,0 +1,10 @@
+%h1 Reset My Forgotten Password
+%p
+  Fill out the form below and instructions to reset your password will be emailed to you:
+= form_tag passwords_path do
+  %label Email:
+  = text_field_tag 'email'
+  %p
+    = submit_tag 'Reset my password'
+  %p
+    = flash[:notice]

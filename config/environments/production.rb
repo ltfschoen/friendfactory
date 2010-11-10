@@ -10,7 +10,7 @@ Friskyfactory::Application.configure do
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
-  config.action_dispatch.x_sendfile_header = "X-Sendfile"
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile"
 
   # For nginx:
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
@@ -46,4 +46,17 @@ Friskyfactory::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address              => 'smtp.gmail.com',
+      :port                 => 587,
+      :domain               => 'friskyhands.com',
+      :user_name            => 'michael@friskyhands.com',
+      :password             => 'lee201',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
+
+  config.action_mailer.default_url_options = { :host => 'friskyhands.com' }
+  
 end

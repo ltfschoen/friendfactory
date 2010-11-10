@@ -6,6 +6,11 @@ Friskyfactory::Application.routes.draw do |map|
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
+  resources :passwords, :except => [ :delete ]
+
+  # # # # # # # # # # # # # # # 
+  # # # # # # # # # # # # # # # 
+
   map.resources :waves, :only => [ :index, :show, :create ], :controller => 'waves/base' do |wave|
     # Used to add postings to a wave...
     wave.resources :texts,  :only => [ :create ]

@@ -1,0 +1,12 @@
+Q: How do I reset my FriskyHands' password?
+
+= "A: Hey #{@user.first_name},"
+A request was sent to FriskyHands to reset your FriskyHands' password. To do so, click the following link:
+
+= edit_password_url(@user.perishable_token)
+
+(If you didn't request to reset your FriskyHands' password, you can safely ignore this email).
+
+From
+Michael
+michael@friskyhands.com
