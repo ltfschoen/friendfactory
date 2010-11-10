@@ -3,20 +3,25 @@ class PasswordsController < ApplicationController
   before_filter :require_no_user
   before_filter :find_user_by_perishable_token, :only => [ :edit, :update ]
   
-  layout 'welcome', :only => [ :new, :create ]
-  layout 'application', :only => [ :edit, :update ]
+  def new
+    render :layout => 'welcome'
+  end
   
   def create
     @user = User.find_by_email(params[:email])
     if @user
       @user.reset_password!
       PasswordsMailer.reset(@user).deliver
-      flash[:notice] = 'Thanks! Instructions to reset your password have been emailed to you.'
+      flash[:notice] = "Thanks! Instructions to reset your password have been emailed to #{@user.email}."
       redirect_to welcome_path
     else
       flash[:notice] = 'Sorry, but that email is not being used at FriskyHands. Did you sign up with another email address?'
       redirect_to new_password_path
     end
+  end
+  
+  def edit
+    render :layout => 'application'
   end
   
   def update
@@ -26,7 +31,7 @@ class PasswordsController < ApplicationController
       flash[:notice] = 'Your password was successfully updated.'
       redirect_to root_path
     else
-      render :action => 'edit'
+      render :action => 'edit', :layout => 'application'
     end
   end
   
