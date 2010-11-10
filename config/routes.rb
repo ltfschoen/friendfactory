@@ -52,16 +52,16 @@ Friskyfactory::Application.routes.draw do |map|
   map.resources :friendships, :only => [ :create, :destroy ]
 
   map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }  
-  map.login  'login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :delete }
+  map.login  '/login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }
+  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :delete }
   
-  map.search 'search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
+  map.search '/search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
     
-  map.welcome 'welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
+  map.welcome '/welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
 
   root :to => 'waves/base#show', :via => :get
 
-  get '/:slug', :to => 'waves#show', :constraints => { :slug => /\D\w*/ }
+  get '/:slug', :to => 'waves/base#show', :constraints => { :slug => /\D\w*/ }
   
   # Miscellaneous
   
