@@ -1,14 +1,21 @@
-%h1 Change My Password
-- form_for @user, :url => password_path, :method => :put do |f|
-  %p
-    = f.error_messages
-  %p
-    = f.label :password
-    = f.password_field :password
-  %p
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  %p
-    = f.submit "Update my password and log me in!"
-  %p
-    = flash[:notice]
+.grid_3
+  &nbsp;
+.grid_12
+  %h1 Change My Password
+  .grid_6.alpha
+    - form_for @user, :url => password_path, :method => :put do |f|
+      %p
+        = f.error_messages
+      %p
+        = f.label :password
+        = f.password_field :password, :placeholder => false
+      %p
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, :placeholder => false
+      .button-bar
+        = f.submit "Update my password and log me in!"
+        = flash[:notice]
+  .grid_6.omega
+    &nbsp;
+.grid_1
+  &nbsp;

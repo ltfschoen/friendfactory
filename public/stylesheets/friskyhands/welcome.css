@@ -47,7 +47,7 @@ body.welcome #creative {
 
 body.welcome .panel.login,
 body.welcome .panel.signup,
-body.welcome .panel.password_new {
+body.welcome .panel.new_password {
 	padding-top: 1em;
 	width: 100%;
 }
@@ -99,7 +99,7 @@ body.welcome .flash_errors li {
     line-height: 1.4em;
 }
 
-body.welcome p.flash {
+body.welcome p {
     clear: both;
 }
 

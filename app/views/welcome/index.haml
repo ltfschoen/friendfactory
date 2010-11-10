@@ -72,15 +72,15 @@
                 = f.button 'Back', :class => 'toggle'
           .panel.new_password
             %h3 Reset Password
+            %p<
             = form_tag passwords_path do
               = text_field_tag 'email', '', :placeholder => 'email'
               .button-bar
                 = button_tag 'Reset my password', :class => 'reset button'
                 = button_tag 'Back', :class => 'back button'
-              %p
-                Provide your email to get instructions to reset your password
               %p.flash
                 = flash[:notice]
+                  
           
     .footer
       %p
@@ -92,6 +92,7 @@
     jQuery(function($){
       $('button, .button').button();
       $("button[type='submit']").button({ icons: { primary: 'ui-icon-check' }});
+      
       #{ flash[:errors].present? ? "$('.panel.login').hide();" : "$('.panel.signup').hide();" }
       $('.panel.new_password').hide();
 
