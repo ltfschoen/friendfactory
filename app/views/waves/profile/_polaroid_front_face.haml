@@ -1,0 +1,13 @@
+.face-container
+  .front.face
+    .content
+      = avatar_image_tag(avatar, :alt => (first_name = avatar.user.first_name), :class => 'headshot')
+      %table.header
+        %tr
+          %td.username<
+            = first_name
+          %td.status
+            - if content_for?(:polaroid_front_face)
+              = content_for(:polaroid_front_face)
+            - else
+              -# Looking for fun

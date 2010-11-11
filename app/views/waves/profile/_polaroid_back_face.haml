@@ -1,0 +1,42 @@
+.face-container
+  .back.face
+    .content.scrollable
+      .items
+        %table.header
+          %tr
+            %td.avatar
+              = avatar_image_tag(avatar, :style => :thumb)
+            %td.username<
+              = avatar.user.first_name
+              = f.text_field :age, :placeholder => 'age', :class => 'ui-widget'
+        %div
+          %table
+            %tr
+              %td.label Deafness
+              %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
+            %tr
+              %td.label Gender
+              %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
+            %tr
+              %td.label Orientation
+              %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
+            %tr
+              %td.label Relationship
+              %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)
+            %tr
+              %td.label Birthday
+              %td.detail
+                = f.date_select :dob, { :order => [ :month, :day, :year ], :start_year => (Time.now.year - 18), :end_year => (Time.now.year - 65) },  { :class => 'date'}
+                %span.unobtrusive.small Your birth date is never displayed.
+            %tr
+              %td.label Location
+              %td.detail= f.text_field :location, :placeholder => false, :class => 'ui-widget'
+            %tr.button_bar
+              %td.label
+                &nbsp;
+              %td.detail
+                = f.submit "Update"
+                = f.button :Cancel, :class => 'cancel'
+                = image_tag('icons/accept.png', :site => false, :class => 'ui_icon ui_icon_check hidden')
+                = image_tag('icons/cancel.png', :site => false, :class => 'ui_icon ui_icon_cancel hidden')
+          
