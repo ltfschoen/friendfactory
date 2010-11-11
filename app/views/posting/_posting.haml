@@ -1,3 +1,0 @@
-- unless posting.nil?
-  - posting_type = posting.class.name.demodulize.tableize
-  = render(:partial => "posting/#{posting_type}/#{posting_type.singularize}", :object => posting)
