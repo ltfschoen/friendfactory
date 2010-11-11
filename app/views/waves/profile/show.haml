@@ -9,10 +9,10 @@
     &nbsp;    
   .grid_6
     .polaroid.edit
-      = render :partial => 'posting/avatars/polaroid_front_face', :locals => { :avatar => @wave.avatar }
+      = render :partial => 'postings/avatars/polaroid_front_face_edit', :locals => { :avatar => @wave.avatar }
   .grid_6
     .polaroid.edit
-      = render :partial => 'posting/avatars/polaroid_back_face', :locals => { :avatar => @wave.avatar }  
+      = render :partial => 'postings/avatars/polaroid_back_face_edit', :locals => { :avatar => @wave.avatar }
   .grid_2
 
 - if false
@@ -111,7 +111,7 @@
       - if current_user
         #text.tab_content
           - label = 'Write a Message on ' + ((@wave.user == current_user) ? 'Your' : "#{@wave.user.first_name}&#8217;s") + ' Wave'
-          = render :partial => 'posting/texts/new', :locals => { :label => label, :wave => @wave }
+          = render :partial => 'postings/texts/new', :locals => { :label => label, :wave => @wave }
 
       - if current_user
         #photo.tab_content

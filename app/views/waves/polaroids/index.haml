@@ -9,4 +9,4 @@
         - group.each_with_index do |posting, i|
           - if posting.is_a?(Posting::Avatar)
             - css_class = (i == 2 ? 'omega' : '')
-            = render :partial => 'posting/avatars/polaroid', :locals => { :avatar => posting, :css_class => css_class }
+            = render :partial => 'postings/avatars/polaroid', :locals => { :avatar => posting, :css_class => css_class }
