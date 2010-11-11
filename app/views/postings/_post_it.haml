@@ -1,0 +1,14 @@
+- if defined?(posting) && posting.present?
+  .post_it{ :class => 'displaced ' + (avatar_present = posting.user.profile.avatar.present? ? 'with_avatar' : 'without_avatar' ) }<
+    = avatar_image_tag(posting.user.profile.avatar, :style => :thumb)
+    %p.header
+      - if avatar_present
+        Posted
+        = distance_of_time_in_words_to_now(posting.created_at)
+      - else
+        Posted
+        = " by #{posting.user.first_name}" if posting.user.first_name
+        = distance_of_time_in_words_to_now(posting.created_at)
+    %p.body
+- else
+  &nbsp;

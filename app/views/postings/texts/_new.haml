@@ -1,0 +1,13 @@
+%table
+  %tr
+    %td{ :colspan => '2' }
+      %h2= "Put a Message on this Wave"
+  %tr
+    %td.avatar.thumb= avatar_image_tag(current_user, :style => :thumb)
+    %td
+      = form_for Posting::Text.new, :url => wave_texts_path(:wave_id => wave), :remote => true do |f|
+        = f.text_field :subject, :placeholder => 'Title (optional)'
+        = f.text_area :body
+        .button_bar
+          = f.submit :OK, :disable_with => 'OK'
+          = f.button :Cancel, :class => 'cancel'
