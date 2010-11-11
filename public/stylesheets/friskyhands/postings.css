@@ -1,6 +1,6 @@
-@import url(posting/post_it.css);
-@import url(posting/photo.css);
-@import url(posting/avatar.css);
-@import url(posting/polaroid.css);
-@import url(posting/video.css);
-@import url(posting/legacy.css);
+@import url(postings/post_it.css);
+@import url(postings/photo.css);
+@import url(postings/avatar.css);
+@import url(postings/polaroid.css);
+@import url(postings/video.css);
+@import url(postings/legacy.css);
