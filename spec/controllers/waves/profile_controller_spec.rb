@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProfileController do
+describe Waves::ProfileController do
 
   describe "GET 'show'" do
     it "should be successful" do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SearchController do
+describe Waves::SearchController do
 
   #Delete these examples and add some real ones
   it "should use SearchController" do
