@@ -1,10 +1,15 @@
-.wave_profile .sidebar .posting_avatar {
-    margin: 1em 0;
+.wave.header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.wave_profile .sidebar .posting_avatar img {
+/*.wave_profile .sidebar .posting_avatar {
+    margin: 1em 0;
+}*/
+
+/*.wave_profile .sidebar .posting_avatar img {
     width: 100%;
-}
+}*/
 
 #avatar_upload_well > div {
 	float: left;
@@ -37,9 +42,4 @@ select.date {
     -moz-transform: rotate(-2deg);
     position: relative;
     left: 20px;
-}
-
-.wave.header {
-    text-align: center;
-    margin-bottom: 20px;
 }

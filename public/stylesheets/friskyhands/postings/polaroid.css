@@ -57,35 +57,44 @@ div.polaroid img.avatar.thumb {
 }
 
 div.polaroid .back.face {
-	color: rgb(34,65,108);
 /*	-webkit-transform: rotateY(180deg);*/
 /*	-moz-transform: rotateY(180deg);*/
 }
 
 div.polaroid .back.face table.header {
+	color: rgb(34,65,108);
     width: 260px;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
+	font-size: 18px;
+	font-family: Chalkduster;
 }
 
 div.polaroid .back.face table.header td.avatar {
     width: 74px;
 }
 
-div.polaroid .back.face table.header .username {
-	font-size: 18px;
-	font-family: Chalkduster;
+div.polaroid .back.face table.header td.username {
 	text-align: left;
 	vertical-align: middle;
+}
+
+div.polaroid .back.face table.header td.age {
+    text-align: right;
+    vertical-align: middle;
+}
+
+div.polaroid .back.face table.header td.age input {
+    width: 3em;
+}
+
+div.polaroid .back.face table.detail {
+	color: gray;
 }
 
 div.polaroid ul.buddy-bar {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-}
-
-div.polaroid.edit ul.buddy-bar {
-    display: none;
 }
 
 div.polaroid ul.buddy-bar.primary {

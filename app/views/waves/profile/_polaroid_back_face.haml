@@ -8,9 +8,10 @@
               = avatar_image_tag(avatar, :style => :thumb)
             %td.username<
               = avatar.user.first_name
+            %td.age<
               = f.text_field :age, :placeholder => 'age', :class => 'ui-widget'
         %div
-          %table
+          %table.detail
             %tr
               %td.label Deafness
               %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
@@ -26,8 +27,7 @@
             %tr
               %td.label Birthday
               %td.detail
-                = f.date_select :dob, { :order => [ :month, :day, :year ], :start_year => (Time.now.year - 18), :end_year => (Time.now.year - 65) },  { :class => 'date'}
-                %span.unobtrusive.small Your birth date is never displayed.
+                = f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date'}
             %tr
               %td.label Location
               %td.detail= f.text_field :location, :placeholder => false, :class => 'ui-widget'

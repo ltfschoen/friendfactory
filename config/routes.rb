@@ -4,7 +4,7 @@ Friskyfactory::Application.routes.draw do |map|
 
   namespace :waves do
     resources :polaroids, :only => [ :index ]
-    resources :profiles,  :only => [ :show ]
+    resources :profiles, :only => [ :show ]
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 

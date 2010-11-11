@@ -1,3 +1,4 @@
+- user_info = avatar.user.info
 .face-container
   .back.face
     .content.scrollable
@@ -8,11 +9,41 @@
               = avatar_image_tag(avatar, :style => :thumb)
             %td.username<
               = avatar.user.first_name
+            %td.age<
+              = user_info.age.present? ? user_info.age : '&nbsp;'
         %div
-          - if content_for?(:polaroid_back_face)
-            = content_for(:polaroid_back_face)
-          - else            
-            Mini-profile will go here, eventually!
+          %table.detail
+            %tr
+              %td<
+                Deafness
+              %td<
+                = user_info.deafness_description.present? ? user_info.deafness_description : '&nbsp;'
+            %tr
+              %td<
+                Gender
+              %td<
+                = user_info.gender_description.present? ? user_info.gender_description : '&nbsp;'
+            %tr
+              %td<
+                Preference
+              %td<
+                = user_info.orientation_description.present? ? user_info.orientation_description : '&nbsp;'.html_safe
+            %tr
+              %td<
+                Relationship
+              %td<
+                = user_info.relationship_description.present? ? user_info.relationship_description : '&nbsp;'.html_safe
+            %tr
+              %td<
+                Birthday
+              %td<
+                = user_info.dob.present? ? user_info.dob.strftime('%e %B') : '&nbsp;'
+            %tr
+              %td<
+                Location
+              %td<
+                = user_info.location.present? ? user_info.location : '&nbsp;'
+                                
           -# %div
           -#   = image_tag 'chat-b-side.png', :width=>'260px'
           -# %div
