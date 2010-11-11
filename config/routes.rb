@@ -1,12 +1,14 @@
 Friskyfactory::Application.routes.draw do |map|
 
-  # Waves Controllers
+  resource :profile, :only => [ :show, :update ], :controller => 'waves/profile'
+
   namespace :waves do
-    resources :polaroids, :only => [ :index, :show ]
+    resources :polaroids, :only => [ :index ]
+    resources :profiles,  :only => [ :show ]
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
-  resources :passwords, :except => [ :delete ]
+  resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
   # # # # # # # # # # # # # # # 
   # # # # # # # # # # # # # # # 
@@ -18,14 +20,7 @@ Friskyfactory::Application.routes.draw do |map|
     wave.resources :videos, :only => [ :create ]
     wave.resources :links,  :only => [ :create ]
   end
-  
-  # map.wave_hotties 'hotties', :controller => :hotties, :action => :show, :conditions => { :method => :get }  
-  map.resources :profiles, :only => [ :show, :edit, :update ]
-  
-  # # # # # # # # # # # # # # # 
-  
-  map.edit_profile 'profile', :controller => 'profiles', :action => 'edit', :conditions => { :method => :get }
-  
+    
   # # # # # # # # # # # # # # # 
   # Postings Controllers
 

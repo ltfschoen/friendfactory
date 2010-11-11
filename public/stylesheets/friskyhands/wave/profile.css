@@ -31,3 +31,15 @@ select.date {
 	margin-top: 120px;
 	margin-left: 60px;
 }
+
+.wave_profile.current_user div.polaroid {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    position: relative;
+    left: 20px;
+}
+
+.wave.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
