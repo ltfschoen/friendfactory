@@ -106,11 +106,21 @@ div.polaroid .back.face table.detail td.detail {
     color: #666;
     border-bottom: 1px dotted lightgray;
 }
+
+div.polaroid .back.face .button-bar {
+    float: right;
+    position: relative;
+    top: -15px;
+}
  
 div.polaroid ul.buddy-bar {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+
+div.polaroid.edit ul.buddy-bar {
+    display: none;
 }
 
 div.polaroid ul.buddy-bar.primary {

@@ -10,6 +10,14 @@ describe Waves::ProfileController do
       profile_path.should == '/profile'
     end
 
+    it 'recognizes #edit' do
+      { :get => '/profile/edit' }.should route_to(:controller => 'waves/profile', :action => 'edit')
+    end
+
+    it 'recognizes edit_profile_path' do
+      edit_profile_path.should == '/profile/edit'
+    end
+
     it 'recognizes #update' do
       { :put => '/profile' }.should route_to(:controller => 'waves/profile', :action => 'update')
     end

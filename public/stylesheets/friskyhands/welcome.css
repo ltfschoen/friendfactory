@@ -109,7 +109,6 @@ input[type='password'] {
 .panel.login a.new_password {
     float: right;
     color: #FFF;
-    margin-top: 6px;
     font-size: small;
 }
 

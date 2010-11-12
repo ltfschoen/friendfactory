@@ -1,6 +1,6 @@
 class Waves::ProfileController < Waves::BaseController
 
-  before_filter :require_user, :only => [ :edit, :update ]
+  before_filter :require_user
 
   helper :waves
 
@@ -12,9 +12,9 @@ class Waves::ProfileController < Waves::BaseController
   end
   
   def update
-    current_user.info.update_attributes(params[:user_info])    
+    @successful = current_user.info.update_attributes(params[:user_info])
     respond_to do |format|
-     format.js
+      format.js { render :layout => false }
     end
   end
 

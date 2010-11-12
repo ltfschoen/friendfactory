@@ -38,8 +38,8 @@ select.date {
 }
 
 .wave_profile.current_user div.polaroid {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
+    -webkit-transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
     position: relative;
     left: 20px;
 }

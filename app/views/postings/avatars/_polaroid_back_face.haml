@@ -20,14 +20,14 @@
               = partial.render :locals => { :attribute => :relationship }
               = partial.render :locals => { :attribute => :birthday }
               = partial.render :locals => { :attribute => :location }
-          -# %div
-          -#   = image_tag 'chat-b-side.png', :width=>'260px'
-          -# %div
-          -#   = image_tag 'message-b-side.png', :width=>'260px'
-          -# %div
-          -#   = image_tag 'photos-b-side.png', :width=>'260px'
-          -# %div
-          -#   = image_tag 'profile-b-side.png', :width=>'260px'
+        -# %div
+        -#   = image_tag 'chat-b-side.png', :width=>'260px'
+        -# %div
+        -#   = image_tag 'message-b-side.png', :width=>'260px'
+        -# %div
+        -#   = image_tag 'photos-b-side.png', :width=>'260px'
+        -# %div
+        -#   = image_tag 'profile-b-side.png', :width=>'260px'
     %ul.buddy-bar.secondary
       %li
         = link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
@@ -40,3 +40,5 @@
       -#   = link_to 'Photos', 'photos', :class => 'photos icon'
       -# %li
       -#   = link_to 'Profile', 'profile', :class => 'profile icon last'
+    - if content_for?(:polaroid_back_face)
+      = content_for(:polaroid_back_face)

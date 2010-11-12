@@ -42,6 +42,10 @@ a {
 	text-decoration: none;
 }
 
+a.button {
+    margin-top: 6px;
+}
+
 .unobtrusive {
 	color: gray;
 }

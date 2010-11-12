@@ -1,4 +1,9 @@
-.face-container
+- content_for :polaroid_back_face do
+  .button-bar
+    #{link_to 'Edit', edit_profile_path, :class => 'edit button'}
+
+= render :partial => 'postings/avatars/polaroid_back_face', :locals => { :avatar => @wave.avatar }
+.face-container.hidden
   .back.face
     .content.scrollable
       .items
@@ -31,12 +36,17 @@
             %tr
               %td.label Location
               %td.detail= f.text_field :location, :placeholder => false, :class => 'ui-widget'
-            %tr.button_bar
-              %td.label
-                &nbsp;
-              %td.detail
-                = f.submit "Update"
-                = f.button :Cancel, :class => 'cancel'
-                = image_tag('icons/accept.png', :site => false, :class => 'ui_icon ui_icon_check hidden')
-                = image_tag('icons/cancel.png', :site => false, :class => 'ui_icon ui_icon_cancel hidden')
-          
+    .button-bar
+      = f.submit "OK"
+      = link_to 'Cancel', profile_path, :class => 'cancel button'
+                
+:javascript
+  $('div.button-bar a.button.edit').button({ icons: { primary: 'ui-icon-pencil' }, text: false }).click(function(event) {
+    $('.back.face').closest('.face-container').toggle();
+    return false;
+  });
+  
+  $('div.button-bar .cancel').click(function() {
+    $('.back.face').closest('.face-container').toggle();
+    return false;
+  });

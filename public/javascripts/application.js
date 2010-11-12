@@ -43,6 +43,6 @@ var FF = {
 };
 
 jQuery(document).ready(function($) {
-  $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
-	$('.header.secondary').hide().children().hide();
+  $('button.cancel, a.cancel').button({ icons: { primary: 'ui-icon-close' }});
+	// $('.header.secondary').hide().children().hide();
 });
