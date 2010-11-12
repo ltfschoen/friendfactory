@@ -17,5 +17,13 @@ class Waves::ProfileController < Waves::BaseController
       format.js { render :layout => false }
     end
   end
+  
+  def avatar
+    avatar = Posting::Avatar.create(params[:posting_avatar])
+    current_user.profile.avatars << avatar
+    respond_to do |format|
+      format.js { render :action => 'update', :layout => false }
+    end
+  end
 
 end

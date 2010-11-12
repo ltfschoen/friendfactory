@@ -1,6 +1,10 @@
 Friskyfactory::Application.routes.draw do |map|
 
-  resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile'
+  resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
+    member do
+      post 'avatar'
+    end
+  end
 
   namespace :waves do
     resources :polaroids, :only => [ :index ]

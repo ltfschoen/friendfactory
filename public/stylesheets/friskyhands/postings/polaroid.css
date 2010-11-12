@@ -32,12 +32,12 @@ div.polaroid .front.face table.header {
 	height: 38px;
 }
 
-div.polaroid .front.face table.header .username {
+div.polaroid .front.face table.header td.username {
 	text-align: left;
 	vertical-align: top;
 }
 
-div.polaroid .front.face table.header .status {
+div.polaroid .front.face table.header td.status {
 	vertical-align: top;
 	padding-top: 6px;
 	text-align: right;
@@ -46,15 +46,19 @@ div.polaroid .front.face table.header .status {
 	color: #666;
 }
 
+div.polaroid.edit .front.face table.detail {
+    margin-top: 6px;
+}
+
+div.polaroid.edit .front.face table.detail td {
+    height: 28px;
+    vertical-align: middle;
+}
+
 div.polaroid .front.face img.avatar.polaroid {
     width: 258px;
     height: 258px;
     border: 1px solid lightgray;
-}
-
-div.polaroid .back.face {
-/*	-webkit-transform: rotateY(180deg);*/
-/*	-moz-transform: rotateY(180deg);*/
 }
 
 div.polaroid .back.face img.avatar.thumb {

@@ -1,13 +1,12 @@
 .face-container
   .front.face
     .content
-      = avatar_image_tag(avatar, :alt => (first_name = avatar.user.first_name), :class => 'headshot')
-      %table.header
-        %tr
-          %td.username<
-            = first_name
-          %td.status
-            - if content_for?(:polaroid_front_face)
-              = content_for(:polaroid_front_face)
-            - else
-              -# Looking for fun
+      = avatar_image_tag(avatar, :alt => avatar.user.first_name, :class => 'headshot')
+      = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true }, :remote => true do |f|
+        %table.detail
+          %tr
+            %td
+              = f.file_field :image
+          %tr
+            %td
+              = f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo', :submit_tag => true

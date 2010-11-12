@@ -1,17 +1,16 @@
 .wave.header.grid_16
   %h1
     #{@wave.user.first_name}&#8217;s Profile
-- form_for current_user.info, :url => profile_path, :remote => true do |f|
-  .current_user.wave[@wave]
-    .grid_2
-      &nbsp;
-    .grid_6
-      .polaroid.edit
-        = render :partial => 'polaroid_front_face', :locals => { :avatar => @wave.avatar, :f => f }
-    .grid_6
-      .polaroid.edit
-        = render :partial => 'polaroid_back_face', :locals => { :avatar => @wave.avatar, :f => f }
-    .grid_2  
+.current_user.wave[@wave]
+  .grid_2
+    &nbsp;
+  .grid_6
+    .polaroid.edit
+      = render :partial => 'polaroid_front_face', :locals => { :avatar => @wave.avatar }
+  .grid_6
+    .polaroid.edit
+      = render :partial => 'polaroid_back_face', :locals => { :avatar => @wave.avatar }
+  .grid_2  
 
 - if false
   .wave[@wave]
