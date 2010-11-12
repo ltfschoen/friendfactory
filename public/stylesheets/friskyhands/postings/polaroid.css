@@ -46,19 +46,19 @@ div.polaroid .front.face table.header .status {
 	color: #666;
 }
 
-div.polaroid img.avatar.polaroid {
+div.polaroid .front.face img.avatar.polaroid {
     width: 258px;
     height: 258px;
-    border: 1px solid lightgray;
-}
-
-div.polaroid img.avatar.thumb {
     border: 1px solid lightgray;
 }
 
 div.polaroid .back.face {
 /*	-webkit-transform: rotateY(180deg);*/
 /*	-moz-transform: rotateY(180deg);*/
+}
+
+div.polaroid .back.face img.avatar.thumb {
+    border: 1px solid lightgray;
 }
 
 div.polaroid .back.face table.header {
@@ -89,8 +89,24 @@ div.polaroid .back.face table.header td.age input {
 
 div.polaroid .back.face table.detail {
 	color: gray;
+	width: 260px;
 }
 
+div.polaroid .back.face table.detail td {
+    height: 28px;
+    vertical-align: middle;
+}
+
+div.polaroid .back.face table.detail td.label {
+    width: 96px;
+    color: #999;
+} 
+
+div.polaroid .back.face table.detail td.detail {
+    color: #666;
+    border-bottom: 1px dotted lightgray;
+}
+ 
 div.polaroid ul.buddy-bar {
 	list-style: none;
 	margin: 0;

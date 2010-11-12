@@ -1,0 +1,7 @@
+- label ||= attribute.to_s.titleize
+- attribute_description = user_info.send((attribute.to_s + '_description').to_sym)
+%tr{ :class => attribute }
+  %td.label<
+    = label
+  %td.detail<
+    = attribute_description.present? ? attribute_description : '&nbsp;'.html_safe

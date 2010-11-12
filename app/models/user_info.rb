@@ -32,4 +32,12 @@ class UserInfo < ActiveRecord::Base
     Deafness.rassoc(self[:deafness]).try(:first)
   end
   
+  def birthday_description
+    self.dob.strftime('%e %B') if self.dob.present?
+  end
+  
+  def location_description
+    self.location
+  end
+  
 end
