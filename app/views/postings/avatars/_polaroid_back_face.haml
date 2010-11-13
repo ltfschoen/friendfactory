@@ -14,13 +14,13 @@
               = user_info.age.present? ? user_info.age : '&nbsp;'
         %div
           %table.detail
-            - with_options :partial => 'postings/avatars/user_info', :object => user_info do |partial|
-              = partial.render :locals => { :attribute => :deafness }
-              = partial.render :locals => { :attribute => :gender }
-              = partial.render :locals => { :attribute => :orientation, :label => 'Preference' }
-              = partial.render :locals => { :attribute => :relationship }
-              = partial.render :locals => { :attribute => :birthday }
-              = partial.render :locals => { :attribute => :location }
+            - with_options :partial => 'postings/avatars/user_info', :object => user_info do |user_info_partial|
+              = user_info_partial.render :locals => { :attribute => :deafness }
+              = user_info_partial.render :locals => { :attribute => :gender }
+              = user_info_partial.render :locals => { :attribute => :orientation, :label => 'Preference' }
+              = user_info_partial.render :locals => { :attribute => :relationship }
+              = user_info_partial.render :locals => { :attribute => :birthday }
+              = user_info_partial.render :locals => { :attribute => :location }
         -# %div
         -#   = image_tag 'chat-b-side.png', :width=>'260px'
         -# %div

@@ -16,8 +16,8 @@
         .button-bar
           #{link_to 'Edit', edit_profile_path, :class => 'edit button'}
       = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :user => @wave.user, :avatar => @wave.avatar }
-
   .grid_2
+    &nbsp;
 
 :javascript
   $('div.button-bar a.button.edit')
