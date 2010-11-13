@@ -97,6 +97,10 @@ a.button {
     left: -16px;
 }*/
 
+.container {
+    position: relative;
+}
+
 input[type=text],
 input[type=password],
 textarea  {
@@ -167,6 +171,27 @@ a.profile {
 	width: 98px;
 	height: 46px;
 	cursor: pointer;
+}
+
+.header.secondary {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    text-align: right;
+}
+
+.header.secondary a {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 2px;
+    font-size: small;
+    color: #775;
+    border-bottom: 1px dotted #775;
+}
+
+.header.secondary a:hover {
+    color: #CCA;
+    background-color: #553;
 }
 
 .header.primary ul.nav li#nav-wave a {

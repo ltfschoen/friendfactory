@@ -1,8 +1,17 @@
-.header.primary
+.header.primary.grid_16
   %ul.nav
-    %li#nav-wave.current
+    %li#nav-wave
       = link_to 'Wave', root_path
     -# %li#nav-inbox
     -#  = link_to 'Inbox', '#'
-    %li#nav-profile
-      = link_to 'Profile', profile_path
+    %li#nav-profile.current
+      = link_to 'Profiles', waves_polaroids_path
+    -# %li#nav-edit_profile
+      =# link_to 'My profile', profile_path
+    -# %li#nav-logout
+      =# link_to 'Logout', logout_path
+
+- if current_user
+  .header.secondary.grid_16
+    = link_to 'Logout', logout_path
+    = link_to "#{current_user.first_name}'s Profile", profile_path
