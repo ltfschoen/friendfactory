@@ -1,0 +1,15 @@
+body 
+{
+	margin: 0px;
+	-webkit-user-select: none;
+	background: url('/images/friskyhands/golden-fibers.jpg') repeat-y top center #CEC2A2;
+}
+
+.hidden {
+	display: none;
+}
+
+a:focus {
+	outline: none;
+	-moz-outline: none;
+}
