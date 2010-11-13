@@ -111,7 +111,7 @@ div.polaroid .back.face table.detail td.detail {
     border-bottom: 1px dotted lightgray;
 }
 
-div.polaroid .back.face .button-bar {
+div.polaroid .button-bar {
     float: right;
     position: relative;
     top: -15px;

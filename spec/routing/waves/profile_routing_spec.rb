@@ -22,7 +22,7 @@ describe Waves::ProfileController do
       { :put => '/profile' }.should route_to(:controller => 'waves/profile', :action => 'update')
     end
     
-    it 'recognizes #avatar' do
+    it 'recognizes #avatar to update an avatar' do
       { :post => '/profile/avatar' }.should route_to(:controller => 'waves/profile', :action => 'avatar')
     end
 

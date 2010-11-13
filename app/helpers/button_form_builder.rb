@@ -3,7 +3,7 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
   include PlaceholderTextHelper
   
   def submit(label, opts = {})
-    if opts.delete(:submit_tag) == true
+    if opts.delete(:as_button) == false
       @template.submit_tag(label, opts)
     else
       @template.content_tag(:button, label, opts.merge(:type => 'submit'))

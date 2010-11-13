@@ -1,0 +1,61 @@
+.wave.header.grid_16
+  %h1
+    #{@wave.user.first_name}&#8217;s Profile
+
+.current_user.wave[@wave]
+  .grid_2
+    &nbsp;
+  .grid_6
+    = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true }, :remote => true do |f|
+      .polaroid.edit
+        .face-container
+          .front.face
+            .content
+              = avatar_image_tag(@wave.avatar, :class => 'headshot', :style => 'polaroid')
+              %table.detail
+                %tr
+                  %td= f.file_field :image
+                %tr
+                  %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo', :as_button => false
+  .grid_6
+    = form_for @wave.user.info, :url => profile_path do |f|
+      .polaroid.edit
+        .face-container
+          .back.face
+            .content.scrollable
+              .items
+                %table.header
+                  %tr
+                    %td.avatar
+                      = avatar_image_tag(@wave.avatar, :style => :thumb)
+                    %td.username<
+                      = @wave.user.first_name
+                    %td.age<
+                      = f.text_field :age, :placeholder => 'age', :class => 'ui-widget'
+                %div
+                  %table.detail
+                    %tr
+                      %td.label Deafness
+                      %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
+                    %tr
+                      %td.label Gender
+                      %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
+                    %tr
+                      %td.label Preference
+                      %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
+                    %tr
+                      %td.label Relationship
+                      %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)
+                    %tr
+                      %td.label Birthday
+                      %td.detail
+                        = f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date'}
+                    %tr
+                      %td.label Location
+                      %td.detail= f.text_field :location, :placeholder => false, :class => 'ui-widget'
+            .button-bar
+              = f.submit "OK"
+              = link_to 'Cancel', profile_path, :class => 'cancel button'
+              
+:javascript
+  $("div.button-bar button[type='submit']").button({ icons: { primary: 'ui-icon-check' }});
