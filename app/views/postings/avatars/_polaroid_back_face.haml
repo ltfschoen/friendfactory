@@ -12,15 +12,13 @@
               = user.first_name
             %td.age<
               = user_info.age.present? ? user_info.age : '&nbsp;'
-        %div
-          %table.detail
-            - with_options :partial => 'postings/avatars/user_info', :object => user_info do |user_info_partial|
-              = user_info_partial.render :locals => { :attribute => :deafness }
-              = user_info_partial.render :locals => { :attribute => :gender }
-              = user_info_partial.render :locals => { :attribute => :orientation, :label => 'Preference' }
-              = user_info_partial.render :locals => { :attribute => :relationship }
-              = user_info_partial.render :locals => { :attribute => :birthday }
-              = user_info_partial.render :locals => { :attribute => :location }
+        %table.detail
+          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :deafness }
+          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :gender }
+          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :orientation, :label => 'Preference' }
+          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :relationship }
+          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :birthday }
+          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :location }
         -# %div
         -#   = image_tag 'chat-b-side.png', :width=>'260px'
         -# %div
