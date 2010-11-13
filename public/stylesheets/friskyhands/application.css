@@ -136,22 +136,19 @@ a.profile {
 	height: 110px;
 	margin: 10px auto;
 	padding: 0;
-	
 }
 
 .header.primary ul.nav {
 	position: relative;
+	list-style: none;
 }
 
 .header.primary ul.nav li {
-	position: absolute;	
-	display: block;
+	position: absolute;
 }
 
-.header.primary ul.nav li a,
-.header.primary ul.nav li.current a {
+.header.primary ul.nav li a {
 	display: block;
-	cursor: auto;
 	text-indent: -1000em;
 	background-image: url(/images/friskyhands/header.png);
 	background-repeat: no-repeat;
@@ -162,39 +159,11 @@ a.profile {
 .header.primary ul.nav li#nav-wave {
 	top: 32px;
 	left: 0px;
-	list-style: none;	
-	cursor: pointer;
-}
-
-.header.primary ul.nav li#nav-wave a,
-.header.primary ul.nav li#nav-wave.current a {
-	width: 98px;
-	height: 46px;
-	cursor: pointer;
-}
-
-.header.secondary {
-    position: absolute;
-    top: 12px;
-    left: 0;
-    text-align: right;
-}
-
-.header.secondary a {
-    display: inline-block;
-    margin: 0 4px;
-    padding: 2px;
-    font-size: small;
-    color: #775;
-    border-bottom: 1px dotted #775;
-}
-
-.header.secondary a:hover {
-    color: #CCA;
-    background-color: #553;
 }
 
 .header.primary ul.nav li#nav-wave a {
+	width: 98px;
+	height: 46px;
 	background-position: 0 -110px;
 }
 
@@ -219,13 +188,9 @@ a.profile {
 	left: 604px;
 }
 
-.header.primary ul.nav li#nav-inbox a,
-.header.primary ul.nav li#nav-inbox.current a {
+.header.primary ul.nav li#nav-inbox a {
 	width: 80px;
 	height: 50px;
-}
-
-.header.primary ul.nav li#nav-inbox a {
 	background-position: -604px -110px;
 }
 
@@ -250,13 +215,9 @@ a.profile {
 	left: 684px;
 }
 
-.header.primary ul.nav li#nav-profile a,
-.header.primary ul.nav li#nav-profile.current a {
+.header.primary ul.nav li#nav-profile a {
 	width: 88px;
 	height: 46px;
-}
-
-.header.primary ul.nav li#nav-profile a {
 	background-position: -684px -110px;
 }
 
@@ -272,6 +233,29 @@ a.profile {
 
 .header.primary ul.nav li#nav-profile.current a {
 	background-position: -684px -275px;
+}
+
+/* * * */
+
+.header.secondary {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    text-align: right;
+}
+
+.header.secondary a {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 2px;
+    font-size: small;
+    color: #664;
+    border-bottom: 1px dotted #664;
+}
+
+.header.secondary a:hover {
+    color: #CCA;
+    background-color: #553;
 }
 
 a.web_logos {
