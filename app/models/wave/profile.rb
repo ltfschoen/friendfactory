@@ -19,6 +19,14 @@ class Wave::Profile < Wave::Base
     self.avatars.active
   end
   
+  def avatar=(avatar)
+    self.avatars.find(:all, :conditions => [ 'active = true' ]).each do |posting|
+      posting.update_attribute(:active, false)
+    end
+    avatar.active = true
+    self.avatars << avatar
+  end
+  
   def avatar_id
     self.avatar.id if self.avatar.present?
   end

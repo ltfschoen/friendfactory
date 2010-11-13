@@ -44,5 +44,4 @@ var FF = {
 
 jQuery(document).ready(function($) {
   $('button.cancel, a.cancel').button({ icons: { primary: 'ui-icon-close' }});
-	// $('.header.secondary').hide().children().hide();
 });
