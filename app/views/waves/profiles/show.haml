@@ -108,7 +108,7 @@
     - if current_user
       #text.tab_content
         - label = 'Write a Message on ' + ((@wave.user == current_user) ? 'Your' : "#{@wave.user.first_name}&#8217;s") + ' Wave'
-        = render :partial => 'posting/texts/new', :locals => { :label => label, :wave => @wave }
+        = render :partial => 'postings/texts/new', :locals => { :label => label, :wave => @wave }
 
     - if current_user
       #photo.tab_content
