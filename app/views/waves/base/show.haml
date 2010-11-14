@@ -1,15 +1,17 @@
+.wave.header.clearfix
+  .grid_1
+    &nbsp;
+  .grid_4
+    = render :partial => 'nav'
+  .grid_6
+    %h1= @wave.topic
+  .grid_5
+    &nbsp;
 .wave[@wave]
   .grid_1
     &nbsp;
-    
   .grid_12
-    %h1= @wave.topic
-    - if flash[:notice].present?
-      %p.flash= flash[:notice]
-    #events
-    = render :partial => 'nav'
     %div.postings
       = render_postings(@wave.postings.for(current_user))
-      
   .grid_3
     &nbsp;
