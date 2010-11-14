@@ -1,0 +1,29 @@
+- if current_user
+  #text.tab_content.text.hidden
+    = render :partial => 'postings/texts/new', :locals => { :wave => @wave }
+  #photo.tab_content.hidden
+    = render :partial => 'photos/form', :locals => { :label => 'Upload a Photo to this Wave', :wave => @wave }
+  / #video.tab_content.hidden
+  /   %table
+  /     %tr
+  /       %td{ :colspan => '2' }
+  /         %h2 Upload a Video to the Wave
+  /     %tr
+  /       %td.avatar.thumb
+  /         = avatar_image_tag(current_user, :style => :thumb)
+  /       %td
+  /         = form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave)) do |f|
+  /           %p.unobtrusive Paste the URL of the YouTube tube here.
+  /           = f.text_area :body
+  /           = f.text_field :subject, :placeholder => 'Caption (optional)'
+  /           .button_bar
+  /             = f.submit :OK
+  /             = f.button :Cancel, :class => 'cancel'
+
+  / #chat.tab_content.hidden Chat
+
+  / #link.tab_content.hidden
+  /   = render :partial => 'links/form', :locals => { :label => 'Add a Link to the Wave', :wave => @wave }
+
+  / #event.tab_content.hidden Event
+  / #poll.tab_content.hidden Poll

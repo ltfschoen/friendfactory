@@ -15,8 +15,13 @@
     margin: 0.2em 0;
 }
 
-.wave.header .nav li {
+.wave.header .nav li,
+.wave.tab_contents button,
+.wave.tab_contents textarea,
+.wave.tab_contents input[type='text'] {
     box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
     -webkit-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
     -moz-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
 }
+
+ 

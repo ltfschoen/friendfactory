@@ -1,10 +1,34 @@
-.post_id { 
+.wave .post_it {
     position: relative;
+    background: url('/images/friskyhands/post-it.png') no-repeat top left;
+    width: 210px;
+    height: 130px;
     z-index: 10;
 }
 
-.post_it img.avatar.thumb {
+.wave .post_it img.avatar {
+    position: relative;
+    float: left;
+    top: -6px;
+    margin-left: 16px;
+    margin-right: 12px;
     -webkit-box-shadow: 3px 3px 4px #873;
     -moz-box-shadow: 3px 3px 4px #873;
     box-shadow: 3px 3px 4px #873;    
+}
+
+.wave .post_it p {
+    line-height: 1.4em;
+	font-size: 0.8em;
+    color: gray;
+}
+
+.wave .post_it p.header {
+    float: left;
+    width: 80px;
+    padding-top: 14px;
+}
+
+.wave .post_it p.body {
+    width: 100%
 }

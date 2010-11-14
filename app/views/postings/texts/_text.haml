@@ -4,12 +4,10 @@
       %td.avatar.thumb
         = render_post_it(text)
       %td
-        %div
-          = link_to_profile(text.user)
-          \ #{distance_of_time_in_words_to_now(text.created_at)}
         - if text.subject
           %p.subject= text.subject
-        %p.body= text.body
+        - if text.body
+          %p.body= text.body
         = render :partial => 'comments/comment', :collection => text.children.comments
         %div{:id => "posting_#{text.id}_new_comment_well"}
         = render :partial => 'comments/new', :locals => { :parent_id => text.id }

@@ -2,8 +2,8 @@ class Waves::BaseController < ApplicationController
 
   DefaultWaveSlug = 'popular'
   
-  before_filter :require_lurker
-
+  before_filter :require_lurker, :only => [ :show ]
+  
   def show
     store_location
     @wave = Wave::Base.find_by_slug(params[:slug] || DefaultWaveSlug)
@@ -11,5 +11,4 @@ class Waves::BaseController < ApplicationController
       format.html
     end
   end
-    
 end

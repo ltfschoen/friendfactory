@@ -11,7 +11,7 @@
             %td.username<
               = user.first_name
             %td.age<
-              = user_info.age.present? ? user_info.age : '&nbsp;'
+              = user_info.age.present? ? user_info.age : '&nbsp;'.html_safe
         %table.detail
           = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :deafness }
           = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :gender }

@@ -47,7 +47,7 @@ module ApplicationHelper
   end
   
   def link_to_profile(user, opts = {})
-    name = opts[:label] || user.full_name
+    name = opts[:label] || user.first_name
     link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
   end
     

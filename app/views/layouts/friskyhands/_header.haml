@@ -13,8 +13,9 @@
 
 - if current_user
   .header.secondary.grid_16
+    .flash
     - if flash[:notice].present?
-      .flash= flash[:notice]
+      = flash[:notice].html_safe
     %div.links
       = link_to 'Logout', logout_path
       = link_to "#{current_user.first_name}'s Profile", profile_path

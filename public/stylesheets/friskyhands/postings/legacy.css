@@ -91,17 +91,9 @@ form.edit_user_info > table td.label.about_me {
 	margin-bottom: 0.5em;
 }
 
-.posting td.avatar {
-	width: 118px;
-}
-
 .posting td.avatar.portrait {
 	width: 206px;
 }
-
-/*.posting img.avatar {
-    margin-right: 12px;
-}*/
 
 .posting_text .subject {
 	font-weight: bold;
@@ -194,32 +186,28 @@ tr.posting_message td {
 
 /* * * * * * * * * */
 
-.tab_content {
-	border-bottom: 1px solid #CCC;
-	width: 100%;
-	padding-bottom: 20px;
+/*.tab_content {
+    border-bottom: 1px solid #CCC;
+    width: 100%;
+    padding-bottom: 20px;
 }
 
 .tab_content > table {
-	width: 100%;
+    width: 100%;
 }
 
 .tab_content > table td {
-	vertical-align: top;
-}
-
-.tab_content td.avatar {	
-	width: 106px;
+    vertical-align: top;
 }
 
 .tab_content td.avatar img.avatar.thumb {
-	margin-right: 12px;
+    margin-right: 12px;
 }
 
 .tab_content h2 {
-	margin: 10px 0;
+    margin: 10px 0;
 }
-
+*/
 /* * * * * * * * * */
 
 #text.tab_content input[type=text] {

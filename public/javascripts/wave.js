@@ -7,16 +7,16 @@ jQuery(document).ready(function($){
   $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
   $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 
-  $('#tabs li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
-  $('#tabs li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
-  $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});
+  $('.wave.nav li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
+  $('.wave.nav li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
+  // $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});
   // $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-comment' }});
-  $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-link' }});
+  // $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-link' }});
   // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
   // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
 
 	// Tabs and their contents
-  $('ul#tabs li').click(function() {
+  $('ul.wave.nav li').click(function() {
     if (!$(this).hasClass('current')) {
       $(this).addClass('current').siblings('li.current').removeClass('current');
       $($(this).find('a').attr('href')).show().siblings('.tab_content').hide();
@@ -27,7 +27,7 @@ jQuery(document).ready(function($){
 
   $('button.cancel', '.tab_content').click(function() {
     $(this).parents('.tab_content').hide().end().parents('form')[0].reset();
-    $('ul#tabs li.current').removeClass('current');
+    $('ul.wave.nav li.current').removeClass('current');
     return false;
   });
 

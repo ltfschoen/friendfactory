@@ -1,6 +1,6 @@
 require 'pusher'
 
-class Posting::ChatsController < ApplicationController
+class Postings::ChatsController < ApplicationController
 
   def index
   end

@@ -6,10 +6,18 @@ Friskyfactory::Application.routes.draw do |map|
     end
   end
 
+  # Used to show waves
   namespace :waves do
     resources :polaroids, :only => [ :index ]
     resources :profiles, :only => [ :show ]
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
+  end
+
+  # Used to add postings to a wave
+  resources :waves, :only => [] do
+    namespace :postings do
+      resources :texts, :only => [ :create ]
+    end
   end
 
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
@@ -19,7 +27,7 @@ Friskyfactory::Application.routes.draw do |map|
 
   map.resources :waves, :only => [ :index, :show, :create ], :controller => 'waves/base' do |wave|
     # Used to add postings to a wave...
-    wave.resources :texts,  :only => [ :create ]
+    # wave.resources :texts,  :only => [ :create ]
     wave.resources :photos, :only => [ :create ]
     wave.resources :videos, :only => [ :create ]
     wave.resources :links,  :only => [ :create ]

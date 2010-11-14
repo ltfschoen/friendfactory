@@ -1,17 +1,24 @@
 .wave.header.clearfix
-  .grid_1
+  .grid_1<
     &nbsp;
-  .grid_4
+  .grid_4<
     = render :partial => 'nav'
-  .grid_6
+  .grid_6<
     %h1= @wave.topic
-  .grid_5
+  .grid_5<
+    &nbsp;
+.wave.tab_contents.clearfix
+  .grid_1<
+    &nbsp;
+  .grid_12<
+    = render :partial => 'tab_content'
+  .grid_3<
     &nbsp;
 .wave[@wave]
-  .grid_1
+  .grid_1<
     &nbsp;
-  .grid_12
-    %div.postings
+  .grid_12<
+    %ul.postings
       = render_postings(@wave.postings.for(current_user))
-  .grid_3
+  .grid_3<
     &nbsp;
