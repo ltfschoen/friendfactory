@@ -31,8 +31,9 @@ jQuery(document).ready(function($){
     return false;
   });
 
-  $('#photo.tab_content form').bind('ajax:before', function(event) {
-    $(this).closest('.tab_content').hide();
+  $('.tab_content.photo form').bind('ajax:before', function(event) {
+    $(this).hide();
+    $('#posting_photo_upload_spinner').show();
   });
 
   // Video form

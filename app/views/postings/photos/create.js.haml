@@ -1,8 +1,12 @@
 = remotipart_response do
   var $currentTab = $('ul.wave.nav li.current');
+  $panel = $($('a', $currentTab).attr('href'));
+  $panel.find('form').show().end().find('.spinner').hide();
   - if @posting.present? && @posting.valid?
-    $('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}"); // .find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
+    $('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}");
+    // .find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
     $currentTab.removeClass('current');
-    $($('a', $currentTab).attr('href')).hide().find('form')[0].reset();
+    $panel.hide().find('form')[0].reset();
   - else
     $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")
+

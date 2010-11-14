@@ -37,13 +37,12 @@ module ApplicationHelper
   end
   
   def spinner(opts = {})
-    id = opts[:id] || 'spinner'
     size = case opts[:size]
       when :small then '14x14'
       when :big   then '32x32'
       else '14x14'
     end    
-    image_tag('ajax-loader.gif', :size => size, :class => 'spinner hidden', :id => id)
+    image_tag('ajax-loader.gif', :size => size, :class => 'spinner hidden', :id => opts[:id], :site => false)
   end
   
   def link_to_profile(user, opts = {})

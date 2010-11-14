@@ -30,5 +30,12 @@
 }
 
 .wave .post_it p.body {
-    width: 100%
+    width: 100%;
+    clear: both;
+}
+
+.wave .post_it .spinner {
+    position: absolute;
+    top: 60px;
+    left: 84px;
 }
