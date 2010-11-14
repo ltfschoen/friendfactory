@@ -17,6 +17,7 @@ Friskyfactory::Application.routes.draw do |map|
   resources :waves, :only => [] do
     namespace :postings do
       resources :texts, :only => [ :create ]
+      resources :photos, :only => [ :create ]
     end
   end
 
@@ -27,8 +28,6 @@ Friskyfactory::Application.routes.draw do |map|
 
   map.resources :waves, :only => [ :index, :show, :create ], :controller => 'waves/base' do |wave|
     # Used to add postings to a wave...
-    # wave.resources :texts,  :only => [ :create ]
-    wave.resources :photos, :only => [ :create ]
     wave.resources :videos, :only => [ :create ]
     wave.resources :links,  :only => [ :create ]
   end

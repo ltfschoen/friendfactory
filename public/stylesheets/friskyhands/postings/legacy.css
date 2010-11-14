@@ -228,34 +228,6 @@ tr.posting_message td {
 	color: #501518;
 }
 
-/* * * * * * * * * */
-
-#photo.tab_content table.button_bar,
-#avatar.tab_content table.button_bar {
-	border-spacing: 0px 4px;
-	border-collapse: separate;	
-	width: 70%
-}
-
-#photo.tab_content table.button_bar td,
-#avatar.tab_content table.button_bar td {
-	vertical-align: center;
-	background-color: #F7F7F7;
-}
-
-#avatar.tab_content table.button_bar .error {
-	margin-bottom: 0;
-}
-
-#photo.tab_content table.button_bar td.file_field,
-#avatar.tab_content table.button_bar td.file_field {
-	padding: 8px 8px;
-}
-
-#photo.tab_content table.button_bar td.submit,
-#avatar.tab_content table.button_bar td.submit {
-	padding: 0 8px;
-}
 
 /* * * * * * * * * */
 
