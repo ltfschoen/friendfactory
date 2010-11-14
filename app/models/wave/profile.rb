@@ -12,7 +12,7 @@ class Wave::Profile < Wave::Base
   end
   
   def self.avatars    
-    scoped.order('created_at desc').map(&:avatar)
+    scoped.order('created_at desc').all.map(&:avatar)
   end
   
   def avatar
@@ -20,7 +20,7 @@ class Wave::Profile < Wave::Base
   end
   
   def avatar=(avatar)
-    if avatar_ids.include?(avatar.id)
+    if avatar.present? && avatar_ids.include?(avatar.id)
       avatars.active.each do |posting|
         posting.update_attribute(:active, false)
       end
