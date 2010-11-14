@@ -1,11 +1,11 @@
 class Waves::PolaroidsController < Waves::BaseController
 
-  PolaroidWave = Struct.new('PolaroidWave', :id, :topic, :postings)
+  PolaroidWave   = Struct.new('PolaroidWave', :id, :topic, :postings)
+  PolaroidWaveID = '000'
 
   def index    
     postings = Posting::Avatar.active
-    wave_id  = '000'
-    @wave = PolaroidWave.new(wave_id, 'Polaroids', postings)
+    @wave = PolaroidWave.new(PolaroidWaveID, 'Polaroids', postings)
     respond_to do |format|
       format.html
     end

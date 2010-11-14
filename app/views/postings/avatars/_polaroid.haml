@@ -1,7 +1,7 @@
 - css_class = defined?(:css_class) ? css_class : ''
 - id = defined?(:id) ? id : ''
-
-.polaroid-container{ :class => css_class }
-  .polaroid{ :id => id }
-    = render :partial => 'postings/avatars/polaroid_front_face', :locals => { :avatar => avatar } 
-    = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :avatar => avatar } 
+- if avatar.present? && avatar.user.present?
+  .polaroid-container{ :class => css_class }
+    .polaroid{ :id => id }
+      = render :partial => 'postings/avatars/polaroid_front_face', :locals => { :avatar => avatar } 
+      = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :avatar => avatar } 
