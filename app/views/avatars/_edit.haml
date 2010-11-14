@@ -1,8 +1,0 @@
-#avatar_upload_well.append-bottom.clearfix
-  - unless current_user.profile.avatar.nil?
-    .portrait
-      = avatar_image_tag(current_user, :style => :portrait, :online_badge => online_badge)
-      %p.unobtrusive This is your portrait picture used in your profile when your friends want to have a good look at you.
-    .thumb
-      = avatar_image_tag(current_user.profile.avatar, :style => :thumb, :online_badge => online_badge)
-      %p.unobtrusive This is your thumb picture used on messages and news feeds.
