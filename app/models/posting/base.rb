@@ -2,6 +2,8 @@ class Posting::Base < ActiveRecord::Base
 
   set_table_name :postings
 
+  attr_readonly :user_id
+
   acts_as_tree :order => 'created_at asc'
   
   has_many :children,
@@ -16,21 +18,15 @@ class Posting::Base < ActiveRecord::Base
     end
   end
     
-  belongs_to :user  
-  belongs_to :resource, :polymorphic => true  
+  belongs_to :user
+  belongs_to :resource, :polymorphic => true
+  
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :foreign_key             => 'posting_id',
       :association_foreign_key => 'wave_id',
       :join_table              => 'postings_waves',
       :order                   => 'created_at desc'
-
-  validates_presence_of :user_id  
-  before_validation(:on => :create) do
-    self.user = UserSession.find.record if Authlogic::Session::Base.activated?
-  end
-
-  attr_readonly :user_id, :wave_id
 
   # Thinking-Sphinx
   # define_index do
@@ -49,5 +45,4 @@ class Posting::Base < ActiveRecord::Base
   def to_s
     self[:type].to_s + ':' + self[:id].to_s
   end
-  
 end

@@ -9,7 +9,6 @@ class Posting::Avatar < Posting::Base
           :iphoneR  => [ '480x320#', :jpg ],
           :ad       => [ '300x250#', :jpg ]},
       :default_style => :portrait,
-      # :default_style => :thumb,
       :convert_options => { :all => [ '-strip', '-depth 8' ] }
   
   validates_attachment_presence     :image
@@ -25,7 +24,6 @@ class Posting::Avatar < Posting::Base
   private
   
   def set_dimensions
-    self.active = true
     tempfile = self.image.queued_for_write[:original]    
     unless tempfile.nil?
       dimensions = Paperclip::Geometry.from_file(tempfile)
@@ -33,6 +31,7 @@ class Posting::Avatar < Posting::Base
       self.height = dimensions.height
       self.horizontal = dimensions.horizontal?
     end
+    true
   end
 
 end

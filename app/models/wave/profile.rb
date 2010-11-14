@@ -7,28 +7,29 @@ class Wave::Profile < Wave::Base
       :join_table              => 'postings_waves',
       :order                   => 'created_at desc' do
     def active
-      find :first, :conditions => [ 'active = true' ]
-    end
+      find :all, :conditions => [ 'active = true' ]
+    end    
   end
   
-  def photos
-    self.postings.only(Posting::Photo)
-  end
-
   def avatar
-    self.avatars.active
+    avatars.active.first
   end
   
   def avatar=(avatar)
-    self.avatars.find(:all, :conditions => [ 'active = true' ]).each do |posting|
-      posting.update_attribute(:active, false)
+    if avatar_ids.include?(avatar.id)
+      avatars.active.each do |posting|
+        posting.update_attribute(:active, false)
+      end
+      return avatar.update_attribute(:active, true)
     end
-    avatar.active = true
-    self.avatars << avatar
+    false
   end
   
   def avatar_id
-    self.avatar.id if self.avatar.present?
+    avatar.id if avatar.present?
   end
-  
+
+  def photos
+    self.postings.only(Posting::Photo)
+  end
 end

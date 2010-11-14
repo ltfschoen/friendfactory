@@ -19,15 +19,16 @@ class Waves::ProfileController < Waves::BaseController
   end
   
   def update
-    @successful = current_user.info.update_attributes(params[:user_info])
+    current_user.info.update_attributes(params[:user_info])
     respond_to do |format|
       format.html { redirect_to profile_path }
     end
   end
   
   def avatar
-    avatar = Posting::Avatar.create(params[:posting_avatar])
-    current_user.profile.avatar = avatar
+    if params[:posting_avatar]
+      current_user.profile.avatars.create(:image => params[:posting_avatar][:image], :user_id => current_user, :active => true)
+    end
     respond_to do |format|
       format.js { render :layout => false }
     end
