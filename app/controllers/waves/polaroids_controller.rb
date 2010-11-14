@@ -4,7 +4,7 @@ class Waves::PolaroidsController < Waves::BaseController
   PolaroidWaveID = '000'
 
   def index    
-    postings = Posting::Avatar.active
+    postings = Wave::Profile.avatars
     @wave = PolaroidWave.new(PolaroidWaveID, 'Polaroids', postings)
     respond_to do |format|
       format.html

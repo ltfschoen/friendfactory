@@ -11,6 +11,10 @@ class Wave::Profile < Wave::Base
     end    
   end
   
+  def self.avatars    
+    scoped.order('created_at desc').map(&:avatar)
+  end
+  
   def avatar
     avatars.active.first
   end
