@@ -1,5 +1,5 @@
-var $currentTab = $('ul.wave.nav li.current');
 = remotipart_response do
+  var $currentTab = $('ul.wave.nav li.current');
   - if @posting.present? && @posting.valid?
     $('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}"); // .find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
     $currentTab.removeClass('current');
