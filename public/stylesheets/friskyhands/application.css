@@ -242,16 +242,28 @@ a.profile {
     position: absolute;
     top: 12px;
     left: 0;
+    font-size: small;
+}
+
+.header.secondary .flash {
+    float: left;
+    color: #664;
+}
+
+.header.secondary .links {
     text-align: right;
+    float: right;
 }
 
 .header.secondary a {
-    display: inline-block;
     margin: 0 4px;
     padding: 2px;
-    font-size: small;
-    color: #664;
     border-bottom: 1px dotted #664;
+}
+
+.header.secondary a:visited,
+.header.secondary a:active {
+    color: #664;
 }
 
 .header.secondary a:hover {
