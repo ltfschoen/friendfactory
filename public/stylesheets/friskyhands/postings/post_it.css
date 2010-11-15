@@ -1,37 +1,32 @@
 .wave .post_it {
     position: relative;
     background: url('/images/friskyhands/post-it.png') no-repeat top left;
-    width: 210px;
+    width: 160px;
     height: 130px;
-    z-index: 10;
+    padding: 20px 20px;
 }
 
 .wave .post_it img.avatar {
     position: relative;
     float: left;
-    top: -6px;
-    margin-left: 16px;
-    margin-right: 12px;
+    top: -20px;
+    left: -10px;
+    margin-bottom: 10px;
     -webkit-box-shadow: 3px 3px 4px #873;
     -moz-box-shadow: 3px 3px 4px #873;
-    box-shadow: 3px 3px 4px #873;    
+    box-shadow: 3px 3px 4px #873;
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-deg);
 }
 
-.wave .post_it p {
-    line-height: 1.4em;
-	font-size: 0.8em;
+.wave .post_it {
+    line-height: 1.2em;
+	font-size: small;
     color: gray;
 }
 
-.wave .post_it p.header {
-    float: left;
-    width: 80px;
-    padding-top: 14px;
-}
-
-.wave .post_it p.body {
-    width: 100%;
-    clear: both;
+.post_it .created_at {
+    white-space: nowrap;
 }
 
 .wave .post_it .spinner {

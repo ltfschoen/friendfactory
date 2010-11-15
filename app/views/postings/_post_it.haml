@@ -2,11 +2,10 @@
 - if defined?(posting) && posting.present?
   .post_it{ :class => 'displaced' }<
     = avatar_image_tag(posting.user.avatar, :style => :thumb, :align => 'left', :anonymous => true)
-    %p.header<
-      = link_to_profile(posting.user)
-      - if posting.created_at?
-        = "posted #{distance_of_time_in_words_to_now(posting.created_at)}".html_safe
-    %p.body<
-      = message if message.present?
+    = link_to_profile(posting.user)
+    - if posting.created_at?
+      %span.created_at
+      = "posted #{distance_of_time_in_words_to_now(posting.created_at)}".html_safe
+    = message if message.present?
 - else
   &nbsp;

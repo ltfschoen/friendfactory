@@ -36,100 +36,19 @@ jQuery(document).ready(function($){
     $('#posting_photo_upload_spinner').show();
   });
 
-  // Video form
-  // $('#video.tab_content form').submit(function(event){
-  //   event.preventDefault()
-  //   FF.scrubPlaceholders(this);
-  //   jQuery.ajax({
-  //     data: jQuery.param(jQuery(this).serializeArray()),
-  //     dataType: 'script',
-  //     cache: false,
-  //     type: 'post',
-  //     url: $(this).attr('action'),
-  //     success: function() {
-  //       $('#video.tab_content form').reset().closest('.tab_content').hide();
-  //       $('ul#tabs li.current').removeClass('current');
-  //     }
-  //   });      
-  // });
-	
-  // Link form
-  // $('#link.tab_content form').submit(function(event){
-  //   event.preventDefault();
-  //   FF.scrubPlaceholders(this);
-  //   jQuery.ajax({
-  //     data: jQuery.param(jQuery(this).serializeArray()),
-  //     dataType: 'script',
-  //     cache: false,
-  //     type: 'post',
-  //     url: $(this).attr('action')
-  //   });      
-  // });
-
 	// Comment forms
-  $('form.new_posting_comment')
-    .find('textarea').live('focus', function() {
-      $(this).height('3.6em').siblings().show().closest('table').find('img.avatar').show();
-  	}).end()
-		.find('button.cancel').live('click', function(event){
-			event.preventDefault();
-			$(this).hide()				
-			.closest('form').reset().end()
-			.siblings('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
-			.siblings('button').hide().end()
-			.closest('table').find('img.avatar').hide()
-    });
-
-  $('form.new_posting_comment').live('submit', function(event) {
+  $('a.new_posting_comment').live('click', function(event) {
     event.preventDefault();
-    FF.scrubPlaceholders(this);
-
-    if ($(this).find('textarea').val().length > 0) {
-			var action = $(this).attr('action');
-      $.ajax({
-        data: jQuery.param(jQuery(this).serializeArray()),
-        dataType: 'script',
-        type: 'post',
-        url: action,
-        success: function(response, status) {
-        }
-      });
-    }
-
-    this.reset();
-    $(this)
-      .find('button').hide().end()
-      .find('textarea').height('1.2em').placeholder({ className: 'placeholder' }).end()
-      .closest('table').find('img.avatar').hide();
+    $(this).hide().next('.comment-bubble').show();
   });
 
-	// Message forms
-  $('.posting_message')
-  	.find('button.message_reply').button({ icons: { primary: 'ui-icon-mail-closed' }})
-    .click(function(event) {
-       $(this).css('visibility', 'hidden').closest('.posting_message').find('form.new_posting_message').show();
+  $('.comment-bubble form').bind('ajax:before', function(event) {
+    $(this).hide().next('.new_posting_comment_spinner').show();
+  });
+	
+  $('form.new_posting_comment')
+     .find('button.cancel').live('click', function(event) {
        event.preventDefault();
-    })
-    .end()
-    .find('form.new_posting_message')
-    .hide()
-    .find('button.cancel').click(function(event) {
-       $(this).closest('form.new_posting_message').hide().reset().closest('.posting_message').find('button.message_reply').css('visibility', 'visible');
-       event.preventDefault();
-    })
-    .end()
-    .submit(function(event) {
-      var form = this;
-      event.preventDefault();
-      jQuery.ajax({
-        data: jQuery.param(jQuery(this).serializeArray()),
-        dataType: 'script',
-        cache: false,
-        type: 'post',
-        url: $(form).attr('action'),
-        success: function() {
-          $(form).hide().reset().closest('.posting_message').find('button.message_reply').css('visibility', 'visible');
-        }
-      });
+       $(this).closest('.comment-bubble').hide().prev('a.new_posting_comment').show();
     });
 });

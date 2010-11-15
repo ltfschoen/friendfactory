@@ -36,7 +36,7 @@ div.posting:nth-child(5n) .displaced {
 div.posting:nth-child(5n) .displaced.post_it {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
-    right: -20px;
+    right: -16px;
 }
 
 div.posting:nth-child(8n) .displaced {

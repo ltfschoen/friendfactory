@@ -1,4 +1,5 @@
 .comment-bubble {
+    width: 240px;
     position: relative;
 }
 
@@ -31,4 +32,19 @@
     margin-top: -1px;
     width: 240px;
     height: 36px;
+}
+
+.comment-bubble form.new_posting_comment textarea {
+    height: 3.6em;
+    background-color: lightyellow;
+}
+
+.comment-bubble form.new_posting_comment .button-bar {
+    text-align: right;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.comment-bubble .new_posting_comment_spinner {
+    margin-left: 80px;
 }

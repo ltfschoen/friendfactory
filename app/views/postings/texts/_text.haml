@@ -8,7 +8,7 @@
           %p.subject= text.subject
         - if text.body
           %p.body= text.body
-        = render :partial => 'comments/comment', :collection => text.children.comments
+        = render :partial => 'postings/comments/comment', :collection => text.children.comments
         %div{:id => "posting_#{text.id}_new_comment_well"}
-        = render :partial => 'comments/new', :locals => { :parent_id => text.id }
+        = render :partial => 'postings/comments/new', :locals => { :parent => text }
   = render_postings(text.children.postings)

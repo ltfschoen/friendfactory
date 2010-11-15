@@ -11,6 +11,6 @@
           = image_tag(photo.image.url(:small), :site => false, :class => 'photo small fluid')
         = render :partial => 'comments/comment', :collection => buddy.children.comments
         %div{:id => "posting_#{buddy.id}_new_comment_well"}
-        = render :partial => 'comments/new', :locals => { :parent_id => buddy.id }
+        = render :partial => 'comments/new', :locals => { :parent => buddy }
   = render_postings(buddy.children.postings)
   

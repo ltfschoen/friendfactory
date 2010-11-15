@@ -1,19 +1,20 @@
 Friskyfactory::Application.routes.draw do |map|
 
+  # To manage a user's profile
   resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
     member do
       post 'avatar'
     end
   end
 
-  # Used to show waves
+  # To show waves
   namespace :waves do
     resources :polaroids, :only => [ :index ]
     resources :profiles, :only => [ :show ]
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
-  # Used to add postings to a wave
+  # To add postings to a wave
   resources :waves, :only => [] do
     namespace :postings do
       resources :texts, :only => [ :create ]
@@ -21,7 +22,17 @@ Friskyfactory::Application.routes.draw do |map|
     end
   end
 
+  # To add a comment to a posting
+  map.resources :postings, :only => [] do |posting|
+    posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
+  end
+
+  # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
+
+
+
+
 
   # # # # # # # # # # # # # # # 
   # # # # # # # # # # # # # # # 
@@ -42,11 +53,6 @@ Friskyfactory::Application.routes.draw do |map|
   map.resources :avatars,  :only => [ :create ] # TODO: remove once profiles wave works correctly
 
   # TODO: Use a manual mapping
-  map.resources :postings, :only => [] do |posting|
-    posting.resources :comments, :only => [ :create ]
-  end
-
-  # TODO: Use a manual mapping
   map.resources :messages, :only => [] do |message|
     message.resource 'reply', :only => [ :create ], :controller => 'messages'
   end
@@ -65,12 +71,10 @@ Friskyfactory::Application.routes.draw do |map|
     
   map.welcome '/welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
 
-  root :to => 'waves/base#show', :via => :get
-
-  get '/:slug', :to => 'waves/base#show', :constraints => { :slug => /\D\w*/ }
-  
   # Miscellaneous
-  
+  root :to => 'waves/base#show', :via => :get
+  get '/:slug', :to => 'waves/base#show', :constraints => { :slug => /\D\w*/ }
+
   if [ 'development', 'staging' ].include?(Rails.env)
     map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
   end
