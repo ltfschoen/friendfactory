@@ -9,18 +9,24 @@ class User < ActiveRecord::Base
   aasm_column        :status
   aasm_initial_state :welcomed
   aasm_state         :welcomed
-    
+
   validates_presence_of :first_name
-  
+
   after_save do
-    Wave::Profile::create(:user => self) if self.profile.nil?
-    UserInfo.create(:user => self) if self.info.nil?
+    if self.profile.nil?
+      Wave::Profile::create(:user => self)
+    end
+    if self.info.nil?
+      UserInfo.create(:user => self)
+    end
   end
 
   has_one  :info,     :class_name => 'UserInfo'
+  has_one  :avatar,   :class_name => 'Posting::Avatar', :conditions => [ 'active = ?', true ], :order => 'created_at desc'
   has_many :waves,    :class_name => 'Wave::Base'
   has_one  :profile,  :class_name => 'Wave::Profile'
   has_many :postings, :class_name => 'Posting::Base'
+
   has_many :friendships
   has_many :friends,  :through => :friendships
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'

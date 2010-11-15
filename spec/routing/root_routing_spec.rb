@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ApplicationController do
   describe 'routing' do
     it 'recognizes get /' do
-      { :get => '/' }.should route_to(:controller => 'waves', :action => 'show')
+      { :get => '/' }.should route_to(:controller => 'waves/base', :action => 'show')
     end
     
     it "doesn't recognize post /" do

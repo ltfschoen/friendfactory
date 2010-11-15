@@ -1,6 +1,12 @@
 module AvatarHelper
-  def avatar_image_tag(user_or_avatar, opts = {})    
-    opts.reverse_merge!(:online_badge => true, :style => :polaroid, :site => false)
+  
+  def avatar_image_tag(user_or_avatar, opts = {})
+    opts.reverse_merge!(:online_badge => true, :style => :polaroid, :site => false, :anonymous => false)
+    
+    if opts[:style].to_sym == :thimble
+      opts[:style], opts[:class] = :thumb, 'thimble'
+    end
+    
     klass = [ 'avatar', opts[:style], opts[:class] ].compact * ' '
     
     if user_or_avatar.present?
@@ -15,6 +21,10 @@ module AvatarHelper
         return link_to(image_tag(avatar.image.url(opts[:style].to_sym), :alt => opts[:alt], :class => klass, :site => opts[:site]), profile_path(user.profile))
       end
     end
-    image_tag('ffffff.gif', :class => klass, :site => false)
-  end  
+    
+    if opts[:anonymous] == true
+      image_tag('ffffff.gif', :class => klass, :site => false)
+    end
+  end
+
 end

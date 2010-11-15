@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe TextsController do
+describe Postings::TextsController do
 
   #Delete these examples and add some real ones
   it "should use Posting::TextsController" do
     pending
-    controller.should be_an_instance_of(TextsController)
+    controller.should be_an_instance_of(Postings::TextsController)
   end
 
 

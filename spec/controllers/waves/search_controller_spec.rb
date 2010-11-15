@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Waves::SearchController do
 
   #Delete these examples and add some real ones
-  it "should use SearchController" do
+  it "should use Waves::SearchController" do
     pending
-    controller.should be_an_instance_of(SearchController)
+    controller.should be_an_instance_of(Waves::SearchController)
   end
 
 

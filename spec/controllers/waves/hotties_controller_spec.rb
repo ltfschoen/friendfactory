@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Waves::HottiesController do
 
-  it "should use HottiesController" do
+  it "should use Waves::HottiesController" do
     pending
-    controller.should be_an_instance_of(HottiesController)
+    controller.should be_an_instance_of(Waves::HottiesController)
   end
 
   describe "GET 'show'" do

@@ -7,7 +7,7 @@ class Wave::Profile < Wave::Base
       :join_table              => 'postings_waves',
       :order                   => 'created_at desc' do
     def active
-      find :all, :conditions => [ 'active = true' ]
+      find :all, :conditions => [ 'active = ?', true ]
     end    
   end
   
