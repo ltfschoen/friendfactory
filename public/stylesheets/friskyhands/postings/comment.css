@@ -1,5 +1,5 @@
 .comment-bubble {
-    width: 240px;
+    width: 222px;
     position: relative;
 }
 
@@ -14,47 +14,36 @@
     box-shadow: 3px 3px 4px #873;
 }
 
-.comment-bubble .c01 {
-    background: url(/images/friskyhands/comment-bubble_01.png) no-repeat top left;
-    width: 200px;
-    padding: 18px 20px 0 16px;
-    min-height: 20px;
-    font-size: small;
-    line-height: 1.2em;
-}
-
 .comment-bubble .created_at {
     white-space: nowrap;
 }
 
-.comment-bubble .c02 {
-    background: url(/images/friskyhands/comment-bubble_02.png) no-repeat top left;
-    margin-top: -1px;
-    width: 240px;
-    height: 36px;
-}
-
-.comment-bubble .c01.note-paper {
+.comment-bubble .c01 {
     background: url(/images/friskyhands/note-paper_01.png) no-repeat top left;
     width: 190px;
-    padding: 34px 24px 0 16px;
+    padding: 34px 16px 0;
     min-height: 30px;
+    max-height: 202px;
     font-size: small;
     line-height: 1.2em;
     line-height: 20px;
+    overflow: hidden;
 }
 
-.comment-bubble .c02.note-paper {
+.comment-bubble .c01 div {
+    overflow: hidden;
+}
+
+.comment-bubble .c02 {
     background: url(/images/friskyhands/note-paper_02.png) no-repeat top left;
     margin-top: -1px;
-    width: 230px;
-    height: 36px;
+    width: 222px;
+    height: 20px;
 }
-
 
 .comment-bubble form.new_posting_comment textarea {
     height: 3.6em;
-    background-color: lightyellow;
+    background-color: #FFF;
 }
 
 .comment-bubble form.new_posting_comment .button-bar {
