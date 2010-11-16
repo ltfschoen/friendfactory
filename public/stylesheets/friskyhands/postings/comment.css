@@ -34,6 +34,24 @@
     height: 36px;
 }
 
+.comment-bubble .c01.note-paper {
+    background: url(/images/friskyhands/note-paper_01.png) no-repeat top left;
+    width: 190px;
+    padding: 34px 24px 0 16px;
+    min-height: 30px;
+    font-size: small;
+    line-height: 1.2em;
+    line-height: 20px;
+}
+
+.comment-bubble .c02.note-paper {
+    background: url(/images/friskyhands/note-paper_02.png) no-repeat top left;
+    margin-top: -1px;
+    width: 230px;
+    height: 36px;
+}
+
+
 .comment-bubble form.new_posting_comment textarea {
     height: 3.6em;
     background-color: lightyellow;
