@@ -133,11 +133,22 @@ span.profile {
 }
 
 .header.primary { 
+    position: relative;
 	background: url(/images/friskyhands/header.png) no-repeat top center;
 	width: 960px;
 	height: 110px;
 	margin: 10px auto;
 	padding: 0;
+}
+
+.header.primary a.badge {
+    position: absolute;
+    display: block;
+    top: 8px;
+    left: 360px;
+    width: 236px;
+    height: 82px;
+    text-indent: -1000em;
 }
 
 .header.primary ul.nav {
@@ -158,83 +169,137 @@ span.profile {
 
 /* * * */
 
-.header.primary ul.nav li#nav-wave {
+.header.primary ul.nav li#nav-1 {
 	top: 32px;
 	left: 0px;
 }
 
-.header.primary ul.nav li#nav-wave a {
-	width: 98px;
+.header.primary ul.nav li#nav-1 a {
+	width: 90px;
 	height: 46px;
 	background-position: 0 -110px;
 }
 
-.header.primary ul.nav li#nav-wave a:hover,
-.header.primary ul.nav li#nav-wave.current a:hover {
+.header.primary ul.nav li#nav-1 a:hover,
+.header.primary ul.nav li#nav-1.current a:hover {
 	background-position: 0 -165px;
 }
 
-.header.primary ul.nav li#nav-wave a:active,
-.header.primary ul.nav li#nav-wave.current a:active {
+.header.primary ul.nav li#nav-1 a:active,
+.header.primary ul.nav li#nav-1.current a:active {
 	background-position: 0 -220px;
 }
 
-.header.primary ul.nav li#nav-wave.current a {
+.header.primary ul.nav li#nav-1.current a {
 	background-position: 0 -275px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-inbox {
+.header.primary ul.nav li#nav-2 {
+	top: 32px;
+	left: 90px;
+}
+
+.header.primary ul.nav li#nav-2 a {
+	width: 94px;
+	height: 46px;
+	background-position: -90px -110px;
+}
+
+.header.primary ul.nav li#nav-2 a:hover,
+.header.primary ul.nav li#nav-2.current a:hover {
+    background-position: -90px -165px;
+}
+
+.header.primary ul.nav li#nav-2 a:active,
+.header.primary ul.nav li#nav-2.current a:active {
+    background-position: -90px -220px;
+}
+
+.header.primary ul.nav li#nav-2.current a {
+    background-position: -90px -275px;
+}
+
+/* * * */
+
+.header.primary ul.nav li#nav-5 {
 	top: 32px;
 	left: 604px;
 }
 
-.header.primary ul.nav li#nav-inbox a {
+.header.primary ul.nav li#nav-5 a {
 	width: 80px;
 	height: 50px;
 	background-position: -604px -110px;
 }
 
-.header.primary ul.nav li#nav-inbox a:hover,
-.header.primary ul.nav li#nav-inbox.current a:hover {
+.header.primary ul.nav li#nav-5 a:hover,
+.header.primary ul.nav li#nav-5.current a:hover {
 	background-position: -604px -165px;
 }
 
-.header.primary ul.nav li#nav-inbox a:active,
-.header.primary ul.nav li#nav-inbox.current a:active {
+.header.primary ul.nav li#nav-5 a:active,
+.header.primary ul.nav li#nav-5.current a:active {
 	background-position: -604px -220px;
 }
 
-.header.primary ul.nav li#nav-inbox.current a {
+.header.primary ul.nav li#nav-5.current a {
 	background-position: -604px -275px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-profile {
+.header.primary ul.nav li#nav-6 {
 	top: 32px;
 	left: 684px;
 }
 
-.header.primary ul.nav li#nav-profile a {
+.header.primary ul.nav li#nav-6 a {
 	width: 88px;
 	height: 46px;
 	background-position: -684px -110px;
 }
 
-.header.primary ul.nav li#nav-profile a:hover,
-.header.primary ul.nav li#nav-profile.current a:hover {
+.header.primary ul.nav li#nav-6 a:hover,
+.header.primary ul.nav li#nav-6.current a:hover {
 	background-position: -684px -165px;
 }
 
-.header.primary ul.nav li#nav-profile a:active,
-.header.primary ul.nav li#nav-profile.current a:active {
+.header.primary ul.nav li#nav-6 a:active,
+.header.primary ul.nav li#nav-6.current a:active {
 	background-position: -684px -220px;
 }
 
-.header.primary ul.nav li#nav-profile.current a {
+.header.primary ul.nav li#nav-6.current a {
 	background-position: -684px -275px;
+}
+
+/* * * */
+
+.header.primary ul.nav li#nav-8 {
+	top: 32px;
+	left: 862px;
+}
+
+.header.primary ul.nav li#nav-8 a {
+	width: 88px;
+	height: 46px;
+	background-position: -862px -110px;
+}
+
+.header.primary ul.nav li#nav-8 a:hover,
+.header.primary ul.nav li#nav-8.current a:hover {
+    background-position: -862px -165px;
+}
+
+.header.primary ul.nav li#nav-8 a:active,
+.header.primary ul.nav li#nav-8.current a:active {
+    background-position: -862px -220px;
+}
+
+.header.primary ul.nav li#nav-8.current a {
+    background-position: -862px -275px;
 }
 
 /* * * */
@@ -274,14 +339,16 @@ span.profile {
 
 a.web_logos {
 	background: url(/images/web_logos.png);
-	width: 18px;
-	height: 18px;
+	width: 14px;
+	height: 14px;
 	display: inline-block;
 	position: relative;
 	top: 4px;
 	margin: 0 3px;
+	border-bottom: none !important;
+	text-decoration: none;
 }
 
-a.web_logos.facebook {
+a.facebook {
 	background-position: -96px 0;
 }

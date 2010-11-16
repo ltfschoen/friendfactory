@@ -7,6 +7,8 @@ Friskyfactory::Application.routes.draw do |map|
     end
   end
 
+  get 'rollcall', :controller => 'waves/polaroids', :action => :index
+  
   # To show waves
   namespace :waves do
     resources :polaroids, :only => [ :index ]

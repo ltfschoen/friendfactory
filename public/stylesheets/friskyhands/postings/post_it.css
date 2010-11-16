@@ -10,13 +10,13 @@
     position: relative;
     float: left;
     top: -20px;
-    left: -10px;
+    left: -12px;
     margin-bottom: 10px;
     -webkit-box-shadow: 3px 3px 4px #873;
     -moz-box-shadow: 3px 3px 4px #873;
     box-shadow: 3px 3px 4px #873;
-    -webkit-transform: rotate(-5deg);
-    -moz-transform: rotate(-deg);
+    -webkit-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
 }
 
 .wave .post_it {

@@ -1,22 +1,22 @@
 .header.primary.grid_16
+  = link_to 'FriskyHands', root_path, :class => 'badge'    
   %ul.nav
-    %li#nav-wave{ :class => "#{'current' if current_page?(:controller => 'base', :action => 'show')}" }
+    %li#nav-1{ :class => "#{'current' if current_page?(:controller => 'base', :action => 'show')}" }
       = link_to 'Wave', root_path
-    -# %li#nav-inbox
-    -#  = link_to 'Inbox', '#'
-    %li#nav-profile{ :class => "#{'current' if current_page?(:controller => '/waves/polaroids', :action => 'index')}" }
-      = link_to 'Profiles', waves_polaroids_path
-    -# %li#nav-edit_profile
-      =# link_to 'My profile', profile_path
-    -# %li#nav-logout
-      =# link_to 'Logout', logout_path
-
-- if current_user
-  .header.secondary.grid_16
-    .flash
-    - if flash[:notice].present?
-      = flash[:notice].html_safe
-    %div.links
+    %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'waves/polaroids', :action => 'index')}" }
+      = link_to 'Roll Call', rollcall_path
+    %li#nav-5{ :class => "#{'current' if current_page?(:controller => 'waves/profile', :action => 'show')}" }
+      = link_to 'Roll Call', profile_path
+    %li#nav-8
       = link_to 'Logout', logout_path
-      = link_to "#{current_user.first_name}'s Profile", profile_path
+
+.header.secondary.grid_16
+  .flash
+  - if flash[:notice].present?
+    = flash[:notice].html_safe
+  %div.links
+    = link_to_facebook
+    - if current_user
+      -# = link_to 'Logout', logout_path
+      -# = link_to "#{current_user.first_name}'s Profile", profile_path
 
