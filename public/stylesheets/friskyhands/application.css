@@ -126,7 +126,8 @@ textarea.placeholder {
 	left: .5em;
 }
 
-a.profile {
+a.profile,
+span.profile {
 	font-weight: bold;
 	color: #9C180C;
 }

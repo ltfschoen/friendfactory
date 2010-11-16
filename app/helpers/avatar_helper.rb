@@ -18,7 +18,8 @@ module AvatarHelper
         opts.reverse_merge!(:alt => user.first_name)
         online = 'online' if (user.online? && (opts[:online_badge] == true))
         klass  = [ klass, online ].compact * ' '
-        return link_to(image_tag(avatar.image.url(opts[:style].to_sym), :alt => opts[:alt], :class => klass, :site => opts[:site]), profile_path(user.profile))
+        # TODO return link_to(image_tag(avatar.image.url(opts[:style].to_sym), :alt => opts[:alt], :class => klass, :site => opts[:site]), profile_path(user.profile))
+        return image_tag(avatar.image.url(opts[:style].to_sym), :alt => opts[:alt], :class => klass, :site => opts[:site])
       end
     end
     

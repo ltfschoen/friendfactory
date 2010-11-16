@@ -48,7 +48,8 @@ module ApplicationHelper
   
   def link_to_profile(user, opts = {})
     name = opts[:label] || user.first_name
-    link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
+    # TODO link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
+    content_tag(:span, name, :class => 'profile')
   end
     
   def distance_of_time_in_words_to_now(date, opts = {})
