@@ -51,6 +51,12 @@ module ApplicationHelper
     # TODO link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
     content_tag(:span, name, :class => 'profile')
   end
+
+  def link_to_bio(opts = {})
+    label = opts[:label] || 'Bio'
+    # TODO link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
+    content_tag(:span, label, :class => 'bio')
+  end
     
   def distance_of_time_in_words_to_now(date, opts = {})
     suffix = opts[:suffix] || 'ago'
