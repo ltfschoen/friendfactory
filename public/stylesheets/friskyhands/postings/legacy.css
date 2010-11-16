@@ -11,6 +11,10 @@
     margin-top: 30px;
 }
 
+.postings > .posting:first-child {
+    margin-top: 0;
+}
+
 .posting > table td {
 	vertical-align: top;
 }
