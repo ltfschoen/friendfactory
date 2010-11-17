@@ -1,7 +1,7 @@
 .header.primary.grid_16
   = link_to 'FriskyHands', root_path, :class => 'badge'    
   %ul.nav
-    %li#nav-1{ :class => "#{'current' if current_page?(:controller => 'base', :action => 'show')}" }
+    %li#nav-1{ :class => "#{'current' if current_page?(:controller => 'waves/base', :action => 'show')}" }
       = link_to 'Wave', root_path
     %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'waves/polaroids', :action => 'index')}" }
       = link_to 'Roll Call', rollcall_path

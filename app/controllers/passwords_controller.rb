@@ -20,8 +20,10 @@ class PasswordsController < ApplicationController
     end
   end
   
+  # Requested usually from the link
+  # in the PasswordsMailer email.
   def edit
-    render :layout => 'application'
+    render :layout => 'welcome'
   end
   
   def update
@@ -31,7 +33,7 @@ class PasswordsController < ApplicationController
       flash[:notice] = 'Your password was successfully updated.'
       redirect_to root_path
     else
-      render :action => 'edit', :layout => 'application'
+      render :action => 'edit', :layout => 'welcome'
     end
   end
   
