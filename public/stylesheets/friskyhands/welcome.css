@@ -26,8 +26,9 @@ img {
 	width: 100%;
 }
 
-a {
+a, a:link, a:hover, a:visited, a:active {
     border-bottom: 1px dotted #FFF;
+    color: #501518;
 }
 
 h1 {
@@ -64,13 +65,9 @@ input[type='password'] {
     width: 210px;
 }
 
-/*.formError {
-    color: #FFF;
-}*/
-
 .creative {
-	text-align: left;
-	padding-bottom: 4em;
+    text-align: left;
+    padding-bottom: 4em;
 }
 
 .blurb p {
@@ -125,6 +122,14 @@ ul.flash.error {
 	margin-left: 1em;
 	list-style: disc outside;
 	marker-offset: auto;
+}
+
+.flash.notice {
+    text-align: center;
+}
+
+.flash.notice a {
+    color: #FFF;
 }
 
 .password-edit h3 {

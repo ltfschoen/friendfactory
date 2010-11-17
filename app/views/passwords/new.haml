@@ -12,7 +12,5 @@
     = form_tag passwords_path do
       = text_field_tag 'email', '', :placeholder => 'email'
       .button-bar
-        = button_tag 'Reset my password', :class => 'reset button'
+        = button_tag 'Reset my password', :class => 'reset button', :disable_with => 'Reset my password'
         = link_to 'Back', welcome_path, :class => 'back button'
-
-

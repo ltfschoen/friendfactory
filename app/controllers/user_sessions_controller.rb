@@ -16,7 +16,7 @@ class UserSessionsController < ApplicationController
         flash[:notice] = "Welcome back" + (user.first_name? ? ", #{user.first_name}" : '') + '!'
         format.html { redirect_back_or_default(root_path) }
       else
-        flash[:notice] = 'Sorry, but that email is not being used at FriskyHands.'
+        flash[:notice] = "Sorry, but the #{@user_session.errors.full_messages.first.downcase}."
         format.html { redirect_back_to_reentry }
       end
     end
@@ -35,7 +35,7 @@ class UserSessionsController < ApplicationController
     clear_lurker
     Broadcast.user_offline('friskyhands', current_user)
     respond_to do |format|
-      format.html { redirect_to welcome_url }
+      format.html { redirect_to root_path }
     end
   end
 

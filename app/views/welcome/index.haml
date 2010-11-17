@@ -1,35 +1,54 @@
-.grid_6.push_1.prepend-top.blurb.alpha
-  = render :partial => 'blurb'
-.grid_4.push_1.omega
-  .panel.login
-    %h3 Log in!
-    = link_to 'Password?', new_password_path, :class => 'new_password'
-    = form_for UserSession.new, :url => user_sessions_path do |f|
-      = f.text_field :email
-      = f.error_message_on :email, :prepend_text => 'Your email address '
-      = f.password_field :password
-      = f.error_message_on :password, :prepend_text => 'Your password '
-      .button-bar
-        = f.submit 'Login'
-        = f.button 'Sign Up', :class => 'toggle'
-        = link_to 'Browse', lurk_new_user_session_path, :class => 'lurk'
-  .panel.signup
-    %h3 Sign up!
-    = form_for User.new, :url => users_path do |f|
-      = f.text_field :first_name, :class => 'ui-widget'
-      = f.error_message_on :first_name, :prepend_text => 'Your first name '
-      = f.text_field :last_name, :class => 'ui-widget'
-      = f.error_message_on :last_name, :prepend_text => 'Your last name '
-      = f.text_field :email, :class => 'ui-widget'
-      = f.error_message_on :email, :prepend_text => 'Your email address '
-      = f.password_field :password, :class => 'ui-widget'
-      = f.error_message_on :password, :prepend_text => 'Your password '
-      = f.password_field :password_confirmation, :class => 'ui-widget'
-      = f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation '
-      .button-bar
-        = f.submit 'Register'
-        = f.button 'Back', :class => 'toggle'
-
+- if flash[:notice].present?
+  .grid_3.alpha<
+    &nbsp;
+  .grid_6.flash.notice<
+    %p= flash[:notice]
+    = link_to 'Back to Login', root_path
+  .grid_3.omega<
+    &nbsp;
+- else
+  .grid_1.alpha<
+    &nbsp;
+  .grid_6.prepend-top.blurb.alpha
+    - if flash[:error].present?
+      %p Oh no! Can you fix this?
+      %ul.flash.error
+        - flash[:error].each do |error|
+          %li= error
+    - else
+      %p Your privacy and safety are our number-one concerns. No search engine nor any other web site can access your FriskyHands' secured profile.
+  .grid_4<
+    .panel.login
+      %h3 Log in!
+      = link_to 'Password?', new_password_path, :class => 'new_password'
+      = form_for UserSession.new, :url => user_sessions_path do |f|
+        = f.text_field :email
+        = f.error_message_on :email, :prepend_text => 'Your email address '
+        = f.password_field :password
+        = f.error_message_on :password, :prepend_text => 'Your password '
+        .button-bar
+          = f.submit 'Login'
+          = f.button 'Sign Up', :class => 'toggle'
+          = link_to 'Browse', lurk_new_user_session_path, :class => 'lurk'
+    .panel.signup
+      %h3 Sign up!
+      = form_for User.new, :url => users_path do |f|
+        = f.text_field :first_name, :class => 'ui-widget'
+        = f.error_message_on :first_name, :prepend_text => 'Your first name '
+        = f.text_field :last_name, :class => 'ui-widget'
+        = f.error_message_on :last_name, :prepend_text => 'Your last name '
+        = f.text_field :email, :class => 'ui-widget'
+        = f.error_message_on :email, :prepend_text => 'Your email address '
+        = f.password_field :password, :class => 'ui-widget'
+        = f.error_message_on :password, :prepend_text => 'Your password '
+        = f.password_field :password_confirmation, :class => 'ui-widget'
+        = f.error_message_on :password_confirmation, :prepend_text => 'Your password confirmation '
+        .button-bar
+          = f.submit 'Register'
+          = link_to 'Back', root_path, :class => 'button'
+  .grid_1.omega<
+    &nbsp;
+  
 :javascript
   jQuery(function($){    
     #{ flash[:error].present? ? "$('.panel.login').hide();" : "$('.panel.signup').hide();" }
@@ -38,7 +57,7 @@
       event.preventDefault();
       $('.panel.login, .panel.signup').toggle();
     });
-    
+  
     if (!$.browser.webkit) {
       $('#user_session_password').before('#{text_field_tag( :user_session_password_placeholder, nil, :value => placeholder_for(:password), :class => 'placeholder ui-widget')}');
       FF.passwordPrompt('#user_session_password', '#user_session_password_placeholder');

@@ -12,16 +12,15 @@ class PasswordsController < ApplicationController
     if @user
       @user.reset_password!
       PasswordsMailer.reset(@user).deliver
-      flash[:notice] = "Thanks! Instructions to reset your password have been emailed to #{@user.email}."
+      flash[:notice] = "Thanks! Instructions to reset your password have been emailed to #{@user.email}"
       redirect_to welcome_path
     else
-      flash[:notice] = 'Sorry, but that email is not being used at FriskyHands. Did you sign up with another email address?'
+      flash[:error] = 'Sorry, but that email is not being used at FriskyHands. Did you sign up with another email address?'
       redirect_to new_password_path
     end
   end
   
-  # Requested usually from the link
-  # in the PasswordsMailer email.
+  # Requested from PasswordsMailer email link.
   def edit
     render :layout => 'welcome'
   end
@@ -29,6 +28,7 @@ class PasswordsController < ApplicationController
   def update
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
+    @user.save
     if @user.save
       flash[:notice] = 'Your password was successfully updated.'
       redirect_to root_path

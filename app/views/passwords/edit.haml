@@ -4,19 +4,22 @@
 .grid_6.password-edit
   %h3 Change Password
   = form_for @user, :url => password_path, :method => :put do |f|
-    = flash[:notice]
-    = f.error_messages
+    =# flash[:notice]
+    =# f.error_messages
     %table
       %tr
         %td= f.label :password
         %td= f.password_field :password, :placeholder => false
       %tr
-        %td= f.label :password_confirmation
+        %td= f.label :password_confirmation          
         %td= f.password_field :password_confirmation, :placeholder => false
       %tr.button-bar
-        %td
-          &nbsp;
-        %td
-          = f.submit submit_message
+        %td &nbsp;
+        %td= f.submit submit_message
+      - unless @user.errors.empty?
+        %tr
+          %td &nbsp;
+          %td.formError
+            %p= @user.errors.full_messages.first
 .grid_3.omega
   &nbsp;
