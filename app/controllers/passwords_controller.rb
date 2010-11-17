@@ -15,7 +15,7 @@ class PasswordsController < ApplicationController
       flash[:notice] = "Thanks! Instructions to reset your password have been emailed to #{@user.email}"
       redirect_to welcome_path
     else
-      flash[:error] = 'Sorry, but that email is not being used at FriskyHands. Did you sign up with another email address?'
+      flash[:notice] = 'Sorry, but that email is not being used at FriskyHands.'
       redirect_to new_password_path
     end
   end

@@ -4,8 +4,6 @@
 .grid_6.password-edit
   %h3 Change Password
   = form_for @user, :url => password_path, :method => :put do |f|
-    =# flash[:notice]
-    =# f.error_messages
     %table
       %tr
         %td= f.label :password
