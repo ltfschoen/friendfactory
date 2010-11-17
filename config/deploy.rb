@@ -1,4 +1,4 @@
-require 'bundler/capistrano'
+# require 'bundler/capistrano'
 
 set :application, 'friskyfactory'
 set :domain, 'friskyhands.com'
@@ -34,22 +34,22 @@ namespace :deploy do
     CMD
   end
   
-  namespace :mongrel do
-    [ :stop, :start ].each do |t|
-      desc "#{t.to_s.capitalize} the mongrel appserver"
-      task t, :roles => :app do
-        # invoke_command checks the use_sudo variable to
-        # determine how to run the mongrel_rails command
-        invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_config}"
-      end
-    end
-
-    task :restart, :roles => :app do
-      invoke_command "mongrel_rails cluster::stop --clean -f -C #{mongrel_config}"
-      sleep 5
-      invoke_command "mongrel_rails cluster::start --clean -C #{mongrel_config}"
-    end
-  end
+  # namespace :mongrel do
+  #   [ :stop, :start ].each do |t|
+  #     desc "#{t.to_s.capitalize} the mongrel appserver"
+  #     task t, :roles => :app do
+  #       # invoke_command checks the use_sudo variable to
+  #       # determine how to run the mongrel_rails command
+  #       invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_config}"
+  #     end
+  #   end
+  # 
+  #   task :restart, :roles => :app do
+  #     invoke_command "mongrel_rails cluster::stop --clean -f -C #{mongrel_config}"
+  #     sleep 5
+  #     invoke_command "mongrel_rails cluster::start --clean -C #{mongrel_config}"
+  #   end
+  # end
 
   desc "Custom restart task for mongrel cluster"
   task :restart, :roles => :app, :except => { :no_release => true } do
