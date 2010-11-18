@@ -27,7 +27,7 @@ class Waves::ProfileController < Waves::BaseController
   
   def avatar
     if params[:posting_avatar]
-      current_user.profile.avatars.create(:image => params[:posting_avatar][:image], :user_id => current_user, :active => true)
+      current_user.profile.avatars.create(:image => params[:posting_avatar][:image], :user_id => current_user.id, :active => true)
     end
     respond_to do |format|
       format.js { render :layout => false }

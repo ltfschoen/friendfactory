@@ -11,8 +11,8 @@ class Wave::Profile < Wave::Base
     end    
   end
   
-  def self.avatars    
-    scoped.order('created_at desc').all.map(&:avatar)
+  def self.avatars
+    scoped.order('created_at desc').all.map(&:avatar).compact
   end
   
   def avatar
