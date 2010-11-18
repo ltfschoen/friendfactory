@@ -14,13 +14,10 @@ class Posting::Avatar < Posting::Base
   validates_attachment_presence     :image
   validates_attachment_size         :image, :less_than => 5.megabytes
   validates_attachment_content_type :image, :content_type => [ 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png' ]
-
+  
   before_create :set_dimensions
-
-  # def self.active
-  #   find :all, :conditions => [ 'active = ?', true ], :order => [ 'created_at DESC' ]
-  # end
-
+  after_save Publisher.new(Waves::BaseController::DefaultWaveSlug)
+  
   private
   
   def set_dimensions
