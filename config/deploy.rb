@@ -1,7 +1,8 @@
 # require 'bundler/capistrano'
 
 set :application, 'friskyfactory'
-set :domain, 'ff01'
+#set :domain, 'ff01'
+set :domain, 'friskyhands.com'
 
 set :scm, 'git'
 set :repository, 'git@github.com:mjbamford/friskyfactory.git'
