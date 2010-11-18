@@ -8,11 +8,12 @@ class Wave::Profile < Wave::Base
       :order                   => 'created_at desc' do
     def active
       find :all, :conditions => [ 'active = ?', true ]
-    end    
+    end
   end
   
   def self.avatars
-    scoped.order('created_at desc').all.map(&:avatar).compact
+    # scoped.order('created_at desc').all.map(&:avatar).compact
+    all.map(&:avatar).compact.sort{ |a, b| b.updated_at <=> a.updated_at }
   end
   
   def avatar
