@@ -1,7 +1,7 @@
 # require 'bundler/capistrano'
 
 set :application, 'friskyfactory'
-set :domain, 'friskyhands.com'
+set :domain, 'ff01'
 
 set :scm, 'git'
 set :repository, 'git@github.com:mjbamford/friskyfactory.git'
@@ -21,51 +21,24 @@ after 'deploy:symlink', 'deploy:config_symlinks'
 # after "deploy:symlink", "deploy:update_crontab"
  
 namespace :deploy do
-  # task :config_symlinks do
-  #   run <<-CMD
-  #     ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
-  #     ln -s #{shared_path}/config/mongrel_cluster.yml #{mongrel_config}
-  #   CMD
-  # end
-
   task :config_symlinks do
     run <<-CMD
       ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml
     CMD
   end
   
-  # namespace :mongrel do
-  #   [ :stop, :start ].each do |t|
-  #     desc "#{t.to_s.capitalize} the mongrel appserver"
-  #     task t, :roles => :app do
-  #       # invoke_command checks the use_sudo variable to
-  #       # determine how to run the mongrel_rails command
-  #       invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_config}"
-  #     end
-  #   end
-  # 
-  #   task :restart, :roles => :app do
-  #     invoke_command "mongrel_rails cluster::stop --clean -f -C #{mongrel_config}"
-  #     sleep 5
-  #     invoke_command "mongrel_rails cluster::start --clean -C #{mongrel_config}"
-  #   end
-  # end
-
-  desc "Custom restart task for mongrel cluster"
+  desc "Restart nginx"
   task :restart, :roles => :app, :except => { :no_release => true } do
-    # deploy.mongrel.restart
     run "touch #{current_release}/tmp/restart.txt"
   end
 
-  desc "Custom start task for mongrel cluster"
+  desc "Start nginx"
   task :start, :roles => :app do
-    # deploy.mongrel.start
     run "touch #{current_release}/tmp/restart.txt"
   end
 
-  desc "Custom stop task for mongrel cluster"
+  desc "Stop nginx (noop)"
   task :stop, :roles => :app do
-    # deploy.mongrel.stop
     # Do nothing
   end  
 
@@ -81,11 +54,6 @@ namespace :deploy do
   end
 end
 
-# unless exists?(:rails_env)
-#   puts 'Usage: cap <environment> task'
-#   exit
-# end
-
 desc 'Set staging environment'
 task :staging do
   set :branch, ENV['branch'] || 'master'
@@ -98,7 +66,6 @@ task :production do
   set :branch, ENV['release']
   set :rails_env, 'production'
   set :deploy_to, '/home/mrcap/friskyfactory/production'
-  set :mongrel_config, "#{deploy_to}/current/config/mongrel_cluster.yml" 
 end
 
 namespace :ff do
