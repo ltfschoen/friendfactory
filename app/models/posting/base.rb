@@ -2,7 +2,7 @@ class Posting::Base < ActiveRecord::Base
 
   set_table_name :postings
 
-  attr_readonly :user_id
+  # attr_readonly :user_id
 
   acts_as_tree :order => 'created_at asc'
   
