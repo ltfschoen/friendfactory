@@ -16,7 +16,7 @@ class Posting::Avatar < Posting::Base
   validates_attachment_content_type :image, :content_type => [ 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png' ]
   
   before_create :set_dimensions
-  after_save Publisher.new(Waves::BaseController::DefaultWaveSlug)
+  after_create Publisher.new(Waves::BaseController::DefaultWaveSlug)
   
   private
   
