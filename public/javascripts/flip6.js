@@ -19,17 +19,17 @@ jQuery(function($){
 	    $(this).closest('.polaroid').toggleClass('flipped') // .find('.gripper').hide();
 	  });
     
-	  $('.polaroid-container .polaroid').each(function(idx, polaroid){
-        //      polaroid.addEventListener('webkitTransitionEnd', function(event){
-        // var $polaroid = $(event.target);
-        //        var $current = $polaroid.find('.front.face .buddy-bar .current')
-        //        $polaroid.find('.back .buddy-bar .' + $current.attr('href')).click();
+	  $('.polaroid-container .polaroid').each(function(idx, polaroid) {
+        polaroid.addEventListener('webkitTransitionEnd', function(event){
+        var $polaroid = $(event.target);
+        var $current = $polaroid.find('.front.face .buddy-bar .current')
+        $polaroid.find('.back .buddy-bar .' + $current.attr('href')).click();
         // $polaroid.find('.back .gripper').show();       
         // if (!$polaroid.hasClass('flipped')) {
-        //  $polaroid.find('.front .gripper').show();
+        //   $polaroid.find('.front .gripper').show();
         // }
-        //        $current.removeClass('current');
-        //      });
+        $current.removeClass('current');
+      });
 	  });
 	
 	} else {

@@ -1,25 +1,29 @@
 - user ||= avatar.try(:user)
 - user_info = user.info
+
 .face-container
   .back.face
     .content.scrollable
       .items
-        %table.header
-          %tr
-            %td.avatar
-              = avatar_image_tag(avatar, :style => :thumb)
-            %td.username<
-              = user.first_name
-            %td.age<
-              = user_info.age.present? ? user_info.age : '&nbsp;'.html_safe
-        %table.detail
-          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :deafness }
-          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :gender }
-          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :orientation, :label => 'Preference' }
-          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :relationship }
-          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :birthday }
-          = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :location }
-        -# %div
+        .photo-grid
+          PHOTO GRID
+          -# avatar.profile.photos(:limit => 9)
+        .mini-profile
+          %table.header
+            %tr
+              %td.avatar
+                = avatar_image_tag(avatar, :style => :thumb)
+              %td.username<
+                = user.first_name
+              %td.age<
+                = user_info.age.present? ? user_info.age : '&nbsp;'.html_safe
+          %table.detail
+            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :deafness }
+            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :gender }
+            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :orientation, :label => 'Preference' }
+            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :relationship }
+            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :birthday }
+            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :location }
         -#   = image_tag 'chat-b-side.png', :width=>'260px'
         -# %div
         -#   = image_tag 'message-b-side.png', :width=>'260px'
@@ -30,14 +34,14 @@
     %ul.buddy-bar.secondary
       %li
         = link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
-    -# %ul.buddy-bar.primary.navi
+    %ul.buddy-bar.primary.navi
       -# %li
       -#   = link_to 'Chat', 'chat', :class => 'chat icon'
       -# %li
       -#   = link_to 'Message', 'message', :class => 'message icon'
-      -# %li
-      -#   = link_to 'Photos', 'photos', :class => 'photos icon'
-      -# %li
-      -#   = link_to 'Profile', 'profile', :class => 'profile icon last'
+      %li
+        = link_to 'Photos', 'photos', :class => 'photos icon'
+      %li
+        = link_to 'Profile', 'profile', :class => 'profile icon last'
     - if content_for?(:polaroid_back_face)
       = content_for(:polaroid_back_face)
