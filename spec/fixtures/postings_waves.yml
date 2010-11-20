@@ -1,19 +1,19 @@
-shared_wave_posting_1:
-  wave_id: <%= Fixtures.identify(:shared_wave) %>
-  posting_id: <%= Fixtures.identify(:posting_1) %>
-
-shared_wave_posting_2:
-  wave_id: <%= Fixtures.identify(:shared_wave) %>
-  posting_id: <%= Fixtures.identify(:posting_2) %>
-
-shared_wave_posting_7:
-  wave_id: <%= Fixtures.identify(:shared_wave) %>
-  posting_id: <%= Fixtures.identify(:posting_7) %>
-
-shared_wave_message_10:
-  wave_id: <%= Fixtures.identify(:shared_wave) %>
-  posting_id: <%= Fixtures.identify(:message_10) %>
-
-shared_wave_message_14:
-  wave_id: <%= Fixtures.identify(:shared_wave) %>
-  posting_id: <%= Fixtures.identify(:message_14) %>
+# shared_wave_posting_1:
+#   wave_id: <%= Fixtures.identify(:shared_wave) %>
+#   posting_id: <%= Fixtures.identify(:posting_1) %>
+# 
+# shared_wave_posting_2:
+#   wave_id: <%= Fixtures.identify(:shared_wave) %>
+#   posting_id: <%= Fixtures.identify(:posting_2) %>
+# 
+# shared_wave_posting_7:
+#   wave_id: <%= Fixtures.identify(:shared_wave) %>
+#   posting_id: <%= Fixtures.identify(:posting_7) %>
+# 
+# shared_wave_message_10:
+#   wave_id: <%= Fixtures.identify(:shared_wave) %>
+#   posting_id: <%= Fixtures.identify(:message_10) %>
+# 
+# shared_wave_message_14:
+#   wave_id: <%= Fixtures.identify(:shared_wave) %>
+#   posting_id: <%= Fixtures.identify(:message_14) %>

@@ -1,13 +1,28 @@
-# popular_wave:
-#   id: <%= Fixtures.identify(:popular_wave) %>
-#   type: Wave::Shared
-#   topic: Everyone's Wave
-#   slug: popular
-#   description: Everyone's Welcome at FriskyHands!
-# 
-# hottie_wave:
-#   id: <%= Fixtures.identify(:hottie_wave) %>
-#   type: Wave::Shared
-#   topic: Hotties
-#   slug: hotties
-#   description: Hotties!
+#Shared Waves
+
+popular_wave:
+  id: 0
+  type: Wave::Shared
+  topic: Everyone's Wave
+  slug: popular
+  description: Get going!
+
+# Profile Waves
+
+adam_profile_wave:
+  id: 1
+  user_id: 1
+  type: Wave::Profile
+  slug: adam
+
+bert_profile_wave:
+  id: 2
+  user_id: 2
+  type: Wave::Profile
+  slug: bert
+
+charlie_profile_wave:
+  id: 3
+  user_id: 3
+  type: Wave::Profile
+  slug: charlie

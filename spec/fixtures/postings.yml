@@ -1,148 +1,132 @@
-<% require 'faker' %>
-posting_1:
-    id: <%= Fixtures.identify(:posting_1) %>
-    type: Posting::Text
-    user_id: <%= Fixtures.identify(:adam) %>
-    body: <%= Faker::Lorem::sentences %>
-    created_at: <%= 14.days.ago %>
-
-posting_2:
-    id: <%= Fixtures.identify(:posting_2) %>
-    type: Posting::Text
-    user_id: <%= Fixtures.identify(:bert) %>
-    body: <%= Faker::Lorem::sentences %>
-    created_at: <%= 7.days.ago %>
-
-posting_3:
-    id: <%= Fixtures.identify(:posting_3) %>
-    type: Posting::Text
-    parent_id: <%= Fixtures.identify(:posting_2) %>
-    user_id: <%= Fixtures.identify(:charlie) %>
-    body: <%= Faker::Lorem::sentences %>
-    created_at: <%= 7.days.ago %>
-
-comment_4:
-    id: <%= Fixtures.identify(:comment_4) %>
-    type: Posting::Comment
-    parent_id: <%= Fixtures.identify(:posting_2) %>
-    user_id: <%= Fixtures.identify(:duncan) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= 6.days.ago %>
-
-comment_5:
-    id: <%= Fixtures.identify(:comment_5) %>
-    type: Posting::Comment
-    parent_id: <%= Fixtures.identify(:posting_2) %>
-    user_id: <%= Fixtures.identify(:charlie) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= 5.days.ago %>
-
-posting_6:
-    id: <%= Fixtures.identify(:posting_6) %>
-    type: Posting::Comment
-    parent_id: <%= Fixtures.identify(:posting_2) %>
-    user_id: <%= Fixtures.identify(:duncan) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= 4.days.ago %>
-
-posting_7:
-    id: <%= Fixtures.identify(:posting_7) %>
-    type: Posting::Text
-    user_id: <%= Fixtures.identify(:adam) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= 3.days.ago %>
-
-comment_8:
-    id: <%= Fixtures.identify(:comment_8) %>
-    type: Posting::Comment
-    parent_id: <%= Fixtures.identify(:posting_1) %>
-    body: <%= Faker::Lorem::sentence %>
-    user_id: <%= Fixtures.identify(:duncan) %>
-    created_at: <%= 2.days.ago %>
-
-comment_9:
-    id: <%= Fixtures.identify(:comment_9) %>
-    type: Posting::Comment
-    parent_id: <%= Fixtures.identify(:posting_1) %>
-    body: <%= Faker::Lorem::sentences %>
-    user_id: <%= Fixtures.identify(:duncan) %>
-    created_at: <%= Date.today %>
-
-message_10:
-    id: <%= Fixtures.identify(:message_10) %>
-    type: Posting::Message
-    private: true
-    user_id: <%= Fixtures.identify(:bert) %>
-    receiver_id: <%= Fixtures.identify(:adam) %>
-    body: <%= Faker::Lorem::sentences(3) %>
-    created_at: <%= Date.today %>
-
-message_11:
-    id: <%= Fixtures.identify(:message_11) %>
-    type: Posting::Message
-    private: true
-    parent_id: <%= Fixtures.identify(:message_10) %>
-    user_id: <%= Fixtures.identify(:adam) %>
-    receiver_id: <%= Fixtures.identify(:bert) %>
-    body: <%= Faker::Lorem::sentences(10) %>
-    created_at: <%= Date.today %>
-
-message_12:
-    id: <%= Fixtures.identify(:message_12) %>
-    type: Posting::Message
-    private: true
-    parent_id: <%= Fixtures.identify(:message_11) %>
-    user_id: <%= Fixtures.identify(:bert) %>
-    receiver_id: <%= Fixtures.identify(:adam) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= Date.today %>
-
-message_13:
-    id: <%= Fixtures.identify(:message_13) %>
-    type: Posting::Message
-    private: true
-    parent_id: <%= Fixtures.identify(:message_12) %>
-    user_id: <%= Fixtures.identify(:adam) %>
-    receiver_id: <%= Fixtures.identify(:bert) %>
-    body: <%= Faker::Lorem::sentence(2) %>
-    created_at: <%= Date.today %>
-
-message_14:
-    id: <%= Fixtures.identify(:message_14) %>
-    type: Posting::Message
-    private: true
-    user_id: <%= Fixtures.identify(:adam) %>
-    receiver_id: <%= Fixtures.identify(:duncan) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= Date.today %>
-
-message_15:
-    id: <%= Fixtures.identify(:message_15) %>
-    type: Posting::Message
-    private: true
-    parent_id: <%= Fixtures.identify(:message_14) %>
-    user_id: <%= Fixtures.identify(:duncan) %>
-    receiver_id: <%= Fixtures.identify(:adam) %>
-    body: <%= Faker::Lorem::sentences %>
-    created_at: <%= Date.today %>
-
-message_16:
-    id: <%= Fixtures.identify(:message_16) %>
-    type: Posting::Message
-    private: true
-    parent_id: <%= Fixtures.identify(:message_15) %>
-    user_id: <%= Fixtures.identify(:adam) %>
-    receiver_id: <%= Fixtures.identify(:duncan) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= Date.today %>
-
-message_17:
-    id: <%= Fixtures.identify(:message_17) %>
-    type: Posting::Message
-    private: true
-    parent_id: <%= Fixtures.identify(:message_16) %>
-    user_id: <%= Fixtures.identify(:duncan) %>
-    receiver_id: <%= Fixtures.identify(:adam) %>
-    body: <%= Faker::Lorem::sentence %>
-    created_at: <%= Date.today %>
-
+# <% require 'faker' %>
+# posting_1:
+#     id: <%= Fixtures.identify(:posting_1) %>
+#     type: Posting::Avatar
+#     user_id: <%= Fixtures.identify(:adam) %>
+#     body: <%= Faker::Lorem::sentences %>
+#     created_at: <%= Time.now %>
+# 
+# posting_2:
+#     id: <%= Fixtures.identify(:posting_2) %>
+#     type: Posting::Text
+#     user_id: <%= Fixtures.identify(:bert) %>
+#     body: <%= Faker::Lorem::sentences %>
+#     created_at: <%= 7.days.ago %>
+# 
+# posting_3:
+#     id: <%= Fixtures.identify(:posting_3) %>
+#     type: Posting::Text
+#     parent_id: <%= Fixtures.identify(:posting_2) %>
+#     user_id: <%= Fixtures.identify(:charlie) %>
+#     body: <%= Faker::Lorem::sentences %>
+#     created_at: <%= 7.days.ago %>
+# 
+# comment_5:
+#     id: <%= Fixtures.identify(:comment_5) %>
+#     type: Posting::Comment
+#     parent_id: <%= Fixtures.identify(:posting_2) %>
+#     user_id: <%= Fixtures.identify(:adam) %>
+#     body: <%= Faker::Lorem::sentence %>
+#     created_at: <%= 5.days.ago %>
+# 
+# posting_7:
+#     id: <%= Fixtures.identify(:posting_7) %>
+#     type: Posting::Text
+#     user_id: <%= Fixtures.identify(:bert) %>
+#     body: <%= Faker::Lorem::sentence %>
+#     created_at: <%= 3.days.ago %>
+# 
+# comment_8:
+#     id: <%= Fixtures.identify(:comment_8) %>
+#     type: Posting::Comment
+#     parent_id: <%= Fixtures.identify(:posting_1) %>
+#     body: <%= Faker::Lorem::sentence %>
+#     user_id: <%= Fixtures.identify(:charlie) %>
+#     created_at: <%= 2.days.ago %>
+# 
+# comment_9:
+#     id: <%= Fixtures.identify(:comment_9) %>
+#     type: Posting::Comment
+#     parent_id: <%= Fixtures.identify(:posting_1) %>
+#     body: <%= Faker::Lorem::sentences %>
+#     user_id: <%= Fixtures.identify(:adam) %>
+#     created_at: <%= Date.today %>
+# 
+# message_10:
+#     id: <%= Fixtures.identify(:message_10) %>
+#     type: Posting::Message
+#     private: true
+#     user_id: <%= Fixtures.identify(:bert) %>
+#     receiver_id: <%= Fixtures.identify(:bert) %>
+#     body: <%= Faker::Lorem::sentences(3) %>
+#     created_at: <%= Date.today %>
+# 
+# message_11:
+#     id: <%= Fixtures.identify(:message_11) %>
+#     type: Posting::Message
+#     private: true
+#     parent_id: <%= Fixtures.identify(:message_10) %>
+#     user_id: <%= Fixtures.identify(:charlie) %>
+#     receiver_id: <%= Fixtures.identify(:bert) %>
+#     body: <%= Faker::Lorem::sentences(10) %>
+#     created_at: <%= Date.today %>
+# 
+# message_12:
+#     id: <%= Fixtures.identify(:message_12) %>
+#     type: Posting::Message
+#     private: true
+#     parent_id: <%= Fixtures.identify(:message_11) %>
+#     user_id: <%= Fixtures.identify(:bert) %>
+#     receiver_id: <%= Fixtures.identify(:adam) %>
+#     body: <%= Faker::Lorem::sentence %>
+#     created_at: <%= Date.today %>
+# 
+# message_13:
+#     id: <%= Fixtures.identify(:message_13) %>
+#     type: Posting::Message
+#     private: true
+#     parent_id: <%= Fixtures.identify(:message_12) %>
+#     user_id: <%= Fixtures.identify(:adam) %>
+#     receiver_id: <%= Fixtures.identify(:bert) %>
+#     body: <%= Faker::Lorem::sentence(2) %>
+#     created_at: <%= Date.today %>
+# 
+# message_14:
+#     id: <%= Fixtures.identify(:message_14) %>
+#     type: Posting::Message
+#     private: true
+#     user_id: <%= Fixtures.identify(:adam) %>
+#     receiver_id: <%= Fixtures.identify(:duncan) %>
+#     body: <%= Faker::Lorem::sentence %>
+#     created_at: <%= Date.today %>
+# 
+# message_15:
+#     id: <%= Fixtures.identify(:message_15) %>
+#     type: Posting::Message
+#     private: true
+#     parent_id: <%= Fixtures.identify(:message_14) %>
+#     user_id: <%= Fixtures.identify(:duncan) %>
+#     receiver_id: <%= Fixtures.identify(:adam) %>
+#     body: <%= Faker::Lorem::sentences %>
+#     created_at: <%= Date.today %>
+# 
+# message_16:
+#     id: <%= Fixtures.identify(:message_16) %>
+#     type: Posting::Message
+#     private: true
+#     parent_id: <%= Fixtures.identify(:message_15) %>
+#     user_id: <%= Fixtures.identify(:adam) %>
+#     receiver_id: <%= Fixtures.identify(:duncan) %>
+#     body: <%= Faker::Lorem::sentence %>
+#     created_at: <%= Date.today %>
+# 
+# message_17:
+#     id: <%= Fixtures.identify(:message_17) %>
+#     type: Posting::Message
+#     private: true
+#     parent_id: <%= Fixtures.identify(:message_16) %>
+#     user_id: <%= Fixtures.identify(:duncan) %>
+#     receiver_id: <%= Fixtures.identify(:adam) %>
+#     body: <%= Faker::Lorem::sentence %>
+#     created_at: <%= Date.today %>
+# 

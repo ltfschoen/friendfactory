@@ -40,4 +40,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0.1'
   gem 'webrat'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
+  gem 'faker'
 end
