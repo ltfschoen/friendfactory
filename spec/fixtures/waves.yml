@@ -1,12 +1,3 @@
-#Shared Waves
-
-popular_wave:
-  id: 0
-  type: Wave::Shared
-  topic: Everyone's Wave
-  slug: popular
-  description: Get going!
-
 # Profile Waves
 
 adam_profile_wave:
@@ -26,3 +17,12 @@ charlie_profile_wave:
   user_id: 3
   type: Wave::Profile
   slug: charlie
+
+#Shared Waves
+
+popular_wave:
+  id: 4
+  type: Wave::Shared
+  topic: Everyone's Wave
+  slug: popular
+  description: Get going!

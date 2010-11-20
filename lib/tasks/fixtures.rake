@@ -13,8 +13,15 @@ namespace :ff do
         image_fixtures.each do |fixture|
           user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
           if user
-            avatar = Posting::Avatar.new(:image => File.new(fixture), :active => true, :user => user)
+            avatar = Posting::Avatar.new(:image => File.new(fixture), :user => user)
             user.profile.avatars << avatar
+          end
+        end
+        
+        # Set last avatar of each user as active
+        User.all.each do |user|
+          unless user.profile.avatars.empty?
+            user.profile.avatars.last.update_attribute(:active, true)
           end
         end
       end

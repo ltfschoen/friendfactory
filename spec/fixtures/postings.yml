@@ -1,11 +1,12 @@
-# <% require 'faker' %>
-# posting_1:
-#     id: <%= Fixtures.identify(:posting_1) %>
-#     type: Posting::Avatar
-#     user_id: <%= Fixtures.identify(:adam) %>
-#     body: <%= Faker::Lorem::sentences %>
-#     created_at: <%= Time.now %>
-# 
+<% require 'faker' %>
+
+text_posting_1:
+    id: 1
+    type: Posting::Text
+    user_id: 1
+    body: Text Posting 1!
+    created_at: <%= Time.now %>
+
 # posting_2:
 #     id: <%= Fixtures.identify(:posting_2) %>
 #     type: Posting::Text
