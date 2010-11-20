@@ -61,7 +61,7 @@ div.polaroid .front.face img.avatar.polaroid {
     border: 1px solid lightgray;
 }
 
-div.polaroid .back.face img.avatar.thumb {
+div.polaroid .back.face img.thumb {
     border: 1px solid lightgray;
 }
 
@@ -110,6 +110,22 @@ div.polaroid .back.face table.detail td.detail {
     color: #666;
     border-bottom: 1px dotted lightgray;
 }
+
+
+/* Photo-gird */
+
+div.polaroid .back.face .photo-grid img.thumb {
+    display: block;
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 0 6px 10px 0;
+}
+
+div.polaroid .back.face .photo-grid img.omega {
+    margin-right: 0;
+}
+
 
 div.polaroid .button-bar {
     float: right;
