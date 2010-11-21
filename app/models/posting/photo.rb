@@ -18,6 +18,8 @@ class Posting::Photo < Posting::Base
 
   before_create :set_dimensions
   
+  publish_to :wave => Wave::Profile
+
   has_and_belongs_to_many :profiles,
       :class_name  => 'Wave::Profile',
       :join_table  => 'postings_profiles',

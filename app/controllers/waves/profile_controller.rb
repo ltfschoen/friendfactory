@@ -26,7 +26,7 @@ class Waves::ProfileController < Waves::BaseController
   end
   
   def avatar
-    if params[:posting_avatar]
+    if params[:posting_avatar]      
       current_user.profile.avatars.create(:image => params[:posting_avatar][:image], :user_id => current_user.id, :active => true)
     end
     respond_to do |format|

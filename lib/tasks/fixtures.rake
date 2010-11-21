@@ -30,12 +30,15 @@ namespace :ff do
       task :photos => :environment do
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
-        image_fixtures = Dir[File.join(Rails.root, 'spec', 'fixtures', 'images', 'photos', '*.{jpg, jpeg, png}')]
-        image_fixtures.each do |fixture|
-          user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
-          if user
-            photo = Posting::Photo.new(:image => File.new(fixture), :user => user)
-            user.profile.postings << photo
+        wave = Wave::Base.find_by_slug(Waves::BaseController::DefaultWaveSlug)
+        if wave
+          image_fixtures = Dir[File.join(Rails.root, 'spec', 'fixtures', 'images', 'photos', '*.{jpg, jpeg, png}')]
+          image_fixtures.each do |fixture|
+            user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
+            if user
+              photo = Posting::Photo.new(:image => File.new(fixture), :user => user)
+              wave.postings << photo
+            end
           end
         end
       end

@@ -1,12 +1,17 @@
 class Publisher
   
-  def initialize(slug)
-    @wave = Wave::Base.find_by_slug(slug)
+  def initialize(publish_to)
+    @publish_to = publish_to
   end
   
   def after_create(posting)
-    if @wave.present?
-      @wave.postings << posting
+    wave = case
+      when @publish_to[:slug].present? then Wave::Base.find_by_slug(@publish_to[:slug])
+      when @publish_to[:wave] == Wave::Profile then Wave::Profile.find_by_user_id(posting.user_id)
+    end
+    if wave
+      Rails.logger.info " *** publishing to #{wave.type}:#{wave.id}"
+      wave.postings << posting
     end
   end
   
