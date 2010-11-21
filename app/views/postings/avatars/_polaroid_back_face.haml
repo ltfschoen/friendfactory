@@ -1,6 +1,4 @@
-- user ||= avatar.try(:user)
-- user_info = user.info
-
+- profile ||= avatar.profile
 .face-container
   .back.face
     .content.scrollable
@@ -11,16 +9,16 @@
               %td.avatar<
                 = avatar_image_tag(avatar, :style => :thumb)
               %td.username<
-                = user.first_name
+                = profile.user.first_name
               %td.age<
-                = user_info.age.present? ? user_info.age : '&nbsp;'.html_safe
+                = profile.user_info.age.present? ? profile.user_info.age : '&nbsp;'.html_safe
           %table.detail
-            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :deafness }
-            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :gender }
-            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :orientation, :label => 'Preference' }
-            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :relationship }
-            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :birthday }
-            = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :location }
+            = render :partial => 'postings/avatars/user_info', :object => profile.user_info, :locals => { :attribute => :deafness }
+            = render :partial => 'postings/avatars/user_info', :object => profile.user_info, :locals => { :attribute => :gender }
+            = render :partial => 'postings/avatars/user_info', :object => profile.user_info, :locals => { :attribute => :orientation, :label => 'Preference' }
+            = render :partial => 'postings/avatars/user_info', :object => profile.user_info, :locals => { :attribute => :relationship }
+            = render :partial => 'postings/avatars/user_info', :object => profile.user_info, :locals => { :attribute => :birthday }
+            = render :partial => 'postings/avatars/user_info', :object => profile.user_info, :locals => { :attribute => :location }
         .photo-grid
           - 1.upto(9) do |i|
             = image_tag('ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)

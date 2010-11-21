@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101103102617) do
+ActiveRecord::Schema.define(:version => 20101121114525) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(:version => 20101103102617) do
   add_index "postings_waves", ["wave_id"], :name => "index_postings_waves_on_wave_id"
 
   create_table "user_info", :force => true do |t|
-    t.integer  "user_id"
     t.date     "dob"
     t.string   "age"
     t.integer  "gender"
@@ -137,6 +136,10 @@ ActiveRecord::Schema.define(:version => 20101103102617) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "resource_id"
+    t.string   "resource_type"
   end
+
+  add_index "waves", ["resource_id", "resource_type"], :name => "index_waves_on_resource_id_and_resource_type"
 
 end

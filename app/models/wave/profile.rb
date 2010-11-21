@@ -11,6 +11,14 @@ class Wave::Profile < Wave::Base
     end
   end
   
+  alias :user_info :resource
+  
+  before_save do
+    if self.resource.nil?      
+      self.resource = UserInfo.create      
+    end
+  end
+
   def self.avatars
     # scoped.order('created_at desc').all.map(&:avatar).compact
     all.map(&:avatar).compact.sort{ |a, b| b.updated_at <=> a.updated_at }

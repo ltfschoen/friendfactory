@@ -1,4 +1,4 @@
-- user ||= avatar.try(:user)
+- profile ||= avatar.profile
 .face-container
   .front.face
     .content
@@ -6,7 +6,7 @@
       %table.header
         %tr
           %td.username<
-            = user.first_name
+            = profile.user.first_name
           %td.status
             -# Looking for fun
       -# %ul.buddy-bar.secondary

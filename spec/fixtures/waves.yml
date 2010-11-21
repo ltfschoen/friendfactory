@@ -5,18 +5,24 @@ adam_profile_wave:
   user_id: 1
   type: Wave::Profile
   slug: adam
+  resource_id: 1
+  resource_type: UserInfo
 
 bert_profile_wave:
   id: 2
   user_id: 2
   type: Wave::Profile
   slug: bert
+  resource_id: 2
+  resource_type: UserInfo
 
 charlie_profile_wave:
   id: 3
   user_id: 3
   type: Wave::Profile
   slug: charlie
+  resource_id: 3
+  resource_type: UserInfo
 
 #Shared Waves
 

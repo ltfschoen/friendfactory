@@ -28,7 +28,8 @@ class Wave::Base < ActiveRecord::Base
     end    
   end
   
-  belongs_to :user
+  belongs_to :user  
+  belongs_to :resource, :polymorphic => true
   
   def self.default
     Wave::Base.first

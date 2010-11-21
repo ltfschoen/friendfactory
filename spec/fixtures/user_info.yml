@@ -1,11 +1,11 @@
 adam:
   id: 1
-  user_id: 1
+  age: 21
   
 bert:
   id: 2
-  user_id: 2
+  age: 22
     
 charlie:
   id: 3
-  user_id: 3
+  age: 23

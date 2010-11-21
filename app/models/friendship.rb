@@ -3,7 +3,7 @@ class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend,  :class_name => 'User'
   has_one    :posting, :class_name => 'Posting::Base', :as => :resource
-
+  
   validates_presence_of :user
   validates_presence_of :friend
   

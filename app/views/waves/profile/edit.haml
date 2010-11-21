@@ -18,7 +18,7 @@
                 %tr
                   %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo', :as_button => false
   .grid_6
-    = form_for @wave.user.info, :url => profile_path do |f|
+    = form_for @wave.user_info, :url => profile_path do |f|
       .polaroid.edit
         .face-container
           .back.face

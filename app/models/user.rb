@@ -14,14 +14,11 @@ class User < ActiveRecord::Base
 
   after_save do
     if self.profile.nil?
-      Wave::Profile::create(:user => self)
-    end
-    if self.info.nil?
-      UserInfo.create(:user => self)
+      create_profile
     end
   end
 
-  has_one  :info,     :class_name => 'UserInfo'
+  # has_one  :info,     :class_name => 'UserInfo'
   has_one  :avatar,   :class_name => 'Posting::Avatar', :conditions => [ 'active = ?', true ], :order => 'created_at desc'
   has_many :waves,    :class_name => 'Wave::Base'
   has_one  :profile,  :class_name => 'Wave::Profile'

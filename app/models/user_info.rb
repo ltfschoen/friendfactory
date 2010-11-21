@@ -14,7 +14,7 @@ class UserInfo < ActiveRecord::Base
 
   set_table_name 'user_info'
 
-  belongs_to :user
+  has_one :profile, :as => :resource
   
   def gender_description
     Gender.rassoc(self[:gender]).try(:first)

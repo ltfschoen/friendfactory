@@ -5,7 +5,8 @@ class Waves::ProfileController < Waves::BaseController
   helper :waves
 
   def show
-    @wave = current_user.profile
+    @profile = current_user.profile
+    @avatar = @profile.avatar || Posting::Avatar.new(:user_id => current_user.id)
     respond_to do |format|
       format.html
     end
@@ -19,7 +20,7 @@ class Waves::ProfileController < Waves::BaseController
   end
   
   def update
-    current_user.info.update_attributes(params[:user_info])
+    current_user.profile.user_info.update_attributes(params[:user_info])
     respond_to do |format|
       format.html { redirect_to profile_path }
     end
