@@ -20,10 +20,10 @@ class Posting::Photo < Posting::Base
   
   publish_to :wave => Wave::Profile
 
-  has_and_belongs_to_many :profiles,
-      :class_name  => 'Wave::Profile',
-      :join_table  => 'postings_profiles',
-      :foreign_key => 'posting_id'
+  # has_and_belongs_to_many :profiles,
+  #     :class_name  => 'Wave::Profile',
+  #     :join_table  => 'postings_waves',
+  #     :foreign_key => 'posting_id'
 
   private
   
@@ -35,5 +35,6 @@ class Posting::Photo < Posting::Base
       self.height = dimensions.height
       self.horizontal = dimensions.horizontal?
     end
+    true
   end
 end

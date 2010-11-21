@@ -10,7 +10,6 @@ class Publisher
       when @publish_to[:wave] == Wave::Profile then Wave::Profile.find_by_user_id(posting.user_id)
     end
     if wave
-      Rails.logger.info " *** publishing to #{wave.type}:#{wave.id}"
       wave.postings << posting
     end
   end

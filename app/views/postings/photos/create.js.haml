@@ -8,5 +8,5 @@
     $currentTab.removeClass('current');
     $panel.hide().find('form')[0].reset();
   - else
-    $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")
+    $('.flash').text("Couldn't save your posting #{@posting.errors.full_messages.to_sentence}")
 
