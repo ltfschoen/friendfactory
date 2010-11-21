@@ -9,6 +9,7 @@ jQuery(function($) {
 	    prev: '',
 	    onSeek: function(event, idx) {
 	      if (idx == 1) {
+	        // Photo Grid
 	        var $photoGrid = $(this.getRoot()).find('.photo-grid');
 	        var id = $photoGrid.closest('.polaroid').attr('data-id');
           $photoGrid.load('/waves/profiles/' + id + '/photos');
