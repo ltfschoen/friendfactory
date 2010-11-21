@@ -1,6 +1,6 @@
 namespace :ff do
-  namespace :rollcall do
-    task :fix => :environment do
+  namespace :fix do
+    task :rollcall => :environment do
       Posting::Avatar.all.each do |posting|
         if posting.user_id == 1
           profile = posting.waves.detect { |wave| wave.is_a?(Wave::Profile) }
