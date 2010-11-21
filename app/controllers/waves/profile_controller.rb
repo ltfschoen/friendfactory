@@ -33,5 +33,5 @@ class Waves::ProfileController < Waves::BaseController
       format.js { render :layout => false }
     end
   end
-
+  
 end

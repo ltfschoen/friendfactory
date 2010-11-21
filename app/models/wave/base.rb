@@ -20,7 +20,8 @@ class Wave::Base < ActiveRecord::Base
     end
     
     def only(*types)
-      find :all, :conditions => [ 'type in (?)', types.map(&:to_s) ]
+      # find :all, :conditions => [ 'type in (?)', types.map(&:to_s) ]
+      where('type in (?)', types.map(&:to_s))
     end
     
     def exclude(*types)

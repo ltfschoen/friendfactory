@@ -2,17 +2,17 @@ Friskyfactory::Application.routes.draw do |map|
 
   # To manage a user's profile
   resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
-    member do
-      post 'avatar'
-    end
+    member { post 'avatar' }
   end
 
   get 'rollcall', :controller => 'waves/roll_calls', :action => :index
     
   # To show waves
   namespace :waves do
-    resources :polaroids, :only => [ :index ]
-    resources :profiles, :only => [ :show ]
+    # resources :polaroids, :only => [ :index ]
+    resources :profiles, :only => [ :show ] do
+      member { get :photos }
+    end
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 

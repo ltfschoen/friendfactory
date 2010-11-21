@@ -1,0 +1,10 @@
+- fill_with = image_tag('ffffff.gif', :class => "thumb", :site => false)
+- fill_with_omega = image_tag('ffffff.gif', :class => "thumb omega", :site => false)
+- fill_with_matrix = [ fill_with, fill_with, fill_with_omega ] * 3
+
+- fill_with_matrix.zip(@photos).in_groups_of(3) do |fill_with_photo_row|
+  - fill_with_photo_row.each_with_index do |photo_with_fill, idx|
+    - if photo_with_fill[1] && photo_with_fill[1].image
+      = image_tag(photo_with_fill[1].image.url(:thumb), :site => false, :class => "thumb#{' omega' if idx == 2 }")
+    - else
+      = photo_with_fill[0]

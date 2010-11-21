@@ -26,7 +26,7 @@ class Posting::Base < ActiveRecord::Base
       :foreign_key             => 'posting_id',
       :association_foreign_key => 'wave_id',
       :join_table              => 'postings_waves',
-      :order                   => 'created_at desc'
+      :order                   => 'updated_at desc'
 
   # Thinking-Sphinx
   # define_index do

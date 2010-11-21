@@ -22,15 +22,8 @@
             = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :birthday }
             = render :partial => 'postings/avatars/user_info', :object => user_info, :locals => { :attribute => :location }
         .photo-grid
-          -# photos = avatar.user.profile.postings.only(Posting::Photo, Posting::Avatar).limit(9)
-          -# if photos.empty?
           - 1.upto(9) do |i|
             = image_tag('ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
-          -# else
-            -# photos.in_groups_of(3, false) do |photo_row|
-              -# photo_row.each_with_index do |photo, i|
-                -# if photo.image
-                  -#= image_tag(photo.image.url(:thumb), :site => false, :class => "thumb#{' omega' if i == 2 }")
         -#   = image_tag 'chat-b-side.png', :width=>'260px'
         -# %div
         -#   = image_tag 'message-b-side.png', :width=>'260px'

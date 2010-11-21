@@ -9,18 +9,9 @@ jQuery(function($) {
 	    prev: '',
 	    onSeek: function(event, idx) {
 	      if (idx == 1) {
-	        $photoGrid = $(this.getRoot()).find('.photo-grid');
-	        // $.getJSON(/profile/);
-          // $photoGrid.children('img').eq(0).attr('src', "/system/images/449/thumb/adam-01.jpg");
-          // $photoGrid.children('img').eq(1).attr('src', '/system/images/451/thumb/adam-03.jpg');
-          // $photoGrid.children('img').eq(2).attr('src', '/system/images/452/thumb/adam-04.jpg');
-          // $photoGrid.children('img').eq(3).attr('src', '/system/images/453/thumb/adam-05.jpg');
-          // $photoGrid.children('img').eq(4).attr('src', '/system/images/454/thumb/adam-06.jpg');
-          // $photoGrid.children('img').eq(5).attr('src', '/system/images/455/thumb/adam-08.jpg');
-          // $photoGrid.children('img').eq(6).attr('src', '/system/images/456/thumb/adam-09.jpg');
-          // $photoGrid.children('img').eq(7).attr('src', '/system/images/457/thumb/adam-10.jpg');
-          // $photoGrid.children('img').eq(8).attr('src', '/system/images/458/thumb/adam-11.jpg');
-          // $photoGrid.children('img').eq(9).attr('src', '/system/images/459/thumb/adam-12.jpg');
+	        var $photoGrid = $(this.getRoot()).find('.photo-grid');
+	        var id = $photoGrid.closest('.polaroid').attr('data-id');
+          $photoGrid.load('/waves/profiles/' + id + '/photos');
 	      }
 	    }
 	  }).navigator();
