@@ -11,7 +11,7 @@
         .face-container
           .front.face
             .content
-              = avatar_image_tag(@wave.avatar, :class => 'headshot', :style => 'polaroid')
+              = avatar_image_tag(@wave.avatar, :class => 'headshot', :style => 'polaroid', :anonymous => true)
               %table.detail
                 %tr
                   %td= f.file_field :image
