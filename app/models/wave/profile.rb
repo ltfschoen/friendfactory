@@ -5,39 +5,31 @@ class Wave::Profile < Wave::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
-      :order                   => 'created_at desc' do
-    def active
-      find :all, :conditions => [ 'active = ?', true ]
-    end
-  end
+      :order                   => 'created_at desc',
+      :after_add               => :set_active_avatar
   
   alias :user_info :resource
   
-  before_save do
+  after_create do
     if self.resource.nil?      
-      self.resource = UserInfo.create      
+      self.resource = UserInfo.create
     end
+    true
   end
-
-  def self.avatars
-    # scoped.order('created_at desc').all.map(&:avatar).compact
-    all.map(&:avatar).compact.sort{ |a, b| b.updated_at <=> a.updated_at }
+  
+  def set_active_avatar(avatar)
+    if avatar.active?
+      # Following update line didn't work. Used update_all instead.
+      # Posting::Avatar.update((self.avatar_ids - [ avatar.id ]), :active => false)
+      Posting::Avatar.update_all([ 'active = ?', false], [ 'id in (?)', (self.avatar_ids - [ avatar.id ]) ])
+    end
+    true
   end
   
   def avatar
-    avatars.active.first
+    avatars.where('active = ?', true).limit(1).first
   end
-  
-  def avatar=(avatar)
-    if avatar.present? && avatar_ids.include?(avatar.id)
-      avatars.active.each do |posting|
-        posting.update_attribute(:active, false)
-      end
-      return avatar.update_attribute(:active, true)
-    end
-    false
-  end
-  
+    
   def avatar_id
     avatar.id if avatar.present?
   end
@@ -45,4 +37,5 @@ class Wave::Profile < Wave::Base
   def photos
     self.postings.only(Posting::Photo)
   end
+
 end

@@ -6,7 +6,6 @@ class Waves::ProfileController < Waves::BaseController
 
   def show
     @profile = current_user.profile
-    @avatar = @profile.avatar || Posting::Avatar.new(:user_id => current_user.id)
     respond_to do |format|
       format.html
     end
@@ -27,7 +26,7 @@ class Waves::ProfileController < Waves::BaseController
   end
   
   def avatar
-    if params[:posting_avatar]      
+    if params[:posting_avatar]     
       current_user.profile.avatars.create(:image => params[:posting_avatar][:image], :user_id => current_user.id, :active => true)
     end
     respond_to do |format|

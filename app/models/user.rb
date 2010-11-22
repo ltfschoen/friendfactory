@@ -12,14 +12,12 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name
 
-  after_save do
+  after_create do
     if self.profile.nil?
       create_profile
     end
   end
 
-  # has_one  :info,     :class_name => 'UserInfo'
-  has_one  :avatar,   :class_name => 'Posting::Avatar', :conditions => [ 'active = ?', true ], :order => 'created_at desc'
   has_many :waves,    :class_name => 'Wave::Base'
   has_one  :profile,  :class_name => 'Wave::Profile'
   has_many :postings, :class_name => 'Posting::Base'
@@ -30,6 +28,10 @@ class User < ActiveRecord::Base
   has_many :admirers, :through => :inverse_friendships, :source => :user
 
   scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]
+
+  def avatar
+    profile.avatar
+  end
   
   def self.online?(user)
     online.include?(user)
