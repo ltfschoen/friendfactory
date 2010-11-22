@@ -10,9 +10,11 @@ class Wave::Profile < Wave::Base
   
   alias :user_info :resource
   
-  after_create do
-    if self.resource.nil?      
-      self.resource = UserInfo.create
+  after_create do |profile|
+    if profile.resource.nil?
+      user_info = UserInfo.create(:user_id => profile.user_id)
+      profile.resource = user_info
+      profile.save
     end
     true
   end

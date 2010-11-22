@@ -1,22 +1,15 @@
 class User < ActiveRecord::Base
 
-  include AASM
-
   acts_as_authentic do |config|
     config.logged_in_timeout = UserSession::Timeout
   end
 
+  validates_presence_of :first_name
+
+  include AASM
   aasm_column        :status
   aasm_initial_state :welcomed
   aasm_state         :welcomed
-
-  validates_presence_of :first_name
-
-  after_create do
-    if self.profile.nil?
-      create_profile
-    end
-  end
 
   has_many :waves,    :class_name => 'Wave::Base'
   has_one  :profile,  :class_name => 'Wave::Profile'
@@ -28,6 +21,12 @@ class User < ActiveRecord::Base
   has_many :admirers, :through => :inverse_friendships, :source => :user
 
   scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]
+
+  after_create do
+    if self.profile.nil?
+      profile = create_profile
+    end
+  end
 
   def avatar
     profile.avatar
