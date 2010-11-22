@@ -19,7 +19,7 @@
     color: #501508;
     margin: 0 4px;
     padding: 2px 6px;
-    border-bottom: 1px dotted #664;
+    border-bottom: 0px;
 }
 
 .tag-cloud a:hover {
@@ -27,10 +27,19 @@
     background-color: rgba(80, 21, 8, 0.8);
 }
 
-.tag-cloud .tag1 { font-size: 0.6em; }
-.tag-cloud .tag2 { font-size: 0.8em; }
-.tag-cloud .tag3 { font-size: 1.0em; }
-.tag-cloud .tag4 { font-size: 1.2em; }
+.tag-cloud a.current {
+    background-color: rgba(80, 21, 8, 0.8);
+    color: #CCA;    
+}
+
+.tag-cloud a.current:hover {
+    color: #501508;
+}
+
+.tag-cloud a.tag1 { font-size: 0.6em; }
+.tag-cloud a.tag2 { font-size: 0.8em; }
+.tag-cloud a.tag3 { font-size: 1.0em; }
+.tag-cloud a.tag4 { font-size: 1.2em; }
 
 
 .polaroid-container:nth-child(2) {
