@@ -1,7 +1,7 @@
 .wave[@wave]
   .grid_16
     .tag-cloud
-      - tag_cloud(@tags, %w(tag1, tag2, tag3, tag4)) do |tag, css_class|
+      - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
         = link_to tag.name, rollcall_path(:tag => tag.name), :class => css_class
     .postings
       - @wave.profiles.in_groups_of(3) do |group|

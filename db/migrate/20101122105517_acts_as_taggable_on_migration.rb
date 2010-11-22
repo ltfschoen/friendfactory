@@ -18,7 +18,7 @@ class ActsAsTaggableOnMigration < ActiveRecord::Migration
     add_index :taggings, [:taggable_id, :taggable_type, :context]
     
     say 'now perform the following rake task:'
-    say 'ff:tags:user_info', true
+    say 'ff:fix:tags', true
   end
 
   def self.down
