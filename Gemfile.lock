@@ -35,6 +35,7 @@ GEM
       activemodel (= 3.0.1)
       activesupport (= 3.0.1)
     activesupport (3.0.1)
+    acts-as-taggable-on (2.0.6)
     arel (1.0.1)
       activesupport (~> 3.0.0)
     authlogic (2.1.6)
@@ -117,6 +118,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  acts-as-taggable-on
   authlogic
   factory_girl!
   faker

@@ -28,6 +28,7 @@ gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
 gem 'remotipart'
 gem 'haml'
+gem 'acts-as-taggable-on'
 gem 'pusher'
 
 # gem 'thinking-sphinx', '>= 1.3.16', :require => 'thinking_sphinx'

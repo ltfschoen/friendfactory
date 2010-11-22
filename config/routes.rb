@@ -5,7 +5,7 @@ Friskyfactory::Application.routes.draw do |map|
     member { post 'avatar' }
   end
 
-  get 'rollcall', :controller => 'waves/roll_calls', :action => :index
+  get 'rollcall(/:tag)', :controller => 'waves/roll_calls', :action => :index, :as => 'rollcall'
     
   # To show waves
   namespace :waves do

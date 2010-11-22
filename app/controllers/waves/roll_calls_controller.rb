@@ -4,8 +4,13 @@ class Waves::RollCallsController < Waves::BaseController
   RollCallWaveID = '000'
 
   def index
-    profiles = Wave::Profile.all_with_active_avatars.includes(:resource, :avatars)
+    profiles = if params[:tag]
+      UserInfo.tagged_with(params[:tag]).map(&:profile)
+    else
+      Wave::Profile.all_with_active_avatars.includes(:resource, :avatars)
+    end
     @wave = RollCallWave.new(RollCallWaveID, 'Roll Call', profiles)
+    @tags = UserInfo.tag_counts_on(:tags)
     respond_to do |format|
       format.html
     end
