@@ -1,6 +1,7 @@
-- css_class = defined?(:css_class) ? css_class : ''
-- if profile.avatar.present?
-  .polaroid-container{ :class => css_class }
-    .polaroid{ :'data-id' => profile.id }
-      = render :partial => 'postings/avatars/polaroid_front_face', :locals => { :profile => profile } 
-      = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :profile => profile } 
+- cache(dom_id(profile.avatar), :expires => 5.minutes) do
+  - css_class = defined?(:css_class) ? css_class : ''
+  - if profile.avatar.present?
+    .polaroid-container{ :class => css_class }
+      .polaroid{ :'data-id' => profile.id }
+        = render :partial => 'postings/avatars/polaroid_front_face', :locals => { :profile => profile } 
+        = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :profile => profile } 
