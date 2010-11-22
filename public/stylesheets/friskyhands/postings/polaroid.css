@@ -120,6 +120,7 @@ div.polaroid .back.face .photo-grid img.thumb {
     width: 80px;
     height: 80px;
     margin: 0 6px 10px 0;
+    background-color: #fff;
 }
 
 div.polaroid .back.face .photo-grid img.omega {
