@@ -42,3 +42,7 @@ group :development, :test do
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
   gem 'faker'
 end
+
+group :production do
+  gem 'memcache-client'
+end

@@ -8,6 +8,14 @@ class Wave::Profile < Wave::Base
       :order                   => 'created_at desc',
       :after_add               => :set_active_avatar
   
+  def self.all_with_active_avatars
+    scoped.
+      joins(%q{join postings_waves on postings_waves.wave_id = waves.id}).
+      joins(%q{join postings on postings.id = postings_waves.posting_id}).
+      where(%q{postings.type = ? and postings.active = ?}, Posting::Avatar, true).
+      order('postings.created_at desc')
+  end
+  
   alias :user_info :resource
   
   after_create do |profile|

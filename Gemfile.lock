@@ -55,6 +55,7 @@ GEM
       i18n (~> 0.4.1)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcache-client (1.8.5)
     mime-types (1.16)
     mysql2 (0.2.6)
     nokogiri (1.4.3.1)
@@ -121,6 +122,7 @@ DEPENDENCIES
   faker
   haml
   jquery-rails
+  memcache-client
   mysql2
   paperclip (>= 2.3.1.1)
   pusher

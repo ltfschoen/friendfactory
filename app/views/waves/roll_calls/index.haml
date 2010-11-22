@@ -3,4 +3,5 @@
     .postings
       - @wave.profiles.in_groups_of(3) do |group|
         - group.each_with_index do |profile, idx|
-          = render :partial => 'postings/avatars/polaroid', :locals => { :profile => profile, :css_class => (idx == 2 ? 'omega' : '') }
+          - unless profile.nil?
+            = render :partial => 'postings/avatars/polaroid', :locals => { :profile => profile, :css_class => (idx == 2 ? 'omega' : '') }
