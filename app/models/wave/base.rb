@@ -15,7 +15,7 @@ class Wave::Base < ActiveRecord::Base
       if user.nil?
         exclude('Posting::Message')
       else
-        find :all, :conditions => [ '(private = false or (private = true and ((user_id = ?) or (receiver_id = ?))))', user.id, user.id ]
+        where('(private = false or (private = true and ((user_id = ?) or (receiver_id = ?))))', user.id, user.id)
       end
     end
     

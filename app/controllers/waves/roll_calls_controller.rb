@@ -8,7 +8,7 @@ class Waves::RollCallsController < Waves::BaseController
       params[:tag] = params[:tag].downcase.gsub(/-/, ' ')
       UserInfo.tagged_with(params[:tag]).map(&:profile)
     else
-      Wave::Profile.includes(:resource, :avatars).order('updated_at desc')      
+      Wave::Profile.includes(:resource, :avatars).order('updated_at desc')
     end
     @wave = RollCallWave.new(RollCallWaveID, 'Roll Call', profiles)
     @tags = UserInfo.tag_counts_on(:tags).order('name asc')
