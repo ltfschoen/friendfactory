@@ -12,6 +12,8 @@
 
 .tag-cloud {
     text-align: center;
+	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center  #CEC2A2;
+	padding: 10px 20px;
 }
 
 .tag-cloud a,
@@ -20,6 +22,7 @@
     margin: 0 4px;
     padding: 2px 6px;
     border-bottom: 0px;
+    white-space: nowrap;
 }
 
 .tag-cloud a:hover {
@@ -28,7 +31,7 @@
 }
 
 .tag-cloud a.current {
-    background-color: rgba(80, 21, 8, 0.8);
+    background-color: rgba(140, 55, 44, 1);
     color: #CCA;    
 }
 
