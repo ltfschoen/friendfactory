@@ -5,17 +5,9 @@ class Wave::Profile < Wave::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
-      :order                   => 'created_at desc',
-      :after_add               => :set_active_avatar
-  
-  def self.all_with_active_avatars
-    scoped.
-      joins(%q{join postings_waves on postings_waves.wave_id = waves.id}).
-      joins(%q{join postings on postings.id = postings_waves.posting_id}).
-      where(%q{postings.type = ? and postings.active = ?}, Posting::Avatar, true).
-      order('postings.created_at desc')
-  end
-  
+      :order                   => 'updated_at desc',
+      :after_add               => [ :active_avatar, :touched ]
+
   alias :user_info :resource
   
   after_create do |profile|
@@ -27,7 +19,7 @@ class Wave::Profile < Wave::Base
     true
   end
   
-  def set_active_avatar(avatar)
+  def active_avatar(avatar)
     if avatar.active?
       # Following update line didn't work. Used update_all instead.
       # Posting::Avatar.update((self.avatar_ids - [ avatar.id ]), :active => false)
@@ -39,6 +31,10 @@ class Wave::Profile < Wave::Base
   def avatar
     avatars.where('active = ?', true).limit(1).first
   end
+  
+  def avatar?
+    avatar.present?
+  end
     
   def avatar_id
     avatar.id if avatar.present?
@@ -46,6 +42,12 @@ class Wave::Profile < Wave::Base
 
   def photos
     self.postings.only(Posting::Photo)
+  end
+  
+  private
+  
+  def touched(avatar)
+    touch
   end
 
 end
