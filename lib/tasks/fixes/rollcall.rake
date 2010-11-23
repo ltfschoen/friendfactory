@@ -1,5 +1,7 @@
 namespace :ff do
   namespace :fix do
+    # One-off fix to correctly assign user_id to avatars
+    # where avatar#user_id == 1
     task :rollcall => :environment do
       Posting::Avatar.all.each do |posting|
         if posting.user_id == 1

@@ -1,6 +1,7 @@
 namespace :ff do
   namespace :fix do
     
+    desc 'Publish all profile avatars to default wave'
     task :publish_to_default_wave => :environment do
       shared_wave = Wave::Base.find_by_slug(Waves::BaseController::DefaultWaveSlug)
       if shared_wave
@@ -11,6 +12,7 @@ namespace :ff do
       end
     end
     
+    desc 'Publish postings from default wave to individual profiles'
     task :publish_to_profiles => :environment do
       shared_wave = Wave::Base.find_by_slug(Waves::BaseController::DefaultWaveSlug)
       cnt = 0

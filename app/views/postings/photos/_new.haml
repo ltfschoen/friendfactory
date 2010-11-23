@@ -1,10 +1,11 @@
+- photo = Posting::Photo.new(:user_id => current_user.id)
 .grid_1
   &nbsp;
 .grid_12.posting
   %table
     %tr
       %td.avatar.thumb
-        = render_post_it(photo = Posting::Photo.new(:user_id => current_user), :message => spinner(:size => :big, :id => 'posting_photo_upload_spinner').html_safe)
+        = render_post_it(photo, :message => spinner(:size => :big, :id => 'posting_photo_upload_spinner').html_safe)
       %td
         = form_for photo, :url => wave_postings_photos_path(:wave_id => wave), :html => { :multipart => true }, :remote => true do |f|
           %table.button-bar

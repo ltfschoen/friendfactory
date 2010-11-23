@@ -4,7 +4,7 @@
   %table
     %tr
       %td.avatar.thumb
-        = render_post_it(text = Posting::Text.new(:user_id => current_user))
+        = render_post_it(text = Posting::Text.new(:user_id => current_user.id))
       %td
         = form_for text, :url => wave_postings_texts_path(:wave_id => wave), :remote => true do |f|
           = f.text_field :subject, :placeholder => false
