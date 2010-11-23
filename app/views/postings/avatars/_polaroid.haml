@@ -1,12 +1,11 @@
--# cache(dom_id(profile.avatar), :expires => 5.minutes) do
-
 - if local_assigns[:profile].present?
   - avatar = profile.avatar
 - if local_assigns[:avatar].present?
   - profile = avatar.profile
 
-- css_class = defined?(:css_class) ? css_class : ''
-.polaroid-container{ :class => css_class }
-  .polaroid{ :'data-id' => profile.id }
-    = render :partial => 'postings/avatars/polaroid_front_face', :locals => { :profile => profile, :avatar => avatar } 
-    = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :profile => profile, :avatar => avatar } 
+- cache(profile.cache_key) do
+  - css_class = defined?(:css_class) ? css_class : ''
+  .polaroid-container{ :class => css_class }
+    .polaroid{ :'data-id' => profile.id }
+      = render :partial => 'postings/avatars/polaroid_front_face', :locals => { :profile => profile, :avatar => avatar } 
+      = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :profile => profile, :avatar => avatar } 
