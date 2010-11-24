@@ -6,7 +6,7 @@ class Wave::Profile < Wave::Base
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
       :order                   => 'updated_at desc',
-      :after_add               => [ :active_avatar, :touched ]
+      :after_add               => [ :active_avatar, :touch ]
 
   alias :user_info :resource
   
@@ -44,10 +44,8 @@ class Wave::Profile < Wave::Base
     self.postings.only(Posting::Photo)
   end
   
-  private
-  
-  def touched(avatar)
-    touch
+  def touch(avatar=nil)
+    super()
   end
 
 end

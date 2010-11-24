@@ -25,6 +25,15 @@ class UserInfo < ActiveRecord::Base
         user_info.relationship_description.try(:downcase),
         user_info.deafness_description.try(:downcase),
         UserInfo.scrub_tag(user_info.location_description) ].compact * ', '
+    true
+  end
+  
+  after_save do |user_info|
+    profile = user_info.profile
+    if profile.present?
+      profile.touch
+    end
+    true
   end
   
   def gender_description
