@@ -25,18 +25,15 @@
     white-space: nowrap;
 }
 
-.tag-cloud a:hover {
+.tag-cloud a:hover,
+.tag-cloud a.current:hover {
     color: #CCA;
-    background-color: rgba(80, 21, 8, 0.8);
+    background-color: rgb(80, 21, 8);
 }
 
 .tag-cloud a.current {
-    background-color: rgba(140, 55, 44, 1);
-    color: #CCA;    
-}
-
-.tag-cloud a.current:hover {
-    color: #501508;
+    color: #CCA;
+    background-color: rgb(140, 55, 44);
 }
 
 .tag-cloud a.tag1 { font-size: 0.6em; }
