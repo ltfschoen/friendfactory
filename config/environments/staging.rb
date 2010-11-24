@@ -10,7 +10,7 @@ Friskyfactory::Application.configure do
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
-  config.action_dispatch.x_sendfile_header = "X-Sendfile"
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile"
 
   # For nginx:
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
@@ -25,7 +25,7 @@ Friskyfactory::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :mem_cache_store, 'localhost:11311', 
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
@@ -35,7 +35,7 @@ Friskyfactory::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
   # config.threadsafe!
