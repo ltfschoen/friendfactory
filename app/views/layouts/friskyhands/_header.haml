@@ -5,8 +5,14 @@
       = link_to 'Wave', root_path
     %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'waves/roll_calls', :action => 'index')}" }
       = link_to 'Roll Call', rollcall_path
+    %li#nav-3{ :class => "#{'current' if current_page?(:controller => 'waves/roll_calls', :action => 'index')}" }
+      = link_to 'Events', rollcall_path
+    %li#nav-4
+      = link_to 'Shop', '#'
     %li#nav-5{ :class => "#{'current' if current_page?(:controller => 'waves/profile', :action => 'show')}" }
-      = link_to 'Roll Call', profile_path
+      = link_to 'Bio', profile_path
+    %li#nav-6{ :class => "#{'current' if current_page?(:controller => 'waves/profile', :action => 'show')}" }
+      = link_to 'Inbox', profile_path
     %li#nav-8
       = link_to 'Logout', logout_path
 
