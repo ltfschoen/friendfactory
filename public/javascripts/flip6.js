@@ -52,7 +52,7 @@ jQuery(function($) {
 	      direction: 'lr',
 	      color: '#FFF',
 	      content: $polaroid.find('.face-container:hidden'),
-	      onEnd: function(){
+	      onEnd: function() {
 					// $polaroid.draggable().find('.buddy-bar a.flip').click(function(event){
 				  $polaroid.find('.buddy-bar a.flip').click(function(event){
 						event.preventDefault();
@@ -63,7 +63,15 @@ jQuery(function($) {
 						items: 'items',
 						keyboard: false,
 						next: '',
-						prev: ''
+						prev: '',
+      	    onSeek: function(event, idx) {
+      	      if (idx == 1) {
+      	        // Photo Grid
+      	        var $photoGrid = $(this.getRoot()).find('.photo-grid');
+      	        var id = $photoGrid.closest('.polaroid').attr('data-id');
+                $photoGrid.load('/waves/profiles/' + id + '/photos');
+      	      }
+      	    }
 					}).navigator();
 				
 	       	$polaroid.find('.navi .' + $polaroid.data('current')).click();
