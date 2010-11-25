@@ -1,6 +1,6 @@
 jQuery(function($) {
   // $('.polaroid').draggable({ handle: '.gripper' })
-	if (false && $.browser.safari) {
+	if ($.browser.safari) {
 		$('.polaroid-container .polaroid .back').css('-webkit-transform', 'rotateY(180deg)');
 	  $('.polaroid-container .polaroid .back .scrollable').scrollable({
 	    items: 'items',
@@ -80,8 +80,8 @@ jQuery(function($) {
       	      }
       	    }
 					}).navigator();
-					var idx = $polaroid.data('idx');
-					$polaroid.find('.scrollable-index').scrollable().seekTo(idx ,0);
+					var idx = $polaroid.data('scrollable-index');
+					$polaroid.find('.scrollable').scrollable().seekTo(idx ,0);
 	       	// $polaroid.find('.navi .' + $polaroid.data('current')).click();
 	      }
 	    });
