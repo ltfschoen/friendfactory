@@ -25,7 +25,7 @@ Friskyfactory::Application.routes.draw do |map|
   end
 
   # To manage messages
-  resources :messages, :as => 'inbox'
+  resources :messages, :only => [ :new, :create ]
   
   # To add a comment to a posting
   map.resources :postings, :only => [] do |posting|

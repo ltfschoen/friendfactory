@@ -5,6 +5,7 @@ body, p, h1, h2, h3, label, input, textarea, a, .formError {
 body {
 	-webkit-user-select: none;
 	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
+/*  overflow-x: hidden;*/
 }
 
 .hidden {

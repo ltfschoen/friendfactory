@@ -233,8 +233,8 @@ div.polaroid div.gripper {
 .polaroid-container {
 	height: 356px;
 	width: 320px;
-	position: relative;	
-	z-index: 1000;
+    position: relative; 
+/*  z-index: 1000;*/
 	-webkit-tap-highlight-color: rgba(0,0,0,0);	
 	-webkit-perspective: 1200;
 }

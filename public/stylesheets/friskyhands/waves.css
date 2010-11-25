@@ -25,4 +25,22 @@
     -moz-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
 }
 
+
+#message-postcard {
+    position: relative;
+    z-index: 5000;
+    background: url('/images/friskyhands/postcard.png') no-repeat top left;
+    width: 480px;
+    height: 364px;
+}
+
+#message-postcard .franking {
+    position: absolute;
+    top: 40px;
+    left: 280px;
+    width: 160px;
+    height: 78px;
+    background: url('/images/friskyhands/postcard.png') no-repeat -290px -368px;
+}
+
  
