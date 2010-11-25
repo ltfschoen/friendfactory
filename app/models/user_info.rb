@@ -7,7 +7,7 @@ class UserInfo < ActiveRecord::Base
       (a = [ 'Gay', 'Lesbian', 'Straight', 'Bisexual', 'Trans' ]).zip((1..a.length).to_a)
 			
 	Relationship = 
-	    (a = [ 'Single', 'In a Relationship', 'Married', 'Looking for a Relationship', 'On the Rebound', 'Friends Only' ]).zip((1..a.length).to_a)
+	    (a = [ 'Single', 'In a Relationship', 'Married', 'Looking for a Relationship', 'Friends Only' ]).zip((1..a.length).to_a)
 	    
 	Deafness =
 	    (a = [ 'Deaf', 'Hard of Hearing', 'Hearing', 'CODA' ]).zip((1..a.length).to_a)
