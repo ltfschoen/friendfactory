@@ -24,6 +24,9 @@ Friskyfactory::Application.routes.draw do |map|
     end
   end
 
+  # To manage messages
+  resources :messages, :as => 'inbox'
+  
   # To add a comment to a posting
   map.resources :postings, :only => [] do |posting|
     posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
@@ -67,16 +70,17 @@ Friskyfactory::Application.routes.draw do |map|
 
   map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }  
   map.login  '/login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }
-  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => [ :get, :delete ] }
-  
+  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => [ :get, :delete ] }  
   map.search '/search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
-    
+  
   map.welcome '/welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
 
-  # Miscellaneous
   root :to => 'waves/base#show', :via => :get
+
+  # Catch-all
   get '/:slug', :to => 'waves/base#show', :constraints => { :slug => /\D\w*/ }
 
+  # Labs
   if [ 'development', 'staging' ].include?(Rails.env)
     map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
   end
