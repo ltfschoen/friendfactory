@@ -1,6 +1,6 @@
 jQuery(function($) {
   // $('.polaroid').draggable({ handle: '.gripper' })
-	if ($.browser.safari) {
+	if (false && $.browser.safari) {
 		$('.polaroid-container .polaroid .back').css('-webkit-transform', 'rotateY(180deg)');
 	  $('.polaroid-container .polaroid .back .scrollable').scrollable({
 	    items: 'items',
@@ -18,8 +18,15 @@ jQuery(function($) {
 	  }).navigator();
           
 	  $('.polaroid-container .polaroid .front .buddy-bar a.flip').click(function(event){
-	    event.preventDefault();	
-	    $(this).addClass('current').closest('.polaroid').toggleClass('flipped') // .find('.gripper').hide();
+      event.preventDefault();	
+      var idx = $(this).closest('li').index();
+      var $polaroid = $(this).closest('.polaroid')
+      var $backFace = $polaroid.find('.back.face');
+      $backFace.css('-webkit-transform', 'rotateY(0deg)');
+      $backFace.find('.scrollable').scrollable().seekTo(idx, 0);
+      $backFace.css('-webkit-transform', 'rotateY(180deg)');
+	    // $(this).addClass('current').closest('.polaroid').toggleClass('flipped').find('.gripper').hide();
+	    $polaroid.toggleClass('flipped')
 	  });
 
 	  $('.polaroid-container .polaroid .back .buddy-bar a.flip').click(function(event){
@@ -28,25 +35,25 @@ jQuery(function($) {
 	  });
     
 	  $('.polaroid-container .polaroid').each(function(idx, polaroid) {
-        polaroid.addEventListener('webkitTransitionEnd', function(event){
-        var $polaroid = $(event.target);
-        var $current = $polaroid.find('.front.face .buddy-bar .current')
-        $polaroid.find('.back .buddy-bar .' + $current.attr('href')).click();
+      // polaroid.addEventListener('webkitTransitionEnd', function(event) {
+        // var $polaroid = $(event.target);
+        // var $current = $polaroid.find('.front.face .buddy-bar .current')
+        // $polaroid.find('.back .buddy-bar .' + $current.attr('href')).click();
         // $polaroid.find('.back .gripper').show();       
         // if (!$polaroid.hasClass('flipped')) {
         //   $polaroid.find('.front .gripper').show();
         // }
-        $current.removeClass('current');
-      });
+        // $current.removeClass('current');
+      // });
 	  });
 	
 	} else {
 		$('.polaroid-container .polaroid').find('.face-container:eq(1)').hide();
 	  $('.polaroid-container .polaroid .front .buddy-bar a.flip').live('click', function(event){
 	    event.preventDefault();
-			var $polaroid = $(this).closest('.polaroid');			
-			$polaroid.data('current', $(this).attr('href'));
-			
+			var $polaroid = $(this).closest('.polaroid');
+			// $polaroid.data('current', $(this).attr('href'));
+			$polaroid.data('scrollable-index', $(this).closest('li').index());
 	    $polaroid.flip({
 				speed: 280,
 	      direction: 'lr',
@@ -73,8 +80,9 @@ jQuery(function($) {
       	      }
       	    }
 					}).navigator();
-				
-	       	$polaroid.find('.navi .' + $polaroid.data('current')).click();
+					var idx = $polaroid.data('idx');
+					$polaroid.find('.scrollable-index').scrollable().seekTo(idx ,0);
+	       	// $polaroid.find('.navi .' + $polaroid.data('current')).click();
 	      }
 	    });
 	  });

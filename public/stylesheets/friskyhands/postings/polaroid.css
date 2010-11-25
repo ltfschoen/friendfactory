@@ -67,7 +67,7 @@ div.polaroid .back.face img.thumb {
 
 div.polaroid .back.face table.header {
 	color: rgb(34,65,108);
-    width: 260px;
+    width: 254px;
     margin-bottom: 8px;
 	font-size: 18px;
 	font-family: Chalkduster;
@@ -249,7 +249,7 @@ div.polaroid div.gripper {
 }
 
 .polaroid-container div.polaroid.flipped {
-/*  -webkit-transform: rotate(2deg) rotateY(180deg);*/
+/*  -webkit-transform: rotate(2deg) rotateotateY(180deg);*/
     -webkit-transform: rotateY(180deg);
 }
 
