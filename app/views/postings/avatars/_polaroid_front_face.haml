@@ -14,19 +14,13 @@
       -#   %li.comment-count
       -#     4
       %ul.buddy-bar.primary
-        -# %li
-        -#   = link_to 'Block', '#', :class => 'block icon'
-        -# %li
-        -#   = link_to 'Buddy', '#', :class => 'buddy icon'
-        -# %li
-        -#   = link_to 'Pin', '#', :class => 'pin icon'
-        -# %li
-        -#   = link_to 'Chat', 'chat', :class => 'flip chat icon'
-        %li
-          = link_to 'Profile', 'profile', :class => 'flip profile icon'
-        %li
-          = link_to 'Photos', 'photos', :class => 'flip photos icon'
-        %li
-          = link_to 'Message', 'new_message_path', :class => 'message icon last'
+        -# %li= link_to 'Block', '#', :class => 'block icon'
+        -# %li= link_to 'Buddy', '#', :class => 'buddy icon'
+        -# %li= link_to 'Pin', '#', :class => 'pin icon'
+        -# %li= link_to 'Chat', 'chat', :class => 'flip chat icon'
+        %li= link_to 'Profile', 'profile', :class => 'flip profile icon'
+        %li= link_to 'Photos', 'photos', :class => 'flip photos icon'
+        - if current_user
+          %li= link_to 'Message', 'messages', :class => 'message icon last'
       - if content_for?(:polaroid_front_face)
         = content_for(:polaroid_front_face)

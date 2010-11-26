@@ -6,5 +6,5 @@ module WavesHelper
       else 'Public'
     end
   end
-
+  
 end

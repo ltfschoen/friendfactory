@@ -36,11 +36,9 @@
     %ul.buddy-bar.primary.navi
       -# %li
       -#   = link_to 'Chat', 'chat', :class => 'chat icon'
-      %li
-        = link_to 'Profile', 'profile', :class => 'profile icon'
-      %li
-        = link_to 'Photos', 'photos', :class => 'photos icon'
-      %li
-        = link_to 'Message', new_message_path, :class => 'message icon last'
+      %li= link_to 'Profile', 'profile', :class => 'profile icon'
+      %li= link_to 'Photos', 'photos', :class => 'photos icon'
+      - if current_user
+        %li= link_to 'Message', 'messages', :class => 'message icon last'
     - if content_for?(:polaroid_back_face)
       = content_for(:polaroid_back_face)

@@ -5,16 +5,18 @@ Friskyfactory::Application.routes.draw do |map|
     member { post 'avatar' }
   end
 
-  get 'rollcall(/:tag)', :controller => 'waves/roll_calls', :action => :index, :as => 'rollcall'
-    
   # To show waves
   namespace :waves do
-    # resources :polaroids, :only => [ :index ]
-    resources :profiles, :only => [ :show ] do
+    resources :profiles, :only => [] do
       member { get :photos }
+    end
+    resources :messages, :only => [ :create ] do
+      member { post :reply }
     end
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
+
+  get 'rollcall(/:tag)', :controller => 'waves/roll_calls', :action => :index, :as => 'rollcall'
 
   # To add postings to a wave
   resources :waves, :only => [] do
@@ -23,9 +25,10 @@ Friskyfactory::Application.routes.draw do |map|
       resources :photos, :only => [ :create ]
     end
   end
-
-  # To manage messages
-  resources :messages, :only => [ :new, :create ]
+  
+  # resources :messages, :only => [ :create ] do
+  #   member { post :reply }
+  # end
   
   # To add a comment to a posting
   map.resources :postings, :only => [] do |posting|
@@ -35,17 +38,13 @@ Friskyfactory::Application.routes.draw do |map|
   # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
-
-
-
-
   # # # # # # # # # # # # # # # 
   # # # # # # # # # # # # # # # 
 
   map.resources :waves, :only => [ :index, :show, :create ], :controller => 'waves/base' do |wave|
     # Used to add postings to a wave...
-    wave.resources :videos, :only => [ :create ]
-    wave.resources :links,  :only => [ :create ]
+    # wave.resources :videos, :only => [ :create ]
+    # wave.resources :links,  :only => [ :create ]
   end
     
   # # # # # # # # # # # # # # # 

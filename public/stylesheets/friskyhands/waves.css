@@ -31,16 +31,61 @@
     z-index: 5000;
     background: url('/images/friskyhands/postcard.png') no-repeat top left;
     width: 480px;
-    height: 364px;
+    height: 340px;
+    padding-top: 26px;
+    text-align: left;    
+}
+
+#message-postcard .grid_5 {
+    width: 250px;
+}
+
+#message-postcard .thread {
+    height: 160px;
+}
+
+#message-postcard textarea {
+    width: 190px;
+    margin-left: 34px;
+}
+
+#message-postcard textarea.tall {
+    height: 270px;
+}
+
+#message-postcard .stamp {
+    width: 160px;
+    height: 118px;    
 }
 
 #message-postcard .franking {
-    position: absolute;
-    top: 40px;
-    left: 280px;
+    position: relative;
+    top: 20px;
+    left: -10px;
     width: 160px;
     height: 78px;
     background: url('/images/friskyhands/postcard.png') no-repeat -290px -368px;
 }
+
+#message-postcard .address {
+    color: lightgray;
+    height: 150px;
+    line-height: 32px;
+    padding-left: 40px;
+}
+
+#message-postcard img.avatar.thimble {
+    width: 30px;
+    height: 30px;
+    margin-top: -2px;
+    margin-right: 4px;
+    border: 1px solid lightgray;
+    float: left;
+}
+
+#message-postcard .button-bar {
+    text-align: center;
+}
+
 
  

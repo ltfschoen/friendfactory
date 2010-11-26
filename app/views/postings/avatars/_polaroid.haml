@@ -5,6 +5,6 @@
 
 -# cache(profile.cache_key) do
 .polaroid-container
-  .polaroid{ :'data-id' => profile.id }
+  .polaroid{ :'data-profile_id' => profile.id }
     = render :partial => 'postings/avatars/polaroid_front_face', :locals => { :profile => profile, :avatar => avatar } 
     = render :partial => 'postings/avatars/polaroid_back_face', :locals => { :profile => profile, :avatar => avatar } 
