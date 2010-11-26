@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
         var $receiver = $polaroid.find('.front.face .username').text();
         $postcard.find('.franking').hide();
         var msg = 'Hey ' + $receiver + ',\n\n';
-        $('textarea', $postcard).text(msg + '\n\nSincerely,\n' + $sender).focus().setCursorPosition(msg.length);
+        $('textarea', $postcard).val(msg + '\n\nSincerely,\n' + $sender).focus(); //.setCursorPosition(msg.length);
         var address = 'To: '+ $receiver + "<br/>From: " + $sender;
         $postcard.find('.address').html(address);        
         $postcard.find('#receiver_avatar_image').attr('src', $polaroid.find('img.polaroid').attr('src'));        
