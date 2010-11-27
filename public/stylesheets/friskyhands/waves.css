@@ -54,17 +54,27 @@
 }
 
 #message-postcard .stamp {
+	position: relative;
     width: 160px;
     height: 118px;    
 }
 
 #message-postcard .franking {
-    position: relative;
-    top: 20px;
-    left: -10px;
+    position: absolute;
+    top: 10px;
+    left: 0;
     width: 160px;
     height: 78px;
     background: url('/images/friskyhands/postcard.png') no-repeat -290px -368px;
+}
+
+#message-postcard .delivered {
+    position: absolute;
+    top: 140px;
+    left: 40px;
+    width: 100px;
+    height: 76px;
+    background: url('/images/friskyhands/postcard.png') no-repeat -190px -368px;
 }
 
 #message-postcard .address {

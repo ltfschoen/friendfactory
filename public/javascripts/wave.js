@@ -36,9 +36,11 @@ jQuery(document).ready(function($) {
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
         var $receiver = $polaroid.find('.front.face .username').text();
         $postcard
-					.find('.franking').hide()
+					.find('.franking, .delivered').hide()
 					.end()
-					.find('button[type="submit"]').button('enable');
+					.find('button[type="submit"]').button('enable')
+					.end()
+					.find('#posting_message_receiver_id').val($polaroid.data('profile_id'));
         var msg = 'Hey ' + $receiver + ',\n\n';
         $('textarea', $postcard).val(msg + '\n\nSincerely,\n' + $sender).focus();
         var address = 'To: '+ $receiver + "<br/>From: " + $sender;
@@ -63,8 +65,13 @@ jQuery(document).ready(function($) {
 				return true;
 			})
 			.bind('ajax:success', function(xhr, data, status){
-				$trigger.overlay().close();
-			});
+				$postcard.find('.delivered').fadeIn();
+				setTimeout(function(){ $trigger.overlay().close(); }, 700);
+			})
+			.bind('ajax:complete', function(){
+				$postcard.find('button[type="submit"]').button('enable');
+			})
+			.bind('ajax:failure', function(){ alert("Couldn't send your message. Try again or Cancel."); });
 
   // Tabs
   $('.wave.nav li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});

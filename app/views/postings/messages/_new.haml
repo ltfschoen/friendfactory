@@ -1,15 +1,16 @@
 #message-postcard.grid_8.alpha.omega.hidden
   - if current_user
     - form_for Posting::Message.new, :url => waves_messages_path, :remote => true do |f|
+      = hidden_field_tag('posting_message[receiver_id]')
       .grid_5.alpha
         - if false
           .thread
             &nbsp;
         = f.text_area :body, :class => 'tall'
-        = hidden_field_tag('posting_message[receiver_id]')
       .grid_3.omega
         .stamp
           .franking.hidden
+          .delivered.hidden
           &nbsp;
         = avatar_image_tag :id => 'receiver_avatar_image', :style => 'thimble', :anonymous => true
         .address

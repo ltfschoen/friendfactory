@@ -10,9 +10,7 @@ Friskyfactory::Application.routes.draw do |map|
     resources :profiles, :only => [] do
       member { get :photos }
     end
-    resources :messages, :only => [ :create ] do
-      member { post :reply }
-    end
+    resources :messages, :only => [ :create ]
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
@@ -25,11 +23,7 @@ Friskyfactory::Application.routes.draw do |map|
       resources :photos, :only => [ :create ]
     end
   end
-  
-  # resources :messages, :only => [ :create ] do
-  #   member { post :reply }
-  # end
-  
+
   # To add a comment to a posting
   map.resources :postings, :only => [] do |posting|
     posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
