@@ -4,6 +4,8 @@ class Wave::Base < ActiveRecord::Base
   
   acts_as_slugable :source_column => :topic, :slug_column => :slug
 
+  belongs_to :user  
+
   has_and_belongs_to_many :postings,
       :class_name              => 'Posting::Base',
       :foreign_key             => 'wave_id',
@@ -28,7 +30,6 @@ class Wave::Base < ActiveRecord::Base
     end    
   end
   
-  belongs_to :user  
   belongs_to :resource, :polymorphic => true
   
   def self.default

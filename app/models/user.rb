@@ -13,8 +13,21 @@ class User < ActiveRecord::Base
 
   has_many :waves,    :class_name => 'Wave::Base'
   has_one  :profile,  :class_name => 'Wave::Profile'
-  has_many :postings, :class_name => 'Posting::Base'
 
+  has_many :conversations,
+      :class_name => 'Wave::Conversation',
+      :order      => 'created_at desc' do
+    def with(receiver)
+      where(:resource_id => receiver.id).limit(1).first
+    end
+  end
+
+  # Syntatic sugar:
+  # <user1>.conversation.with.<user2>
+  alias :conversation :conversations
+
+  has_many :postings, :class_name => 'Posting::Base'
+  
   has_many :friendships
   has_many :friends,  :through => :friendships
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
@@ -38,6 +51,13 @@ class User < ActiveRecord::Base
   
   def online?
     User.online?(self)
+  end
+  
+  def create_conversation_with(receiver)
+    wave = conversations.build
+    wave.resource = receiver
+    wave.save
+    wave    
   end
   
   def has_friend?(buddy)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122105517) do
+ActiveRecord::Schema.define(:version => 20101127044526) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(:version => 20101122105517) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "posting_id"
+    t.datetime "created_at"
+    t.datetime "read_at"
+  end
+
+  add_index "notifications", ["posting_id"], :name => "index_notifications_on_posting_id"
+  add_index "notifications", ["user_id", "posting_id"], :name => "index_notifications_on_user_id_and_posting_id"
 
   create_table "posting_chats", :force => true do |t|
     t.integer "receiver_id"
@@ -37,11 +47,6 @@ ActiveRecord::Schema.define(:version => 20101122105517) do
     t.datetime "updated_at"
     t.text     "subject"
     t.text     "body"
-    t.boolean  "private",             :default => false
-    t.integer  "receiver_id"
-    t.datetime "read_at"
-    t.datetime "sender_deleted_at"
-    t.datetime "receiver_deleted_at"
     t.boolean  "active"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -53,7 +58,6 @@ ActiveRecord::Schema.define(:version => 20101122105517) do
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"
-  add_index "postings", ["receiver_id"], :name => "index_postings_on_receiver_id"
   add_index "postings", ["resource_id", "resource_type"], :name => "index_postings_on_resource_id_and_resource_type"
   add_index "postings", ["user_id"], :name => "index_postings_on_user_id"
 

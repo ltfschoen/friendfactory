@@ -5,7 +5,6 @@ class CreatePostingMessage < ActiveRecord::Migration
     add_column :postings, :read_at,             :datetime
     add_column :postings, :sender_deleted_at,   :datetime
     add_column :postings, :receiver_deleted_at, :datetime    
-
     add_index  :postings, :receiver_id
   end
 

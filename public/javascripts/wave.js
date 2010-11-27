@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 					.end()
 					.find('button[type="submit"]').button('enable')
 					.end()
-					.find('#posting_message_receiver_id').val($polaroid.data('profile_id'));
+					.find('#posting_message_profile_id').val($polaroid.data('profile_id'));
         var msg = 'Hey ' + $receiver + ',\n\n';
         $('textarea', $postcard).val(msg + '\n\nSincerely,\n' + $sender).focus();
         var address = 'To: '+ $receiver + "<br/>From: " + $sender;

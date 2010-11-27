@@ -10,7 +10,6 @@ Friskyfactory::Application.routes.draw do |map|
     resources :profiles, :only => [] do
       member { get :photos }
     end
-    resources :messages, :only => [ :create ]
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
@@ -22,6 +21,11 @@ Friskyfactory::Application.routes.draw do |map|
       resources :texts, :only => [ :create ]
       resources :photos, :only => [ :create ]
     end
+  end
+  
+  # To create a messsage when we don't know the wave
+  namespace :postings do
+    resources :messages, :only => [ :create ]
   end
 
   # To add a comment to a posting
@@ -44,22 +48,22 @@ Friskyfactory::Application.routes.draw do |map|
   # # # # # # # # # # # # # # # 
   # Postings Controllers
 
-  map.namespace(:posting) do |posting|
-    posting.resources :chats
-  end
+  # map.namespace(:posting) do |posting|
+  #   posting.resources :chats
+  # end
   
-  map.resources :avatars,  :only => [ :create ] # TODO: remove once profiles wave works correctly
+  map.resources :avatars, :only => [ :create ] # TODO: remove once profiles wave works correctly
 
   # TODO: Use a manual mapping
-  map.resources :messages, :only => [] do |message|
-    message.resource 'reply', :only => [ :create ], :controller => 'messages'
-  end
+  # map.resources :messages, :only => [] do |message|
+  #   message.resource 'reply', :only => [ :create ], :controller => 'messages'
+  # end
 
   # # # # # # # # # # # # # # # 
 
   # map.resources :chats, :only => [ :index ]  
   map.resources :users, :only => [ :new, :create ]
-  map.resources :friendships, :only => [ :create, :destroy ]
+  # map.resources :friendships, :only => [ :create, :destroy ]
 
   map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }  
   map.login  '/login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }

@@ -1,18 +1,21 @@
 class Posting::Message < Posting::Base
 
-  alias_attribute :sender,    :user
-  alias_attribute :sender_id, :user_id
+  attr_accessible :subject, :body, :user_id, :receiver_id
+  attr_readonly :user_id
 
-  belongs_to :receiver, :class_name => User.name, :foreign_key => 'receiver_id'
+  alias_attribute :sender, :user
+
+  # receiver_id is a User
+  attr_accessor :receiver_id
+    
+  has_many :notifications
   
-  scope :unread, :conditions => { :read_at => nil }
+  # TODO validates_presence_of :receiver_id
 
-  before_save { |message| message[:private] = true }
+  publish_to :wave => Wave::Conversation
 
-  validates_presence_of :receiver_id
+  # # # # # #
   
-  attr_accessible :receiver_id, :subject, :body
-
   def read?
     !!read_at
   end
