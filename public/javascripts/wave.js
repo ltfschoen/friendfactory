@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
 	$('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
 
 	// Buttons
-  $('button[type=submit]').button({ icons: { primary: 'ui-icon-check' }});
+  $('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});
   $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 
   // Message Postcard
@@ -35,9 +35,12 @@ jQuery(document).ready(function($) {
       onBeforeLoad:function(event){
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
         var $receiver = $polaroid.find('.front.face .username').text();
-        $postcard.find('.franking').hide();
+        $postcard
+					.find('.franking').hide()
+					.end()
+					.find('button[type="submit"]').button('enable');
         var msg = 'Hey ' + $receiver + ',\n\n';
-        $('textarea', $postcard).val(msg + '\n\nSincerely,\n' + $sender).focus(); //.setCursorPosition(msg.length);
+        $('textarea', $postcard).val(msg + '\n\nSincerely,\n' + $sender).focus();
         var address = 'To: '+ $receiver + "<br/>From: " + $sender;
         $postcard.find('.address').html(address);        
         $postcard.find('#receiver_avatar_image').attr('src', $polaroid.find('img.polaroid').attr('src'));        
@@ -49,22 +52,20 @@ jQuery(document).ready(function($) {
       }
   });
 
-  $postcard
-    .find('.button.cancel')
-      .click(function(event){ event.preventDefault(); })
-    .end()
-    .find('[type="submit"]')
-      .click(function(event){ $postcard.find('.franking').fadeIn();
-        // $this = $(this);
-        // setTimeout(function(){ $this.closest('form').submit(); }, 700);
-        // event.preventDefault();
-      })
-    .end()
-    .find('form')
-      .bind('ajax:success', function(xhr, data, status){
-        $trigger.overlay().close();
-      });
-      
+	$postcard
+		.find('.button.cancel')
+			.click(function(event){ event.preventDefault(); })
+		.end()
+		.find('form')
+			.bind('ajax:loading', function(){
+				$postcard.find('.franking').fadeIn();
+				$(this).find('button[type="submit"]').button('disable');
+				return true;
+			})
+			.bind('ajax:success', function(xhr, data, status){
+				$trigger.overlay().close();
+			});
+
   // Tabs
   $('.wave.nav li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
   $('.wave.nav li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
