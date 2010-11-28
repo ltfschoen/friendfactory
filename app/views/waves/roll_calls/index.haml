@@ -1,20 +1,16 @@
-.wave[@wave]
-  .grid_16
-    .grid_1.alpha
-      &nbsp;
-    .grid_14
-      .tag-cloud
-        - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
-          - css_class = 'tag4' if tag.name.downcase == 'deaf' # TODO !!!
-          - css_class += " current" if tag.name == params[:tag]
-          = link_to tag.name.titleize, rollcall_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
-        = render :partial => 'postings/messages/new'
-    .grid_1.omega
-      &nbsp;
-  .grid_16
-    .postings
-      - @wave.profiles.in_groups_of(3) do |group|
-        - group.each_with_index do |profile, idx|
-          - unless profile.nil?
-            = render :partial => 'postings/avatars/polaroid', :locals => { :profile => profile }
-
+.grid_1
+  &nbsp;
+.grid_14
+  .tag-cloud
+    - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
+      - css_class = 'tag4' if tag.name.downcase == 'deaf' # TODO !!!
+      - css_class += " current" if tag.name == params[:tag]
+      = link_to tag.name.titleize, rollcall_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
+    = render :partial => 'postings/messages/new'
+.grid_1
+  &nbsp;
+.wave.roll_call.grid_16
+  - @waves.in_groups_of(3) do |group|
+    - group.each_with_index do |profile, idx|
+      - unless profile.nil?
+        = render :partial => 'postings/avatars/polaroid', :locals => { :profile => profile }

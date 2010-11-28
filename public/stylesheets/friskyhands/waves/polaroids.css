@@ -1,11 +1,10 @@
-.wave.struct_polaroid_wave .postings,
-.wave.struct_roll_call_wave .postings {
+.wave.roll_call {
     width: 961px;
     margin-left: 6px;
     margin-top: 20px;
 }
-.wave.struct_polaroid_wave .polaroid-container,
-.wave.struct_roll_call_wave .polaroid-container {
+.wave.roll_call .polaroid-container,
+.wave.roll_call .polaroid-container {
     float: left;
     height: 376px;
 }
