@@ -71,11 +71,11 @@ module ApplicationHelper
   end
   
   def link_to_facebook
-    link_to('', 'http://www.facebook.com/pages/Frisky-Hands/297300376633', :target => 'blank', :class => 'web_logos facebook')
+    link_to('', 'http://www.facebook.com/pages/Frisky-Hands/297300376633', :target => 'blank', :class => 'web_logos facebook', :target => '_blank')
   end
   
   def link_to_facebook_shop
-    link_to('Shop', 'http://www.facebook.com/pages/Frisky-Hands/297300376633?v=app_135607783795&ref=ts')
+    link_to('Shop', 'http://www.facebook.com/pages/Frisky-Hands/297300376633?v=app_135607783795&ref=ts', :target => '_blank')
   end
   
   def reset_new_posting_comment_form(page)
