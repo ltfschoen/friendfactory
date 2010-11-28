@@ -55,6 +55,7 @@
 
 .postcard .thread .time_ago {
 	text-align: center;
+	margin-bottom: 6px;
 }
 
 .postcard .thread .message {
