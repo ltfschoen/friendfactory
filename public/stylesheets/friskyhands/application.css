@@ -67,6 +67,34 @@ a.button {
     background: #fff url(/stylesheets/16_col.gif) repeat-y;
 }
 
+.pagination {
+	margin-top: 30px;
+	text-align: center;	
+}
+
+.pagination a,
+.pagination a:visited,
+.pagination a:link {
+	color: #501508;
+	padding: 2px 4px;
+}
+
+.pagination a:hover {
+	color: #CCA;
+	background-color: #501508;
+}
+
+.pagination span.disabled {
+	color: #664;	
+	padding: 2px 4px;
+}
+
+.pagination em {
+	padding: 2px 4px;
+	color: #CCA;
+	background-color: #8C872C;		
+}
+
 .footer {
 	clear: both;
 	text-align: center;	

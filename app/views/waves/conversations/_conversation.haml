@@ -1,6 +1,6 @@
 - if current_user
   .wave.postcard.grid_8[conversation]
-    - form_for Posting::Message.new, :url => wave_postings_messages_path(:wave_id => conversation.id), :remote => true do |f|
+    = form_for Posting::Message.new, :url => wave_postings_messages_path(:wave_id => conversation.id), :remote => true do |f|
       .grid_5.alpha
         .thread
           - messages = conversation.messages

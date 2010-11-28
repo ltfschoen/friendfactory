@@ -20,6 +20,9 @@
     &nbsp;
   .grid_12<
     %ul.postings
-      = render_postings(@wave.postings.includes(:user))
+      =# render_postings(@postings.includes(:user))
+      = render :partial => 'postings/posting', :collection => @postings
   .grid_3<
     &nbsp;
+.grid_16    
+  = will_paginate @postings

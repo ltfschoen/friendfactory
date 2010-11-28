@@ -14,3 +14,5 @@
     - group.each_with_index do |profile, idx|
       - unless profile.nil?
         = render :partial => 'postings/avatars/polaroid', :locals => { :profile => profile }
+.grid_16    
+  = will_paginate @waves

@@ -1,6 +1,6 @@
 #postcard.postcard.grid_8.alpha.omega.hidden
   - if current_user
-    - form_for Posting::Message.new, :url => postings_messages_path, :remote => true do |f|
+    = form_for Posting::Message.new, :url => postings_messages_path, :remote => true do |f|
       = hidden_field_tag('posting_message[profile_id]')
       .grid_5.alpha
         .thread
