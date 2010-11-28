@@ -36,19 +36,27 @@ jQuery(document).ready(function($) {
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
         var $receiver = $polaroid.find('.front.face .username').text();
         $postcard
+					.find('textarea').val('')
+					.end()
+					.find('.thread')
+						.text('')
+						.load('/profile/' + $polaroid.data('profile_id') + '/conversation',
+							function(){
+								var threadDiv = $postcard.find('.thread')[0];
+								threadDiv.scrollTop = threadDiv.scrollHeight;
+							})
+					.end()
 					.find('.franking, .delivered').hide()
 					.end()
 					.find('button[type="submit"]').button('enable')
 					.end()
 					.find('#posting_message_profile_id').val($polaroid.data('profile_id'));
-        $('textarea', $postcard).val('');
         var address = '<p><span class="profile">' + $receiver + '</span></p><p>From ' + $sender + '</p>';
         $postcard.find('.address').html(address);        
         $postcard.find('#receiver_avatar_image').attr('src', $polaroid.find('img.polaroid').attr('src'));        
       },
       onLoad:function(event){
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
-        var $receiver = $polaroid.find('.front.face .username').text();
         $('textarea', $postcard).focus();
       }
   });
@@ -74,10 +82,6 @@ jQuery(document).ready(function($) {
 	// Inbox Postcards
 	$('.postcard').not('#postcard')
 		.find('form')
-			.bind('submit', function(){
-				var msg = $(this).find('textarea').val();
-				if (msg.length == 0) { return false; }			
-			})
 			.bind('ajax:loading', function(){
 				$(this).find('.franking').fadeIn();
 				$(this).find('button[type="submit"]').button('disable');
@@ -86,21 +90,28 @@ jQuery(document).ready(function($) {
 				$this = $(this);
 				$this.find('.delivered').fadeIn();
 				setTimeout(function(){
-						$this
-							.find('.franking, .delivered').fadeOut()
-							.end()
-							.find('textarea').val('')
-							.end()
-							.find('button[type="submit"]').button('enable');
+					$this
+						.find('.franking, .delivered').fadeOut()
+						.end()
+						.find('textarea').val('')
+						.end()
+						.find('button[type="submit"]').button('enable');
 				}, 700);
-				var threadDiv = $this.find('.thread')[0];
-				threadDiv.scrollTop = threadDiv.scrollHeight;
 			})
 			.bind('ajax:complete', function(){
 				$(this).find('textarea').focus();
+				var threadDiv = $this.find('.thread')[0];
+				threadDiv.scrollTop = threadDiv.scrollHeight;
 			});
 			
 	// Inbox Postcards and Polaroid Postcard
+	$('.postcard')
+		.find('form')
+			.bind('submit', function(){
+				var msg = $(this).find('textarea').val();
+				if (msg.length == 0) { return false; }			
+			});
+	
 	var $threads = $('.postcard').find('form .thread');
 	$threads.each(function(idx, thread){
 		thread.scrollTop = thread.scrollHeight;

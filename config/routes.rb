@@ -24,11 +24,15 @@ Friskyfactory::Application.routes.draw do |map|
     end
   end
   
-  # To create a messsage from a polaroid when
-  # we only have the profile_id of the receiver.
+  # Route for create conversation messages from a polaroid
+  # when we only have the profile_id for the receiver.
   namespace :postings do
     resources :messages, :only => [ :create ]
   end
+
+  # Route to show conversation messages from a polaroid
+  # when we only have the profile_id of the receiver.
+  get 'profile/:profile_id/conversation', :controller => 'waves/conversations', :action => 'show'
   
   get 'inbox', :controller => 'waves/conversations', :action => :index
 

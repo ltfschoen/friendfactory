@@ -42,10 +42,6 @@
 	padding-left: 26px;
 }
 
-.posting .grid_3 {
-	
-}
-
 .postcard .thread {
     height: 188px;
 	width: auto;
@@ -54,7 +50,35 @@
 	font-size: 12px;
 	line-height: 18px;
 	overflow-x: hidden;
-	overflow-x: auto;
+	overflow-y: auto;
+}
+
+.postcard .thread .time_ago {
+	text-align: center;
+}
+
+.postcard .thread .message {
+	margin: 5px 0;
+}
+
+.postcard .thread .message img.avatar.thimble {
+	position: relative;
+	top: -5px;
+}
+
+.postcard .thread .message.sent img.avatar.thimble {
+	float: right;
+	margin-left: 4px;
+}
+
+.postcard .thread .message.sent {
+	float: right;
+	padding-left: 20px;
+}
+
+.postcard .thread .message.received {
+	float: left;
+/*	padding-right: 20px;*/
 }
 
 .postcard textarea {

@@ -3,7 +3,12 @@
     - form_for Posting::Message.new, :url => wave_postings_messages_path(:wave_id => conversation.id), :remote => true do |f|
       .grid_5.alpha
         .thread
-          = render :partial => 'postings/messages/message', :collection => conversation.messages
+          - messages = conversation.messages
+          .unobtrusive.time_ago
+            Started&nbsp;
+            = time_ago_in_words(messages.first.created_at)
+            &nbsp;ago
+          = render :partial => 'postings/messages/message', :collection => messages
           &nbsp;
         = f.text_area :body
       .grid_3.omega
