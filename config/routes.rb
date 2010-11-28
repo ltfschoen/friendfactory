@@ -20,13 +20,17 @@ Friskyfactory::Application.routes.draw do |map|
     namespace :postings do
       resources :texts, :only => [ :create ]
       resources :photos, :only => [ :create ]
+      resources :messages, :only => [ :create ]
     end
   end
   
-  # To create a messsage when we don't know the wave
+  # To create a messsage from a polaroid when
+  # we only have the profile_id of the receiver.
   namespace :postings do
     resources :messages, :only => [ :create ]
   end
+  
+  get 'inbox', :controller => 'waves/conversations', :action => :index
 
   # To add a comment to a posting
   map.resources :postings, :only => [] do |posting|

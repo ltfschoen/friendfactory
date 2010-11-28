@@ -6,6 +6,8 @@ class Wave::Conversation < Wave::Base
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
-      :order                   => 'created_at desc'
+      :order                   => 'created_at asc'
+
+  alias :recipient :resource
 
 end

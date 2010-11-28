@@ -21,16 +21,16 @@ jQuery(document).ready(function($) {
   $('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});
   $('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 
-  // Message Postcard
-  var $postcard = $('#message-postcard');
+  // Overlay Postcard
+  var $postcard = $('#postcard');
   var $sender = $('body').attr('data-first_name');
   var $trigger;
   
-  $('a.message')
+  $('.polaroid a.message')
     .click(function(){ $trigger = $(this); })
     .overlay({
       top:'30%',
-      target:'#message-postcard',
+      target:'#postcard',
       close:'.button.cancel',
       onBeforeLoad:function(event){
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
@@ -41,16 +41,15 @@ jQuery(document).ready(function($) {
 					.find('button[type="submit"]').button('enable')
 					.end()
 					.find('#posting_message_profile_id').val($polaroid.data('profile_id'));
-        var msg = 'Hey ' + $receiver + ',\n\n';
-        $('textarea', $postcard).val(msg + '\n\nSincerely,\n' + $sender).focus();
-        var address = 'To: '+ $receiver + "<br/>From: " + $sender;
+        $('textarea', $postcard).val('');
+        var address = '<p><span class="profile">' + $receiver + '</span></p><p>From ' + $sender + '</p>';
         $postcard.find('.address').html(address);        
         $postcard.find('#receiver_avatar_image').attr('src', $polaroid.find('img.polaroid').attr('src'));        
       },
       onLoad:function(event){
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
         var $receiver = $polaroid.find('.front.face .username').text();
-        $('textarea', $postcard).focus().setCursorPosition($receiver.length + 7);
+        $('textarea', $postcard).focus();
       }
   });
 
@@ -62,16 +61,50 @@ jQuery(document).ready(function($) {
 			.bind('ajax:loading', function(){
 				$postcard.find('.franking').fadeIn();
 				$(this).find('button[type="submit"]').button('disable');
-				return true;
 			})
 			.bind('ajax:success', function(xhr, data, status){
 				$postcard.find('.delivered').fadeIn();
 				setTimeout(function(){ $trigger.overlay().close(); }, 700);
 			})
 			.bind('ajax:complete', function(){
-				$postcard.find('button[type="submit"]').button('enable');
+				setTimeout(function(){ $postcard.find('button[type="submit"]').button('enable'); }, 700);				
 			})
 			.bind('ajax:failure', function(){ alert("Couldn't send your message. Try again or Cancel."); });
+
+	// Inbox Postcards
+	$('.postcard').not('#postcard')
+		.find('form')
+			.bind('submit', function(){
+				var msg = $(this).find('textarea').val();
+				if (msg.length == 0) { return false; }			
+			})
+			.bind('ajax:loading', function(){
+				$(this).find('.franking').fadeIn();
+				$(this).find('button[type="submit"]').button('disable');
+			})
+			.bind('ajax:success', function(xhr, data, status){
+				$this = $(this);
+				$this.find('.delivered').fadeIn();
+				setTimeout(function(){
+						$this
+							.find('.franking, .delivered').fadeOut()
+							.end()
+							.find('textarea').val('')
+							.end()
+							.find('button[type="submit"]').button('enable');
+				}, 700);
+				var threadDiv = $this.find('.thread')[0];
+				threadDiv.scrollTop = threadDiv.scrollHeight;
+			})
+			.bind('ajax:complete', function(){
+				$(this).find('textarea').focus();
+			});
+			
+	// Inbox Postcards and Polaroid Postcard
+	var $threads = $('.postcard').find('form .thread');
+	$threads.each(function(idx, thread){
+		thread.scrollTop = thread.scrollHeight;
+	});
 
   // Tabs
   $('.wave.nav li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});

@@ -20,6 +20,6 @@
     &nbsp;
   .grid_12<
     %ul.postings
-      = render_postings(@wave.postings.for(current_user).includes(:user))
+      = render_postings(@wave.postings.includes(:user))
   .grid_3<
     &nbsp;

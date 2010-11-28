@@ -12,19 +12,10 @@ class Wave::Base < ActiveRecord::Base
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
-      :order                   => 'created_at desc' do        
-    def for(user)
-      if user.nil?
-        exclude('Posting::Message')
-      else
-        where('(private = false or (private = true and ((user_id = ?) or (receiver_id = ?))))', user.id, user.id)
-      end
-    end
-    
+      :order                   => 'created_at desc' do    
     def only(*types)
       where('type in (?)', types.map(&:to_s))
     end
-    
     def exclude(*types)
       find :all, :conditions => [ 'type not in (?)', types.map(&:to_s) ]
     end    

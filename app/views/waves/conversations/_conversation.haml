@@ -1,0 +1,22 @@
+- if current_user
+  .wave.postcard.grid_8[conversation]
+    - form_for Posting::Message.new, :url => wave_postings_messages_path(:wave_id => conversation.id), :remote => true do |f|
+      .grid_5.alpha
+        .thread
+          = render :partial => 'postings/messages/message', :collection => conversation.messages
+          &nbsp;
+        = f.text_area :body
+      .grid_3.omega
+        .stamp
+          .franking.hidden
+          .delivered.hidden
+          &nbsp;
+        = avatar_image_tag conversation.recipient, :style => 'thimble', :anonymous => true
+        .address
+          %p
+            = link_to_profile(conversation.recipient)
+          %p
+            From
+            = current_user.first_name
+        .button-bar
+          = f.submit 'Send'

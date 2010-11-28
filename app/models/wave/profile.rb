@@ -21,7 +21,7 @@ class Wave::Profile < Wave::Base
   
   def active_avatar(avatar)
     if avatar.active?
-      # Following update line didn't work. Used update_all instead.
+      # Following update didn't work. Used update_all instead.
       # Posting::Avatar.update((self.avatar_ids - [ avatar.id ]), :active => false)
       Posting::Avatar.update_all([ 'active = ?', false], [ 'id in (?)', (self.avatar_ids - [ avatar.id ]) ])
     end

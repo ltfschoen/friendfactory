@@ -1,12 +1,11 @@
-#message-postcard.grid_8.alpha.omega.hidden
+#postcard.postcard.grid_8.alpha.omega.hidden
   - if current_user
     - form_for Posting::Message.new, :url => postings_messages_path, :remote => true do |f|
       = hidden_field_tag('posting_message[profile_id]')
       .grid_5.alpha
-        - if false
-          .thread
-            &nbsp;
-        = f.text_area :body, :class => 'tall'
+        .thread
+          &nbsp;
+        = f.text_area :body
       .grid_3.omega
         .stamp
           .franking.hidden
@@ -18,4 +17,3 @@
         .button-bar
           = f.submit 'Send'
           = f.button 'Cancel', :class => 'cancel button'
-
