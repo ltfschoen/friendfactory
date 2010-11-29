@@ -41,6 +41,9 @@ Friskyfactory::Application.routes.draw do |map|
     posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
   end
 
+  # To show events
+  resources :events, :only => [ :index ]
+
   # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
