@@ -1,6 +1,6 @@
 class CreateEventWave < ActiveRecord::Migration
   def self.up
-    Rake::Task[:'db:seed'].invoke
+    require File.join(Rails.root, 'db', 'seeds')
   end
 
   def self.down
