@@ -1,0 +1,10 @@
+#new_event_overlay.hidden  
+  = form_for Wave::Event.new(:user_id => current_user.id), :remote => true do |f|
+    .ticket
+      .center-pane
+        = text_field_tag 'wave_event[promoter_name]', current_user.full_name
+        .presents PRESENTS
+        = f.text_area  :description, :placeholder => 'Event Description'
+      .button-bar
+        = f.submit 'Create'
+        = f.button 'Cancel', :class => 'button cancel'

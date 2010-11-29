@@ -2,8 +2,6 @@ class Wave::Base < ActiveRecord::Base
   
   set_table_name :waves
   
-  acts_as_slugable :source_column => :topic, :slug_column => :slug
-
   belongs_to :user  
 
   has_and_belongs_to_many :postings,

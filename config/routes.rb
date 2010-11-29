@@ -15,6 +15,13 @@ Friskyfactory::Application.routes.draw do |map|
 
   get 'rollcall(/:tag)', :controller => 'waves/roll_calls', :action => :index, :as => 'rollcall'
 
+  # To show events
+  namespace :wave do
+    resources :events, :only => [ :index, :create ]
+  end
+  
+  get 'events', :controller => 'wave/events', :action => 'index'
+
   # To add postings to a wave
   resources :waves, :only => [] do
     namespace :postings do
@@ -24,7 +31,7 @@ Friskyfactory::Application.routes.draw do |map|
     end
   end
   
-  # Route for create conversation messages from a polaroid
+  # Route to create conversation messages from a polaroid
   # when we only have the profile_id for the receiver.
   namespace :postings do
     resources :messages, :only => [ :create ]
@@ -40,9 +47,6 @@ Friskyfactory::Application.routes.draw do |map|
   map.resources :postings, :only => [] do |posting|
     posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
   end
-
-  # To show events
-  resources :events, :only => [ :index ]
 
   # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  

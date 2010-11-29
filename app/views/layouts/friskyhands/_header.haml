@@ -6,7 +6,7 @@
     %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'waves/roll_calls', :action => 'index')}" }
       = link_to 'Roll Call', rollcall_path
     %li#nav-3
-      = link_to 'Events', '#'
+      = link_to 'Events', events_path
     %li#nav-4
       = link_to_facebook_shop
     %li#nav-5{ :class => "#{'current' if current_page?(:controller => 'waves/profile', :action => 'show')}" }

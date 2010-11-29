@@ -1,32 +1,36 @@
-.header.clearfix
+- javascript 'wave/event'
+- stylesheet 'wave/event'
+
+.wave.header.clearfix<
   .grid_1<
     &nbsp;
   .grid_4<
     = render :partial => 'nav'
-  .grid_6
-    - if @wave.try(:topic)
-      %h1= @wave.topic
-    - else
-      &nbsp;
+  .grid_6<
+    &nbsp;
   .grid_5<
     &nbsp;
+  = render :partial => 'new'
 
-.grid_1
+.grid_1<
   &nbsp;
-.grid_14
-  .tag-cloud
+.grid_14<
+  .tag-cloud<
     - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
       - css_class = 'tag4' if tag.name.downcase == 'deaf' # TODO !!!
       - css_class += " current" if tag.name == params[:tag]
       = link_to tag.name.titleize, rollcall_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
-  =# render :partial => 'postings/events/new'
-.grid_1
+.grid_1<
   &nbsp;
 
-.wave.events.grid_16
-  - @waves.each do |wave|
-    = wave.inspect
-    =# render :partial => 'postings/avatars/polaroid', :locals => { :profile => profile }
+.wave.events<
+  .grid_2<
+    &nbsp;
+  .grid_12<
+    %ul.waves
+      = render :partial => 'event', :collection => @waves
+  .grid_2<
+    &nbsp;
     
-.grid_16    
+.grid_16<
   = will_paginate @waves

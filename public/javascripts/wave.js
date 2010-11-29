@@ -32,6 +32,7 @@ jQuery(document).ready(function($) {
       top:'30%',
       target:'#postcard',
       close:'.button.cancel',
+			mask: { color: '#666', opacity: 0.5 },
       onBeforeLoad:function(event){
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
         var $receiver = $polaroid.find('.front.face .username').text();
@@ -117,48 +118,8 @@ jQuery(document).ready(function($) {
 		thread.scrollTop = thread.scrollHeight;
 	});
 
-  // Tabs
-  $('.wave.nav li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
-  $('.wave.nav li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
-  // $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});
-  // $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-comment' }});
-  // $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-link' }});
-  // $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
-  // $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
-
-  $('ul.wave.nav li').click(function() {
-    if (!$(this).hasClass('current')) {
-      $(this).addClass('current').siblings('li.current').removeClass('current');
-      $($(this).find('a').attr('href')).show().siblings('.tab_content').hide();
-      this.blur();
-    }
-    return false;
-  });
-
-  $('button.cancel', '.tab_content').click(function() {
-    $(this).parents('.tab_content').hide().end().parents('form')[0].reset();
-    $('ul.wave.nav li.current').removeClass('current');
-    return false;
-  });
-
-  $('.tab_content.photo form').bind('ajax:before', function(event) {
-    $(this).hide();
-    $('#posting_photo_upload_spinner').show();
-  });
-
-	// Comment forms
-  $('a.new_posting_comment').live('click', function(event) {
-    event.preventDefault();
-    $(this).hide().next('.comment-bubble').show();
-  });
-
-  $('.comment-bubble form').bind('ajax:before', function(event) {
-    $(this).hide().next('.new_posting_comment_spinner').show();
-  });
+	// shared.js was here
 	
-  $('form.new_posting_comment')
-     .find('button.cancel').live('click', function(event) {
-       event.preventDefault();
-       $(this).closest('.comment-bubble').hide().prev('a.new_posting_comment').show();
-    });
+	// comment.js was here
+	
 });

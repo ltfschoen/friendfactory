@@ -16,7 +16,7 @@
     margin: 0;
 }
 
-.wave.header .nav li,
+/*.wave.header .nav a,*/
 .wave.tab_contents button,
 .wave.tab_contents textarea,
 .wave.tab_contents input[type='text'] {
