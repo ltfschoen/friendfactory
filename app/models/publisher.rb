@@ -1,7 +1,8 @@
 class Publisher
   
-  def initialize(publish_to)
+  def initialize(publish_to, &call_back)
     @publish_to = publish_to
+    @call_back = call_back
   end
   
   def after_create(posting)
@@ -10,7 +11,11 @@ class Publisher
       when @publish_to[:wave] == Wave::Profile then Wave::Profile.find_by_user_id(posting.user_id)
       when @publish_to[:wave] == Wave::Conversation then find_or_create_conversation_wave(posting)
     end
-    wave.postings << posting if wave.present?
+    if wave.present?      
+      wave.postings << posting
+      @call_back.call(wave, posting)
+    end
+    true
   end
   
   private

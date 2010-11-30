@@ -1,5 +1,7 @@
 class Posting::Avatar < Posting::Base
 
+  RepublishDuration = 6.hours
+  
   has_attached_file :image,
       :styles => {
           :thumb    => [ '100x100#', :jpg ],
@@ -17,7 +19,17 @@ class Posting::Avatar < Posting::Base
 
   before_create :set_dimensions  
 
-  publish_to :slug => Waves::BaseController::DefaultWaveSlug
+  publish_to :slug => Waves::BaseController::DefaultWaveSlug do |wave, posting|
+    if wave.present? && posting.present?
+      postings_to_unpublish = wave.postings \
+        .where(
+          :user_id    => posting.user_id,
+          :type       => Posting::Avatar,
+          :created_at => (Time.now - RepublishDuration)..Time.now) \
+        .where('id <> ?', posting.id)
+      wave.postings.delete(postings_to_unpublish)
+    end
+  end
 
   def profile
     waves.where('type = (?)', Wave::Profile).limit(1).first

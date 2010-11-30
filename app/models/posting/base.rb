@@ -28,8 +28,8 @@ class Posting::Base < ActiveRecord::Base
       :join_table              => 'postings_waves',
       :order                   => 'updated_at desc'
 
-  def self.publish_to(destination)
-    after_create Publisher.new(destination)
+  def self.publish_to(destination, &block)
+    after_create Publisher.new(destination, &block)
   end
 
   # Thinking-Sphinx
