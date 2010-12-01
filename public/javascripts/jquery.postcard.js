@@ -1,4 +1,4 @@
-(function($){
+(function($) {
 
 	var $trigger;
 					
@@ -64,7 +64,7 @@
 		if (methods[method]) {
       		return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
 		} else if (!method) {
-      		return methods.init.apply(this, arguments );			
+      		return methods.init.apply(this, arguments);
 		} // if
 	}; // fn.postcard
 	
@@ -72,8 +72,6 @@
 
 
 jQuery(function($) {
-	// $postcard = $('#postcard');
-	// $postcard.find('form')
 	$('#postcard').find('form')
 		.bind('ajax:success', function(xhr, data, status) {
 			var $trigger = $('.polaroid a.message').postcard('trigger');
