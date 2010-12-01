@@ -49,7 +49,8 @@ module ApplicationHelper
   def link_to_profile(user, opts = {})
     name = opts[:label] || user.first_name
     if user.profile
-      link_to(name, waves_profile_path(user.profile), :class => 'profile', :rel => '#polaroid-overlay')
+      content_tag :span, name, :class => 'profile'
+      # link_to(name, waves_profile_path(user.profile), :class => 'profile', :rel => '#polaroid-overlay')
     end
   end
 
