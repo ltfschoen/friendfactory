@@ -13,7 +13,7 @@ class Publisher
     end
     if wave.present?      
       wave.postings << posting
-      @call_back.call(wave, posting)
+      @call_back.call(wave, posting) unless @call_back.nil?
     end
     true
   end
