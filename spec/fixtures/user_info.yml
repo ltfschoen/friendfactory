@@ -1,5 +1,6 @@
 adam:
   id: 1
+  user_id: 1
   age: 21
   gender: 1
   orientation: 1
@@ -8,6 +9,7 @@ adam:
   
 bert:
   id: 2
+  user_id: 2
   age: 22
   gender: 2
   orientation: 2
@@ -16,6 +18,7 @@ bert:
     
 charlie:
   id: 3
+  user_id: 3
   age: 23
   gender: 3
   orientation: 3
