@@ -52,9 +52,13 @@
       });
     = csrf_meta_tag    
   %body{ :class => "#{[ current_site, current_layout ].compact * ' '}", :'data-first_name' => current_user.try(:first_name), :'data-site_name' => current_site }
+
+    #polaroid-overlay
+      .polaroid-wrap
+      
     .container.container_16.clearfix
       = render :partial => "layouts/#{current_site}/header"
-      = yield      
+      = yield
       = render :partial => "layouts/#{current_site}/footer" rescue nil
       = render :partial => 'layouts/feedback' unless Rails.env.development?
   - if Rails.env.production?

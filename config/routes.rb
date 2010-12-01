@@ -7,7 +7,7 @@ Friskyfactory::Application.routes.draw do |map|
 
   # To show waves
   namespace :waves do
-    resources :profiles, :only => [] do
+    resources :profiles, :only => [ :show ] do
       member { get :photos }
     end
     get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }

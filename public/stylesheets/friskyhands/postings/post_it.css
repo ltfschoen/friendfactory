@@ -29,6 +29,15 @@
     white-space: nowrap;
 }
 
+.post_it a.icon.message {
+	display: inline-block;
+	background: url(/images/friskyhands/buddy-bar.png) -120px -1px no-repeat;
+	width: 26px;
+	height: 20px;
+	text-decoration: none;
+	text-indent: -1000em;	
+}
+
 .wave .post_it .spinner {
     position: absolute;
     top: 60px;

@@ -22,8 +22,12 @@ module AvatarHelper
         opts.reverse_merge!(:alt => user.first_name)
         online = 'online' if (user.online? && (opts[:online_badge] == true))
         klass = (klass << online).compact * ' '
-        # TODO return link_to(..., profile_path(user.profile))
-        return image_tag(avatar.image.url(opts[:style].to_sym), :alt => opts[:alt], :class => klass, :site => opts[:site], :id => opts[:id])
+        image_tag = image_tag(avatar.image.url(opts[:style].to_sym),
+            :alt   => opts[:alt],
+            :class => klass,
+            :site  => opts[:site],
+            :id    => opts[:id])
+        return link_to(image_tag, waves_profile_path(user.profile))
       end
     end
 
@@ -31,12 +35,12 @@ module AvatarHelper
       klass = (klass << 'silhouette').compact * ' '
       with_options :class => klass, :site => false, :id => opts[:id] do |options|
         case opts[:gender]
-          when UserInfo::GuyGender
-            then options.image_tag 'silhouette-guy.gif'
-          when UserInfo::GirlGender
-            then options.image_tag 'silhouette-girl.gif'
-          else
-            options.image_tag 'silhouette-q.gif'
+        when UserInfo::GuyGender
+          then options.image_tag 'silhouette-guy.gif'
+        when UserInfo::GirlGender
+          then options.image_tag 'silhouette-girl.gif'
+        else
+          options.image_tag 'silhouette-q.gif'
         end
       end      
     end

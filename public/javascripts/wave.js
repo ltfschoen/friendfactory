@@ -28,11 +28,11 @@ jQuery(document).ready(function($) {
   
   $('.polaroid a.message')
     .click(function(){ $trigger = $(this); })
-    .overlay({
-      top:'30%',
-      target:'#postcard',
-      close:'.button.cancel',
-			mask: { color: '#666', opacity: 0.5 },
+	.overlay({
+		top:'30%',
+      	target:'#postcard',
+      	close:'.button.cancel',
+		mask: { color: '#666', opacity: 0.5 },
       onBeforeLoad:function(event){
         var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
         var $receiver = $polaroid.find('.front.face .username').text();
@@ -118,6 +118,17 @@ jQuery(document).ready(function($) {
 		thread.scrollTop = thread.scrollHeight;
 	});
 
+	// Post-its
+	$('a.profile[rel]', '.post_it')
+		.overlay({
+			top:'30%',
+			mask: { color: '#666', opacity: 0.5 },			
+			onBeforeLoad: function() {
+				var wrap = this.getOverlay().find('.polaroid-wrap');
+				wrap.load(this.getTrigger().attr('href'));
+			}
+		});
+	
 	// shared.js was here
 	
 	// comment.js was here

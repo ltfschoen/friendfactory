@@ -6,9 +6,9 @@ class Waves::ProfilesController < Waves::BaseController
   helper :waves
   
   def show
-    @wave = Wave::Profile.find_by_id(params[:id])
+    @profile = Wave::Profile.find_by_id(params[:id])
     respond_to do |format|
-      format.html
+      format.html { render :layout => false }
     end
   end
   
