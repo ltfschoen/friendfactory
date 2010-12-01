@@ -10,9 +10,9 @@ class Waves::RollCallsController < Waves::BaseController
       params[:tag] = params[:tag].downcase.gsub(/-/, ' ')
       UserInfo \
           .tagged_with(params[:tag]) \
-          .includes(:profile => :avatars) \
+          .includes(:profile) \
+          .order('waves.updated_at desc') \
           .map(&:profile) \
-          .order('updated_at desc') \
           .paginate(:page => params[:page], :per_page => @@per_page)
     else
       Wave::Profile.includes(:avatars) \
