@@ -1,9 +1,9 @@
 .wave .post_it {
     position: relative;
     background: url('/images/friskyhands/post-it.png') no-repeat top left;
-    width: 160px;
+    width: 150px;
     height: 130px;
-    padding: 20px 20px;
+    padding: 20px 24px 10px 20px;
 }
 
 .wave .post_it img.avatar {
@@ -12,9 +12,9 @@
     top: -20px;
     left: -12px;
     margin-bottom: 10px;
-    -webkit-box-shadow: 3px 3px 4px #873;
-    -moz-box-shadow: 3px 3px 4px #873;
-    box-shadow: 3px 3px 4px #873;
+    -webkit-box-shadow: 2px 2px 4px #666;
+    -moz-box-shadow: 3px 3px 4px #666;
+    box-shadow: 3px 3px 4px #666;
     -webkit-transform: rotate(-6deg);
     -moz-transform: rotate(-6deg);
 }

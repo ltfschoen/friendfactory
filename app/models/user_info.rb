@@ -1,7 +1,11 @@
 class UserInfo < ActiveRecord::Base
 
+  GuyGender    = 1
+  GirlGender   = 2
+  TrannyGender = 3
+
   Gender =
-      (a = [ 'Guy', 'Girl', 'Trans' ]).zip((1..a.length).to_a)
+      ([ 'Guy', 'Girl', 'Trans' ].zip([ GuyGender, GirlGender, TrannyGender ]))
 
   Orientation =
       (a = [ 'Gay', 'Lesbian', 'Straight', 'Bisexual', 'Trans' ]).zip((1..a.length).to_a)
@@ -15,7 +19,8 @@ class UserInfo < ActiveRecord::Base
   set_table_name 'user_info'
 
   acts_as_taggable
-  
+
+  belongs_to :user
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
   
   before_save do |user_info|

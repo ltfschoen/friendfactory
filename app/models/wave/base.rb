@@ -2,7 +2,7 @@ class Wave::Base < ActiveRecord::Base
   
   set_table_name :waves
   
-  belongs_to :user  
+  belongs_to :user, :include => :user_info
 
   has_and_belongs_to_many :postings,
       :class_name              => 'Posting::Base',

@@ -16,7 +16,7 @@
           .franking.hidden
           .delivered.hidden
           &nbsp;
-        = avatar_image_tag conversation.recipient, :style => 'thimble', :anonymous => true
+        = avatar_image_tag conversation.recipient, :style => 'thimble', :anonymous => false, :gender => conversation.recipient.user_info.gender
         .address
           %p
             = link_to_profile(conversation.recipient)

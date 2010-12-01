@@ -11,9 +11,10 @@ class User < ActiveRecord::Base
   aasm_initial_state :welcomed
   aasm_state         :welcomed
 
+  has_one  :user_info
+  
   has_many :waves,    :class_name => 'Wave::Base'
-  has_one  :profile,  :class_name => 'Wave::Profile'
-
+  has_one  :profile,  :class_name => 'Wave::Profile'  
   has_many :conversations,
       :class_name => 'Wave::Conversation',
       :order      => 'created_at desc' do
