@@ -2,6 +2,14 @@
 	
 	$.fn.polaroid = function() {
 		
+		this.each(function() {
+			var $polaroid = $(this);
+			$('a.close', $polaroid).click(function(event) {
+				event.preventDefault();
+				$polaroid.fadeOut();
+			});
+		});
+		
 		if ($.browser.safari) {
 
 			return this.each(function() {

@@ -1,10 +1,5 @@
 jQuery(document).ready(function($) {  
 
-	var ff = {
-		
-	};
-	
-	
 	// Placeholders
 	$('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
 
@@ -31,7 +26,8 @@ jQuery(document).ready(function($) {
 					.draggable()
 					.find('.polaroid-container > .polaroid')
 						.polaroid()
-						.find('a.message').postcard();
+						.find('a.message').postcard().end()
+						.find('a.close').show();
 			});
 	});
 
