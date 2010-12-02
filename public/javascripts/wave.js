@@ -1,5 +1,10 @@
 jQuery(document).ready(function($) {  
 
+	var ff = {
+		
+	};
+	
+	
 	// Placeholders
 	$('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
 
@@ -7,20 +12,29 @@ jQuery(document).ready(function($) {
 	$('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});
 	$('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 
-	// Set up polaroid button to messaging
-	$('a.message', '.polaroid').postcard();
+	// Set up polaroids
+	$('.polaroid-container > .polaroid').polaroid().find('a.message').postcard();
 
 	// Post-its
-	$('a.profile[rel]', '.post_it')
-		.overlay({
-			top:'30%',
-			mask: { color: '#666', opacity: 0.5 },			
-			onBeforeLoad: function() {
-				var wrap = this.getOverlay().find('.polaroid-wrap');
-				wrap.load(this.getTrigger().attr('href'));
-			}
-		});
-	
+	$('a.profile', '.post_it').click(function(event) {
+		event.preventDefault();
+		$('<div class="floating"></div>')
+			.appendTo('.floating-overlay')
+			.load($(this).attr('href'), function() {	 			
+				$(this)
+					.position({
+						my: 'left center',
+						of: event,
+						offset: '30 0',
+						collision: 'fit'
+					})	
+					.draggable()
+					.find('.polaroid-container > .polaroid')
+						.polaroid()
+						.find('a.message').postcard();
+			});
+	});
+
 	// shared.js was here	
 	// comment.js was here
 	

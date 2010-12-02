@@ -34,7 +34,7 @@
 }
 
 #postcard {
-    z-index: 5000;
+/*    z-index: 0;*/
 }
 
 .postcard .grid_5 {

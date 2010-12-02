@@ -15,12 +15,12 @@ div.polaroid .face {
 	width: 260px;
 	background: url(/images/friskyhands/polariod.jpg);
 	padding: 15px;
-	border-radius: 5px;	
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-    box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
+	border-radius: 5px;	
     -webkit-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
     -moz-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
+    box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
 }
 
 div.polaroid .front.face table.header {
@@ -239,7 +239,7 @@ div.polaroid div.gripper {
 	-webkit-perspective: 1200;
 }
 
-.polaroid-container div.polaroid  {
+.polaroid-container div.polaroid {
 	position: absolute;
 	-webkit-transform-style: preserve-3d;	
     -webkit-transition-property: -webkit-transform;

@@ -121,7 +121,3 @@
 	
 })(jQuery);
 
-
-jQuery(function($) {
-	$('.polaroid-container > .polaroid').polaroid();
-});

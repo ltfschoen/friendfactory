@@ -10,6 +10,7 @@
     %h1= @wave.topic
   .grid_5<
     &nbsp;
+
 .wave.tab_contents.clearfix
   .grid_1<
     &nbsp;
@@ -18,13 +19,13 @@
     = render :partial => 'postings/messages/new'
   .grid_3<
     &nbsp;
+
 .wave[@wave]
   .grid_1<
     &nbsp;
   .grid_12<
     %ul.postings
-      =# render_postings(@postings.includes(:user))
-      = render :partial => 'postings/posting', :collection => @postings
+      = render_postings(@postings)
   .grid_3<
     &nbsp;
 .grid_16    

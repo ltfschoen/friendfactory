@@ -6,7 +6,13 @@ module AvatarHelper
       user_or_avatar = nil
     end
     
-    opts.reverse_merge!(:online_badge => true, :style => :polaroid, :site => false, :anonymous => true)    
+    opts.reverse_merge!(
+        :online_badge    => true,
+        :style           => :polaroid,
+        :site            => false,
+        :anonymous       => true,
+        :link_to_profile => true)    
+    
     if opts[:style].to_sym == :thimble
       opts[:style], opts[:class] = :thumb, 'thimble'
     end
@@ -22,15 +28,23 @@ module AvatarHelper
         opts.reverse_merge!(:alt => user.first_name)
         online = 'online' if (user.online? && (opts[:online_badge] == true))
         klass = (klass << online).compact * ' '
+        
         image_tag = image_tag(avatar.image.url(opts[:style].to_sym),
             :alt   => opts[:alt],
             :class => klass,
             :site  => opts[:site],
             :id    => opts[:id])
-        return link_to(image_tag, waves_profile_path(user.profile))
+        
+        if opts[:link_to_profile]
+          return link_to(image_tag, waves_profile_path(user.profile), :class => 'profile')
+        else
+          return image_tag
+        end
       end
     end
 
+    # user_or_avatar not present
+    
     if opts[:anonymous] == true
       klass = (klass << 'silhouette').compact * ' '
       with_options :class => klass, :site => false, :id => opts[:id] do |options|

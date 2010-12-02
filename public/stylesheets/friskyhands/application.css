@@ -127,6 +127,10 @@ a.button {
 
 .container {
     position: relative;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;	
 }
 
 input[type=text],
@@ -434,3 +438,32 @@ a.web_logos {
 a.facebook {
 	background-position: -96px 0;
 }
+
+.floating-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.floating {
+	position: fixed;
+	z-index: 5000;
+	cursor: move;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.floating img {
+	-webkit-user-drag: none;
+}
+
+.floating div.polaroid .face {
+    -webkit-box-shadow: 6px 6px 20px 6px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
+    box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
+}
+
