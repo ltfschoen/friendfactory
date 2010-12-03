@@ -12,7 +12,7 @@
               = link_to link.body
             - else
               = link_to link.subject, link.body
-        = render :partial => 'postings/comments/comment', :collection => link.children.comments
+        = render :partial => 'posting/comments/comment', :collection => link.children.comments
         %div{:id => "posting_#{link.id}_new_comment_well"}
-        = render :partial => 'postings/comments/new', :locals => { :parent => link }
+        = render :partial => 'posting/comments/new', :locals => { :parent => link }
   = render_postings(link.children.postings)

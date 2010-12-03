@@ -7,10 +7,13 @@ Friskyfactory::Application.routes.draw do |map|
     resources :events,      :only => [ :index, :create ]
   end
 
+  # Menu bar equivalents
+  # get 'wave'            => 'wave/communities#show'
   get 'rollcall(/:tag)' => 'wave/roll_calls#index', :as => 'rollcall'
   get 'events'          => 'wave/events#index'
   get 'inbox'           => 'wave/conversations#index'
 
+  # To add postings to a wave
   resources :waves, :only => [] do
     namespace :posting do
       resources :texts, :only => [ :create ]
@@ -22,11 +25,15 @@ Friskyfactory::Application.routes.draw do |map|
   # Route to show conversation messages from a polaroid
   # when we only have the profile_id of the receiver.
   get 'profile/:profile_id/conversation' => 'wave/conversations#show'
-  
   # Route to create conversation messages from a polaroid
   # when we only have the profile_id for the receiver.
   namespace :posting do
     resources :messages, :only => [ :create ]
+  end
+
+  # To add a comment to a posting
+  resources :postings, :only => [] do |posting|
+    resources :comments, :only => [ :new, :create ], :controller => 'posting/comments'
   end
 
   # To manage a user's profile
@@ -39,19 +46,11 @@ Friskyfactory::Application.routes.draw do |map|
 
   # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # 
-
-  # To add postings to a wave
-  # resources :waves, :only => [] do
-  #   namespace :postings do
-  #     # resources :texts, :only => [ :create ]
-  #     resources :photos, :only => [ :create ]
-  #   end
-  # end
     
-  # To add a comment to a posting
-  map.resources :postings, :only => [] do |posting|
-    posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
-  end
+  # # To add a comment to a posting
+  # map.resources :postings, :only => [] do |posting|
+  #   posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
+  # end
 
 
   # # # # # # # # # # # # # # #

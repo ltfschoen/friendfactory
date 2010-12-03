@@ -1,4 +1,4 @@
-class Postings::CommentsController < ApplicationController
+class Posting::CommentsController < ApplicationController
   
   before_filter :require_user
     

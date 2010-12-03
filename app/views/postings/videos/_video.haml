@@ -6,6 +6,6 @@
       %td
         = video.body.html_safe
         %p= video.subject
-        = render :partial => 'postings/comments/comment', :collection => video.children.comments
+        = render :partial => 'posting/comments/comment', :collection => video.children.comments
         %div{:id => "posting_#{video.id}_new_comment_well"}
-        = render :partial => 'postings/comments/new', :locals => { :parent => video }
+        = render :partial => 'posting/comments/new', :locals => { :parent => video }

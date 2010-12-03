@@ -10,6 +10,6 @@
           - else
             = image_tag(photo.image.url(:v4x6), :site => false, :class => 'photo v4x6 small displaced')
           %p
-          = render :partial => 'postings/comments/comment', :collection => photo.children.comments
+          = render :partial => 'posting/comments/comment', :collection => photo.children.comments
           %div{:id => "posting_#{photo.id}_new_comment_well"}
-          = render :partial => 'postings/comments/new', :locals => { :parent => photo }
+          = render :partial => 'posting/comments/new', :locals => { :parent => photo }
