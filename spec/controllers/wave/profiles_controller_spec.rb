@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Waves::ProfilesController do
+describe Wave::ProfilesController do
 
   def mock_profile(stubs={})
     @mock_profile ||= mock_model(Profile, stubs)

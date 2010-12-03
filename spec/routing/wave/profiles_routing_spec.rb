@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Waves::ProfilesController do
+describe Wave::ProfilesController do
   describe 'routing' do
     it 'recognizes #show' do
       { :get => '/waves/profiles/42' }.should route_to(:controller => 'waves/profiles', :action => 'show', :id => '42')

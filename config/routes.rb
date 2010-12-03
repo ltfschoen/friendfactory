@@ -5,22 +5,17 @@ Friskyfactory::Application.routes.draw do |map|
     resources :communities, :only => [ :show ]
     resources :profiles,    :only => [ :show ] { member { get :photos } }
     resources :events,      :only => [ :index, :create ]
-    get ':slug' => 'communities#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
+    # get ':slug' => 'communities#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
-  get 'rollcall(/:tag)', :controller => 'wave/roll_calls', :action => :index, :as => 'rollcall'
-  get 'events', :controller => 'wave/events', :action => 'index'
+  get 'rollcall(/:tag)' => 'wave/roll_calls#index', :as => 'rollcall'
+  get 'events'          => 'wave/events#index'
+  get 'inbox'           => 'wave/conversations#index'
 
   # To manage a user's profile
   resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
     member { post 'avatar' }
   end
-
-  # To reset passwords
-  resources :passwords, :only => [ :new, :create, :edit, :update ]  
-
-  # # # # # # # # # # # # # # #
-  # # # # # # # # # # # # # # # 
 
   # To add postings to a wave
   resources :waves, :only => [] do
@@ -30,6 +25,12 @@ Friskyfactory::Application.routes.draw do |map|
       resources :messages, :only => [ :create ]
     end
   end
+
+  # To reset passwords
+  resources :passwords, :only => [ :new, :create, :edit, :update ]  
+
+  # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # 
   
   # Route to create conversation messages from a polaroid
   # when we only have the profile_id for the receiver.
@@ -41,8 +42,6 @@ Friskyfactory::Application.routes.draw do |map|
   # when we only have the profile_id of the receiver.
   get 'profile/:profile_id/conversation', :controller => 'waves/conversations', :action => 'show'
   
-  get 'inbox', :controller => 'waves/conversations', :action => :index
-
   # To add a comment to a posting
   map.resources :postings, :only => [] do |posting|
     posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'

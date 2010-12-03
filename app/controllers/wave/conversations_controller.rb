@@ -1,4 +1,4 @@
-class Waves::ConversationsController < ApplicationController
+class Wave::ConversationsController < ApplicationController
 
   before_filter :require_user
 
