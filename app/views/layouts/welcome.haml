@@ -22,7 +22,7 @@
     = javascript_include_tag 'jquery.placeholder'
     = javascript_include_tag 'welcome'
     
-  %body{ :class => "#{[ current_site, current_layout ].compact * ' '}" }
+  %body{ :class => current_site }
     .container.container_16.clearfix
       .badge.prefix_3.grid_10.suffix_3
         = image_tag 'badge.png', :size => '520x220'

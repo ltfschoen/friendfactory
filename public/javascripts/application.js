@@ -1,3 +1,8 @@
+if (/chrome/.test(navigator.userAgent.toLowerCase())){
+  jQuery.browser.chrome = true;
+  jQuery.browser.safari = false;
+}
+
 var FF = {	
 	scrubPlaceholders: function(form) {
 	  $(form).children('input[type=text], textarea').each(function(child){

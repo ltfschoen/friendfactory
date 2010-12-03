@@ -40,11 +40,9 @@
     = javascript_include_tag 'jquery.remotipart'
     = javascript_include_tag 'jquery.placeholder'
     = javascript_include_tag 'jquery.flip'
-    = javascript_include_tag 'chrome'
     = javascript_include_tag 'application'
     = javascript_include_tag 'wave'
-    = javascript_include_tag 'broadcast'
-    
+    = javascript_include_tag 'broadcast'    
     = javascript_include_tag 'jquery.polaroid'
     = javascript_include_tag 'jquery.postcard'
     
@@ -54,7 +52,7 @@
         #{yield(:pagejs)}        
       });
     = csrf_meta_tag    
-  %body{ :class => "#{[ current_site, current_layout ].compact * ' '}", :'data-first_name' => current_user.try(:first_name), :'data-site_name' => current_site }
+  %body{ :class => current_site, :'data-site_name' => current_site, :'data-first_name' => current_user.try(:first_name) }
     .floating-overlay    
     .container.container_16.clearfix
       = render :partial => "layouts/#{current_site}/header"
