@@ -23,20 +23,22 @@
 			      	onBeforeLoad: function(event) {
 			        	var $polaroid = $(event.target.getTrigger()).closest('.polaroid');
 			        	var $receiver = $polaroid.find('.front.face .username').text();
-			
+						var actionUrl = encodeURI('/wave/profiles/' + $polaroid.data('profile_id') + '/messages');
+						
 			        	$postcard
+							.find('form').attr('action', actionUrl).end()
 							.find('textarea').val('').end()
 							.find('.thread')
 								.text('')
-								.load('/profile/' + $polaroid.data('profile_id') + '/conversation',
+								.load('/wave/profiles/' + $polaroid.data('profile_id') + '/conversation',
 									function() {
 										var threadDiv = $postcard.find('.thread')[0];
 										threadDiv.scrollTop = threadDiv.scrollHeight;
 									})
 							.end()
 							.find('.franking, .delivered').hide().end()
-							.find('button[type="submit"]').button('enable').end()
-							.find('#posting_message_profile_id').val($polaroid.data('profile_id'));
+							.find('button[type="submit"]').button('enable').end();
+							// .find('#posting_message_profile_id').val($polaroid.data('profile_id'));
 												
 			        	var address = '<p><span class="profile">' + $receiver + '</span></p><p>From ' + $sender + '</p>';
 			        	$postcard.find('.address').html(address);        

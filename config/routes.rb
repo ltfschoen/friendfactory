@@ -1,39 +1,37 @@
-Friskyfactory::Application.routes.draw do |map|
+Friskyfactory::Application.routes.draw do
 
   # To show waves
   namespace :wave do
     resources :communities, :only => [ :show ]
-    resources :profiles,    :only => [ :show ] { member { get :photos } }
+    resources :rollcalls,   :only => [ :index ], :controller => 'roll_calls', :as => 'roll_calls'
     resources :events,      :only => [ :index, :create ]
+    resources :profiles,    :only => [ :show ] do      
+      member { get 'photos' }
+      get  'conversation' => 'conversations#show'
+    end
   end
 
-  # Menu bar equivalents
-  # get 'wave'            => 'wave/communities#show'
-  get 'rollcall(/:tag)' => 'wave/roll_calls#index', :as => 'rollcall'
-  get 'events'          => 'wave/events#index'
-  get 'inbox'           => 'wave/conversations#index'
+  # Route to create conversation messages from a polaroid
+  # when we only have the profile_id for the receiver.
+  # namespace :posting { resources :messages, :only => [ :create ] }
+  scope 'wave/profiles/:profile_id', :module => :posting do
+    resources :messages, :only => [ :create ], :as => 'wave_profile_messages'
+  end
 
   # To manage a user's profile
-  resource :profile, :only => [ :show, :edit, :update ], :controller => 'wave/profile' do
-    member { post 'avatar' }
+  scope :module => :wave do
+    resource :profile, :only => [ :show, :edit, :update ], :controller => 'profile' do
+      member { post 'avatar' }
+    end
   end
 
   # To add postings to a wave
   resources :waves, :only => [] do
     namespace :posting do
-      resources :texts, :only => [ :create ]
-      resources :photos, :only => [ :create ]
+      resources :texts,    :only => [ :create ]
+      resources :photos,   :only => [ :create ]
       resources :messages, :only => [ :create ]
     end
-  end
-
-  # Route to show conversation messages from a polaroid
-  # when we only have the profile_id of the receiver.
-  get 'profile/:profile_id/conversation' => 'wave/conversations#show'
-  # Route to create conversation messages from a polaroid
-  # when we only have the profile_id for the receiver.
-  namespace :posting do
-    resources :messages, :only => [ :create ]
   end
 
   # To add a comment to a posting
@@ -44,43 +42,27 @@ Friskyfactory::Application.routes.draw do |map|
   # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
-
-  # # # # # # # # # # # # # # #
-  # # # # # # # # # # # # # # # 
+  # User and User Sessions
+  resources :users, :only => [ :new, :create ]  
+  resources :user_sessions, :only => [ :new, :create, :destroy ] do
+    get 'lurk', :on => :new
+  end
   
-  map.resources :avatars, :only => [ :create ] # TODO: remove once profiles wave works correctly
-
-  # TODO: Use a manual mapping
-  # map.resources :messages, :only => [] do |message|
-  #   message.resource 'reply', :only => [ :create ], :controller => 'messages'
-  # end
-
-  # # # # # # # # # # # # # # # 
-
-  # map.resources :chats, :only => [ :index ]  
-  map.resources :users, :only => [ :new, :create ]
-  # map.resources :friendships, :only => [ :create, :destroy ]
-
-  map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }  
-  map.login  '/login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }
-  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => [ :get, :delete ] }  
-  # map.search '/search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
-  
-  map.welcome '/welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
-
-
-  # # # # # # # # # # # # # # # 
-  # # # # # # # # # # # # # # # 
-
-  # Catch-all
-  get '/:slug', :to => 'wave/communities#show', :constraints => { :slug => /\D\w*/ }
-  root          :to => 'wave/communities#show', :via => :get
+  # Menu bar equivalents
+  get   'wave'            => 'wave/communities#show'
+  get   'rollcall(/:tag)' => 'wave/roll_calls#index', :as => 'roll_call'
+  get   'events'          => 'wave/events#index'
+  get   'inbox'           => 'wave/conversations#index'
+  get   'login'           => 'user_sessions#create'  
+  match 'logout'          => 'user_sessions#destroy', :via => [ :get, :delete ]
+  get   'welcome'         => 'welcome#index'
+  get   ':slug',      :to => 'wave/communities#show', :constraints => { :slug => /\D\w*/ }
+  root                :to => 'wave/communities#show', :via => :get
 
   # Labs
   if [ 'development', 'staging' ].include?(Rails.env)
-    map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
+    get 'labs/:action', :controller => 'labs'
   end
-
 
   
   # The priority is based upon order of creation:

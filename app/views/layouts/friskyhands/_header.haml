@@ -4,7 +4,7 @@
     %li#nav-1{ :class => "#{'current' if current_page?(:controller => 'wave/communities', :action => 'show')}" }
       = link_to 'Wave', root_path
     %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'wave/roll_calls', :action => 'index')}" }
-      = link_to 'Roll Call', rollcall_path
+      = link_to 'Roll Call', roll_call_path
     - if false
       %li#nav-3
         = link_to 'Events', events_path
@@ -15,7 +15,7 @@
     %li#nav-6
       = link_to 'Inbox', inbox_path
     %li#nav-8
-      = link_to 'Logout', logout_path
+      = link_to 'Logout', logout_path, :method => :delete
 
 .header.secondary.grid_16
   .flash

@@ -6,8 +6,8 @@ describe Wave::RollCallsController do
       { :get => '/rollcall' }.should route_to(:controller => 'waves/roll_calls', :action => 'index')
     end
 
-    it 'recognizes rollcall_path' do
-      rollcall_path.should == '/rollcall'
+    it 'recognizes roll_call_path' do
+      roll_call_path.should == '/rollcall'
     end
 
     it 'recognizes #index' do

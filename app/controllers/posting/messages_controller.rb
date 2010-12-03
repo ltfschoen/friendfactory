@@ -17,7 +17,8 @@ class Posting::MessagesController < ApplicationController
         posting_message = params[:posting_message].merge({ :user_id => current_user.id, :receiver_id => @wave.recipient.id })
       end        
     else
-      profile_id = params[:posting_message].delete(:profile_id)
+      # profile_id = params[:posting_message].delete(:profile_id)
+      profile_id = params[:profile_id]
       receiver = Wave::Profile.find_by_id(profile_id).try(:user)    
       if receiver
         @wave = current_user.conversation.with(receiver) || current_user.create_conversation_with(receiver)      
