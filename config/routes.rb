@@ -13,6 +13,11 @@ Friskyfactory::Application.routes.draw do |map|
   get 'events'          => 'wave/events#index'
   get 'inbox'           => 'wave/conversations#index'
 
+  # To manage a user's profile
+  resource :profile, :only => [ :show, :edit, :update ], :controller => 'wave/profile' do
+    member { post 'avatar' }
+  end
+
   # To add postings to a wave
   resources :waves, :only => [] do
     namespace :posting do
@@ -36,38 +41,12 @@ Friskyfactory::Application.routes.draw do |map|
     resources :comments, :only => [ :new, :create ], :controller => 'posting/comments'
   end
 
-  # To manage a user's profile
-  resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
-    member { post 'avatar' }
-  end
-
   # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
-  # # # # # # # # # # # # # # #
-  # # # # # # # # # # # # # # # 
-    
-  # # To add a comment to a posting
-  # map.resources :postings, :only => [] do |posting|
-  #   posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
-  # end
-
 
   # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # 
-
-  map.resources :waves, :only => [ :index, :show, :create ], :controller => 'waves/base' do |wave|
-    # Used to add postings to a wave...
-    # wave.resources :videos, :only => [ :create ]
-    # wave.resources :links,  :only => [ :create ]
-  end
-    
-  # # # # # # # # # # # # # # # 
-  # Postings Controllers
-
-  # map.namespace(:posting) do |posting|
-  #   posting.resources :chats
-  # end
   
   map.resources :avatars, :only => [ :create ] # TODO: remove once profiles wave works correctly
 

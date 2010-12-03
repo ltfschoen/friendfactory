@@ -1,4 +1,4 @@
-class Postings::VideosController < ApplicationController
+class Posting::VideosController < ApplicationController
   
   before_filter :require_user
   

@@ -10,7 +10,7 @@
         = link_to 'Events', events_path
     %li#nav-4
       = link_to_facebook_shop
-    %li#nav-5{ :class => "#{'current' if current_page?(:controller => 'waves/profile', :action => 'show')}" }
+    %li#nav-5{ :class => "#{'current' if current_page?(:controller => 'wave/profile', :action => 'show')}" }
       = link_to 'Bio', profile_path
     %li#nav-6
       = link_to 'Inbox', inbox_path

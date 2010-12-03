@@ -22,7 +22,7 @@ module ApplicationHelper
     files.map! { |file| File.join(current_site.name,*file) }
     content_for(:stylesheets) { stylesheet_link_tag(files) }
   end
-  
+    
   def image_tag(source, opts = {})    
     source = File.join(current_site.name, source) unless opts.delete(:site) == false
     super(source, opts)

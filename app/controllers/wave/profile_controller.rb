@@ -1,8 +1,8 @@
-class Waves::ProfileController < ApplicationController
+class Wave::ProfileController < ApplicationController
 
   before_filter :require_user
 
-  helper :waves
+  # helper :waves
 
   def show
     @profile = current_user.profile

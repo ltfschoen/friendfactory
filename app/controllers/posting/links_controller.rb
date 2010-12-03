@@ -1,4 +1,4 @@
-class Postings::LinksController < ApplicationController
+class Posting::LinksController < ApplicationController
 
   # before_filter :require_user
   # 

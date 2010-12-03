@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
 
-  helper :application, :placeholder_text
+  helper :all
   helper_method :current_user_session, :current_user, :current_site
   helper_method :presenter
   

@@ -3,7 +3,7 @@ class Wave::ProfilesController < ApplicationController
   before_filter :require_lurker, :only => [ :show ]
   before_filter :require_user,   :only => [ :edit, :update ]
 
-  helper :waves
+  # helper :waves
   
   def show
     @profile = Wave::Profile.find_by_id(params[:id])
