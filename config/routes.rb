@@ -36,7 +36,9 @@ Friskyfactory::Application.routes.draw do
 
   # To add a comment to a posting
   resources :postings, :only => [] do |posting|
-    resources :comments, :only => [ :new, :create ], :controller => 'posting/comments'
+    scope :module => :posting do
+      resources :comments, :only => [ :new, :create ]
+    end
   end
 
   # To reset passwords
