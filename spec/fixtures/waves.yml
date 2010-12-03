@@ -28,7 +28,7 @@ charlie_profile_wave:
 
 popular_wave:
   id: 4
-  type: Wave::Shared
+  type: Wave::Community
   topic: Everyone's Wave
   slug: popular
   description: Get going!

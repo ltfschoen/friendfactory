@@ -6,7 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-Wave::Shared.find_or_create_by_slug(
+Wave::Community.find_or_create_by_slug(
     :slug        => Wave::CommunitiesController::DefaultWaveSlug,
     :topic       => "Everyone's Wall",
     :description => 'Get going!')

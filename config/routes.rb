@@ -1,23 +1,24 @@
 Friskyfactory::Application.routes.draw do |map|
 
+  # To show waves
   namespace :wave do
     resource :communities, :only => [ :show ]
+    get ':slug' => 'communities#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
-
-  # # # # # # # # # # # # # # #
-  # # # # # # # # # # # # # # # 
 
   # To manage a user's profile
   resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
     member { post 'avatar' }
   end
 
+  # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # 
+
   # To show waves
   namespace :waves do
     resources :profiles, :only => [ :show ] do
       member { get :photos }
     end
-    get ':slug' => 'base#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
   get 'rollcall(/:tag)', :controller => 'waves/roll_calls', :action => :index, :as => 'rollcall'
@@ -90,9 +91,13 @@ Friskyfactory::Application.routes.draw do |map|
   map.resources :user_sessions, :only => [ :new, :create, :destroy ], :new => { :lurk => :get }  
   map.login  '/login',  :controller => 'user_sessions', :action => 'create',  :conditions => { :method => :get }
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => [ :get, :delete ] }  
-  map.search '/search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
+  # map.search '/search', :controller => 'search', :action => 'index', :conditions => { :method => :get }
   
   map.welcome '/welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
+
+
+  # # # # # # # # # # # # # # # 
+  # # # # # # # # # # # # # # # 
 
   # Catch-all
   get '/:slug', :to => 'wave/communities#show', :constraints => { :slug => /\D\w*/ }
@@ -102,6 +107,8 @@ Friskyfactory::Application.routes.draw do |map|
   if [ 'development', 'staging' ].include?(Rails.env)
     map.labs 'labs/:action', :controller => 'labs', :conditions => { :method => :get }
   end
+
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
