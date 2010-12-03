@@ -1,2 +1,0 @@
-module Wave::EventsHelper
-end
