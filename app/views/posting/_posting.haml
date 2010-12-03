@@ -1,4 +1,4 @@
 - unless posting.nil?
   - posting_type = posting.class.name.demodulize.tableize
-  - file_name = "postings/#{posting_type}/#{posting_type.singularize}"
+  - file_name = "posting/#{posting_type}/#{posting_type.singularize}"
   = render(:partial => file_name, :object => posting)

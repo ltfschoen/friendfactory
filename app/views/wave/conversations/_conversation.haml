@@ -1,6 +1,6 @@
 - if current_user
   .wave.postcard.grid_8[conversation]
-    = form_for Posting::Message.new, :url => wave_postings_messages_path(:wave_id => conversation.id), :remote => true do |f|
+    = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => conversation.id), :remote => true do |f|
       .grid_5.alpha
         .thread
           - messages = conversation.messages
@@ -8,7 +8,7 @@
             Started&nbsp;
             = time_ago_in_words(messages.first.created_at)
             &nbsp;ago
-          = render :partial => 'postings/messages/message', :collection => messages
+          = render :partial => 'posting/messages/message', :collection => messages
           &nbsp;
         = f.text_area :body
       .grid_3.omega

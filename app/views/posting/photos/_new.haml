@@ -7,7 +7,7 @@
       %td.avatar.thumb
         = render_post_it(photo, :message => spinner(:size => :big, :id => 'posting_photo_upload_spinner').html_safe)
       %td
-        = form_for photo, :url => wave_postings_photos_path(:wave_id => wave.id), :html => { :multipart => true }, :remote => true do |f|
+        = form_for photo, :url => wave_posting_photos_path(:wave_id => wave.id), :html => { :multipart => true }, :remote => true do |f|
           %table.button-bar
             %tr
               %td.file_field= f.file_field :image

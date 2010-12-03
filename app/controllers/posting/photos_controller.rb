@@ -1,4 +1,4 @@
-class Postings::PhotosController < ApplicationController
+class Posting::PhotosController < ApplicationController
 
   before_filter :require_user
   

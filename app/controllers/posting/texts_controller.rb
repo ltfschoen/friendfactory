@@ -1,4 +1,4 @@
-class Postings::TextsController < ApplicationController
+class Posting::TextsController < ApplicationController
   
   before_filter :require_user
   

@@ -6,13 +6,13 @@
       - css_class = 'tag4' if tag.name.downcase == 'deaf' # TODO !!!
       - css_class += " current" if tag.name == params[:tag]
       = link_to tag.name.titleize, rollcall_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
-  = render :partial => 'postings/messages/new'
+  = render :partial => 'posting/messages/new'
 .grid_1
   &nbsp;
 .wave.roll_call.grid_16
   - @waves.in_groups_of(3) do |group|
     - group.each_with_index do |profile, idx|
       - unless profile.nil?
-        = render :partial => 'postings/avatars/polaroid', :locals => { :profile => profile }
+        = render :partial => 'posting/avatars/polaroid', :locals => { :profile => profile }
 .grid_16    
   = will_paginate @waves

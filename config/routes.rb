@@ -5,25 +5,33 @@ Friskyfactory::Application.routes.draw do |map|
     resources :communities, :only => [ :show ]
     resources :profiles,    :only => [ :show ] { member { get :photos } }
     resources :events,      :only => [ :index, :create ]
-    # get ':slug' => 'communities#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
 
   get 'rollcall(/:tag)' => 'wave/roll_calls#index', :as => 'rollcall'
   get 'events'          => 'wave/events#index'
   get 'inbox'           => 'wave/conversations#index'
 
-  # To manage a user's profile
-  resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
-    member { post 'avatar' }
-  end
-
-  # To add postings to a wave
   resources :waves, :only => [] do
-    namespace :postings do
+    namespace :posting do
       resources :texts, :only => [ :create ]
       resources :photos, :only => [ :create ]
       resources :messages, :only => [ :create ]
     end
+  end
+
+  # Route to show conversation messages from a polaroid
+  # when we only have the profile_id of the receiver.
+  get 'profile/:profile_id/conversation' => 'wave/conversations#show'
+  
+  # Route to create conversation messages from a polaroid
+  # when we only have the profile_id for the receiver.
+  namespace :posting do
+    resources :messages, :only => [ :create ]
+  end
+
+  # To manage a user's profile
+  resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
+    member { post 'avatar' }
   end
 
   # To reset passwords
@@ -31,17 +39,15 @@ Friskyfactory::Application.routes.draw do |map|
 
   # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # 
-  
-  # Route to create conversation messages from a polaroid
-  # when we only have the profile_id for the receiver.
-  namespace :postings do
-    resources :messages, :only => [ :create ]
-  end
 
-  # Route to show conversation messages from a polaroid
-  # when we only have the profile_id of the receiver.
-  get 'profile/:profile_id/conversation', :controller => 'waves/conversations', :action => 'show'
-  
+  # To add postings to a wave
+  # resources :waves, :only => [] do
+  #   namespace :postings do
+  #     # resources :texts, :only => [ :create ]
+  #     resources :photos, :only => [ :create ]
+  #   end
+  # end
+    
   # To add a comment to a posting
   map.resources :postings, :only => [] do |posting|
     posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
