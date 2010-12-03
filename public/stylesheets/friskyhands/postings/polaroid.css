@@ -24,9 +24,9 @@ div.polaroid .face {
 }
 
 div.polaroid .face a.close {
-	position: absolute;
-	right: 0;
-	top: 0;
+	float: right;
+	margin-top: -12px;
+	margin-right: -12px;
 	width: 15px;
 	height: 15px;
 	background: url(/images/friskyhands/buddy-bar.png) -244px -3px no-repeat;

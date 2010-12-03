@@ -25,9 +25,8 @@ jQuery(document).ready(function($) {
 					})	
 					.draggable()
 					.find('.polaroid-container > .polaroid')
-						.polaroid()
-						.find('a.message').postcard().end()
-						.find('a.close').show();
+						.polaroid({ 'close-button' : true })
+						.find('a.message').postcard().end();
 			});
 	});
 

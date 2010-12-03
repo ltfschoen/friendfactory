@@ -1,19 +1,28 @@
 (function($){
 	
-	$.fn.polaroid = function() {
-		
-		this.each(function() {
-			var $polaroid = $(this);
-			$('a.close', $polaroid).click(function(event) {
-				event.preventDefault();
-				$polaroid.fadeOut();
-			});
-		});
+	$.fn.polaroid = function(options) {
+
+		var settings = {
+			'close-button' : false
+		}
+				
+		$.extend(settings, options);		
 		
 		if ($.browser.safari) {
 
 			return this.each(function() {
+				
 				$this = $(this); // a polaroid
+
+				// Show the close button
+				if (settings[ 'close-button' ] === true) {
+					$('a.close', $this).click(function(event) {
+						event.preventDefault();
+						$this.fadeOut();
+						$(event.target).closest('.floating').remove();
+					}).show();
+				}				
+				
 				$this.find('.back.face')
 					.css('-webkit-transform', 'rotateY(180deg)')
 
@@ -38,7 +47,6 @@
 						.click(function(event) {
 							event.preventDefault();	
 							$(this).closest('.polaroid').toggleClass('flipped')
-							// .find('.gripper').hide();
 						})
 					.end()										
 				.end()
@@ -57,11 +65,6 @@
 						$backFace.css('-webkit-transform', 'rotateY(0deg)');
 						$backFace.find('.scrollable').scrollable().seekTo(idx, 0);
 						$backFace.css('-webkit-transform', 'rotateY(180deg)');
-						
-						// Hide the gripper
-						// $(this).addClass('current')
-							//.closest('.polaroid')
-							// .find('.gripper').hide();
 							
 						// Do the flip
 						$polaroid.toggleClass('flipped');
@@ -78,6 +81,15 @@
 				$this = $(this); // a polaroid
 				
 				$this.find('.face-container:eq(1)').hide();
+				
+				if (settings[ 'close-button' ] === true) {
+					$('a.close', $this).live('click', function(event) {
+						event.preventDefault();
+						$this.fadeOut();
+						$(event.target).closest('.floating').remove();
+					}).show();
+				}				
+				
 				$this.find('.front .buddy-bar a.flip').live('click', function(event) {
 		    		event.preventDefault();
 					
@@ -85,15 +97,15 @@
 					$polaroid.data('scrollable-index', $(this).closest('li').index());
 					
 		    		$polaroid.flip({
-						speed: 280,
+						speed: 300,
 		      			direction: 'lr',
 		      			color: '#FFF',
-		      			content: $polaroid.find('.face-container:hidden'),		
+		      			content: $polaroid.find('.face-container:hidden'),
+				
 		      			onEnd: function() {
 					  		$polaroid.find('.buddy-bar a.flip').click(function(event) {
 								event.preventDefault();
-								$polaroid.revertFlip();
-								
+								$polaroid.revertFlip();								
 							});
 
 							// Make polaroids work
@@ -117,10 +129,11 @@
 
 							var idx = $polaroid.data('scrollable-index');
 							$polaroid.find('.scrollable').scrollable().seekTo(idx ,0);
-	
-		      			} // onEnd	
+		      			} // onEnd		
 		    		}); // flip
+		
 		  		}); // live
+		
 			}); // each
 			
 		} // if

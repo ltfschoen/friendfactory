@@ -2,6 +2,7 @@
 - user_info = user.user_info
 .face-container
   .back.face
+    = link_to 'Close', waves_profile_path(profile), :class => 'close hidden'
     .content.scrollable
       .items
         .mini-profile
