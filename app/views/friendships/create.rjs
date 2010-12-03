@@ -1,5 +1,0 @@
-if @posting
-  page << "alert(\"You\'re now a buddy with #{@friend.first_name}\")"
-  page['#make_buddy.tab_content'].hide()
-  page['ul#tabs li.current'].removeClass('current')
-end
