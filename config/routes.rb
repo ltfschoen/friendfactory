@@ -13,7 +13,6 @@ Friskyfactory::Application.routes.draw do
 
   # Route to create conversation messages from a polaroid
   # when we only have the profile_id for the receiver.
-  # namespace :posting { resources :messages, :only => [ :create ] }
   scope 'wave/profiles/:profile_id', :module => :posting do
     resources :messages, :only => [ :create ], :as => 'wave_profile_messages'
   end
