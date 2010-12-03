@@ -37,7 +37,7 @@
 									// Load the Photo Grid pane
 									var $photoGrid = $(this.getRoot()).find('.photo-grid');
 									var id = $photoGrid.closest('.polaroid').attr('data-profile_id');
-									$photoGrid.load('/waves/profiles/' + id + '/photos');
+									$photoGrid.load('/wave/profiles/' + id + '/photos');
 								}
 							}
 						}).navigator()						
@@ -122,7 +122,7 @@
 	      	        					// Photo Grid
 	      	        					var $photoGrid = $(this.getRoot()).find('.photo-grid');
 	      	        					var id = $photoGrid.closest('.polaroid').attr('data-id');
-	                					$photoGrid.load('/waves/profiles/' + id + '/photos');
+	                					$photoGrid.load('/wave/profiles/' + id + '/photos');
 									} // if
 	      	    				} // onSeek
 							}).navigator();

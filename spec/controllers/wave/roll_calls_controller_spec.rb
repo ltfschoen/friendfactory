@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Waves::RollCallsController do
+describe Wave::RollCallsController do
 
   def mock_wave(stubs={})
     (@mock_wave ||= mock_model(Wave::RollCall).as_null_object).tap do |wave|

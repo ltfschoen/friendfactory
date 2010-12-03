@@ -1,4 +1,4 @@
-class Waves::RollCallsController < ApplicationController
+class Wave::RollCallsController < ApplicationController
   
   before_filter :require_lurker
 

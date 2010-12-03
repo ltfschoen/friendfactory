@@ -49,7 +49,7 @@ module ApplicationHelper
   def link_to_profile(user, opts = {})
     name = opts[:label] || user.first_name
     if user.profile
-      link_to(name, waves_profile_path(user.profile), :class => 'profile')
+      link_to(name, wave_profile_path(user.profile), :class => 'profile')
     end
   end
 

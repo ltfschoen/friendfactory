@@ -2,33 +2,25 @@ Friskyfactory::Application.routes.draw do |map|
 
   # To show waves
   namespace :wave do
-    resource :communities, :only => [ :show ]
+    resources :communities, :only => [ :show ]
+    resources :profiles,    :only => [ :show ] { member { get :photos } }
+    resources :events,      :only => [ :index, :create ]
     get ':slug' => 'communities#show', :as => 'slug', :constraints => { :slug => /\D\w*/ }
   end
+
+  get 'rollcall(/:tag)', :controller => 'wave/roll_calls', :action => :index, :as => 'rollcall'
+  get 'events', :controller => 'wave/events', :action => 'index'
 
   # To manage a user's profile
   resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
     member { post 'avatar' }
   end
 
+  # To reset passwords
+  resources :passwords, :only => [ :new, :create, :edit, :update ]  
+
   # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # 
-
-  # To show waves
-  namespace :waves do
-    resources :profiles, :only => [ :show ] do
-      member { get :photos }
-    end
-  end
-
-  get 'rollcall(/:tag)', :controller => 'waves/roll_calls', :action => :index, :as => 'rollcall'
-
-  # To show events
-  namespace :wave do
-    resources :events, :only => [ :index, :create ]
-  end
-  
-  get 'events', :controller => 'wave/events', :action => 'index'
 
   # To add postings to a wave
   resources :waves, :only => [] do
@@ -56,8 +48,6 @@ Friskyfactory::Application.routes.draw do |map|
     posting.resources :comments, :only => [ :new, :create ], :controller => 'postings/comments'
   end
 
-  # To reset passwords
-  resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
   # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # 

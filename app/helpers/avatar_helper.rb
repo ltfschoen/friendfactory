@@ -36,7 +36,7 @@ module AvatarHelper
             :id    => opts[:id])
         
         if opts[:link_to_profile]
-          return link_to(image_tag, waves_profile_path(user.profile), :class => 'profile')
+          return link_to(image_tag, wave_profile_path(user.profile), :class => 'profile')
         else
           return image_tag
         end

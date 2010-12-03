@@ -3,7 +3,7 @@
   %ul.nav
     %li#nav-1{ :class => "#{'current' if current_page?(:controller => 'wave/communities', :action => 'show')}" }
       = link_to 'Wave', root_path
-    %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'waves/roll_calls', :action => 'index')}" }
+    %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'wave/roll_calls', :action => 'index')}" }
       = link_to 'Roll Call', rollcall_path
     - if false
       %li#nav-3

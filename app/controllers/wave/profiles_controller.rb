@@ -1,4 +1,4 @@
-class Waves::ProfilesController < ApplicationController
+class Wave::ProfilesController < ApplicationController
 
   before_filter :require_lurker, :only => [ :show ]
   before_filter :require_user,   :only => [ :edit, :update ]
