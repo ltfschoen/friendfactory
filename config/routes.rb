@@ -7,7 +7,7 @@ Friskyfactory::Application.routes.draw do
     resources :events,      :only => [ :index, :create ]
     resources :profiles,    :only => [ :show ] do      
       member { get 'photos' }
-      get  'conversation' => 'conversations#show'
+      get 'conversation' => 'conversations#show'
     end
   end
 
@@ -49,21 +49,23 @@ Friskyfactory::Application.routes.draw do
   end
   
   # Menu bar equivalents
-  get   'wave'            => 'wave/communities#show'
-  get   'rollcall(/:tag)' => 'wave/roll_calls#index', :as => 'roll_call'
-  get   'events'          => 'wave/events#index'
-  get   'inbox'           => 'wave/conversations#index'
-  get   'login'           => 'user_sessions#create'  
-  match 'logout'          => 'user_sessions#destroy', :via => [ :get, :delete ]
-  get   'welcome'         => 'welcome#index'
-  get   ':slug',      :to => 'wave/communities#show', :constraints => { :slug => /\D\w*/ }
-  root                :to => 'wave/communities#show', :via => :get
+  get   'login'   => 'user_sessions#create'  
+  match 'logout'  => 'user_sessions#destroy', :via => [ :get, :delete ]
+  get   'welcome' => 'welcome#index'
+
+  scope :module => 'wave' do
+    get 'wave'            => 'communities#show'
+    get 'rollcall(/:tag)' => 'roll_calls#index', :as => 'roll_call'
+    get 'events'          => 'events#index'
+    get 'inbox'           => 'conversations#index'
+    get ':slug',      :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
+    root              :to => 'communities#show', :via => :get
+  end
 
   # Labs
   if [ 'development', 'staging' ].include?(Rails.env)
-    get 'labs/:action', :controller => 'labs'
+    get 'labs/:action' => 'labs'
   end
-
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
