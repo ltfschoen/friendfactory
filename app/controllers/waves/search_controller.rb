@@ -1,4 +1,4 @@
-class Waves::SearchController < Waves::BaseController
+class Waves::SearchController < ApplicationController
 
   before_filter :require_lurker
 

@@ -1,4 +1,4 @@
-class Waves::BaseController < ApplicationController
+class Wave::CommunitiesController < ApplicationController
 
   DefaultWaveSlug = 'popular'
   
@@ -15,4 +15,5 @@ class Waves::BaseController < ApplicationController
       format.html
     end
   end
+  
 end

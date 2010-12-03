@@ -1,4 +1,4 @@
-class Waves::ProfileController < Waves::BaseController
+class Waves::ProfileController < ApplicationController
 
   before_filter :require_user
 

@@ -4,7 +4,7 @@ class MovePostingsToSharedWave < ActiveRecord::Migration
     Rake::Task[:'ff:db:slugs'].invoke
     
     user = User.find_by_email('michael@michaelbamford.com')
-    shared_wave = Wave::Base.find_by_slug(Waves::BaseController::DefaultWaveSlug)
+    shared_wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
     if user.present? && shared_wave.present?
       say "moving postings from profile wave (id=#{user.profile.id}) to shared wave (id=#{shared_wave.id})"
       profile_posting_ids = user.profile.posting_ids - user.profile.avatar_ids

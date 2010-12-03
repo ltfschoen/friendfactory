@@ -1,3 +1,3 @@
 Factory.define :wave, :class => Wave::Base do |wave|
-  wave.slug Waves::BaseController::DefaultWaveSlug
+  wave.slug Wave::CommunitiesController::DefaultWaveSlug
 end

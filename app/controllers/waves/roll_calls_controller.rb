@@ -1,5 +1,5 @@
-class Waves::RollCallsController < Waves::BaseController
-
+class Waves::RollCallsController < ApplicationController
+  
   before_filter :require_lurker
 
   cattr_reader :per_page

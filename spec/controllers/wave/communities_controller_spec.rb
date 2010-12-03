@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Waves::BaseController do
+describe Wave::CommunitiesController do
   
   def mock_wave(stubs={})
     @mock_wave ||= mock_model(Wave::Base, stubs)
@@ -22,7 +22,7 @@ describe Waves::BaseController do
   
     it "assigns the default wave as @wave when given no parameters" do
       wave = Factory.build(:wave)
-      Wave::Base.should_receive(:find_by_slug).with(Waves::BaseController::DefaultWaveSlug).and_return(wave)
+      Wave::Base.should_receive(:find_by_slug).with(Wave::CommunitiesController::DefaultWaveSlug).and_return(wave)
       get :show, nil, { :lurker => true }
       assigns[:wave].should equal(wave)
     end    

@@ -1,5 +1,12 @@
 Friskyfactory::Application.routes.draw do |map|
 
+  namespace :wave do
+    resource :communities, :only => [ :show ]
+  end
+
+  # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # 
+
   # To manage a user's profile
   resource :profile, :only => [ :show, :edit, :update ], :controller => 'waves/profile' do
     member { post 'avatar' }
@@ -51,7 +58,7 @@ Friskyfactory::Application.routes.draw do |map|
   # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
-  # # # # # # # # # # # # # # # 
+  # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # 
 
   map.resources :waves, :only => [ :index, :show, :create ], :controller => 'waves/base' do |wave|
@@ -87,10 +94,9 @@ Friskyfactory::Application.routes.draw do |map|
   
   map.welcome '/welcome', :controller => 'welcome', :action => 'index', :conditions => { :method => :get }
 
-  root :to => 'waves/base#show', :via => :get
-
   # Catch-all
-  get '/:slug', :to => 'waves/base#show', :constraints => { :slug => /\D\w*/ }
+  get '/:slug', :to => 'wave/communities#show', :constraints => { :slug => /\D\w*/ }
+  root          :to => 'wave/communities#show', :via => :get
 
   # Labs
   if [ 'development', 'staging' ].include?(Rails.env)

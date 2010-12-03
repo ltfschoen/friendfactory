@@ -1,4 +1,4 @@
-class Waves::HottiesController < Waves::BaseController
+class Waves::HottiesController < ApplicationController
   
   # def show
   #   @wave = Wave::Base.find_by_slug('hotties')

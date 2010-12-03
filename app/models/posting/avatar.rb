@@ -19,7 +19,7 @@ class Posting::Avatar < Posting::Base
 
   before_create :set_dimensions  
 
-  publish_to :slug => Waves::BaseController::DefaultWaveSlug do |wave, posting|
+  publish_to :slug => Wave::CommunitiesController::DefaultWaveSlug do |wave, posting|
     if wave.present? && posting.present?
       postings_to_unpublish = wave.postings \
         .where(

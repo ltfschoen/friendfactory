@@ -30,7 +30,7 @@ namespace :ff do
       task :photos => :environment do
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
-        wave = Wave::Base.find_by_slug(Waves::BaseController::DefaultWaveSlug)
+        wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
         if wave
           image_fixtures = Dir[File.join(Rails.root, 'spec', 'fixtures', 'images', 'photos', '*.{jpg, jpeg, png}')]
           image_fixtures.each do |fixture|

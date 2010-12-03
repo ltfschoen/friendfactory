@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Waves::BaseController do
+describe Wave::CommunitiesController do
   describe 'routing' do
     describe 'show by slug' do
       it 'recognizes #show by :slug' do
