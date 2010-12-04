@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 	$('a.profile').click(function(event) {
 		event.preventDefault();
 		$('<div class="floating"></div>')
-			.appendTo('.floating-overlay')
+			.appendTo('.floating-container')
 			.load($(this).attr('href'), function() {	 			
 				$(this).position({
 					my: 'left center',
