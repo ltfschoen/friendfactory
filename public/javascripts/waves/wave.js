@@ -29,4 +29,8 @@ jQuery(document).ready(function($) {
 			});
 	});
 	
+	$('.floating').live('mousedown', function(event) {
+		$(event.target).closest('.floating').bringToFront();
+	});
+	
 });

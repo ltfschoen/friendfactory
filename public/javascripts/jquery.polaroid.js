@@ -15,9 +15,9 @@
 
 				if (settings[ 'close-button' ] === true) {
 					$('a.close', $this).click(function(event) {
-						event.preventDefault();
 						$this.fadeOut();
 						$(event.target).closest('.floating').remove();
+						return false;
 					});
 				}				
 				
@@ -82,9 +82,9 @@
 				
 				if (settings[ 'close-button' ] === true) {
 					$('a.close', $this).live('click', function(event) {
-						event.preventDefault();
 						$this.fadeOut();
 						$(event.target).closest('.floating').remove();
+						return false;
 					});
 				}				
 				
