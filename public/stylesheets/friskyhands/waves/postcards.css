@@ -1,30 +1,3 @@
-@import url(wave/community.css);
-@import url(waves/profile.css);
-@import url(waves/polaroids.css);
-
-.wave.header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.wave.header h1 {
-    margin: 0;
-	text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.wave.header .nav {
-    margin: 0;
-}
-
-/*.wave.header .nav a,*/
-/*.wave.tab_contents button,
-.wave.tab_contents textarea,
-.wave.tab_contents input[type='text'] {
-    box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
-    -webkit-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
-    -moz-box-shadow: 2px 2px 20px rgba(80, 70, 30, 0.5);
-}*/
-
 .postcard {
     position: relative;
     background: url('/images/friskyhands/postcard.png') no-repeat top left;

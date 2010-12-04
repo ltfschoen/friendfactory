@@ -2,56 +2,48 @@
 %html
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
-    %title FriskyHands    
-    - if Rails.env.development?
-      = stylesheet_link_tag 'uncompressed/reset', :media => 'screen'
-      = stylesheet_link_tag 'uncompressed/forms', :media => 'screen'
-      = stylesheet_link_tag 'uncompressed/960', :media => 'screen'
-    - else
-      = stylesheet_link_tag 'reset', :media => 'screen'
-      = stylesheet_link_tag 'forms', :media => 'screen'
-      = stylesheet_link_tag '960', :media => 'screen'
-    = stylesheet_link_tag "#{current_site}/jquery-ui.css", :media => 'screen'
-    = stylesheet_link_tag "#{current_site}/application", :media => 'screen'
-    = stylesheet_link_tag "#{current_site}/waves", :media => 'screen'
-    = stylesheet_link_tag "#{current_site}/postings", :media => 'screen'
-    = stylesheet_link_tag "#{current_site}/scrollable", :media => 'screen'
-    = stylesheet_link_tag "#{current_site}/displaced", :media => 'screen'
+    %title FriskyHands
+    = stylesheet_links 'reset', 'forms', '960', :media => 'screen', :cache => 'cached'
+    - site = current_site
+    = stylesheet_links |
+        "#{site}/jquery-ui.css", |
+        "#{site}/application", |
+        "#{site}/scrollable", |
+        "#{site}/waves/", |
+        "#{site}/postings/", |
+        "#{site}/displaced", :media => 'screen', :cache => "#{site}/cached"    
     / [if IE]
-      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
+      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'      
     = yield(:stylesheets)
     :css
       #{yield(:pagecss)}
 
     - if Rails.env.development?
-      = javascript_include_tag 'jquery.min.js'
-      = javascript_include_tag 'jquery-ui.min.js'
-      = javascript_include_tag 'jquery.tools.min.js'
-      = javascript_include_tag 'pusher.min.js'
-      = javascript_include_tag 'debug.js'
+      = javascript_include_tag 'jquery.min.js', 'jquery-ui.min.js', 'jquery.tools.min.js', 'pusher.min.js', 'debug.js'
     - else
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
       = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
-      = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'
-      
-    = javascript_include_tag 'rails'
-    = javascript_include_tag 'jquery.form'
-    = javascript_include_tag 'jquery.remotipart'
-    = javascript_include_tag 'jquery.placeholder'
-    = javascript_include_tag 'jquery.flip'
-    = javascript_include_tag 'application'
-    = javascript_include_tag 'wave'
-    = javascript_include_tag 'broadcast'    
-    = javascript_include_tag 'jquery.polaroid'
-    = javascript_include_tag 'jquery.postcard'
-    
-    = yield(:javascripts)
+      = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'    
+    = javascript_includes |
+        'rails', |
+        'jquery.form', |
+        'jquery.remotipart', |
+        'jquery.placeholder', |
+        'jquery.flip', |
+        'jquery.polaroid', |
+        'jquery.postcard', |
+        'application', |
+        'broadcast', |
+        'waves/', |
+        'postings/', :cache => 'cached'    
+    = yield(:javascripts)    
     :javascript
       jQuery(function($){
         #{yield(:pagejs)}        
       });
     = csrf_meta_tag    
+    
   %body{ :class => current_site, :'data-site_name' => current_site, :'data-first_name' => current_user.try(:first_name) }
     .floating-overlay    
     .container.container_16.clearfix
@@ -59,6 +51,7 @@
       = yield
       = render :partial => "layouts/#{current_site}/footer" rescue nil
       = render :partial => 'layouts/feedback' unless Rails.env.development?
+            
   - if Rails.env.production?
     :javascript
       var _gaq = _gaq || [];
