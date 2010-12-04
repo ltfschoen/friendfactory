@@ -26,17 +26,19 @@
       = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
       = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'    
     = javascript_includes |
-        'rails', |
+        'rails', |        
         'jquery.form', |
         'jquery.remotipart', |
         'jquery.placeholder', |
         'jquery.flip', |
         'jquery.polaroid', |
         'jquery.postcard', |
+        'jquery.floating', |
         'application', |
         'broadcast', |
         'waves/', |
-        'postings/', :cache => 'cached'    
+        'postings/', :cache => 'cached'
+        
     = yield(:javascripts)    
     :javascript
       jQuery(function($){
