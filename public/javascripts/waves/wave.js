@@ -10,27 +10,23 @@ jQuery(document).ready(function($) {
 	// Set up polaroids
 	$('.polaroid-container > .polaroid').polaroid().find('a.message').postcard();
 
-	// Post-its
-	$('a.profile', '.post_it').click(function(event) {
+	// Click-to-polaroid
+	$('a.profile').click(function(event) {
 		event.preventDefault();
 		$('<div class="floating"></div>')
 			.appendTo('.floating-overlay')
 			.load($(this).attr('href'), function() {	 			
-				$(this)
-					.position({
-						my: 'left center',
-						of: event,
-						offset: '30 0',
-						collision: 'fit'
-					})	
-					.draggable()
-					.find('.polaroid-container > .polaroid')
-						.polaroid({ 'close-button' : true })
-						.find('a.message').postcard().end();
+				$(this).position({
+					my: 'left center',
+					of: event,
+					offset: '30 0',
+					collision: 'fit'
+				})	
+				.draggable()
+				.find('.polaroid-container > .polaroid')
+					.polaroid({ 'close-button' : true })
+					.find('a.message').postcard().end();
 			});
 	});
-
-	// shared.js was here	
-	// comment.js was here
 	
 });
