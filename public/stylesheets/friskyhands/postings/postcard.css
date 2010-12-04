@@ -6,10 +6,6 @@
     text-align: left;	
 }
 
-#postcard {
-/*    z-index: 0;*/
-}
-
 .postcard .grid_5 {
     width: 226px;
 	padding-left: 26px;
@@ -32,27 +28,96 @@
 }
 
 .postcard .thread .message {
-	margin: 5px 0;
-}
-
-.postcard .thread .message img.avatar.thimble {
-	position: relative;
-	top: -5px;
-}
-
-.postcard .thread .message.sent img.avatar.thimble {
-	float: right;
-	margin-left: 4px;
-}
-
-.postcard .thread .message.sent {
-	float: right;
-	padding-left: 20px;
+	margin: 8px 5px;
+	min-width: 10px;
+	position: relative; 
+	padding: 3px 5px; 
+	background: none;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #f9f9f9;	
 }
 
 .postcard .thread .message.received {
 	float: left;
-/*	padding-right: 20px;*/
+	border: 1px solid darkred; 
+}
+
+.postcard .thread .message.received:before {
+	content:""; 
+	position:absolute; 
+	z-index:10; 
+	bottom:-6px; 
+	left: 4px; 
+	width:10px; 
+	height: 5px;
+	border-style:solid; 
+	border-width:0 1px 1px 0; 
+	border-color: darkred; 
+	background:transparent;
+	background-color: #f9f9f9;
+	-webkit-border-bottom-right-radius:18px 10px;
+	-moz-border-radius-bottomright:18px 10px;
+	border-bottom-right-radius:18px 10px;
+}
+
+.postcard .thread .message.received:after {
+	content:""; 
+	position:absolute; 
+	z-index:10; 
+	bottom:-6px; 
+	left:1px; 
+	width:4px; 
+	height: 5px; 
+	border-style:solid; 
+	border-width:0 1px 1px 0; 
+	border-color: darkred; 
+	background:transparent;
+	-webkit-border-bottom-right-radius: 10px 20px; 
+	-moz-border-radius-bottomright: 10px 20px; 
+	border-bottom-right-radius: 10px 20px; 
+}
+
+.postcard .thread .message.sent {
+	float: right;
+	text-align: right;
+	border: 1px solid #5a8f00; 
+}
+
+.postcard .thread .message.sent:before {
+	content:""; 
+	position:absolute; 
+	z-index:10; 
+	bottom:-6px; 
+	right:4px;
+	width:10px; 
+	height:5px;
+	border-style:solid; 
+	border-width:0 0 1px 1px; 
+	border-color: #5a8f00; 
+	background:transparent;
+	background-color: #f9f9f9;
+	-webkit-border-bottom-left-radius:18px 10px;
+	-moz-border-radius-bottomleft:18px 10px;
+	border-bottom-left-radius:18px 10px;
+}
+
+.postcard .thread .message.sent:after {
+	content:""; 
+	position:absolute; 
+	z-index:10; 
+	bottom:-6px; 
+	right:1px; 
+	width:4px; 
+	height:5px; 
+	border-style:solid; 
+	border-width:0 0 1px 1px; 
+	border-color: #5a8f00; 
+	background:transparent;
+	-webkit-border-bottom-left-radius: 10px 20px; 
+	-moz-border-radius-bottomleft: 10px 20px; 
+	border-bottom-left-radius: 10px 20px; 
 }
 
 .postcard textarea {

@@ -16,12 +16,13 @@
           .franking.hidden
           .delivered.hidden
           &nbsp;
-        = avatar_image_tag conversation.recipient, :style => 'thimble', :anonymous => false, :gender => conversation.recipient.user_info.gender
         .address
-          %p
-            = link_to_profile(conversation.recipient)
-          %p
-            From
-            = current_user.first_name
+          = avatar_image_tag conversation.recipient, :style => 'thumb', :gender => conversation.recipient.user_info.gender
+          / %p
+          /   = link_to_profile(conversation.recipient)
+          / %p
+          /   From
+          /   = current_user.first_name
+        =# avatar_image_tag conversation.user, :style => 'thimble', :gender => conversation.user.user_info.gender
         .button-bar
           = f.submit 'Send'

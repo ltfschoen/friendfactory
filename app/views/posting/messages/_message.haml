@@ -1,3 +1,2 @@
 .message[message]{ :class => (message.sender == current_user ? 'sent' : 'received') }<
-  = avatar_image_tag(message.user, :style => 'thimble')
   = message.body

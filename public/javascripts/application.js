@@ -14,5 +14,9 @@ var FF = {
 };
 
 jQuery(document).ready(function($) {
-  $('button.cancel, a.cancel').button({ icons: { primary: 'ui-icon-close' }});
+ 	$('button.cancel, a.cancel').button({ icons: { primary: 'ui-icon-close' }});
+	// $(window).load(function(){alert('hello!2')});
 });
+
+
+
