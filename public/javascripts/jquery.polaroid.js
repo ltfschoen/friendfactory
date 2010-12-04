@@ -10,17 +10,15 @@
 		
 		if ($.browser.safari) {
 
-			return this.each(function() {
-				
+			return this.each(function() {				
 				$this = $(this); // a polaroid
 
-				// Show the close button
 				if (settings[ 'close-button' ] === true) {
 					$('a.close', $this).click(function(event) {
 						event.preventDefault();
 						$this.fadeOut();
 						$(event.target).closest('.floating').remove();
-					}).show();
+					});
 				}				
 				
 				$this.find('.back.face')
@@ -87,7 +85,7 @@
 						event.preventDefault();
 						$this.fadeOut();
 						$(event.target).closest('.floating').remove();
-					}).show();
+					});
 				}				
 				
 				$this.find('.front .buddy-bar a.flip').live('click', function(event) {
