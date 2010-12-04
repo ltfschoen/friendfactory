@@ -17,12 +17,11 @@
           .delivered.hidden
           &nbsp;
         .address
-          = avatar_image_tag conversation.recipient, :style => 'thumb', :gender => conversation.recipient.user_info.gender
-          / %p
-          /   = link_to_profile(conversation.recipient)
-          / %p
-          /   From
-          /   = current_user.first_name
-        =# avatar_image_tag conversation.user, :style => 'thimble', :gender => conversation.user.user_info.gender
+          .message.received
+            = avatar_image_tag conversation.recipient, :style => 'thimble', :gender => conversation.recipient.user_info.gender
+            = link_to_profile(conversation.recipient)
+          .message.sent
+            = avatar_image_tag conversation.user, :style => 'thimble', :gender => conversation.user.user_info.gender
+            = link_to_profile(conversation.user)
         .button-bar
           = f.submit 'Send'

@@ -27,7 +27,7 @@
 	margin-bottom: 6px;
 }
 
-.postcard .thread .message {
+.postcard .message {
 	margin: 8px 5px;
 	min-width: 10px;
 	position: relative; 
@@ -39,12 +39,12 @@
 	background-color: #f9f9f9;	
 }
 
-.postcard .thread .message.received {
+.postcard .message.received {
 	float: left;
 	border: 1px solid darkred; 
 }
 
-.postcard .thread .message.received:before {
+.postcard .message.received:before {
 	content:""; 
 	position:absolute; 
 	z-index:10; 
@@ -62,7 +62,7 @@
 	border-bottom-right-radius:18px 10px;
 }
 
-.postcard .thread .message.received:after {
+.postcard .message.received:after {
 	content:""; 
 	position:absolute; 
 	z-index:10; 
@@ -79,13 +79,13 @@
 	border-bottom-right-radius: 10px 20px; 
 }
 
-.postcard .thread .message.sent {
+.postcard .message.sent {
 	float: right;
 	text-align: right;
 	border: 1px solid #5a8f00; 
 }
 
-.postcard .thread .message.sent:before {
+.postcard .message.sent:before {
 	content:""; 
 	position:absolute; 
 	z-index:10; 
@@ -103,7 +103,7 @@
 	border-bottom-left-radius:18px 10px;
 }
 
-.postcard .thread .message.sent:after {
+.postcard .message.sent:after {
 	content:""; 
 	position:absolute; 
 	z-index:10; 
@@ -148,6 +148,7 @@
 
 .postcard .delivered {
     position: absolute;
+	z-index: 10;
     top: 140px;
     left: 40px;
     width: 102px;
@@ -170,13 +171,28 @@
 	margin: 0;
 }
 
-.postcard img.avatar.thimble {
+.postcard .address .message a.profile {
+	font-size: 12px;
+}     
+
+.postcard .address .message.sent a.profile {
+	color: #5a8f00;
+}
+
+.postcard .address img.avatar.thimble {
     width: 30px;
     height: 30px;
-    margin-top: -2px;
-    margin-right: 4px;
+    margin: 2px 4px 2px 0;
     border: 1px solid lightgray;
     float: left;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.postcard .address .message.sent img.avatar.thimble {
+    float: right;
+    margin: 2px 0 2px 4px;
 }
 
 .postcard .button-bar {
