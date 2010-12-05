@@ -6,6 +6,12 @@ jQuery(function($) {
 			setTimeout(function() { $trigger.overlay().close(); }, 900);
 		});
 
+	$('.postcard').find('textarea').bind('keydown', function(event) {
+		if (event.keyCode == '13') {
+			event.preventDefault();
+			$(this).closest('form').submit();
+		}
+	});
 
 	$('.postcard').not('#postcard')
 		.find('form')

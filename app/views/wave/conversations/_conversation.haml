@@ -10,7 +10,8 @@
             &nbsp;ago
           = render :partial => 'posting/messages/message', :collection => messages
           &nbsp;
-        = f.text_area :body
+        .message-input
+          = f.text_area :body
       .grid_3.omega
         .stamp
           .franking.hidden

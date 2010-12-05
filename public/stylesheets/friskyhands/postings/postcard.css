@@ -12,7 +12,7 @@
 }
 
 .postcard .thread {
-    height: 188px;
+    height: 220px;
 	width: auto;
     margin-top: 26px;
 	color: gray;
@@ -41,37 +41,37 @@
 
 .postcard .message.received {
 	float: left;
-	border: 1px solid darkred; 
+	border: 2px solid rgba(139, 0, 0, 0.5); 
 }
 
 .postcard .message.received:before {
-	content:""; 
-	position:absolute;
-	bottom:-6px; 
+	content: ""; 
+	position: absolute;
+	bottom: -7px; 
 	left: 4px; 
 	width:10px; 
 	height: 5px;
-	border-style:solid; 
-	border-width:0 1px 1px 0; 
-	border-color: darkred; 
-	background:transparent;
+	border-style: solid; 
+	border-width: 0 2px 2px 0; 
+	border-color: rgba(139, 0, 0, 0.5); 
+	background: transparent;
 	background-color: #f9f9f9;
-	-webkit-border-bottom-right-radius:18px 10px;
-	-moz-border-radius-bottomright:18px 10px;
-	border-bottom-right-radius:18px 10px;
+	-webkit-border-bottom-right-radius: 18px 10px;
+	-moz-border-radius-bottomright: 18px 10px;
+	border-bottom-right-radius: 18px 10px;
 }
 
 .postcard .message.received:after {
-	content:""; 
-	position:absolute;
-	bottom:-6px; 
-	left:1px; 
-	width:4px; 
+	content: ""; 
+	position: absolute;
+	bottom: -7px;
+	left: 1px; 
+	width: 4px; 
 	height: 5px; 
-	border-style:solid; 
-	border-width:0 1px 1px 0; 
-	border-color: darkred; 
-	background:transparent;
+	border-style: solid; 
+	border-width: 0 2px 2px 0; 
+	border-color: rgba(139, 0, 0, 0.5); 
+	background: transparent;
 	-webkit-border-bottom-right-radius: 10px 20px; 
 	-moz-border-radius-bottomright: 10px 20px; 
 	border-bottom-right-radius: 10px 20px; 
@@ -80,52 +80,107 @@
 .postcard .message.sent {
 	float: right;
 	text-align: right;
-	border: 1px solid #5a8f00; 
+	border: 2px solid rgba(90, 143, 0, 0.5); 
 }
 
 .postcard .message.sent:before {
-	content:""; 
-	position:absolute;
-	bottom:-6px; 
-	right:4px;
-	width:10px; 
-	height:5px;
-	border-style:solid; 
-	border-width:0 0 1px 1px; 
-	border-color: #5a8f00; 
-	background:transparent;
+	content: ""; 
+	position: absolute;
+	bottom: -7px; 
+	right: 4px;
+	width: 10px; 
+	height: 5px;
+	border-style: solid; 
+	border-width: 0 0 2px 2px; 
+	border-color: rgba(90, 143, 0, 0.5);
+	background: transparent;
 	background-color: #f9f9f9;
-	-webkit-border-bottom-left-radius:18px 10px;
-	-moz-border-radius-bottomleft:18px 10px;
-	border-bottom-left-radius:18px 10px;
+	-webkit-border-bottom-left-radius: 18px 10px;
+	-moz-border-radius-bottomleft: 18px 10px;
+	border-bottom-left-radius: 18px 10px;
 }
 
 .postcard .message.sent:after {
-	content:""; 
-	position:absolute;
-	bottom:-6px; 
-	right:1px; 
-	width:4px; 
-	height:5px; 
-	border-style:solid; 
-	border-width:0 0 1px 1px; 
-	border-color: #5a8f00; 
-	background:transparent;
-	-webkit-border-bottom-left-radius: 10px 20px; 
+	content: ""; 
+	position: absolute;
+	bottom: -7px; 
+	right: 1px; 
+	width: 4px; 
+	height: 5px; 
+	border-style: solid;
+	border-width: 0 0 2px 2px;
+	border-color: rgba(90, 143, 0, 0.5); 
+	background: transparent;
+	-webkit-border-bottom-left-radius: 10px 20px;
 	-moz-border-radius-bottomleft: 10px 20px; 
 	border-bottom-left-radius: 10px 20px; 
 }
 
+.postcard .message-input {
+	position: relative;
+	height: 40px;
+	width: 232px;
+	margin-top: 12px;
+}
 .postcard textarea {
 	width: 212px;
-    height: 76px;
-	margin-top: 10px;	
-	background: none;
+    height: 36px;
 	font-size: 12px;
+	background: none;
 	line-height: 18px;
-	resize: none;
+	margin: 0;
+	overflow: hidden;
+	resize: none;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 2px solid rgba(90, 143, 0, 0.5); 	
 }
 
+.postcard .message-input:before {
+	content: ""; 
+	position: absolute;
+	bottom: -17px; 
+	right: 4px;
+	width: 10px; 
+	height: 5px;
+	border-style: solid; 
+	border-width: 0 0 2px 2px; 
+	border-color: rgba(90, 143, 0, 0.5);
+	background: transparent;
+	background-color: #f9f9f9;
+	-webkit-border-bottom-left-radius: 18px 10px;
+	-moz-border-radius-bottomleft: 18px 10px;
+	border-bottom-left-radius: 18px 10px;
+}
+
+.postcard .message-input:after {
+	content: ""; 
+	position: absolute;
+	bottom: -17px; 
+	right: 1px; 
+	width: 4px; 
+	height: 5px; 
+	border-style: solid;
+	border-width: 0 0 2px 2px;
+	border-color: rgba(90, 143, 0, 0.5); 
+	background: transparent;
+	-webkit-border-bottom-left-radius: 10px 20px;
+	-moz-border-radius-bottomleft: 10px 20px; 
+	border-bottom-left-radius: 10px 20px; 
+}
+
+/*.postcard .new-message {
+	word-wrap: break-word;
+}
+*/
+/*.postcard .new-message input {
+	height: 32px;
+	font-size: 12px;
+	color: #333;
+	word-wrap: break-word;
+}
+*/
 .postcard .stamp {
 	position: relative;
 	margin-top: 26px;
@@ -156,7 +211,7 @@
     color: lightgray;
     height: 144px;
     line-height: 32px;
-	padding-left: 6px;
+	padding-left: 3px;
 }
 
 .postcard .address img {
