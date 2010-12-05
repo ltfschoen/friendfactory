@@ -24,7 +24,6 @@ jQuery(function($) {
 		var channel_id = $(this).attr('id');
 		var channel = pusher.subscribe(channel_id);
 		channel.bind('message', function(data) {
-			console.dir(data);
 			$.get(data['url'], function(partial) {
 				var threadDiv = $('.thread', data['dom_id']).append(partial)[0];
 				threadDiv.scrollTop = threadDiv.scrollHeight;				

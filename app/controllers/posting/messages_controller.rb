@@ -25,7 +25,8 @@ class Posting::MessagesController < ApplicationController
       end
     end
 
-    @posting = @wave.messages.create(posting_message)    
+    @posting = @wave.messages.create(posting_message)
+    
     (@posting.waves - [ @wave ]).each do |wave|
       channel_id = dom_id(wave)
       Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, @posting), :dom_id => "##{channel_id}" })
