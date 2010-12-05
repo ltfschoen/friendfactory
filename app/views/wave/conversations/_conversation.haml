@@ -1,5 +1,10 @@
 - if current_user
   .wave.postcard.grid_8[conversation]
+
+    - if Rails.env.development?
+      %div{ :style => 'position:absolute;top:10px;left:20px' }
+        = dom_id(conversation)
+      
     = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => conversation.id), :remote => true do |f|
       .grid_5.alpha
         .thread

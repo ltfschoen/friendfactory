@@ -5,14 +5,18 @@ class Posting::Message < Posting::Base
 
   alias_attribute :sender, :user
 
-  # receiver_id is a User
-  attr_accessor :receiver_id
-    
+  attr_accessor :receiver_id # user_id
+  
   has_many :notifications
   
   # TODO validates_presence_of :receiver_id
 
-  publish_to :wave => Wave::Conversation
+  # publish_to :wave => Wave::Conversation  
+  after_create do |posting|
+    wave = find_or_create_recipient_wave(posting)
+    wave.postings << posting if wave
+    true
+  end  
 
   # # # # # #
   
@@ -41,6 +45,15 @@ class Posting::Message < Posting::Base
   
   def reply_subject(subject = nil)
     subject || self.subject && self.subject !~ /^Re:\s/ ? 'Re: ' + self.subject : self.subject
+  end
+  
+  def find_or_create_recipient_wave(posting)
+    if posting.present?
+      receiver = User.find_by_id(posting.receiver_id)
+      if receiver.present? && (receiver != posting.sender)
+        receiver.conversation.with(posting.sender) || receiver.create_conversation_with(posting.sender)
+      end
+    end
   end
       
 end

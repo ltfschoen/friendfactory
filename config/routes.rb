@@ -29,7 +29,7 @@ Friskyfactory::Application.routes.draw do
     namespace :posting do
       resources :texts,    :only => [ :create ]
       resources :photos,   :only => [ :create ]
-      resources :messages, :only => [ :create ]
+      resources :messages, :only => [ :create, :show ]
     end
   end
 

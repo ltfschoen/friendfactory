@@ -3,6 +3,17 @@ jQuery.fn.log = function (msg) {
     return this;
 };
 
+var PusherEvent = {
+  log: function(message, avatar) {
+    message = '<p>' + message
+    if (avatar) {
+      // message = message + avatar.id + avatar.image_file_name
+    }
+    message = message + '</p>'
+    $('#events').prepend(message);
+  }
+};
+
 var FF = {	
 	inspect: function(obj){
 		var str = ''; 
@@ -17,7 +28,7 @@ var FF = {
 			$('#log').append("<p>" + message + "</p>");
 		})(jQuery);	
 	}
-}
+};
 
 new function($) {
   $.fn.setCursorPosition = function(pos) {

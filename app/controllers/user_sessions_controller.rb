@@ -33,7 +33,6 @@ class UserSessionsController < ApplicationController
     current_user.update_attribute(:current_login_at, nil)
     current_user_session.destroy
     clear_lurker
-    Broadcast.user_offline('friskyhands', current_user)
     respond_to do |format|
       format.html { redirect_to root_path }
     end

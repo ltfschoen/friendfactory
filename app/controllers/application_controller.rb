@@ -1,5 +1,5 @@
 require 'exceptions'
-require 'broadcast'
+require 'pusher'
 
 class ApplicationController < ActionController::Base
 

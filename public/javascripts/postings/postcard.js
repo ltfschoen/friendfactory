@@ -6,6 +6,9 @@ jQuery(function($) {
 			setTimeout(function() { $trigger.overlay().close(); }, 900);
 		});
 
+
+	// Enter key in textarea
+	
 	$('.postcard').find('textarea').bind('keydown', function(event) {
 		if (event.keyCode == '13') {
 			event.preventDefault();
@@ -13,6 +16,25 @@ jQuery(function($) {
 		}
 	});
 
+
+	// Pusher
+	
+	var pusher = new Pusher('064cfff6a7f7e44b07ae');	
+	$('.postcard').each(function() {
+		var channel_id = $(this).attr('id');
+		var channel = pusher.subscribe(channel_id);
+		channel.bind('message', function(data) {
+			console.dir(data);
+			$.get(data['url'], function(partial) {
+				var threadDiv = $('.thread', data['dom_id']).append(partial)[0];
+				threadDiv.scrollTop = threadDiv.scrollHeight;				
+			});
+		});
+	});
+
+	
+	// Postcard setup
+	
 	$('.postcard').not('#postcard')
 		.find('form')
 			.find('.thread')
@@ -26,7 +48,7 @@ jQuery(function($) {
 			setTimeout(function() {
 				$this
 					.find('.franking, .delivered').fadeOut().end()
-					.find('textarea').val(''); }, 900);
+					.find('textarea').val(''); }, 800);
 		})
 		
 		.bind('ajax:complete', function() {
@@ -53,7 +75,7 @@ jQuery(function($) {
 	
 		.bind('ajax:complete', function() {
 			$this = $(this);
-			setTimeout(function() { $this.find('button[type="submit"]').button('enable'); }, 900);
+			setTimeout(function() { $this.find('button[type="submit"]').button('enable'); }, 800);
 		})
 	
 		.bind('ajax:failure', function() {
