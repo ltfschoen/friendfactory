@@ -5,12 +5,33 @@
 		var settings = {
 			'close-button' : false
 		}
-				
-		$.extend(settings, options);		
 		
+		function conversationLink(polaroid) {
+			$(polaroid).find('a.conversation').click(function(event) {
+				event.preventDefault();
+				$('<div class="floating"></div>')
+					.appendTo('.floating-container')
+					.load($(this).attr('href'), function() {
+						$(this).find('.postcard')
+							.postcard()
+							.draggable({ cancel: '.thread' })
+							.position({
+								my: 'left center',
+								of: event,
+								offset: '30 0',
+								collision: 'fit'
+							})
+							.find('textarea').focus();					
+					});
+			});			
+		}
+		
+		$.extend(settings, options);		
+				
 		if ($.browser.safari) {
 
-			return this.each(function() {				
+			return this.each(function() {
+							
 				$this = $(this); // a polaroid
 
 				if (settings[ 'close-button' ] === true) {
@@ -21,7 +42,9 @@
 							});
 						return false;
 					});
-				}				
+				}
+				
+				conversationLink(this);
 				
 				$this.find('.back.face')
 					.css('-webkit-transform', 'rotateY(180deg)')
@@ -78,6 +101,7 @@
 			// Non-Safari
 						
 			return this.each(function() {
+				
 				$this = $(this); // a polaroid
 				
 				$this.find('.face-container:eq(1)').hide();
@@ -89,6 +113,8 @@
 						return false;
 					});
 				}				
+
+				conversationLink(this);
 				
 				$this.find('.front .buddy-bar a.flip').live('click', function(event) {
 		    		event.preventDefault();
@@ -108,10 +134,8 @@
 								$polaroid.revertFlip();								
 							});
 
-							// Make polaroids work
-							$('a.message', $polaroid).postcard('overlay');
-
-							// Make scrollable work
+							// Make links work on backside
+							conversationLink($polaroid);
 							$polaroid.find('.scrollable').scrollable({
 								items: 'items',
 								keyboard: false,

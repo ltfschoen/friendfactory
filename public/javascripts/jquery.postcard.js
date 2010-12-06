@@ -33,12 +33,10 @@
 							$(event.target).closest('.postcard')
 								.fadeOut(function() {
 									$(this).closest('.floating').andSelf().remove();
-									// $(event.target).closest('.floating')
-									// $(this).remove();
 								});
 						})
 					.end()
-					
+
 					.find('form')
 						.find('textarea')
 							.bind('keydown', function(event) {
@@ -46,9 +44,9 @@
 									event.preventDefault();
 									$(this).closest('form').submit();
 								} else if (event.keyCode == '27') {
-									$(event.target).closest('.floating')
+									$(event.target).closest('.postcard')
 										.fadeOut(function() {
-											$(this).remove();
+											$(this).closest('.floating').andSelf().remove();
 										});
 								}
 							})

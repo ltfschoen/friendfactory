@@ -11,31 +11,28 @@ class Posting::Message < Posting::Base
   
   # TODO validates_presence_of :receiver_id
 
-  # publish_to :wave => Wave::Conversation  
   after_create do |posting|
     wave = find_or_create_recipient_wave(posting)
     wave.postings << posting if wave
     true
   end  
 
-  # # # # # #
+  # def read?
+  #   !!read_at
+  # end
   
-  def read?
-    !!read_at
-  end
-  
-  def recipient_for(user)
-    [ sender, receiver ].detect{ |recipient| recipient != user }
-  end
+  # def recipient_for(user)
+  #   [ sender, receiver ].detect{ |recipient| recipient != user }
+  # end
 
-  def direction_for(user)
-    sender == user ? 'from' : 'to'
-  end
+  # def direction_for(user)
+  #   sender == user ? 'from' : 'to'
+  # end
 
-  def latest_reply
-    leaf = self.children.last
-    leaf.nil? ? self : leaf.latest_reply
-  end
+  # def latest_reply
+  #   leaf = self.children.last
+  #   leaf.nil? ? self : leaf.latest_reply
+  # end
 
   def to_s
     "{ :id => #{self.id}, :sender => #{sender.to_s}, :receiver => #{receiver.to_s} :subject => '#{subject}' }"

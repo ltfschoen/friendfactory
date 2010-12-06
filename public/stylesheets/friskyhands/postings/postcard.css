@@ -250,10 +250,10 @@
 	text-indent: -1000em;
 }
 
-.floating .postcard {
+.ui-draggable.postcard {
 	cursor: move;
 }
 
-.floating .postcard .grid_5 {
+.postcard .grid_5 {
 	cursor: default;
 }
