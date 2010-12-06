@@ -14,7 +14,7 @@
 					.load($(this).attr('href'), function() {
 						$(this).find('.postcard')
 							.postcard()
-							.draggable({ cancel: '.thread' })
+							.draggable({ cancel: '.grid_5, button' })
 							.position({
 								my: 'left center',
 								of: event,

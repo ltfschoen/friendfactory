@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 	$('.postcard').postcard(); // .draggable({ cancel: '.thread' });
 
 	// Set up click-to-polaroid from a.profile
-	$('a[href^="/wave/profiles"].profile').click(function(event) {
+	$('a[href^="/wave/profiles"].profile').live('click', function(event) {
 		event.preventDefault();
 		$('<div class="floating"></div>')
 			.appendTo('.floating-container')
@@ -28,7 +28,6 @@ jQuery(document).ready(function($) {
 				.draggable()
 				.find('.polaroid-container > .polaroid')
 					.polaroid({ 'close-button' : true });
-					// .find('a.message').postcard('overlay').end();
 			});
 	});
 	
