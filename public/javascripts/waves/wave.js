@@ -8,10 +8,13 @@ jQuery(document).ready(function($) {
 	$('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 
 	// Set up polaroids
-	$('.polaroid-container > .polaroid').polaroid().find('a.message').postcard();
+	$('.polaroid-container > .polaroid').polaroid(); // .find('a.message').postcard('overlay');
+
+	// Set up postcards
+	$('.postcard').postcard();
 
 	// Click-to-polaroid
-	$('a.profile').click(function(event) {
+	$('a[href^="/wave/profiles"].profile').click(function(event) {
 		event.preventDefault();
 		$('<div class="floating"></div>')
 			.appendTo('.floating-container')
@@ -25,12 +28,32 @@ jQuery(document).ready(function($) {
 				.draggable()
 				.find('.polaroid-container > .polaroid')
 					.polaroid({ 'close-button' : true })
-					.find('a.message').postcard().end();
+					.find('a.message').postcard('overlay').end();
 			});
 	});
 	
+	// Click-to-postcard
+	$('a[href^="/wave/profiles"].conversation').click(function(event) {
+		event.preventDefault();
+		$('<div class="floating"></div>')
+			.appendTo('.floating-container')
+			.load($(this).attr('href'), function() {
+				$(this).find('.postcard')
+					.postcard()
+					.draggable({ cancel: '.thread' })
+					.position({
+						my: 'left center',
+						of: event,
+						offset: '30 0',
+						collision: 'fit'
+					})
+					.find('textarea').focus();					
+			});
+	});
+
+	// Floating bring to front
 	$('.floating').live('mousedown', function(event) {
 		$(event.target).closest('.floating').bringToFront();
 	});
-	
+		
 });

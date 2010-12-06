@@ -15,8 +15,10 @@
 
 				if (settings[ 'close-button' ] === true) {
 					$('a.close', $this).click(function(event) {
-						$this.fadeOut();
-						$(event.target).closest('.floating').remove();
+						$(event.target).closest('.floating')
+							.fadeOut(function() {
+								$(this).remove();
+							});
 						return false;
 					});
 				}				
@@ -107,7 +109,7 @@
 							});
 
 							// Make polaroids work
-							$('a.message', $polaroid).postcard();
+							$('a.message', $polaroid).postcard('overlay');
 
 							// Make scrollable work
 							$polaroid.find('.scrollable').scrollable({

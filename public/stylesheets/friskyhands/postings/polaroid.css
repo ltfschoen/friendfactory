@@ -24,6 +24,7 @@ div.polaroid .face {
 }
 
 div.polaroid .face a.close {
+	display: none;
 	float: right;
 	margin-top: -15px;
 	margin-right: -15px;
@@ -210,7 +211,7 @@ div.polaroid a.icon.chat {
 	background-position: -92px -1px;
 }
 
-div.polaroid a.icon.message {
+div.polaroid a.icon.conversation {
 	width: 26px;
 	background-position: -120px -1px;
 }
@@ -256,6 +257,7 @@ div.polaroid a.icon.headshot {
 }
 
 .floating div.polaroid .face {
+	cursor: move;
     -webkit-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
     box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);

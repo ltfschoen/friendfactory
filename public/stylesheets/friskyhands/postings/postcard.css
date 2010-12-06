@@ -238,3 +238,22 @@
 .postcard .button-bar {
     text-align: right;
 }
+
+.postcard a.close {
+	display: block;
+	float: right;
+	margin-top: 8px;
+	margin-right: 13px;
+	width: 15px;
+	height: 15px;
+	background: url(/images/friskyhands/buddy-bar.png) -244px -3px no-repeat;
+	text-indent: -1000em;
+}
+
+.floating .postcard {
+	cursor: move;
+}
+
+.floating .postcard .grid_5 {
+	cursor: default;
+}

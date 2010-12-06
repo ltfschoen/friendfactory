@@ -40,6 +40,6 @@
       %li= link_to 'Profile', 'profile', :class => 'mini-profile icon'
       %li= link_to 'Photos', 'photos', :class => 'photos icon'
       - if current_user
-        %li= link_to 'Message', 'messages', :class => 'message icon last'
+        %li= link_to 'Message', profile_conversation_path(profile), :class => 'conversation icon last'
     - if content_for?(:polaroid_back_face)
       = content_for(:polaroid_back_face)

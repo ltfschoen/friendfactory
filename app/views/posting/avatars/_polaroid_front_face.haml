@@ -23,6 +23,6 @@
         %li= link_to 'Profile', 'profile', :class => 'flip mini-profile icon'
         %li= link_to 'Photos', 'photos', :class => 'flip photos icon'
         - if current_user
-          %li= link_to 'Message', 'messages', :class => 'message icon last'
+          %li= link_to 'Message', profile_conversation_path(profile), :class => 'conversation icon last'
       - if content_for?(:polaroid_front_face)
         = content_for(:polaroid_front_face)

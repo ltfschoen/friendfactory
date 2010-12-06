@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
       :class_name => 'Wave::Conversation',
       :order      => 'created_at desc' do
     def with(receiver)
-      where(:resource_id => receiver.id).limit(1).first
+      where(:resource_id => receiver.id).limit(1).first if receiver.present?
     end
   end
 
@@ -55,10 +55,12 @@ class User < ActiveRecord::Base
   end
   
   def create_conversation_with(receiver)
-    wave = conversations.build
-    wave.resource = receiver
-    wave.save
-    wave    
+    if receiver.present?
+      wave = conversations.build
+      wave.resource = receiver
+      wave.save
+      wave
+    end
   end
   
   def has_friend?(buddy)

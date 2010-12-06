@@ -1,9 +1,98 @@
 (function($) {
 
 	var $trigger;
+	var pusher = new Pusher('064cfff6a7f7e44b07ae');	
 					
 	var methods = {
+		
 		init: function() {
+			
+			return this.each(function() {
+
+				$this = $(this);  // .postcard
+				
+				var channel_id = $this.attr('id');
+				var channel = pusher.subscribe(channel_id);
+				channel.bind('message', function(data) {
+					$.get(data['url'], function(partial) {
+						var threadDiv = $('.thread', data['dom_id']).append(partial)[0];
+						threadDiv.scrollTop = threadDiv.scrollHeight;				
+					});
+				});
+
+				$this
+					.find('.thread')
+						.each(function(idx, thread) {
+							thread.scrollTop = thread.scrollHeight;
+						})
+					.end()
+					
+					.find('a.close')
+						.click(function(event) {
+							event.preventDefault();
+							$(event.target).closest('.postcard')
+								.fadeOut(function() {
+									$(this).closest('.floating').andSelf().remove();
+									// $(event.target).closest('.floating')
+									// $(this).remove();
+								});
+						})
+					.end()
+					
+					.find('form')
+						.find('textarea')
+							.bind('keydown', function(event) {
+								if (event.keyCode == '13') {
+									event.preventDefault();
+									$(this).closest('form').submit();
+								} else if (event.keyCode == '27') {
+									$(event.target).closest('.floating')
+										.fadeOut(function() {
+											$(this).remove();
+										});
+								}
+							})
+						.end()
+						
+						.find('button[type="submit"]')
+							.button({ icons: { primary: 'ui-icon-check' }})
+						.end()
+					
+						.bind('ajax:loading', function() {
+							$(this).find('.franking').fadeIn();
+							$(this).find('button[type="submit"]').button('disable');
+						})
+						
+						.bind('ajax:success', function(xhr, data, status) {
+							$this = $(this);
+							$this.find('.delivered').fadeIn();							
+							setTimeout(function() {
+								$this
+									.find('.franking, .delivered').fadeOut().end()
+									.find('textarea').val(''); }, 800);
+						})
+		
+						.bind('ajax:complete', function() {
+							$this = $(this);
+							$this.find('textarea').focus();
+							var threadDiv = $this.find('.thread')[0];
+							threadDiv.scrollTop = threadDiv.scrollHeight;
+							setTimeout(function() { $this.find('button[type="submit"]').button('enable'); }, 800);
+						})
+												
+						.bind('submit', function() {
+							var msg = $(this).find('textarea').val();
+							if (msg.length == 0) { return false; }			
+						})
+
+						.bind('ajax:failure', function() {
+							alert("Couldn't send your message. Try again or Cancel.");
+						});		
+			}) // each			
+		}, // init
+		
+		
+		overlay : function() {
 			
 			var $postcard = $('#postcard');
 			var $sender = $('body').attr('data-first_name');

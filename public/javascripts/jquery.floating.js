@@ -6,9 +6,7 @@
 		$(this).siblings('.floating')
 			.each(function() {
 				maxz = Math.max(maxz, parseInt($(this).css('z-index')));
-				console.log(maxz);
-		});
-		
+		});		
 		return $(this).css('z-index', (maxz + 1));
 		
 	} // fn.top

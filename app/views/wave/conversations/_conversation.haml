@@ -1,19 +1,14 @@
 - if current_user
   .wave.postcard.grid_8[conversation]
-
-    - if Rails.env.development?
-      %div{ :style => 'position:absolute;top:10px;left:20px' }
-        = dom_id(conversation)
-      
+    = link_to 'Close', wave_posting_messages_path(conversation), :class => 'close hidden'  
     = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => conversation.id), :remote => true do |f|
       .grid_5.alpha
         .thread
-          - messages = conversation.messages
           .unobtrusive.time_ago
             Started&nbsp;
-            = time_ago_in_words(messages.first.created_at)
+            = time_ago_in_words(conversation.created_at)
             &nbsp;ago
-          = render :partial => 'posting/messages/message', :collection => messages
+          = render :partial => 'posting/messages/message', :collection => conversation.messages
           &nbsp;
         .message-input
           = f.text_area :body
