@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
 	$('.polaroid-container > .polaroid').polaroid();
 
 	// Set up statically rendered postcards (i.e Inbox)
-	$('.postcard').postcard(); // .draggable({ cancel: '.thread' });
+	$('.postcard').postcard().draggable({ cancel: '.grid_5, button' });
 
 	// Set up click-to-polaroid from a.profile
 	$('a[href^="/wave/profiles"].profile').live('click', function(event) {
