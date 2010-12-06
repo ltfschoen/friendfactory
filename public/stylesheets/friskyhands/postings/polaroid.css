@@ -6,13 +6,7 @@
 
 div.polaroid {
 	height: 350px;
-	width: 290px;    
-    -webkit-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;	
+	width: 290px; 
 }
 
 div.polaroid .face {
@@ -21,6 +15,9 @@ div.polaroid .face {
 	width: 260px;
 	background: url(/images/friskyhands/polariod.jpg);
 	padding: 15px;
+    -webkit-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;	
@@ -258,10 +255,10 @@ div.polaroid a.icon.headshot {
 	-webkit-backface-visibility: hidden;    
 }
 
-.floating div.polaroid {
-    -webkit-box-shadow: 6px 6px 16px 6px rgba(0, 0, 0, 0.35);
-    -moz-box-shadow: 6px 6px 16px 6px rgba(0, 0, 0, 0.35);
-    box-shadow: 6px 6px 16px 6px rgba(0, 0, 0, 0.35);
+.floating div.polaroid .face {
+    -webkit-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
 }
 
 .floating div.polaroid .face a.close {

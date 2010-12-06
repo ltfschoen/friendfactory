@@ -119,7 +119,7 @@
 	      	      					if (idx == 1) {
 	      	        					// Photo Grid
 	      	        					var $photoGrid = $(this.getRoot()).find('.photo-grid');
-	      	        					var id = $photoGrid.closest('.polaroid').attr('data-id');
+	      	        					var id = $photoGrid.closest('.polaroid').attr('data-profile_id');
 	                					$photoGrid.load('/wave/profiles/' + id + '/photos');
 									} // if
 	      	    				} // onSeek
