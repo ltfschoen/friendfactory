@@ -47,10 +47,10 @@
     = csrf_meta_tag    
     
   %body{ :class => current_site, :'data-site_name' => current_site, :'data-first_name' => current_user.try(:first_name) }
-    .floating-container    
+    .floating-container
     .container.container_16.clearfix
       = render :partial => "layouts/#{current_site}/header"
-      = yield
+      = yield      
       = render :partial => "layouts/#{current_site}/footer" rescue nil
       = render :partial => 'layouts/feedback' unless Rails.env.development?
             

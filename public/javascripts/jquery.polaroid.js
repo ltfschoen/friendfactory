@@ -44,7 +44,7 @@
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
 							event.preventDefault();	
-							$(this).closest('.polaroid').toggleClass('flipped')
+							$(this).closest('.polaroid').toggleClass('flipped');
 						})
 					.end()										
 				.end()
