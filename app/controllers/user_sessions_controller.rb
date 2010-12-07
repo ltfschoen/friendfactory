@@ -1,7 +1,6 @@
 class UserSessionsController < ApplicationController
   
   before_filter :require_lurker, :only => :new
-  before_filter :require_user,   :only => :destroy
     
   def new    
     store_reentry_location
@@ -30,9 +29,11 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    current_user.update_attribute(:current_login_at, nil)
-    current_user_session.destroy
-    clear_lurker
+    if current_user.present?
+      current_user.update_attribute(:current_login_at, nil)
+      current_user_session.destroy
+      clear_lurker
+    end
     respond_to do |format|
       format.html { redirect_to root_path }
     end
