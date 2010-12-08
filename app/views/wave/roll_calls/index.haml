@@ -6,7 +6,6 @@
       - css_class = 'tag4' if tag.name.downcase == 'deaf' # TODO !!!
       - css_class += " current" if tag.name == params[:tag]
       = link_to tag.name.titleize, roll_call_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
-  = render :partial => 'posting/messages/new'
 .grid_1
   &nbsp;
 .wave.roll_call.grid_16

@@ -2,43 +2,26 @@ class Posting::MessagesController < ApplicationController
 
   before_filter :require_user
 
-  def create
-    # From the polaroid, the receiver is carried in as
-    #   profile_id in the params. Convert this to user_id.
-    # From the inbox, the receiver is carried in the
-    #   wave_id on the path.
-
-    @wave = nil
-    @posting = nil
-    
-    if params[:wave_id]
-      @wave = current_user.conversations.find_by_id(params[:wave_id])
-      if @wave
-        posting_message = params[:posting_message].merge({ :user_id => current_user.id, :receiver_id => @wave.recipient.id })
-      end        
-    end
-
-    @posting = @wave.messages.create(posting_message)
-
-    (@posting.waves - [ @wave ]).each do |wave|
-      channel_id = dom_id(wave)
-      Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, @posting), :dom_id => "##{channel_id}" })
-    end
-    
+  def show
+    wave = current_user.conversations.find_by_id(params[:wave_id])
+    @posting = wave.postings.find_by_id(params[:id]) if wave.present?
     respond_to do |format|
-      format.js { render(:layout => false) }
+      format.html { render :layout => false }
     end
   end
 
-  
-  def show
-    @posting = nil
-    wave = current_user.conversations.find_by_id(params[:wave_id])
-    if wave
-      @posting = wave.postings.find_by_id(params[:id])
-    end
+  def create
+    @wave = current_user.conversations.find_by_id(params[:wave_id])
+    if @wave.present?
+      posting_message = params[:posting_message].merge({ :user_id => current_user.id, :receiver_id => @wave.recipient.id })
+      @posting = @wave.messages.create(posting_message)    
+      (@posting.waves - [ @wave ]).each do |wave|
+        channel_id = dom_id(wave)
+        Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, @posting), :dom_id => "##{channel_id}" })
+      end
+    end    
     respond_to do |format|
-      format.html { render :layout => false }
+      format.js { render(:layout => false) }
     end
   end
 
