@@ -9,13 +9,6 @@ set :user, 'mrcap'
 set :runner, 'mrcap'
 set :use_sudo, false
 
-set :branch do
-  default_tag = `git tag`.split("\n").last
-  tag = Capistrano::CLI.ui.ask "Tag to deploy (already pushed with git push origin --tags): [#{default_tag}] "
-  tag = default_tag if tag.empty?
-  tag
-end
-
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
@@ -63,14 +56,24 @@ end
 
 desc 'Set staging environment'
 task :staging do
-  set :branch, ENV['branch'] || 'master'
+  set :branch do
+    default_tag = ENV['release'] || 'master'
+    tag = Capistrano::CLI.ui.ask "Pushed tag to deploy: [#{default_tag}] "
+    tag = default_tag if tag.empty?
+    tag
+  end
   set :rails_env, 'staging'
   set :deploy_to, '/home/mrcap/friskyfactory/staging'
 end
 
 desc "Set production environment"
 task :production do
-  set :branch, ENV['release']
+  set :branch do
+    default_tag = `git tag`.split("\n").last
+    tag = Capistrano::CLI.ui.ask "Pushed tag to deploy: [#{default_tag}] "
+    tag = default_tag if tag.empty?
+    tag
+  end
   set :rails_env, 'production'
   set :deploy_to, '/home/mrcap/friskyfactory/production'
 end
