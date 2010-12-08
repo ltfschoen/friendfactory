@@ -9,6 +9,13 @@ set :user, 'mrcap'
 set :runner, 'mrcap'
 set :use_sudo, false
 
+set :branch do
+  default_tag = `git tag`.split("\n").last
+  tag = Capistrano::CLI.ui.ask "Tag to deploy (already pushed with git push origin --tags): [#{default_tag}] "
+  tag = default_tag if tag.empty?
+  tag
+end
+
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
