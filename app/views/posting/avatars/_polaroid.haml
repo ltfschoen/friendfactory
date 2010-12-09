@@ -3,8 +3,8 @@
 - if local_assigns[:avatar].present?
   - profile = avatar.profile
 
-- cache(profile.cache_key) do
-  .polaroid-container
-    .polaroid{ :'data-profile_id' => profile.id }
-      = render :partial => 'posting/avatars/polaroid_front_face', :locals => { :profile => profile, :avatar => avatar } 
-      = render :partial => 'posting/avatars/polaroid_back_face', :locals => { :profile => profile, :avatar => avatar } 
+-# cache(profile.cache_key) do
+.polaroid-container
+  .polaroid{ :'data-profile_id' => profile.id }
+    = render :partial => 'posting/avatars/polaroid_front_face', :locals => { :profile => profile, :avatar => avatar } 
+    = render :partial => 'posting/avatars/polaroid_back_face', :locals => { :profile => profile, :avatar => avatar } 
