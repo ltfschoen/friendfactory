@@ -50,9 +50,9 @@ jQuery(document).ready(function($) {
 	// 		});
 	// });
 
-	// Floating bring to front
-	$('.floating').live('mousedown', function(event) {
-		$(event.target).closest('.floating').bringToFront();
-	});
+	// // Floating bring to front
+	// $('.floating').live('mousedown', function(event) {
+	// 	$(event.target).closest('.floating').bringToFront();
+	// });
 		
 });

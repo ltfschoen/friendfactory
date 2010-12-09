@@ -1,4 +1,7 @@
-.floating-container {}
+.floating-container {
+	position: fixed;
+	z-index: 5000;
+}
 
 .floating {
 	position: fixed;

@@ -5,7 +5,7 @@
 		var settings = {
 			'close-button' : false
 		}
-		
+
 		function conversationLink(polaroid) {
 			$(polaroid).find('a.conversation').click(function(event) {
 				event.preventDefault();
@@ -14,7 +14,11 @@
 					.load($(this).attr('href'), function() {
 						$(this).find('.postcard')
 							.postcard()
-							.draggable({ cancel: '.grid_5, button' })
+							.draggable({
+								cancel: '.thread, textarea, button',
+								zIndex: 9999,
+								stack: '.floating'
+							})
 							.position({
 								my: 'left center',
 								of: event,

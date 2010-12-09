@@ -8,13 +8,15 @@
 
 .postcard .grid_5 {
     width: 226px;
+	height: 300px;
 	padding-left: 26px;
+	padding-top: 26px;
+	overflow: hidden;
 }
 
 .postcard .thread {
     height: 220px;
 	width: auto;
-    margin-top: 26px;
 	color: gray;
 	font-size: 12px;
 	line-height: 18px;
@@ -123,7 +125,7 @@
 	margin-top: 12px;
 }
 .postcard textarea {
-	width: 212px;
+	width: 210px;
     height: 36px;
 	font-size: 12px;
 	background: none;
@@ -203,7 +205,7 @@
 	padding-left: 3px;
 }
 
-.postcard .address img {
+.wave_conversation .address img {
 	margin-left: -6px;
 }
 
@@ -254,6 +256,8 @@
 	cursor: move;
 }
 
-.postcard .grid_5 {
+.postcard .thread, 
+.postcard textarea,
+.postcard button {
 	cursor: default;
 }
