@@ -1,21 +1,19 @@
 jQuery(function($){
 
-	return; // This file no-op
-	
 	var $trigger;
 	var $ticket = $('#new_event_overlay');
 	
-	$('li:eq(0) a', 'ul.wave.nav')
-		.button({ icons: { primary: 'ui-icon-clock' }})		
+	$('li:eq(0) a', 'ul.wave.event.nav')
+		.button({ icons: { primary: 'ui-icon-pencil' }})
 		.overlay({
-			top: '20%',
+			top: '30%',
 			close: '.button.cancel',
 			mask: { color: '#666', opacity: 0.5 },
-			onBeforeLoad: function(event){
+			onBeforeLoad: function(event) {
 				$trigger = event.target.getTrigger();
 				$ticket.find('button[type="submit"]').button('enable');				
 			},
-			onLoad: function(event){}
+			onLoad: function(event) {}
 		});
 		
 	$ticket

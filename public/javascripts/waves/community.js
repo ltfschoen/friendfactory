@@ -1,15 +1,15 @@
-jQuery(function($){
+jQuery(function($) {
 
 	// Tabs
-	$('.wave.nav li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
-	$('.wave.nav li:eq(1)').button({ icons: { primary: 'ui-icon-image' }})
+	$('.wave.community.nav li:eq(0)').button({ icons: { primary: 'ui-icon-pencil' }});
+	$('.wave.community.nav li:eq(1)').button({ icons: { primary: 'ui-icon-image' }});
 	// $('#tabs li:eq(2)').button({ icons: { primary: 'ui-icon-video' }});
 	// $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-comment' }});
 	// $('#tabs li:eq(3)').button({ icons: { primary: 'ui-icon-link' }});
 	// $('#tabs li:eq(5)').button({ icons: { primary: 'ui-icon-clock' }});
 	// $('#tabs li:eq(6)').button({ icons: { primary: 'ui-icon-signal' }});
 
-	$('ul.wave.nav li').click(function() {
+	$('ul.wave.community.nav li').click(function() {
 	  if (!$(this).hasClass('current')) {
 	    $(this).addClass('current').siblings('li.current').removeClass('current');
 	    $($(this).find('a').attr('href')).show().siblings('.tab_content').hide();

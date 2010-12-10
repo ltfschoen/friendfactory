@@ -13,7 +13,7 @@
         "#{site}/postings/", |
         "#{site}/displaced", :media => 'screen', :cache => "#{site}/cached"    
     / [if IE]
-      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'      
+      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
     = yield(:stylesheets)
     :css
       #{yield(:pagecss)}
@@ -24,7 +24,8 @@
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
       = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
-      = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'    
+      = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'
+      
     = javascript_includes |
         'rails', |        
         'jquery.form', |
