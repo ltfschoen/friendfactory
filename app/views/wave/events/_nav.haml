@@ -1,3 +1,4 @@
 - if current_user
   %ul.wave.nav
-    %li= link_to 'Event', 'event/new', :rel => '#new_event_overlay'
+    %li{ :class => 'pencil' }
+      = link_to 'Event', 'event/new', :rel => '#new_event_overlay'

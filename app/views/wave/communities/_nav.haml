@@ -1,7 +1,9 @@
 - if current_user
   %ul.wave.nav
-    %li= link_to 'Message', '#text'
-    %li= link_to 'Photo', '#photo'
+    %li{ :class => 'pencil' }
+      = link_to 'Message', '#text'
+    %li{ :class => 'image' }
+      = link_to 'Photo', '#photo'
     / %li
     /   %a{ :href => '#video' } Video
     / %li
