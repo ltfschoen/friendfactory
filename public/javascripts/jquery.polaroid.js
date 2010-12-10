@@ -6,7 +6,7 @@
 			'close-button' : false
 		}
 
-		function conversationLink(polaroid) {
+		function clickToPostcard(polaroid) {
 			$(polaroid).find('a.conversation').click(function(event) {
 				event.preventDefault();
 				$('<div class="floating"></div>')
@@ -48,7 +48,7 @@
 					});
 				}
 				
-				conversationLink(this);
+				clickToPostcard(this);
 				
 				$this.find('.back.face')
 					.css('-webkit-transform', 'rotateY(180deg)')
@@ -118,7 +118,7 @@
 					});
 				}				
 
-				conversationLink(this);
+				clickToPostcard(this);
 				
 				$this.find('.front .buddy-bar a.flip').live('click', function(event) {
 		    		event.preventDefault();
@@ -139,7 +139,7 @@
 							});
 
 							// Make links work on backside
-							conversationLink($polaroid);
+							clickToPostcard($polaroid);
 							$polaroid.find('.scrollable').scrollable({
 								items: 'items',
 								keyboard: false,

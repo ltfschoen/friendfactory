@@ -1,6 +1,6 @@
 - if current_user
   .wave.postcard.grid_8[conversation]
-    = link_to 'Close', wave_posting_messages_path(conversation), :class => 'close hidden'  
+    = link_to 'Close', close_wave_conversation_path(conversation), :class => 'close hidden', :remote => true, :method => :put
     = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => conversation.id), :remote => true do |f|
       .grid_5.alpha
         .thread

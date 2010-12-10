@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   # <user1>.conversation.with.<user2>
   alias :conversation :conversations
 
+  has_one  :inbox, :class_name => 'Wave::Inbox'
+      
   has_many :postings, :class_name => 'Posting::Base'
   
   has_many :friendships

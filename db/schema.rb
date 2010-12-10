@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101203073213) do
+ActiveRecord::Schema.define(:version => 20101210002532) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -85,6 +85,14 @@ ActiveRecord::Schema.define(:version => 20101203073213) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "uber_waves", :id => false, :force => true do |t|
+    t.integer "uber_wave_id"
+    t.integer "wave_id"
+  end
+
+  add_index "uber_waves", ["uber_wave_id", "wave_id"], :name => "index_uber_waves_on_uber_wave_id_and_wave_id"
+  add_index "uber_waves", ["wave_id"], :name => "index_uber_waves_on_wave_id"
 
   create_table "user_info", :force => true do |t|
     t.integer  "user_id"

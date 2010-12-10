@@ -26,16 +26,6 @@
 							thread.scrollTop = thread.scrollHeight;
 						})
 					.end()
-					
-					.find('a.close')
-						.click(function(event) {
-							event.preventDefault();
-							$(event.target).closest('.postcard')
-								.fadeOut(function() {
-									$(this).closest('.floating').andSelf().remove();
-								});
-						})
-					.end()
 
 					.find('form')
 						.find('textarea')
