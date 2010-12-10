@@ -13,7 +13,7 @@ class Posting::Message < Posting::Base
 
   after_create do |posting|
     wave = find_or_create_recipient_wave(posting)
-    wave.postings << posting if wave
+    wave.messages << posting if wave
     true
   end  
 
@@ -21,19 +21,6 @@ class Posting::Message < Posting::Base
   #   !!read_at
   # end
   
-  # def recipient_for(user)
-  #   [ sender, receiver ].detect{ |recipient| recipient != user }
-  # end
-
-  # def direction_for(user)
-  #   sender == user ? 'from' : 'to'
-  # end
-
-  # def latest_reply
-  #   leaf = self.children.last
-  #   leaf.nil? ? self : leaf.latest_reply
-  # end
-
   def to_s
     "{ :id => #{self.id}, :sender => #{sender.to_s}, :receiver => #{receiver.to_s} :subject => '#{subject}' }"
   end

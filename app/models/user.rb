@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   has_one  :user_info
   
   has_many :waves,    :class_name => 'Wave::Base'
-  has_one  :profile,  :class_name => 'Wave::Profile'  
+  has_one  :profile,  :class_name => 'Wave::Profile'
+  
   has_many :conversations,
       :class_name => 'Wave::Conversation',
       :order      => 'created_at desc' do
@@ -23,8 +24,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Syntatic sugar:
-  # <user1>.conversation.with.<user2>
+  # Syntatic sugar: <user1>.conversation.with.<user2>
   alias :conversation :conversations
 
   has_one  :inbox, :class_name => 'Wave::Inbox'

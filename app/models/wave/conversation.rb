@@ -6,8 +6,18 @@ class Wave::Conversation < Wave::Base
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
-      :order                   => 'created_at asc'
+      :order                   => 'created_at asc',
+      :after_add               => :add_conversation_to_inbox
 
   alias :recipient :resource
+
+  private
+  
+  def add_conversation_to_inbox(message)
+    inbox = self.user.inbox
+    unless inbox.nil? || inbox.wave_ids.include?(self.id)
+      inbox.waves << self
+    end
+  end
 
 end
