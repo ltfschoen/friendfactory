@@ -1,4 +1,6 @@
-#new_event_overlay.hidden  
+#new_event_overlay.grid_12.hidden  
+  %h3
+    Create a new Event
   = form_for Wave::Event.new(:user_id => current_user.id), :remote => true do |f|
     .ticket
       .center-pane
@@ -6,5 +8,6 @@
         .presents PRESENTS
         = f.text_area  :description, :placeholder => 'Event Description'
       .button-bar
+        = f.text_field :start_date
         = f.submit 'Create'
-        = f.button 'Cancel', :class => 'button cancel'
+        =# f.button 'Cancel', :class => 'button cancel'

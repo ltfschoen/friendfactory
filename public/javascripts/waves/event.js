@@ -6,8 +6,7 @@ jQuery(function($){
 	$('li:eq(0) a', 'ul.wave.event.nav')
 		.button({ icons: { primary: 'ui-icon-pencil' }})
 		.overlay({
-			top: '30%',
-			close: '.button.cancel',
+			top: '12%',
 			mask: { color: '#666', opacity: 0.5 },
 			onBeforeLoad: function(event) {
 				$trigger = event.target.getTrigger();

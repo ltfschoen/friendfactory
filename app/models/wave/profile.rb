@@ -9,6 +9,8 @@ class Wave::Profile < Wave::Base
       :after_add               => [ :active_avatar, :touch ]
 
   alias :user_info :resource
+
+  has_many :events, :through => :invitations
   
   after_create do |profile|
     if profile.resource.nil?

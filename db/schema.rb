@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101210002532) do
+ActiveRecord::Schema.define(:version => 20101210235947) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(:version => 20101210002532) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "profile_id"
+    t.integer  "attendance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invitations", ["event_id", "profile_id"], :name => "index_invitations_on_event_id_and_profile_id"
+  add_index "invitations", ["profile_id"], :name => "index_invitations_on_profile_id"
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
@@ -28,13 +39,6 @@ ActiveRecord::Schema.define(:version => 20101210002532) do
 
   add_index "notifications", ["posting_id"], :name => "index_notifications_on_posting_id"
   add_index "notifications", ["user_id", "posting_id"], :name => "index_notifications_on_user_id_and_posting_id"
-
-  create_table "posting_chats", :force => true do |t|
-    t.integer "receiver_id"
-    t.text    "body"
-  end
-
-  add_index "posting_chats", ["receiver_id"], :name => "index_posting_chats_on_receiver_id"
 
   create_table "postings", :force => true do |t|
     t.string   "type"
@@ -68,6 +72,13 @@ ActiveRecord::Schema.define(:version => 20101210002532) do
 
   add_index "postings_waves", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
   add_index "postings_waves", ["wave_id"], :name => "index_postings_waves_on_wave_id"
+
+  create_table "resource_events", :force => true do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "private"
+    t.boolean  "rsvp"
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
