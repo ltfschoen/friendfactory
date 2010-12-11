@@ -20,7 +20,7 @@ class Wave::EventsController < ApplicationController
     end
   end
   
-  def create    
+  def create
     @wave = Wave::Event.create(params[:wave_event].merge(:user_id => current_user.id))
     respond_to do |format|
       format.js { render :layout => false }

@@ -9,6 +9,18 @@
 	height: 64px;
 }
 
+.ticket .left-info_pane {
+	position: relative;
+}
+
+.ticket .start_date {
+	position: relative;
+	top: 126px;
+	left: 20px;
+	width: 5em;
+	color: black;
+}
+
 .ticket .center-pane {
 	text-align: center;
 }
@@ -29,6 +41,7 @@
 
 .ticket .description {
 	text-align: center;
+	font-size: 16px;
 }
 
 .wave.events .event {
@@ -107,11 +120,12 @@
 	text-transform: uppercase;
 }
 
-#new_event_overlay input.date {
+#new_event_overlay input#wave_event_start_date {
 	position: relative;
 	top: 114px;
 	left: 20px;
-	width: 5em;	
+	width: 5em;
+	color: black;
 }
 
 #new_event_overlay input#wave_event_promoter_name {
@@ -121,10 +135,12 @@
 }
 
 #new_event_overlay textarea#wave_event_description {
+	font-size: 16px;
 	height: 60px;
 	text-align: center;
 	resize: none;
 	background: none;
+	color: black;
 }
 
 #new_event_overlay .button-bar {
