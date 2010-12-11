@@ -5,10 +5,12 @@
 	background: url('/images/friskyhands/ticket.png');
 }
 
+.ticket .header {
+	height: 64px;
+}
+
 .ticket .center-pane {
-	width: 360px;
-	margin-left: 104px;
-	padding-top: 80px;
+	text-align: center;
 }
 
 .ticket .promoter_name {
@@ -22,6 +24,7 @@
 	color: gray;
 	text-align: center;
 	margin: 10px 0;
+	text-transform: uppercase;
 }
 
 .ticket .description {
@@ -92,10 +95,6 @@
 	width: 35px;
 }
 
-#new_event_overlay .ticket .center-pane {
-	padding-top: 60px;
-}
-
 #new_event_overlay form {
 	position: relative;
 	margin: 0 auto;
@@ -105,6 +104,14 @@
 
 #new_event_overlay .ticket .presents {
 	margin: 0;
+	text-transform: uppercase;
+}
+
+#new_event_overlay input.date {
+	position: relative;
+	top: 114px;
+	left: 20px;
+	width: 5em;	
 }
 
 #new_event_overlay input#wave_event_promoter_name {
@@ -114,7 +121,7 @@
 }
 
 #new_event_overlay textarea#wave_event_description {
-	height: 66px;
+	height: 60px;
 	text-align: center;
 	resize: none;
 	background: none;

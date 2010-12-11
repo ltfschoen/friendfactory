@@ -16,6 +16,9 @@ jQuery(function($){
 		});
 		
 	$ticket
+		.find('.date')
+			.datepicker()
+		.end()
 		.find('.button.cancel')
 			.click(function(event){ event.preventDefault(); })
 		.end()
