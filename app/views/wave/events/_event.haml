@@ -6,6 +6,8 @@
       .start_date
         - if event.start_date.present?
           = event.start_date.to_s(:event_date)
+        - else
+          &nbsp;
     .center-pane.grid_6<
       .promoter_name<
         = event.promoter_name
