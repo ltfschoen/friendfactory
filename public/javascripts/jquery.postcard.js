@@ -21,7 +21,7 @@
 				});
 
 				$this
-					.find('.popup')
+					.find('a.popup')
 						.click(function(event) {
 							event.preventDefault();							
 							var url = $(this).attr('href');
@@ -34,6 +34,16 @@
 								.fadeOut(function() {
 									$(this).closest('.floating').andSelf().remove();								
 								})
+						})
+					.end()
+					
+					.find('a.close')
+						.click(function(event) {
+							event.preventDefault();
+							$(event.target).closest('.postcard')
+								.fadeOut(function() {
+									$(this).closest('.floating').andSelf().remove();								
+								})							
 						})
 					.end()
 					

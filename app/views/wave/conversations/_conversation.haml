@@ -1,7 +1,7 @@
 - if current_user
   .wave.postcard.grid_8[conversation]
     - unless @popup.present?
-      = link_to 'Close', close_wave_conversation_path(conversation), :class => 'close', :remote => true, :method => :put
+      = link_to 'Close', close_wave_conversation_path(conversation), :class => 'close'
       = link_to 'Popup', wave_conversation_path(conversation), :class => 'popup'
     = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => conversation.id), :remote => true do |f|
       .grid_5.alpha

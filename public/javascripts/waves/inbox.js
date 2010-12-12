@@ -15,7 +15,13 @@ jQuery(function($) {
 				// $.Storage.set($(ui.helper).attr('id'), position.top + 'x' + position.left + 'x' + $(ui.helper).css('z-index'));
 			}
 		})
+		
 		.mousedown(function(event) {
 			$(this).topZIndex('.wave_conversation');
-		});	
+		})
+		
+		.find('a.close')
+			.attr('data-remote', 'true')
+			.attr('data-method', 'put');
+
 });
