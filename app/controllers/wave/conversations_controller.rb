@@ -15,11 +15,20 @@ class Wave::ConversationsController < ApplicationController
   end
 
   def show
-    # current_user's conversation with another identified by other user's profile_id.
-    user = Wave::Profile.find_by_id(params[:profile_id]).try(:user)
-    @wave = current_user.conversation.with(user) || current_user.create_conversation_with(user)
+    # Show conversation postcard identified by either
+    # :id or by the :profile_id of the other user.
+    
     respond_to do |format|
-      format.html { render :layout => false }
+      if params[:profile_id]
+        user = Wave::Profile.find_by_id(params[:profile_id]).try(:user)
+        @wave = current_user.conversation.with(user) || current_user.create_conversation_with(user)
+        format.html { render :layout => false }
+      else
+        @popup = true
+        @wave = current_user.conversations.find_by_id(params[:id])
+        @title = "FriskyHands with #{@wave.recipient.first_name}"
+        format.html
+      end
     end
   end
   
@@ -34,4 +43,13 @@ class Wave::ConversationsController < ApplicationController
     end
   end
   
+  # def popup
+  #   @popup = true
+  #   @wave = current_user.conversations.find_by_id(params[:id])
+  #   @title = "FriskyHands with #{@wave.recipient.first_name}"
+  #   respond_to do |format|
+  #     format.html
+  #   end
+  # end
+    
 end

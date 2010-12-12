@@ -7,11 +7,19 @@
 }
 
 .postcard .grid_5 {
+	margin-top: 22px;
     width: 226px;
 	height: 300px;
 	padding-left: 26px;
-	padding-top: 26px;
+	padding-top: 0px;
 	overflow: hidden;
+}
+
+.postcard .grid_3 {
+	position: relative;
+	margin-top: 22px;
+	overflow: hidden;
+	height: 300px;
 }
 
 .postcard .thread {
@@ -172,16 +180,9 @@
 	border-bottom-left-radius: 10px 20px; 
 }
 
-.postcard .stamp {
-	position: relative;
-	margin-top: 26px;
-    width: 160px;
-    height: 110px;    
-}
-
 .postcard .franking {
     position: absolute;
-    top: 20px;
+	top: 10px;
     left: 20px;
     width: 130px;
     height: 64px;
@@ -199,13 +200,14 @@
 }
 
 .postcard .address {
+	margin-top: 120px;
+	height: 140px;
     color: lightgray;
-    height: 144px;
     line-height: 32px;
 	padding-left: 3px;
 }
 
-.wave_conversation .address img {
+.postcard .address img {
 	margin-left: -6px;
 }
 
@@ -242,17 +244,33 @@
 }
 
 .postcard a.close {
+	position: absolute;
 	display: block;
-	float: right;
-	margin-top: 8px;
-	margin-right: 13px;
+	right: 14px;
+	top: 10px;
 	width: 15px;
 	height: 15px;
 	background: url(/images/friskyhands/buddy-bar.png) -244px -3px no-repeat;
 	text-indent: -1000em;
 }
 
-.ui-draggable.postcard {
+.postcard a.popup {
+	position: absolute;
+	display: block;
+	top: 10px;
+	right: 34px;
+	width: 14px;
+	height: 18px;
+	background: url(/images/friskyhands/buddy-bar.png) -260px -3px no-repeat;
+	text-indent: -1000em;
+}
+
+.popup .postcard a.close,
+.popup .postcard a.popup {
+	display: none;
+}
+
+.postcard.ui-draggable {
 	cursor: move;
 }
 

@@ -2,7 +2,8 @@
 %html
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
-    %title FriskyHands
+    %title
+      = @title || 'FriskyHands'
     = stylesheet_links 'reset', 'forms', '960', :media => 'screen', :cache => 'cached'
     - site = current_site
     = stylesheet_links |
@@ -52,10 +53,10 @@
   %body{ :class => current_site, :'data-site_name' => current_site, :'data-first_name' => current_user.try(:first_name) }
     .floating-container.container_16.clearfix
     .container.container_16.clearfix
-      = render :partial => "layouts/#{current_site}/header"
+      = render :partial => "layouts/#{current_site}/header" unless @popup.present?
       = yield      
-      = render :partial => "layouts/#{current_site}/footer" rescue nil
-      = render :partial => 'layouts/feedback' unless Rails.env.development?
+      = render :partial => "layouts/#{current_site}/footer" unless @popup.present?
+      = render :partial => 'layouts/feedback' unless @popup.present? || Rails.env.development?
             
   - if Rails.env.production?
     :javascript

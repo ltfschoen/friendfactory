@@ -21,6 +21,22 @@
 				});
 
 				$this
+					.find('.popup')
+						.click(function(event) {
+							event.preventDefault();							
+							var url = $(this).attr('href');
+							var receiver = $(this).closest('.wave').find('.received a.profile').text();
+							
+							var popup = window.open(url, url,
+								'width=480,height=350,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no');
+								
+							$(event.target).closest('.postcard')
+								.fadeOut(function() {
+									$(this).closest('.floating').andSelf().remove();								
+								})
+						})
+					.end()
+					
 					.find('.thread')
 						.each(function(idx, thread) {
 							thread.scrollTop = thread.scrollHeight;

@@ -7,10 +7,13 @@ jQuery(document).ready(function($) {
 	$('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});
 	$('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 
-	// Set up polaroids
+	// Set up static polaroids
 	$('.polaroid-container > .polaroid').polaroid();
 
-	// Set up click-to-polaroid from a.profile
+	// Set up static postcards
+	$('.postcard').postcard();
+
+	// Set up static click-to-polaroid from a.profile
 	$('a[href^="/wave/profiles"].profile').live('click', function(event) {
 		event.preventDefault();
 		$('<div class="floating"></div>')

@@ -1,7 +1,6 @@
 jQuery(function($) {
 
 	$('.postcard', '.inbox')
-		.postcard()
 		.draggable({
 			cancel: '.thread, textarea, button',
 			stack: '.wave_conversation',
