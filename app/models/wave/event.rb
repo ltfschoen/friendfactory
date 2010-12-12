@@ -14,6 +14,14 @@ class Wave::Event < Wave::Base
 
   after_save do |event|
     event.event_info.save
+    wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
+    if wave
+      posting = Posting::WaveProxy.new(:user_id => event.user_id)
+      posting.resource = event
+      posting.save    
+      wave.postings << posting
+    end
+    true
   end
 
   def promoter_name=(name)

@@ -1,6 +1,6 @@
 #new_event_overlay.hidden<
-  %h3<
-    Create a new Event
+  %h1<    
+    Create a New Event
   = form_for Wave::Event.new(:user_id => current_user.id), :remote => true do |f|
     .ticket<
       .grid_10.alpha      

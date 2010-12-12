@@ -1,3 +1,17 @@
 .wave_community td.avatar.thumb {
     width: 220px
 }
+
+.wave_community .posting_wave_proxy {
+	position: relative;
+}
+
+.wave_community .posting_wave_proxy .post_it {
+	position: absolute;
+	z-index: 10;
+}
+
+.wave_community .posting_wave_proxy .wave_container {
+	position: relative;
+	left: 80px;
+}
