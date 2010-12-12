@@ -42,14 +42,5 @@ class Wave::ConversationsController < ApplicationController
       format.js { render :layout => false }
     end
   end
-  
-  # def popup
-  #   @popup = true
-  #   @wave = current_user.conversations.find_by_id(params[:id])
-  #   @title = "FriskyHands with #{@wave.recipient.first_name}"
-  #   respond_to do |format|
-  #     format.html
-  #   end
-  # end
     
 end
