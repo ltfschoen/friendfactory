@@ -3,7 +3,10 @@ body, p, h1, h2, h3, label, input, textarea, a, .formError {
 }
 
 body {
+	-moz-user-select: auto;
+	-khtml-user-select: auto;
 	-webkit-user-select: auto;
+	user-select: auto;	
 	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
 }
 
@@ -127,10 +130,6 @@ a.button {
 
 .container {
     position: relative;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;	
 }
 
 input[type=text],
