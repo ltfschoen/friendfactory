@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/profiles/edit.html.erb" do
-  include ProfilesHelper
+  # include ProfilesHelper
 
   before(:each) do
     assigns[:profile] = @profile = stub_model(Wave::Profile,

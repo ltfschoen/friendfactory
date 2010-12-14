@@ -15,6 +15,7 @@ describe Wave::CommunitiesController do
 
   describe "GET show" do
     it "assigns the requested wave with :slug as @wave" do
+      pending
       Wave::Base.should_receive(:find_by_slug).once.with("hotties").and_return(mock_wave)
       get :show, { :slug => "hotties" }, { :lurker => true }
       assigns[:wave].should equal(mock_wave)

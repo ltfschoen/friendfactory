@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MessagesController do
+describe Posting::MessagesController do
   describe "routing" do
     # it "recognizes and generates #index" do
     #   pending do

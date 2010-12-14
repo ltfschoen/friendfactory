@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/friendships/index.html.erb" do
-  include FriendshipsHelper
+  # include FriendshipsHelper
 
   before(:each) do
     assigns[:friendships] = [

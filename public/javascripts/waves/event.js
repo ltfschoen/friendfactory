@@ -7,7 +7,7 @@ jQuery(function($){
 		.button({ icons: { primary: 'ui-icon-pencil' }})
 		.overlay({
 			top: '12%',
-			mask: { color: '#666', opacity: 0.5 },
+			mask: { color: '#501508', opacity: 0 },
 			onBeforeLoad: function(event) {
 				$trigger = event.target.getTrigger();
 				$ticket.find('button[type="submit"]').button('enable');				

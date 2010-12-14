@@ -3,6 +3,7 @@ require "spec_helper"
 describe Wave::RollCallsController do
   describe 'routing' do
     it 'recognizes #index' do
+      pending
       { :get => '/rollcall' }.should route_to(:controller => 'waves/roll_calls', :action => 'index')
     end
 

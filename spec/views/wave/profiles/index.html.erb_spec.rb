@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/profiles/index.html.erb" do
-  include ProfilesHelper
+  # include ProfilesHelper
 
   before(:each) do
     assigns[:profiles] = [

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/friendships/new.html.erb" do
-  include FriendshipsHelper
+  # include FriendshipsHelper
 
   before(:each) do
     assigns[:friendship] = stub_model(Friendship,

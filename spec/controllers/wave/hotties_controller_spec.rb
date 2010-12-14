@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Waves::HottiesController do
+describe Wave::HottiesController do
 
   it "should use Waves::HottiesController" do
     pending

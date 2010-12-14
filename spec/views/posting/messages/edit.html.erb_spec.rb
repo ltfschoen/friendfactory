@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/messages/edit.html.erb" do
-  include MessagesHelper
+  # include MessagesHelper
 
   before(:each) do
     assigns[:message] = @message = stub_model(Posting::Message,

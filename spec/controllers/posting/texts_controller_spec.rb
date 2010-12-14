@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Postings::TextsController do
+describe Posting::TextsController do
 
   #Delete these examples and add some real ones
   it "should use Posting::TextsController" do

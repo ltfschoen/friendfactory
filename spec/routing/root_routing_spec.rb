@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ApplicationController do
   describe 'routing' do
     it 'recognizes get /' do
+      pending
       { :get => '/' }.should route_to(:controller => 'waves/base', :action => 'show')
     end
     

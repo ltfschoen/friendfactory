@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe "/friendships/show.html.erb" do
-  include FriendshipsHelper
+  # include FriendshipsHelper
+  
   before(:each) do
     assigns[:friendship] = @friendship = stub_model(Friendship,
       :user_id => 1,

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/messages/index.html.erb" do
-  include MessagesHelper
+  # include MessagesHelper
 
   before(:each) do
     assigns[:messages] = [

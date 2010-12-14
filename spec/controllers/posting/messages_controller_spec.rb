@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MessagesController do
+describe Posting::MessagesController do
 
   def mock_message(stubs={})
     @mock_message ||= mock_model(Message, stubs)
