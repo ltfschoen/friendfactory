@@ -1,4 +1,4 @@
-jQuery(function($){
+jQuery(function($) {
 
 	var $trigger;
 	var $ticket = $('#new_event_overlay');
@@ -14,6 +14,10 @@ jQuery(function($){
 			},
 			onLoad: function(event) {}
 		});
+
+	$('.ticket-container > .ticket').click(function(event) {
+		$(this).closest('.ticket').toggleClass('flipped');
+	});
 		
 	$ticket
 		.find('.date')

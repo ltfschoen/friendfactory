@@ -1,8 +1,48 @@
+.ticket-container {
+	width: 720px;
+	height: 254px;
+	-webkit-perspective: 1200;
+}
+
 .ticket {
+	position: absolute;
+	width: 720px;
+	height: 254px;
+	-webkit-transform-style: preserve-3d;	
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 1s;
+}
+
+.ticket.flipped {
+	-webkit-transform: rotateY(180deg);
+}
+
+.wave_container.horizontal .ticket.flipped {
+	-webkit-transform: rotateX(180deg);
+}
+
+.ticket .face {
+	position: absolute;
+	-webkit-backface-visibility: hidden;    
+}
+
+.ticket .front.face {
 	margin: 0 auto;
 	width: 700px;
 	height: 254px;
 	background: url('/images/friskyhands/ticket.png');
+}
+
+.ticket .back.face {
+	margin: 0 auto;
+	width: 700px;
+	height: 254px;
+	background: url('/images/friskyhands/ticket-b-side.png');	
+	-webkit-transform: rotateY(180deg);	
+}
+
+.wave_container.horizontal .ticket .back.face {
+	-webkit-transform: rotateX(180deg);		
 }
 
 .ticket .header {
@@ -48,43 +88,43 @@
 	margin: 10px 0;
 }
 
-.wave.events .event {
+/*.wave.events .event {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
     postition: relative;
-}
+}*/
 
-.wave.events .event:nth-child(even) {
+/*.wave.events .event:nth-child(even) {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
-}
+}*/
 
-.wave.events .event:nth-child(3n) {
+/*.wave.events .event:nth-child(3n) {
 	position: relative;
     -webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
     top: -30px;
     right: 30px;
-}
+}*/
 
-.wave.events .event:nth-child(5n) {
+/*.wave.events .event:nth-child(5n) {
 	position: relative;
     -webkit-transform: rotate(5deg);
     -moz-transform: rotate(5deg);
     left: 30px;
-}
+}*/
 
-.wave.events .event:nth-child(8n) {
+/*.wave.events .event:nth-child(8n) {
     -webkit-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
     top: 10px;
     right: 10px;
-}
+}*/
 
-.wave.events .event:nth-child(11n) {
+/*.wave.events .event:nth-child(11n) {
     top: -10px;
     right: -15px;
-}
+}*/
 
 
 #new_event_overlay h1 {
