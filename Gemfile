@@ -31,6 +31,8 @@ gem 'haml'
 gem 'acts-as-taggable-on'
 gem 'pusher'
 gem 'will_paginate', '~> 3.0.pre2'
+# gem 'postageapp'
+# gem 'exifr'
 
 # gem 'thinking-sphinx', '>= 1.3.16', :require => 'thinking_sphinx'
 

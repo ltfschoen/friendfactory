@@ -3,7 +3,7 @@
     %tr
       %td{ :colspan => '2' }
         = render_post_it(wave_proxy)
-        .displaced.wave_container= render :partial => 'wave/events/event', :object => wave_proxy.resource
+        = render :partial => 'wave/events/event', :object => wave_proxy.resource
     %tr
       %td.avatar.thumb
         &nbsp;

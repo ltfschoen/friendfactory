@@ -1,21 +1,25 @@
 .event[event]<
-  .ticket<
-    .header.grid_12.alpha.omega
-      &nbsp;
-    .left-info-pane.grid_2.alpha
-      .start_date
-        - if event.start_date.present?
-          = event.start_date.to_s(:event_date)
-        - else
+  .ticket-container<
+    .ticket
+      .front.face
+        .header.grid_12.alpha.omega
           &nbsp;
-    .center-pane.grid_6<
-      .promoter_name<
-        = event.promoter_name
-      .presents<
-        Presents
-      .description<
-        = event.description
-    .right-info-pane.grid_2
-      &nbsp;
-    .stub-pane.grid_2.omega<
-      &nbsp;
+        .left-info-pane.grid_2.alpha
+          .start_date
+            - if event.start_date.present?
+              = event.start_date.to_s(:event_date)
+            - else
+              &nbsp;
+        .center-pane.grid_6<
+          .promoter_name<
+            = event.promoter_name
+          .presents<
+            Presents
+          .description<
+            = event.description
+        .right-info-pane.grid_2
+          &nbsp;
+        .stub-pane.grid_2.omega<
+          &nbsp;
+      .back.face
+        &nbsp;
