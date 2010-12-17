@@ -89,6 +89,7 @@ GEM
       thor (~> 0.14.0)
     rake (0.8.7)
     remotipart (0.1.1)
+    responsalizr (1.0.2)
     rspec (2.0.1)
       rspec-core (~> 2.0.1)
       rspec-expectations (~> 2.0.1)
@@ -131,6 +132,7 @@ DEPENDENCIES
   pusher
   rails (= 3.0.1)
   remotipart
+  responsalizr
   rspec-rails (~> 2.0.1)
   webrat
   will_paginate (~> 3.0.pre2)
