@@ -230,9 +230,32 @@
 	resize: none;
 }
 
+#new_event_overlay .back.face div.map {
+	position: relative;
+	left: 20px;
+	margin-top: 14px;
+	overflow: hidden;
+}
+
+#new_event_overlay .back.face div.map img {
+/*	margin-left: 20px;*/
+}
 
 #new_event_overlay .back.face .info-pane {
-	margin-top: 10px;
+	position: relative;
+	margin-top: 14px;
+	height: 210px;
+}
+
+#new_event_overlay input#wave_event_location_name {
+	margin-top: 0;
+}
+
+#new_event_overlay textarea#wave_event_body {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	margin-bottom: 0;
 }
 
 #new_event_overlay .button-bar {

@@ -12,7 +12,14 @@ class LocationsController < ApplicationController
     resp = http.get("/maps/api/geocode/json?sensor=false&address=#{escaped_params}")
     geocode = JSON.parse(resp.body)
     geocode = if (geocode['status'] == 'OK') && (geocode['results'].length > 0)
-      geocode['results'].first
+      tmp = geocode['results'].first
+      lat = tmp['geometry']['location']['lat']
+      lng = tmp['geometry']['location']['lng']
+      { 'formatted_address' => tmp['formatted_address'],
+        'lat' => lat,
+        'lng' => lng,
+        'map_url' => "http://maps.google.com/maps/api/staticmap?zoom=15&size=210x210&markers=color:red|size:mid|#{lat},#{lng}&sensor=false",
+        'link_url' => "http://maps.google.com/maps?ll=#{lat},#{lng}&q=#{escaped_params}" }
     else
       nil
     end 

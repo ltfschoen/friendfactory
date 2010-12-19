@@ -37,12 +37,13 @@
         .stub-pane.grid_2.alpha
           &nbsp;
           
-        .map.grid_4
-          &nbsp;
+        .map.grid_4          
+          / %a{ :href}
+          / %img{ :src => nil, :class => 'map' }
           
         .info-pane.grid_5
-          = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'Where? (optional)'
-          = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'Address? (optional)'
+          = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'Name of Place (optional)'
+          = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'Address (optional)'
           = f.text_area :body, :placeholder => 'Event information (optional)'
           
         .photos.grid_1.omega
