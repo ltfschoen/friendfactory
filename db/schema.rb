@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101210235947) do
+ActiveRecord::Schema.define(:version => 20101217130324) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -30,6 +30,20 @@ ActiveRecord::Schema.define(:version => 20101210235947) do
   add_index "invitations", ["event_id", "profile_id"], :name => "index_invitations_on_event_id_and_profile_id"
   add_index "invitations", ["profile_id"], :name => "index_invitations_on_profile_id"
 
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "street"
+    t.string   "locality"
+    t.string   "city"
+    t.string   "country"
+    t.string   "post_code"
+    t.integer  "latitute"
+    t.integer  "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "posting_id"
@@ -39,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20101210235947) do
 
   add_index "notifications", ["posting_id"], :name => "index_notifications_on_posting_id"
   add_index "notifications", ["user_id", "posting_id"], :name => "index_notifications_on_user_id_and_posting_id"
+
+  create_table "posting_chats", :force => true do |t|
+    t.integer "receiver_id"
+    t.text    "body"
+  end
+
+  add_index "posting_chats", ["receiver_id"], :name => "index_posting_chats_on_receiver_id"
 
   create_table "postings", :force => true do |t|
     t.string   "type"
@@ -65,6 +86,28 @@ ActiveRecord::Schema.define(:version => 20101210235947) do
   add_index "postings", ["resource_id", "resource_type"], :name => "index_postings_on_resource_id_and_resource_type"
   add_index "postings", ["user_id"], :name => "index_postings_on_user_id"
 
+  create_table "postings_deleted", :id => false, :force => true do |t|
+    t.integer  "id",                 :default => 0, :null => false
+    t.string   "type"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "subject"
+    t.text     "body"
+    t.boolean  "active"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "width"
+    t.integer  "height"
+    t.boolean  "horizontal"
+  end
+
   create_table "postings_waves", :id => false, :force => true do |t|
     t.integer "posting_id"
     t.integer "wave_id"
@@ -74,8 +117,11 @@ ActiveRecord::Schema.define(:version => 20101210235947) do
   add_index "postings_waves", ["wave_id"], :name => "index_postings_waves_on_wave_id"
 
   create_table "resource_events", :force => true do |t|
+    t.integer  "location_id"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.text     "body"
+    t.string   "url"
     t.boolean  "private"
     t.boolean  "rsvp"
   end
@@ -119,6 +165,21 @@ ActiveRecord::Schema.define(:version => 20101210235947) do
     t.datetime "updated_at"
   end
 
+  create_table "user_info_deleted", :id => false, :force => true do |t|
+    t.integer  "id",           :default => 0, :null => false
+    t.integer  "user_id"
+    t.date     "dob"
+    t.string   "age"
+    t.integer  "gender"
+    t.integer  "orientation"
+    t.integer  "relationship"
+    t.string   "location"
+    t.integer  "deafness"
+    t.text     "about_me"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                             :null => false
     t.string   "handle"
@@ -147,6 +208,30 @@ ActiveRecord::Schema.define(:version => 20101210235947) do
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+
+  create_table "users_deleted", :id => false, :force => true do |t|
+    t.integer  "id",                 :default => 0, :null => false
+    t.string   "email",                             :null => false
+    t.string   "handle"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "slug"
+    t.date     "dob"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.string   "perishable_token"
+    t.integer  "login_count",        :default => 0, :null => false
+    t.integer  "failed_login_count", :default => 0, :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+  end
 
   create_table "users_prelaunch", :id => false, :force => true do |t|
     t.integer  "id",                 :default => 0, :null => false
@@ -182,5 +267,18 @@ ActiveRecord::Schema.define(:version => 20101210235947) do
   end
 
   add_index "waves", ["resource_id", "resource_type"], :name => "index_waves_on_resource_id_and_resource_type"
+
+  create_table "waves_deleted", :id => false, :force => true do |t|
+    t.integer  "id",            :default => 0, :null => false
+    t.string   "type"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.string   "topic"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+  end
 
 end

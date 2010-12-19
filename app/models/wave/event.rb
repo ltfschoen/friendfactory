@@ -1,13 +1,21 @@
-class Wave::Event < Wave::Base
-  
+class Wave::Event < Wave::Base  
   extend Forwardable
 
-  attr_accessible :promoter_name, :description, :start_date, :end_date, :user_id
+  attr_accessible :promoter_name, :description, :start_date, :start_time, :end_date, :location, :body, :url
 
-  def_delegators :event_info, :start_date, :start_date=, :end_date, :end_date=
+  def_delegators :event_info,
+      :start_date,  :start_date=,
+      :start_time,  :start_time=,
+      :end_date,    :end_date=,
+      :url,         :url=,
+      :location,    :location=,
+      :body,        :body=      
+
+  validates_presence_of :user_id, :promoter_name, :description
+  
+  attr_readonly :user_id
 
   acts_as_taggable
-
   acts_as_slugable :source_column => :description, :slug_column => :slug
 
   has_many :profiles, :through => :invitations

@@ -1,7 +1,7 @@
 class Wave::EventsController < ApplicationController
 
   DefaultEventSlug = 'events'
-
+  
   before_filter :require_lurker
 
   cattr_reader :per_page
@@ -21,10 +21,12 @@ class Wave::EventsController < ApplicationController
   end
   
   def create
-    @wave = Wave::Event.create(params[:wave_event].merge(:user_id => current_user.id))
+    @wave = Wave::Event.new(params[:wave_event])
+    @wave.user = current_user
+    @wave.save
     respond_to do |format|
       format.js { render :layout => false }
     end
-  end
+  end  
   
 end

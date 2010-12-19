@@ -1,4 +1,4 @@
 Factory.define :user, :class => User do |user|
-  user.first_name 'Michael'
-  user.email 'michael@test.com'
+  user.first_name 'adam'
+  user.email 'adam@test.com'
 end

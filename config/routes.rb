@@ -36,6 +36,10 @@ Friskyfactory::Application.routes.draw do
       resources :comments, :only => [ :new, :create ]
     end
   end
+  
+  resources :locations, :only => [] do
+    get 'geocode', :on => :collection
+  end
 
   # To reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
