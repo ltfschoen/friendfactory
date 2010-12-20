@@ -39,10 +39,11 @@
             %img{ :src => "http://maps.google.com/maps/api/staticmap?zoom=15&size=210x210&markers=color:red|size:mid|#{location.lat},#{location.lng}&sensor=false" }
             
         .info-pane.grid_5.omega
-          %p.location.name
-            = event.location.name
-          %p.location.address
-            = event.location.address
+          - if event.location.present?
+            %p.location.name
+              = event.location.name
+            %p.location.address
+              = event.location.address
           %p.body
             = event.body
 
