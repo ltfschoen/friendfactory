@@ -2,7 +2,7 @@
 	
 	$.fn.ticket = function() {
 		
-		if ($.browser.safari) {			
+		if (Modernizr.csstransforms3d) {
 			return this.each(function() {
 				$this = $(this); // a ticket				
 				$this.click(function(event) {

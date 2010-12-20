@@ -32,8 +32,8 @@
 		
 		$.extend(settings, options);		
 				
-		if ($.browser.safari) {
-
+		if (Modernizr.csstransforms3d) {
+			
 			return this.each(function() {
 							
 				$this = $(this); // a polaroid
@@ -101,8 +101,6 @@
 			}); // each
 			
 		} else {
-			
-			// Non-Safari
 						
 			return this.each(function() {
 				
