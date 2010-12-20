@@ -1,49 +1,50 @@
 .event[event]<
   .ticket-container<
     .ticket
-      .front.face        
-        .grid_10.alpha<
-          .header.grid_10.alpha.omega<
-            .grid_3.alpha
-              &nbsp;
-            .grid_4.start_date
-              - if event.start_date.present?
-                = event.start_date.to_s(:event_date)
-            .grid_3.omega
-              &nbsp;              
-          .header-url.grid_10.alpha.omega
-            = link_to(event.url, "http://#{event.url}")
+      .face-container
+        .front.face        
+          .grid_10.alpha<
+            .header.grid_10.alpha.omega<
+              .grid_3.alpha
+                &nbsp;
+              .grid_4.start_date
+                - if event.start_date.present?
+                  = event.start_date.to_s(:event_date)
+              .grid_3.omega
+                &nbsp;              
+            .header-url.grid_10.alpha.omega
+              = link_to(event.url, "http://#{event.url}")
           
-          .left-info-pane.grid_2.alpha
-            &nbsp;          
-          .center-pane.grid_6
-            .promoter_name<
-              = event.promoter_name
-            .presents<
-              Presents
-            .description<
-              = event.description
+            .left-info-pane.grid_2.alpha
+              &nbsp;          
+            .center-pane.grid_6
+              .promoter_name<
+                = event.promoter_name
+              .presents<
+                Presents
+              .description<
+                = event.description
 
-          .right-info-pane.grid_2.omega
-            &nbsp;
+            .right-info-pane.grid_2.omega
+              &nbsp;
                     
-        .stub-pane.grid_2.omega
-          &nbsp;        
-          
-      .back.face
-        .stub-pane.grid_2.alpha
-          &nbsp;
-        .map.grid_4
-          - location = event.location
-          - if location.present? && location.lat? && location.lng?
-            %img{ :src => "http://maps.google.com/maps/api/staticmap?zoom=15&size=210x210&markers=color:red|size:mid|#{location.lat},#{location.lng}&sensor=false" }
+          .stub-pane.grid_2.omega
+            &nbsp;        
+      .face-container
+        .back.face
+          .stub-pane.grid_2.alpha
+            &nbsp;
+          .map.grid_4
+            - location = event.location
+            - if location.present? && location.lat? && location.lng?
+              %img{ :src => "http://maps.google.com/maps/api/staticmap?zoom=15&size=210x210&markers=color:red|size:mid|#{location.lat},#{location.lng}&sensor=false" }
             
-        .info-pane.grid_5.omega
-          - if event.location.present?
-            %p.location.name
-              = event.location.name
-            %p.location.address
-              = event.location.address
-          %p.body
-            = event.body
+          .info-pane.grid_5.omega
+            - if event.location.present?
+              %p.location.name
+                = event.location.name
+              %p.location.address
+                = event.location.address
+            %p.body
+              = event.body
 
