@@ -1,23 +1,21 @@
 - submit_message ||= "Update Password & Login"
-.grid_3.alpha
+.grid_4.alpha
   &nbsp;
-.grid_6.password-edit
-  %h3 Change Password
+.grid_4.password-edit
   = form_for @user, :url => password_path, :method => :put do |f|
     %table
       %tr
-        %td= f.label :password
-        %td= f.password_field :password, :placeholder => false
+        %td
+          %h3 Change Password
       %tr
-        %td= f.label :password_confirmation          
-        %td= f.password_field :password_confirmation, :placeholder => false
+        %td= f.password_field :password, :class => 'password', :placeholder => 'password'
+      %tr
+        %td= f.password_field :password_confirmation, :class => 'password', :placeholder => 'password confirmation'
       %tr.button-bar
-        %td &nbsp;
         %td= f.submit submit_message
       - unless @user.errors.empty?
         %tr
-          %td &nbsp;
           %td.formError
             %p= @user.errors.full_messages.first
-.grid_3.omega
+.grid_4.omega
   &nbsp;

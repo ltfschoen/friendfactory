@@ -7,7 +7,7 @@
         = render_post_it(text = Posting::Text.new(:user_id => current_user.id))
       %td
         = form_for text, :url => wave_posting_texts_path(:wave_id => wave.id), :remote => true do |f|
-          = f.text_field :subject, :placeholder => false
+          = f.text_field :subject
           = f.text_area :body
           .button_bar
             = f.submit :OK, :disable_with => 'OK'

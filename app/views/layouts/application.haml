@@ -1,6 +1,6 @@
 !!! 5
-%html
-  %head.no-js
+%html.no-js
+  %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
     %title
       = @title || 'FriskyHands'
@@ -28,13 +28,13 @@
       = javascript_include_tag 'http://js.pusherapp.com/1.6/pusher.min.js'
       
     = javascript_includes |
-        'rails', |        
         'modernizr-1.6.min', |
         'jquery.form', |
         'jquery.remotipart', |
         'jquery.topzindex.min', |
         'jquery.Storage', |
-        'jquery.placeholder', |
+        'jquery.placehold-0.3.min', |
+        'rails', |        
         'jquery.flip', |
         'jquery.polaroid', |
         'jquery.postcard', |
@@ -43,7 +43,8 @@
         'broadcast', |
         'waves/', |
         'inbox/', |
-        'postings/', :cache => 'cached'
+        'postings/', |
+        :cache => 'cached'
         
     = yield(:javascripts)    
     :javascript

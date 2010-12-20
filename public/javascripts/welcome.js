@@ -1,24 +1,13 @@
-var FF = {	
-	passwordPrompt: function(password_field, password_placeholder_field){
-		(function($){
-			$(password_placeholder_field).focus(function() {
-				$(this).hide();
-				$(password_field).show().focus();
-			});
-			$(password_field).blur(function() {
-				if ($(this).val() == '') {
-					$(this).hide();
-					$(password_placeholder_field).show();
-				}
-			});			
-		})(jQuery);
-	},
+jQuery(function($) {
+
+	$('button, .button').button();
+	$("button[type='submit']").button({ icons: { primary: 'ui-icon-check' }});
+
+	$('button.toggle').click(function(event) {
+		event.preventDefault();
+		$('.panel.login, .panel.signup').toggle();
+	});
+
+	$('input, textarea').placehold();
 	
-	scrubPlaceholders: function(form) {
-	  $(form).children('input[type=text], textarea').each(function(child){
-      if ($(this).val().toLowerCase() === $(this).attr('placeholder').toLowerCase()) {
-        $(this).val('');
-	    }
-		});
-	}
-};
+});

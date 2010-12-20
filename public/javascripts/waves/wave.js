@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {  
 
 	// Placeholders
-	$('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
+	// $('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
 
 	// Buttons
 	$('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});

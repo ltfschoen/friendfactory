@@ -1,5 +1,5 @@
 !!! 5
-%html
+%html.no-js
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
     %title FriskyHands
@@ -17,7 +17,13 @@
     - else
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
-    = javascript_includes 'jquery.placeholder', 'welcome', :cache => 'welcome-cached'
+      
+    = javascript_includes |
+        'modernizr-1.6.min', |    
+        'rails', |
+        'jquery.placehold-0.3.min', |
+        'welcome', |
+        :cache => 'welcome-cached'
   
   %body{ :class => current_site }
     .container.container_16.clearfix
@@ -32,12 +38,6 @@
         %span
           &copy;&nbsp;#{Date.today.year} Frisky Factory LLC, New York, NY
         = render :partial => '/layouts/grid'
-
-    :javascript
-      jQuery(function($){
-        $('button, .button').button();
-        $("button[type='submit']").button({ icons: { primary: 'ui-icon-check' }});
-      });
       
     - if Rails.env.production?
       :javascript

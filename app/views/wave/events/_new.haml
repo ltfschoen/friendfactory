@@ -1,54 +1,46 @@
-#new_event_overlay.hidden<
-  %h1<    
-    Create a New Event
-    
-  = form_for Wave::Event.new(:user_id => current_user.id), :remote => true do |f|
-    .ticket
-      .front.face<
-
-        .grid_10.alpha<  
-          .header.grid_10.alpha.omega<
-            .grid_3.alpha<
+- if current_user
+  #new_event_overlay.hidden<
+    %h1<    
+      Create a New Event    
+    = form_for Wave::Event.new(:user_id => current_user.id), :remote => true do |f|
+      .ticket
+        .front.face<
+          .grid_10.alpha<  
+            .header.grid_10.alpha.omega<
+              .grid_3.alpha<
+                &nbsp;
+              .grid_4<
+                = f.text_field :start_date, { :class => 'date' }
+              .grid_3.omega<
+                .time
+                  Time
+                  = time_select 'wave_event', 'start_time', { :ignore_date => true, :minute_step => 10, :default => Time.now }, { :class => 'time' }
+            .header-url.grid_10.alpha.omega<
+              = f.text_field :url, { :placeholder => 'http:// (optional)' }            
+            .left-info-pane.grid_2.alpha<
               &nbsp;
-            .grid_4<
-              = f.text_field :start_date, { :class => 'date' }
-            .grid_3.omega<
-              .time
-                Time
-                = time_select 'wave_event', 'start_time', { :ignore_date => true, :minute_step => 10, :default => Time.now }, { :class => 'time' }
-
-          .header-url.grid_10.alpha.omega<
-            = f.text_field :url, { :placeholder => 'http:// (optional)' }
-            
-          .left-info-pane.grid_2.alpha<
+            .center-pane.grid_6<
+              = text_field_tag 'wave_event[promoter_name]', current_user.full_name
+              .presents
+                Presents
+              = f.text_area  :description, :placeholder => 'event title'
+            .right-info-pane.grid_2.omega<
+              &nbsp;
+          .stub-pane.grid_2.omega<
             &nbsp;
 
-          .center-pane.grid_6<
-            = text_field_tag 'wave_event[promoter_name]', current_user.full_name
-            .presents
-              Presents
-            = f.text_area  :description, :placeholder => 'Event Description'
-          .right-info-pane.grid_2.omega<
-            &nbsp;
-
-        .stub-pane.grid_2.omega<
-          &nbsp;
-
-      .back.face<
-        .stub-pane.grid_2.alpha
-          &nbsp;
-          
-        .map.grid_4          
-          
-        .info-pane.grid_5
-          = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'Name of Place (optional)'
-          = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'Address (optional)'
-          = hidden_field_tag 'wave_event[location[lat]]'
-          = hidden_field_tag 'wave_event[location[lng]]'
-          = f.text_area :body, :placeholder => 'Event information (optional)'
-          
-        .photos.grid_1.omega
-          &nbsp;          
+        .back.face<
+          .stub-pane.grid_2.alpha
+            &nbsp;          
+          .map.grid_4
+          .info-pane.grid_5
+            = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'place name'
+            = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'address'
+            = hidden_field_tag 'wave_event[location[lat]]'
+            = hidden_field_tag 'wave_event[location[lng]]'
+            = f.text_area :body, :placeholder => 'additional information'          
+          .photos.grid_1.omega
+            &nbsp;          
         
-      .button-bar.grid_12.alpha.omega<
-        = f.submit 'Create'
+        .button-bar.grid_12.alpha.omega<
+          = f.submit 'Create'

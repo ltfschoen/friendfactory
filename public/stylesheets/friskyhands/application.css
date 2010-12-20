@@ -132,8 +132,9 @@ a.button {
     position: relative;
 }
 
-input[type=text],
-input[type=password],
+input[type='text'],
+input[type='password'],
+input.password,
 textarea  {
 	padding: 6px;
 	width: 90%;
@@ -142,7 +143,7 @@ textarea  {
 
 input.placeholder,
 textarea.placeholder {
-	color: #999 !important;
+	color: #999;
 }
 
 /*.ui-button .ui-button-text {

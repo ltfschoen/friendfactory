@@ -19,16 +19,18 @@ legend      { font-weight: bold; font-size:1.2em; }
 -------------------------------------------------------------- */
 
 /* MJB: Added button */
-input[type=text], input[type=password],
+input[type='text'], input[type='password'],
 input.text, input.title,
 textarea, select,
-button {
+button,
+input.password {
   background-color:#fff;
   border:1px solid #bbb;
 }
 input[type=text]:focus, input[type=password]:focus,
 input.text:focus, input.title:focus,
-textarea:focus, select:focus {
+textarea:focus, select:focus, {
+input.password
   border-color:#666;
 }
 
@@ -36,7 +38,8 @@ textarea:focus, select:focus {
 input[type=text], input[type=password],
 input.text, input.title,
 textarea, select,
-button {
+button,
+input.password {
   margin:0.5em 0;
 }
 

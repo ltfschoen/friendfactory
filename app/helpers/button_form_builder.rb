@@ -14,15 +14,15 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
     @template.content_tag(:button, label, opts)
   end
   
-  def text_field(label, opts = {})
-    opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
-    super(label, opts)
-  end
+  # def text_field(label, opts = {})
+  #   opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
+  #   super(label, opts)
+  # end
   
-  def password_field(label, opts = {})    
-    opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
-    super(label, opts)
-  end
+  # def password_field(label, opts = {})    
+  #   opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
+  #   super(label, opts)
+  # end
 
   private
   
@@ -36,5 +36,5 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
       placeholder
     end
   end
-  
+    
 end

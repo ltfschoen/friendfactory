@@ -26,6 +26,7 @@
 						speed: 300,
 						direction: 'lr',
 						dontChangeColor: true,
+						color: '#FFF',
 						content: $ticket.find('.face-container:hidden'),
 						
 						onEnd: function() {

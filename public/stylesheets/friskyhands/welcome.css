@@ -61,7 +61,8 @@ h4 {
 }
 
 input[type='text'],
-input[type='password'] {
+input[type='password'],
+input.password {
     width: 210px;
 }
 

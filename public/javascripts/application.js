@@ -14,8 +14,10 @@ var FF = {
 };
 
 jQuery(document).ready(function($) {
- 	$('button.cancel, a.cancel').button({ icons: { primary: 'ui-icon-close' }});
-	// $(window).load(function(){alert('hello!2')});
+ 	$('button.cancel, a.cancel')
+		.button({ icons: { primary: 'ui-icon-close' }});
+	
+	$('input, textarea').placehold();
 });
 
 

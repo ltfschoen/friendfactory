@@ -116,6 +116,7 @@ $.extend( $.fx.step, {
 $.fn.revertFlip = function(){
 	return this.each( function(){
 		var $this = $(this);
+		console.dir($this.data('flipRevertedSettings'))
 		$this.flip($this.data('flipRevertedSettings'));		
 	});
 };
@@ -147,7 +148,8 @@ $.fn.flip = function(settings){
 			bgColor: acceptHexColor(settings.color) || "#999",
 			color: acceptHexColor(settings.bgColor) || $this.css("background-color"),
 			content: $this.html(),
-			speed: settings.speed || 500,
+			speed: settings.speed || 500,			
+            dontChangeColor: settings.dontChangeColor || false,			
             onBefore: settings.onBefore || function(){},
             onEnd: settings.onEnd || function(){},
             onAnimation: settings.onAnimation || function(){}
