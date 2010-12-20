@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20101217130324) do
     t.string   "city"
     t.string   "country"
     t.string   "post_code"
-    t.integer  "latitute"
-    t.integer  "longitude"
+    t.decimal  "lat",        :precision => 10, :scale => 7
+    t.decimal  "lng",        :precision => 10, :scale => 7
     t.datetime "created_at"
     t.datetime "updated_at"
   end

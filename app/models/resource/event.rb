@@ -4,18 +4,22 @@ module Resource
     has_one :event, :as => :resource, :class_name => 'Wave::Event'
     belongs_to :location
     
-    # def start_date=(date)
-    #   # date  = DateTime.parse(date)
-    #   # write_attribute(:start_date, date)
-    # end    
+    def start_date=(date)      
+      if date.present?
+        write_attribute(:start_date, DateTime.parse(date)) rescue nil
+      end
+    end    
 
     def end_date=(date)
-      # formatted_date = Date.strptime(date, '%m/%d/%Y')
-      # write_attribute(:end_date, formatted_date) 
+      if date.present?
+        write_attribute(:end_date, DateTime.parse(date)) rescue nil
+      end
     end
     
     def location=(attrs)
-      build_location(attrs) if attrs.is_a?(Hash)
+      if attrs.is_a?(Hash)
+        build_location(attrs)
+      end      
     end
             
   end

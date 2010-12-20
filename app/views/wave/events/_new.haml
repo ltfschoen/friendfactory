@@ -1,6 +1,7 @@
 #new_event_overlay.hidden<
   %h1<    
     Create a New Event
+    
   = form_for Wave::Event.new(:user_id => current_user.id), :remote => true do |f|
     .ticket
       .front.face<
@@ -16,7 +17,7 @@
                 Time
                 = time_select 'wave_event', 'start_time', { :ignore_date => true, :minute_step => 10, :default => Time.now }, { :class => 'time' }
 
-          .header.url.grid_10.alpha.omega<
+          .header-url.grid_10.alpha.omega<
             = f.text_field :url, { :placeholder => 'http:// (optional)' }
             
           .left-info-pane.grid_2.alpha<
@@ -38,12 +39,12 @@
           &nbsp;
           
         .map.grid_4          
-          / %a{ :href}
-          / %img{ :src => nil, :class => 'map' }
           
         .info-pane.grid_5
           = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'Name of Place (optional)'
           = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'Address (optional)'
+          = hidden_field_tag 'wave_event[location[lat]]'
+          = hidden_field_tag 'wave_event[location[lng]]'
           = f.text_area :body, :placeholder => 'Event information (optional)'
           
         .photos.grid_1.omega

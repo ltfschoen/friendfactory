@@ -24,7 +24,7 @@ charlie_profile_wave:
   resource_id: 3
   resource_type: UserInfo
 
-#Community Waves
+# Community Waves
 
 popular_wave:
   id: 4
@@ -32,3 +32,22 @@ popular_wave:
   topic: Everyone's Wave
   slug: popular
   description: Get going!
+
+# Event Waves
+
+event_wave:
+  id: 5
+  type: Wave::Event
+  topic: Bam Bam and the Magnetic Zeros
+  slug: bam-bam
+  resource_id: 1
+  resource_type: Resource::Event
+  description:
+    Lorem ipsum dolor sit amet,
+    consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua.
+    Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco
+    laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor....  (the rest)

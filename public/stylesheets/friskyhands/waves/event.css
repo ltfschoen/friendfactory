@@ -29,6 +29,56 @@
 	background: url('/images/friskyhands/ticket.png');
 }
 
+.ticket .front.face .header {
+	height: 20px;
+	padding-top: 17px;
+	overflow: hidden;
+}
+
+.ticket .front.face .header-url {	
+	height: 20px;
+	padding-top: 4px;
+	text-align: center;
+}
+
+.ticket .front.face .header-url a,
+.ticket .front.face .header-url a:visited {
+	color: #fff;	
+}
+
+.ticket .front.face .left-info_pane {
+	position: relative;
+}
+
+.ticket .front.face .start_date {
+	text-align: center;
+}
+
+.ticket .front.face .center-pane {
+	text-align: center;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.ticket .front.face .promoter_name {
+	font-size: 24px;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.ticket .front.face .presents {
+	font-size: small;
+	color: gray;
+	text-align: center;
+	margin: 10px 0;
+	text-transform: uppercase;
+}
+
+.ticket .front.face .description {
+	text-align: center;
+	font-size: 16px;
+}
+
 .ticket .back.face {
 	margin: 0 auto;
 	width: 700px;
@@ -40,92 +90,28 @@
 	-webkit-transform: rotateY(180deg);
 }
 
-.ticket .header {
-	height: 38px;
+.ticket .back.face .info-pane {
+	position: relative;
+	margin-top: 14px;
+	height: 210px;
+	width: 312px;
+	overflow-y: auto;
+}
+
+.ticket .back.face div.map {
+	position: relative;
+	left: 20px;
+	margin-top: 14px;
 	overflow: hidden;
 }
 
-.ticket .header.url {
-	height: 20px;
+.ticket .back.face p.name {
+	margin-top: 0px;
 }
 
-.ticket .left-info_pane {
-	position: relative;
+.ticket .back.face p.body {
+	margin-bottom: 0px;
 }
-
-.ticket .start_date {
-	position: relative;
-	top: 126px;
-	left: 20px;
-	width: 5em;
-	color: black;
-}
-
-.ticket .center-pane {
-	text-align: center;
-}
-
-.ticket .promoter_name {
-	font-size: 24px;
-	text-align: center;
-	margin: 10px 0;
-}
-
-.ticket .presents {
-	font-size: small;
-	color: gray;
-	text-align: center;
-	margin: 10px 0;
-	text-transform: uppercase;
-}
-
-.ticket .description {
-	text-align: center;
-	font-size: 16px;
-}
-
-.wave.events .event {
-	margin: 10px 0;
-}
-
-/*.wave.events .event {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-    postition: relative;
-}*/
-
-/*.wave.events .event:nth-child(even) {
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-}*/
-
-/*.wave.events .event:nth-child(3n) {
-	position: relative;
-    -webkit-transform: rotate(-3deg);
-    -moz-transform: rotate(-3deg);
-    top: -30px;
-    right: 30px;
-}*/
-
-/*.wave.events .event:nth-child(5n) {
-	position: relative;
-    -webkit-transform: rotate(5deg);
-    -moz-transform: rotate(5deg);
-    left: 30px;
-}*/
-
-/*.wave.events .event:nth-child(8n) {
-    -webkit-transform: rotate(-5deg);
-    -moz-transform: rotate(-5deg);
-    top: 10px;
-    right: 10px;
-}*/
-
-/*.wave.events .event:nth-child(11n) {
-    top: -10px;
-    right: -15px;
-}*/
-
 
 #new_event_overlay {
 	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
@@ -160,9 +146,18 @@
 	font-family: 'Arial';
 }
 
-#new_event_overlay .ticket .presents {
+#new_event_overlay .front.face .header {
+	height: 38px;
+	padding-top: 0;
+}	
+
+#new_event_overlay .front.face .header-url {
+	height: 24px;
+	padding-top: 0;
+}	
+
+#new_event_overlay .presents {
 	margin: 0;
-	text-transform: uppercase;
 }
 
 #new_event_overlay input#wave_event_start_date {
@@ -210,6 +205,10 @@
 	cursor: pointer;
 }
 
+#new_event_overlay .front.face .center-pane {
+	margin-top: 0;
+}
+
 #new_event_overlay input#wave_event_promoter_name {
 	font-size: 24px;
 	text-align: center;
@@ -230,25 +229,12 @@
 	resize: none;
 }
 
-#new_event_overlay .back.face div.map {
-	position: relative;
-	left: 20px;
-	margin-top: 14px;
-	overflow: hidden;
-}
-
-#new_event_overlay .back.face div.map img {
-/*	margin-left: 20px;*/
+#new_event_overlay input#wave_event_location_name {
+	margin-top: 0;
 }
 
 #new_event_overlay .back.face .info-pane {
-	position: relative;
-	margin-top: 14px;
-	height: 210px;
-}
-
-#new_event_overlay input#wave_event_location_name {
-	margin-top: 0;
+	overflow: hidden;
 }
 
 #new_event_overlay textarea#wave_event_body {
@@ -263,3 +249,46 @@
 	padding-right: 20px;	
 	margin-top: 20px;
 }
+
+
+.wave.events .event {
+	margin: 10px 0;
+}
+
+.wave.events .event {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    postition: relative;
+}
+
+.wave.events .event:nth-child(even) {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+.wave.events .event:nth-child(3n) {
+	position: relative;
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    top: -30px;
+    right: 30px;
+}
+
+/*.wave.events .event:nth-child(5n) {
+	position: relative;
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    left: 30px;
+}*/
+
+/*.wave.events .event:nth-child(8n) {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    top: 10px;
+    right: 10px;
+}*/
+
+/*.wave.events .event:nth-child(11n) {
+    top: -10px;
+    right: -15px;
+}*/

@@ -13,6 +13,9 @@ jQuery(document).ready(function($) {
 	// Set up static postcards
 	$('.postcard').postcard();
 
+	// Set up static tickets
+	$('.ticket-container > .ticket').ticket();
+	
 	// Set up static click-to-polaroid from a.profile
 	$('a[href^="/wave/profiles"].profile').live('click', function(event) {
 		event.preventDefault();
