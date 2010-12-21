@@ -12,7 +12,7 @@
         "#{site}/scrollable", |
         "#{site}/waves/", |
         "#{site}/postings/", |
-        "#{site}/displaced", :media => 'screen', :cache => "#{site}/cached"    
+        :cache => "#{site}/cached"    
     / [if IE]
       = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
     = yield(:stylesheets)

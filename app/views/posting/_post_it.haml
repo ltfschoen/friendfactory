@@ -1,7 +1,7 @@
 - message ||= nil
 - if posting.present?
   - user = posting.user
-  .post_it{ :class => 'displaced' }<
+  .post_it<
     = avatar_image_tag(user, :style => :thumb, :align => 'left', :anonymous => false, :gender => user.user_info.gender)
     = link_to_profile(user)
     - if posting.created_at?

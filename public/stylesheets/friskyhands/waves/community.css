@@ -2,6 +2,79 @@
     width: 220px
 }
 
+.wave_community .posting {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    postition: relative;
+}
+
+.wave_community .posting:nth-child(even) {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+.wave_community .posting:nth-child(3n) {
+    -webkit-transform: none;
+    -moz-transform: none;
+    top: -5px;
+    right: 10px;
+}
+
+.wave_community .posting:nth-child(5n) {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    right: 5px;
+}
+
+.wave_community .posting:nth-child(8n) {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    top: 8px;
+    right: 5px;
+}
+
+.wave_community .posting:nth-child(11n) {
+    top: 3px;
+    right: -5px;
+}
+
+
+.wave_community .posting post_it {
+    -webkit-transform: none;
+    -moz-transform: none;
+}
+
+.wave_community .posting:nth-child(3n) .post_it {
+    -webkit-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
+    right: 30px;
+}
+
+.wave_community .posting:nth-child(5n) .post_it {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    right: -16px;
+}
+
+
+.wave_community .posting:nth-child(5n) .comment-bubble {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    right: -16px;
+}
+
+.wave_community .posting:first-child .comment-bubble {
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
+}
+
+.wave_community .posting:nth-child(12n) comment-bubble {
+    -webkit-transform: rotate(6deg);
+    -moz-transform: rotate(6deg);
+    left: 40px;
+}
+
+
 .wave_community .posting_wave_proxy {
 	position: relative;
 }
