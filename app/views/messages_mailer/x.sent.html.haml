@@ -1,0 +1,44 @@
+!!! html
+%html
+  %head
+    :css
+      body, p, h1, h2, h3, label, input, textarea, a, .formError {
+      	font-family: "Gill Sans MT", "Gill Sans", "Lucida Sans", Tahoma, Helvetica, sans-serif;
+      }    
+
+      body {
+        background: url('http://friskyhands.com/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
+      }
+
+      .postcard {
+          position: relative;
+          background: url('http://friskyhands.com/images/friskyhands/postcard.png') no-repeat top left;
+          width: 460px;
+          height: 350px;
+          text-align: left;	
+      }
+      
+  %body
+    .wave.postcard.grid_8[@conversation]
+      .grid_5.alpha
+        .thread
+          .unobtrusive.time_ago
+            Started&nbsp;
+            = time_ago_in_words(@conversation.created_at)
+            &nbsp;ago
+          =# render :partial => 'posting/messages/message', :collection => @conversation.messages
+          &nbsp;
+        .message-input
+          =# f.text_area :body
+      .grid_3.omega
+        .franking
+        .delivered
+        .address
+          .message.received          
+            = avatar_image_tag @conversation.recipient, :style => 'thimble', :gender => @conversation.recipient.user_info.gender, :full_url => true, :link_to_profile => false
+            =# link_to_profile(@conversation.recipient)
+          .message.sent
+            =# avatar_image_tag @conversation.user, :style => 'thimble', :gender => @conversation.user.user_info.gender
+            =# link_to_profile(@conversation.user)
+        .button-bar
+          =# f.submit 'Send'

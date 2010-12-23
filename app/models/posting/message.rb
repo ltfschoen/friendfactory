@@ -5,7 +5,7 @@ class Posting::Message < Posting::Base
 
   alias_attribute :sender, :user
 
-  attr_accessor :receiver_id # user_id
+  attr_accessor :receiver_id
   
   has_many :notifications
   
@@ -13,18 +13,25 @@ class Posting::Message < Posting::Base
 
   after_create do |posting|
     wave = find_or_create_recipient_wave(posting)
-    wave.messages << posting if wave
+    if wave
+      wave.messages << posting
+      MessageMailer.sent(wave, posting)
+    end
     true
-  end  
+  end
 
   # def read?
   #   !!read_at
   # end
   
+  def receiver
+    User.find_by_id(self.receiver_id)
+  end
+  
   def to_s
     "{ :id => #{self.id}, :sender => #{sender.to_s}, :receiver => #{receiver.to_s} :subject => '#{subject}' }"
   end
-  
+    
   private
   
   def reply_subject(subject = nil)

@@ -1,0 +1,24 @@
+!!! html
+%html
+  %head
+    :css
+      h1 { font-size: 1em; }
+  %body
+    - unless Rails.env.production?
+      %p
+        = ('= ' * 6) + ' SAMPLE ' + ('= ' * 6)
+    %p
+      = "Hey #{@conversation.user.first_name},"
+    %p
+      = "You have a new message from #{@conversation.recipient.first_name}."
+      To get your message, click the following link:
+    %p
+      = wave_conversation_url(@conversation)
+    %p
+      To unsubscribe from these messages, send an email to michael@friskyhands.com, and I remove you right away.
+    %p
+      Frisky Factory, LLC
+      %br
+        151 First Ave, Suite 205
+      %br
+        New York, NY 10003

@@ -1,0 +1,16 @@
+:plain    
+  #{(('= ' * 6) + ' SAMPLE ' + ('= ' * 6)) unless Rails.env.production?}
+  
+  Hey #{@conversation.user.first_name},
+
+  You have a new message from #{@conversation.recipient.first_name}.
+
+  To get your message, click the following link:
+
+  #{wave_conversation_url(@conversation)}
+
+  To unsubscribe from these messages, send an email to michael@friskyhands.com, and I remove you right away.
+
+  Frisky Factory, LLC
+  151 First Ave, Suite 205
+  New York, NY 10003
