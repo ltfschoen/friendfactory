@@ -8,6 +8,14 @@ body {
 	background-color: #9C180C;
 }
 
+label {
+	font-weight: normal;
+    font-size: 1em;
+    color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    line-height: 1.4em;    
+}
+
 p {
     font-size: 1.2em;
     color: #501518;
