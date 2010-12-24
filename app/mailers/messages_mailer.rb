@@ -6,12 +6,10 @@ class MessagesMailer < ActionMailer::Base
 
   def sent(conversation, message)
     @conversation = conversation
-    @message = message
+    @message = message    
     
-    email = case Rails.env
-    when 'production' then @conversation.user.email
-    when 'staging'    then @conversation.recipient.email # to test on staging
-    else 'michael@michaelbamford.com'
+    if Rails.env.development?      
+      email = 'michael@michaelbamford.com'
     end
     
     mail :to => email, :subject => "Message from #{@conversation.recipient.first_name} at FriskyHands"

@@ -1,6 +1,5 @@
 :plain    
-  #{(('= ' * 6) + ' SAMPLE ' + ('= ' * 6)) unless Rails.env.production?}
-  
+  #{(('= ' * 6) + ' SAMPLE ' + ('= ' * 6)) unless Rails.env.production?}  
   Hey #{@conversation.user.first_name},
 
   You have a new message from #{@conversation.recipient.first_name}.
