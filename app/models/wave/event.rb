@@ -1,8 +1,13 @@
 class Wave::Event < Wave::Base  
   extend Forwardable
 
-  attr_accessible :promoter_name, :description,
-      :start_date, :start_time, :end_date, :url, :location, :body
+  attr_accessible :promoter_name,
+      :description,
+      :start_date, :start_time,
+      :end_date,
+      :url,
+      :location,
+      :body
 
   def_delegators :event_info,
       :start_date,  :start_date=,
