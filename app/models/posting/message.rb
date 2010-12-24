@@ -15,7 +15,7 @@ class Posting::Message < Posting::Base
     wave = find_or_create_recipient_wave(posting)
     if wave.present?
       wave.messages << posting
-      MessagesMailer.sent(wave, posting)
+      MessagesMailer.sent(wave, posting).deliver
     end
     true
   end
