@@ -13,9 +13,9 @@ class Posting::Message < Posting::Base
 
   after_create do |posting|
     wave = find_or_create_recipient_wave(posting)
-    if wave
+    if wave.present?
       wave.messages << posting
-      MessageMailer.sent(wave, posting)
+      MessagesMailer.sent(wave, posting)
     end
     true
   end
