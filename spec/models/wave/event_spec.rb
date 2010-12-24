@@ -43,15 +43,15 @@ describe Wave::Event do
   end
     
   it 'can have a start_date' do
-    start_date = Date.today
-    event.start_date = start_date.strftime('%m/%d/%Y')
-    event.resource.start_date.should == start_date
+    start_date = 'Friday, December 25th, 2010'
+    event.start_date = start_date
+    event.resource.start_date.should == DateTime.civil(2010, 12, 25)
   end
 
   it 'can have a end_date' do
-    end_date = Date.today
-    event.end_date = end_date.strftime('%m/%d/%Y')
-    event.resource.end_date.should == end_date
+    end_date = 'Friday, December 25th, 2010'
+    event.end_date = end_date
+    event.resource.end_date.should == DateTime.civil(2010, 12, 25)
   end
   
   it 'can have a body' do

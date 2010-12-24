@@ -11,7 +11,7 @@ class Wave::Event < Wave::Base
       :location,    :location=,
       :body,        :body=
 
-  # validates_presence_of :user_id, :promoter_name, :description
+  validates_presence_of :user_id, :promoter_name, :description
   
   attr_readonly :user_id
 
