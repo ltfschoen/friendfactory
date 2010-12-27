@@ -35,7 +35,9 @@
           .map.grid_4
           .info-pane.grid_5
             = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'place name'
-            = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'address'
+            = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'city, state'
+            = hidden_field_tag 'wave_event[location[city]]'
+            = hidden_field_tag 'wave_event[location[state]]'
             = hidden_field_tag 'wave_event[location[lat]]'
             = hidden_field_tag 'wave_event[location[lng]]'
             = f.text_area :body, :placeholder => 'additional information'          

@@ -61,7 +61,7 @@ Friskyfactory::Application.routes.draw do
   scope :module => 'wave' do
     get 'wave'            => 'communities#show'
     get 'rollcall(/:tag)' => 'roll_calls#index', :as => 'roll_call'
-    get 'events'          => 'events#index'
+    get 'events(/:tag)'   => 'events#index', :as => 'events'
     get 'inbox'           => 'conversations#index'
     get ':slug',      :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
     root              :to => 'communities#show', :via => :get

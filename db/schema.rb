@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20101217130324) do
     t.string   "street"
     t.string   "locality"
     t.string   "city"
+    t.string   "state"
     t.string   "country"
     t.string   "post_code"
     t.decimal  "lat",        :precision => 10, :scale => 7

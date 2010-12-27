@@ -12,8 +12,16 @@ jQuery(function($) {
 					'<a href="' + resp['link_url'] + '" target="_blank"><img src="' + resp['map_url'] + '" class="map"></a>');
 				
 				$ticket
-					.find('#wave_event_location_address')
-						.val(resp['formatted_address'])
+					// .find('#wave_event_location_address')
+					// 	.val(resp['address'])
+					// .end()
+
+					.find('#wave_event_location_city')
+						.val(resp['city'])
+					.end()
+
+					.find('#wave_event_location_state')
+						.val(resp['state'])
 					.end()
 					
 					.find('#wave_event_location_lat')

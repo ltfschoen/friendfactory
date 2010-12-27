@@ -25,6 +25,11 @@ class Wave::Event < Wave::Base
 
   has_many :profiles, :through => :invitations
 
+  before_save do |event|
+    self.tag_list = event.location.try(:city)
+    true
+  end
+
   after_save do |event|
     event.event_info.save
     wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)

@@ -10,7 +10,10 @@ class Wave::EventsController < ApplicationController
   def index
     @waves = if params[:tag]
       params[:tag] = params[:tag].downcase.gsub(/-/, ' ')
-      Wave::Event.tagged_with(params[:tag]).paginate(:page => params[:page], :per_page => @@per_page)
+      Wave::Event \
+        .tagged_with(params[:tag]) \
+        .order('updated_at desc') \
+        .paginate(:page => params[:page], :per_page => @@per_page)
     else
       Wave::Event.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
     end
