@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   acts_as_authentic do |config|
-    config.logged_in_timeout = UserSession::Timeout
+    config.logged_in_timeout UserSession::Timeout
   end
 
   validates_presence_of :first_name
@@ -20,7 +20,9 @@ class User < ActiveRecord::Base
       :class_name => 'Wave::Conversation',
       :order      => 'created_at desc' do
     def with(receiver)
-      where(:resource_id => receiver.id).limit(1).first if receiver.present?
+      if receiver.present?
+        where(:resource_id => receiver.id).limit(1).first
+      end
     end
   end
 
