@@ -5,13 +5,12 @@
       h1 { font-size: 1em; }
   %body
     %p
-      =# "Hey #{@message.receiver.first_name},"
       = "Hey #{@message.receiver.first_name},"
     %p
       = "You have a new message from #{@message.sender.first_name}."
       To get your message, click the following link:
     %p
-      = wave_conversation_url(@conversation)
+      = inbox_path # wave_conversation_url(@conversation)
     %p
       To unsubscribe from these messages, send an email to michael@friskyhands.com, and we'll remove you right away.
     %p

@@ -4,10 +4,9 @@ class MessagesMailer < ActionMailer::Base
 
   default :from => "michael@friskyhands.com"
 
-  def new_message_notification(message, conversation)
-    if message.present? && conversation.present?
+  def new_message_notification(message)
+    if message.present?
       @message = message
-      @conversation = conversation      
       email = Rails.env.development? ? 'michael@michaelbamford.com' : @message.receiver.email    
       mail :to => email, :subject => "Message from #{@message.sender.first_name} at FriskyHands"
     end

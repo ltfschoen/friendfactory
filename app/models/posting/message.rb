@@ -17,8 +17,9 @@ class Posting::Message < Posting::Base
     wave = find_or_create_recipient_wave(posting)
     if wave.present?
       wave.messages << posting
+      wave.touch
       unless posting.receiver.online?
-        MessagesMailer.new_message_notification(posting, wave).try(:deliver)
+        MessagesMailer.new_message_notification(posting).try(:deliver)
       end
     end
     true
@@ -54,5 +55,5 @@ class Posting::Message < Posting::Base
       end
     end
   end
-      
+        
 end

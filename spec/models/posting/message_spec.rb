@@ -75,4 +75,18 @@ describe Posting::Message do
     end    
   end
   
+  describe 'inbox' do
+    it "creates a new receiver's wave" do
+      message.save!
+      wave = message.waves.where('user_id = ?', users(:bert).id)
+      users(:bert).conversations include(wave)
+    end
+    
+    it "adds the receiver's wave to their inbox" do
+      message.save!
+      wave = message.waves.where('user_id = ?', users(:bert).id)
+      users(:bert).inbox include(wave)
+    end
+  end
+
 end

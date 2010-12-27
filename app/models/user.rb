@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   alias :conversation :conversations
 
   has_one  :inbox, :class_name => 'Wave::Inbox'
-      
+  
   has_many :postings, :class_name => 'Posting::Base'
   
   has_many :friendships
