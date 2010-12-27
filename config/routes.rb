@@ -10,7 +10,10 @@ Friskyfactory::Application.routes.draw do
       get 'conversation' => 'conversations#show'
     end
     resources :conversations, :only => [ :index, :show ] do
-      member { put 'close' }
+      member do
+        put 'close'
+        get 'popup'
+      end
     end
   end
 

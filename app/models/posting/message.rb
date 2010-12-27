@@ -1,6 +1,6 @@
 class Posting::Message < Posting::Base
 
-  attr_accessible :subject, :body, :user_id, :receiver_id
+  attr_accessible :subject, :body, :receiver_id
   attr_readonly :user_id
 
   alias_attribute :sender, :user
@@ -9,13 +9,17 @@ class Posting::Message < Posting::Base
   
   has_many :notifications
   
-  # TODO validates_presence_of :receiver_id
+  validates_presence_of :user_id, :receiver_id
+
+  attr_readonly :user_id
 
   after_create do |posting|
     wave = find_or_create_recipient_wave(posting)
     if wave.present?
       wave.messages << posting
-      MessagesMailer.new_message_notification(posting, wave).try(:deliver)
+      unless posting.receiver.online?
+        MessagesMailer.new_message_notification(posting, wave).try(:deliver)
+      end
     end
     true
   end
@@ -23,19 +27,19 @@ class Posting::Message < Posting::Base
   # def read?
   #   !!read_at
   # end
-            
+
   def receiver
     if @receiver_id.present?
       User.find_by_id(@receiver_id)
     else
-      waves.where('user_id <> ?', self.user_id ).first.user
+      waves.where('user_id <> ?', user_id ).first.try(:user)
     end
   end
 
   def receiver_id
-    @receiver_id || self.receiver.id
+    @receiver_id || self.receiver.try(:id)
   end
-  
+      
   def to_s
     "{ :id => #{self.id}, :sender => #{sender.to_s}, :receiver => #{receiver.to_s} :subject => '#{subject}' }"
   end

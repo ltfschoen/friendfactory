@@ -4,7 +4,9 @@ describe Wave::Event do
   
   fixtures :users
   
-  let(:attrs) {{ :promoter_name => 'Promoter', :description => 'Description' }}
+  let(:attrs) do
+    { :promoter_name => 'Promoter', :description => 'Description' }
+  end
     
   let(:event) do
     wave = Wave::Event.new(attrs)
@@ -21,7 +23,7 @@ describe Wave::Event do
     event.should_not be_valid
   end
   
-  it 'has a read-only user_id attribute' do
+  it 'has a read-only user attribute' do
     event.save    
     event.user = users(:bert)
     event.save && event.reload
