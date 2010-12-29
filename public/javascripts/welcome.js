@@ -8,6 +8,6 @@ jQuery(function($) {
 		$('.panel.login, .panel.signup').toggle();
 	});
 
-	$('input, textarea').placehold();
+	$('input, textarea').val('').placehold();	
 	
 });
