@@ -91,11 +91,6 @@ input.password {
 	width: 100%;
 }
 
-.button-bar button {
-    float: left;
-    margin-right: 8px;
-}
-
 .button-bar a {
     margin-top: 0.5em;
 }
@@ -104,22 +99,10 @@ input.password {
     float: left;
 }
 
-.panel.login a.lurk {
-    float: right;
-    margin-right: 0;
-    color: #FFF;
-    font-size: small;
-    margin-top: 12px;
-}
-
 .panel.login a.new_password {
     float: right;
     color: #FFF;
     font-size: small;
-}
-
-.button-bar {
-    height: 2em;
 }
 
 .panel p {

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   acts_as_authentic do |config|
-    config.logged_in_timeout UserSession::Timeout
+    config.logged_in_timeout UserSession::InactivityTimeout
   end
 
   validates_presence_of :first_name
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :admirers, :through => :inverse_friendships, :source => :user
 
-  scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::Timeout).to_s(:db) ]
+  scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::InactivityTimeout).to_s(:db) ]
 
   after_create do
     if self.profile.nil?
