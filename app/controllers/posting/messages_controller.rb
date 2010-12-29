@@ -13,14 +13,14 @@ class Posting::MessagesController < ApplicationController
   def create
     @wave = current_user.conversations.find_by_id(params[:wave_id])
     if @wave.present?
-      posting_message = params[:posting_message].merge({ :receiver_id => @wave.recipient.id })
+      posting_message = params[:posting_message].merge({ :receiver_id => @wave.recipient.id })      
       @posting = @wave.messages.build(posting_message)
       @posting.user = current_user
-      @posting.save      
+      @wave.save
       broadcast_posting(@posting, (@posting.waves - [ @wave ]))
-    end    
+    end
     respond_to do |format|
-      format.js { render(:layout => false) }
+      format.js { render :layout => false }
     end
   end
   
