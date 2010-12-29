@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-activate_authlogic
-
 describe Wave::ProfileController do
+  include Authlogic::TestCase
   
   fixtures :users
+  setup :activate_authlogic
   
   describe 'not logged in' do
     describe "GET 'show'" do

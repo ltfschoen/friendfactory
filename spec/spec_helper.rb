@@ -5,7 +5,7 @@ require 'rspec/rails'
 require 'factory_girl'
 require 'authlogic/test_case'
 
-include Authlogic::TestCase 
+# include Authlogic::TestCase
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -30,28 +30,20 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 end
 
-# def login_as_user
-#   # define user and session
-#   @current_user = mock_model(User, :login => "dane").as_null_object
-#   @current_session = mock(UserSession)
-# 
-#   controller.stub!(:current_user).and_return @current_user
-#   controller.stub!(:current_session).and_return @current_session
+
+# def current_user(stubs = {})
+#   @current_user ||= mock_model(User, stubs)
 # end
-
-def current_user(stubs = {})
-  @current_user ||= mock_model(User, stubs)
-end
-
-def user_session(stubs = {}, user_stubs = {})
-  @current_user ||= mock(UserSession, { :record => current_user(user_stubs) }.merge(stubs))
-end
-
-def login(session_stubs = {}, user_stubs = {})
-  UserSession.stub!(:find).and_return(user_session(session_stubs, user_stubs))
-end
-
-def logout
-  @user_session = nil
-end
+# 
+# def user_session(stubs = {}, user_stubs = {})
+#   @current_user ||= mock(UserSession, { :record => current_user(user_stubs) }.merge(stubs))
+# end
+# 
+# def login(session_stubs = {}, user_stubs = {})
+#   UserSession.stub!(:find).and_return(user_session(session_stubs, user_stubs))
+# end
+# 
+# def logout
+#   @user_session = nil
+# end
 
