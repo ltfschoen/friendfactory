@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
   
   def create
     @user_session = UserSession.new(params[:user_session])
-    @user_session.remember_me = params.has_key?(:remember_me)
+    @user_session.remember_me = true || params.has_key?(:remember_me)
     respond_to do |format|
       if @user_session.save        
         user = @user_session.record        
