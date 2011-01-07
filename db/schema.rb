@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101217130324) do
+ActiveRecord::Schema.define(:version => 20110107003456) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -127,6 +127,14 @@ ActiveRecord::Schema.define(:version => 20101217130324) do
     t.boolean  "rsvp"
   end
 
+  create_table "resource_events_bak", :id => false, :force => true do |t|
+    t.integer  "id",         :default => 0, :null => false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "private"
+    t.boolean  "rsvp"
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -182,7 +190,7 @@ ActiveRecord::Schema.define(:version => 20101217130324) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                             :null => false
+    t.string   "email",                                :null => false
     t.string   "handle"
     t.string   "first_name"
     t.string   "last_name"
@@ -195,13 +203,14 @@ ActiveRecord::Schema.define(:version => 20101217130324) do
     t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "perishable_token"
-    t.integer  "login_count",        :default => 0, :null => false
-    t.integer  "failed_login_count", :default => 0, :null => false
+    t.integer  "login_count",        :default => 0,    :null => false
+    t.integer  "failed_login_count", :default => 0,    :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.boolean  "emailable",          :default => true
   end
 
   add_index "users", ["first_name"], :name => "index_users_on_first_name"

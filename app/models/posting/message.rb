@@ -11,15 +11,12 @@ class Posting::Message < Posting::Base
   
   validates_presence_of :user_id, :receiver_id
 
-  attr_readonly :user_id
-
   after_create do |posting|
-    wave = find_or_create_recipient_wave(posting)
-    if wave.present?
+    if wave = find_or_create_recipient_wave(posting)
       wave.messages << posting
       wave.touch
-      unless posting.receiver.online?
-        MessagesMailer.new_message_notification(posting).try(:deliver)
+      if !posting.receiver.online? && posting.receiver.emailable?
+        MessagesMailer.new_message_notification(posting).deliver
       end
     end
     true

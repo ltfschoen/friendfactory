@@ -16,18 +16,22 @@ describe Posting::Message do
     message
   end
   
-  it "is valid with valid attributes" do
-    message.should be_valid
+  describe 'is valid' do
+    it 'with valid attributes' do
+      message.should be_valid
+    end
   end
 
-  it "is not valid without a user" do
-    message.user_id = nil
-    message.should_not be_valid
-  end
+  describe 'is not valid' do
+    it "without a user" do
+      message.user_id = nil
+      message.should_not be_valid
+    end
 
-  it "is not valid without a receiver" do
-    message.receiver_id = nil
-    message.should_not be_valid
+    it "without a receiver" do
+      message.receiver_id = nil
+      message.should_not be_valid
+    end
   end
   
   it 'aliases sender to user' do
@@ -68,11 +72,27 @@ describe Posting::Message do
       ActionMailer::Base.deliveries.should have(1).item
     end
 
-    it 'is not when the receiver is online' do
-      User.stub(:online).and_return([ users(:bert)])
+    it 'is not sent when the receiver is online' do
+      User.stub(:online).and_return([ users(:bert) ])
       message.save!
       ActionMailer::Base.deliveries.should be_empty
-    end    
+    end
+
+    it 'is sent if the receiver is emailable' do
+      User.stub(:online).and_return([])
+      message.receiver.emailable = true
+      message.save!
+      ActionMailer::Base.deliveries.should have(1).item      
+    end
+    
+    it 'is not sent if the receiver is not emailable' do
+      User.stub(:online).and_return([])
+      receiver = message.receiver
+      receiver.emailable = false
+      receiver.save!
+      message.save!
+      ActionMailer::Base.deliveries.should be_empty
+    end            
   end
   
   describe 'inbox' do
