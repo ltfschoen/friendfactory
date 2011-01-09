@@ -1,13 +1,13 @@
 class CreateAdminTags < ActiveRecord::Migration
   def self.up
-    create_table :admin_tags do |t|
-      t.string :old_tag
-      t.string :new_tag
-      t.timestamps
+    create_table :admin_tags, :force => true do |t|
+      t.string :taggable_type
+      t.string :defective, :null => false
+      t.string :corrected
     end
   end
 
   def self.down
-    drop_table :admin_tags
+    drop_table :admin_tags rescue nil
   end
 end

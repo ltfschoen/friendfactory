@@ -13,10 +13,9 @@
 ActiveRecord::Schema.define(:version => 20110107175437) do
 
   create_table "admin_tags", :force => true do |t|
-    t.string   "old_tag"
-    t.string   "new_tag"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "taggable_type"
+    t.string "defective",     :null => false
+    t.string "corrected"
   end
 
   create_table "friendships", :force => true do |t|

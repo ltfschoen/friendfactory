@@ -25,11 +25,12 @@ class UserInfo < ActiveRecord::Base
   
   before_save do |user_info|
     self.tag_list = [
-        user_info.gender_description.try(:downcase),
-        user_info.orientation_description.try(:downcase),
-        user_info.relationship_description.try(:downcase),
-        user_info.deafness_description.try(:downcase),
-        UserInfo.scrub_tag(user_info.location_description) ].compact * ', '
+      user_info.gender_description.try(:downcase),
+      user_info.orientation_description.try(:downcase),
+      user_info.relationship_description.try(:downcase),
+      user_info.deafness_description.try(:downcase),
+      UserInfo.scrub_tag(user_info.location_description)
+    ].compact * ', '
     true
   end
   
@@ -66,33 +67,28 @@ class UserInfo < ActiveRecord::Base
   end
   
   private
-
-  Rejects = [ 'USA', 'US', 'UK', 'AUSTRALIA', 'CANADA',
-      'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE',
-      'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA',
-      'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS',
-      'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND',
-      'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD',
-      'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ]
-  
-  Transposes = {
-      'nyc' => 'new york',
-      'la'  => 'los angeles',
-      'sf'  => 'san francisco',
-      'new york city' => 'new york',
-      'newyork' => 'new york',
-      'columbus ohio' => 'columbus',
-      'cincinatti ohio' => 'cincinatti',
-      'chelmsford essex' => 'chelmsford' }
   
   def self.scrub_tag(tag)
-    unless tag.nil?
-      tag = tag.gsub(/,/, ' ').gsub(/'|"|\.|-/, '').gsub(/\b(#{UserInfo::Rejects * '|'})\b/i, '').gsub(/\s{2,}/, ' ')
-      UserInfo::Transposes.each do |transpose|
-        tag = tag.gsub(/\b#{transpose[0]}\b/i, transpose[1])
-      end
+    unless tag.blank?
+      tag = scrub_transposes(scrub_rejects(scrub_punctuation(tag)))
       tag.nil? || (tag.length > 16) ? nil : tag.downcase
     end
   end
   
+  def self.scrub_punctuation(tag)
+    tag.gsub(/,/, ' ').gsub(/'|"|\.|-/, '').gsub(/\s{2,}/, ' ')
+  end
+  
+  def self.scrub_rejects(tag)
+    rejects = Admin::Tag.where(['taggable_type = ? and corrected is null', 'UserInfo']).map(&:defective)
+    tag.gsub(/\b(#{rejects * '|'})\b/i, '')
+  end
+  
+  def self.scrub_transposes(tag)
+    Admin::Tag.where(['taggable_type = ? and corrected is not null', 'UserInfo']).each do |transpose|
+      tag = tag.gsub(/\b#{transpose.defective}\b/i, transpose.corrected)
+    end
+    tag
+  end
+
 end
