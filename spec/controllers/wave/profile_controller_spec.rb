@@ -1,13 +1,11 @@
 require 'spec_helper'
 
 describe Wave::ProfileController do
-  include Authlogic::TestCase
-  
-  fixtures :users
-  setup :activate_authlogic
+    
+  fixtures :users, :waves
   
   describe 'not logged in' do
-    describe "GET 'show'" do
+    describe "GET show" do
       it "should redirect to welcome controller" do
         get 'show'
         response.should redirect_to(welcome_path)
@@ -17,16 +15,36 @@ describe Wave::ProfileController do
   
   describe 'logged in' do
     before(:each) do
-      #@user = Factory.build(:user)
-      # activate_authlogic
-      # UserSession.create(users(:adam))
+      controller.stub(:current_user).and_return(users(:adam))
     end
 
-    it 'should render' do
-      pending
-      login({}, :profile => mock_model(Wave::Profile))
-      get :show
-      response.should render_template('waves/profile/show')
+    describe "GET show" do
+      it 'assigns @profile' do
+        get :show
+        assigns[:profile].should == users(:adam).profile
+      end
+      
+      it 'renders show' do
+        get :show
+        response.should render_template('wave/profile/show')
+      end
+    end
+    
+    describe 'XHR avatar' do      
+      let(:image) do
+        File.join(Rails.root, 'spec', 'fixtures', 'images', 'avatars', 'adam-02.jpg')
+      end
+      
+      it 'renders avatar' do
+        xhr :post, :avatar, :posting_avatar => { :image => fixture_file_upload(image, 'image/jpeg') }
+        response.should render_template('wave/profile/avatar')        
+      end
+      
+      it 'creates an avatar posting' do
+        expect {
+          xhr :post, :avatar, :posting_avatar => { :image => fixture_file_upload(image, 'image/jpeg') }
+        }.to change{ users(:adam).profile.avatars.count }.by(1)
+      end      
     end
   end
 

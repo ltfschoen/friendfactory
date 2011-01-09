@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe UserSessionsController do
+  
   include Authlogic::TestCase
+  setup :activate_authlogic
   
   fixtures :users  
-  setup :activate_authlogic
 
   it 'remembers me for 4 weeks when remember_me is checked' do
     time_now = Time.now.utc + 4.weeks
