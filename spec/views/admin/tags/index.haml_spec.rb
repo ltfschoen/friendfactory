@@ -4,12 +4,12 @@ describe "admin_tags/index.html.erb" do
   before(:each) do
     assign(:admin_tags, [
       stub_model(Admin::Tag,
-        :old_tag => "Old Tag",
-        :new_tag => "New Tag"
+        :defective => "Defective",
+        :corrected => "Corrected"
       ),
       stub_model(Admin::Tag,
-        :old_tag => "Old Tag",
-        :new_tag => "New Tag"
+        :defective => "Defective",
+        :corrected => "Corrected"
       )
     ])
   end
@@ -17,9 +17,7 @@ describe "admin_tags/index.html.erb" do
   it "renders a list of admin_tags" do
     pending
     render
-    # Run the generator again with the --webrat-matchers flag if you want to use webrat matchers
-    assert_select "tr>td", :text => "Old Tag".to_s, :count => 2
-    # Run the generator again with the --webrat-matchers flag if you want to use webrat matchers
-    assert_select "tr>td", :text => "New Tag".to_s, :count => 2
+    rendered.should have_selector("tr>td", :content => "Defective".to_s, :count => 2)
+    rendered.should have_selector("tr>td", :content => "Corrected".to_s, :count => 2)
   end
 end
