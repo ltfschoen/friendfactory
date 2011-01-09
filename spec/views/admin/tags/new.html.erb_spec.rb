@@ -9,8 +9,8 @@ describe "admin_tags/new.html.erb" do
   end
 
   it "renders new tag form" do
+    pending
     render
-
     # Run the generator again with the --webrat-matchers flag if you want to use webrat matchers
     assert_select "form", :action => admin_tags_path, :method => "post" do
       assert_select "input#tag_old_tag", :name => "tag[old_tag]"
