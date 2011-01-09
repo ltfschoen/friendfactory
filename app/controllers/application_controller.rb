@@ -53,6 +53,13 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def require_admin
+    unless current_user && current_user.admin?
+      redirect_to welcome_url
+      return false
+    end
+  end
+  
   def require_no_user
     if current_user
       store_location

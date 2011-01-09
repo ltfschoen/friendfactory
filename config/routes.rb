@@ -72,6 +72,11 @@ Friskyfactory::Application.routes.draw do
     get 'labs/:action' => 'labs'
   end
   
+  # Admin  
+  namespace :admin do
+    resources :tags
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

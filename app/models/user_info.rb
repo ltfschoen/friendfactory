@@ -76,9 +76,14 @@ class UserInfo < ActiveRecord::Base
       'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ]
   
   Transposes = {
-      'nyc' => 'New York City',
-      'la'  => 'Los Angeles',
-      'sf'  => 'San Francisco' }
+      'nyc' => 'new york',
+      'la'  => 'los angeles',
+      'sf'  => 'san francisco',
+      'new york city' => 'new york',
+      'newyork' => 'new york',
+      'columbus ohio' => 'columbus',
+      'cincinatti ohio' => 'cincinatti',
+      'chelmsford essex' => 'chelmsford' }
   
   def self.scrub_tag(tag)
     unless tag.nil?
