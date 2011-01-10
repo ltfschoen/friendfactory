@@ -74,7 +74,9 @@ Friskyfactory::Application.routes.draw do
   
   # Admin  
   namespace :admin do
-    resources :tags
+    resources :tags, :except => [ :show ] do
+      collection { get 'commit' }
+    end
   end
   
   # The priority is based upon order of creation:

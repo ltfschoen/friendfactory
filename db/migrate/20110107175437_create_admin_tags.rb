@@ -1,7 +1,7 @@
 class CreateAdminTags < ActiveRecord::Migration
   def self.up
     create_table :admin_tags, :force => true do |t|
-      t.string :taggable_type
+      t.string :taggable_type, :null => false
       t.string :defective, :null => false
       t.string :corrected
     end

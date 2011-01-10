@@ -1,17 +1,24 @@
-%h1 User Info Tag Scrubber
-%table
-  %tr
-    %th Defective Tag
-    %th Corrected Tag
-    %th
-    %th
-    %th
-  - @tags.each do |tag|
+.wave.header
+  %h1 User Info Tag Scrubber
+.grid_3
+  &nbsp;
+.grid_10
+  %table.admin
     %tr
-      %td= tag.defective
-      %td= tag.corrected
-      %td= link_to 'Show', tag
-      %td= link_to 'Edit', edit_admin_tag_path(tag)
-      %td= link_to 'Destroy', tag, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'New Scrubber', new_admin_tag_path
+      %th Defective
+      %th Corrected
+      %th
+    - @tags.each do |tag|
+      %tr
+        %td= tag.defective
+        %td= tag.corrected
+        %td
+          = link_to 'Edit', edit_admin_tag_path(tag)
+          = link_to 'Delete', tag, :confirm => 'Are you sure?', :method => :delete
+    %tr
+      %td{ :colspan => '5' }
+        = link_to 'Add Scrubbed Tag', new_admin_tag_path
+        |
+        = link_to 'Commit', commit_admin_tags_path
+.grid_3
+  &nbsp;
