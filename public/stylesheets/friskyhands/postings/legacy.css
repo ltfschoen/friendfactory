@@ -212,15 +212,6 @@ tr.posting_message td {
     margin: 10px 0;
 }
 */
-/* * * * * * * * * */
-
-#text.tab_content input[type=text] {
-	margin-top: 0;
-}
-
-#text.tab_content textarea {
-	height: 5.8em;
-}
 
 /* * * * * * * * * */
 
@@ -231,7 +222,6 @@ tr.posting_message td {
 .posting_link h2.link a {
 	color: #501518;
 }
-
 
 /* * * * * * * * * */
 

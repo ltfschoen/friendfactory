@@ -8,18 +8,11 @@
   .grid_5<
     &nbsp;
 
-.wave.tab_contents.clearfix
+.wave.clearfix[@wave]
   .grid_1<
     &nbsp;
   .grid_12<
     = render :partial => 'tab_content'
-  .grid_3<
-    &nbsp;
-
-.wave[@wave]
-  .grid_1<
-    &nbsp;
-  .grid_12<
     %ul.postings
       = render_postings(@postings)
   .grid_3<

@@ -1,0 +1,7 @@
+          /   =# render :partial => 'posting/post_its/post_it', :locals => { :posting => text }
+          /   =# render_post_it(text = Posting::Text.new(:user_id => current_user.id))
+          /   - user = text.user
+          /   .post_it.form<
+          /     = avatar_image_tag(user, :style => :thumb, :align => 'left', :anonymous => false, :gender => user.user_info.gender)
+          /     %span= "Posted today by #{link_to_profile(user)}".html_safe
+          /     = f.text_area :subject          

@@ -1,7 +1,7 @@
 - if @posting.present? && @posting.valid?
   $('ul.postings').prepend("#{escape_javascript(render(:partial => 'text', :object => @posting))}");
   var $currentTab = $('ul.wave.nav li.current').removeClass('current');
-  $($('a', $currentTab).attr('href')).hide().find('form')[0].reset();
+  $($('a', $currentTab).attr('href')).hide().find('textarea').val('').placehold();
   $('.flash').text('');
 - else
   $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")

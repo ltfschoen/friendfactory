@@ -2,12 +2,17 @@
   %table
     %tr
       %td.avatar.thumb
-        = render_post_it(text)
+        &nbsp;
+        =# render_post_it(text)
       %td
-        - if text.subject
-          %p.subject= text.subject
-        - if text.body
-          %p.body= text.body
+        .index-card<
+          .content<
+            = avatar_image_tag(text.user, :style => :thumb, :anonymous => false, :gender => text.user.user_info.gender)
+            = link_to_profile(text.user)
+            %span.created_at.unobtrusive
+              = distance_of_time_in_words_to_now(text.created_at)
+            %h1= text.subject || '&nbsp'.html_safe
+            = text.body || '&nbsp'.html_safe
         = render :partial => 'posting/comments/comment', :collection => text.children.comments
         %div{:id => "posting_#{text.id}_new_comment_well"}
         = render :partial => 'posting/comments/new', :locals => { :parent => text }

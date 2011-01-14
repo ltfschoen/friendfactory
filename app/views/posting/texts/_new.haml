@@ -1,16 +1,21 @@
-.grid_1
-  &nbsp;
-.grid_12.posting
-  %table
-    %tr
-      %td.avatar.thumb
-        = render_post_it(text = Posting::Text.new(:user_id => current_user.id))
-      %td
-        = form_for text, :url => wave_posting_texts_path(:wave_id => wave.id), :remote => true do |f|
-          = f.text_field :subject
-          = f.text_area :body
+- text = Posting::Text.new(:user_id => current_user.id)
+= form_for text, :url => wave_posting_texts_path(:wave_id => wave.id), :remote => true do |f|
+  .grid_1
+    &nbsp;
+  .grid_12.posting
+    %table
+      %tr
+        %td.avatar.thumb
+          &nbsp;
+        %td
+          .index-card
+            .content
+              = avatar_image_tag(text.user, :style => :thumb, :anonymous => false, :gender => text.user.user_info.gender)
+              = link_to_profile(text.user)
+              = f.text_area :subject, :placeholder => 'Subject (optional)'
+              = f.text_area :body, :placeholder => 'Say something!'
           .button_bar
             = f.submit :OK, :disable_with => 'OK'
             = f.button :Cancel, :class => 'cancel'
-.grid_3
-  &nbsp;
+  .grid_3
+    &nbsp;
