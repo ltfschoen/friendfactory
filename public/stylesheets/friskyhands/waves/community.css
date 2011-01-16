@@ -88,3 +88,28 @@
 	position: relative;
 	left: 80px;
 }
+
+@-webkit-keyframes BOUNCE {
+	0% {
+		-webkit-transform: translateY(0px);
+	}
+	40% {
+		-webkit-transform: translateY(-14px);
+	}
+	70% {
+		-webkit-transform: translateY(-15px);
+	}	
+	80% {
+		-webkit-transform: translateY(38px);
+	}
+	100% {
+		-webkit-transform: translateY(0px);
+	}
+}
+
+.bounce {
+	-webkit-animation-name: BOUNCE;
+	-webkit-animation-duration: 1.25s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;
+}

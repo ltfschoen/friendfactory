@@ -1,14 +1,10 @@
 - message ||= nil
-- if posting.present?
-  - user = posting.user
-  .post_it<
-    = avatar_image_tag(user, :style => :thumb, :align => 'left', :anonymous => false, :gender => user.user_info.gender)
-    = link_to_profile(user)
-    - if posting.created_at?
-      %span.created_at<
-        = "posted #{distance_of_time_in_words_to_now(posting.created_at)}".html_safe
-    .message
-      = posting.subject
-      = message if message.present?
-- else
-  &nbsp;
+.post_it<
+  = avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info.gender)
+  = link_to_profile(post_it.user)
+  - if post_it.created_at?
+    %span.created_at<
+      = "posted #{distance_of_time_in_words_to_now(post_it.created_at)}".html_safe
+  .message
+    = post_it.subject
+    = message if message.present?

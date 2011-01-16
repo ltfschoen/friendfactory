@@ -1,7 +1,7 @@
 module PostingsHelper
   
   def render_post_it(object, opts={})
-    render(:partial => 'posting/post_its/post_it', :locals => { :posting => object, :message => opts[:message] })
+    render(:partial => 'posting/post_its/post_it', :locals => { :post_it => object, :message => opts[:message] })
   end
   
   def render_postings(collection)

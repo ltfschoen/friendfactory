@@ -30,6 +30,7 @@ Friskyfactory::Application.routes.draw do
       resources :texts,    :only => [ :create ]
       resources :photos,   :only => [ :create ]
       resources :messages, :only => [ :create, :show ]
+      resources :post_its, :only => [ :create ]
     end
   end
 
@@ -40,6 +41,7 @@ Friskyfactory::Application.routes.draw do
     end
   end
   
+  # To get geocoded location
   resources :locations, :only => [] do
     get 'geocode', :on => :collection
   end

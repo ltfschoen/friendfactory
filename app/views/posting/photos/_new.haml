@@ -1,22 +1,17 @@
 - photo = Posting::Photo.new(:user_id => current_user.id)
-.grid_1
-  &nbsp;
-.grid_12.posting
-  %table
-    %tr
-      %td.avatar.thumb
-        = render_post_it(photo, :message => spinner(:size => :big, :id => 'posting_photo_upload_spinner').html_safe)
-      %td
-        = form_for photo, :url => wave_posting_photos_path(:wave_id => wave.id), :html => { :multipart => true }, :remote => true do |f|
-          %table.button-bar
-            %tr
-              %td.file_field= f.file_field :image
-            %tr
-              %td.submit
-                = f.submit 'Upload Photo', :disable_with => 'Upload Photo'
-                = f.button :Cancel, :class => 'cancel'
-            %tr
-              %td
-                Choose a photo upload
-.grid_3
-  &nbsp;
+%table
+  %tr
+    %td.avatar.thumb
+      = render_post_it(photo, :message => spinner(:size => :big, :id => 'posting_photo_upload_spinner').html_safe)
+    %td
+      = form_for photo, :url => wave_posting_photos_path(:wave_id => wave.id), :html => { :multipart => true }, :remote => true do |f|
+        %table.button-bar
+          %tr
+            %td.file_field= f.file_field :image
+          %tr
+            %td.submit
+              = f.submit 'Upload Photo', :disable_with => 'Upload Photo'
+              = f.button :Cancel, :class => 'cancel'
+          %tr
+            %td
+              Choose a photo upload

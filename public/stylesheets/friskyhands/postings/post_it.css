@@ -16,7 +16,8 @@
 }
 
 .post_it.form {
-    background: url('/images/friskyhands/post-it.png') no-repeat -150px left;	
+	margin-top: 12px;
+    background: url('/images/friskyhands/post-it.png') no-repeat -150px left;
 }
 
 .post_it * {
@@ -44,7 +45,7 @@
 	clear: both;
 }
 
-.post_it textarea#posting_text_subject {
+.post_it textarea#posting_post_it_subject {
 	position: relative;
 	line-height: 14px;
 	top: -6px;

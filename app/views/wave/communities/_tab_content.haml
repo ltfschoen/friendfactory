@@ -1,8 +1,11 @@
 - if current_user
-  #posting_text.tab_content.clearfix.hidden
-    = render :partial => 'posting/texts/new', :locals => { :wave => @wave }
-  #posting_photo.tab_content.clearfix.hidden
-    = render :partial => 'posting/photos/new', :locals => { :wave => @wave }
+  .tab_contents
+    #posting_text.tab_content.clearfix.hidden
+      = render :partial => 'posting/texts/new', :locals => { :wave => @wave }
+    #posting_post_it.tab_content.clearfix.hidden
+      = render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
+    #posting_photo.tab_content.clearfix.hidden
+      = render :partial => 'posting/photos/new', :locals => { :wave => @wave }
   / #video.tab_content.hidden
   /   %table
   /     %tr
