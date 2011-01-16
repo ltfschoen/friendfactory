@@ -26,7 +26,7 @@
 	line-height: 16px;
 }
 
-.post_it img.avatar {
+.post_it img.avatar.thumb {
     position: relative;
     float: left;
     top: -8px;
@@ -39,6 +39,11 @@
     box-shadow: 3px 3px 4px #666;
     -webkit-transform: rotate(-6deg);
     -moz-transform: rotate(-6deg);
+}
+
+.post_it img.avatar.thumb.online {
+	width: 50px;
+	height: 50px;	
 }
 
 .post_it .message {
