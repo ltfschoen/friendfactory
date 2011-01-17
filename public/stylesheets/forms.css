@@ -19,19 +19,22 @@ legend      { font-weight: bold; font-size:1.2em; }
 -------------------------------------------------------------- */
 
 /* MJB: Added button */
-input[type='text'], input[type='password'],
-input.text, input.title,
-textarea, select,
+/*
+input[type='text'],
+input[type='password'],
+input.text,
+input.title,
+textarea,
+select,
 button,
 input.password {
   background-color:#fff;
   border:1px solid #bbb;
-}
-input[type=text]:focus, input[type=password]:focus,
-input.text:focus, input.title:focus,
-textarea:focus, select:focus, {
-input.password
-  border-color:#666;
+}*/
+
+input[type='text'], input[type='password'], textarea {
+  background-color: #fff;
+  border: 1px solid #bbb;
 }
 
  /* MJB: Added button */

@@ -5,10 +5,7 @@
         %td.avatar.thumb
           = render_post_it(photo)
         %td
-          - if photo.present? && photo.horizontal?
-            = image_tag(photo.image.url(:h4x6), :site => false, :class => 'photo h4x6 small')
-          - else
-            = image_tag(photo.image.url(:v4x6), :site => false, :class => 'photo v4x6 small')
+          = render_photo(photo)
           %p
           = render :partial => 'posting/comments/comment', :collection => photo.children.comments
           %div{:id => "posting_#{photo.id}_new_comment_well"}

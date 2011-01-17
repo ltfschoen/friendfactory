@@ -1,11 +1,7 @@
 jQuery(document).ready(function($) {  
 
-	// Placeholders
-	// $('input[placeholder], textarea[placeholder]').placeholder({ className: 'placeholder' }).addClass('placeholder');
-
 	// Buttons
 	$('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});
-	$('button.cancel').button({ icons: { primary: 'ui-icon-close' }});
 
 	// Set up static polaroids
 	$('.polaroid-container > .polaroid').polaroid();

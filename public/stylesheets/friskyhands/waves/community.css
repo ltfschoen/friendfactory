@@ -89,6 +89,16 @@
 	left: 80px;
 }
 
+.tab_content {
+	margin-bottom: 20px;
+}
+
+#posting_photo_upload_well {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);	
+	margin: 6px;	
+}
+
 @-webkit-keyframes BOUNCE {
 	0% {
 		-webkit-transform: translateY(0px);
@@ -112,4 +122,32 @@
 	-webkit-animation-duration: 1.25s;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes SHAKE {
+	0% {
+		-webkit-transform: translateX(0px);
+	}
+	20% {
+		-webkit-transform: translateX(-2px);
+	}
+	40% {
+		-webkit-transform: translateX(2px);
+	}
+	60% {
+		-webkit-transform: translateX(-2px);
+	}
+	80% {
+		-webkit-transform: translateX(2px);
+	}
+	100% {
+		-webkit-transform: translateX(0px);
+	}
+}
+
+.shake {
+	-webkit-animation-name: SHAKE;
+	-webkit-animation-duration: 0.25s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
 }

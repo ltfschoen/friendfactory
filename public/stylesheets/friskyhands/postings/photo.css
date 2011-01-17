@@ -32,10 +32,14 @@ img.photo.v4x6.small {
     height: 220px;
 }
 
-.tab_content.photo table.button-bar {
+.tab_content#posting_photo table.button-bar {
     vertical-align: top;
     border-spacing: 0px 4px;
     border-collapse: separate;  
     padding: 4px;
     width: 70%
+}
+
+.tab_content#posting_photo td {
+	vertical-align: top;
 }

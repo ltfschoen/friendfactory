@@ -1,0 +1,5 @@
+= remotipart_response do
+  $('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}");
+  - silhouette_tag = image_tag('silhouette-q.gif', :site => false, :class => 'photo h4x6 small silhouette')
+  $('.tab_content#posting_photo').hide().find('#posting_photo_upload_well').html("#{escape_javascript(silhouette_tag)}");
+  $('a[href="#posting_photo"]', 'ul.wave.community.nav').closest('li').removeClass('current');
