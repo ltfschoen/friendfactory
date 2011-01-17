@@ -44,11 +44,11 @@ jQuery(function($) {
 	  		// $('#posting_photo_upload_spinner').show();
 		});
 		
-	$('input[type="file"]', '.tab_content#posting_photo').change(function(event) {
+	$('input[type="file"]', '.tab_content#posting_photo').live('change', function(event) {
 		$(event.target.form).submit();
 	});
 	
-	$('button', '.tab_content#posting_photo').click(function(event) {
+	$('button:not([type="submit"])', '.tab_content#posting_photo').live('click', function(event) {
 		event.preventDefault();
 		$(this).closest('.tab_content')
 			.slideUp()

@@ -15,10 +15,10 @@ class Posting::PhotosController < ApplicationController
   end
 
   def update
-    # raise params.inspect
     @posting = Posting::Photo.find_by_id(params[:id])
     respond_to do |format|
       if @posting && @posting.update_attributes(params[:posting_photo])
+        @wave = Wave::Base.find_by_id(params[:wave_id])
         format.js { render :layout => false }
       end
     end
