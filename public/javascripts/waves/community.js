@@ -39,9 +39,11 @@ jQuery(function($) {
 		});
 
 	$('form', '.tab_content#posting_photo')
-		.bind('ajax:before', function(event) {
-	  		// $(this).hide();
-	  		// $('#posting_photo_upload_spinner').show();
+		.bind('ajax:loading', function(event) {
+			$(this).find('.button-bar').css('visibility', 'hidden');
+		})
+		.bind('ajax:complete', function(event){
+			$(this).find('.button-bar').css('visibility', 'visible');
 		});
 		
 	$('input[type="file"]', '.tab_content#posting_photo').live('change', function(event) {
