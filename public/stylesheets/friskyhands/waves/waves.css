@@ -12,9 +12,14 @@
     margin: 0;
 }
 
+.wave.header ul.nav li {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+}
+
 .wave.header ul.nav li a {
 	display: block;
-	float: left;
 	background: url('/images/friskyhands/posting-icons.png') top left no-repeat;
 	text-indent: -1000em;
 	width: 50px;
