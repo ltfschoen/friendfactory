@@ -1,3 +1,15 @@
+.wave_community.header ul.nav li:nth-child(1) a {
+	background-position: 0px;
+}
+
+.wave_community.header ul.nav li:nth-child(2) a {
+	background-position: -50px 0;
+}
+
+.wave_community.header ul.nav li:nth-child(3) a {
+	background-position: -100px;
+}
+
 .wave_community td.avatar.thumb {
     width: 220px
 }

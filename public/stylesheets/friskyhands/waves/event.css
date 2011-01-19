@@ -1,3 +1,8 @@
+.wave_events.header ul.nav li:nth-child(1) a {
+	background-position: -150px;
+	width: 70px;
+}
+
 .ticket-container {
 	width: 700px;
 	height: 254px;

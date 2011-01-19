@@ -1,14 +1,15 @@
-.grid_1<
-  &nbsp;
-.grid_14<
-  .tag-cloud<
-    - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
-      - css_class += " current" if tag.name == params[:tag]
-      = link_to tag.name.titleize, events_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
-.grid_1<
-  &nbsp;
+.clearfix
+  .grid_1<
+    &nbsp;
+  .grid_14<
+    .tag-cloud<
+      - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
+        - css_class += " current" if tag.name == params[:tag]
+        = link_to tag.name.titleize, events_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
+  .grid_1<
+    &nbsp;
 
-.wave.header.events.clearfix<
+.wave.header.events.wave_events.clearfix<
   .grid_1<
     &nbsp;
   .grid_4<
@@ -18,7 +19,7 @@
   .grid_5<
     &nbsp;
 
-.wave.events<
+.wave.events.wave_events.clearfix<
   .grid_2<
     &nbsp;
   .grid_12<

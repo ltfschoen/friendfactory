@@ -35,7 +35,7 @@ jQuery(function($) {
 		}, 'json')
 	}
 	
-	$('li:eq(0) a', 'ul.wave.event.nav')
+	$('li:eq(0) a', 'ul.wave_events.nav')
 		.overlay({
 			top: '12%',
 			mask: { color: '#000', opacity: 0.3 },

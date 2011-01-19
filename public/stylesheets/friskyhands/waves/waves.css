@@ -9,8 +9,6 @@
 
 .wave.header ul.nav li {
 	display: inline-block;
-	width: 50px;
-	height: 50px;
 }
 
 .wave.header ul.nav li a {
@@ -20,15 +18,4 @@
 	width: 50px;
 	height: 50px;
 	margin: 0 10px 0 0;
-}
-.wave.header ul.nav li:nth-child(1) a {
-	background-position: 0px;
-}
-
-.wave.header ul.nav li:nth-child(2) a {
-	background-position: -50px 0;
-}
-
-.wave.header ul.nav li:nth-child(3) a {
-	background-position: -100px;
 }
