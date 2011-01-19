@@ -36,7 +36,6 @@ jQuery(function($) {
 	}
 	
 	$('li:eq(0) a', 'ul.wave.event.nav')
-		.button({ icons: { primary: 'ui-icon-pencil' }})
 		.overlay({
 			top: '12%',
 			mask: { color: '#000', opacity: 0.3 },
