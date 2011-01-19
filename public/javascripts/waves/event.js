@@ -55,6 +55,31 @@ jQuery(function($) {
 			onLoad: function(event) {}
 		});
 
+
+	$('a', 'ul.wave_events.nav').live('click', function(event) {
+		event.preventDefault();
+		
+		var $this = $(this);		
+		if (!$this.closest('li').hasClass('current')) {
+
+			var $tab_content = $($this.attr('rel'));
+			// $tab_content.find('form')[0].reset();
+
+			$this.closest('li').addClass('current');		
+			$this.addClass('bounce');
+			
+			// $tab_content.prependTo('.tab_contents').delay(1200).slideDown(function() {
+			// 	$this.removeClass('bounce');
+			// });
+		} else {
+			$this.bind('webkitAnimationEnd', function(event) {
+				$this.removeClass('shake');
+			});
+			$this.addClass('shake');
+		}	
+	});
+
+
 	// $('.ticket-container > .ticket').click(function(event) {
 	// 	$(this).closest('.ticket').toggleClass('flipped');
 	// });

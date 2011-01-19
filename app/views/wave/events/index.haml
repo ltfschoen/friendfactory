@@ -23,7 +23,9 @@
   .grid_2<
     &nbsp;
   .grid_12<
-    = render :partial => 'new'
+    - if current_user
+      .tab_contents
+        = render :partial => 'new'
     %ul.waves
       = render :partial => 'event', :collection => @waves
   .grid_2<
