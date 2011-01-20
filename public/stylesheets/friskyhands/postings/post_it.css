@@ -12,7 +12,7 @@
 	padding: 20px 22px 20px 20px;
     line-height: 1.2em;
 	font-size: small;
-    color: gray;
+    color: #3C3C3C;
 }
 
 .post_it.form {
@@ -45,7 +45,7 @@
 	height: 40px;	
 }
 
-.post_it .message {
+.post_it.attachment .message {
 	clear: both;
 }
 

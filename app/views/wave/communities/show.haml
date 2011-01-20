@@ -14,8 +14,10 @@
   .grid_12<
     = render :partial => 'tab_content'
     %ul.postings
-      = render_postings(@postings)
+      = render_postings(@postings, :exclude => Posting::PostIt)
   .grid_3<
+    %ul.post_its
+      = render_postings(@postings, :only => Posting::PostIt)
     &nbsp;
 .grid_16    
   = will_paginate @postings

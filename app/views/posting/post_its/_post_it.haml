@@ -1,10 +1,11 @@
-- message ||= nil
-.post_it<
+- opts ||= { :as => :posting, :message => nil }
+.post_it{ :class => "#{opts[:as] == :attachment && 'attachment' }"  }<
   = avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info.gender)
-  = link_to_profile(post_it.user)
-  - if post_it.created_at?
-    %span.created_at<
-      = "posted #{distance_of_time_in_words_to_now(post_it.created_at)}".html_safe
+  - if opts[:as] == :attachment
+    = link_to_profile(post_it.user)
+    - if post_it.created_at?
+      %span.created_at<
+        = "posted #{distance_of_time_in_words_to_now(post_it.created_at)}".html_safe
   .message
     = post_it.subject
-    = message if message.present?
+    = opts[:message] if opts[:message].present?

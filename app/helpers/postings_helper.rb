@@ -1,10 +1,19 @@
 module PostingsHelper
   
   def render_post_it(object, opts={})
-    render(:partial => 'posting/post_its/post_it', :locals => { :post_it => object, :message => opts[:message] })
+    opts.reverse_merge!({ :as => :attachment, :message => nil })
+    render(:partial => 'posting/post_its/post_it', :locals => { :post_it => object, :opts => opts })
   end
   
-  def render_postings(collection)
+  def render_postings(collection, opts={})
+    if opts[:only].present?
+      collection = collection.select{ |posting| posting[:type] == opts[:only].to_s }
+    end
+    
+    if opts[:exclude].present?
+      collection = collection.reject{ |posting| posting[:type] == opts[:exclude].to_s }
+    end
+    
     render :partial => 'posting/posting', :collection => collection
   end
 
