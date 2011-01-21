@@ -163,3 +163,27 @@
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: linear;	
 }
+
+@-webkit-keyframes PULSE {
+  from {
+    -webkit-transform: scale(1.0);
+    opacity: 1.0;
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+    opacity: 0.25;
+  }
+  to { 
+    -webkit-transform: scale(1.0);
+    opacity: 1.0;
+  }
+}
+
+.pulse {
+  -webkit-animation-name: PULSE;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: ease-in-out;
+}
+
+
