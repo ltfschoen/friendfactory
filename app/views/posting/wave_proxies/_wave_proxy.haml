@@ -2,7 +2,7 @@
   %table
     %tr
       %td{ :colspan => '2' }
-        = render_post_it(wave_proxy)
+        = render_attachment(wave_proxy)
         = render :partial => 'wave/events/event', :object => wave_proxy.resource
     %tr
       %td.avatar.thumb

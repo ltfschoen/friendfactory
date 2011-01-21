@@ -1,8 +1,7 @@
 module PostingsHelper
   
-  def render_post_it(object, opts={})
-    opts.reverse_merge!({ :as => :attachment, :message => nil })
-    render(:partial => 'posting/post_its/post_it', :locals => { :post_it => object, :opts => opts })
+  def render_attachment(object)
+    render(:partial => 'posting/post_its/attachment', :locals => { :post_it => object })
   end
   
   def render_postings(collection, opts={})

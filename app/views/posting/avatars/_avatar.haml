@@ -2,7 +2,7 @@
   %table
     %tr
       %td.avatar.thumb
-        = render_post_it(avatar)
+        = render_attachment(avatar)
       %td
         = render :partial => 'posting/avatars/polaroid', :locals => { :avatar => avatar }
         / = render :partial => 'posting/comments/comment', :collection => avatar.children.comments
