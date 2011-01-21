@@ -40,11 +40,20 @@ jQuery(function($) {
 
 	$('form', '.tab_content#posting_photo')
 		.bind('ajax:loading', function(event) {
-			$(this).find('.button-bar').css('visibility', 'hidden');
-			$(this).find('#posting_photo_upload_well').addClass('pulse');
+			$(this)
+				.find('.button-bar')
+					.css('visibility', 'hidden')
+				.end()
+				.find('#posting_photo_upload_well')
+					.addClass('pulse');
 		})
 		.bind('ajax:complete', function(event){
-			$(this).find('.button-bar').css('visibility', 'visible');
+			$(this)
+				.find('.button-bar')
+					.css('visibility', 'visible')
+				.end()
+				.find('#posting_photo_upload_well')
+					.removeClass('pulse');
 		});
 		
 	$('input[type="file"]', '.tab_content#posting_photo').live('change', function(event) {			
