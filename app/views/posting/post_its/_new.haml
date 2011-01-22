@@ -7,8 +7,7 @@
       %td
         .post_it.form<
           = avatar_image_tag(current_user, :style => :thumb, :align => 'left', :anonymous => false, :gender => current_user.user_info.gender)
-          %span= "Posted today by #{link_to_profile(current_user)}".html_safe
-          = f.text_area :subject
+          = f.text_area :subject, :placeholder => 'Short message'
         .button_bar
           = f.submit :OK, :disable_with => 'OK'
           = f.button :Cancel, :class => 'cancel'

@@ -5,8 +5,10 @@ class Posting::PostItsController < ApplicationController
   def create
     wave = Wave::Base.find_by_id(params[:wave_id])
     if wave.present?
-      @posting = Posting::PostIt.new(:subject => params[:posting_post_it][:subject], :user_id => current_user.id)      
+      @posting = Posting::PostIt.new(:subject => params[:posting_post_it][:subject])
+      @posting.user = current_user
       wave.postings << @posting
+      @posting.publish!
     end    
     respond_to do |format|
       format.js { render :layout => false }
