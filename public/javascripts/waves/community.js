@@ -26,7 +26,7 @@ jQuery(function($) {
 	$('button.cancel', '.tab_content')
 		.click(function(event) {
 			event.preventDefault();
-
+			
 			var $tabContent = $(this).closest('.tab_content')
 
 			$('a[href="#' + $tabContent.attr('id') +'"]', 'ul.wave.community.nav')
@@ -39,7 +39,7 @@ jQuery(function($) {
 		});
 
 	$('form', '.tab_content#posting_photo')
-		.bind('ajax:loading', function(event) {
+		.live('ajax:loading', function(event) {
 			$(this)
 				.find('.button-bar')
 					.css('visibility', 'hidden')
@@ -47,7 +47,7 @@ jQuery(function($) {
 				.find('#posting_photo_upload_well')
 					.addClass('pulse');
 		})
-		.bind('ajax:complete', function(event){
+		.live('ajax:complete', function(event) {
 			$(this)
 				.find('.button-bar')
 					.css('visibility', 'visible')
