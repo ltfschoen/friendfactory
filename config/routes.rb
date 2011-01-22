@@ -27,12 +27,12 @@ Friskyfactory::Application.routes.draw do
   # To add postings to a wave
   resources :waves, :only => [] do
     namespace :posting do
-      resources :texts,    :only => [ :create ]
-      resources :photos,   :only => [ :create, :update, :destroy ] do
+      resources :texts,    :only => [ :new, :create ]
+      resources :photos,   :only => [ :new, :create, :update, :destroy ] do
         member { put 'publish' }
       end
+      resources :post_its, :only => [ :new, :create ]
       resources :messages, :only => [ :create, :show ]
-      resources :post_its, :only => [ :create ]
     end
   end
 

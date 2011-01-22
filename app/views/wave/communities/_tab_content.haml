@@ -1,29 +1,29 @@
 - if current_user
   .tab_contents
-    #posting_text.tab_content.clearfix.hidden
+    #posting_text.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_text_path(@wave) }
       = render :partial => 'posting/texts/new', :locals => { :wave => @wave }
-    #posting_post_it.tab_content.clearfix.hidden
+    #posting_post_it.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_post_it_path(@wave) }
       = render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
-    #posting_photo.tab_content.clearfix.hidden
+    #posting_photo.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_photo_path(@wave) }
       = render :partial => 'posting/photos/new', :locals => { :wave => @wave }
-  / #video.tab_content.hidden
-  /   %table
-  /     %tr
-  /       %td{ :colspan => '2' }
-  /         %h2 Upload a Video to the Wave
-  /     %tr
-  /       %td.avatar.thumb
-  /         = avatar_image_tag(current_user, :style => :thumb)
-  /       %td
-  /         = form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave)) do |f|
-  /           %p.unobtrusive Paste the URL of the YouTube tube here.
-  /           = f.text_area :body
-  /           = f.text_field :subject, :placeholder => 'Caption (optional)'
-  /           .button_bar
-  /             = f.submit :OK
-  /             = f.button :Cancel, :class => 'cancel'
-
-  / #link.tab_content.hidden
-  /   = render :partial => 'links/form', :locals => { :label => 'Add a Link to the Wave', :wave => @wave }
-  / #event.tab_content.hidden Event
-  / #poll.tab_content.hidden Poll
+      
+    / #video.tab_content.hidden
+    /   %table
+    /     %tr
+    /       %td{ :colspan => '2' }
+    /         %h2 Upload a Video to the Wave
+    /     %tr
+    /       %td.avatar.thumb
+    /         = avatar_image_tag(current_user, :style => :thumb)
+    /       %td
+    /         = form_for(Posting::Video.new, :url => wave_videos_path(:wave_id => @wave)) do |f|
+    /           %p.unobtrusive Paste the URL of the YouTube tube here.
+    /           = f.text_area :body
+    /           = f.text_field :subject, :placeholder => 'Caption (optional)'
+    /           .button_bar
+    /             = f.submit :OK
+    /             = f.button :Cancel, :class => 'cancel'
+    / #link.tab_content.hidden
+    /   = render :partial => 'links/form', :locals => { :label => 'Add a Link to the Wave', :wave => @wave }
+    / #event.tab_content.hidden Event
+    / #poll.tab_content.hidden Poll
