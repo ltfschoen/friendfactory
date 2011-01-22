@@ -1,10 +1,21 @@
 class Posting::Base < ActiveRecord::Base
 
+  include ActiveRecord::Transitions
+  
   set_table_name :postings
 
   # attr_readonly :user_id
 
   acts_as_tree :order => 'created_at asc'
+  
+  state_machine do
+    state :unpublished
+    state :published
+    
+    event :publish do
+      transitions :to => :published, :from => [ :unpublished ]
+    end
+  end
   
   has_many :children,
       :class_name  => 'Posting::Base',

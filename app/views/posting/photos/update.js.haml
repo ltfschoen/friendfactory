@@ -1,6 +1,5 @@
 = remotipart_response do
-  $('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}");
-  - silhouette_tag = image_tag('silhouette-q.gif', :site => false, :class => 'photo h4x6 small silhouette')
-  // $('.tab_content#posting_photo').hide().find('#posting_photo_upload_well').html("#{escape_javascript(silhouette_tag)}");
-  $('.tab_content#posting_photo').hide().html("#{escape_javascript(render(:partial => 'new', :locals => { :wave => @wave }))}");
-  $('a[href="#posting_photo"]', 'ul.wave.community.nav').closest('li').removeClass('current');
+  - if @posting.present? && @posting.valid?    
+    $('form#new_posting_photo').replaceWith("#{escape_javascript(render :partial => 'edit', :locals => { :wave => @wave, :photo => @posting })}");    
+  - else
+    $('.flash').text("Couldn't save your posting #{@posting.errors.full_messages.to_sentence}")

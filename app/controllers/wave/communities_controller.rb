@@ -10,7 +10,7 @@ class Wave::CommunitiesController < ApplicationController
   def show
     store_location
     @wave = Wave::Base.find_by_slug(params[:slug] || DefaultWaveSlug)
-    @postings = @wave.postings.includes(:user).paginate(:page => params[:page], :per_page => @@per_page)
+    @postings = @wave.postings.where(:state => :published).includes(:user).paginate(:page => params[:page], :per_page => @@per_page)
     respond_to do |format|
       format.html
     end

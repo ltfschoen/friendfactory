@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107175437) do
+ActiveRecord::Schema.define(:version => 20110122013406) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20110107175437) do
     t.integer  "width"
     t.integer  "height"
     t.boolean  "horizontal"
+    t.string   "state"
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"

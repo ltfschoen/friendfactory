@@ -1,5 +1,5 @@
 class Posting::Photo < Posting::Base
-  
+
   has_attached_file :image,
       :styles => {
           :h4x6    => [ '460x310#', :jpg ],

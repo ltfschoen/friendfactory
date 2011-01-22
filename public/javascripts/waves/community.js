@@ -1,4 +1,15 @@
 jQuery(function($) {
+	
+	$('.tab_content').bind('reset', function(event) {
+		$(event.target)
+			.find('form')[0].reset();
+	});
+		
+	$('#posting_photo.tab_content').bind('reset', function(event) {		
+		var silhouette_tag = '<img alt="Silhouette-q" class="photo h4x6 small silhouette" src="/images/silhouette-q.gif">'
+		$(event.target)
+			.find("#posting_photo_upload_well").html(silhouette_tag);
+	});
 
 	$('a', 'ul.wave.community.nav').live('click', function(event) {		
 		event.preventDefault();
@@ -7,7 +18,7 @@ jQuery(function($) {
 		if (!$this.closest('li').hasClass('current')) {
 
 			var $tab_content = $($this.attr('href'));
-			$tab_content.find('form')[0].reset();
+			$tab_content.trigger('reset');
 
 			$this.closest('li').addClass('current');		
 			$this.addClass('bounce');
@@ -35,7 +46,7 @@ jQuery(function($) {
 			
 			$tabContent
 				.slideUp()				
-				.find('textarea').val('').placehold();		
+				.find('textarea').val('').placehold();
 		});
 
 	$('form', '.tab_content#posting_photo')
@@ -56,20 +67,24 @@ jQuery(function($) {
 					.removeClass('pulse');
 		});
 		
-	$('input[type="file"]', '.tab_content#posting_photo').live('change', function(event) {			
-		$(event.target.form).submit();
-	});
+	$('.tab_content#posting_photo')
+		.find('input[type="file"]')
+			.live('change', function(event) {
+				$(event.target.form).submit();
+			})
+		.end();
 	
-	$('button:not([type="submit"])', '.tab_content#posting_photo').live('click', function(event) {
-		event.preventDefault();
-		$(this).closest('.tab_content')
-			.slideUp()
-			.find('textarea').val('').placehold();
+	$('button:not([type="submit"])', '.tab_content#posting_photo')
+		.live('click', function(event) {
+			event.preventDefault();
+			$(this).closest('.tab_content')
+				.slideUp()
+				.find('textarea').val('').placehold();
 			
-		$('ul.wave.community.nav')
-			.find('a[href="#posting_photo"]')
-			.closest('li')
-			.removeClass('current')
-	});
+			$('ul.wave.community.nav')
+				.find('a[href="#posting_photo"]')
+				.closest('li')
+				.removeClass('current')
+		});
 
 });

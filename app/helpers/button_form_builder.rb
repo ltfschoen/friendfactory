@@ -9,8 +9,12 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
       @template.content_tag(:button, label, opts.merge(:type => 'submit'))
     end
   end
-
-  def button(label, opts = {})
+    
+  def button(label, *args)
+    opts = args.extract_options!
+    if href = args.first
+      opts.merge!(:href => href)
+    end
     @template.content_tag(:button, label, opts)
   end
   

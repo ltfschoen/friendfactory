@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name
 
-  include AASM
-  aasm_column        :status
-  aasm_initial_state :welcomed
-  aasm_state         :welcomed
+  # include AASM
+  # aasm_column        :status
+  # aasm_initial_state :welcomed
+  # aasm_state         :welcomed
 
   has_one  :user_info
   
