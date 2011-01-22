@@ -1,15 +1,24 @@
 jQuery(function($) {
 	
-	$('.tab_content').bind('reset', function(event) {
-		$(event.target)
-			.find('form')[0].reset();
-	});
-		
-	$('#posting_photo.tab_content').bind('reset', function(event) {		
-		var silhouette_tag = '<img alt="Silhouette-q" class="photo h4x6 small silhouette" src="/images/silhouette-q.gif">'
-		$(event.target)
-			.find("#posting_photo_upload_well").html(silhouette_tag);
-	});
+	$('.tab_content')
+		.bind('reset', function(event) {
+			$('form', event.target)[0].reset();
+		})
+		.filter('#posting_text')
+			.bind('reset', function(event) {
+				$('textarea', event.target).placehold();
+			})
+		.end()
+		.filter('#posting_photo')
+			.bind('reset', function(event) {		
+				var silhouette_tag = '<img alt="Silhouette-q" class="photo h4x6 small silhouette" src="/images/silhouette-q.gif">'
+				$("#posting_photo_upload_well", event.target).html(silhouette_tag);
+			})
+		.end()
+		.filter('#posting_post_it')
+			.bind('reset', function(event) {		
+				$('textarea', event.target).placehold();
+			})
 
 	$('a', 'ul.wave.community.nav').live('click', function(event) {		
 		event.preventDefault();
@@ -20,8 +29,8 @@ jQuery(function($) {
 			var $tab_content = $($this.attr('href'));
 			$tab_content.trigger('reset');
 
-			$this.closest('li').addClass('current');		
-			$this.addClass('bounce');
+			$this.addClass('bounce')
+				.closest('li').addClass('current');		
 			
 			$tab_content.prependTo('.tab_contents').delay(1200).slideDown(function() {
 				$this.removeClass('bounce');
@@ -44,9 +53,7 @@ jQuery(function($) {
 				.closest('li')
 				.removeClass('current');
 			
-			$tabContent
-				.slideUp()				
-				.find('textarea').val('').placehold();
+			$tabContent.slideUp();
 		});
 
 	$('form', '.tab_content#posting_photo')
