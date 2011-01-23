@@ -1,5 +1,2 @@
 = remotipart_response do
-  - if @posting.present? && @posting.valid?    
-    $('form#new_posting_photo').replaceWith("#{escape_javascript(render :partial => 'edit', :locals => { :wave => @wave, :photo => @posting })}");    
-  - else
-    $('.flash').text("Couldn't save your posting #{@posting.errors.full_messages.to_sentence}")
+  alert("hello!");

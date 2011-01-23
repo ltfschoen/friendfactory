@@ -19,7 +19,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 }
 body {
-	line-height: 1;
+/* MJB 1/22/2011 */
+/*	line-height: 1;*/
 }
 ol, ul {
 	list-style: none;

@@ -2,7 +2,7 @@ jQuery(function($) {
 	
 	$('.tab_content')
 		.bind('reset', function(event) {
-			$('form', event.target)[0].reset();
+			// $('form', event.target)[0].reset();
 		})
 		.filter('#posting_text')
 			.bind('reset', function(event) {
@@ -13,6 +13,7 @@ jQuery(function($) {
 			.bind('reset', function(event) {		
 				var silhouette_tag = '<img alt="Silhouette-q" class="photo h4x6 small silhouette" src="/images/silhouette-q.gif">'
 				$("#posting_photo_upload_well", event.target).html(silhouette_tag);
+				$('textarea', event.target).placehold();				
 			})
 		.end()
 		.filter('#posting_post_it')
@@ -48,7 +49,7 @@ jQuery(function($) {
 			event.preventDefault();
 			
 			var $tabContent = $(this).closest('.tab_content')
-
+	
 			$('a[href="#' + $tabContent.attr('id') +'"]', 'ul.wave.community.nav')
 				.closest('li')
 				.removeClass('current');
@@ -79,19 +80,23 @@ jQuery(function($) {
 			.live('change', function(event) {
 				$(event.target.form).submit();
 			})
-		.end();
-	
-	$('button:not([type="submit"])', '.tab_content#posting_photo')
-		.live('click', function(event) {
-			event.preventDefault();
-			$(this).closest('.tab_content')
-				.slideUp()
-				.find('textarea').val('').placehold();
+		.end()
+		.find('form.new_posting_photo button#posting_photo_cancel')
+			.live('click', function(event) {
+				event.preventDefault();
+				$(this).closest('.tab_content')
+					.slideUp();
 			
-			$('ul.wave.community.nav')
-				.find('a[href="#posting_photo"]')
-				.closest('li')
-				.removeClass('current')
-		});
+				$('ul.wave.community.nav')
+					.find('a[href="#posting_photo"]')
+						.closest('li')
+						.removeClass('current')
+			})
+		.end()
+		.find('form.edit_posting_photo button#posting_photo_cancel')
+			.live('click', function(event) {
+				event.preventDefault();
+				alert('here!');
+			});
 
 });

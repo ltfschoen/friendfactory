@@ -111,6 +111,20 @@
 	margin: 6px;	
 }
 
+.new_posting_photo .button-bar,
+.edit_posting_photo .button-bar {
+	padding: 6px 8px;
+	margin-top: -4px;
+	margin-left: -10px;
+	min-width: 260px;
+	background-color: #FFF;
+	text-align: right;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);	
+	border-radius: 3px;
+}
+
 @-webkit-keyframes BOUNCE {
 	0% {
 		-webkit-transform: translateY(0px);

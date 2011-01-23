@@ -1,11 +1,9 @@
 = remotipart_response do
-
-  // var $currentTab = $('ul.wave.nav li.current');
-  // $panel = $($('a', $currentTab).attr('href'));
-  // $panel.find('form').show().end().find('.spinner').hide();
-
   - if @posting.present? && @posting.valid?    
-    $('form#new_posting_photo').replaceWith("#{escape_javascript(render :partial => 'edit', :locals => { :wave => @wave, :photo => @posting })}");
+    $('form#new_posting_photo').replaceWith("#{escape_javascript(render(:partial => 'edit', :locals => { :wave => @wave, :photo => @posting }))}");
+    $('textarea', 'form#edit_posting_photo').placehold();
+    $('a#destroy_posting_photo').button({ icons: { primary: 'ui-icon-close' }});
+
     
     // .find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
     // $currentTab.removeClass('current');
