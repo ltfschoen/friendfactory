@@ -1,8 +1,8 @@
 - if current_user
   %ul.wave.community.nav
-    %li= link_to 'Message', '#posting_text'
-    %li= link_to 'Post-it', '#posting_post_it'
-    %li= link_to 'Photo', '#posting_photo'
+    %li= link_to 'Message', new_wave_posting_text_path(@wave), :rel => '#posting_text'
+    %li= link_to 'Post-it', new_wave_posting_post_it_path(@wave), :rel => '#posting_post_it'
+    %li= link_to 'Photo', new_wave_posting_photo_path(@wave), :rel => '#posting_photo'
     
     / %li
     /   %a{ :href => '#video' } Video

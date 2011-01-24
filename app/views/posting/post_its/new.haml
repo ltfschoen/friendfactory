@@ -1,5 +1,4 @@
-- post_it = Posting::PostIt.new(:user_id => current_user.id)
-= form_for post_it, :url => wave_posting_post_its_path(:wave_id => wave.id), :remote => true do |f|
+= form_for @posting, :url => wave_posting_post_its_path(@wave), :remote => true do |f|
   %table
     %tr
       %td.avatar.thumb
@@ -8,6 +7,6 @@
         .post_it.form<
           = avatar_image_tag(current_user, :style => :thumb, :align => 'left', :anonymous => false, :gender => current_user.user_info.gender)
           = f.text_area :subject, :placeholder => 'Short message'
-        .button_bar
+        .button-bar
           = f.submit :OK, :disable_with => 'OK'
           = f.button :Cancel, :class => 'cancel'

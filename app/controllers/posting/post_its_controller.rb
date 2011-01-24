@@ -2,6 +2,11 @@ class Posting::PostItsController < ApplicationController
   
   before_filter :require_user
   
+  def new
+    @wave = Wave::Base.find_by_id(params[:wave_id])
+    @posting = Posting::PostIt.new(:user_id => current_user.id)
+  end
+  
   def create
     wave = Wave::Base.find_by_id(params[:wave_id])
     if wave.present?

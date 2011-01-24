@@ -1,11 +1,11 @@
 - if current_user
   .tab_contents
     #posting_text.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_text_path(@wave) }
-      = render :partial => 'posting/texts/new', :locals => { :wave => @wave }
+      =# render :partial => 'posting/texts/new', :locals => { :wave => @wave }
     #posting_post_it.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_post_it_path(@wave) }
-      = render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
+      =# render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
     #posting_photo.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_photo_path(@wave) }
-      = render :partial => 'posting/photos/new', :locals => { :wave => @wave }
+      =# render :partial => 'posting/photos/new', :locals => { :wave => @wave }
       
     / #video.tab_content.hidden
     /   %table

@@ -1,5 +1,5 @@
 - text = Posting::Text.new(:user_id => current_user.id)
-= form_for text, :url => wave_posting_texts_path(:wave_id => wave.id), :remote => true do |f|
+= form_for text, :url => wave_posting_texts_path(@wave), :remote => true do |f|
   %table
     %tr
       %td.avatar.thumb
@@ -11,6 +11,6 @@
             = link_to_profile(text.user)
             = f.text_area :subject, :placeholder => 'Subject (optional)'
             = f.text_area :body, :placeholder => 'Say something!'
-        .button_bar
+        .button-bar
           = f.submit :OK, :disable_with => 'OK'
           = f.button :Cancel, :class => 'cancel'

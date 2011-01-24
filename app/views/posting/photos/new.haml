@@ -1,5 +1,5 @@
 - photo ||= Posting::Photo.new(:user_id => current_user.id)
-= form_for photo, :url => wave_posting_photos_path(:wave_id => wave.id), :html => { :multipart => true }, :remote => true do |f|
+= form_for photo, :url => wave_posting_photos_path(@wave), :html => { :multipart => true }, :remote => true do |f|
   %table
     %tr
       %td.avatar.thumb
@@ -9,6 +9,7 @@
           = f.text_area :subject, :placeholder => 'Caption'
       %td
         #posting_photo_upload_well
+          = image_tag 'silhouette-q.gif', :class => 'photo h4x6 small silhouette', :site => false
         .button-bar
           = f.file_field :image
           = f.button 'Cancel', :id => 'posting_photo_cancel'

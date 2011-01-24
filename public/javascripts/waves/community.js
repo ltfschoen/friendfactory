@@ -1,25 +1,29 @@
 jQuery(function($) {
 	
 	$('.tab_content')
-		.bind('reset', function(event) {
-			// $('form', event.target)[0].reset();
-		})
-		.filter('#posting_text')
-			.bind('reset', function(event) {
-				$('textarea', event.target).placehold();
-			})
-		.end()
-		.filter('#posting_photo')
-			.bind('reset', function(event) {		
-				var silhouette_tag = '<img alt="Silhouette-q" class="photo h4x6 small silhouette" src="/images/silhouette-q.gif">'
-				$("#posting_photo_upload_well", event.target).html(silhouette_tag);
-				$('textarea', event.target).placehold();				
-			})
-		.end()
-		.filter('#posting_post_it')
-			.bind('reset', function(event) {		
-				$('textarea', event.target).placehold();
-			})
+		.bind('reset', function(event, target) {
+			var $this = $(this);
+			var $target = $(target);
+
+			$this.hide().load($target.attr('href') + ' form', function(event) {
+				$(this)
+					.find('button.cancel, a.cancel')
+						.button({ icons: { primary: 'ui-icon-close' }})
+					.end()					
+					.find('button[type="submit"]')
+						.button({ icons: { primary: 'ui-icon-check' }})
+					.end()					
+					.find('textarea').placehold();
+				
+				$target.addClass('bounce')
+					.closest('li').addClass('current');		
+			
+				$this.prependTo('.tab_contents').delay(1200).slideDown(function() {
+					$target.removeClass('bounce');
+				});			
+			});			
+		});
+		
 
 	$('a', 'ul.wave.community.nav').live('click', function(event) {		
 		event.preventDefault();
@@ -27,15 +31,15 @@ jQuery(function($) {
 		var $this = $(this);		
 		if (!$this.closest('li').hasClass('current')) {
 
-			var $tab_content = $($this.attr('href'));
-			$tab_content.trigger('reset');
+			var $tab_content = $($this.attr('rel'));
+			$tab_content.trigger('reset', this);
 
-			$this.addClass('bounce')
-				.closest('li').addClass('current');		
-			
-			$tab_content.prependTo('.tab_contents').delay(1200).slideDown(function() {
-				$this.removeClass('bounce');
-			});
+			// $this.addClass('bounce')
+			// 	.closest('li').addClass('current');		
+			// 
+			// $tab_content.prependTo('.tab_contents').delay(1200).slideDown(function() {
+			// 	$this.removeClass('bounce');
+			// });
 		} else {
 			$this.bind('webkitAnimationEnd', function(event) {
 				$this.removeClass('shake');
@@ -45,16 +49,26 @@ jQuery(function($) {
 	});
 
 	$('button.cancel', '.tab_content')
-		.click(function(event) {
+		.live('click', function(event) {
 			event.preventDefault();
+			var $tabContent = $(this).closest('.tab_content');
 			
-			var $tabContent = $(this).closest('.tab_content')
-	
-			$('a[href="#' + $tabContent.attr('id') +'"]', 'ul.wave.community.nav')
+			$('a[rel="#' + $tabContent.attr('id') +'"]', 'ul.wave.community.nav')
 				.closest('li')
 				.removeClass('current');
 			
-			$tabContent.slideUp();
+			$tabContent.slideUp(function() {
+				$tabContent.empty();
+			});
+		});
+
+	$('form', '.tab_content:not(#posting_photo)')
+		.live('ajax:loading', function() {
+			$(this)
+				.find('.button-bar')
+					.css('visibility', 'hidden')
+				.end()
+				.addClass('pulse');
 		});
 
 	$('form', '.tab_content#posting_photo')
@@ -81,7 +95,7 @@ jQuery(function($) {
 				$(event.target.form).submit();
 			})
 		.end()
-		.find('form.new_posting_photo button#posting_photo_cancel')
+		.find('button#posting_photo_cancel')
 			.live('click', function(event) {
 				event.preventDefault();
 				$(this).closest('.tab_content')
@@ -95,8 +109,7 @@ jQuery(function($) {
 		.end()
 		.find('form.edit_posting_photo button#posting_photo_cancel')
 			.live('click', function(event) {
-				event.preventDefault();
-				alert('here!');
+		        $(this).callRemote();
 			});
 
 });

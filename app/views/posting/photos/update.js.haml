@@ -1,3 +1,3 @@
 $('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}");
-$('.tab_content#posting_photo').hide().html("#{escape_javascript(render(:partial => 'new', :locals => { :wave => @wave }))}");
+$('.tab_content#posting_photo').hide().empty();
 $('a[href="#posting_photo"]', 'ul.wave.community.nav').closest('li').removeClass('current');

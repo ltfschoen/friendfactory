@@ -2,6 +2,10 @@ class Posting::PhotosController < ApplicationController
 
   before_filter :require_user
   
+  def new
+    @wave ||= Wave::Base.find_by_id(params[:wave_id])
+  end
+  
   def create
     @wave ||= Wave::Base.find_by_id(params[:wave_id])
     if @wave.present?      
@@ -34,7 +38,10 @@ class Posting::PhotosController < ApplicationController
   # end
   
   def destroy
-    raise params.inspect
+    posting.destroy
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
   end
 
   private

@@ -11,4 +11,4 @@
           = render_photo(photo)
         .button-bar
           = f.submit 'Done'
-          = button_tag 'Cancel', :id => 'posting_photo_cancel'
+          = button_tag 'Cancel', :id => 'posting_photo_cancel', :method => :delete, :action => wave_posting_photo_path(wave, photo)
