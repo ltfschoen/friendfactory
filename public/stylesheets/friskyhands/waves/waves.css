@@ -5,6 +5,7 @@
 
 .wave.header ul.nav {
     margin: 0;
+	height: 50px;
 }
 
 .wave.header ul.nav li {
