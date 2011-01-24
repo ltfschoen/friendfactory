@@ -5,7 +5,7 @@ class Wave::CommunitiesController < ApplicationController
   before_filter :require_lurker, :only => [ :show ]
 
   cattr_reader :per_page
-  @@per_page = 30
+  @@per_page = 60
   
   def show
     store_location
