@@ -127,11 +127,12 @@ jQuery(function($) {
 			.live('click', function(event) {
 		        $(this).callRemote();
 			});
+	
+	$('button', '.tab_content#posting_post_it, .tab_content#posting_text')
+		.button({ text: false })	
 			
 	$('textarea', '.tab_content#posting_post_it')
-		.textareaCount({
-			'maxCharacterSize': 108			
-		});
+		.textareaCount({ 'maxCharacterSize': 108 });
 
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});

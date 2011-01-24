@@ -124,18 +124,40 @@
 	margin: 6px;	
 }
 
+.wave_community .tab_content .button-bar button {
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
 .new_posting_photo .button-bar,
 .edit_posting_photo .button-bar {
-	padding: 6px 8px;
 	margin-top: -4px;
 	margin-left: -10px;
+	padding: 6px 8px;
 	min-width: 260px;
 	background-color: #FFF;
 	text-align: right;
     -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);	
-	border-radius: 3px;
+	border-radius: 3px;	
+}
+
+.new_posting_post_it .button-bar {
+	margin-top: -30px;
+	margin-left: 120px;
+	padding: 0;
+	width: 80px;
+	text-align: center;
+}
+
+.new_posting_text .button-bar {
+	margin-top: -56px;
+	margin-left: 300px;
+	padding: 0;
+	width: 80px;
+	text-align: center;	
 }
 
 @-webkit-keyframes BOUNCE {
