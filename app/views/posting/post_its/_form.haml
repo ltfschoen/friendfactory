@@ -5,8 +5,8 @@
         &nbsp;
       %td
         .post_it.form<
-          = avatar_image_tag(new_posting_post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => new_posting_post_it.user.user_info.gender)
-          = f.text_area :subject, :placeholder => 'Short message'
+          .content
+            = f.text_area :subject, :placeholder => 'Short message'
         .button-bar
           = f.submit :OK, :disable_with => 'OK'
           = f.button :Cancel, :class => 'cancel'

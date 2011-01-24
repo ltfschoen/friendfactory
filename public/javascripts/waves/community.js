@@ -21,7 +21,11 @@ jQuery(function($) {
 						.find('button[type="submit"]')
 							.button({ icons: { primary: 'ui-icon-check' }})
 						.end()					
-						.find('textarea').placehold();				
+						.find('textarea')
+							.placehold()
+						.end()
+						.find('textarea', '.post_it.attachment')
+							.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
 				});				
 			});
 
@@ -123,5 +127,13 @@ jQuery(function($) {
 			.live('click', function(event) {
 		        $(this).callRemote();
 			});
+			
+	$('textarea', '.tab_content#posting_post_it')
+		.textareaCount({
+			'maxCharacterSize': 108			
+		});
+
+	$('textarea', '.tab_content .post_it.attachment')
+		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
 
 });

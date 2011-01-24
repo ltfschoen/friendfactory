@@ -1,7 +1,7 @@
 = remotipart_response do
   - if @posting.present? && @posting.valid?    
     $('form#new_posting_photo').replaceWith("#{escape_javascript(render(:partial => 'edit', :locals => { :wave => @wave, :photo => @posting }))}");
-    $('textarea, input', 'form#edit_posting_photo').placehold();
+    $('textarea, input', 'form.edit_posting_photo').placehold().filter('.post_it.attachment textarea').textareaCount({ 'maxCharacterSize': 70 }, function(data){});
     $('a#destroy_posting_photo').button({ icons: { primary: 'ui-icon-close' }});    
   - else
     $('.flash').text("Couldn't save your posting #{@posting.errors.full_messages.to_sentence}")

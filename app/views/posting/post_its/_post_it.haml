@@ -1,4 +1,5 @@
 .post_it<
-  = avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info.gender)
-  .message
-    = post_it.subject
+  .content<
+    = avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info.gender)
+    .subject
+      = post_it.subject
