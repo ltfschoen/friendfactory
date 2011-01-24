@@ -84,29 +84,48 @@ namespace :ff do
       desc "Refresh sql and images on staging. DUMP_DATE=yyyymmdd"
       task :default do
         sql
-        images          
+        images
+        deploy.restart
       end
 
-      desc "Refresh sql on staging. DUMP_DATE=yyyymmdd"
       task :sql do
         require 'yaml'
         staging
         database = YAML::load_file("config/database.yml")
-        filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "dump.#{dump_date}.sql")
+        filename = File.join(shared_path, 'dumps', "dump.#{dump_date}.sql")
         run "mysql -u #{database['staging']['username']} -p#{database['staging']['password']} #{database['staging']['database']} < #{filename}"
       end
       
-      desc "Refresh images on staging. DUMP_DATE=yyyymmdd"
       task :images do
         staging
-        filename = File.join(deploy_to, '..', 'production', 'shared', 'dumps', "images.#{dump_date}.tar.gz")
-        run "cd #{current_path}/public/system && tar -czf #{filename} images/*"
+        filename = File.join(shared_path, 'dumps', "images.#{dump_date}.tar.gz")
+        run "cd #{current_path} && rm -rf public/system/images/* && tar -xf #{filename} -C public/system"
       end
     end
 
-    namespace :dumps do
-      desc "Show available production dumps"
+    namespace :dump do
+      desc "Dump production db and images to system/dumps"
       task :default do
+        ff.db.dump.sql
+        ff.db.dump.images
+      end
+      
+      task :sql do
+        require 'yaml'
+        production
+        database = YAML::load_file("config/database.yml")
+        on_rollback { delete "#{shared_path}/dumps/#{dump_filename}" }
+        run "mysqldump -u #{database['production']['username']} -p#{database['production']['password']} -h #{database['production']['host']} #{database['production']['database']} > #{shared_path}/dumps/#{dump_filename}"
+      end
+      
+      task :images do
+        production        
+        on_rollback { delete "#{shared_path}/dumps/#{tar_filename}" }
+        run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
+      end
+
+      desc "Show available production dumps"
+      task :status do
         production
         db_dumps = capture("ls #{File.join(shared_path, 'dumps', '*.sql')}").strip
         image_dumps = capture("ls #{File.join(shared_path, 'dumps', '*.tar.gz')}").strip
@@ -122,52 +141,26 @@ namespace :ff do
         end
         run "rm #{shared_path}/dumps/#{dump_filename}"
         run "rm #{shared_path}/dumps/#{tar_filename}"
+      end            
+    end
+      
+    namespace :download do
+      desc "Download dumped production db and images to local. DUMP_DATE=yyyymmdd"
+      task :default do
+        sql
+        images
+      end
+      
+      task :sql do
+        production
+        get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
+      end
+      
+      task :images do
+        production
+        get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"
       end
     end
-
-    namespace :dump do
-      desc "Dump production db and images to system/dumps"
-      task :default do
-        ff.db.dump.sql
-        ff.db.dump.images
-      end
-      
-      desc "Dump production sql to system/dumps"
-      task :sql do
-        require 'yaml'
-        production
-        database = YAML::load_file("config/database.yml")
-        on_rollback { delete "#{shared_path}/dumps/#{dump_filename}" }
-        run "mysqldump -u #{database['production']['username']} -p#{database['production']['password']} -h #{database['production']['host']} #{database['production']['database']} > #{shared_path}/dumps/#{dump_filename}"
-      end
-      
-      desc "Dump production images to system/dumps"
-      task :images do
-        production        
-        on_rollback { delete "#{shared_path}/dumps/#{tar_filename}" }
-        run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
-      end      
-      
-      namespace :download do
-        desc "Download dumped production db and images to local. DUMP_DATE=yyyymmdd"
-        task :default do
-          sql
-          images
-        end
-        
-        desc "Download dumped production sql to local. DUMP_DATE=yyyymmdd"
-        task :sql do
-          production
-          get "#{shared_path}/dumps/#{dump_filename}", "db/dumps/#{dump_filename}"
-        end
-        
-        desc "Download dumped production images to local. DUMP_DATE=yyyymmdd"
-        task :images do
-          production
-          get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"
-        end
-      end
-    end    
   end
 end
 
