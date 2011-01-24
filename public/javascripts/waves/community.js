@@ -71,7 +71,7 @@ jQuery(function($) {
 				.find('.button-bar')
 					.css('visibility', 'hidden')
 				.end()
-				.find('.index-card, .post_it, #posting_photo_upload_well')
+				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well')
 					.addClass('pulse');
 		})
 		.live('ajax:complete', function() {
@@ -79,7 +79,7 @@ jQuery(function($) {
 				.find('.button-bar')
 					.css('visibility', 'visible')
 				.end()
-				.find('.index-card, .post_it, #posting_photo_upload_well')
+				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well')
 					.removeClass('pulse');			
 		});
 
