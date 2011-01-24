@@ -98,6 +98,31 @@ jQuery(function($) {
 		});
 
 
+	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well', '.cssanimations .tab_content')
+		.bind('pulse', function(event, operation) {
+			if (operation === 'start') {
+				$(this).addClass('pulse');
+			} else {
+				$(this).removeClass('pulse');				
+			}
+		});
+
+	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well', '.no-cssanimations .tab_content')
+		.bind('pulse', function(event, operation) {
+			var $this = $(this);
+			
+			if (operation === 'start') {
+				var worker = setInterval(function() {
+					$this.fadeTo(300, 0.5).fadeTo(300, 1.0);				
+				}, 600);
+				$this.attr('data-worker', worker);
+			} else {			
+				clearInterval($this.attr('data-worker'));
+				$this.removeAttr('data-worker');
+			}
+		});
+
+
 	$('form', '.tab_content')
 		.live('ajax:loading', function() {
 			$(this)
@@ -105,7 +130,7 @@ jQuery(function($) {
 					.fadeTo('fast', 0.0)
 				.end()
 				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well')
-					.addClass('pulse');
+					.trigger('pulse', 'start');
 		})
 		.live('ajax:complete', function() {
 			$(this)
@@ -113,7 +138,7 @@ jQuery(function($) {
 					.fadeTo('fast', 1.0)
 				.end()
 				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well')
-					.removeClass('pulse');			
+					.trigger('pulse', 'stop');
 		});
 
 		
