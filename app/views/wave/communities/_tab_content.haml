@@ -1,12 +1,12 @@
 - if current_user
   .tab_contents
-    #posting_text.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_text_path(@wave) }
-      =# render :partial => 'posting/texts/new', :locals => { :wave => @wave }
-    #posting_post_it.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_post_it_path(@wave) }
-      =# render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
-    #posting_photo.tab_content.clearfix.hidden{ :'data-href' => new_wave_posting_photo_path(@wave) }
-      =# render :partial => 'posting/photos/new', :locals => { :wave => @wave }
-      
+    #posting_text.tab_content.clearfix.hidden
+      = render :partial => 'posting/texts/form'
+    #posting_post_it.tab_content.clearfix.hidden
+      = render :partial => 'posting/post_its/form'
+    #posting_photo.tab_content.clearfix.hidden
+      = render :partial => 'posting/photos/form'
+
     / #video.tab_content.hidden
     / #link.tab_content.hidden
     /   = render :partial => 'links/form', :locals => { :label => 'Add a Link to the Wave', :wave => @wave }

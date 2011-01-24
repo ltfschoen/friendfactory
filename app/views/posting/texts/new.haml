@@ -1,16 +1,1 @@
-- text = Posting::Text.new(:user_id => current_user.id)
-= form_for text, :url => wave_posting_texts_path(@wave), :remote => true do |f|
-  %table
-    %tr
-      %td.avatar.thumb
-        &nbsp;
-      %td
-        .index-card
-          .content
-            = avatar_image_tag(text.user, :style => :thumb, :anonymous => false, :gender => text.user.user_info.gender)
-            = link_to_profile(text.user)
-            = f.text_area :subject, :placeholder => 'Subject (optional)'
-            = f.text_area :body, :placeholder => 'Say something!'
-        .button-bar
-          = f.submit :OK, :disable_with => 'OK'
-          = f.button :Cancel, :class => 'cancel'
+= render :partial => 'form'

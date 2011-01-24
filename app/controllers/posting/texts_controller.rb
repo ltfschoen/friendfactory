@@ -2,6 +2,10 @@ class Posting::TextsController < ApplicationController
   
   before_filter :require_user
   
+  def new
+    @wave = Wave::Base.find_by_id(params[:wave_id])
+  end
+  
   def create
     wave = Wave::Base.find_by_id(params[:wave_id])
     if wave.present?

@@ -28,9 +28,7 @@ Friskyfactory::Application.routes.draw do
   resources :waves, :only => [] do
     namespace :posting do
       resources :texts,    :only => [ :new, :create ]
-      resources :photos,   :only => [ :new, :create, :update, :destroy ] do
-        member { put 'publish' }
-      end
+      resources :photos,   :only => [ :new, :create, :update, :destroy ]
       resources :post_its, :only => [ :new, :create ]
       resources :messages, :only => [ :create, :show ]
     end

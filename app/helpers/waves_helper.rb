@@ -27,4 +27,23 @@ module WavesHelper
     end    
   end
   
+  # Communities Controller
+  def new_posting_post_it
+    @new_posting_post_it ||= new_posting(Posting::PostIt)
+  end
+  
+  def new_posting_text
+    @new_posting_text ||= new_posting(Posting::Text)
+  end
+
+  def new_posting_photo
+    @new_posting_photo ||= new_posting(Posting::Photo)
+  end
+  
+  def new_posting(klass)
+    posting = klass.new
+    posting.user = current_user
+    posting
+  end
+    
 end

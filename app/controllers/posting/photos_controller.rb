@@ -22,21 +22,12 @@ class Posting::PhotosController < ApplicationController
     @wave ||= Wave::Base.find_by_id(params[:wave_id])
     respond_to do |format|
       if posting.update_attributes(params[:posting_photo])
-        posting.publish! if posting.state == :unpublished
+        posting.publish!
         format.js { render :layout => false }
       end
     end
   end
-  
-  # def publish
-  #   respond_to do |format|
-  #     if posting.update_attributes(params[:posting_photo])
-  #       posting.publish!
-  #       format.js { render :layout => false }        
-  #     end
-  #   end
-  # end
-  
+    
   def destroy
     posting.destroy
     respond_to do |format|

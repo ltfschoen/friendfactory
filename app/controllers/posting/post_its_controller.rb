@@ -4,7 +4,6 @@ class Posting::PostItsController < ApplicationController
   
   def new
     @wave = Wave::Base.find_by_id(params[:wave_id])
-    @posting = Posting::PostIt.new(:user_id => current_user.id)
   end
   
   def create
@@ -19,5 +18,5 @@ class Posting::PostItsController < ApplicationController
       format.js { render :layout => false }
     end
   end
-
+  
 end
