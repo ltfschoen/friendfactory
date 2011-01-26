@@ -59,6 +59,7 @@ Friskyfactory::Application.routes.draw do
   get   'login'   => 'user_sessions#create'  
   match 'logout'  => 'user_sessions#destroy', :via => [ :get, :delete ]
   get   'welcome' => 'welcome#index'
+  get   'launch'  => 'welcome#launch'
 
   scope :module => 'wave' do
     get 'wave'            => 'communities#show'

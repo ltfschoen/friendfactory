@@ -1,0 +1,31 @@
+.header.primary.grid_16
+  = link_to 'FriskyHands', root_path, :class => 'badge'    
+  %ul.nav
+    %li#nav-1{ :class => "#{'current' if current_page?(:controller => 'wave/communities', :action => 'show')}" }
+      = link_to 'Wave', root_path
+    %li#nav-2{ :class => "#{'current' if current_page?(:controller => 'wave/roll_calls', :action => 'index')}" }
+      = link_to 'Roll Call', roll_call_path
+    %li#nav-3
+      = link_to 'Events', events_path
+    %li#nav-4
+      = link_to_facebook_shop
+    %li#nav-5{ :class => "#{'current' if current_page?(:controller => 'wave/profile', :action => 'show')}" }
+      = link_to 'Bio', profile_path
+    %li#nav-6
+      = link_to 'Inbox', inbox_path
+    %li#nav-8
+      = link_to 'Logout', logout_path, :method => :delete
+
+.header.secondary.grid_16
+  .flash
+  - if flash[:notice].present?
+    = flash[:notice].html_safe
+  - else
+    - if current_user && current_user.avatar.nil?
+      Create a profile on your #{link_to('Bio', profile_path)} page
+  %div.links
+    = link_to_facebook
+    - if current_user
+      -# = link_to 'Logout', logout_path
+      -# = link_to "#{current_user.first_name}'s Profile", profile_path
+

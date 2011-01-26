@@ -7,4 +7,9 @@ class WelcomeController < ApplicationController
     store_reentry_location
   end
   
+  def launch
+    current_site.name = 'positivelyfrisky'
+    render :layout => false
+  end
+  
 end

@@ -1,0 +1,268 @@
+@font-face {
+	font-family: "Chalkduster";
+	src: url('/fonts/Chalkduster.ttf');
+	font-weight: normal;
+}
+
+div.polaroid {
+	height: 350px;
+	width: 290px; 
+}
+
+div.polaroid .face {
+	position: absolute;
+	height: 320px;
+	width: 260px;
+	background: url(/images/friskyhands/polariod.jpg);
+	padding: 15px;
+    -webkit-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+}
+
+div.polaroid .face a.close {
+	display: none;
+	float: right;
+	margin-top: -15px;
+	margin-right: -15px;
+	width: 15px;
+	height: 15px;
+	background: url(/images/friskyhands/buddy-bar.png) -244px -3px no-repeat;
+	text-indent: -1000em;
+}
+
+div.polaroid .front.face table.header {
+	font-size: 18px;
+	font-family: Chalkduster;
+	color: rgb(0, 0, 0);
+	margin-top: 5px;
+	width: 260px;
+	height: 38px;
+}
+
+div.polaroid .front.face table.header td.username {
+	text-align: left;
+	vertical-align: top;
+}
+
+div.polaroid .front.face table.header td.status {
+	vertical-align: top;
+	padding-top: 6px;
+	text-align: right;
+	font-family: Gill Sans, Trebuchet MS, Verdana, Arial;
+	font-size: 12px;
+	color: #666;
+}
+
+div.polaroid.edit .front.face table.detail {
+    margin-top: 6px;
+}
+
+div.polaroid.edit .front.face table.detail td {
+    height: 28px;
+    vertical-align: middle;
+}
+
+div.polaroid .front.face img.avatar.polaroid {
+    width: 258px;
+    height: 258px;
+    border: 1px solid lightgray;
+}
+
+div.polaroid .back.face img.thumb {
+    border: 1px solid lightgray;
+}
+
+div.polaroid .back.face table.header {
+	color: rgb(34,65,108);
+    width: 254px;
+    margin-bottom: 8px;
+	font-size: 18px;
+	font-family: Chalkduster;
+}
+
+div.polaroid .back.face table.header td.avatar {
+    width: 74px;
+}
+
+div.polaroid .back.face table.header td.username {
+	text-align: left;
+	vertical-align: middle;
+}
+
+div.polaroid .back.face table.header td.age {
+    text-align: right;
+    vertical-align: middle;
+}
+
+div.polaroid .back.face table.header td.age input {
+    width: 3em;
+}
+
+div.polaroid .back.face table.detail {
+	color: gray;
+	width: 260px;
+}
+
+div.polaroid .back.face table.detail td {
+    height: 28px;
+    vertical-align: middle;
+}
+
+div.polaroid .back.face table.detail td.label {
+    width: 96px;
+    color: #999;
+} 
+
+div.polaroid .back.face table.detail td.detail {
+    color: #666;
+    border-bottom: 1px dotted lightgray;
+}
+
+
+/* Photo-gird */
+
+div.polaroid .back.face .photo-grid img.thumb {
+    display: block;
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 0 6px 10px 0;
+    background-color: #fff;
+}
+
+div.polaroid .back.face .photo-grid img.omega {
+    margin-right: 0;
+}
+
+
+div.polaroid .button-bar {
+    float: right;
+    position: relative;
+    top: -15px;
+}
+ 
+div.polaroid ul.buddy-bar {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+div.polaroid.edit ul.buddy-bar {
+    display: none;
+}
+
+div.polaroid ul.buddy-bar.primary {
+	float: right;
+}
+
+div.polaroid ul.buddy-bar.secondary {
+	float: left;
+}
+
+div.polaroid ul.buddy-bar li {
+	float: left;
+}
+
+div.polaroid ul.buddy-bar li.comment-count {	
+	font-family: Gill Sans, Trebuchet MS, Verdana, Arial;
+	font-size: 12px;
+	color: #666;
+	padding-top: 4px;
+}
+
+div.polaroid .navi a,
+div.polaroid a.icon {
+	display: block;
+	text-decoration: none;
+	text-indent: -5000px;
+	margin-right: 6px;
+	width: 18px;
+	height: 20px;
+	background: url(/images/friskyhands/buddy-bar.png) top left no-repeat;	
+}
+
+div.polaroid a.icon.last {
+	margin-right: 0px;
+}
+
+div.polaroid a.icon.comment {
+	width: 18px;
+	background-position: 0 -3px;
+}
+
+div.polaroid a.icon.block {
+	background-position: -24px -1px;
+}
+
+div.polaroid a.icon.buddy {
+	background-position: -49px -1px;
+}
+
+div.polaroid a.icon.pin {
+	background-position: -70px -1px;
+}
+
+div.polaroid a.icon.chat {
+	width: 24px;
+	background-position: -92px -1px;
+}
+
+div.polaroid a.icon.conversation {
+	width: 26px;
+	background-position: -120px -1px;
+}
+
+div.polaroid a.icon.photos {
+	width: 24px;
+	background-position: -150px -1px;
+}
+
+div.polaroid a.icon.mini-profile {
+	background-position: -180px -1px;
+}
+
+div.polaroid a.icon.headshot {
+	width: 22px;
+	background-position: -200px -1px;
+}
+
+.polaroid-container {
+	height: 356px;
+	width: 320px;
+    position: relative; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);	
+	-webkit-perspective: 1200;
+}
+
+.polaroid-container div.polaroid {
+	position: absolute;
+	-webkit-transform-style: preserve-3d;	
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;        
+/*  -webkit-transform: rotate(2deg);*/
+/*  -moz-transform: rotate(2deg);*/
+}
+
+.polaroid-container div.polaroid.flipped {
+/*  -webkit-transform: rotate(2deg) rotateotateY(180deg);*/
+    -webkit-transform: rotateY(180deg);
+}
+
+.polaroid-container div.polaroid .face {
+	-webkit-backface-visibility: hidden;    
+}
+
+.floating div.polaroid .face {
+	cursor: move;
+    -webkit-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+}
+
+.floating div.polaroid .face a.close {
+	display: block;
+}

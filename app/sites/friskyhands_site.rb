@@ -1,6 +1,6 @@
 class FriskyhandsSite < ApplicationSite  
   def name
-    "friskyhands"
+    @name ||= "friskyhands"
   end
   
   def layout

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user, :current_site
   helper_method :presenter
-  
+
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
   end
@@ -67,6 +67,10 @@ class ApplicationController < ActionController::Base
       redirect_to logout_url
       return false
     end
+  end
+  
+  def require_launch
+    redirect_to launch_url
   end
   
   def store_location

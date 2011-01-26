@@ -1,0 +1,80 @@
+@font-face {
+	font-family: 'NothingYouCouldDo';
+	src: url('/fonts/nothingyoucoulddo.ttf');
+	font-weight: normal;
+}
+
+.post_it {
+    position: relative;
+    background: url('/images/friskyhands/post-it.png') no-repeat top left;
+    width: 173px;
+	height: 122px;
+	padding: 5px 9px 20px 8px;
+    line-height: 1.2em;
+	font-size: small;
+    color: #3C3C3C;
+}
+
+.post_it.form {
+    background: url('/images/friskyhands/post-it.png') no-repeat -150px left;
+}
+
+.post_it .content {
+	width: 153px;
+	height: 120px;
+	padding: 7px 10px 0 10px;
+	overflow: hidden;
+	font-family: 'NothingYouCouldDo';
+	font-size: 11px;
+	line-height: 16px;
+}
+
+.post_it .content a.profile {
+	font-family: 'NothingYouCouldDo';
+	font-size: 11px;
+	line-height: 16px;	
+}
+
+.post_it img.avatar.thumb {
+    position: relative;
+    float: left;
+	margin: 0 12px 4px 0;
+	width: 40px;
+	height: 40px;
+    -webkit-box-shadow: 2px 2px 4px #666;
+    -moz-box-shadow: 3px 3px 4px #666;
+    box-shadow: 3px 3px 4px #666;
+    -webkit-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
+}
+
+.post_it img.avatar.thumb.online {
+	width: 40px;
+	height: 40px;	
+}
+
+.post_it.attachment .header {
+	margin-top: 4px;
+}
+
+.post_it.attachment .subject {
+	clear: both;
+}
+
+.post_it textarea {
+	position: relative;
+	width: 100%;
+	height: 115px;
+	border: 0;
+	padding: 0;
+	font-family: 'NothingYouCouldDo';
+	font-size: 11px;
+	line-height: 16px;	
+	background: transparent;
+	resize: none;
+	overflow: hidden;
+}
+
+.post_it.attachment textarea {
+	height: 72px;
+}
