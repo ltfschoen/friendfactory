@@ -8,7 +8,6 @@ class WelcomeController < ApplicationController
   end
   
   def launch
-    current_site.name = 'positivelyfrisky'
     render :layout => false
   end
   
