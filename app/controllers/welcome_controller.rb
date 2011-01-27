@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
   
   def index
     store_reentry_location
+    redirect_to launch_url if current_site.name == 'positivelyfrisky'
   end
   
   def launch
