@@ -91,8 +91,8 @@ input.password {
 	width: 100%;
 }
 
-.button-bar a {
-    margin-top: 0.5em;
+.button-bar {
+	float: left;
 }
 
 .panel.login h3 {

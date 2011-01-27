@@ -44,13 +44,14 @@
           &nbsp;
         .grid_6<
           .panel
-            %p
-              Provide your email address and we'll let you know when we're ready.
-            = form_for UserSession.new, :url => '/crap' do |f|
-              = f.text_field :email, :placeholder => 'email@address.com'
-              .button-bar
-                = f.submit 'Keep me posted!'
-        
+            - if flash[:launch_user]
+              %h4 Thanks!
+              %p We'll drop you an email when we're ready!              
+            - else
+              %p Provide your email address and we'll let you know when we're ready.
+              = form_for LaunchUser.new, :url => launch_path do |f|
+                = f.text_field :email, :placeholder => 'email@address.com'
+                = f.submit 'Thanks'        
         .grid_3.omega<
           &nbsp;
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110122013406) do
+ActiveRecord::Schema.define(:version => 20110127032342) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(:version => 20110122013406) do
 
   add_index "invitations", ["event_id", "profile_id"], :name => "index_invitations_on_event_id_and_profile_id"
   add_index "invitations", ["profile_id"], :name => "index_invitations_on_profile_id"
+
+  create_table "launch_users", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+  end
 
   create_table "locations", :force => true do |t|
     t.string   "name"
