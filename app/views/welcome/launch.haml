@@ -1,65 +1,27 @@
-!!! 5
-%html.no-js
-  %head
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
-    %title= current_site.name
-    = stylesheet_links 'reset', 'forms', '960', :media => 'screen', :cache => 'cached'
-    - site = current_site
-    = stylesheet_links |
-        "friskyfactory/application", |
-        "#{current_site}/jquery-ui.css", |
-        "#{current_site}/application", |
-        "#{current_site}/welcome", :media => 'screen', :cache => "#{current_site}/launched-cached"
-        
-    / [if IE]
-      =# stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
-
-    - if Rails.env.development?
-      = javascript_include_tag 'jquery.min.js', 'jquery-ui.min.js', 'debug.js'
-    - else
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
-      
-    = javascript_includes |
-        'modernizr-1.6.min', |    
-        'rails', |
-        'jquery.placehold-0.3.min', |
-        'welcome', |
-        :cache => 'welcome-cached'
-  
-  %body{ :class => current_site }
-    .container.container_16.clearfix
-      .badge.prefix_3.grid_10.suffix_3
-        = image_tag 'badge.png', :size => '520x220'
-        %h1
-          A Place for Positive People
-        %h4
-          Positively Frisky is a new destination for the HIV+ LGBTQ community & their Friends!          
-        .grid_8.prefix_1.suffix_1.alpha.omega
-          %p
-            Find new friends and lovers in a fun, uplifting, stigma-free environment where privacy is a priority.
-        .grid_8.prefix_1.suffix_1.prepend-top.alpha.omega
-          %h4
-            Coming March 2011        
-      .creative.prepend-top.prefix_2.grid_12.suffix_2
-        .grid_3.alpha<
-          &nbsp;
-        .grid_6<
-          .panel
-            - if flash[:launch_user]
-              %h4 Thanks!
-              %p We'll drop you an email when we're ready!              
-            - else
-              %p Provide your email address and we'll let you know when we're ready.
-              = form_for LaunchUser.new, :url => launch_path do |f|
-                = f.text_field :email, :placeholder => 'email@address.com'
-                = f.submit 'Thanks'        
-        .grid_3.omega<
-          &nbsp;
-
-    .footer
-      %p
-        %span
-          &copy;&nbsp;#{Date.today.year} Frisky Factory LLC, New York, NY
-        = render :partial => '/layouts/grid'
-    = render :partial => 'layouts/analytics'
+.badge.prefix_3.grid_10.suffix_3
+  = image_tag 'badge.png', :size => '520x220'
+  %h1
+    A Place for Positive People
+  %h4
+    Positively Frisky is a new destination for the HIV+ LGBTQ community & their Friends!          
+  .grid_8.prefix_1.suffix_1.alpha.omega
+    %p
+      Find new friends and lovers in a fun, uplifting, stigma-free environment where privacy is a priority.
+  .grid_8.prefix_1.suffix_1.prepend-top.alpha.omega
+    %h4
+      Coming March 2011        
+.creative.prepend-top.prefix_2.grid_12.suffix_2
+  .grid_3.alpha<
+    &nbsp;
+  .grid_6<
+    .panel
+      - if flash[:launch_user]
+        %h4 Thanks!
+        %p We'll drop you an email when we're ready!              
+      - else
+        %p Provide your email address and we'll let you know when we're ready.
+        = form_for LaunchUser.new, :url => launch_path do |f|
+          = f.text_field :email, :placeholder => 'email@address.com'
+          = f.submit 'Thanks'        
+  .grid_3.omega<
+    &nbsp;

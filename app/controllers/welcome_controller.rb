@@ -15,7 +15,7 @@ class WelcomeController < ApplicationController
         flash[:launch_user] = true
         format.html { redirect_to launch_path }
       else
-        format.html { render :layout => false }      
+        format.html
       end
     end
   end
