@@ -2,17 +2,6 @@ body {
 	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
 }
 
-/*.ui-button .ui-button-text {
-	line-height: 1.2em;
-}*/
-
-/* MJB Fixed Changed .ui-icon-primary to .ui-button-icon-primary */
-.ui-button-text-icon .ui-button-icon-primary,
-.ui-button-text-icons .ui-button-icon-primary,
-.ui-button-icons-only .ui-button-icon-primary {
-	left: .5em;
-}
-
 .header.primary { 
 	background: url(/images/friskyhands/header.png) no-repeat top center;
 }
