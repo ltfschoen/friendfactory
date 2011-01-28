@@ -39,6 +39,10 @@ module WavesHelper
   def new_posting_photo
     @new_posting_photo ||= new_posting(Posting::Photo)
   end
+
+  def new_posting_video
+    @new_posting_video ||= new_posting(Posting::Video)
+  end
   
   def new_posting(klass)
     posting = klass.new

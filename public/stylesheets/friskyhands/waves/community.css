@@ -131,7 +131,9 @@
 }
 
 .new_posting_photo .button-bar,
-.edit_posting_photo .button-bar {
+.edit_posting_photo .button-bar,
+.new_posting_video .button-bar,
+.edit_posting_video .button-bar {
 	margin-top: -4px;
 	margin-left: -10px;
 	padding: 6px 8px;

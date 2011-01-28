@@ -1,0 +1,15 @@
+= form_for new_posting_video, :url => wave_posting_videos_path(@wave), :html => { :multipart => true }, :remote => true do |f|
+  %table
+    %tr
+      %td.avatar.thumb
+        .post_it.attachment.form<
+          .content<
+            = avatar_image_tag(new_posting_photo.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => new_posting_video.user.user_info.gender)
+            %span= "Posted by #{link_to_profile(new_posting_photo.user)}".html_safe
+            = f.text_area :subject, :placeholder => 'Caption'
+      %td
+        #posting_video_upload_well
+          = image_tag 'silhouette-q.gif', :class => 'photo h4x6 small silhouette', :site => false
+        .button-bar
+          = f.text_field :body, :placeholder => 'http://'
+          = f.button 'Cancel', :id => 'posting_video_cancel'

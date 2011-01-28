@@ -30,6 +30,7 @@ Friskyfactory::Application.routes.draw do
       resources :texts,    :only => [ :new, :create ]
       resources :photos,   :only => [ :new, :create, :update, :destroy ]
       resources :post_its, :only => [ :new, :create ]
+      resources :videos,   :only => [ :new, :create ]
       resources :messages, :only => [ :create, :show ]
     end
   end
