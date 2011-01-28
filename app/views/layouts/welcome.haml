@@ -6,9 +6,13 @@
     = stylesheet_links 'reset', 'forms', '960', :media => 'screen', :cache => 'cached'
     - site = current_site
     = stylesheet_links |
-        "#{site}/jquery-ui.css", |
-        "#{site}/application", |
-        "#{site}/welcome", :media => 'screen', :cache => "#{site}/welcome-cached"      
+      'friskyfactory/application', |
+      'friskyfactory/welcome', |
+      "#{current_site}/jquery-ui.css", |
+      "#{current_site}/application", |
+      "#{current_site}/welcome", |
+        :media => 'screen', :cache => "#{current_site}/welcome-cached"
+        
     / [if IE]
       = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
 

@@ -1,0 +1,242 @@
+.wave_community.header ul.nav li {
+	width: 50px;
+}
+
+.no-cssanimations .wave_community.header ul.nav li {
+	position: relative;
+	height: 50px;
+}
+
+.no-cssanimations .wave_community.header ul.nav li a {
+	position: absolute;
+}
+
+.wave_community.header ul.nav li:nth-child(1) a {
+	background-position: 0 0;
+}
+
+.wave_community.header ul.nav li:nth-child(2) a {
+	background-position: -50px 0;
+}
+
+.wave_community.header ul.nav li:nth-child(3) a {
+	background-position: -100px 0;
+}
+
+.wave_community td.avatar.thumb {
+    width: 220px
+}
+
+.wave_community .posting {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    postition: relative;
+}
+
+.wave_community .posting:nth-child(even) {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+.wave_community .posting:nth-child(3n) {
+    -webkit-transform: none;
+    -moz-transform: none;
+    top: -5px;
+    right: 10px;
+}
+
+.wave_community .posting:nth-child(5n) {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    right: 5px;
+}
+
+.wave_community .posting:nth-child(8n) {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    top: 8px;
+    right: 5px;
+}
+
+.wave_community .posting:nth-child(11n) {
+    top: 3px;
+    right: -5px;
+}
+
+
+.wave_community .posting post_it {
+    -webkit-transform: none;
+    -moz-transform: none;
+}
+
+.wave_community .posting:nth-child(3n) .post_it {
+    -webkit-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
+    right: 30px;
+}
+
+.wave_community .posting:nth-child(5n) .post_it {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    right: -16px;
+}
+
+
+.wave_community .posting:nth-child(5n) .comment-bubble {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    right: -16px;
+}
+
+.wave_community .posting:first-child .comment-bubble {
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
+}
+
+.wave_community .posting:nth-child(12n) comment-bubble {
+    -webkit-transform: rotate(6deg);
+    -moz-transform: rotate(6deg);
+    left: 40px;
+}
+
+
+.wave_community .posting_wave_proxy {
+	position: relative;
+}
+
+.wave_community .posting_wave_proxy .post_it {
+	position: absolute;
+	z-index: 10;
+}
+
+.wave_community .posting_wave_proxy .wave_event {
+	position: relative;
+	left: 80px;
+}
+
+.tab_content {
+	margin-bottom: 20px;
+}
+
+#posting_photo_upload_well {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);	
+	margin: 6px;	
+}
+
+.wave_community .tab_content .button-bar button {
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.new_posting_photo .button-bar,
+.edit_posting_photo .button-bar,
+.new_posting_video .button-bar,
+.edit_posting_video .button-bar {
+	margin-top: -4px;
+	margin-left: -10px;
+	padding: 6px 8px;
+	min-width: 260px;
+	background-color: #FFF;
+	text-align: right;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;	
+}
+
+.new_posting_post_it .button-bar {
+	margin-top: -30px;
+	margin-left: 120px;
+	padding: 0;
+	width: 80px;
+	text-align: center;
+}
+
+.new_posting_text .button-bar {
+	margin-top: -56px;
+	margin-left: 300px;
+	padding: 0;
+	width: 80px;
+	text-align: center;	
+}
+
+@-webkit-keyframes BOUNCE {
+	0% {
+		-webkit-transform: translateY(0px);
+	}
+	40% {
+		-webkit-transform: translateY(-14px);
+	}
+	70% {
+		-webkit-transform: translateY(-15px);
+	}	
+	80% {
+		-webkit-transform: translateY(38px);
+	}
+	100% {
+		-webkit-transform: translateY(0px);
+	}
+}
+
+.bounce {
+	-webkit-animation-name: BOUNCE;
+	-webkit-animation-duration: 1.25s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes SHAKE {
+	0% {
+		-webkit-transform: translateX(0px);
+	}
+	20% {
+		-webkit-transform: translateX(-2px);
+	}
+	40% {
+		-webkit-transform: translateX(2px);
+	}
+	60% {
+		-webkit-transform: translateX(-2px);
+	}
+	80% {
+		-webkit-transform: translateX(2px);
+	}
+	100% {
+		-webkit-transform: translateX(0px);
+	}
+}
+
+.shake {
+	-webkit-animation-name: SHAKE;
+	-webkit-animation-duration: 0.25s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+}
+
+@-webkit-keyframes PULSE {
+  from {
+    -webkit-transform: scale(1.0) rotate(-2deg);
+    opacity: 1.0;
+  }
+  50% {
+    -webkit-transform: scale(0.95) rotate(-2deg);
+    opacity: 0.5;
+  }
+  to { 
+    -webkit-transform: scale(1.0) rotate(-2deg);
+    opacity: 1.0;
+  }
+}
+
+.pulse {
+  -webkit-animation-name: PULSE;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: ease-in-out;
+}
+
+
