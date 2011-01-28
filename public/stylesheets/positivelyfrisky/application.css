@@ -1,11 +1,11 @@
 body {
-	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
+	background: url('/images/friskyfactory/golden_fibers.png') repeat-y top center #CEC2A2;
 }
 
 .header.primary { 
-	background: url(/images/friskyhands/header.png) no-repeat top center;
+	background: url(/images/positivelyfrisky/header.png) no-repeat top center;
 }
 
 .header.primary ul.nav li a {
-	background-image: url(/images/friskyhands/header.png);
+	background-image: url(/images/positivelyfrisky/header.png);
 }
