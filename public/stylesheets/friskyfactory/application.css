@@ -7,7 +7,6 @@ body {
 	-khtml-user-select: auto;
 	-webkit-user-select: auto;
 	user-select: auto;	
-	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
 }
 
 .hidden {
@@ -155,7 +154,6 @@ a.bio {
 
 .header.primary { 
     position: relative;
-	background: url(/images/friskyhands/header.png) no-repeat top center;
 	width: 960px;
 	height: 110px;
 	margin: 10px auto;
@@ -184,7 +182,6 @@ a.bio {
 .header.primary ul.nav li a {
 	display: block;
 	text-indent: -1000em;
-	background-image: url(/images/friskyhands/header.png);
 	background-repeat: no-repeat;
 }
 
