@@ -39,7 +39,7 @@ module ApplicationHelper
       else '14x14'
     end    
     css_class = [ 'spinner', 'hidden', opts[:class] ].compact * ' '
-    image_tag('ajax-loader.gif', :size => size, :class => css_class, :id => opts[:id], :site => false)
+    image_tag('friskyfactory/ajax-loader.gif', :size => size, :class => css_class, :id => opts[:id], :site => false)
   end
   
   def link_to_profile(user, opts = {})
