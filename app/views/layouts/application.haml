@@ -8,16 +8,17 @@
     = stylesheet_links |
       'reset', 'forms', '960', |
       'friskyfactory/application', |
+      'friskyfactory/admin', |
+      'friskyfactory/scrollable', |
       "#{current_site}/jquery-ui.css", |
       "#{current_site}/application", |
-      "#{current_site}/admin", |
-      "#{current_site}/scrollable", |
       "#{current_site}/waves/", |
       "#{current_site}/postings/", |
         :media => 'screen', :cache => "#{current_site}/cached"
 
     / [if IE]
-      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
+      = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
+      
     = yield(:stylesheets)
     :css
       #{yield(:pagecss)}
