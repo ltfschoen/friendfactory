@@ -1,6 +1,6 @@
 .postcard {
     position: relative;
-    background: url('/images/friskyhands/postcard.png') no-repeat top left;
+    background: url('/images/friskyfactory/postcard.png') no-repeat top left;
     width: 460px;
     height: 350px;
     text-align: left;	
@@ -186,7 +186,7 @@
     left: 20px;
     width: 130px;
     height: 64px;
-    background: url('/images/friskyhands/postcard.png') no-repeat -284px -346px;
+    background: url('/images/friskyfactory/postcard.png') no-repeat -284px -346px;
 }
 
 .postcard .delivered {
@@ -196,7 +196,7 @@
     left: 40px;
     width: 102px;
     height: 76px;
-    background: url('/images/friskyhands/postcard.png') no-repeat -184px -348px;
+    background: url('/images/friskyfactory/postcard.png') no-repeat -184px -348px;
 }
 
 .postcard .address {
@@ -250,7 +250,7 @@
 	top: 10px;
 	width: 15px;
 	height: 15px;
-	background: url(/images/friskyhands/buddy-bar.png) -244px -3px no-repeat;
+	background: url(/images/friskyfactory/buddy-bar.png) -244px -3px no-repeat;
 	text-indent: -1000em;
 }
 
@@ -261,7 +261,7 @@
 	right: 34px;
 	width: 14px;
 	height: 18px;
-	background: url(/images/friskyhands/buddy-bar.png) -260px -3px no-repeat;
+	background: url(/images/friskyfactory/buddy-bar.png) -260px -3px no-repeat;
 	text-indent: -1000em;
 }
 

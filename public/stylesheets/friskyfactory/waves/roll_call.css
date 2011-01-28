@@ -3,6 +3,7 @@
     margin-left: 6px;
     margin-top: 20px;
 }
+
 .wave.roll_call .polaroid-container,
 .wave.roll_call .polaroid-container {
     float: left;
@@ -11,7 +12,7 @@
 
 .tag-cloud {
     text-align: center;
-	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center  #CEC2A2;
+	background: url('/images/friskyfactory/golden_fibers.png') repeat-y top center  #CEC2A2;
 	padding: 10px 20px;
 }
 

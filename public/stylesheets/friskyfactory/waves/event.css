@@ -31,7 +31,7 @@
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
-	background: url('/images/friskyhands/ticket.png');
+	background: url('/images/friskyfactory/ticket.png');
 }
 
 .ticket .front.face .header {
@@ -88,7 +88,7 @@
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
-	background: url('/images/friskyhands/ticket.png') 0 -250px;
+	background: url('/images/friskyfactory/ticket.png') 0 -250px;
 }
 
 .ticket-container > .ticket .back.face {
@@ -119,7 +119,7 @@
 }
 
 #new_event_overlay {
-	background: url('/images/friskyhands/golden_fibers.png') repeat-y top center #CEC2A2;
+	background: url('/images/friskyfactory/golden_fibers.png') repeat-y top center #CEC2A2;
 	padding: 5px 20px 10px 20px;
 	-webkit-box-shadow: 0 0 90px #000;	
 	-moz-box-shadow:0 0 90px 5px #000;
@@ -135,7 +135,7 @@
 }
 
 #new_event_overlay .close {
-	background-image: url(/images/friskyhands/close.png);
+	background-image: url(/images/friskyfactory/close.png);
 	position: absolute;
 	right: -15px;
 	top: -15px;
