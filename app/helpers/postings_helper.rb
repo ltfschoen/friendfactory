@@ -66,11 +66,11 @@ module PostingsHelper
       with_options :class => klass, :site => false, :id => opts[:id] do |options|
         case opts[:gender]
         when UserInfo::GuyGender
-          then options.image_tag 'silhouette-guy.gif'
+          then options.image_tag 'friskyfactory/silhouette-guy.gif'
         when UserInfo::GirlGender
-          then options.image_tag 'silhouette-girl.gif'
+          then options.image_tag 'friskyfactory/silhouette-girl.gif'
         else
-          options.image_tag 'silhouette-q.gif'
+          options.image_tag 'friskyfactory/silhouette-q.gif'
         end
       end      
     end
