@@ -2,10 +2,10 @@
 %html.no-js
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
-    %title FriskyHands
-    = stylesheet_links 'reset', 'forms', '960', :media => 'screen', :cache => 'cached'
-    - site = current_site
+    %title
+      = current_site.name.titleize
     = stylesheet_links |
+      'reset', 'forms', '960', |
       'friskyfactory/application', |
       'friskyfactory/welcome', |
       "#{current_site}/jquery-ui.css", |
@@ -14,7 +14,7 @@
         :media => 'screen', :cache => "#{current_site}/welcome-cached"
         
     / [if IE]
-      = stylesheet_link_tag "#{current_site}/ie", :media => 'screen'
+      = stylesheet_link_tag 'friskyfactory/ie', :media => 'screen'
 
     - if Rails.env.development?
       = javascript_include_tag 'jquery.min.js', 'jquery-ui.min.js', 'debug.js'
@@ -31,12 +31,7 @@
   
   %body{ :class => current_site }
     .container.container_16.clearfix
-      .badge.prefix_3.grid_10.suffix_3
-        = image_tag 'badge.png', :size => '520x220'
-        %h1 A Sign of Good Times!
-        %h4 FriskyHands is the social networking site designed especially for the Deaf GLBTQ Community and their Friends.
-      .creative.prepend-top.prefix_2.grid_12.suffix_2
-        = yield
+      = yield
     .footer
       %p
         %span
