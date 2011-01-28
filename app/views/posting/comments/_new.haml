@@ -1,6 +1,6 @@
 - if current_user
   - form_id = "posting_#{parent.id}_new_comment"
-  = link_to(image_tag('new-comment.png'), new_posting_comment_path(parent), :class => 'new_posting_comment')
+  = link_to(image_tag('new-comment.png', :site => false), new_posting_comment_path(parent), :class => 'new_posting_comment')
   .comment-bubble.hidden
     .c01<
       =# avatar_image_tag(current_user.avatar, :style => :thimble)

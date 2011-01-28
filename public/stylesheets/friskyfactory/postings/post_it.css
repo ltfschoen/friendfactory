@@ -6,7 +6,7 @@
 
 .post_it {
     position: relative;
-    background: url('/images/friskyhands/post-it.png') no-repeat top left;
+    background: url('/images/friskyfactory/post-it.png') no-repeat top left;
     width: 173px;
 	height: 122px;
 	padding: 5px 9px 20px 8px;
@@ -16,7 +16,7 @@
 }
 
 .post_it.form {
-    background: url('/images/friskyhands/post-it.png') no-repeat -150px left;
+    background: url('/images/friskyfactory/post-it.png') no-repeat -150px left;
 }
 
 .post_it .content {

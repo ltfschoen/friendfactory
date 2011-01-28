@@ -19,7 +19,7 @@
 }
 
 .comment-bubble .c01 {
-    background: url(/images/friskyhands/note-paper_01.png) no-repeat top left;
+    background: url(/images/friskyfactory/note-paper_01.png) no-repeat top left;
     width: 190px;
     padding: 34px 16px 0;
     min-height: 36px;
@@ -35,7 +35,7 @@
 }
 
 .comment-bubble .c02 {
-    background: url(/images/friskyhands/note-paper_02.png) no-repeat top left;
+    background: url(/images/friskyfactory/note-paper_02.png) no-repeat top left;
     margin-top: -1px;
     width: 222px;
     height: 20px;
