@@ -4,8 +4,7 @@
       %td.avatar.thumb
         = render_attachment(video)
       %td
-        = video.body.html_safe
-        %p= video.subject
+        .youtube_player{ :'data-vid' => video.body }
         = render :partial => 'posting/comments/comment', :collection => video.children.comments
         %div{:id => "posting_#{video.id}_new_comment_well"}
         = render :partial => 'posting/comments/new', :locals => { :parent => video }
