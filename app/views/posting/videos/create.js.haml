@@ -1,0 +1,7 @@
+- if @posting.present? && @posting.valid?
+  var $currentTab = $('ul.wave.nav li.current').removeClass('current');
+  $($('a', $currentTab).attr('rel')).hide().trigger('reset');
+  $('ul.postings').prepend("#{escape_javascript(render(:partial => 'video', :object => @posting))}");
+  $('.flash').text('');
+- else
+  $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")

@@ -1,4 +1,5 @@
-.posting_video .video_player {
+.posting_video .video_player,
+.tab_content#posting_video_upload .video_player {
 	position: relative;
     padding: 6px;
 	margin: 0 10px 20px 6px;
@@ -11,6 +12,23 @@
     -webkit-box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.4);
+}
+
+.tab_content#posting_video_upload .button-bar {
+	position: relative;
+	width: 380px;
+	padding: 2px 4px;	
+	left: 50%;
+	margin-left: -194px;
+	margin-top: -12px;
+}
+
+.tab_content#posting_video_upload input#posting_video_body {
+	width: 290px;
+}
+
+.tab_content#posting_video_upload td {
+	vertical-align: top;
 }
 
 .posting_video .video_player a {
@@ -33,7 +51,6 @@
 	left: 50%;
 	margin-top: -24px;
 	margin-left: -24px;
-	/*display: none;*/
 }
 
 .posting_video .video_player iframe {

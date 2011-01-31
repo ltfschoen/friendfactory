@@ -2,11 +2,15 @@ jQuery(function($) {
 	$('<script>')
 		.attr('src', 'http://www.youtube.com/player_api')
 		.attr('type', 'text/javascript')
-		.insertBefore('script:first');			
+		.insertBefore('script:first');
+		
+	$('.tab_content#posting_video_upload')
+		.find('button')
+			.button({ text: false });
 });
 
 function onYouTubePlayerAPIReady() {
-	$('a', '.youtube_video_player').click(function(event) {
+	$('a', '.youtube_video_player').live('click', function(event) {
 		event.preventDefault();
 		$('img.youtube_thumb', this).hide();
 		new YT.Player($(this).closest('.youtube_video_player').get(0), {

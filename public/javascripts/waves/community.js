@@ -98,7 +98,7 @@ jQuery(function($) {
 		});
 
 
-	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well', '.cssanimations .tab_content')
+	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well', '.cssanimations .tab_content')
 		.bind('pulse', function(event, operation) {
 			if (operation === 'start') {
 				$(this).addClass('pulse');
@@ -107,7 +107,7 @@ jQuery(function($) {
 			}
 		});
 
-	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well', '.no-cssanimations .tab_content')
+	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well', '.no-cssanimations .tab_content')
 		.bind('pulse', function(event, operation) {
 			var $this = $(this);
 			
@@ -129,7 +129,7 @@ jQuery(function($) {
 				.find('.button-bar')
 					.fadeTo('fast', 0.0)
 				.end()
-				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well')
+				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well')
 					.trigger('pulse', 'start');
 		})
 		.live('ajax:complete', function() {
@@ -137,7 +137,7 @@ jQuery(function($) {
 				.find('.button-bar')
 					.fadeTo('fast', 1.0)
 				.end()
-				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well')
+				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well')
 					.trigger('pulse', 'stop');
 		});
 
@@ -154,7 +154,7 @@ jQuery(function($) {
 			});
 	
 	$('button', '.tab_content#posting_post_it, .tab_content#posting_text')
-		.button({ text: false })	
+		.button({ text: false });
 			
 	$('textarea', '.tab_content#posting_post_it')
 		.textareaCount({ 'maxCharacterSize': 108 });

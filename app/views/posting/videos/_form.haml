@@ -1,4 +1,4 @@
-= form_for new_posting_video, :url => wave_posting_videos_path(@wave), :html => { :multipart => true }, :remote => true do |f|
+= form_for new_posting_video, :url => wave_posting_videos_path(@wave), :remote => true do |f|
   %table
     %tr
       %td.avatar.thumb
@@ -8,8 +8,8 @@
             %span= "Posted by #{link_to_profile(new_posting_photo.user)}".html_safe
             = f.text_area :subject, :placeholder => 'Caption'
       %td
-        #posting_video_upload_well
-          = image_tag 'friskyfactory/silhouette-q.gif', :class => 'photo h4x6 small silhouette', :site => false
+        #posting_video_upload_well.video_player
         .button-bar
-          = f.text_field :body, :placeholder => 'http://'
-          = f.button 'Cancel', :id => 'posting_video_cancel'
+          = f.text_field :body, :placeholder => 'http://www.youtube.com/...'
+          = f.submit 'OK'
+          = f.button 'Cancel', :class => 'cancel'
