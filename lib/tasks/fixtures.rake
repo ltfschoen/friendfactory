@@ -5,7 +5,6 @@ namespace :ff do
     task :load => [ :'load:models', :'load:avatars', :'load:photos', :'db:seed' ] # ts:rebuild
     
     namespace :load do      
-      desc "Load avatars using paperclip"
       task :avatars => :environment do
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
@@ -26,7 +25,6 @@ namespace :ff do
         end
       end
       
-      desc "Load photos using paperclip"
       task :photos => :environment do
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
@@ -43,7 +41,6 @@ namespace :ff do
         end
       end
     
-      desc "Load models from yaml files"
       task :models do
         ENV['FIXTURES_PATH'] = 'spec/fixtures'
         Rake::Task[:'db:fixtures:load'].invoke
