@@ -44,6 +44,8 @@
 .comment-bubble form.new_posting_comment textarea {
     height: 3.6em;
     background-color: #FFF;
+	width: 172px;
+	background: transparent;
 }
 
 .comment-bubble form.new_posting_comment .button-bar {
