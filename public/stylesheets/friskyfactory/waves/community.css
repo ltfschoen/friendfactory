@@ -141,27 +141,6 @@
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 }
 
-
-.wave_community .new_posting_photo .button-bar,
-.wave_community .edit_posting_photo .button-bar,
-.wave_community .new_posting_video .button-bar,
-.wave_community .edit_posting_video .button-bar {
-	margin-top: -4px;
-	width: 280px;
-	background-color: #FFF;
-	text-align: center;
-    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);	
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-
-.wave_community .edit_posting_photo .button-bar {
-	text-align: right;
-}
-
 .wave_community .new_posting_post_it .button-bar {
 	margin-top: -30px;
 	margin-left: 120px;

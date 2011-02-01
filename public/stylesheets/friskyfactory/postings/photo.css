@@ -32,13 +32,6 @@ img.photo.v4x6.small {
     height: 220px;
 }
 
-/*.tab_content#posting_photo table.button-bar {
-    vertical-align: top;
-    border-spacing: 0px 4px;
-    border-collapse: separate;  
-    padding: 4px;
-    width: 70%
-}*/
 
 .tab_content#posting_photo .button-bar {
 	margin-top: -6px;
@@ -51,4 +44,22 @@ img.photo.v4x6.small {
 
 .tab_content#posting_photo #posting_photo_upload_well {
 	margin-left: 24px;
+}
+
+.tab_content#posting_photo .button-bar,
+.tab_content#posting_video_upload .button-bar {
+	margin-top: -4px;
+	width: 280px;
+	background-color: #FFF;
+	text-align: center;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.tab_content#posting_photo .edit_posting_photo .button-bar {
+	text-align: right;
 }
