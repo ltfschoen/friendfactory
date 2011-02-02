@@ -5,8 +5,16 @@ jQuery(function($) {
 		.insertBefore('script:first');
 		
 	$('.tab_content#posting_video_upload')
+		.bind('reset', function() {
+			$form = $(this).find('form');
+			$form.get(0).reset();
+			$form.find('input#posting_video_body').placehold();
+		})
 		.find('button')
-			.button({ text: false });
+			.button({ text: false })
+		.end()
+		.find('input#posting_video_body')
+			.placehold();
 });
 
 function onYouTubePlayerAPIReady() {
@@ -17,7 +25,7 @@ function onYouTubePlayerAPIReady() {
 			height: '260',
 			width: '400',
 			videoId: getYouTubeVideoId($(this).attr('href')),
-			playerVars: { disablekb: 1 },
+			playerVars: { 'disablekb': 1, 'controls': 0, 'egm': 0 },
 			events: {
 				'onReady': onPlayerReady,
 				'onStateChange': onPlayerStateChange,
