@@ -10,7 +10,7 @@ class Wave::Base < ActiveRecord::Base
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
-      :order                   => 'created_at desc' do    
+      :order                   => 'updated_at desc' do
     def only(*types)
       where('type in (?)', types.map(&:to_s))
     end
