@@ -76,17 +76,17 @@ class UserInfo < ActiveRecord::Base
   end
   
   def self.scrub_punctuation(tag)
-    tag.gsub(/,/, ' ').gsub(/'|"|\.|-/, '').gsub(/\s{2,}/, ' ')
+    tag.gsub(/,/, ' ').gsub(/'|"|\.|-|\$/, '').gsub(/\s{2,}/, ' ')
   end
   
   def self.scrub_rejects(tag)
-    rejects = Admin::Tag.where(['taggable_type = ? and corrected is null', 'UserInfo']).map(&:defective)
+    rejects = Admin::Tag.where(['taggable_type = ? and corrected is null', 'UserInfo']).order('defective asc').map(&:defective)
     tag.gsub(/\b(#{rejects * '|'})\b/i, '')
   end
   
   def self.scrub_transposes(tag)
-    Admin::Tag.where(['taggable_type = ? and corrected is not null', 'UserInfo']).each do |transpose|
-      tag = tag.gsub(/\b#{transpose.defective}\b/i, transpose.corrected)
+    Admin::Tag.where(['taggable_type = ? and corrected is not null', 'UserInfo']).order('corrected asc, defective asc').each do |transpose|
+      tag = tag.gsub(/^#{transpose.defective}$/i, transpose.corrected)
     end
     tag
   end

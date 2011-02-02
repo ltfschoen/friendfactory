@@ -3,7 +3,7 @@ class Admin::TagsController < ApplicationController
   before_filter :require_admin
   
   def index
-    @tags = Admin::Tag.all
+    @tags = Admin::Tag.order('corrected asc, defective asc').all
     respond_to do |format|
       format.html
     end
