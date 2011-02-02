@@ -104,8 +104,6 @@ GEM
       railties (~> 3.0)
       rspec (~> 2.4.0)
     ruby-hmac (0.4.0)
-    sanitize (2.0.0)
-      nokogiri (~> 1.4.4)
     signature (0.1.2)
       ruby-hmac
     thor (0.14.6)
@@ -136,7 +134,6 @@ DEPENDENCIES
   rails (= 3.0.1)
   remotipart
   rspec-rails (>= 2.4.1)
-  sanitize
   transitions
   webrat
   will_paginate (~> 3.0.pre2)
