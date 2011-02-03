@@ -15,6 +15,10 @@ class Posting::Base < ActiveRecord::Base
     event :publish do
       transitions :to => :published, :from => [ :unpublished ]
     end
+    
+    event :unpublish do
+      transitions :to => :unpublished
+    end
   end
   
   has_many :children,
@@ -25,7 +29,7 @@ class Posting::Base < ActiveRecord::Base
       find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at desc'
     end    
     def comments
-      find :all, :conditions => [ "type = 'Posting::Comment'" ], :order => 'created_at asc'
+      where(:type => Posting::Comment, :state => :published).order('updated_at desc')
     end
   end
     
