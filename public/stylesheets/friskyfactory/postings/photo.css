@@ -48,7 +48,7 @@ img.photo.v4x6.small {
 
 .tab_content#posting_photo .button-bar {
 	margin-top: -4px;
-	width: 280px;
+	min-width: 280px;
 	background-color: #FFF;
 	text-align: center;
     -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
