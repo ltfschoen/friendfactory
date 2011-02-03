@@ -7,7 +7,6 @@ class Posting::CommentsController < ApplicationController
     if posting.present?      
       @comment = Posting::Comment.new(:body => params[:posting_comment][:body], :user_id => current_user.id)
       posting.children << @comment
-      posting.touch
     end
     respond_to do |format|
       format.js { render :layout => false }
