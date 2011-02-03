@@ -46,8 +46,7 @@ img.photo.v4x6.small {
 	margin-left: 24px;
 }
 
-.tab_content#posting_photo .button-bar,
-.tab_content#posting_video_upload .button-bar {
+.tab_content#posting_photo .button-bar {
 	margin-top: -4px;
 	width: 280px;
 	background-color: #FFF;
