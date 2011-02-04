@@ -14,7 +14,7 @@ class UserSession < Authlogic::Session::Base
   def enabled?
     return true if attempted_record.nil?
     if !attempted_record.enabled?
-      errors.add(:base, I18n.t("error_messages.not_enabled", :default => "Your account is not enabled"))
+      errors.add(:base, I18n.t("error_messages.not_enabled", :default => "account is not enabled"))
       false
     end
   end
