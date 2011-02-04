@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     @user_session.remember_me = true || params.has_key?(:remember_me)
     respond_to do |format|
-      if @user_session.save        
+      if @user_session.save
         user = @user_session.record        
         clear_lurker
         flash[:notice] = "Welcome back" + (user.first_name? ? ", #{user.first_name}" : '') + '!'

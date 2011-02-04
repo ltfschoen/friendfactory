@@ -1,16 +1,26 @@
 class User < ActiveRecord::Base
 
+  include ActiveRecord::Transitions
+
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
   end
 
   validates_presence_of :first_name
-
-  # include AASM
-  # aasm_column        :status
-  # aasm_initial_state :welcomed
-  # aasm_state         :welcomed
-
+  
+  state_machine do
+    state :disabled
+    state :enabled
+    
+    event :enable do
+      transitions :to => :enabled, :from => [ :disabled ]
+    end
+    
+    event :disable do
+      transitions :to => :disabled, :from => [ :enabled ]
+    end
+  end
+  
   has_one  :user_info
   
   has_many :waves,    :class_name => 'Wave::Base'
