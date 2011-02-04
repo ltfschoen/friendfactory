@@ -17,7 +17,7 @@ class Posting::Base < ActiveRecord::Base
     end
     
     event :unpublish do
-      transitions :to => :unpublished
+      transitions :to => :unpublished, :from => [ :published ]
     end
   end
   

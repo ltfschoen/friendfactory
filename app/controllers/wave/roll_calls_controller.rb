@@ -11,11 +11,13 @@ class Wave::RollCallsController < ApplicationController
       UserInfo \
         .tagged_with(params[:tag]) \
         .includes(:profile) \
+        .where(:waves => { :state => :published }) \
         .order('waves.updated_at desc') \
         .map(&:profile) \
         .paginate(:page => params[:page], :per_page => @@per_page)
     else
-      Wave::Profile.includes(:avatars) \
+      Wave::Profile.where(:state => :published) \
+        .includes(:avatars) \
         .order('updated_at desc') \
         .paginate(:page => params[:page], :per_page => @@per_page)
     end

@@ -1,6 +1,21 @@
 class Wave::Base < ActiveRecord::Base
+
+  include ActiveRecord::Transitions
   
   set_table_name :waves
+
+  state_machine do
+    state :published
+    state :unpublished
+    
+    event :publish do
+      transitions :to => :published, :from => [ :unpublished ]
+    end
+    
+    event :unpublish do
+      transitions :to => :unpublished, :from => [ :published ]
+    end
+  end
   
   belongs_to :user, :include => :user_info
 
