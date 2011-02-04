@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|      
       if @user.save
-        @user.enable!
         format.html { redirect_to root_path }
       else
         flash[:error] = @user.errors.full_messages

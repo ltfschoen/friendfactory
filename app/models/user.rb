@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   
   state_machine do
-    state :disabled
     state :enabled
+    state :disabled
     
     event :enable do
       transitions :to => :enabled, :from => [ :disabled ]
