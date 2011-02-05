@@ -1,9 +1,24 @@
-table.admin {
-	width: 100%;
-	margin: 0 auto;
+.admin {
 }
 
-table.admin td {
+.admin table {
+	display: block;
+	height: 30em;
+	margin: 0 auto;	
+	overflow: auto;
+}
+
+.admin table th,
+.admin table td {
+	text-align: left;
+	padding: 5px;	
+}
+
+.admin table td.actions {
+	text-align: right;
+} 
+
+.admin .button-bar {
 	text-align: center;
-	padding: 10px;
+	margin: 10px auto;
 }

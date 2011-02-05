@@ -21,6 +21,8 @@ class Admin::TagsController < ApplicationController
   end
 
   def create
+    params[:admin_tag][:defective] = params[:admin_tag][:defective].strip
+    params[:admin_tag][:corrected] = nil if params[:admin_tag][:corrected].length == 0
     @tag = Admin::Tag.new(params[:admin_tag].merge({:taggable_type => 'UserInfo'}))
     respond_to do |format|
       if @tag.save
@@ -51,8 +53,13 @@ class Admin::TagsController < ApplicationController
   end
   
   def commit
-    UserInfo.all.each { |user_info| user_info.touch && user_info.save! }
-    ActsAsTaggableOn::Tag.all.select{ |t| t.taggings.empty? }.each{ |t| t.delete }
+    ActsAsTaggableOn::Tag.delete_all
+    ActsAsTaggableOn::Tagging.delete_all
+    
+    UserInfo.all.each { |user_info| user_info.save! }
+    Wave::Event.all.each { |event| event.save! }
+    
+    # ActsAsTaggableOn::Tag.all.select{ |t| t.taggings.empty? }.each{ |t| t.delete }
     respond_to do |format|
       format.html { redirect_to(admin_tags_path, :notice => 'Changes committed.') }
     end

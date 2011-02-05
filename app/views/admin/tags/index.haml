@@ -3,22 +3,23 @@
 .grid_3
   &nbsp;
 .grid_10
-  %table.admin
-    %tr
-      %th Defective
-      %th Corrected
-      %th
-    - @tags.each do |tag|
+  .admin
+    %table
       %tr
-        %td= tag.defective
-        %td= tag.corrected
-        %td
-          = link_to 'Edit', edit_admin_tag_path(tag)
-          = link_to 'Delete', tag, :confirm => 'Are you sure?', :method => :delete
-    %tr
-      %td{ :colspan => '5' }
-        = link_to 'Add Scrubbed Tag', new_admin_tag_path
-        |
-        = link_to 'Commit', commit_admin_tags_path
+        %th Defective
+        %th Corrected
+        %th
+      - @tags.each do |tag|
+        %tr
+          %td= tag.defective
+          %td= tag.corrected
+          %td.actions
+            = link_to 'Edit', edit_admin_tag_path(tag)
+            = link_to 'Delete', tag, :confirm => 'Are you sure?', :method => :delete    
+    .button-bar
+      = link_to 'Add Scrubbed Tag', new_admin_tag_path
+      |
+      = link_to 'Commit', commit_admin_tags_path
+
 .grid_3
   &nbsp;

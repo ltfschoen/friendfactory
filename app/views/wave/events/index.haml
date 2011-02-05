@@ -4,8 +4,8 @@
   .grid_14<
     .tag-cloud<
       - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
-        - css_class += " current" if tag.name == params[:tag]
-        = link_to tag.name.titleize, events_path(:tag => tag.name.gsub(/\s/, '-')), :class => css_class
+        - css_class += " current" if tag.name.downcase == params[:tag]
+        = link_to tag.name, events_path(:tag => tag.name.gsub(/\s/, '-').downcase), :class => css_class
   .grid_1<
     &nbsp;
 

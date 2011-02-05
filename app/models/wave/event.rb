@@ -1,6 +1,10 @@
-class Wave::Event < Wave::Base  
-  extend Forwardable
+require 'tag_scrubber'
 
+class Wave::Event < Wave::Base  
+
+  extend Forwardable
+  include TagScrubber
+  
   attr_accessible :promoter_name,
       :description,
       :start_date, :start_time,
@@ -26,7 +30,9 @@ class Wave::Event < Wave::Base
   has_many :profiles, :through => :invitations
 
   before_save do |event|
-    self.tag_list = event.location.try(:city)
+    if event.location.present?
+      self.tag_list = scrub_tag(event.location.city)
+    end
     true
   end
 

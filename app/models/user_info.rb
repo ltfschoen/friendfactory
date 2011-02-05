@@ -1,5 +1,9 @@
+require 'tag_scrubber'
+
 class UserInfo < ActiveRecord::Base
 
+  include TagScrubber
+  
   GuyGender    = 1
   GirlGender   = 2
   TrannyGender = 3
@@ -24,13 +28,22 @@ class UserInfo < ActiveRecord::Base
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
   
   before_save do |user_info|
-    self.tag_list = [
-      user_info.gender_description.try(:downcase),
-      user_info.orientation_description.try(:downcase),
-      user_info.relationship_description.try(:downcase),
-      user_info.deafness_description.try(:downcase),
-      UserInfo.scrub_tag(user_info.location_description)
-    ].compact * ', '
+    tag_list = [
+      user_info.gender_description,
+      user_info.orientation_description,
+      user_info.relationship_description,
+      user_info.deafness_description
+    ].compact * ','
+    
+    if location_tags = scrub_tag(user_info.location_description)
+      if tag_list.present?
+        tag_list += (',' + location_tags)
+      else
+        tag_list = location_tags
+      end
+    end
+    
+    self.tag_list = tag_list
     true
   end
   
@@ -64,31 +77,6 @@ class UserInfo < ActiveRecord::Base
   
   def location_description
     self.location
-  end
-  
-  private
-  
-  def self.scrub_tag(tag)
-    unless tag.blank?
-      tag = scrub_transposes(scrub_rejects(scrub_punctuation(tag)))
-      tag.nil? || (tag.length > 16) ? nil : tag.downcase
-    end
-  end
-  
-  def self.scrub_punctuation(tag)
-    tag.gsub(/,/, ' ').gsub(/'|"|\.|-|\$/, '').gsub(/\s{2,}/, ' ')
-  end
-  
-  def self.scrub_rejects(tag)
-    rejects = Admin::Tag.where(['taggable_type = ? and corrected is null', 'UserInfo']).order('defective asc').map(&:defective)
-    tag.gsub(/\b(#{rejects * '|'})\b/i, '')
-  end
-  
-  def self.scrub_transposes(tag)
-    Admin::Tag.where(['taggable_type = ? and corrected is not null', 'UserInfo']).order('corrected asc, defective asc').each do |transpose|
-      tag = tag.gsub(/^#{transpose.defective}$/i, transpose.corrected)
-    end
-    tag
   end
 
 end
