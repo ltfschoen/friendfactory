@@ -12,10 +12,11 @@ class Wave::EventsController < ApplicationController
       params[:tag] = params[:tag].downcase.gsub(/-/, ' ')
       Wave::Event \
         .tagged_with(params[:tag]) \
+        .where(:state => :published) \
         .order('updated_at desc') \
         .paginate(:page => params[:page], :per_page => @@per_page)
     else
-      Wave::Event.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+      Wave::Event.where(:state => :published).order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
     end
     @tags = Wave::Event.tag_counts_on(:tags).order('name asc')
     respond_to do |format|
