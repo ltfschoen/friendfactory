@@ -105,41 +105,6 @@ form.edit_user_info > table td.label.about_me {
 
 /* * * * * * * * * */
 
-.posting_comment {
-	width: 460px;
-	font-size: 0.9em;
-	margin: 4px 0;
-}
-
-.posting_comment > table {
-	width: 100%;
-}
-
-.posting_comment > table td div:first-child {
-	margin-top: 0.5em;
-}
-
-.posting_comment > table p.body {
-	margin-bottom: 0.5em;
-}
-
-.posting_comment > table textarea {
-	height: 1.2em;
-	width: 93%;
-}
-
-.posting_comment > table td.avatar {
-	width: 52px;
-}
-
-.posting_comment > table td.avatar img.avatar {
-	border: 0px;
-	margin: 0.5em 10px 0.5em 4px;
-	width: 36px;
-}
-
-/* * * * * * * * * */
-
 .posting_message > table {
 	width: 100%;
 }

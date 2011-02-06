@@ -1,9 +1,19 @@
-.comment-bubble {
+.posting_comment {
+	width: 460px;
+	font-size: 0.9em;
+	margin: 4px 0;
+}
+
+.posting_comment .content {
     width: 222px;
     position: relative;
 }
 
-.comment-bubble .c01 img.avatar.thimble {
+.posting_comment .created_at {
+    white-space: nowrap;
+}
+
+.posting_comment img.avatar.thimble {
 	border: 1px solid gray;
     float: left;
     width: 30px;
@@ -14,11 +24,7 @@
     box-shadow: 2px 2px 3px #666;
 }
 
-.comment-bubble .created_at {
-    white-space: nowrap;
-}
-
-.comment-bubble .c01 {
+.posting_comment .body {
     background: url(/images/friskyfactory/note-paper_01.png) no-repeat top left;
     width: 190px;
     padding: 34px 16px 0;
@@ -29,31 +35,27 @@
     overflow: hidden;
 }
 
-.comment-bubble .c01 div {
+.posting_comment .body div {
     overflow: hidden;
 	min-height: 36px;
 }
 
-.comment-bubble .c02 {
+.posting_comment .footer {
     background: url(/images/friskyfactory/note-paper_02.png) no-repeat top left;
     margin-top: -1px;
     width: 222px;
     height: 20px;
 }
 
-.comment-bubble form.new_posting_comment textarea {
+.posting_comment form.new_posting_comment textarea {
     height: 3.6em;
     background-color: #FFF;
 	width: 172px;
 	background: transparent;
 }
 
-.comment-bubble form.new_posting_comment .button-bar {
+.posting_comment form.new_posting_comment .button-bar {
     text-align: right;
     margin-top: -5px;
     margin-bottom: -5px;
-}
-
-.comment-bubble .new_posting_comment_spinner {
-    margin-left: 80px;
 }

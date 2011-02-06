@@ -1,20 +1,20 @@
-.content {
+.polaroid .content {
 	width: 260px;
 	height: 300px;
 	margin-bottom: 5px;
 }
 
-.scrollable {
+.polaroid .content.scrollable {
 	position: relative;
 	overflow: hidden;
 }
 
-.scrollable .items {
+.polaroid .content.scrollable .items {
 	width: 1600px;
 	position: absolute;
 }
 
-.scrollable .items div {
+.polaroid .content.scrollable .items div {
 	float: left;
 	width: 260px;
 }

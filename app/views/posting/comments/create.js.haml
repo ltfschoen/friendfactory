@@ -1,7 +1,7 @@
 - if @comment.present? && @comment.valid?
   well = "#posting_#{@comment.parent_id}_new_comment_well"
   $(well).append("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
-  $(well).next('a.new_posting_comment').show().next('.comment-bubble').hide().find('form').show().next('.new_posting_comment_spinner').hide();
+  $(well).next('a.new_posting_comment').fadeIn().next('.posting_comment').fadeOut().find('form').fadeIn();
   $('.flash').text('');
 - else
   $('.flash').text("Couldn't save your comment: #{@comment.errors.full_messages.to_sentence}")
