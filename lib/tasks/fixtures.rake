@@ -14,6 +14,7 @@ namespace :ff do
           if user
             avatar = Posting::Avatar.new(:image => File.new(fixture), :user => user)
             user.profile.avatars << avatar
+            avatar.publish!
           end
         end
         
@@ -36,6 +37,7 @@ namespace :ff do
             if user
               photo = Posting::Photo.new(:image => File.new(fixture), :user => user)
               wave.postings << photo
+              photo.publish!
             end
           end
         end

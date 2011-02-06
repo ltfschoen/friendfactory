@@ -7,6 +7,7 @@ adam_profile_wave:
   slug: adam
   resource_id: 1
   resource_type: UserInfo
+  state: published
 
 bert_profile_wave:
   id: 2
@@ -15,7 +16,8 @@ bert_profile_wave:
   slug: bert
   resource_id: 2
   resource_type: UserInfo
-
+  state: published
+  
 charlie_profile_wave:
   id: 3
   user_id: 3
@@ -23,7 +25,8 @@ charlie_profile_wave:
   slug: charlie
   resource_id: 3
   resource_type: UserInfo
-
+  state: published
+  
 # Community Waves
 
 popular_wave:
@@ -32,7 +35,8 @@ popular_wave:
   topic: Everyone's Wave
   slug: popular
   description: Get going!
-
+  state: published
+  
 # Event Waves
 
 event_wave:
@@ -40,6 +44,7 @@ event_wave:
   type: Wave::Event
   topic: Bam Bam and the Magnetic Zeros
   slug: bam-bam
+  state: published
   resource_id: 1
   resource_type: Resource::Event
   description:

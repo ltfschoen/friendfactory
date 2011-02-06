@@ -5,6 +5,7 @@ adam:
   last_name: ant
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  state: enabled
 
 bert:
   id: 2
@@ -13,6 +14,7 @@ bert:
   last_name: bacharach
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  state: enabled
   
 charlie:
   id: 3
@@ -22,3 +24,5 @@ charlie:
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
   admin: true
+  state: enabled
+  
