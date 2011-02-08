@@ -3,18 +3,7 @@ module PostingsHelper
   def render_attachment(object)
     render(:partial => 'posting/post_its/attachment', :locals => { :post_it => object })
   end
-  
-  def render_postings(collection, opts={})
-    if opts[:only].present?
-      collection = collection.select{ |posting| posting[:type] == opts[:only].to_s }
-    end
-    
-    if opts[:exclude].present?
-      collection = collection.reject{ |posting| posting[:type] == opts[:exclude].to_s }
-    end
-    
-    render :partial => 'posting/posting', :collection => collection
-  end
+
 
   def avatar_image_tag(user_or_avatar, opts = {})
     if user_or_avatar.is_a?(Hash)
