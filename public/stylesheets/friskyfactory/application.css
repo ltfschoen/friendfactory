@@ -97,7 +97,7 @@ a.button {
 	background-color: #8C872C;		
 }
 
-.footer {
+.page.footer {
 	clear: both;
 	text-align: center;	
 	font-size: small;
@@ -106,7 +106,7 @@ a.button {
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-.footer span {
+.page.footer span {
 	margin: 0 5px;
 }
 
