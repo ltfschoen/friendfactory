@@ -6,6 +6,7 @@
           = render_attachment(photo)
         %td
           = render_photo(photo)
-          = render :partial => 'posting/comments/comment', :collection => photo.children.comments
-          %div{:id => "posting_#{photo.id}_new_comment_well"}
-          = render :partial => 'posting/comments/new', :locals => { :parent => photo }
+          .posting_comments
+            = render :partial => 'posting/comments/comment', :collection => photo.children.comments
+            %div{:id => "posting_#{photo.id}_new_comment_well"}
+            = render :partial => 'posting/comments/new', :locals => { :parent => photo }

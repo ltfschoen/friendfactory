@@ -5,8 +5,8 @@
         = render_attachment(video)
       %td
         .video_player.youtube_video_player{ :'data-vid' => video.body }
-          =# image_tag('friskyfactory/ajax-loader-youtube.gif', :site => false, :class => 'ajax-loader')
           = link_to_youtube_video_image(video.body)
-        = render :partial => 'posting/comments/comment', :collection => video.children.comments
-        %div{:id => "posting_#{video.id}_new_comment_well"}
-        = render :partial => 'posting/comments/new', :locals => { :parent => video }
+        .posting_comments
+          = render :partial => 'posting/comments/comment', :collection => video.children.comments
+          %div{:id => "posting_#{video.id}_new_comment_well"}
+          = render :partial => 'posting/comments/new', :locals => { :parent => video }
