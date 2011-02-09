@@ -1,5 +1,7 @@
 jQuery(function($) {
 	
+	// $('button', 'form.new_posting_comment').button({ text: false })
+	
 	$('.posting_comment').bind('pulse', function(event) {
 		$(this).toggleClass('pulse');
 	});
@@ -14,8 +16,7 @@ jQuery(function($) {
 				.slideDown(function() {
 					$(this)
 						.fadeTo('fast', 1.0)
-						.find('textarea')
-							.focus();
+						.find('textarea').focus();
 				});					
 	});
 
@@ -36,14 +37,11 @@ jQuery(function($) {
 				event.preventDefault();
 				$(this)
 					.closest('.posting_comment')
-					.fadeTo('fast', 0.5, function() {
+					.fadeTo('fast', 0.0, function() {
 						$(this)
 							.slideUp()
 							.prev('a.new_posting_comment')
 							.fadeTo('fast', 1.0);
-							// .css({ opacity: 1.0 });
-							// .show();
-							// .fadeIn('fast', 1.0);
 					});
 			});	
 

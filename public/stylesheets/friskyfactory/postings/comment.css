@@ -59,6 +59,7 @@ a.new_posting_comment {
     background-color: #FFF;
 	width: 172px;
 	background: transparent;
+	resize: none;
 }
 
 .posting_comment form.new_posting_comment .button-bar {
