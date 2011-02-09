@@ -55,7 +55,7 @@ a.new_posting_comment {
 }
 
 .posting_comment form.new_posting_comment textarea {
-    height: 3.6em;
+    height: 1em;
     background-color: #FFF;
 	width: 172px;
 	background: transparent;

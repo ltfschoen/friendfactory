@@ -32,6 +32,8 @@ jQuery(function($) {
 				.closest('.posting_comment')
 				.trigger('pulse');
 		})
+		.find('textarea').autoResize({ extraSpace: 0 })
+		.end()
 		.find('button.cancel')
 			.live('click', function(event) {
 				event.preventDefault();
@@ -43,6 +45,6 @@ jQuery(function($) {
 							.prev('a.new_posting_comment')
 							.fadeTo('fast', 1.0);
 					});
-			});	
+			});
 
 });

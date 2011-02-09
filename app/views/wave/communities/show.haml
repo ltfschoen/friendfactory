@@ -10,8 +10,9 @@
 
 .wave.clearfix[@wave]
   .grid_16
-    = render :partial => 'tab_content'
     = render_postings(@postings, :only => Posting::PostIt, :class => 'post_its')
+  .grid_16
+    = render :partial => 'tab_content'
   .grid_16
     = render_postings(@postings, :exclude => Posting::PostIt)
 .grid_16    

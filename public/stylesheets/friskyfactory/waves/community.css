@@ -32,46 +32,53 @@
     width: 220px
 }
 
-.wave_community .posting {
+.wave_community li .posting {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
     postition: relative;
 }
 
-.wave_community .posting:nth-child(even) {
+.wave_community li:nth-child(even) .posting {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
 }
 
-.wave_community .posting:nth-child(3n) {
+.wave_community li:nth-child(3n) .posting {
     -webkit-transform: none;
     -moz-transform: none;
     top: -5px;
     right: 10px;
 }
 
-.wave_community .posting:nth-child(5n) {
+.wave_community li:nth-child(5n) .posting {
     -webkit-transform: rotate(5deg);
     -moz-transform: rotate(5deg);
     right: 5px;
 }
 
-.wave_community .posting:nth-child(8n) {
+.wave_community li:nth-child(8n) .posting {
     -webkit-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
     top: 8px;
     right: 5px;
 }
 
-.wave_community .posting:nth-child(11n) {
+.wave_community li:nth-child(11n) .posting {
     top: 3px;
     right: -5px;
 }
 
+
 .wave_community .posting_video {
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+}
+
+.wave_community .posting_comment.form {
     -webkit-transform: none !important;
     -moz-transform: none !important;	
 }
+
 
 .wave_community .posting post_it {
     -webkit-transform: none;
