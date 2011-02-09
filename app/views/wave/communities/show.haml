@@ -9,15 +9,10 @@
     &nbsp;
 
 .wave.clearfix[@wave]
-  .grid_1<
-    &nbsp;
-  .grid_12<
+  .grid_16
     = render :partial => 'tab_content'
-    %ul.postings
-      = render_postings(@postings, :exclude => Posting::PostIt)
-  .grid_3<
-    %ul.post_its
-      = render_postings(@postings, :only => Posting::PostIt)
-    &nbsp;
+    = render_postings(@postings, :only => Posting::PostIt, :class => 'post_its')
+  .grid_16
+    = render_postings(@postings, :exclude => Posting::PostIt)
 .grid_16    
   = will_paginate @postings

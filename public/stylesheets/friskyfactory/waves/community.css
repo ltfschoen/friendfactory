@@ -160,6 +160,9 @@
 	text-align: center;	
 }
 
+.postings.post_its .post_it {
+	float: left;
+}
 
 @-webkit-keyframes BOUNCE {
 	0% {
