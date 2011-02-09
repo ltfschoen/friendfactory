@@ -1,7 +1,7 @@
 .posting_comment {
-	width: 460px;
-	font-size: 0.9em;
-	margin: 4px 0;
+/*	width: 460px;*/
+/*	font-size: 0.9em;*/
+/*	margin: 4px 0;*/
 }
 
 .posting_comment .content {
@@ -44,7 +44,14 @@
     background: url(/images/friskyfactory/note-paper_02.png) no-repeat top left;
     margin-top: -1px;
     width: 222px;
-    height: 20px;
+}
+
+a.new_posting_comment {
+	display: inline-block;
+	text-indent: -1000em;
+	background: url('/images/friskyfactory/posting-icons.png') no-repeat -286px -10px;
+	width: 36px;
+	height: 36px;
 }
 
 .posting_comment form.new_posting_comment textarea {

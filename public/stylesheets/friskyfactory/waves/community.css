@@ -90,6 +90,9 @@
     right: -16px;
 }
 
+.wave_community .postings .posting_comment {
+	float: left;
+}
 
 .wave_community .posting:nth-child(5n) .comment-bubble {
     -webkit-transform: rotate(-2deg);
