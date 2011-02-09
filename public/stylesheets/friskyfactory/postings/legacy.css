@@ -1,11 +1,7 @@
-/* * * * * * * * * */
-/* Obsolete        */
-/* * * * * * * * * */
-
-.posting {
+/*.posting {
 	display: table;
 	width: 100%;
-}
+}*/
 
 .postings > .posting {
     margin-top: 30px;
