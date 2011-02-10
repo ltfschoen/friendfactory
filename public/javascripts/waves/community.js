@@ -98,7 +98,7 @@ jQuery(function($) {
 		});
 
 
-	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well', '.cssanimations .tab_content')
+	$('.text.canvas, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well', '.cssanimations .tab_content')
 		.bind('pulse', function(event, operation) {
 			if (operation === 'start') {
 				$(this).addClass('pulse');
@@ -107,7 +107,7 @@ jQuery(function($) {
 			}
 		});
 
-	$('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well', '.no-cssanimations .tab_content')
+	$('.text.canvas, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well', '.no-cssanimations .tab_content')
 		.bind('pulse', function(event, operation) {
 			var $this = $(this);
 			
@@ -129,7 +129,7 @@ jQuery(function($) {
 				.find('.button-bar')
 					.fadeTo('fast', 0.0)
 				.end()
-				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well')
+				.find('.text.canvas, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well')
 					.trigger('pulse', 'start');
 		})
 		.live('ajax:complete', function() {
@@ -137,7 +137,7 @@ jQuery(function($) {
 				.find('.button-bar')
 					.fadeTo('fast', 1.0)
 				.end()
-				.find('.index-card, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well')
+				.find('.text.canvas, .post_it:not(.attachment), #posting_photo_upload_well, #posting_video_upload_well')
 					.trigger('pulse', 'stop');
 		});
 

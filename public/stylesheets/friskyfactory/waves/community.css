@@ -40,42 +40,45 @@
     width: 220px
 }
 
-/*.wave_community li .posting {
+.wave_community ul.postings > li > .posting_text .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
-    postition: relative;
+	transform: rotate(-2deg);
 }
 
-.wave_community li:nth-child(even) .posting {
+.wave_community ul.postings > li:nth-child(even) > .posting_text .canvas {
     -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
+    -moz-transform: rotate(2deg)
+	transform: rotate(2deg);
 }
 
-.wave_community li:nth-child(3n) .posting {
+.wave_community ul.postings > li:nth-child(3n) > .posting_text .canvas {
     -webkit-transform: none;
     -moz-transform: none;
+	transform: none;
     top: -5px;
     right: 10px;
 }
 
-.wave_community li:nth-child(5n) .posting {
+.wave_community ul.postings > li:nth-child(5n) > .posting_text .canvas {
     -webkit-transform: rotate(5deg);
     -moz-transform: rotate(5deg);
+	transform: rotate(5deg);
     right: 5px;
 }
 
-.wave_community li:nth-child(8n) .posting {
+.wave_community ul.postings > li:nth-child(8n) > .posting_text .canvas {
     -webkit-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
+	transform: rotate(-5deg);
     top: 8px;
     right: 5px;
 }
 
-.wave_community li:nth-child(11n) .posting {
+.wave_community ul.postings > li:nth-child(11n) > .posting_text .canvas {
     top: 3px;
     right: -5px;
-}*/
-
+}
 
 .wave_community .posting_video {
     -webkit-transform: none !important;
@@ -101,19 +104,19 @@
 }*/
 
 
-.wave_community ul.posting_comments li .displace {
+.wave_community ul.posting_comments > li > .posting_comment .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
 }
 
-.wave_community ul.posting_comments li:nth-child(even) .displace {
+.wave_community ul.posting_comments > li:nth-child(even) > .posting_comment .canvas {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
 	transform: rotate(2deg);
 }
 
-.wave_community ul.posting_comments li:nth-child(3n) .dsplace {
+.wave_community ul.posting_comments > li:nth-child(3n) > .posting_comment .canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
@@ -121,14 +124,14 @@
     right: 10px;
 }
 
-.wave_community ul.posting_comments li:nth-child(5n) .displace {
+.wave_community ul.posting_comments > li:nth-child(5n) > .posting_comment .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
     right: -16px;
 }
 
-.wave_community ul.posting_comments li:nth-child(8n) .displace {
+.wave_community ul.posting_comments > li:nth-child(8n) > .posting_comment .canvas {
     -webkit-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
 	transform: rotate(-5deg);
@@ -136,7 +139,7 @@
     right: 5px;
 }
 
-.wave_community ul.posting_comments li:nth-child(11n) .displace {
+.wave_community ul.posting_comments > li:nth-child(11n) > .posting_comment .canvas {
     -webkit-transform: rotate(6deg);
     -moz-transform: rotate(6deg);
 	transform: rotate(6deg);

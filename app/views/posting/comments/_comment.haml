@@ -1,9 +1,11 @@
-.posting.displace[comment]<
-  .body<
-    = avatar_image_tag(comment.user.avatar, :style => :thimble, :anonymous => false)
-    = link_to_profile(comment.user)
-    = comment.body
-    %span.created_at.unobtrusive<
-      = distance_of_time_in_words_to_now(comment.created_at)
-  .footer<
-    &nbsp;
+.posting[comment]<  
+  .comment.canvas
+    .body
+      .content
+        = avatar_image_tag(comment.user.avatar, :style => :thimble, :anonymous => false)
+        = link_to_profile(comment.user)
+        = comment.body
+        %span.created_at.unobtrusive<
+          = distance_of_time_in_words_to_now(comment.created_at)
+    .footer<
+      &nbsp;

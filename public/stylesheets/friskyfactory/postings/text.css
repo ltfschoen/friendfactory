@@ -1,4 +1,4 @@
-.index-card {
+.text.canvas {
     background: url('/images/friskyfactory/index-card.png') no-repeat top left;
     width: 372px;
 	height: 238px;
@@ -8,14 +8,14 @@
 	padding-bottom: 13px;
 }
 
-.index-card h1 {
+.text.canvas h1 {
     color: #501508;
 	font-size: 13px;
     line-height: 20px;
 	margin: 0;
 }
 
-.index-card .content {
+.text.canvas .content {
 	position: relative;
     color: #501508;
 	width: 332px;
@@ -29,7 +29,7 @@
 	overflow: hidden;
 }
 
-.index-card img.avatar.thumb {
+.text.canvas img.avatar.thumb {
 	float: left;
 	position: relative;
 	top: -4px;
@@ -44,7 +44,7 @@
     -moz-transform: rotate(-6deg);
 }
 
-.index-card textarea {
+.text.canvas textarea {
 	position: relative;
 	background: transparent;
 	resize: none;
@@ -54,7 +54,7 @@
 	line-height: 20px;
 }
 
-.index-card textarea#posting_text_subject {
+.text.canvas textarea#posting_text_subject {
 	width: 256px;
 	height: 38px;
 	color: #501508;
@@ -63,7 +63,7 @@
 	overflow: hidden;
 }
 
-.index-card textarea#posting_text_body {
+.text.canvas textarea#posting_text_body {
 	top: -4px;
 	width: 318px;
 	height: 136px;	
