@@ -1,4 +1,9 @@
 jQuery(function($) {
+
+	$('.posting_comments').masonry({
+		singleMode: true, 
+		itemSelector: '.posting_comment:visible'
+	});
 	
 	$('button', 'form.new_posting_comment').button({ text: false })
 	

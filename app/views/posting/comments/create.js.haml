@@ -1,28 +1,27 @@
 - if @comment.present? && @comment.valid?
   :plain
-    // var well = "#posting_#{@comment.parent_id}_new_comment_well"
-    // $(well)
-    //   .append("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
-    // $(well).next('a.new_posting_comment').fadeIn().next('.posting_comment').fadeOut().find('form').fadeIn();
-    // $('.flash').text('');
-    var $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");    
-
-    $posting = $("##{dom_id(@comment.parent)}");    
-    $postingComments = $posting.find('.posting_comments');
-    
-    $comment
-      .hide()
-      .appendTo($postingComments)
-      .fadeIn(1500, function() {
-        $posting
-          .find('a.new_posting_comment')
-            .fadeTo('slow', 1.0);
+    var
+      $posting = $("##{dom_id(@comment.parent)}"),  
+      $postingComments = $posting.find('.posting_comments'),
+      $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
+  
+    $comment.css({ opacity: 0.0 });
+    $postingComments
+      .append($comment)
+      .masonry({ appendedContent: $comment }, function() {
+        $comment.fadeTo('slow', 1.0);
       });
-      
+    
     $posting
       .find('.posting_comment.form')
         .css({ opacity: 0.0 })
-        .slideUp();
+        .delay(1600)
+        .slideUp(function() {
+          $posting
+            .find('a.new_posting_comment')
+              .delay(600)
+              .fadeTo('slow', 1.0);
+        });
 
 - else
   :plain
