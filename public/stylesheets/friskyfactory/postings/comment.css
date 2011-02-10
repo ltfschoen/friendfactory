@@ -1,13 +1,22 @@
 .posting_comment {
-/*	width: 460px;*/
-/*	font-size: 0.9em;*/
-/*	margin: 4px 0;*/
 	float: left;
 }
 
-.posting_comment .content {
+.posting_comment .body {
+    background: url(/images/friskyfactory/note-paper_01.png) no-repeat top left;
+    width: 190px;
+    padding: 34px 16px 0;
+    min-height: 36px;
+    max-height: 202px;
+    font-size: small;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+.posting_comment .footer {
+    background: url(/images/friskyfactory/note-paper_02.png) no-repeat top left;
+    margin-top: -1px;
     width: 222px;
-    position: relative;
 }
 
 .posting_comment .created_at {
@@ -23,28 +32,6 @@
     -webkit-box-shadow: 2px 2px 3px #666;
     -moz-box-shadow: 2px 2px 3px #666;
     box-shadow: 2px 2px 3px #666;
-}
-
-.posting_comment .body {
-    background: url(/images/friskyfactory/note-paper_01.png) no-repeat top left;
-    width: 190px;
-    padding: 34px 16px 0;
-    min-height: 36px;
-    max-height: 202px;
-    font-size: small;
-    line-height: 20px;
-    overflow: hidden;
-}
-
-.posting_comment .body div {
-    overflow: hidden;
-	min-height: 36px;
-}
-
-.posting_comment .footer {
-    background: url(/images/friskyfactory/note-paper_02.png) no-repeat top left;
-    margin-top: -1px;
-    width: 222px;
 }
 
 a.new_posting_comment {
