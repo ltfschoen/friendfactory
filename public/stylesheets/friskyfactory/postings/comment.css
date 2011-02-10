@@ -2,6 +2,7 @@
 /*	width: 460px;*/
 /*	font-size: 0.9em;*/
 /*	margin: 4px 0;*/
+	float: left;
 }
 
 .posting_comment .content {
@@ -55,10 +56,16 @@ a.new_posting_comment {
 }
 
 .posting_comment form.new_posting_comment textarea {
-    height: 1em;
-    background-color: #FFF;
+	margin: 0;
+	padding-right: 0;
+	padding-top: 0;
+	height: 32px;
 	width: 172px;
+	font-size: 12px;
+	line-height: 20px;
+    background-color: #FFF;
 	background: transparent;
+	border: none;
 	resize: none;
 }
 

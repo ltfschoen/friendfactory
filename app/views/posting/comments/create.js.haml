@@ -1,8 +1,30 @@
 - if @comment.present? && @comment.valid?
   :plain
-    well = "#posting_#{@comment.parent_id}_new_comment_well"
-    $(well).append("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
-    $(well).next('a.new_posting_comment').fadeIn().next('.posting_comment').fadeOut().find('form').fadeIn();
-    $('.flash').text('');
+    // var well = "#posting_#{@comment.parent_id}_new_comment_well"
+    // $(well)
+    //   .append("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
+    // $(well).next('a.new_posting_comment').fadeIn().next('.posting_comment').fadeOut().find('form').fadeIn();
+    // $('.flash').text('');
+    var $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");    
+
+    $posting = $("##{dom_id(@comment.parent)}");    
+    $postingComments = $posting.find('.posting_comments');
+    
+    $comment
+      .hide()
+      .appendTo($postingComments)
+      .fadeIn(1500, function() {
+        $posting
+          .find('a.new_posting_comment')
+            .fadeTo('slow', 1.0);
+      });
+      
+    $posting
+      .find('.posting_comment.form')
+        .css({ opacity: 0.0 })
+        .slideUp();
+
 - else
-  $('.flash').text("Couldn't save your comment: #{@comment.errors.full_messages.to_sentence}")
+  :plain
+    $('.flash')
+      .text("Couldn't save your comment: #{@comment.errors.full_messages.to_sentence}")
