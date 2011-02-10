@@ -6,7 +6,4 @@
       %td
         .video_player.youtube_video_player{ :'data-vid' => video.body }
           = link_to_youtube_video_image(video.body)
-        .posting_comments
-          = render :partial => 'posting/comments/comment', :collection => video.children.comments
-          %div{:id => "posting_#{video.id}_new_comment_well"}
-          = render :partial => 'posting/comments/new', :locals => { :parent => video }
+        = render_comments(video)

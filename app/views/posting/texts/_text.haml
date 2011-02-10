@@ -12,8 +12,5 @@
               = distance_of_time_in_words_to_now(text.created_at)
             %h1= text.subject || '&nbsp'.html_safe
             = text.body || '&nbsp'.html_safe
-        .posting_comments
-          = render :partial => 'posting/comments/comment', :collection => text.children.comments
-          %div{:id => "posting_#{text.id}_new_comment_well"}
-          = render :partial => 'posting/comments/new', :locals => { :parent => text }
+        = render_comments(text)
   = render_postings(text.children.postings)
