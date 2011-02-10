@@ -9,7 +9,7 @@
     $postingComments
       .append($comment)
       .masonry({ appendedContent: $comment }, function() {
-        $comment.fadeTo('slow', 1.0);
+        $comment.delay(300).fadeTo(900, 1.0);
       });
     
     $posting

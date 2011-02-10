@@ -6,6 +6,6 @@
         = link_to_profile(comment.user)
         = comment.body
         %span.created_at.unobtrusive<
-          = "(#{distance_of_time_in_words_to_now(comment.created_at)})".html_safe
+          = distance_of_time_in_words_to_now(comment.created_at)
     .footer<
       &nbsp;
