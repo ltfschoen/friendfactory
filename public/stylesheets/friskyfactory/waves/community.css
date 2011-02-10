@@ -28,6 +28,14 @@
 	width: 55px;
 }
 
+.wave_community ul.postings .posting {
+	margin: 10px 0;
+}
+
+.wave_community ul.postings .posting_comment {
+	margin: 0;
+}
+
 .wave_community td.avatar.thumb {
     width: 220px
 }
@@ -74,11 +82,6 @@
     -moz-transform: none !important;
 }
 
-/*.wave_community .posting_comment.form {
-    -webkit-transform: none !important;
-    -moz-transform: none !important;	
-}*/
-
 
 /*.wave_community .posting post_it {
     -webkit-transform: none;
@@ -97,26 +100,50 @@
     right: -16px;
 }*/
 
-/*.wave_community .postings .posting_comment {
-	float: left;
-}
 
-.wave_community .posting:nth-child(5n) .comment-bubble {
+.wave_community ul.posting_comments li .displace {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
+	transform: rotate(-2deg);
+}
+
+.wave_community ul.posting_comments li:nth-child(even) .displace {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+	transform: rotate(2deg);
+}
+
+.wave_community ul.posting_comments li:nth-child(3n) .dsplace {
+    -webkit-transform: none;
+    -moz-transform: none;
+	transform: none;
+    top: -5px;
+    right: 10px;
+}
+
+.wave_community ul.posting_comments li:nth-child(5n) .displace {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+	transform: rotate(-2deg);
     right: -16px;
 }
 
-.wave_community .posting:first-child .comment-bubble {
-    -webkit-transform: rotate(1deg);
-    -moz-transform: rotate(1deg);
+.wave_community ul.posting_comments li:nth-child(8n) .displace {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+	transform: rotate(-5deg);
+    top: 8px;
+    right: 5px;
 }
 
-.wave_community .posting:nth-child(12n) .comment-bubble {
+.wave_community ul.posting_comments li:nth-child(11n) .displace {
     -webkit-transform: rotate(6deg);
     -moz-transform: rotate(6deg);
-    left: 40px;
-}*/
+	transform: rotate(6deg);
+    top: 3px;
+    right: -5px;
+}
+
 
 .postings.post_its .post_it {
 	float: left;
