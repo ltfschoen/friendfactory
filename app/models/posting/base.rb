@@ -29,7 +29,7 @@ class Posting::Base < ActiveRecord::Base
       find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at desc'
     end    
     def comments
-      where(:type => Posting::Comment, :state => :published).order('updated_at desc')
+      where(:type => Posting::Comment, :state => :published).order('updated_at asc')
     end
   end
     
