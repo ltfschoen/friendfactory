@@ -2,12 +2,11 @@
   - form_id = "posting_#{parent.id}_new_comment"
   = link_to 'New comment', new_posting_comment_path(parent), :class => 'new_posting_comment'
   .posting_comment.form.hidden
-    .content
-      .body
-        = form_for Posting::Comment.new, :url => posting_comments_path(parent), :html => { :id => form_id }, :remote => true do |f|
-          = f.text_area :body
-          .button-bar
-            = f.submit 'OK'
-            = f.button 'Cancel', :class => 'cancel'
-      .footer
-        &nbsp;
+    .body
+      = form_for Posting::Comment.new, :url => posting_comments_path(parent), :html => { :id => form_id }, :remote => true do |f|
+        = f.text_area :body
+        .button-bar
+          = f.submit 'OK'
+          = f.button 'Cancel', :class => 'cancel'
+    .footer
+      &nbsp;
