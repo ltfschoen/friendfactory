@@ -43,19 +43,19 @@
 }
 
 
-.wave_community ul.postings > li > .posting .canvas {
+.wave_community .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
 }
 
-.wave_community ul.postings > li:nth-child(even) > .posting .canvas {
+.wave_community li:nth-child(even) .canvas {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg)
 	transform: rotate(2deg);
 }
 
-.wave_community ul.postings > li:nth-child(3n) > .posting .canvas {
+.wave_community li:nth-child(3n) .canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
@@ -63,68 +63,48 @@
     right: 10px;
 }
 
-.wave_community ul.postings > li:nth-child(5n) > .posting .canvas {
-    -webkit-transform: rotate(5deg);
-    -moz-transform: rotate(5deg);
-	transform: rotate(5deg);
+.wave_community li:nth-child(5n) .canvas {
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+	transform: rotate(3deg);
     right: 5px;
 }
 
-.wave_community ul.postings > li:nth-child(8n) > .posting .canvas {
-    -webkit-transform: rotate(-5deg);
-    -moz-transform: rotate(-5deg);
-	transform: rotate(-5deg);
+.wave_community li:nth-child(8n) .canvas {
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+	transform: rotate(-3deg);
     top: 8px;
     right: 5px;
 	margin-bottom: 20px;
 }
 
-.wave_community ul.postings > li:nth-child(11n) > .posting .canvas {
+.wave_community li:nth-child(11n) .canvas {
     top: 3px;
     right: -5px;
 }
 
-.wave_community ul.posting_comments > li > .posting_comment > .comment.canvas {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-	transform: rotate(-2deg);
-}
-
-.wave_community ul.posting_comments > li:nth-child(even) > .posting_comment > .comment.canvas {
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-	transform: rotate(2deg);
-}
-
-.wave_community ul.posting_comments > li:nth-child(3n) > .posting_comment > .comment.canvas {
+.wave_community ul.posting_comments .comment.canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
-    top: -5px;
-    right: 10px;
+	top: 0;
+	right: 0;
+	margin: 0;
 }
 
-.wave_community ul.posting_comments > li:nth-child(5n) > .posting_comment > .comment.canvas {
+.wave_community ul.posting_comments > li:first-child  .comment.canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
-    right: -16px;
 }
 
-.wave_community ul.posting_comments > li:nth-child(8n) > .posting_comment > .comment.canvas {
-    -webkit-transform: rotate(-5deg);
-    -moz-transform: rotate(-5deg);
-	transform: rotate(-5deg);
-    top: 8px;
+.wave_community ul.posting_comments > li:nth-child(5n) .comment.canvas {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+	transform: rotate(2deg);
+    top: -2px;
     right: 5px;
-}
-
-.wave_community ul.posting_comments > li:nth-child(11n) > .posting_comment > .comment.canvas {
-    -webkit-transform: rotate(6deg);
-    -moz-transform: rotate(6deg);
-	transform: rotate(6deg);
-    top: 3px;
-    right: -5px;
 }
 
 

@@ -10,7 +10,7 @@
   .grid_16<
     =# render_postings(@postings, :only => Posting::PostIt, :class => 'posting_post_its')
   .grid_16<
-    =# render_postings(@postings, :exclude => Posting::PostIt, :class => 'postings')
-    = render_postings(@postings, :class => 'postings')
+    = render_postings(@postings, :exclude => Posting::PostIt, :class => 'postings')
+    =# render_postings(@postings, :class => 'postings')
   .grid_16<
     = will_paginate @postings
