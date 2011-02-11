@@ -2,7 +2,7 @@
   %table
     %tr
       %td.avatar.thumb
-        .post_it.attachment.form<
+        .post_it.canvas.attachment.form<
           .content<
             = avatar_image_tag(new_posting_photo.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => new_posting_video.user.user_info.gender)
             %span= "Posted by #{link_to_profile(new_posting_photo.user)}".html_safe
