@@ -1,18 +1,14 @@
-.wave.header {
+.wave ul.nav {
+	height: 50px;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.wave.header ul.nav {
-    margin: 0;
-	height: 50px;
-}
-
-.wave.header ul.nav li {
+.wave ul.nav li {
 	display: inline-block;
 }
 
-.wave.header ul.nav li a {
+.wave ul.nav li a {
 	display: block;
 	background: url('/images/friskyfactory/posting-icons.png') top left no-repeat;
 	text-indent: -1000em;

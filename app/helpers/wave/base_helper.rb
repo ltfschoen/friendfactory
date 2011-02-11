@@ -9,8 +9,7 @@ module Wave::BaseHelper
       postings = postings.reject{ |posting| posting[:type] == opts[:exclude].to_s }
     end
 
-    css_class = [ 'postings', opts[:class] ].compact * ' '
-    content_tag(:ul, :class => css_class) do
+    content_tag(:ul, :class => opts[:class]) do
       postings.inject(String.new) do |buffer, posting|
         buffer << content_tag(:li) do
           render(:partial => 'posting/posting', :object => posting)

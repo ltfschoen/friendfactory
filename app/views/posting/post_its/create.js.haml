@@ -1,5 +1,5 @@
 - if @posting.present? && @posting.valid?
-  $('ul.post_its').prepend("#{escape_javascript(render(:partial => 'post_it', :object => @posting))}").find('.post_it:first').hide().slideDown();
+  $('ul.posting_post_its').prepend("#{escape_javascript(render(:partial => 'post_it', :object => @posting))}").find('.post_it:first').hide().slideDown();
   var $currentTab = $('ul.wave.nav li.current').removeClass('current');
   $($('a', $currentTab).attr('rel')).slideUp().trigger('reset');
   $('.flash').text('');
