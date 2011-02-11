@@ -36,6 +36,12 @@
     width: 220px
 }
 
+.wave_community ul.postings a.new_posting_comment {
+	position: relative;
+	float: right;
+	top: -40px;
+}
+
 
 .wave_community ul.postings > li > .posting .canvas {
     -webkit-transform: rotate(-2deg);
