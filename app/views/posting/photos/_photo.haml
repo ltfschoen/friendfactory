@@ -5,5 +5,6 @@
         %td.avatar.thumb
           = render_attachment(photo)
         %td
-          = render_photo(photo)
+          .photo.canvas
+            = render_photo(photo)
           = render_comments(photo)

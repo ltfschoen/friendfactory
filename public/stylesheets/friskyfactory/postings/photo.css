@@ -1,4 +1,4 @@
-img.photo {
+.photo.canvas img.photo {
     padding: 10px;
     background: #FFF;
     -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
@@ -6,28 +6,28 @@ img.photo {
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 }
 
-img.photo.h4x6 {
+.photo.canvas  img.photo.h4x6 {
 	width: 434px;
 	height: 284px;
     border: 1px solid darkgrey;
 }
 
-img.photo.v4x6 {
+.photo.canvas img.photo.v4x6 {
 	width: 284px;
 	height: 434px;
     border: 1px solid darkgrey;
 }
 
-img.photo.small {
+.photo.canvas img.photo.small {
     padding: 8px;
 }
 
-img.photo.h4x6.small {
+.photo.canvas img.photo.h4x6.small {
     width: 220px;
     height: 148px;
 }
 
-img.photo.v4x6.small {
+.photo.canvas img.photo.v4x6.small {
     width: 148px;
     height: 220px;
 }
