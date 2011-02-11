@@ -40,19 +40,19 @@
     width: 220px
 }
 
-.wave_community ul.postings > li > .posting_text .canvas {
+.wave_community ul.postings > li > .posting .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
 }
 
-.wave_community ul.postings > li:nth-child(even) > .posting_text .canvas {
+.wave_community ul.postings > li:nth-child(even) > .posting .canvas {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg)
 	transform: rotate(2deg);
 }
 
-.wave_community ul.postings > li:nth-child(3n) > .posting_text .canvas {
+.wave_community ul.postings > li:nth-child(3n) > .posting .canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
@@ -60,63 +60,40 @@
     right: 10px;
 }
 
-.wave_community ul.postings > li:nth-child(5n) > .posting_text .canvas {
+.wave_community ul.postings > li:nth-child(5n) > .posting .canvas {
     -webkit-transform: rotate(5deg);
     -moz-transform: rotate(5deg);
 	transform: rotate(5deg);
     right: 5px;
 }
 
-.wave_community ul.postings > li:nth-child(8n) > .posting_text .canvas {
+.wave_community ul.postings > li:nth-child(8n) > .posting .canvas {
     -webkit-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
 	transform: rotate(-5deg);
     top: 8px;
     right: 5px;
+	margin-bottom: 20px;
 }
 
-.wave_community ul.postings > li:nth-child(11n) > .posting_text .canvas {
+.wave_community ul.postings > li:nth-child(11n) > .posting .canvas {
     top: 3px;
     right: -5px;
 }
 
-.wave_community .posting_video {
-    -webkit-transform: none !important;
-    -moz-transform: none !important;
-}
-
-
-/*.wave_community .posting post_it {
-    -webkit-transform: none;
-    -moz-transform: none;
-}
-
-.wave_community .posting:nth-child(3n) .post_it {
-    -webkit-transform: rotate(-6deg);
-    -moz-transform: rotate(-6deg);
-    right: 30px;
-}
-
-.wave_community .posting:nth-child(5n) .post_it {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-    right: -16px;
-}*/
-
-
-.wave_community ul.posting_comments > li > .posting_comment .canvas {
+.wave_community ul.posting_comments > li > .posting_comment > .comment.canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
 }
 
-.wave_community ul.posting_comments > li:nth-child(even) > .posting_comment .canvas {
+.wave_community ul.posting_comments > li:nth-child(even) > .posting_comment > .comment.canvas {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
 	transform: rotate(2deg);
 }
 
-.wave_community ul.posting_comments > li:nth-child(3n) > .posting_comment .canvas {
+.wave_community ul.posting_comments > li:nth-child(3n) > .posting_comment > .comment.canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
@@ -124,14 +101,14 @@
     right: 10px;
 }
 
-.wave_community ul.posting_comments > li:nth-child(5n) > .posting_comment .canvas {
+.wave_community ul.posting_comments > li:nth-child(5n) > .posting_comment > .comment.canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
     right: -16px;
 }
 
-.wave_community ul.posting_comments > li:nth-child(8n) > .posting_comment .canvas {
+.wave_community ul.posting_comments > li:nth-child(8n) > .posting_comment > .comment.canvas {
     -webkit-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
 	transform: rotate(-5deg);
@@ -139,7 +116,7 @@
     right: 5px;
 }
 
-.wave_community ul.posting_comments > li:nth-child(11n) > .posting_comment .canvas {
+.wave_community ul.posting_comments > li:nth-child(11n) > .posting_comment > .comment.canvas {
     -webkit-transform: rotate(6deg);
     -moz-transform: rotate(6deg);
 	transform: rotate(6deg);
@@ -151,6 +128,7 @@
 .postings.post_its .post_it {
 	float: left;
 }
+
 
 .wave_community .posting_wave_proxy {
 	position: relative;
@@ -177,16 +155,9 @@
 }
 
 
-.tab_content#posting_text .button-bar button,
-.tab_content#posting_post_it .button-bar button {
-    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-}
-
 .wave_community .new_posting_post_it .button-bar {
-	margin-top: -30px;
-	margin-left: 120px;
+	margin-top: -46px;
+	margin-left: 102px;
 	padding: 0;
 	width: 80px;
 	text-align: center;

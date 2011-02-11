@@ -4,23 +4,21 @@
 	font-weight: normal;
 }
 
-.post_it {
-    position: relative;
+.post_it.canvas {
     background: url('/images/friskyfactory/post-it.png') no-repeat top left;
     width: 173px;
 	height: 122px;
-/*	padding: 5px 9px 20px 8px;*/
 	padding: 5px 8px 20px 6px;
     line-height: 1.2em;
 	font-size: small;
     color: #111;
 }
 
-.post_it.form {
+.new_posting_post_it .post_it.canvas {
     background: url('/images/friskyfactory/post-it.png') no-repeat -150px left;
 }
 
-.post_it .content {
+.post_it.canvas .content {
 	width: 153px;
 	height: 120px;
 	padding: 7px 10px 0 10px;
@@ -30,13 +28,13 @@
 	line-height: 16px;
 }
 
-.post_it .content a.profile {
+.post_it.canvas .content a.profile {
 	font-family: 'NothingYouCouldDo';
 	font-size: 11px;
 	line-height: 16px;	
 }
 
-.post_it img.avatar.thumb {
+.post_it.canvas img.avatar.thumb {
     position: relative;
     float: left;
 	margin: 0 12px 4px 0;
@@ -49,20 +47,20 @@
     -moz-transform: rotate(-6deg);
 }
 
-.post_it img.avatar.thumb.online {
+.post_it.canvas img.avatar.thumb.online {
 	width: 40px;
 	height: 40px;	
 }
 
-.post_it.attachment .header {
+.post_it.canvas.attachment .header {
 	margin-top: 4px;
 }
 
-.post_it.attachment .subject {
+.post_it.canvas.attachment .subject {
 	clear: both;
 }
 
-.post_it textarea {
+.post_it.canvas textarea {
 	position: relative;
 	width: 100%;
 	height: 115px;
@@ -76,6 +74,6 @@
 	overflow: hidden;
 }
 
-.post_it.attachment textarea {
+.post_it.canvas.attachment textarea {
 	height: 72px;
 }
