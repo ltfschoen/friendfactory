@@ -69,3 +69,11 @@
 	height: 136px;	
 	overflow: hidden;
 }
+
+.new_posting_text .button-bar {
+	margin-top: -56px;
+	margin-left: 300px;
+	padding: 0;
+	width: 80px;
+	text-align: center;	
+}

@@ -77,3 +77,11 @@
 .post_it.canvas.attachment textarea {
 	height: 72px;
 }
+
+.new_posting_post_it .button-bar {
+	margin-top: -46px;
+	margin-left: 102px;
+	padding: 0;
+	width: 80px;
+	text-align: center;
+}

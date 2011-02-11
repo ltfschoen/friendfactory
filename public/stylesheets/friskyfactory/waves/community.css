@@ -40,6 +40,7 @@
     width: 220px
 }
 
+
 .wave_community ul.postings > li > .posting .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
@@ -125,7 +126,7 @@
 }
 
 
-.postings.post_its .post_it {
+.postings.post_its .posting_post_it {
 	float: left;
 }
 
@@ -154,22 +155,6 @@
 	margin: 6px;	
 }
 
-
-.wave_community .new_posting_post_it .button-bar {
-	margin-top: -46px;
-	margin-left: 102px;
-	padding: 0;
-	width: 80px;
-	text-align: center;
-}
-
-.new_posting_text .button-bar {
-	margin-top: -56px;
-	margin-left: 300px;
-	padding: 0;
-	width: 80px;
-	text-align: center;	
-}
 
 @-webkit-keyframes BOUNCE {
 	0% {
