@@ -28,12 +28,8 @@
 	width: 55px;
 }
 
-.wave_community ul.postings .posting {
-	margin: 10px 0;
-}
-
-.wave_community ul.postings .posting_comment {
-	margin: 0;
+.wave_community ul.postings > li {
+	margin: 30px 0;
 }
 
 .wave_community td.avatar.thumb {
@@ -215,7 +211,7 @@
     opacity: 1.0;
   }
   25% {
-	-webkit-transform: scale(0.99);
+	-webkit-transform: scale(0.98);
     opacity: 0.5;
   }
   to {

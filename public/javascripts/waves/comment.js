@@ -7,10 +7,6 @@ jQuery(function($) {
 	
 	$('button', 'form.new_posting_comment').button({ text: false })
 	
-	$('.posting_comment').bind('pulse', function(event) {
-		$(this).toggleClass('pulse');
-	});
-
 	
 	$('a.new_posting_comment').live('click', function(event) {
 		event.preventDefault();
@@ -32,20 +28,12 @@ jQuery(function($) {
 
 	$('form.new_posting_comment')
 		.bind('ajax:before', function(event) {
-			$(this)
-				.find('.button-bar')
-					.css({ opacity: 0.0 })
-				.end()
-				.closest('.posting_comment')
-				.trigger('pulse');
+			$(this).find('.button-bar')
+				.css({ opacity: 0.0 });
 		})
 		.bind('ajax:complete', function(event) {
-			$(this)
-				.find('.button-bar')
-					.css({ opacity: 1.0 })
-				.end()
-				.closest('.posting_comment')
-				.trigger('pulse');
+			$(this).find('.button-bar')
+				.css({ opacity: 1.0 });
 		})
 		.find('textarea')
 			.autoResize({ extraSpace: 12, limit: 152 })
@@ -53,13 +41,11 @@ jQuery(function($) {
 		.find('button.cancel')
 			.live('click', function(event) {
 				event.preventDefault();
-				$(this)
-					.closest('.posting_comment')
+				$(this).closest('.posting_comment')
 					.fadeTo('fast', 0.0, function() {
-						$(this)
-							.slideUp()
-							.prev('a.new_posting_comment')
-							.fadeTo('fast', 1.0);
+						$(this).slideUp(function(){
+							$(this).prev('a.new_posting_comment').fadeTo('fast', 1.0);
+						});
 					});
 			});
 
