@@ -43,19 +43,19 @@
 }
 
 
-.wave_community .canvas {
+.wave_community ul.postings li .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
 }
 
-.wave_community li:nth-child(even) .canvas {
+.wave_community ul.postings li:nth-child(even) .canvas {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg)
 	transform: rotate(2deg);
 }
 
-.wave_community li:nth-child(3n) .canvas {
+.wave_community ul.postings li:nth-child(3n) .canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
@@ -63,14 +63,14 @@
     right: 10px;
 }
 
-.wave_community li:nth-child(5n) .canvas {
+.wave_community ul.postings li:nth-child(5n) .canvas {
     -webkit-transform: rotate(3deg);
     -moz-transform: rotate(3deg);
 	transform: rotate(3deg);
     right: 5px;
 }
 
-.wave_community li:nth-child(8n) .canvas {
+.wave_community ul.postings li:nth-child(8n) .canvas {
     -webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
 	transform: rotate(-3deg);
@@ -79,12 +79,12 @@
 	margin-bottom: 20px;
 }
 
-.wave_community li:nth-child(11n) .canvas {
+.wave_community ul.postings li:nth-child(11n) .canvas {
     top: 3px;
     right: -5px;
 }
 
-.wave_community ul.posting_comments .comment.canvas {
+.wave_community ul.posting_comments > li .comment.canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
