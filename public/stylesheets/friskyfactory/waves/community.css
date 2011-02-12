@@ -112,10 +112,6 @@ ul.posting_post_its .posting_post_it {
 	float: left;
 }
 
-ul.postings .posting_post_it {
-	float: right;
-}
-
 .wave_community .posting_wave_proxy {
 	position: relative;
 }
