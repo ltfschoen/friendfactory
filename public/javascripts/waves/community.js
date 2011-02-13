@@ -1,7 +1,7 @@
 jQuery(function($) {
 	
 	$('.tab_content')
-		.filter('#posting_post_it, #posting_text')
+		.filter('#posting_post_it, #posting_text, #posting_post_it')
 			.bind('reset', function(event) {
 				$('form', this).get(0).reset();
 				$('textarea, input', this).placehold();
@@ -104,7 +104,7 @@ jQuery(function($) {
 					.addClass('current');					
 
 				$($this.attr('rel'))
-					.find('form')					
+					.find('form')
 					.clone()
 					.css({ width: 0, opacity: 0.0 })
 					.prependTo('ul.posting_post_its:first');
@@ -117,7 +117,8 @@ jQuery(function($) {
 					.find(':first')
 						.delay(1800)					
 						.animate({ width: 187 }, 'slow', function() {
-							$(this).fadeTo('slow', 1.0);
+							$(this).fadeTo('slow', 1.0)
+								.find('textarea').focus();
 						});
 				
 			} else {
@@ -125,26 +126,6 @@ jQuery(function($) {
 			}			
 		});
 
-
-	$('button.cancel', 'form.new_posting_post_it')	
-		.live('click', function(event) {
-			event.preventDefault();
-			$(this).closest('form')
-				.fadeTo('slow', 0.0)
-				.animate({ width: 0 }, 'slow', function() {
-					$(this)
-						.closest('ul.posting_post_its')
-							.find('li:last')
-								.fadeTo('slow', 1.0)
-							.end()
-						.end()
-						.remove();
-				});
-				
-			$('a[rel="#posting_post_it"]', 'ul.wave.community.nav')
-				.closest('li')
-					.removeClass('current');			
-		});
 
 	$('button.cancel, button#posting_photo_cancel', '.tab_content')
 		.live('click', function(event) {

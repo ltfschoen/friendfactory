@@ -1,19 +1,29 @@
+:plain
+  $('a[rel="#posting_post_it"]', 'ul.wave.nav')
+    .closest('li')
+    .removeClass('current');
+
 - if @posting.present? && @posting.valid?
   :plain
     $postIt = $("<li>#{escape_javascript(render(:partial => 'post_it', :object => @posting))}</li>")
     
-    $('ul.posting_post_its')
+    $('ul.posting_post_its:first')
       .find('form')
         .fadeTo('slow', 0.0, function() {
           $(this).replaceWith($postIt);
         });
-                
-    $('a[rel="#posting_post_it"]', 'ul.wave.nav')
-      .closest('li')
-      .removeClass('current');
-      
-    $('.flash').text('');
     
 - else
   :plain
-    $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")
+    $('ul.posting_post_its:first')    
+      .find('form')
+        .fadeTo('slow', 0.0)
+        .animate({ width: 0 }, 'slow', function() {
+          $(this)
+            .closest('ul.posting_post_its')
+              .find('li:last')
+                .fadeTo('slow', 1.0)
+              .end()
+            .end()
+            .remove();
+          });
