@@ -1,12 +1,7 @@
 = form_for new_posting_post_it, :url => wave_posting_post_its_path(@wave), :remote => true do |f|
-  %table
-    %tr
-      %td.avatar.thumb
-        &nbsp;
-      %td
-        .post_it.canvas<
-          .content
-            = f.text_area :subject, :placeholder => 'Short message'
-        .button-bar
-          = f.submit :OK, :disable_with => 'OK'
-          = f.button :Cancel, :class => 'cancel'
+  .post_it.canvas<
+    .content
+      = f.text_area :subject, :placeholder => 'Short message'
+  .button-bar
+    = f.submit :OK, :disable_with => 'OK'
+    = f.button :Cancel, :class => 'cancel'

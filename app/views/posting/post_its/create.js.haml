@@ -1,7 +1,19 @@
 - if @posting.present? && @posting.valid?
-  $('ul.posting_post_its').prepend("#{escape_javascript(render(:partial => 'post_it', :object => @posting))}").find('.post_it:first').hide().slideDown();
-  var $currentTab = $('ul.wave.nav li.current').removeClass('current');
-  $($('a', $currentTab).attr('rel')).slideUp().trigger('reset');
-  $('.flash').text('');
+  :plain
+    $postIt = $("<li>#{escape_javascript(render(:partial => 'post_it', :object => @posting))}</li>")
+    
+    $('ul.posting_post_its')
+      .find('form')
+        .fadeTo('slow', 0.0, function() {
+          $(this).replaceWith($postIt);
+        });
+                
+    $('a[rel="#posting_post_it"]', 'ul.wave.nav')
+      .closest('li')
+      .removeClass('current');
+      
+    $('.flash').text('');
+    
 - else
-  $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")
+  :plain
+    $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")

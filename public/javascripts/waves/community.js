@@ -32,54 +32,119 @@ jQuery(function($) {
 
 	$('a', 'ul.wave.community.nav')		
 		.bind('bounce', function() {
-			$(this)
-				.animate({ top: -15 }, 600)
-				.animate({ top: -15 }, 100)
-				.animate({ top: 30 }, 100)
-				.animate({ top: 0 }, 500);
-		})		
-		.bind('shake', function() {
-			$(this)
-				.animate({ left: -3 }, 50)
-				.animate({ left: 3 }, 50)
-				.animate({ left: 0 }, 50);
-		})		
-		.live('click', function(event) {		
-			event.preventDefault();
+			var $this = $(this);
+
+			if (Modernizr.cssanimations) {				
+				$this.bind('webkitAnimationEnd', function(event) {
+					$this.removeClass('bounce');
+				})
+				.addClass('bounce')
+						
+			} else {
+				$this
+					.animate({ top: -15 }, 600)
+					.delay(100)
+					.animate({ top: 30 }, 100)
+					.animate({ top: 0 }, 500);				
+			}
+		})
 		
-			var $this = $(this);		
+		.bind('shake', function() {
+			var $this = $(this);
+			
+			if (Modernizr.cssanimations) {				
+				$this.bind('webkitAnimationEnd', function(event) {
+					$this.removeClass('shake');
+				})
+				.addClass('shake');
+				
+			} else {
+				$this
+					.animate({ left: -3 }, 50)
+					.animate({ left: 3 }, 50)
+					.animate({ left: 0 }, 50);
+			}		
+		});
+
+		
+	$('a:not([rel="#posting_post_it"])', 'ul.wave.community.nav')	
+		.click(function(event) {		
+			event.preventDefault();		
+			var $this = $(this);
+			
 			if (!$this.closest('li').hasClass('current')) {
-
-				var $tab_content = $($this.attr('rel'));
-
-				$this.addClass('bounce')
+				$this.trigger('bounce')
 					.closest('li')
-						.addClass('current');		
-
-				if (!Modernizr.cssanimations) {
-					$this.trigger('bounce');
-				}
-
+					.addClass('current');					
+					
+				var $tab_content = $($this.attr('rel'));
+				
 				$tab_content
 					.css({ opacity: 0.0 })
 					.prependTo('.tab_contents')
 					.delay(1200)
 					.slideDown(function() {
 						$tab_content.fadeTo('fast', 1.0);
-						$this.removeClass('bounce');
 					});
+					
 			} else {
-				if (Modernizr.cssanimations) {
-					$this.bind('webkitAnimationEnd', function(event) {
-						$this.removeClass('shake');
-					})
-					.addClass('shake');
-				} else {
-					$this.trigger('shake');
-				}				
+				$this.trigger('shake');				
 			}	
 		});
 
+
+	$('a[rel="#posting_post_it"]', 'ul.wave.community.nav')
+		.click(function(event){
+			event.preventDefault();
+			var $this = $(this);
+			
+			if (!$this.closest('li').hasClass('current')) {
+				$this.trigger('bounce')
+					.closest('li')
+					.addClass('current');					
+
+				$($this.attr('rel'))
+					.find('form')					
+					.clone()
+					.css({ width: 0, opacity: 0.0 })
+					.prependTo('ul.posting_post_its:first');
+				
+				$('ul.posting_post_its:first')
+					.find('li:last')
+						.delay(1200)
+						.fadeTo(700, 0.0)
+					.end()
+					.find(':first')
+						.delay(1800)					
+						.animate({ width: 187 }, 'slow', function() {
+							$(this).fadeTo('slow', 1.0);
+						});
+				
+			} else {
+				$this.trigger('shake');
+			}			
+		});
+
+
+	$('button.cancel', 'form.new_posting_post_it')	
+		.live('click', function(event) {
+			event.preventDefault();
+			$(this).closest('form')
+				.fadeTo('slow', 0.0)
+				.animate({ width: 0 }, 'slow', function() {
+					$(this)
+						.closest('ul.posting_post_its')
+							.find('li:last')
+								.fadeTo('slow', 1.0)
+							.end()
+						.end()
+						.remove();
+				});
+				
+			$('a[rel="#posting_post_it"]', 'ul.wave.community.nav')
+				.closest('li')
+					.removeClass('current');			
+		});
 
 	$('button.cancel, button#posting_photo_cancel', '.tab_content')
 		.live('click', function(event) {
