@@ -1,4 +1,4 @@
-module Wave::BaseHelper
+module Wave::CommunityHelper
 
   def render_postings(postings, opts={})
     return unless postings.present?
@@ -29,6 +29,7 @@ module Wave::BaseHelper
         end
       end
     end
+    
   end
   
   def render_post_its(postings)
