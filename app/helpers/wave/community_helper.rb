@@ -15,11 +15,11 @@ module Wave::CommunityHelper
     postings = postings.reject{ |posting| posting[:type] == Posting::PostIt.name }
     number_of_breaks = (rendered_post_its.length > 0) ? rendered_post_its.length : postings.length    
 
-    ActiveSupport::SafeBuffer.new.tap do |html|
+    String.new.html_safe.tap do |html|      
       postings.in_groups(number_of_breaks) do |postings_in_break|
         html.safe_concat(rendered_post_its.shift)
         html.safe_concat(content_tag(:ul, :class => 'postings clearfix') do
-          postings_in_break.inject(ActiveSupport::SafeBuffer.new) do |buffer, posting|
+          postings_in_break.inject(String.new.html_safe) do |buffer, posting|
             buffer.safe_concat(content_tag(:li) do
               render(:partial => 'posting/posting', :object => posting)
             end)
@@ -33,10 +33,10 @@ module Wave::CommunityHelper
     postings = postings.select{ |posting| posting[:type] == Posting::PostIt.name }
     postings.in_groups_of(5).map do |group|
       content_tag(:ul, :class => 'posting_post_its clearfix') do
-        group.compact.inject(String.new) do |buffer, posting|
-          buffer << content_tag(:li) do
+        group.compact.inject(String.new.html_safe) do |buffer, posting|
+          buffer.safe_concat(content_tag(:li) do
             render(:partial => 'posting/posting', :object => posting)
-          end
+          end)
         end
       end
     end
