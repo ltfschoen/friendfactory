@@ -1,5 +1,30 @@
-jQuery(function($) {
+(function($) {
 	
+	$.fn.insertNavContent = function() {
+		var $this = $(this), height = $this.height();		
+		var $insertLocation;
+		
+		if ($('ul.posting_post_its').length > 0) {
+			$insertLocation = $('ul.posting_post_its:first').closest('li').next('li');
+		} else {
+			$insertLocation = $('li:first', 'ul.postings');
+		}
+		
+		return $(this)		
+			.css({ opacity: 0.0 })
+			.hide()
+			.insertBefore($insertLocation)
+			.delay(1200)
+			.slideDown(function() {
+				$(this).fadeTo('slow', 1.0);
+			});
+	}
+	
+})(jQuery);
+
+
+jQuery(function($) {
+
 	$('.tab_content')
 		.filter('#posting_post_it, #posting_text, #posting_post_it')
 			.bind('reset', function(event) {
@@ -66,8 +91,8 @@ jQuery(function($) {
 			}		
 		});
 
-		
-	$('a:not([rel="#posting_post_it"])', 'ul.wave.community.nav')	
+	// $('a:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
+	$('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
 		.click(function(event) {		
 			event.preventDefault();		
 			var $this = $(this);
@@ -91,7 +116,6 @@ jQuery(function($) {
 				$this.trigger('shake');				
 			}	
 		});
-
 
 	$('a[rel="#posting_post_it"]', 'ul.wave.community.nav')
 		.click(function(event){
@@ -124,6 +148,25 @@ jQuery(function($) {
 			} else {
 				$this.trigger('shake');
 			}			
+		});
+
+
+	$('a[href^="#"]', '.wave_community ul.nav')
+		.click(function(event) {
+			event.preventDefault();
+			var $this = $(this);
+		
+			if (!$this.closest('li').hasClass('current')) {
+				$this.trigger('bounce')
+					.closest('li')
+					.addClass('current');
+			
+				$('form', 'a[name="' + $(this).attr('href').substring(1) + '"]')
+					.insertNavContent();
+				
+			} else {
+				$this.trigger('shake');
+			}
 		});
 
 

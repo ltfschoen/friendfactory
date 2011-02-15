@@ -1,9 +1,16 @@
 - if current_user
   %ul.wave.community.nav
-    %li= link_to 'Message', new_wave_posting_text_path(@wave), :rel => '#posting_text'
-    %li= link_to 'Post-it', new_wave_posting_post_it_path(@wave), :rel => '#posting_post_it'
-    %li= link_to 'Photo', new_wave_posting_photo_path(@wave), :rel => '#posting_photo'    
-    %li= link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#posting_video_upload'
-    / %li %a{ :href => '#link' } Link
-    / %li %a{ :href => '#event' } Event
-    / %li %a{ :href => '#poll' } Poll
+    %li
+      = link_to 'Message', new_wave_posting_text_path(@wave), :rel => '#posting_text', :class => 'posting_text'
+    %li
+      = link_to 'Post-it', new_wave_posting_post_it_path(@wave), :rel => '#posting_post_it', :class => 'posting_post_it'
+    %li
+      = link_to 'Photo', new_wave_posting_photo_path(@wave), :rel => '#posting_photo', :class => 'posting_photo'
+    %li
+      = link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#posting_video_upload', :class => 'posting_video'
+    %li
+      = link_to 'Album', '#new-wave-album', :class => 'wave_album'
+
+- if false
+  %a{ :name => 'new-wave-album', :class => 'new_posting' }
+    = render :partial => 'wave/albums/new', :locals => { :publish_to => @wave }

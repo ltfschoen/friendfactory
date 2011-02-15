@@ -11,21 +11,35 @@
 	position: absolute;
 }
 
-.wave_community ul.nav li:nth-child(1) a {
+.wave_community ul.nav li:nth-child(1) a,
+.wave_community ul.nav a.posting_text {
 	background-position: 0 0;
 }
 
-.wave_community ul.nav li:nth-child(2) a {
+.wave_community ul.nav li:nth-child(2) a,
+.wave_community ul.nav a.posting_post_it {
 	background-position: -50px 0;
 }
 
-.wave_community ul.nav li:nth-child(3) a {
+.wave_community ul.nav li:nth-child(3) a,
+.wave_community ul.nav a.posting_photo {
 	background-position: -100px 0;
 }
 
-.wave_community ul.nav li:nth-child(4) a {
+.wave_community ul.nav li:nth-child(4) a,
+.wave_community ul.nav a.posting_video {
 	background-position: -220px 0;
 	width: 55px;
+}
+
+.wave_community ul.nav li:nth-child(5) a,
+.wave_community ul.nav a.wave_album {
+	background-position: -100px 0;
+	width: 50px;
+}
+
+.wave_community a.new_posting form {
+	display: none;
 }
 
 .wave_community ul.postings > li {
@@ -52,13 +66,13 @@
 	transform: rotate(-2deg);
 }
 
-.wave_community ul.postings > li:nth-child(even) .canvas {
+.wave_community ul.postings > li:nth-of-type(even) .canvas {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg)
 	transform: rotate(2deg);
 }
 
-.wave_community ul.postings > li:nth-child(3n) .canvas {
+.wave_community ul.postings > li:nth-of-type(3n) .canvas {
     -webkit-transform: none;
     -moz-transform: none;
 	transform: none;
@@ -66,14 +80,14 @@
     right: 10px;
 }
 
-.wave_community ul.postings > li:nth-child(5n) .canvas {
+.wave_community ul.postings > li:nth-of-type(5n) .canvas {
     -webkit-transform: rotate(3deg);
     -moz-transform: rotate(3deg);
 	transform: rotate(3deg);
     right: 5px;
 }
 
-.wave_community ul.postings > li:nth-child(8n) .canvas {
+.wave_community ul.postings > li:nth-of-type(8n) .canvas {
     -webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
 	transform: rotate(-3deg);
@@ -82,7 +96,7 @@
 	margin-bottom: 20px;
 }
 
-.wave_community ul.postings > li:nth-child(11n) .canvas {
+.wave_community ul.postings > li:nth-of-type(11n) .canvas {
     top: 3px;
     right: -5px;
 }
@@ -102,7 +116,7 @@
 	transform: rotate(-2deg);
 }
 
-.wave_community ul.posting_comments > li:nth-child(5n) .comment.canvas {
+.wave_community ul.posting_comments > li:nth-of-type(5n) .comment.canvas {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
 	transform: rotate(2deg);
@@ -130,22 +144,6 @@
 	margin: 0;
 }
 
-/*.wave_community ul.posting_post_its > li:nth-child(2) .canvas {
-	-webkit-transform: rotate(10deg);
-	-moz-transform: rotate(10deg);
-	transform: rotate(10deg);
-}*/
-
-/*.wave_community ul.posting_post_its > li:nth-child(4) .canvas {
-    -webkit-transform: rotate(-10deg);
-	-moz-transform: rotate(-10deg);
-	transform: rotate(-10deg);
-}*/
-
-/*.wave_community ul.posting_post_its > li .canvas {
-	-webkit-transition: -webkit-transform 0.6s linear 2s;
-}*/
-
 .wave_community .posting_wave_proxy {
 	position: relative;
 }
@@ -167,8 +165,9 @@
 .wave_community #posting_photo_upload_well {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);	
-	margin: 6px;	
+	margin: 6px;
 }
+
 
 
 @-webkit-keyframes BOUNCE {
