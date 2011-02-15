@@ -14,22 +14,19 @@ module Wave::CommunityHelper
     rendered_post_its = render_post_its(postings)
     postings = postings.reject{ |posting| posting[:type] == Posting::PostIt.name }
     number_of_breaks = (rendered_post_its.length > 0) ? rendered_post_its.length : postings.length    
-    
-    content_tag(:ul, :class => 'postings') do      
-      String.new.tap do |html|
-        postings.in_groups(number_of_breaks) do |postings_in_break|          
-          html << content_tag(:li) do
-            rendered_post_its.shift
-          end
-          html << postings_in_break.inject(String.new) do |buffer, posting|
-            buffer << content_tag(:li) do
+
+    ActiveSupport::SafeBuffer.new.tap do |html|
+      postings.in_groups(number_of_breaks) do |postings_in_break|
+        html.safe_concat(rendered_post_its.shift)
+        html.safe_concat(content_tag(:ul, :class => 'postings clearfix') do
+          postings_in_break.inject(ActiveSupport::SafeBuffer.new) do |buffer, posting|
+            buffer.safe_concat(content_tag(:li) do
               render(:partial => 'posting/posting', :object => posting)
-            end
+            end)
           end
-        end
+        end)
       end
-    end
-    
+    end        
   end
   
   def render_post_its(postings)

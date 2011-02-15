@@ -55,9 +55,9 @@
 }
 
 .wave_community ul.postings a.new_posting_comment {
-	position: relative;
-	float: right;
-	top: -40px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 .wave_community ul.postings > li .canvas {
@@ -124,7 +124,15 @@
     right: 5px;
 }
 
+.wave_community .video.canvas,
+.wave_community .photo.canvas {
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+	transform: none !important;	
+}
+
 .wave_community ul.posting_post_its {
+	margin: 30px 0px;
 	height: 147px;
 	overflow: hidden;
 }

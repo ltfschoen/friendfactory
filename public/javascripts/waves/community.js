@@ -25,6 +25,9 @@
 
 jQuery(function($) {
 
+	$('.tab_contents')
+		.insertAfter('ul.posting_post_its:first');
+
 	$('.tab_content')
 		.filter('#posting_post_it, #posting_text, #posting_post_it')
 			.bind('reset', function(event) {

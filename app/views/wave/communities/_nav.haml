@@ -7,10 +7,7 @@
     %li
       = link_to 'Photo', new_wave_posting_photo_path(@wave), :rel => '#posting_photo', :class => 'posting_photo'
     %li
-      = link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#posting_video_upload', :class => 'posting_video'
-    %li
-      = link_to 'Album', '#new-wave-album', :class => 'wave_album'
-
-- if false
-  %a{ :name => 'new-wave-album', :class => 'new_posting' }
-    = render :partial => 'wave/albums/new', :locals => { :publish_to => @wave }
+      = link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#posting_video_upload', :class => 'posting_video'      
+    - if false
+      %li
+        = link_to 'Album', '#new-wave-album', :class => 'wave_album'
