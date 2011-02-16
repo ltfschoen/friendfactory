@@ -135,19 +135,17 @@ jQuery(function($) {
 					.clone()
 					.css({ width: 0, opacity: 0.0 })
 					.prependTo('ul.posting_post_its:first');
+
+				setTimeout(function() {
+					$('li:last .canvas', 'ul.posting_post_its:first')
+						.hide('drop', { direction: 'down' }, 900);					
+				}, 1100);
 				
 				$('ul.posting_post_its:first')
-					.find('li:last')
-						// setTimeOut(1200, function() {
-						// 	$('li:last', 'ul.posting_post_its:first')
-						// )})
-						.delay(1200)
-						// .fadeTo(700, 0.0)
-						// .find('.canvas')
-						.hide('drop', { direction: 'down' }, 1000)
-						// .end()
-						// .hide()
-					.end()
+					// .find('li:last')
+					// 	.delay(1200)
+					// 	.fadeTo(700, 0.0)
+					// .end()
 					.find(':first')
 						.delay(1800)					
 						.animate({ width: 187 }, 'slow', function() {

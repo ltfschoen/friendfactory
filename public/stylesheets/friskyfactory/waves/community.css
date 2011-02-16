@@ -134,7 +134,7 @@
 .wave_community ul.posting_post_its {
 	margin: 30px 0px;
 	height: 147px;
-	overflow: hidden;
+/*	overflow: hidden;*/
 }
 
 .wave_community ul.posting_post_its .posting_post_it,

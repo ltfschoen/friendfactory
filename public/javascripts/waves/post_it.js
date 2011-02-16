@@ -15,7 +15,7 @@ jQuery(function($) {
 					.animate({ width: 0 }, 'slow', function() {
 						$(this)
 							.closest('ul.posting_post_its')
-								.find('li:last')
+								.find('li:last .canvas')
 									.fadeTo('slow', 1.0)
 								.end()
 							.end()
