@@ -25,7 +25,10 @@ function onYouTubePlayerAPIReady() {
 			height: '260',
 			width: '400',
 			videoId: getYouTubeVideoId($(this).attr('href')),
-			playerVars: { 'disablekb': 1, 'controls': 0, 'egm': 0 },
+			playerVars: {
+				'disablekb': 1,
+				// 'controls': 0,
+				'egm': 0 },
 			events: {
 				'onReady': onPlayerReady,
 				'onStateChange': onPlayerStateChange,
