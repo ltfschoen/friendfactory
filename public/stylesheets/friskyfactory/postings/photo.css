@@ -42,12 +42,12 @@
 	vertical-align: top;
 }
 
-.tab_content#posting_photo #posting_photo_upload_well {
-	margin-left: 24px;
+.tab_content#posting_photo .photo.canvas {
+	text-align: center;
 }
 
 .tab_content#posting_photo .button-bar {
-	margin-top: -4px;
+	margin: -4px auto 0;
 	min-width: 280px;
 	background-color: #FFF;
 	text-align: center;

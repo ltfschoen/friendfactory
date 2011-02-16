@@ -43,7 +43,7 @@
 }
 
 .wave_community ul.postings > li {
-	margin: 30px 0;
+	margin: 0 0 30px 0;
 }
 
 .wave_community ul.postings > li:first {
@@ -152,6 +152,10 @@
 	margin: 0;
 }
 
+.wave_community .canvas {
+	-webkit-transition: -webkit-transform 0.1s ease-in;
+}
+
 .wave_community .posting_wave_proxy {
 	position: relative;
 }
@@ -167,7 +171,7 @@
 }
 
 .wave_community .tab_content {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 .wave_community #posting_photo_upload_well {

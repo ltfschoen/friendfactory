@@ -1,3 +1,11 @@
-$('ul.postings').prepend("#{escape_javascript(render(:partial => 'photo', :object => @posting))}");
-$('.tab_content#posting_photo').hide().trigger('reset');
-$('a[rel="#posting_photo"]', 'ul.wave.community.nav').closest('li').removeClass('current');
+:plain
+  $("#{escape_javascript(render(:partial => 'photo', :object => @posting))}")
+    .prependTo('ul.postings:first').wrap('<li>');
+    
+  $('.tab_content#posting_photo')
+    .hide()
+    .trigger('reset');
+    
+  $('a[rel="#posting_photo"]', 'ul.wave.community.nav')
+    .closest('li')
+    .removeClass('current');

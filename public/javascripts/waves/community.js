@@ -138,8 +138,15 @@ jQuery(function($) {
 				
 				$('ul.posting_post_its:first')
 					.find('li:last')
+						// setTimeOut(1200, function() {
+						// 	$('li:last', 'ul.posting_post_its:first')
+						// )})
 						.delay(1200)
-						.fadeTo(700, 0.0)
+						// .fadeTo(700, 0.0)
+						// .find('.canvas')
+						.hide('drop', { direction: 'down' }, 1000)
+						// .end()
+						// .hide()
 					.end()
 					.find(':first')
 						.delay(1800)					
@@ -183,9 +190,9 @@ jQuery(function($) {
 					.removeClass('current');
 			
 			$tabContent.fadeTo('fast', 0.0, function() {
-				$tabContent.slideUp(function() {					
+				$tabContent.slideUp(800, 'easeOutBounce', function() {
 					$tabContent.trigger('reset');
-				});				
+				});
 			});
 		});
 
