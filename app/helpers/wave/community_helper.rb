@@ -17,7 +17,7 @@ module Wave::CommunityHelper
 
     String.new.html_safe.tap do |html|      
       postings.in_groups(number_of_breaks) do |postings_in_break|
-        html.safe_concat(rendered_post_its.shift)
+        html.safe_concat(rendered_post_its.shift) unless rendered_post_its.empty?
         html.safe_concat(content_tag(:ul, :class => 'postings clearfix') do
           postings_in_break.inject(String.new.html_safe) do |buffer, posting|
             buffer.safe_concat(content_tag(:li) do
