@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
   def launch
     respond_to do |format|
       if request.post?
-        LaunchUser.create(params[:launch_user])
+        LaunchUser.create(params[:launch_user].merge(:site => current_site))
         flash[:launch_user] = true
         format.html { redirect_to launch_path }
       else
