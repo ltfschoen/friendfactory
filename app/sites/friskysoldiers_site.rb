@@ -1,6 +1,6 @@
-class PositivelyfriskySite < ApplicationSite  
+class FriskysoldiersSite < ApplicationSite  
   def name
-    "positivelyfrisky"
+    "friskysoldiers"
   end
     
   def layout
@@ -9,13 +9,13 @@ class PositivelyfriskySite < ApplicationSite
 
   def launch?
     true
-  end
+  end  
   
   def analytics_account_number
-    'UA-19948002-2'
+    'UA-19948002-3'
   end
   
   def analytics_domain_name
-    '.positivelyfrisky.com'
+    '.friskysoldiers.com'
   end
 end

@@ -6,4 +6,8 @@ class ApplicationSite
   def to_s
     name
   end
+  
+  def launch?
+    false
+  end
 end
