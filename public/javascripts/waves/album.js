@@ -55,10 +55,7 @@ jQuery(function($) {
 						return $('<li>' + renderPostingPhoto(photo) + '</li>');
 					},
 
-			        beforeSend: function (event, files, index, xhr, handler, callBack) {
-						// $('.photo.canvas', handler.dropZone).hide();
-							// .trigger('pulse');
-							
+			        beforeSend: function (event, files, index, xhr, handler, callBack) {							
 			            if (index === 0) {
 			                files.uploadSequence = [];
 			                files.uploadSequence.start = function (index) {
@@ -66,9 +63,6 @@ jQuery(function($) {
 			                    if (next) {
 			                        next.apply(null, Array.prototype.slice.call(arguments, 1));
 			                        this[index] = null;
-			                    } else {
-									// $('.photo.canvas', handler.dropZone).show();
-									// .trigger('pulse');
 								}
 			                };
 			            }
@@ -83,13 +77,18 @@ jQuery(function($) {
 			        onComplete: function (event, files, index, xhr, handler) {
 						var result = handler.parseResponse(xhr);
 						$('input#wave_id', handler.dropZone).val(result.wave_id);
-						files.uploadSequence.start(index + 1);
+						// files.uploadSequence.start(index + 1);
+						if (index === 0) {
+							for (i = 1, j = files.length; i < j; i++) {
+								files.uploadSequence.start(i);
+							}
+						}
 			        },
 			
 			        onAbort: function (event, files, index, xhr, handler) {
 			            handler.removeNode(handler.uploadRow);
 			            files.uploadSequence[index] = null;
-			            files.uploadSequence.start(index + 1);
+			            // files.uploadSequence.start(index + 1);
 			        }
 				})
 				.find('p.unobtrusive')
