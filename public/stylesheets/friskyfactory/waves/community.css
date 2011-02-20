@@ -24,11 +24,6 @@
 	width: 55px;
 }
 
-.wave_community ul.nav li:nth-child(5) a,
-.wave_community ul.nav li.wave_album a {
-	background-position: -100px 0;
-}
-
 .wave_community a.new_posting form {
 	display: none;
 }
@@ -150,10 +145,6 @@
 
 .wave_community .canvas {
 	-webkit-transition: -webkit-transform 0.1s ease-in;
-}
-
-.wave_community .tab_content {
-	margin-bottom: 30px;
 }
 
 .wave_community #posting_photo_upload_well {

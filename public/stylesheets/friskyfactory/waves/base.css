@@ -1,7 +1,7 @@
 .wave ul.nav {
 	height: 50px;
     text-align: center;
-    margin-bottom: 12px;
+	margin-bottom: 30px;
 }
 
 .wave ul.nav li {
@@ -29,3 +29,6 @@
 	position: absolute;
 }
 
+.wave .tab_content {
+	margin-bottom: 30px;
+}
