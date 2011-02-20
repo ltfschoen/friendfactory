@@ -1,0 +1,91 @@
+.tab_content .new_wave_album td {
+	vertical-align: top;
+}
+
+/*.tab_content .new_wave_album ul.posting_photos,
+.tab_content .edit_wave_album ul.posting_photos {
+	float: left;
+}*/
+
+.tab_content .new_wave_album.file_upload,
+.tab_content .edit_wave_album.file_upload {
+/*	float: left;*/
+	position: relative;
+/*	overflow: hidden;*/
+	direction: ltr;
+/*	cursor: pointer;*/
+	text-align: center;
+/*	margin-left: -11px;	*/
+}
+
+/*.tab_content .new_wave_album .photo.canvas,
+.tab_content .edit_wave_album .photo.canvas {
+	text-align: center;
+	cursor: pointer;	
+	width: 260px;
+	height: 200px;
+}*/
+
+
+/*.tab_content .new_wave_album .posting_photos .posting_photo,
+.wave_album .posting_photos .posting_photo {
+	margin-right: 10px;
+	margin-bottom: 10px;
+}*/
+
+.tab_content .photo.canvas {
+	width: 238px;
+}
+
+.tab_content ul.posting_photos li,
+.wave_album ul.posting_photos li {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.tab_content ul.posting_photos > li .photo.canvas,
+.wave_album ul.posting_photos > li .photo.canvas {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+	transform: rotate(-2deg);
+}
+
+.tab_content ul.posting_photos > li:nth-of-type(even) .photo.canvas,
+.wave_album ul.posting_photos > li:nth-of-type(even) .photo.canvas {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg)
+	transform: rotate(2deg);
+}
+
+.tab_content ul.posting_photos > li:nth-of-type(3n) .photo.canvas,
+.wave_album ul.posting_photos > li:nth-of-type(3n) .photo.canvas {
+    -webkit-transform: none;
+    -moz-transform: none;
+	transform: none;
+    top: -5px;
+    right: 10px;
+}
+
+.tab_content ul.posting_photos > li:nth-of-type(5n) .photo.canvas,
+.wave_album ul.posting_photos > li:nth-of-type(5n) .photo.canvas {
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+	transform: rotate(3deg);
+    right: 5px;
+}
+
+.tab_content ul.posting_photos > li:nth-of-type(8n) .photo.canvas,
+.wave_album ul.posting_photos > li:nth-of-type(8n) .photo.canvas {
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+	transform: rotate(-3deg);
+    top: 8px;
+    right: 5px;
+}
+
+.tab_content ul.posting_photos > li:nth-of-type(11n) .photo.canvas,
+.wave_album ul.posting_photos > li:nth-of-type(11n) .photo.canvas {
+    top: 3px;
+    right: -5px;
+}

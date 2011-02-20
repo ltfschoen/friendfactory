@@ -1,14 +1,8 @@
 .posting[wave_proxy]
   %table
     %tr
-      %td{ :colspan => '2' }
-        = render_attachment(wave_proxy)
-        = render :partial => 'wave/events/event', :object => wave_proxy.resource
-    %tr
-      %td.avatar.thumb
-        &nbsp;
       %td
-        = render :partial => 'posting/comments/comment', :collection => wave_proxy.children.comments
-        %div{:id => "posting_#{wave_proxy.id}_new_comment_well"}
-        = render :partial => 'posting/comments/new', :locals => { :parent => wave_proxy }
-  = render_postings(wave_proxy.children.postings)
+        = render_attachment(wave_proxy)
+      %td
+        = render_wave(wave_proxy.resource)
+        = render_comments(wave_proxy)

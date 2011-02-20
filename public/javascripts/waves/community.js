@@ -23,7 +23,7 @@
 })(jQuery);
 
 
-jQuery(function($) {
+jQuery(function($) {	
 
 	$('.tab_contents')
 		.insertAfter('ul.posting_post_its:first');
@@ -94,12 +94,12 @@ jQuery(function($) {
 			}		
 		});
 
-	// $('a:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
-	$('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
+	// $('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
+	$('a[rel="#posting_text"], a[rel="#posting_photo"], a[rel="#posting_video_upload"], a[rel="#wave_album"]', 'ul.wave.community.nav')
 		.click(function(event) {		
-			event.preventDefault();		
+			event.preventDefault();			
 			var $this = $(this);
-			
+						
 			if (!$this.closest('li').hasClass('current')) {
 				$this.trigger('bounce')
 					.closest('li')
@@ -119,6 +119,36 @@ jQuery(function($) {
 				$this.trigger('shake');				
 			}	
 		});
+
+
+	$('a[rel="#wave_album1"]', '.wave_community .nav')
+		.click(function(event) {
+			event.preventDefault();
+			var $this = $(this);
+						
+			if (!$this.closest('li').hasClass('current')) {
+				$this.trigger('bounce')
+					.closest('li')
+					.addClass('current');
+
+				var $navContent = $($this.attr('rel') + '.tab_content'),
+					waveId = $this.closest('.wave[id]').attr('id');
+				
+				$navContent.load('/wave/albums .edit_wave_album', { publish_id: waveId }, function() {
+					$navContent
+						.css({ opacity: 0.0 })
+						.prependTo('.tab_contents')
+						.find('form')
+							.trigger('reset')
+						.end()
+						.delay(1200)
+						.slideDown(function() {
+							$navContent.fadeTo('fast', 1.0);
+						});					
+				});
+			}
+		});
+	
 
 	$('a[rel="#posting_post_it"]', 'ul.wave.community.nav')
 		.click(function(event){

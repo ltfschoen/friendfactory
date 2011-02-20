@@ -1,0 +1,23 @@
+%table
+  %tr
+    %td
+      =# form_for @wave do |f|
+      .post_it.canvas.attachment
+        .content
+          = avatar_image_tag(@wave.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => @wave.user.user_info.gender)
+          =# f.text_area :topic, :placeholder => 'Caption'
+    %td
+      %ul.posting_photos
+      = form_for @wave, :html => { :multipart => true } do |f|
+        .photo.canvas
+          = image_tag 'friskyfactory/silhouette-q.gif', :class => 'photo h4x6 small silhouette', :site => false    
+          %p.unobtrusive.hidden
+            Click or drag photos here to upload
+        = fields_for :posting_photo do |photo|
+          = photo.file_field :image
+
+  %tr
+    %td
+      &nbsp;
+    %td
+      %table.upload_files

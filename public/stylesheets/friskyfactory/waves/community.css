@@ -115,11 +115,16 @@
     right: 5px;
 }
 
-.wave_community .video.canvas,
-.wave_community .photo.canvas {
+.wave_community .video.canvas {
     -webkit-transform: none !important;
     -moz-transform: none !important;
 	transform: none !important;	
+}
+
+.wave_community ul.postings > li .photo.canvas {
+    -webkit-transform: none;
+    -moz-transform: none;
+	transform: none;
 }
 
 .wave_community ul.posting_post_its {
@@ -147,20 +152,6 @@
 	-webkit-transition: -webkit-transform 0.1s ease-in;
 }
 
-.wave_community .posting_wave_proxy {
-	position: relative;
-}
-
-.wave_community .posting_wave_proxy .post_it {
-	position: absolute;
-	z-index: 10;
-}
-
-.wave_community .posting_wave_proxy .wave_event {
-	position: relative;
-	left: 80px;
-}
-
 .wave_community .tab_content {
 	margin-bottom: 30px;
 }
@@ -170,8 +161,6 @@
     -moz-transform: rotate(-2deg);	
 	margin: 6px;
 }
-
-
 
 @-webkit-keyframes BOUNCE {
 	0% {

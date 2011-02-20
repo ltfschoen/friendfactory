@@ -9,7 +9,4 @@
     %li.posting_video
       = link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#posting_video_upload'
     %li.wave_album
-      = link_to 'Album', new_wave_posting_video_path(@wave), :rel => '#wave_album'
-    - if false
-      %li
-        = link_to 'Album', '#new-wave-album', :class => 'wave_album'
+      = link_to 'Album', new_wave_album, :rel => '#wave_album'

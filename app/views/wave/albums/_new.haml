@@ -1,0 +1,20 @@
+.new_wave_album
+  %table
+    %tr
+      %td
+        .post_it.canvas.attachment
+          .content
+            = avatar_image_tag(new_wave_album.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => new_wave_album.user.user_info.gender)
+            =# f.text_area :subject, :placeholder => 'Caption'
+      %td
+        %ul.posting_photos
+        = form_for new_wave_album, :html => { :multipart => true } do |f|
+          = hidden_field_tag :wave_id
+          = hidden_field_tag :publish_id, @wave.id
+          .photo.canvas
+            = image_tag 'friskyfactory/silhouette-q.gif', :class => 'photo h4x6 small silhouette', :site => false    
+            %p.unobtrusive
+              Click or drag photos here to upload
+          = fields_for :posting_photo do |photo|
+            = photo.file_field :image
+        %table.upload_files

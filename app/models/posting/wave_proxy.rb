@@ -1,2 +1,2 @@
-class Posting::WaveProxy < Posting::Base  
+class Posting::WaveProxy < Posting::Base
 end

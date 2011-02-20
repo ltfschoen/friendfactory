@@ -1,0 +1,7 @@
+.wave.clearfix[album]
+  %ul.posting_photos
+    - album.postings.each do |photo|
+      %li
+        .posting[photo]
+          .photo.canvas
+            = render_photo(photo, :class => 'small')
