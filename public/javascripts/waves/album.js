@@ -67,6 +67,12 @@ jQuery(function($) {
 			                };
 			            }
 			
+						(pulseCycle = function() {
+							$('.no-cssanimations .tab_content ul.posting_photos .canvas.pulse')
+								.animate({ opacity: 0.6 }, 300)
+								.animate({ opacity: 1.0 }, 300, pulseCycle);
+						})();
+						
 			            files.uploadSequence.push(callBack);
 						
 			            if (index + 1 === files.length) {

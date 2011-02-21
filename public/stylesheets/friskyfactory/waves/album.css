@@ -2,39 +2,80 @@
 	vertical-align: top;
 }
 
-/*.tab_content .new_wave_album ul.posting_photos,
-.tab_content .edit_wave_album ul.posting_photos {
-	float: left;
-}*/
-
-.tab_content .new_wave_album.file_upload,
-.tab_content .edit_wave_album.file_upload {
-/*	float: left;*/
+.tab_content .new_wave_album.file_upload {
 	position: relative;
-/*	overflow: hidden;*/
+	overflow: hidden;
 	direction: ltr;
-/*	cursor: pointer;*/
-	text-align: center;
-/*	margin-left: -11px;	*/
+	cursor: pointer;
+	text-align: left;
+	width: 260px;
+	height: 220px;
+	margin-left: -6px;
+	margin-top: -6px;
+	clear: both;
 }
 
-/*.tab_content .new_wave_album .photo.canvas,
-.tab_content .edit_wave_album .photo.canvas {
-	text-align: center;
-	cursor: pointer;	
-	width: 260px;
-	height: 200px;
-}*/
+.file_upload_small {
+}
 
+.file_upload_large {
+}
 
-/*.tab_content .new_wave_album .posting_photos .posting_photo,
-.wave_album .posting_photos .posting_photo {
-	margin-right: 10px;
-	margin-bottom: 10px;
-}*/
+.file_upload_highlight img {
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	transform: scale(1.05);
+}
 
-.tab_content .photo.canvas {
+.file_upload input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  border: 300px solid transparent;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  filter: alpha(opacity=0);
+  -o-transform: translate(-300px, -300px) scale(10);
+  -moz-transform: translate(-800px, 0) scale(10);
+  cursor: pointer;
+}
+
+.file_upload iframe, .file_upload button {
+  display: none;
+}
+
+.file_upload_preview img {
+  width: 80px;
+}
+
+.file_upload_progress .ui-progressbar-value {
+  background: url(pbar-ani.gif);
+}
+
+.file_upload_progress div {
+  width: 150px;
+  height: 15px;
+}
+
+.file_upload_cancel button {
+/*  cursor: pointer;*/
+}
+
+.tab_content .new_wave_album.file_upload .photo.canvas {
 	width: 238px;
+	margin: 6px;
+	cursor: pointer;
+}
+
+.tab_content .new_wave_album .photo.canvas img {
+	-webkit-transition: -webkit-transform 0.1s linear;
+	-moz-transition: -moz-transform 0.1s linear;
+	transition: transform 0.1s linear;
+}
+
+.tab_content .new_wave_album .photo.canvas p.unobtrusive {
+	text-align: center;
 }
 
 .tab_content ul.posting_photos li,
