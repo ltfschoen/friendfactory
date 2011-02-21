@@ -151,20 +151,16 @@ jQuery(function($) {
 				setTimeout(function() {
 					$('li:eq(4)', 'ul.posting_post_its:first')
 						.find('.canvas')
-							.hide('drop', { direction: 'down' }, 900);					
-				}, 1100);
-				
-				$('ul.posting_post_its:first')
-					// .find('li:last')
-					// 	.delay(1200)
-					// 	.fadeTo(700, 0.0)
-					// .end()
-					.find(':first')
-						.delay(1800)					
-						.animate({ width: 187 }, 'slow', function() {
-							$(this).fadeTo('slow', 1.0)
-								.find('textarea').focus();
-						});
+							.hide('drop', { direction: 'down' }, 900, function() {
+								$('ul.posting_post_its:first')
+									.find(':first')
+										.delay(150)
+										.animate({ width: 187 }, 'slow', function() {
+											$(this).fadeTo('slow', 1.0)
+												.find('textarea').focus();
+										});
+							});
+				}, 1100);				
 				
 			} else {
 				$this.trigger('shake');
