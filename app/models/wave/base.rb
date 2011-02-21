@@ -9,11 +9,11 @@ class Wave::Base < ActiveRecord::Base
     state :unpublished
     
     event :publish do
-      transitions :to => :published, :from => [ :unpublished ]
+      transitions :to => :published, :from => [ :unpublished, :published ]
     end
     
     event :unpublish do
-      transitions :to => :unpublished, :from => [ :published ]
+      transitions :to => :unpublished, :from => [ :unpublished, :published ]
     end
   end
   

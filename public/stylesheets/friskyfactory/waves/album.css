@@ -1,18 +1,8 @@
-.tab_content .new_wave_album td {
-	vertical-align: top;
-}
-
-.tab_content .new_wave_album.file_upload {
+.file_upload {
 	position: relative;
 	overflow: hidden;
 	direction: ltr;
 	cursor: pointer;
-	text-align: left;
-	width: 260px;
-	height: 220px;
-	margin-left: -6px;
-	margin-top: -6px;
-	clear: both;
 }
 
 .file_upload_small {
@@ -28,29 +18,29 @@
 }
 
 .file_upload input {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  border: 300px solid transparent;
-  opacity: 0;
-  -ms-filter: 'alpha(opacity=0)';
-  filter: alpha(opacity=0);
-  -o-transform: translate(-300px, -300px) scale(10);
-  -moz-transform: translate(-800px, 0) scale(10);
-  cursor: pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	border: 300px solid transparent;
+	opacity: 0;
+	-ms-filter: 'alpha(opacity=0)';
+	filter: alpha(opacity=0);
+	-o-transform: translate(-300px, -300px) scale(10);
+	-moz-transform: translate(-800px, 0) scale(10);
+	cursor: pointer;
 }
 
-.file_upload iframe, .file_upload button {
-  display: none;
+.file_upload iframe,
+.file_upload button {
+	 display: none;
 }
 
 .file_upload_preview img {
-  width: 80px;
 }
 
 .file_upload_progress .ui-progressbar-value {
-  background: url(pbar-ani.gif);
+/*  background: url(pbar-ani.gif);*/
 }
 
 .file_upload_progress div {
@@ -59,7 +49,31 @@
 }
 
 .file_upload_cancel button {
-/*  cursor: pointer;*/
+}
+
+.tab_content .new_wave_album td {
+	vertical-align: top;
+}
+
+.tab_content .new_wave_album.file_upload {
+	text-align: left;
+	width: 260px;
+	height: 208px;
+	margin-left: -6px;
+	margin-top: -6px;
+	clear: both;
+}
+
+.tab_content .new_wave_album .button-bar {
+	position: relative;
+	top: -76px;
+	left: -24px;
+	text-align: right;
+}
+
+.tab_content .new_wave_album.file_upload button.submit,
+.tab_content .new_wave_album.file_upload button.cancel {
+	display: inline-block;
 }
 
 .tab_content .new_wave_album.file_upload .photo.canvas {

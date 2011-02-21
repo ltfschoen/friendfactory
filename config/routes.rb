@@ -15,7 +15,7 @@ Friskyfactory::Application.routes.draw do
         get 'popup'
       end
     end
-    resources :albums, :only => [ :new, :create, :edit, :update ]
+    resources :albums, :only => [ :new, :create ]
   end
 
   # To manage a user's profile
@@ -28,11 +28,12 @@ Friskyfactory::Application.routes.draw do
   # To add postings to a wave
   resources :waves, :only => [] do
     namespace :posting do
-      resources :texts,    :only => [ :new, :create ]
-      resources :photos,   :only => [ :new, :create, :update, :destroy ]
-      resources :post_its, :only => [ :new, :create ]
-      resources :videos,   :only => [ :new, :create ]
-      resources :messages, :only => [ :create, :show ]
+      resources :texts,        :only => [ :new, :create ]
+      resources :photos,       :only => [ :new, :create, :update, :destroy ]
+      resources :post_its,     :only => [ :new, :create ]
+      resources :videos,       :only => [ :new, :create ]
+      resources :messages,     :only => [ :create, :show ]
+      resources :wave_proxies, :only => [ :create ]
     end
   end
 

@@ -1,8 +1,9 @@
-.posting[wave_proxy]
-  %table
-    %tr
-      %td
-        = render_attachment(wave_proxy)
-      %td
-        = render_wave(wave_proxy.resource)
-        = render_comments(wave_proxy)
+- if wave_proxy.resource.published?
+  .posting[wave_proxy]
+    %table
+      %tr
+        %td
+          = render_attachment(wave_proxy)
+        %td
+          = render_wave(wave_proxy.resource)
+          = render_comments(wave_proxy)

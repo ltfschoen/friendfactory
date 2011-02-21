@@ -1,0 +1,11 @@
+- if @posting.present?
+  :plain
+    var $posting = $("#{escape_javascript(render(:partial => 'wave_proxy', :object => @posting))}");    
+    $posting
+      .prependTo('ul.postings:first')
+      .wrap('<li>');
+
+    var $currentNav = $('li.current', '.wave ul.nav').removeClass('current');      
+    $($('a', $currentNav).attr('rel'))
+      .hide()
+      .trigger('reset');  

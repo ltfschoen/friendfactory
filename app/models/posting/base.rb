@@ -13,11 +13,11 @@ class Posting::Base < ActiveRecord::Base
     state :published
     
     event :publish do
-      transitions :to => :published, :from => [ :unpublished ]
+      transitions :to => :published, :from => [ :unpublished, :published ]
     end
     
     event :unpublish do
-      transitions :to => :unpublished, :from => [ :published ]
+      transitions :to => :unpublished, :from => [ :unpublished, :published ]
     end
   end
   

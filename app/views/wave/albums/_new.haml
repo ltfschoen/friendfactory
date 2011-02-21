@@ -9,12 +9,15 @@
       %td
         %ul.posting_photos
         = form_for new_wave_album, :html => { :multipart => true } do |f|
-          = hidden_field_tag :wave_id
           = hidden_field_tag :publish_id, @wave.id
+          = hidden_field_tag :wave_id
           .photo.canvas
             = image_tag 'friskyfactory/silhouette-q.gif', :class => 'photo h4x6 small silhouette', :site => false    
             %p.unobtrusive
               Click or drag photos here to upload
           = fields_for :posting_photo do |photo|
             = photo.file_field :image
+          .button-bar
+            = f.submit 'Upload', :class => 'submit'
+            = f.button 'Cancel', :class => 'cancel'
         %table.upload_files
