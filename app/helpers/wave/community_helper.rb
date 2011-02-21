@@ -13,7 +13,7 @@ module Wave::CommunityHelper
 
     rendered_post_its = render_post_its(postings)
     postings = postings.reject{ |posting| posting[:type] == Posting::PostIt.name }
-    number_of_breaks = (rendered_post_its.length > 0) ? rendered_post_its.length : postings.length    
+    number_of_breaks = (rendered_post_its.length > 0) ? rendered_post_its.length : 1
 
     String.new.html_safe.tap do |html|      
       postings.in_groups(number_of_breaks) do |postings_in_break|

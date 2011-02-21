@@ -131,6 +131,17 @@ jQuery(function($) {
 					.closest('li')
 					.addClass('current');					
 
+				if ($('ul.posting_post_its').length === 0) {
+					$('<ul class="posting_post_its clearfix"></ul>')
+						.css({ opacity: 0.0 })
+						.hide()
+						.insertBefore('ul.postings:first')
+						.delay(1200)
+						.slideDown(function() {
+							$(this).fadeTo('slow', 1.0);
+						});
+				}
+
 				$($this.attr('rel'))
 					.find('form')
 					.clone()
@@ -138,8 +149,9 @@ jQuery(function($) {
 					.prependTo('ul.posting_post_its:first');
 
 				setTimeout(function() {
-					$('li:last .canvas', 'ul.posting_post_its:first')
-						.hide('drop', { direction: 'down' }, 900);					
+					$('li:eq(4)', 'ul.posting_post_its:first')
+						.find('.canvas')
+							.hide('drop', { direction: 'down' }, 900);					
 				}, 1100);
 				
 				$('ul.posting_post_its:first')
