@@ -5,13 +5,12 @@
 
 - if @posting.present? && @posting.valid?
   :plain
-    $postIt = $("<li>#{escape_javascript(render(:partial => 'post_it', :object => @posting))}</li>")
+    $postIt = $("#{escape_javascript(render(:partial => 'post_it', :object => @posting))}")
     
-    $('ul.posting_post_its:first')
-      .find('form')
-        .fadeTo('slow', 0.0, function() {
-          $(this).replaceWith($postIt);
-        });
+    $('form', 'ul.posting_post_its:first li:first')
+      .fadeTo('slow', 0.0, function() {
+        $(this).replaceWith($postIt);
+      });
     
 - else
   :plain

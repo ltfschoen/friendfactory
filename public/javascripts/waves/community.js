@@ -94,6 +94,7 @@ jQuery(function($) {
 			}		
 		});
 
+
 	// $('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
 	$('a[rel="#posting_text"], a[rel="#posting_photo"], a[rel="#posting_video_upload"], a[rel="#wave_album"]', 'ul.wave.community.nav')
 		.click(function(event) {		
@@ -121,70 +122,23 @@ jQuery(function($) {
 		});
 	
 
-	$('a[rel="#posting_post_it"]', 'ul.wave.community.nav')
-		.click(function(event){
-			event.preventDefault();
-			var $this = $(this);
-			
-			if (!$this.closest('li').hasClass('current')) {
-				$this.trigger('bounce')
-					.closest('li')
-					.addClass('current');					
-
-				if ($('ul.posting_post_its').length === 0) {
-					$('<ul class="posting_post_its clearfix"></ul>')
-						.css({ opacity: 0.0 })
-						.hide()
-						.insertBefore('ul.postings:first')
-						.delay(1200)
-						.slideDown(function() {
-							$(this).fadeTo('slow', 1.0);
-						});
-				}
-
-				$($this.attr('rel'))
-					.find('form')
-					.clone()
-					.css({ width: 0, opacity: 0.0 })
-					.prependTo('ul.posting_post_its:first');
-
-				setTimeout(function() {
-					$('li:eq(4)', 'ul.posting_post_its:first')
-						.find('.canvas')
-							.hide('drop', { direction: 'down' }, 900, function() {
-								$('ul.posting_post_its:first')
-									.find(':first')
-										.delay(150)
-										.animate({ width: 187 }, 'slow', function() {
-											$(this).fadeTo('slow', 1.0)
-												.find('textarea').focus();
-										});
-							});
-				}, 1100);				
-				
-			} else {
-				$this.trigger('shake');
-			}			
-		});
-
-
-	$('a[href^="#"]', '.wave_community ul.nav')
-		.click(function(event) {
-			event.preventDefault();
-			var $this = $(this);
-		
-			if (!$this.closest('li').hasClass('current')) {
-				$this.trigger('bounce')
-					.closest('li')
-					.addClass('current');
-			
-				$('form', 'a[name="' + $(this).attr('href').substring(1) + '"]')
-					.insertNavContent();
-				
-			} else {
-				$this.trigger('shake');
-			}
-		});
+	// $('a[href^="#"]', '.wave_community ul.nav')
+	// 	.click(function(event) {
+	// 		event.preventDefault();
+	// 		var $this = $(this);
+	// 	
+	// 		if (!$this.closest('li').hasClass('current')) {
+	// 			$this.trigger('bounce')
+	// 				.closest('li')
+	// 				.addClass('current');
+	// 		
+	// 			$('form', 'a[name="' + $(this).attr('href').substring(1) + '"]')
+	// 				.insertNavContent();
+	// 			
+	// 		} else {
+	// 			$this.trigger('shake');
+	// 		}
+	// 	});
 
 
 	$('button.cancel, button#posting_photo_cancel', '.tab_content')
