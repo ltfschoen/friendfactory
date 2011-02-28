@@ -10,7 +10,7 @@
             Started&nbsp;
             = time_ago_in_words(conversation.created_at)
             &nbsp;ago
-          = render :partial => 'posting/messages/message', :collection => conversation.messages
+          = render :partial => 'posting/messages/message', :collection => conversation.messages.published
           &nbsp;
         .message-input
           = f.text_area :body

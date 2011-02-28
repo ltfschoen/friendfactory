@@ -7,7 +7,11 @@ class Wave::Conversation < Wave::Base
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
       :order                   => 'created_at asc',
-      :after_add               => :add_conversation_to_inbox
+      :after_add               => :add_conversation_to_inbox do
+    def published
+      where(:state => :published)
+    end
+  end
 
   alias :recipient :resource
 

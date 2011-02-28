@@ -15,8 +15,9 @@ class Posting::MessagesController < ApplicationController
     if @wave.present?
       posting_message = params[:posting_message].merge({ :receiver_id => @wave.recipient.id })      
       @posting = @wave.messages.build(posting_message)
-      @posting.user = current_user
+      @posting.user = current_user      
       @wave.save
+      @posting.publish!
       broadcast_posting(@posting, (@posting.waves - [ @wave ]))
     end
     respond_to do |format|
