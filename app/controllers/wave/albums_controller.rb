@@ -33,7 +33,7 @@ class Wave::AlbumsController < ApplicationController
   def results
     { :wave_id    => wave.id,
       :dom_id     => dom_id(posting),
-      :image_path => posting.image.url.to_s,
+      :image_path => (posting.horizontal? ? posting.image.url(:h4x6) : posting.image.url(:v4x6)),
       :name       => posting.image.instance.attributes["image_file_name"],
       :horizontal => posting.horizontal? }
   end
