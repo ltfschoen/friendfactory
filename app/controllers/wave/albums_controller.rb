@@ -5,7 +5,7 @@ class Wave::AlbumsController < ApplicationController
   def create
     create_wave_album unless params[:wave_id].present?
     if wave.postings << posting
-      render :json => results, :content_type => 'text/html'  
+      render :json => success_state, :content_type => 'text/html'  
     else
       render :json => { :result => 'error' }, :content_type => 'text/html'      
     end
@@ -30,7 +30,7 @@ class Wave::AlbumsController < ApplicationController
     @wave = Wave::Album.create(:user => current_user, :state => :unpublished)
   end
   
-  def results
+  def success_state
     { :wave_id    => wave.id,
       :dom_id     => dom_id(posting),
       :image_path => (posting.horizontal? ? posting.image.url(:h4x6) : posting.image.url(:v4x6)),
