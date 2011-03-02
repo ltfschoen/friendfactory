@@ -79,17 +79,20 @@
 }
 
 .tab_content .new_wave_album .photo.canvas img {
-	margin-top: 4px;
-	margin-left: 4px;
 	-webkit-transition: -webkit-transform 0.1s linear;
 	-moz-transition: -moz-transform 0.1s linear;
 	transition: transform 0.1s linear;
+}
+
+.tab_content .new_wave_album .photo.canvas img.silhouette {
+	margin-top: 4px;
+	margin-left: 4px;	
 	-webkit-transform: scale(0.98);
 	-moz-transform: scale(0.98);
 	transform: scale(0.98);
 }
 
-.tab_content .new_wave_album .photo.canvas.file_upload_highlight img {
+.tab_content .new_wave_album .photo.canvas.file_upload_highlight img.silhouette {
 	-webkit-transform: scale(1.0);
 	-moz-transform: scale(1.0);
 	transform: scale(1.0);

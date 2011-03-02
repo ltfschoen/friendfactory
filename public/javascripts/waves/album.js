@@ -38,7 +38,9 @@ jQuery(function($) {
 					if (albumId !== '') {
 						var url = '/waves/' + publishId + '/posting/wave_proxies' 
 						$form.fadeTo('slow', 0.0, function() {
-							$form.slideUp();
+							$form.slideUp(function() {
+								$form.css({ opacity: 1.0 });
+							});
 						});
 						$.post(url, { resource_id: albumId }, function(){}, 'script');
 					}
@@ -90,13 +92,13 @@ jQuery(function($) {
 	        },
 
 	        onComplete: function (event, files, index, xhr, handler) {
-				var result = handler.parseResponse(xhr),
-					$dropZone = $(handler.dropZone);
+				var result = handler.parseResponse(xhr),					
+					$form = $(handler.dropZone).closest('form');
 			
-				$('input#wave_id', $dropZone).val(result.wave_id);
+				$('input#wave_id', $form).val(result.wave_id);
 			
 				if (result.proxy_id !== undefined) {
-					$('input#proxy_id', $dropZone).val(result.proxy_id);
+					$('input#proxy_id', $form).val(result.proxy_id);
 				}
 
 				// files.uploadSequence.start(index + 1);
