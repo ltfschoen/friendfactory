@@ -16,7 +16,7 @@ class Posting::WaveProxiesController < ApplicationController
   def new_posting_wave_proxy
     if resource = Wave::Base.find_by_id(params[:resource_id])
       resource.publish!
-      @posting ||= Posting::WaveProxy.new.tap do |proxy|
+      @posting = Posting::WaveProxy.new.tap do |proxy|
         proxy.user = current_user
         proxy.resource = resource
         proxy.state = :published
