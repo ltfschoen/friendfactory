@@ -52,6 +52,7 @@ jQuery(function($) {
 
 		.fileUploadUI({
 			dropEffect: null,
+			dropZone: $('.dropzone'),
 			uploadTable: $('.tab_content ul.posting_photos'),
 			downloadTable: $('.tab_content ul.posting_photos'),
 

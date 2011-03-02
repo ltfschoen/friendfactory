@@ -4,6 +4,9 @@ class Wave::Base < ActiveRecord::Base
   
   set_table_name :waves
 
+  alias_attribute :subject, :topic
+  alias_attribute :body, :description
+  
   state_machine do
     state :published
     state :unpublished

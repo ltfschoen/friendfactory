@@ -12,9 +12,6 @@
 }
 
 .file_upload_highlight img {
-	-webkit-transform: scale(1.05);
-	-moz-transform: scale(1.05);
-	transform: scale(1.05);
 }
 
 .file_upload input {
@@ -44,8 +41,8 @@
 }
 
 .file_upload_progress div {
-  width: 150px;
-  height: 15px;
+/*  width: 150px;*/
+/*  height: 15px;*/
 }
 
 .file_upload_cancel button {
@@ -55,40 +52,52 @@
 	vertical-align: top;
 }
 
-.tab_content .new_wave_album.file_upload {
-	text-align: left;
-	width: 260px;
-	height: 208px;
-	margin-left: -6px;
-	margin-top: -6px;
+.tab_content .new_wave_album .dropzone {
+	text-align: left;	
+	width: 254px;
+	height: 182px;
+	margin-top: -4px;
+	margin-left: -4px;
 	clear: both;
-}
-
-.tab_content .new_wave_album .button-bar {
-	position: relative;
-	top: -76px;
-	left: -24px;
-	text-align: right;
-}
-
-.tab_content .new_wave_album.file_upload button.submit,
-.tab_content .new_wave_album.file_upload button.cancel {
-	display: inline-block;
-}
-
-.tab_content .new_wave_album.file_upload .photo.canvas {
-	width: 238px;
-	margin: 6px;
 	cursor: pointer;
 }
 
+.tab_content .new_wave_album .button-bar {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	text-align: right;	
+}
+
+.tab_content .new_wave_album .button-bar button {
+	margin: 0;
+}
+
+.tab_content .new_wave_album .button-bar button.submit,
+.tab_content .new_wave_album .button-bar button.cancel {
+	display: inline-block;
+}
+
 .tab_content .new_wave_album .photo.canvas img {
+	margin-top: 4px;
+	margin-left: 4px;
 	-webkit-transition: -webkit-transform 0.1s linear;
 	-moz-transition: -moz-transform 0.1s linear;
 	transition: transform 0.1s linear;
+	-webkit-transform: scale(0.98);
+	-moz-transform: scale(0.98);
+	transform: scale(0.98);
 }
 
-.tab_content .new_wave_album .photo.canvas p.unobtrusive {
+.tab_content .new_wave_album .photo.canvas.file_upload_highlight img {
+	-webkit-transform: scale(1.0);
+	-moz-transform: scale(1.0);
+	transform: scale(1.0);
+}
+
+.tab_content .new_wave_album .photo.canvas + p {
+	width: 238px;
+	margin: 0;
 	text-align: center;
 }
 
