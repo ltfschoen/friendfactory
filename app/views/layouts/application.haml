@@ -1,7 +1,9 @@
 !!! 5
 %html.no-js
   %head
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
+    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }    
+    / [if lt IE 9]
+      %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
     %title
       = @title || current_site
 
