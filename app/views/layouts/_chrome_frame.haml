@@ -1,0 +1,70 @@
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js'
+= javascript_include_tag 'chrome-frame.js'
+
+:css
+  .chromeFrameInstallDefaultStyle.xxx {
+    width: 100%;
+    border: 5px solid blue;
+  }
+
+  #updateBar {
+    width: 100%;
+    padding: 5px 0px;
+    border-bottom: 1px solid #666;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10000;
+    font-family: Bitstream Vera Sans,verdana,sans-serif !important;
+    font-size: 11px !important;
+    color: #000 !important;
+    background: #FFFFE1;
+    cursor: default;
+  }
+
+  * html #updateBar {
+    position: absolute;
+    top:expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop : document.body.scrollTop);
+  }
+
+  #updateBar.over {
+    color: #fff !important;
+    background: #3399ff;
+  }
+
+  #updateMessage {
+    height: 16px;
+    line-height: 16px;
+    padding: 0px 23px;
+    background: url('images/friskyfactory/chrome-frame/icon.png') 3px 0px no-repeat;
+  }
+
+  #updateBar.over #updateMessage {
+    /* background-position: 3px -16px; */
+    background: url('images/friskyfactory/chrome-frame/icon-over.png') 3px 0px no-repeat;
+  }
+
+  #closeUpdateBar {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 5px;
+    right: 1px;
+    z-index: 10001;
+    background: url(../images/friskyfactory/chrome-frame/close.png) 0px 0px;
+  }
+
+  #updateBar.over #closeUpdateBar {
+    /* background-position: 0px -16px; */
+    background: url(../images/friskyfactory/chrome-frame/close-over.png) 0px 0px;
+  }
+
+:javascript
+  (function(){
+    window.attachEvent("onload", function() {
+      CFInstall.check({
+        mode: "overlay",
+        node: "prompt"
+      });
+    });  
+  });

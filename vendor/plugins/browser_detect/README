@@ -1,0 +1,42 @@
+*WHAT?*
+
+updated and extended version of browser dectection to be used in RAILS applications.
+besides finding out the browser and OS version, it can also return if the "user agent" is
+a bot, a mobile browser, an offline browser, etc. (still in TODO)
+
+currently you can use it like this:
+
+script/plugin install git://github.com/pboling/browser_detect.git
+
+include BrowserDetectHelper
+if (browser_is('mozilla') && browser_version>=2.0)
+  puts "yay"
+else
+  puts "oh no!"
+end
+
+*INFORMATION*
+
+see zytrax.com for a list of web browser names
+http://www.zytrax.com/tech/web/browser_ids.htm
+
+see also the user agent strings reference on developer.mozilla.org
+https://developer.mozilla.org/en/User_Agent_Strings_Reference
+
+evolt.org's Browser Archive — the Internet's leading source for web browsers, old and new
+http://browsers.evolt.org/
+
+WIKIPEDIA information on browser usage share
+http://en.wikipedia.org/wiki/Usage_share_of_web_browsers
+
+
+
+ressources
+
+GOOD
+* http://www.user-agents.org/
+* http://user-agent-string.info/
+
+BAD
+* http://www.pgts.com.au/pgtsj/pgtsj0212d.html
+* http://user-agents.my-addr.com/user_agent_list/user_agent_database/useragent_library.php
