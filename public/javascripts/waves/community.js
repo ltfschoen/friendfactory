@@ -67,8 +67,7 @@ jQuery(function($) {
 		});
 
 
-	// $('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
-	$('a[rel="#posting_text"], a[rel="#posting_photo"], a[rel="#posting_video_upload"], a[rel="#wave_album"]', 'ul.wave.community.nav')
+	$('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
 		.click(function(event) {		
 			event.preventDefault();			
 			var $this = $(this);
