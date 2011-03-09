@@ -1,21 +1,23 @@
 jQuery(function($) {
+
 	$('<script>')
 		.attr('src', 'http://www.youtube.com/player_api')
 		.attr('type', 'text/javascript')
 		.insertBefore('script:first');
 		
-	$('.tab_content#posting_video_upload')
-		.bind('reset', function() {
-			$form = $(this).find('form');
-			$form.get(0).reset();
-			$form.find('input#posting_video_body').placehold();
-		})
-		.find('button')
-			.button({ text: false })
+		
+	$('form.new_posting_video', '.tab_content')
+		.buttonize()
+		
+		.find('button.cancel')
+			.bind('click', function() {
+				$(this).hideTabContent();
+				return false;
+			})
 		.end()
-		.find('input#posting_video_body')
-			.placehold();
+
 });
+
 
 function onYouTubePlayerAPIReady() {
 	$('a', '.youtube_video_player').live('click', function(event) {
@@ -38,9 +40,11 @@ function onYouTubePlayerAPIReady() {
 	});	
 }
 
+
 function getYouTubeVideoId(url) {
 	return url.match("[\\?&]v=([^&#]*)")[1];
 }
+
 
 function onPlayerReady(event) {
 	$(event.target.a.parentNode).find('a').remove();
@@ -54,9 +58,11 @@ function onPlayerStateChange(event) {
   // }
 }
 
+
 function onPlayerError(event) {
 	alert(event.data);
 }
+
 
 function stopVideo() {
   // player.stopVideo();

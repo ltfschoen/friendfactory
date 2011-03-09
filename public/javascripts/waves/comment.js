@@ -40,14 +40,13 @@ jQuery(function($) {
 
 		.find('button.cancel')
 			.bind('click', function(event) {
-				event.preventDefault();
-				event.stopPropagation();
 				$(this).closest('.posting_comment')
 					.fadeTo('fast', 0.0, function() {
-						$(this).slideUp(function(){
+						$(this).slideUp(function() {
 							$(this).prev('a.new_posting_comment').fadeTo('fast', 1.0);
 						});
 					});
+				return false;
 			});
 
 });

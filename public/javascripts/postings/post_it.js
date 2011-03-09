@@ -62,8 +62,6 @@ jQuery(function($) {
 		
 		.find('button.cancel')			
 			.live('click', function(event) {
-				event.preventDefault();
-				event.stopPropagation();
 				$(this).closest('.button-bar')
 					.css({ opacity: 0.0 })
 					.closest('form')
@@ -79,8 +77,9 @@ jQuery(function($) {
 						});
 				
 				$('a[rel="#posting_post_it"]', 'ul.wave.nav')
-					.closest('li')
-						.removeClass('current');		
+					.closest('li').removeClass('current');
+					
+				return false;
 			});
 
 });

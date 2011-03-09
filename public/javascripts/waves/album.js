@@ -23,22 +23,32 @@ jQuery(function($) {
 		.buttonize({ text: true })
 		
 		.find('button.submit')
-			.click(function(event) {
+			.bind('click', function(event) {
 				event.preventDefault();
 			
 				var $form = $(this).closest('form'),							
-					publishId = $form.find('#publish_id').val()
+					publishId = $form.find('#publish_id').val(),
 					albumId = $form.find('#wave_id').val();
 			
 				if (albumId !== '') {
-					var url = '/waves/' + publishId + '/posting/wave_proxies' 
-					$form.fadeTo('slow', 0.0, function() {
-						$form.slideUp(function() {
-							$form.css({ opacity: 1.0 });
+					var url = '/waves/' + publishId + '/posting/wave_proxies',
+						$tabContent = $form.closest('tab_content');
+					
+					$tabContent.fadeTo('fast', 0.0, function() {
+						$tabContent.slideUp(800, 'easeOutBounce', function() {
+							$tabContent.trigger('reset');
 						});
 					});
+										
 					$.post(url, { resource_id: albumId }, function(){}, 'script');
 				}
+			})
+		.end()
+		
+		.find('button.cancel')
+			.bind('click', function() {
+				$(this).hideTabContent();
+				return false;
 			})
 		.end()
 		
