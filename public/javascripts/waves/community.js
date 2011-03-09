@@ -140,15 +140,13 @@ jQuery(function($) {
 	// 		}
 	// 	});
 
-
-	$('button.cancel, button#posting_photo_cancel', '.tab_content')
-		.live('click', function(event) {
+	$('button.cancel', '.tab_content')
+		.click(function(event) {
 			event.preventDefault();
 			var $tabContent = $(this).closest('.tab_content');
 			
 			$('a[rel="#' + $tabContent.attr('id') +'"]', 'ul.wave.community.nav')
-				.closest('li')
-					.removeClass('current');
+				.closest('li').removeClass('current');
 			
 			$tabContent.fadeTo('fast', 0.0, function() {
 				$tabContent.slideUp(800, 'easeOutBounce', function() {

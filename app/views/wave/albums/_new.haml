@@ -4,18 +4,13 @@
   %table
     %tr
       %td
-        .post_it.canvas.attachment
-          .content
-            = avatar_image_tag(new_wave_album.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => new_wave_album.user.user_info.gender)
-            = f.text_area :subject, :placeholder => 'Caption'
-      %td
         %ul.posting_photos
         .photo.canvas.dropzone
-          = image_tag 'friskyfactory/silhouette-q.gif', :class => 'photo h4x6 small silhouette', :site => false    
+          = image_tag 'friskyfactory/ffffff.gif', :class => 'photo h4x6 small', :site => false
+          %p.unobtrusive<
+            Choose or drag photos here
           = fields_for :posting_photo do |photo|
             = photo.file_field :image
           .button-bar
-            = f.submit 'Upload', :class => 'submit'
+            = f.submit 'Finished', :class => 'submit'
             = f.button 'Cancel', :class => 'cancel'
-        %p.unobtrusive<
-          Click or drag photos here to upload

@@ -1,14 +1,9 @@
 jQuery(function($) {
 
-	function renderImgTag(photo) {
-		var imgTag = '<div class="photo canvas"><img src="' + photo.image_path + '" class="photo small ';
-		imgTag += photo.horizontal ? 'h4x6"' : 'v4x6"';
-		return imgTag + '></div>';
-	}
-	
-	
 	function renderPostingPhoto(photo) {
-		return '<div class="posting '+ photo.dom_id + '">' + renderImgTag(photo) + '</div>';
+		var imgTag = '<div class="photo canvas"><img src="' + photo.image_path + '" class="photo small ';
+		imgTag += (photo.horizontal ? 'h4x6"' : 'v4x6"') + '></div>';
+		return '<div class="posting '+ photo.dom_id + '">' + imgTag + '</div>';
 	}
 	
 	
@@ -25,33 +20,28 @@ jQuery(function($) {
 
 	
 	$('form.new_wave_album', '.tab_content')
-		.find('button')
-			.button({ text: false })
-			.filter('button.submit')
-				.click(function(event) {
-					event.preventDefault();
-				
-					var $form = $(this).closest('form'),							
-						publishId = $form.find('#publish_id').val()
-						albumId = $form.find('#wave_id').val();
-				
-					if (albumId !== '') {
-						var url = '/waves/' + publishId + '/posting/wave_proxies' 
-						$form.fadeTo('slow', 0.0, function() {
-							$form.slideUp(function() {
-								$form.css({ opacity: 1.0 });
-							});
+		.buttonize({ text: true })
+		
+		.find('button.submit')
+			.click(function(event) {
+				event.preventDefault();
+			
+				var $form = $(this).closest('form'),							
+					publishId = $form.find('#publish_id').val()
+					albumId = $form.find('#wave_id').val();
+			
+				if (albumId !== '') {
+					var url = '/waves/' + publishId + '/posting/wave_proxies' 
+					$form.fadeTo('slow', 0.0, function() {
+						$form.slideUp(function() {
+							$form.css({ opacity: 1.0 });
 						});
-						$.post(url, { resource_id: albumId }, function(){}, 'script');
-					}
-				})
-			.end()
+					});
+					$.post(url, { resource_id: albumId }, function(){}, 'script');
+				}
+			})
 		.end()
 		
-		.find('p.unobtrusive')
-			.show()
-		.end()
-
 		.fileUploadUI({
 			dropEffect: null,
 			dropZone: $('.dropzone'),
