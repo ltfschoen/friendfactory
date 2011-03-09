@@ -3,13 +3,9 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
   jQuery.browser.safari = false;
 }
 
-// jQuery(function($) {
-//  	$('button.cancel, a.cancel')
-// 		.button({ icons: { primary: 'ui-icon-close' }});	
-// 	$('input, textarea').placehold();	
-// });
 
 (function($) {
+
 	$.fn.buttonize = function(customOptions) {
 		var options = $.extend({}, $.fn.buttonize.defaults, customOptions || {});
 		return $(this)
