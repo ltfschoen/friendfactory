@@ -23,10 +23,10 @@ jQuery(function($) {
 
 				$($this.attr('rel'))
 					.find('form')
-					.clone()
-					.css({ width: 0, opacity: 0.0 })
-					.prependTo('ul.posting_post_its:first')
-					.wrap('<li>');
+						.clone()
+						.css({ width: 0, opacity: 0.0 })
+						.prependTo('ul.posting_post_its:first')
+						.wrap('<li>');
 
 				setTimeout(function() {
 					$('li:eq(5)', 'ul.posting_post_its:first')
@@ -47,13 +47,20 @@ jQuery(function($) {
 		});
 
 
-	$('form.new_posting_post_it', '#posting_post_it.nav')
+	$('form.new_posting_post_it', '.tab_content')
+		.buttonize()
+		
 		.live('ajax:before', function(event) {
 			$(this).find('.button-bar')
 				.css({ opacity: 0.0 });
 		})
 
-		.find('button.cancel')
+		.live('ajax:complete', function(event) {
+			$(this).find('.button-bar')
+				.css({ opacity: 1.0 });
+		})
+		
+		.find('button.cancel')			
 			.live('click', function(event) {
 				event.preventDefault();
 				$(this).closest('.button-bar')
