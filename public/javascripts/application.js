@@ -11,7 +11,7 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 
 (function($) {
 	$.fn.buttonize = function(customOptions) {
-		var options = $.extend({}, $.fn.buttonize.defaults, customOptions);
+		var options = $.extend({}, $.fn.buttonize.defaults, customOptions || {});
 		return $(this)
 			.find('button[type="submit"]')
 				.button({ icons: { primary: 'ui-icon-check' }, text: options.text })
