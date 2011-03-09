@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {  
 
 	// Buttons
-	$('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});
+	// $('button[type="submit"]').button({ icons: { primary: 'ui-icon-check' }});
 
 	// Set up static polaroids
 	$('.polaroid-container > .polaroid').polaroid();
