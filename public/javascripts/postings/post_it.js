@@ -63,6 +63,7 @@ jQuery(function($) {
 		.find('button.cancel')			
 			.live('click', function(event) {
 				event.preventDefault();
+				event.stopPropagation();
 				$(this).closest('.button-bar')
 					.css({ opacity: 0.0 })
 					.closest('form')

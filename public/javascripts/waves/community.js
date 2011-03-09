@@ -141,7 +141,7 @@ jQuery(function($) {
 	// 	});
 
 	$('button.cancel', '.tab_content')
-		.click(function(event) {
+		.bind('click', function(event) {
 			event.preventDefault();
 			var $tabContent = $(this).closest('.tab_content');
 			
