@@ -7,7 +7,6 @@ jQuery(function($) {
 		var params = encodeURIComponent('location[address]=' + address);
 		$.get('/locations/geocode', params, function(resp) {
 			if (resp) {
-				console.dir(resp);
 				$('div.map', $ticket).html(
 					'<a href="' + resp['link_url'] + '" target="_blank"><img src="' + resp['map_url'] + '" class="map"></a>');
 				
