@@ -41,7 +41,7 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 			return aliasedFadeTo.apply(this, arguments);			
 		}
 	};
-	
+
 	
 	var aliasedHide = $.fn.hide;
 	
@@ -53,12 +53,17 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 			if ((arguments.length > 0) && $.isFunction(arguments[arguments.length - 1])) {
 				callBack = arguments[arguments.length - 1];
 			}
-			
-			return aliasedHide.apply(this, [ 0, callBack ]);
+
+			if (callBack !== 'undefined') {
+				aliasedHide.apply(this);
+				return callBack.apply(this);
+			} else {
+				return aliasedHide.apply(this);				
+			}
 
 		} else {
 			return aliasedHide.apply(this, arguments);			
 		}
 	};
-	
+
 })(jQuery);
