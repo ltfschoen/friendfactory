@@ -1,7 +1,12 @@
 @font-face {
-	font-family: 'NothingYouCouldDo';
-	src: url('/fonts/nothingyoucoulddo.ttf');
-	font-weight: normal;
+    font-family: 'NothingYouCouldDoRegular';
+    src: url('/fonts/nothingyoucoulddo-webfont.eot');
+    src: url('/fonts/nothingyoucoulddo-webfont.eot?iefix') format('eot'),
+         url('/fonts/nothingyoucoulddo-webfont.woff') format('woff'),
+         url('/fonts/nothingyoucoulddo-webfont.ttf') format('truetype'),
+         url('/fonts/nothingyoucoulddo-webfont.svg#webfontBhZmh9Sb') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .post_it.canvas {
@@ -23,13 +28,13 @@
 	height: 120px;
 	padding: 7px 10px 0 10px;
 	overflow: hidden;
-	font-family: 'NothingYouCouldDo';
+	font-family: 'NothingYouCouldDoRegular';
 	font-size: 11px;
 	line-height: 16px;
 }
 
 .post_it.canvas .content a.profile {
-	font-family: 'NothingYouCouldDo';
+	font-family: 'NothingYouCouldDoRegular';
 	font-size: 11px;
 	line-height: 16px;	
 }
@@ -66,7 +71,7 @@
 	height: 115px;
 	border: 0;
 	padding: 0;
-	font-family: 'NothingYouCouldDo';
+	font-family: 'NothingYouCouldDoRegular';
 	font-size: 11px;
 	line-height: 16px;	
 	color: #111;

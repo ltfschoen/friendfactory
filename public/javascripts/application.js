@@ -54,7 +54,7 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 				callBack = arguments[arguments.length - 1];
 			}
 
-			if (callBack !== 'undefined') {
+			if (callBack !== undefined) {
 				aliasedHide.apply(this);
 				callBack.apply(this);
 				return this;
