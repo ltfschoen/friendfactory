@@ -1,7 +1,13 @@
 @font-face {
     font-family: 'NothingYouCouldDoRegular';
     src: url('/fonts/nothingyoucoulddo-webfont.eot');
-    src: url('/fonts/nothingyoucoulddo-webfont.eot?iefix') format('eot'),
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NothingYouCouldDoRegular';
+    src: url(//:) format('no4040'),
          url('/fonts/nothingyoucoulddo-webfont.woff') format('woff'),
          url('/fonts/nothingyoucoulddo-webfont.ttf') format('truetype'),
          url('/fonts/nothingyoucoulddo-webfont.svg#webfontBhZmh9Sb') format('svg');
