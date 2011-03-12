@@ -29,10 +29,10 @@
       #{yield(:pagecss)}
 
     - if Rails.env.development?
-      = javascript_include_tag 'jquery.min.js', 'jquery-ui.min.js', 'jquery.tools.min.js', 'debug.js'
+      = javascript_include_tag 'jquery.js', 'jquery-ui.js', 'jquery.tools.min.js', 'debug.js'
     - else
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js'
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js'
       = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
       
     = javascript_includes |
