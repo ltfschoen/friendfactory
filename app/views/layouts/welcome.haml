@@ -11,7 +11,6 @@
       'friskyfactory/application', |
       'friskyfactory/welcome', |
       "#{current_site}/jquery-ui.css", |
-      "friskyfactory/ff.jquery-ui.css", |
       "#{current_site}/application", |
       "#{current_site}/welcome", |
         :media => 'screen', :cache => "#{current_site}/welcome-cached"
@@ -20,10 +19,10 @@
       = stylesheet_link_tag 'friskyfactory/ie', :media => 'screen'
 
     - if Rails.env.development?
-      = javascript_include_tag 'jquery.min.js', 'jquery-ui.min.js', 'debug.js'
+      = javascript_include_tag 'jquery.js', 'jquery-ui.js', 'debug.js'
     - else
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js'
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js'
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js'
       
     = javascript_includes |
         'modernizr-1.6.min', |    
