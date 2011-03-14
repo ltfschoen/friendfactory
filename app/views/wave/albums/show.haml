@@ -3,7 +3,7 @@
     $.supersized({
       slideshow : 1,
       autoplay : 0,
-      start_slide : 1,
+      start_slide : #{@start_slide},
       slide_interval : 1600,
       transition : 1,
       transition_speed : 500,
@@ -22,11 +22,7 @@
       thumbnail_navigation : 1,
       slide_counter : 0,
       slide_captions : 1,
-      slides : [
-        { image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.1/slides/quietchaos-kitty.jpg', title : 'Quiet Chaos by Kitty Gallannaugh', url : 'http://www.nonsensesociety.com/2010/12/kitty-gallannaugh/'},  
-        { image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.1/slides/wanderers-kitty.jpg', title : 'Wanderers by Kitty Gallannaugh', url : 'http://www.nonsensesociety.com/2010/12/kitty-gallannaugh/'},  
-        { image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.1/slides/apple-kitty.jpg', title : 'Applewood by Kitty Gallannaugh', url : 'http://www.nonsensesociety.com/2010/12/kitty-gallannaugh/'}  
-      ]
+      slides : #{supersized_album_photos(@wave).to_json}
     }); 
   });
 

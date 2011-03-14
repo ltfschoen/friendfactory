@@ -8,5 +8,11 @@ module Wave::AlbumHelper
       end
     end
   end
+  
+  def supersized_album_photos(album)
+    album.photos.inject([]) do |memo, photo|
+      memo << { :image => photo.image.url(:original), :title => '' }
+    end
+  end
 
 end

@@ -28,12 +28,18 @@ class Wave::Base < ActiveRecord::Base
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null' do
+        
     def only(*types)
       where('type in (?)', types.map(&:to_s))
     end
+    
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
-    end    
+    end
+    
+    def published
+      where(:state => :published)
+    end
   end
   
   belongs_to :resource, :polymorphic => true
