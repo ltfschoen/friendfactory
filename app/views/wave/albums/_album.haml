@@ -4,4 +4,6 @@
       %li
         .posting[photo]
           .photo.canvas
-            = render_photo(photo, :class => 'small')
+            - render_photo(photo, :class => 'small') do |image_tag|
+              = link_to(image_tag, wave_album_photo_path(@wave, photo), :target => '_blank')
+              

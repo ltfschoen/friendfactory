@@ -15,7 +15,14 @@ module ApplicationHelper
   end
   
   def stylesheet(*files)
-    files.map! { |file| File.join(current_site.name,*file) }
+    options = files.extract_options!
+    options.reverse_merge!(:site => false)
+    site_name = if options[:site] == false
+      'friskyfactory'
+    else
+      current_site.name
+    end
+    files.map! { |file| File.join(site_name, *file) }
     content_for(:stylesheets) { stylesheet_link_tag(files) }
   end
     

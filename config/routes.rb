@@ -15,7 +15,9 @@ Friskyfactory::Application.routes.draw do
         get 'popup'
       end
     end
-    resources :albums, :only => [ :new, :create ]
+    resources :albums, :only => [ :new, :create ] do
+      resources :photos, :only => [ :show ], :controller => 'albums'
+    end
   end
 
   # To manage a user's profile

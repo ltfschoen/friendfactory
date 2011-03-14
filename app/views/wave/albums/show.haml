@@ -1,0 +1,45 @@
+:javascript
+  jQuery(function($) {
+    $.supersized({
+      slideshow : 1,
+      autoplay : 0,
+      start_slide : 1,
+      slide_interval : 1600,
+      transition : 1,
+      transition_speed : 500,
+      new_window : 1,
+      pause_hover : 0,
+      keyboard_nav : 1,
+      performance : 1,
+      min_width : 0,
+      min_height : 0,
+      vertical_center : 1,
+      horizontal_center : 1,
+      fit_portrait : 1,
+      fit_landscape : 1,
+      image_path : '/images/friskyfactory/supersized/',
+      navigation : 1,
+      thumbnail_navigation : 1,
+      slide_counter : 0,
+      slide_captions : 1,
+      slides : [
+        { image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.1/slides/quietchaos-kitty.jpg', title : 'Quiet Chaos by Kitty Gallannaugh', url : 'http://www.nonsensesociety.com/2010/12/kitty-gallannaugh/'},  
+        { image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.1/slides/wanderers-kitty.jpg', title : 'Wanderers by Kitty Gallannaugh', url : 'http://www.nonsensesociety.com/2010/12/kitty-gallannaugh/'},  
+        { image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.1/slides/apple-kitty.jpg', title : 'Applewood by Kitty Gallannaugh', url : 'http://www.nonsensesociety.com/2010/12/kitty-gallannaugh/'}  
+      ]
+    }); 
+  });
+
+#prevthumb
+#nextthumb
+#controls-wrapper
+  #controls
+    #slidecounter
+      %span.slidenumber>
+      %span.totalslides
+    #slidecaption
+    #navigation
+      = image_tag '/images/friskyfactory/supersized/back_dull.png', :id => 'prevslide', :site => false
+      = image_tag '/images/friskyfactory/supersized/pause_dull.png', :id => 'pauseplay', :site => false
+      = image_tag '/images/friskyfactory/supersized/forward_dull.png', :id => 'nextslide', :site => false
+    = image_tag '/images/friskyfactory/supersized/supersized-logo.png', :class => 'stamp', :site => false

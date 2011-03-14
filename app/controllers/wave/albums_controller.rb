@@ -2,6 +2,12 @@ class Wave::AlbumsController < ApplicationController
   
   before_filter :require_user  
     
+  def show
+    respond_to do |format|
+      format.html { render :layout => 'wave_album' }
+    end
+  end
+    
   def create
     create_wave_album unless params[:wave_id].present?
     if wave.postings << posting
@@ -12,6 +18,10 @@ class Wave::AlbumsController < ApplicationController
   end
     
   private
+
+  def wave
+    @wave ||= Wave::Album.find_by_id(params[:wave_id])
+  end
   
   def posting
     @posting ||= begin
@@ -21,11 +31,7 @@ class Wave::AlbumsController < ApplicationController
       end
     end
   end
-  
-  def wave
-    @wave ||= Wave::Album.find_by_id(params[:wave_id])
-  end
-    
+      
   def create_wave_album
     @wave = Wave::Album.create(:user => current_user, :state => :unpublished)
   end
