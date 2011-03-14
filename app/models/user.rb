@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
       wave = conversations.build
       wave.resource = receiver
       wave.save
+      wave.publish!
       wave
     end
   end
