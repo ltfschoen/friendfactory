@@ -4,7 +4,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
     %meta{:content => "IE=8", "http-equiv" => "X-UA-Compatible"}/
     %title= @title || current_site
-    %link{:href => "/stylesheets/friskyfactory/supersized.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    = stylesheet_link_tag 'friskyfactory/wave_album.css'
     = javascript_includes 'jquery.min', 'modernizr-1.6.min', 'supersized.3.1.2'
   %body
     = yield
