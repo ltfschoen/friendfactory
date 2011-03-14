@@ -7,11 +7,11 @@ jQuery(function($) {
 	}
 
 
-	$('.posting_photos').masonry({
-		singleMode: false,
-		columnWidth: 1,
-		itemSelector: 'li'
-	});
+	// $('.posting_photos').masonry({
+	// 	singleMode: false,
+	// 	columnWidth: 1,
+	// 	itemSelector: 'li'
+	// });
 	
 	
 	$('#wave_album.tab_content')
