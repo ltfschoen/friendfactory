@@ -108,8 +108,8 @@
 .tab_content ul.posting_photos li,
 .wave_album ul.posting_photos li {
 	float: left;
-	/*margin-right: 10px;*/
-	/*margin-bottom: 10px;*/
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 .tab_content ul.posting_photos > li .photo.canvas,
