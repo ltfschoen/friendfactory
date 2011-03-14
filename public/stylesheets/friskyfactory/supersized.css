@@ -76,11 +76,11 @@ img { border:none; }
 }
 
 #controls {
-	overflow:hidden;
-	height:100%;
-	text-align:left;
-	z-index:5;
-	padding:0 114px;
+	overflow: hidden;
+	height: 100%;
+	text-align: left;
+	z-index: 5;
+	padding: 0 114px;
 }
 
 #slidecounter {
@@ -126,4 +126,8 @@ img { border:none; }
 #nextthumb:active, #prevthumb:active { bottom:10px; }
 #navigation > :hover,#nextthumb:hover, #prevthumb:hover { cursor:pointer; }
 
-.stamp{ float: right; margin: 15px 30px 0 0;}
+.logo {
+	float: right;
+	margin: 6px 30px 0 0;
+	width: 140px;
+}
