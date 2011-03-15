@@ -31,7 +31,6 @@ class UserInfo < ActiveRecord::Base
     tag_list = [
       user_info.gender_description,
       user_info.orientation_description,
-      user_info.relationship_description,
       user_info.deafness_description
     ].compact * ','
     
