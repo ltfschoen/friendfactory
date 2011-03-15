@@ -7,10 +7,11 @@ jQuery(function($) {
 	}
 
 
-	$('.posting_photos').masonry({
+	$('.posting_photos', '.wave_community').masonry({
 		singleMode: false,
 		columnWidth: 1,
-		itemSelector: 'li'
+		itemSelector: 'li',
+		resizeable: false
 	});
 	
 	
