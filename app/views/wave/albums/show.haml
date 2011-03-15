@@ -1,3 +1,4 @@
+- supersized_photos = supersized_album_photos(@wave)
 :javascript
   jQuery(function($) {
     $.supersized({
@@ -18,11 +19,11 @@
       fit_portrait : 1,
       fit_landscape : 1,
       image_path : '/images/friskyfactory/supersized/',
-      navigation : 1,
-      thumbnail_navigation : 1,
+      navigation : #{(supersized_photos.length > 1) ? 1 : 0},
+      thumbnail_navigation : #{(supersized_photos.length > 1) ? 1 : 0},
       slide_counter : 0,
       slide_captions : 1,
-      slides : #{supersized_album_photos(@wave).to_json}
+      slides : #{supersized_photos.to_json}
     }); 
   });
 
