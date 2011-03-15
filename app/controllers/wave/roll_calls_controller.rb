@@ -3,7 +3,7 @@ class Wave::RollCallsController < ApplicationController
   before_filter :require_lurker
 
   cattr_reader :per_page
-  @@per_page = 100
+  @@per_page = 102
   
   def index
     @waves = if params[:tag]
