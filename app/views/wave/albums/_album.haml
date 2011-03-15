@@ -1,7 +1,9 @@
 .wave.clearfix[album]
   %ul.posting_photos
-    - album.photos.each do |photo|
+    - photos = album.photos; photo_count = photos.length
+    - photos.each do |photo|
       %li
         .posting[photo]
           .photo.canvas
-            = link_to(render_photo(photo, :class => 'small'), wave_album_photo_path(album, photo), :target => '_blank')
+            - css_class = (photo_count > 1) ? 'small' : ''
+            = link_to(render_photo(photo, :class => css_class), wave_album_photo_path(album, photo), :target => '_blank')
