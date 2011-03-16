@@ -1,1 +1,2 @@
-= render :partial => File.join('sites', current_site.name, 'welcome', 'launch')
+=# render :partial => File.join('sites', current_site.name, 'welcome', 'launch')
+= render :partial => ('launch-' + current_site.name)

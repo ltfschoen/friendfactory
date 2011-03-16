@@ -1,0 +1,56 @@
+.badge.prefix_3.grid_10.suffix_3
+  = image_tag 'badge.png', :size => '520x220'
+  %h1 A Place for Positive People
+  %h4 FriskyHands is the social networking site designed especially for the Deaf GLBTQ Community and their Friends.
+.creative.prepend-top.prefix_2.grid_12.suffix_2
+  - if flash[:notice].present?
+    .grid_3.alpha<
+      &nbsp;
+    .grid_6.flash.notice<
+      %p= flash[:notice]
+      = link_to 'Back to Login', root_path
+    .grid_3.omega<
+      &nbsp;
+  - else
+    .grid_1.alpha<
+      &nbsp;
+    .grid_6.prepend-top.blurb.alpha
+      - if flash[:error].present?
+        %p Oh no! Can you fix this?
+        %ul.flash.error
+          - flash[:error].each do |error|
+            %li= error
+      - else
+        %p Your privacy and safety are our number-one concerns. No search engine nor any other web site can access your FriskyHands' secured profile.
+    
+    .grid_4<
+      .panel.login
+        %h3 Log in!
+        = link_to 'Password?', new_password_path, :class => 'new_password'
+        = form_for UserSession.new, :url => user_sessions_path do |f|
+          = f.text_field :email, :placeholder => 'email@address.com'
+          = f.password_field :password, :class => 'password', :placeholder => 'password'
+          .button-bar
+            = f.submit 'Login'
+            = f.button 'Sign Up', :class => 'toggle'
+          =# check_box_tag 'remember_me', '1', true
+          =# label_tag 'remember_me', 'Remember me'
+        
+      .panel.signup
+        %h3 Sign up!
+        = form_for User.new, :url => users_path do |f|
+          = f.text_field :first_name, :class => 'ui-widget', :placeholder => 'first name'
+          = f.text_field :last_name, :class => 'ui-widget', :placeholder => 'last name'
+          = f.text_field :email, :class => 'ui-widget', :placeholder => 'email@address.com'
+          = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'
+          = f.password_field :password_confirmation, :class => 'password ui-widget', :placeholder => 'password confirmation'
+          .button-bar
+            = f.submit 'Register'
+            = link_to 'Back', root_path, :class => 'button'
+    .grid_1.omega<
+      &nbsp;
+
+:javascript
+  jQuery(function($){    
+    #{ flash[:error].present? ? "$('.panel.login').hide();" : "$('.panel.signup').hide();" }
+  });
