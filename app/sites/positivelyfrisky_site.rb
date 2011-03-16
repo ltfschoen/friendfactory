@@ -8,7 +8,7 @@ class PositivelyfriskySite < ApplicationSite
   end  
 
   def launch?
-    true
+    false
   end
   
   def analytics_account_number

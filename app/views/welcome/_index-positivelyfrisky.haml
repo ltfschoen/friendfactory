@@ -1,7 +1,9 @@
 .badge.prefix_3.grid_10.suffix_3
   = image_tag 'badge.png', :size => '520x220'
-  %h1 A Place for Positive People
-  %h4 FriskyHands is the social networking site designed especially for the Deaf GLBTQ Community and their Friends.
+  %h1
+    A Place for Positive People
+  %h4
+    PositivelyFrisky is the social networking site designed especially for the HIV+ LGBTQ community & their Friends.
 .creative.prepend-top.prefix_2.grid_12.suffix_2
   - if flash[:notice].present?
     .grid_3.alpha<
@@ -21,8 +23,8 @@
           - flash[:error].each do |error|
             %li= error
       - else
-        %p Your privacy and safety are our number-one concerns. No search engine nor any other web site can access your FriskyHands' secured profile.
-    
+        %p
+          Find new friends and lovers in a fun, uplifting, stigma-free environment where privacy is a priority.    
     .grid_4<
       .panel.login
         %h3 Log in!
