@@ -4,29 +4,29 @@
 }
 
 body {
-	background-color: #9C180C;
+	background-color: #FFF;
 }
 
 label {
 	font-weight: normal;
     font-size: 1em;
-    color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     line-height: 1.4em;    
+  	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 p {
     font-size: 1.2em;
+    line-height: 1.4em;    
     color: #501518;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-    line-height: 1.4em;    
 }
 
 ul.flash.error li {
     font-size: 1.1em;
+    line-height: 1.4em;
     color: #501518;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-    line-height: 1.4em;
 }
 
 img {
@@ -40,8 +40,8 @@ a, a:link, a:hover, a:visited, a:active {
 
 h1 {
 	font-size: 3em;
-	text-shadow: 4px 8px 6px #701518;
 	color: #FFF;
+	text-shadow: 4px 8px 6px #701518;
 }
 
 h2 {
@@ -100,8 +100,8 @@ input.password {
 
 .panel.login a.new_password {
     float: right;
-    color: #FFF;
     font-size: small;
+    color: #FFF;
 }
 
 .panel p {
