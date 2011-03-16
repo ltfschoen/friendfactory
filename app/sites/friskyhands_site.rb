@@ -1,4 +1,8 @@
 class FriskyhandsSite < ApplicationSite  
+  def id
+    1
+  end
+  
   def name
     "friskyhands"
   end

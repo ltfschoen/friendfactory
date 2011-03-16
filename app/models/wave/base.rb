@@ -6,7 +6,7 @@ class Wave::Base < ActiveRecord::Base
 
   alias_attribute :subject, :topic
   alias_attribute :body, :description
-  
+
   state_machine do
     state :published
     state :unpublished
@@ -19,7 +19,9 @@ class Wave::Base < ActiveRecord::Base
       transitions :to => :unpublished, :from => [ :unpublished, :published ]
     end
   end
-  
+
+  scope :site, lambda { |site| where('site_id = ?', site.id) }
+    
   belongs_to :user, :include => :user_info
 
   has_and_belongs_to_many :postings,

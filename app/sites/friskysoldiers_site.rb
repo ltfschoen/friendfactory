@@ -1,4 +1,8 @@
-class FriskysoldiersSite < ApplicationSite  
+class FriskysoldiersSite < ApplicationSite
+  def id
+    3
+  end
+  
   def name
     "friskysoldiers"
   end

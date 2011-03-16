@@ -1,4 +1,8 @@
-class ApplicationSite    
+class ApplicationSite
+  def id
+    0
+  end
+  
   def name
     "default"
   end
