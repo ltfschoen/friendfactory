@@ -34,6 +34,7 @@ class Posting::Base < ActiveRecord::Base
   end
     
   belongs_to :user
+
   belongs_to :resource, :polymorphic => true
   
   has_and_belongs_to_many :waves,

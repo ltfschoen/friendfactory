@@ -29,7 +29,8 @@ class Wave::Base < ActiveRecord::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
       :join_table              => 'postings_waves',
-      :conditions              => 'parent_id is null' do
+      :conditions              => 'parent_id is null',
+      :order                   => 'updated_at desc' do
         
     def only(*types)
       where('type in (?)', types.map(&:to_s))
@@ -41,7 +42,7 @@ class Wave::Base < ActiveRecord::Base
     
     def published
       where(:state => :published)
-    end
+    end    
   end
   
   belongs_to :resource, :polymorphic => true
