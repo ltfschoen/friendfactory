@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
 
   helper :all
-  helper_method :current_user_session, :current_user, :current_site
+  helper_method :current_user_session, :current_user
+  helper_method :current_site  
   helper_method :presenter
 
   rescue_from UnauthorizedException do |exception|
@@ -29,6 +30,9 @@ class ApplicationController < ActionController::Base
     @current_user = current_user_session && current_user_session.record
   end
   
+  def current_site
+  end
+  
   def require_user
     unless current_user
       store_location
@@ -38,7 +42,7 @@ class ApplicationController < ActionController::Base
         end
         return false
       else
-        flash[:notice] = "You must be logged in to access this page"
+        # flash[:notice] = "You must be logged in to access this page"
         redirect_to welcome_url
         return false
        end
