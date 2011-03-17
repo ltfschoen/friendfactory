@@ -2,13 +2,10 @@ jQuery(function($) {
 
 	function insertPostItsContainer() {
 		$('<ul class="posting_post_its clearfix"></ul>')
-			// .css({ opacity: 0.0 })
-			// .hide()
+			.hide()
 			.insertBefore('ul.postings:first')
 			.delay(1200)
 			.slideDown(function() {
-				$(this).show();
-				// $(this).fadeTo('slow', 1.0);
 			});		
 	}
 	
@@ -46,6 +43,7 @@ jQuery(function($) {
 				$this.trigger('bounce')
 					.closest('li').addClass('current');					
 
+				
 				if ($('ul.posting_post_its').length === 0) {
 					insertPostItsContainer();
 				}				
@@ -53,7 +51,8 @@ jQuery(function($) {
 				setTimeout(dropLastPostIt, 1100);
 
 				var postItForm = $($this.attr('rel')).find('form');
-				setTimeout(function(){ revealFirstPostIt(postItForm) }, 2000);
+				var delay = ($('li', 'ul.posting_post_its:eq(0)').length) < 5 ? 900 : 2000;
+				setTimeout(function() { revealFirstPostIt(postItForm) }, delay);
 				
 			} else {
 				$this.trigger('shake');
