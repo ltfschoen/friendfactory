@@ -34,7 +34,8 @@ jQuery(function($) {
 		.bind('bounce', function() {
 			var $this = $(this);
 
-			if (Modernizr.cssanimations) {				
+			if (false && Modernizr.cssanimations) {
+				// Temporarily disabled because of poor Safari rendering
 				$this.bind('webkitAnimationEnd', function(event) {
 					$this.removeClass('bounce');
 				})

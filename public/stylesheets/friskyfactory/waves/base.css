@@ -20,12 +20,22 @@
 	width: 50px;
 }
 
-.no-cssanimations .wave ul.nav li {
+/*.no-cssanimations .wave ul.nav li {
+	position: relative;
+	height: 50px;
+}*/
+
+.wave ul.nav li {
 	position: relative;
 	height: 50px;
 }
 
-.no-cssanimations .wave ul.nav li a {
+
+/*.no-cssanimations .wave ul.nav li a {
+	position: absolute;
+}*/
+
+.wave ul.nav li a {
 	position: absolute;
 }
 
