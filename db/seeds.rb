@@ -5,9 +5,6 @@ sites << Site.find_or_create_by_name(
     :analytics_account_number => 'UA-19948002-1',
     :analytics_domain_name    => '.friskyhands.com')
 
-# All existing waves are on the friskyhands site.
-sites.first.waves = Wave::Base.all
-
 sites << Site.find_or_create_by_name(
     :name                     => 'positivelyfrisky',
     :launch                   => false,
