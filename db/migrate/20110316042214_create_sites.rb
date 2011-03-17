@@ -7,12 +7,29 @@ class CreateSites < ActiveRecord::Migration
       t.string    :analytics_account_number
       t.timestamps
     end
-    add_column :waves, :site_id, :integer
+    
     add_index :sites, :name
+
+    create_table :sites_waves, :id => false, :force => true do |t|
+      t.integer :site_id
+      t.integer :wave_id
+    end
+        
+    add_index :sites_waves, [ :site_id, :wave_id ]
+    add_index :sites_waves, :wave_id
+    
+    create_table :sites_users, :id => false, :force => true do |t|
+      t.integer :site_id
+      t.integer :user_id
+    end
+    
+    add_index :sites_users, [ :site_id, :user_id ]
+    add_index :sites_users, :user_id
   end
 
   def self.down
     drop_table :sites rescue nil
-    remove_column :waves, :site_id rescue nil
+    drop_table :sites_waves rescue nil
+    drop_table :sites_users rescue nil
   end
 end

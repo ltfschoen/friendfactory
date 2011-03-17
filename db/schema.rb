@@ -159,6 +159,22 @@ ActiveRecord::Schema.define(:version => 20110316042214) do
 
   add_index "sites", ["name"], :name => "index_sites_on_name"
 
+  create_table "sites_users", :id => false, :force => true do |t|
+    t.integer "site_id"
+    t.integer "user_id"
+  end
+
+  add_index "sites_users", ["site_id", "user_id"], :name => "index_sites_users_on_site_id_and_user_id"
+  add_index "sites_users", ["user_id"], :name => "index_sites_users_on_user_id"
+
+  create_table "sites_waves", :id => false, :force => true do |t|
+    t.integer "site_id"
+    t.integer "wave_id"
+  end
+
+  add_index "sites_waves", ["site_id", "wave_id"], :name => "index_sites_waves_on_site_id_and_wave_id"
+  add_index "sites_waves", ["wave_id"], :name => "index_sites_waves_on_wave_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -300,7 +316,6 @@ ActiveRecord::Schema.define(:version => 20110316042214) do
     t.integer  "resource_id"
     t.string   "resource_type"
     t.string   "state"
-    t.integer  "site_id"
   end
 
   add_index "waves", ["resource_id", "resource_type"], :name => "index_waves_on_resource_id_and_resource_type"

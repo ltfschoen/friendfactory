@@ -20,15 +20,19 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
-  scope :site, lambda { |site| where('site_id = ?', site.id) }
-    
   belongs_to :user, :include => :user_info
+
+  has_and_belongs_to_many :sites,
+      :class_name              => 'Site',
+      :join_table              => 'sites_waves',
+      :foreign_key             => 'wave_id',
+      :association_foreign_key => 'site_id'      
 
   has_and_belongs_to_many :postings,
       :class_name              => 'Posting::Base',
+      :join_table              => 'postings_waves',
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
-      :join_table              => 'postings_waves',
       :conditions              => 'parent_id is null',
       :order                   => 'updated_at desc' do
         

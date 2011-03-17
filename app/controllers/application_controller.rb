@@ -3,7 +3,7 @@ require 'pusher'
 
 class ApplicationController < ActionController::Base
 
-  include ActionController::Sites
+  # include ActionController::Sites
     
   protect_from_forgery
 
@@ -31,6 +31,11 @@ class ApplicationController < ActionController::Base
   end
   
   def current_site
+    @current_site ||= begin
+      site_name = request.domain && request.domain.gsub(/\..*$/, '')
+      site_name = ActionController::Base.localhost if [ nil, 'localhost' ].include?(site_name)
+      Site.find_by_name(site_name)
+    end
   end
   
   def require_user

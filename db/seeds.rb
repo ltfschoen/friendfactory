@@ -1,25 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
+sites = []
+sites << Site.find_or_create_by_name(
+    :name                     => 'friskyhands',
+    :launch                   => false,
+    :analytics_account_number => 'UA-19948002-1',
+    :analytics_domain_name    => '.friskyhands.com')
 
-Wave::Community.find_or_create_by_site_id_and_slug(
-    :site_id     => FriskyhandsSite.new.id,
-    :slug        => Wave::CommunitiesController::DefaultWaveSlug,
-    :topic       => 'FriskyHands Wave',
-    :description => '')
+# All existing waves are on the friskyhands site.
+sites.first.waves = Wave::Base.all
 
-Wave::Community.find_or_create_by_site_id_and_slug(
-    :site_id     => PositivelyfriskySite.new.id,
-    :slug        => Wave::CommunitiesController::DefaultWaveSlug,
-    :topic       => 'PositivelyFrisky Wave',
-    :description => '')
+sites << Site.find_or_create_by_name(
+    :name                     => 'positivelyfrisky',
+    :launch                   => false,
+    :analytics_account_number => 'UA-19948002-2',
+    :analytics_domain_name    => '.positivelyfrisky.com')
 
-Wave::Community.find_or_create_by_site_id_and_slug(
-    :site_id     => FriskysoldiersSite.new.id,
-    :slug        => Wave::CommunitiesController::DefaultWaveSlug,
-    :topic       => 'FriskySoldiers Wave',
-    :description => '')
+sites << Site.find_or_create_by_name(
+    :name                     => 'friskysoldiers',
+    :launch                   => true,
+    :analytics_account_number => 'UA-19948002-3',
+    :analytics_domain_name    => '.friskysoldiers.com')
+
+sites.each do |site|  
+  unless site.waves.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug).present?
+    site.waves << Wave::Community.create(  
+        :slug        => Wave::CommunitiesController::DefaultWaveSlug,
+        :topic       => 'Community Wave',
+        :description => '')
+  end
+end
