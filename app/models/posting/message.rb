@@ -1,17 +1,19 @@
 class Posting::Message < Posting::Base
 
-  attr_accessible :subject, :body, :receiver_id
+  attr_writer :receiver_id  
+  attr_accessor :site
+
+  attr_accessible :subject, :body, :receiver_id, :site
   attr_readonly :user_id
 
   alias_attribute :sender, :user
-
-  attr_writer :receiver_id
   
   has_many :notifications
   
   validates_presence_of :user_id, :receiver_id
 
   after_create do |posting|
+    posting.publish!
     if wave = find_or_create_recipient_wave(posting)
       wave.messages << posting
       wave.touch
@@ -33,6 +35,9 @@ class Posting::Message < Posting::Base
       waves.where('user_id <> ?', user_id ).first.try(:user)
     end
   end
+  
+  # def receiver=(user)
+  # end
 
   def receiver_id
     @receiver_id || self.receiver.try(:id)
@@ -48,7 +53,7 @@ class Posting::Message < Posting::Base
     if posting.present?
       receiver = User.find_by_id(posting.receiver_id)
       if receiver.present? && (receiver != posting.sender)
-        receiver.conversation.with(posting.sender) || receiver.create_conversation_with(posting.sender)
+        receiver.conversation.with(posting.sender, posting.site) || receiver.create_conversation_with(posting.sender, posting.site)
       end
     end
   end

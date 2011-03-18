@@ -31,17 +31,52 @@ class User < ActiveRecord::Base
   has_many :conversations,
       :class_name => 'Wave::Conversation',
       :order      => 'created_at desc' do
-    def with(receiver)
-      if receiver.present?
-        where(:resource_id => receiver.id).limit(1).first
+        
+    def site(site)
+      if site.present?
+        joins(:sites).where('sites_waves.site_id = ?', site.id)        
       end
+    end
+
+    def with(receiver, site)
+      if receiver.present?
+        site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first
+      end
+    end    
+  end
+
+  # Syntatic sugar:
+  # <user1>.conversation.with.<user2>
+  alias :conversation :conversations
+
+  def create_conversation_with(receiver, site)
+    if receiver.present? && site.present?
+      wave = conversations.build
+      wave.resource = receiver
+      site.waves << wave
+      wave.publish!
+      wave
     end
   end
 
-  # Syntatic sugar: <user1>.conversation.with.<user2>
-  alias :conversation :conversations
+  has_many :inboxes, :class_name => 'Wave::Inbox'
 
-  has_one  :inbox, :class_name => 'Wave::Inbox'
+  def inbox(site)
+    if site.present?
+      site.waves.
+        where('type = ? and user_id = ?', Wave::Inbox, self.id).
+        order('updated_at desc').limit(1).first
+    end
+  end
+  
+  def create_inbox(site)
+    if site.present?
+      inbox = inboxes.build
+      inbox.waves = conversations.site(site)    
+      site.waves << inbox
+      inbox
+    end
+  end
   
   has_many :postings, :class_name => 'Posting::Base'
   
@@ -68,16 +103,6 @@ class User < ActiveRecord::Base
   
   def online?
     User.online?(self)
-  end
-  
-  def create_conversation_with(receiver)
-    if receiver.present?
-      wave = conversations.build
-      wave.resource = receiver
-      wave.save
-      wave.publish!
-      wave
-    end
   end
   
   def has_friend?(buddy)
@@ -141,5 +166,5 @@ class User < ActiveRecord::Base
   def reset_password!
     reset_perishable_token!
   end
-    
+  
 end
