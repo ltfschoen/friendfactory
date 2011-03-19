@@ -26,7 +26,7 @@ module PostingsHelper
         
     if user_or_avatar.present?
       user, avatar = user_or_avatar.is_a?(User) ?
-          [ user_or_avatar, user_or_avatar.profile.avatar ] :
+          [ user_or_avatar, user_or_avatar.profile(current_site).avatar ] :
           [ user_or_avatar.user, user_or_avatar ]
 
       if user.present? && avatar.present?
@@ -41,7 +41,7 @@ module PostingsHelper
             :id    => opts[:id])
         
         if opts[:link_to_profile]
-          return link_to(image_tag, wave_profile_path(user.profile), :class => 'profile')
+          return link_to(image_tag, wave_profile_path(user.profile(current_site)), :class => 'profile')
         else
           return image_tag
         end

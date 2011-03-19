@@ -21,13 +21,15 @@ class User < ActiveRecord::Base
     end
   end
   
-  has_and_belongs_to_many :sites
+  has_and_belongs_to_many :sites  
+  has_one  :user_info  
+  has_many :waves, :class_name => 'Wave::Base'  
+  has_many :profiles, :class_name => 'Wave::Profile'
   
-  has_one  :user_info
-  
-  has_many :waves,   :class_name => 'Wave::Base'
-  has_one  :profile, :class_name => 'Wave::Profile'
-  
+  def profile(site)
+    profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
+  end
+    
   has_many :conversations,
       :class_name => 'Wave::Conversation',
       :order      => 'created_at desc' do
@@ -87,14 +89,12 @@ class User < ActiveRecord::Base
 
   scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::InactivityTimeout).to_s(:db) ]
 
-  after_create do
-    if self.profile.nil?
-      profile = create_profile
-    end
+  after_create do |user|    
+    user.create_profile if user.profile.nil?
   end
 
-  def avatar
-    profile.avatar
+  def avatar(site)
+    profile(site).avatar
   end
   
   def self.online?(user)

@@ -21,7 +21,7 @@
   - if flash[:notice].present?
     = flash[:notice].html_safe
   - else
-    - if current_user && current_user.avatar.nil?
+    - if current_user && current_user.avatar(current_site).nil?
       Create a profile on your #{link_to('Bio', profile_path)} page
   %div.links
     = link_to_facebook
