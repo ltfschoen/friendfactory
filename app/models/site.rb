@@ -8,7 +8,11 @@ class Site < ActiveRecord::Base
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
-      :association_foreign_key => 'wave_id'      
+      :association_foreign_key => 'wave_id' do
+    def type(type)
+      where(:type => type)
+    end
+  end
   
   def to_s
     name
