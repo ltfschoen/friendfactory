@@ -1,6 +1,4 @@
-# Profile Waves
-
-adam_profile_wave:
+adam_profile_wave_1:
   id: 1
   user_id: 1
   type: Wave::Profile
@@ -8,8 +6,10 @@ adam_profile_wave:
   resource_id: 1
   resource_type: UserInfo
   state: published
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>
 
-bert_profile_wave:
+bert_profile_wave_1:
   id: 2
   user_id: 2
   type: Wave::Profile
@@ -17,8 +17,10 @@ bert_profile_wave:
   resource_id: 2
   resource_type: UserInfo
   state: published
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>
   
-charlie_profile_wave:
+charlie_profile_wave_1:
   id: 3
   user_id: 3
   type: Wave::Profile
@@ -26,33 +28,49 @@ charlie_profile_wave:
   resource_id: 3
   resource_type: UserInfo
   state: published
-  
-# Community Waves
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>
 
+adam_profile_wave_2:
+  id: 11
+  user_id: 1
+  type: Wave::Profile
+  slug: adam
+  resource_id: 11
+  resource_type: UserInfo
+  state: published
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>
+
+bert_profile_wave_2:
+  id: 12
+  user_id: 2
+  type: Wave::Profile
+  slug: bert
+  resource_id: 12
+  resource_type: UserInfo
+  state: published
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>
+  
 popular_wave:
   id: 4
   type: Wave::Community
-  topic: Everyone's Wave
+  topic: Community Wave
   slug: popular
   description: Get going!
   state: published
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>
   
-# Event Waves
-
 event_wave:
   id: 5
   type: Wave::Event
-  topic: Bam Bam and the Magnetic Zeros
+  topic: Magnetic Zeros
   slug: bam-bam
   state: published
   resource_id: 1
   resource_type: Resource::Event
-  description:
-    Lorem ipsum dolor sit amet,
-    consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua.
-    Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor....  (the rest)
+  description: Lorem ipsum
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>

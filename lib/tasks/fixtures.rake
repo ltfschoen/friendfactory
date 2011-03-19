@@ -2,9 +2,14 @@ namespace :ff do
   namespace :fixtures do
     
     desc "Load friskyfactory fixtures"
-    task :load => [ :'load:models', :'load:avatars', :'load:photos', :'db:seed' ] # ts:rebuild
+    task :load => [ :'load:models', :'load:avatars', :'load:photos' ] # ts:rebuild
     
     namespace :load do      
+      task :models do
+        ENV['FIXTURES_PATH'] = 'spec/fixtures'
+        Rake::Task[:'db:fixtures:load'].invoke
+      end
+
       task :avatars => :environment do
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
@@ -13,15 +18,15 @@ namespace :ff do
           user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
           if user
             avatar = Posting::Avatar.new(:image => File.new(fixture), :user => user)
-            user.profile.avatars << avatar
+            user.profiles.each { |profile| profile.avatars << avatar }
             avatar.publish!
           end
         end
         
         # Set last avatar of each user as active
         User.all.each do |user|
-          unless user.profile.avatars.empty?
-            user.profile.avatars.last.update_attribute(:active, true)
+          user.profiles.each do |profile|            
+            profile.avatars.last.update_attribute(:active, true) unless profile.avatars.empty?
           end
         end
       end
@@ -42,11 +47,7 @@ namespace :ff do
           end
         end
       end
-    
-      task :models do
-        ENV['FIXTURES_PATH'] = 'spec/fixtures'
-        Rake::Task[:'db:fixtures:load'].invoke
-      end
+      
     end
   end
 end

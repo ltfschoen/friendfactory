@@ -1,0 +1,27 @@
+friskyhands_popular_wave:
+  site_id: 1
+  wave_id: 4
+
+positivelyfrisky_popular_wave:
+  site_id: 2
+  wave_id: 4
+
+friskyhands_adam_profile_wave:
+  site_id: 1
+  wave_id: 1
+
+friskyhands_bert_profile_wave:
+  site_id: 1
+  wave_id: 2
+
+friskyhands_charlie_profile_wave:
+  site_id: 1
+  wave_id: 3
+
+positivelyfrisky_adam_profile_wave:
+  site_id: 2
+  wave_id: 11
+
+positivelyfrisky_bert_profile_wave:
+  site_id: 2
+  wave_id: 12

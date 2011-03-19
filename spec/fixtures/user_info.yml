@@ -1,4 +1,4 @@
-adam:
+adam_user_info_1:
   id: 1
   user_id: 1
   age: 21
@@ -7,7 +7,7 @@ adam:
   relationship: 1
   location: Amsterdam
   
-bert:
+bert_user_info_1:
   id: 2
   user_id: 2
   age: 22
@@ -16,7 +16,7 @@ bert:
   relationship: 2
   location: Berlin
     
-charlie:
+charlie_user_info_1:
   id: 3
   user_id: 3
   age: 23
@@ -24,3 +24,21 @@ charlie:
   orientation: 3
   relationship: 3
   location: Cairo
+
+adam_user_info_2:
+  id: 11
+  user_id: 1
+  age: 21
+  gender: 1
+  orientation: 1
+  relationship: 1
+  location: Amsterdam
+  
+bert_user_info_2:
+  id: 12
+  user_id: 2
+  age: 22
+  gender: 2
+  orientation: 2
+  relationship: 2
+  location: Berlin

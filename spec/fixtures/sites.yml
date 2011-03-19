@@ -1,0 +1,14 @@
+friskyhands:
+    id: 1
+    name: friskyhands
+    launch: false
+
+positivelyfrisky:
+    id: 2
+    name: positivelyfrisky
+    launch: false
+
+friskysoldiers:
+    id: 3
+    name: friskysoldiers
+    launch: true

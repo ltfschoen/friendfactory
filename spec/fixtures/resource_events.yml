@@ -1,4 +1,4 @@
-event_1:
+event_resource:
   id: 1
   location_id: 1
   start_date: <%= Date.today %>

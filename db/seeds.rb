@@ -22,6 +22,7 @@ sites.each do |site|
     site.waves << Wave::Community.create(  
         :slug        => Wave::CommunitiesController::DefaultWaveSlug,
         :topic       => 'Community Wave',
-        :description => '')
+        :description => '',
+        :state       => :published)
   end
 end
