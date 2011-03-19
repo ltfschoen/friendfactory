@@ -10,8 +10,9 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     @user_session.remember_me = true || params.has_key?(:remember_me)
     respond_to do |format|
-      if @user_session.save
-        user = @user_session.record        
+      if user = login_user(@user_session)
+        user = @user_session.record
+        user.initialize_profile(current_site)
         clear_lurker
         flash[:notice] = "Welcome back" + (user.first_name? ? ", #{user.first_name}" : '') + '!'
         format.html { redirect_back_or_default(root_path) }
@@ -30,13 +31,31 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    if current_user.present?
-      current_user.update_attribute(:current_login_at, nil)
-      current_user_session.destroy
-      clear_lurker
-    end
+    destroy_session
     respond_to do |format|
       format.html { redirect_to root_path }
+    end
+  end
+  
+  private
+  
+  def login_user(user_session)    
+    if user_session.save && user = user_session.record      
+      if user.site_ids.include?(current_site.id)
+        user
+      else
+        destroy_session
+        user_session.errors.add(:base, I18n.t("error_messages.invalid_email", :default => "email is not valid"))
+        false
+      end
+    end
+  end
+  
+  def destroy_session
+    clear_lurker
+    if current_user
+      current_user.update_attribute(:current_login_at, nil)
+      current_user_session.destroy
     end
   end
 
