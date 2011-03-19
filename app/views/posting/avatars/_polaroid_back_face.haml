@@ -1,5 +1,5 @@
 - user = profile.user 
-- user_info = user.user_info
+- user_info = user.user_info(current_site)
 .face-container
   .back.face
     = link_to 'Close', wave_profile_path(profile), :class => 'close hidden'

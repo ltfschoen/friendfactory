@@ -20,7 +20,7 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
-  belongs_to :user, :include => :user_info
+  belongs_to :user
 
   has_and_belongs_to_many :sites,
       :class_name              => 'Site',

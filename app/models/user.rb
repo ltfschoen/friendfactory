@@ -22,12 +22,15 @@ class User < ActiveRecord::Base
   end
   
   has_and_belongs_to_many :sites  
-  has_one  :user_info  
   has_many :waves, :class_name => 'Wave::Base'  
   has_many :profiles, :class_name => 'Wave::Profile'
   
   def profile(site)
     profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
+  end
+    
+  def user_info(site)
+    profile(site).profile_info
   end
     
   has_many :conversations,

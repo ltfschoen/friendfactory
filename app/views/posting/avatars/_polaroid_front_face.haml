@@ -3,7 +3,7 @@
   .front.face
     = link_to 'Close', wave_profile_path(profile), :class => 'close hidden'
     .content
-      = avatar_image_tag(avatar, :class => 'headshot', :anonymous => true, :gender => user.user_info.gender, :link_to_profile => false)
+      = avatar_image_tag(avatar, :class => 'headshot', :anonymous => true, :gender => user.user_info(current_site).gender, :link_to_profile => false)
       %table.header
         %tr
           %td.username<

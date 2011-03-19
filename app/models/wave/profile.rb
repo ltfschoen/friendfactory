@@ -8,18 +8,18 @@ class Wave::Profile < Wave::Base
       :order                   => 'updated_at desc',
       :after_add               => [ :active_avatar, :touch ]
 
-  alias :user_info :resource
-
   has_many :events, :through => :invitations
   
   after_create do |profile|
     if profile.resource.nil?
-      user_info = UserInfo.create(:user_id => profile.user_id)
-      profile.resource = user_info
+      profile.resource = UserInfo.new(:user_id => profile.user_id)
       profile.save
     end
     true
   end
+  
+  alias :user_info :resource
+  alias :profile_info :resource
   
   def active_avatar(avatar)
     if avatar.active?
