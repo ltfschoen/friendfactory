@@ -18,6 +18,10 @@ friskyhands_charlie_profile_wave:
   site_id: 1
   wave_id: 3
 
+friskyhands_event_wave:
+  site_id: 1
+  wave_id: 5
+
 positivelyfrisky_adam_profile_wave:
   site_id: 2
   wave_id: 11

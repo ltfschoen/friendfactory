@@ -65,6 +65,7 @@ popular_wave_1:
 
 popular_wave_2:
   id: 14
+  user_id: 1
   type: Wave::Community
   topic: Community Wave
   slug: popular
@@ -75,6 +76,7 @@ popular_wave_2:
   
 event_wave:
   id: 5
+  user_id: 1
   type: Wave::Event
   topic: Magnetic Zeros
   slug: bam-bam
