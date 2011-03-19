@@ -53,8 +53,18 @@ bert_profile_wave_2:
   created_at: <%= now = Time.now %>
   updated_at: <%= now %>
   
-popular_wave:
+popular_wave_1:
   id: 4
+  type: Wave::Community
+  topic: Community Wave
+  slug: popular
+  description: Get going!
+  state: published
+  created_at: <%= now = Time.now %>
+  updated_at: <%= now %>
+
+popular_wave_2:
+  id: 14
   type: Wave::Community
   topic: Community Wave
   slug: popular
