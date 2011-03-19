@@ -1,6 +1,6 @@
 .post_it.canvas.attachment<
   .content<
-    = avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info.gender)
+    = avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info(current_site).gender)
     .header
       = link_to_profile(post_it.user)
       - if post_it.created_at?

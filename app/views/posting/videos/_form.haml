@@ -4,7 +4,7 @@
       %td.avatar.thumb
         .post_it.canvas.attachment.form<
           .content<
-            = avatar_image_tag(new_posting_photo.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => new_posting_video.user.user_info.gender)
+            = avatar_image_tag(new_posting_photo.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => new_posting_video.user.user_info(current_site).gender)
             %span= "Posted by #{link_to_profile(new_posting_photo.user)}".html_safe
             = f.text_area :subject, :placeholder => 'Caption'
       %td
