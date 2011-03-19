@@ -1,0 +1,19 @@
+adam_friskyhands:
+  user_id: 1
+  site_id: 1
+
+bert_friskyhands:
+  user_id: 2
+  site_id: 1
+  
+charlie_friskyhands:
+  user_id: 3
+  site_id: 1
+  
+adam_postivelyfrisky:
+  user_id: 1
+  site_id: 2
+  
+bert_postivelyfrisky:
+  user_id: 2
+  site_id: 2
