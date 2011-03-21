@@ -36,7 +36,7 @@
           =# check_box_tag 'remember_me', '1', true
           =# label_tag 'remember_me', 'Remember me'
         
-      .panel.signup
+      .panel.signup.hidden
         %h3 Sign up!
         = form_for User.new, :url => users_path do |f|
           = f.text_field :first_name, :class => 'ui-widget', :placeholder => 'first name'
@@ -49,8 +49,3 @@
             = link_to 'Back', root_path, :class => 'button'
     .grid_1.omega<
       &nbsp;
-
-:javascript
-  jQuery(function($){    
-    #{ flash[:error].present? ? "$('.panel.login').hide();" : "$('.panel.signup').hide();" }
-  });

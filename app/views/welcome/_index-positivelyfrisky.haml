@@ -36,7 +36,7 @@
             = f.submit 'Login'
             = f.button 'Sign Up', :class => 'toggle'
         
-      .panel.signup
+      .panel.signup.hidden
         %h3 Sign up!
         = form_for new_user, :url => users_path do |f|
           = f.fields_for :invitations do |invitation|
@@ -52,8 +52,3 @@
             = link_to 'Back', root_path, :class => 'button'
     .grid_1.omega<
       &nbsp;
-
-:javascript
-  jQuery(function($){    
-    #{ flash[:error].present? ? "$('.panel.login').hide();" : "$('.panel.signup').hide();" }
-  });
