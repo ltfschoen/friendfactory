@@ -30,10 +30,10 @@ class CreateSites < ActiveRecord::Migration
     Rake::Task['ff:db:seed'].invoke
 
     fh = Site.find_by_name('friskyhands')
-    fh.waves = Wave::Base.all
+    fh.waves = Wave::Base.where('type <> ?', Wave::Community)
     fh.users = User.all
     
-    Site.find_by_name('positivelyfrisky').users = User.where(:admin => true)    
+    # Site.find_by_name('positivelyfrisky').users = User.where(:admin => true)    
   end
 
   def self.down
