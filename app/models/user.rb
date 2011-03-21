@@ -32,11 +32,17 @@ class User < ActiveRecord::Base
     end
   end
   
-  has_and_belongs_to_many :sites
+  has_and_belongs_to_many :sites, :before_add => :validates_uniqueness_of_site
+
+  def validates_uniqueness_of_site(site)    
+    raise "User already on site" if self.sites.where(:id => site.id).present?
+  end
 
   def current_site=(site)
-    @current_site ||= site
-    self.sites << @current_site unless site_ids.include?(site.id)
+    @current_site ||= begin
+      self.sites << site
+      site
+    end
   end
       
   has_many :waves, :class_name => 'Wave::Base'
