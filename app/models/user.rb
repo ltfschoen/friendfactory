@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   def current_site=(site)
     @current_site ||= begin
-      self.sites << site
+      self.sites << site rescue nil
       site
     end
   end
