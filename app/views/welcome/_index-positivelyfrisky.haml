@@ -40,7 +40,7 @@
         %h3 Sign up!
         = form_for new_user, :url => users_path do |f|
           = f.fields_for :invitations do |invitation|
-            = invitation.text_field :code, :class => 'ui-widget'# , :placeholder => 'membership code'
+            = invitation.text_field :code, :class => 'ui-widget', :placeholder => 'membership code'
             = invitation.label :code, 'Provide a valid membership code to join PositivelyFrisky'
           = f.text_field :first_name, :class => 'ui-widget', :placeholder => 'first name'
           = f.text_field :last_name, :class => 'ui-widget', :placeholder => 'last name'
