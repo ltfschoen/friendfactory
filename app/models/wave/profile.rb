@@ -8,7 +8,7 @@ class Wave::Profile < Wave::Base
       :order                   => 'updated_at desc',
       :after_add               => [ :active_avatar, :touch ]
 
-  has_many :events, :through => :invitations
+  # has_many :events, :through => :invitations
   
   after_create do |profile|
     if profile.resource.nil?

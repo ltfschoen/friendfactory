@@ -35,12 +35,13 @@
           .button-bar
             = f.submit 'Login'
             = f.button 'Sign Up', :class => 'toggle'
-          =# check_box_tag 'remember_me', '1', true
-          =# label_tag 'remember_me', 'Remember me'
         
       .panel.signup
         %h3 Sign up!
-        = form_for User.new, :url => users_path do |f|
+        = form_for new_user, :url => users_path do |f|
+          = f.fields_for :invitations do |invitation|
+            = invitation.text_field :code, :class => 'ui-widget'# , :placeholder => 'membership code'
+            = invitation.label :code, 'Provide a valid membership code to join PositivelyFrisky'
           = f.text_field :first_name, :class => 'ui-widget', :placeholder => 'first name'
           = f.text_field :last_name, :class => 'ui-widget', :placeholder => 'last name'
           = f.text_field :email, :class => 'ui-widget', :placeholder => 'email@address.com'

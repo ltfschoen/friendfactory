@@ -27,7 +27,7 @@ class Wave::Event < Wave::Base
   acts_as_taggable
   acts_as_slugable :source_column => :description, :slug_column => :slug
 
-  has_many :profiles, :through => :invitations
+  # has_many :profiles, :through => :invitations
 
   before_save do |event|
     if event.location.present?

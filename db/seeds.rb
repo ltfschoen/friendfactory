@@ -1,13 +1,12 @@
 sites = []
 sites << Site.find_or_create_by_name(
     :name                     => 'friskyhands',
-    :launch                   => false,
     :analytics_account_number => 'UA-19948002-1',
     :analytics_domain_name    => '.friskyhands.com')
 
 sites << Site.find_or_create_by_name(
     :name                     => 'positivelyfrisky',
-    :launch                   => false,
+    :invite_only              => true,
     :analytics_account_number => 'UA-19948002-2',
     :analytics_domain_name    => '.positivelyfrisky.com')
 

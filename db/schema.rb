@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110316042214) do
+ActiveRecord::Schema.define(:version => 20110320224444) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -26,15 +26,15 @@ ActiveRecord::Schema.define(:version => 20110316042214) do
   end
 
   create_table "invitations", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "profile_id"
-    t.integer  "attendance"
+    t.string   "code",       :null => false
+    t.integer  "site_id",    :null => false
+    t.integer  "sponsor_id", :null => false
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "invitations", ["event_id", "profile_id"], :name => "index_invitations_on_event_id_and_profile_id"
-  add_index "invitations", ["profile_id"], :name => "index_invitations_on_profile_id"
+  add_index "invitations", ["email", "code", "site_id"], :name => "index_invitations_on_email_and_code_and_site_id"
 
   create_table "launch_users", :force => true do |t|
     t.string   "email"
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(:version => 20110316042214) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "memberships", :force => true do |t|
+    t.string   "code",       :null => false
+    t.integer  "site_id",    :null => false
+    t.integer  "inviter_id"
+    t.integer  "invitee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memberships", ["code"], :name => "index_memberships_on_code"
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
@@ -149,8 +160,9 @@ ActiveRecord::Schema.define(:version => 20110316042214) do
   end
 
   create_table "sites", :force => true do |t|
-    t.string   "name",                     :null => false
-    t.boolean  "launch"
+    t.string   "name",                                        :null => false
+    t.boolean  "launch",                   :default => false
+    t.boolean  "invite_only",              :default => false
     t.string   "analytics_domain_name"
     t.string   "analytics_account_number"
     t.datetime "created_at"

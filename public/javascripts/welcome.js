@@ -8,6 +8,6 @@ jQuery(function($) {
 		$('.panel.login, .panel.signup').toggle();
 	});
 
-	$('input:not([type="hidden"])').val('').placehold();
+	$('input:not([type="hidden"])').placehold();
 	
 });

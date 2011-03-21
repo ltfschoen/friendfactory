@@ -1,8 +1,10 @@
 class WelcomeController < ApplicationController
 
-  before_filter :require_no_user, :only => [ :index ]
-  before_filter :require_no_launch_site, :only => [ :index ]
-  before_filter :clear_lurker, :only => [ :index ]
+  before_filter :require_no_user,     :only => [ :index ]
+  before_filter :require_launch_site, :only => [ :index ]
+  before_filter :clear_lurker,        :only => [ :index ]
+
+  helper_method :new_user
   
   def index
     store_reentry_location
@@ -23,8 +25,14 @@ class WelcomeController < ApplicationController
 
   private
   
-  def require_no_launch_site
+  def require_launch_site
     redirect_to launch_url if current_site.launch?
+  end
+  
+  def new_user
+    @user ||= User.new.tap do |user|
+      user.invitations.build(:code => params[:invite])
+    end
   end
     
 end

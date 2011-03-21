@@ -2,11 +2,23 @@ class User < ActiveRecord::Base
 
   include ActiveRecord::Transitions
 
+  attr_reader :current_site, :invitation_code
+
+  validates_presence_of :first_name  
+  validates_presence_of :current_site, :on => :create
+
+  validates_each :invitation_code,
+      :on => :create,
+      :if => lambda { |user| current_site && current_site.invite_only? },
+      :message => 'is not a valid membership code' do |user, attr, value|
+    unless user.invitations.where(:code => value, :site_id => user.current_site.id).present?
+      user.errors.add(attr)
+    end
+  end
+  
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
   end
-
-  validates_presence_of :first_name
   
   state_machine do
     state :enabled
@@ -14,35 +26,38 @@ class User < ActiveRecord::Base
     
     event :enable do
       transitions :to => :enabled, :from => [ :disabled ]
-    end
-    
+    end    
     event :disable do
       transitions :to => :disabled, :from => [ :enabled ]
     end
   end
   
-  has_and_belongs_to_many :sites  
-  has_many :waves, :class_name => 'Wave::Base'  
-  has_many :profiles, :class_name => 'Wave::Profile'
+  has_and_belongs_to_many :sites
+
+  def current_site=(site)
+    @current_site ||= site
+    self.sites << @current_site unless site_ids.include?(site.id)
+  end
+      
+  has_many :waves, :class_name => 'Wave::Base'
+  has_many :profiles, :class_name => 'Wave::Profile'  
   
   def profile(site)
     profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
   end
-    
+      
   def user_info(site)
     profile(site).profile_info
   end
     
   has_many :conversations,
       :class_name => 'Wave::Conversation',
-      :order      => 'created_at desc' do
-        
+      :order      => 'created_at desc' do        
     def site(site)
       if site.present?
         joins(:sites).where('sites_waves.site_id = ?', site.id)        
       end
     end
-
     def with(receiver, site)
       if receiver.present?
         site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first
@@ -84,7 +99,15 @@ class User < ActiveRecord::Base
   end
   
   has_many :postings, :class_name => 'Posting::Base'
-  
+    
+  has_many :invitations, :foreign_key => 'email', :primary_key => 'email'
+
+  def invitations_attributes=(attrs)
+    @invitation_code ||= attrs["0"]["code"] rescue nil
+  end
+    
+  has_many :sponsorships, :class_name  => 'Invitation', :foreign_key => 'sponsor_id'
+    
   has_many :friendships
   has_many :friends,  :through => :friendships
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
@@ -92,8 +115,16 @@ class User < ActiveRecord::Base
 
   scope :online, :conditions => [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::InactivityTimeout).to_s(:db) ]
 
-  after_create do |user|    
-    user.create_profile if user.profile.nil?
+  after_create do |user|
+    create_profile(user.current_site)
+  end
+
+  def create_profile(site)
+    profiles.new.tap { |profile| site.waves << profile }
+  end
+  
+  def initialize_profile(site)
+    create_profile(site) if profile(site).nil?
   end
 
   def avatar(site)
@@ -111,7 +142,7 @@ class User < ActiveRecord::Base
   def has_friend?(buddy)
     self.friendships.map(&:friend_id).include?(buddy.id)
   end
-
+  
   # DefaultMessagePeriod = 10.days
   
   # has_many :received_messages, :class_name => Message.name, :foreign_key => 'receiver_id', :order => 'created_at desc' do
