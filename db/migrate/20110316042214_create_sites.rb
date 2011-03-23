@@ -27,13 +27,10 @@ class CreateSites < ActiveRecord::Migration
     add_index :sites_users, [ :site_id, :user_id ]
     add_index :sites_users, :user_id
     
-    # Rake::Task['ff:db:seed'].invoke
+    Rake::Task['ff:db:seed'].invoke
 
-    # fh = Site.find_by_name('friskyhands')
-    # fh.waves = Wave::Base.where('type <> ?', Wave::Community)
-    # fh.users = User.all
-    
-    # Site.find_by_name('positivelyfrisky').users = User.where(:admin => true)    
+    say 'now perform the following rake task:'
+    say 'ff:fix:sites_waves', true
   end
 
   def self.down
