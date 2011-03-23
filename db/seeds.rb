@@ -16,12 +16,12 @@ sites << Site.find_or_create_by_name(
     :analytics_account_number => 'UA-19948002-3',
     :analytics_domain_name    => '.friskysoldiers.com')
 
-sites.each do |site|  
-  unless site.waves.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug).present?
-    site.waves << Wave::Community.create(  
-        :slug        => Wave::CommunitiesController::DefaultWaveSlug,
-        :topic       => 'Community Wave',
-        :description => '',
-        :state       => :published)
-  end
-end
+# sites.each do |site|  
+#   unless site.waves.where(:slug => Wave::CommunitiesController::DefaultWaveSlug).empty?
+#     site.waves << Wave::Community.create(  
+#         :slug        => Wave::CommunitiesController::DefaultWaveSlug,
+#         :topic       => 'Community Wave',
+#         :description => '',
+#         :state       => :published)
+#   end
+# end

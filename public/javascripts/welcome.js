@@ -13,7 +13,6 @@ jQuery(function($) {
 	var $codeInput = $('input#user_invitations_attributes_0_code');
 	if (($('li', 'ul.flash.error').length > 0) || ($codeInput.val().length > 0)) {
 		$('button.toggle').trigger('click');
-		$codeInput.attr('disabled', 'disabled');
 	}
 	
 });
