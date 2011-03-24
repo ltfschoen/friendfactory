@@ -1,1 +1,1 @@
-= render :partial => ('index-' + current_site.name)
+= render :partial => File.join('welcome', current_site.name, 'index')
