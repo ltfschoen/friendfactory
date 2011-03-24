@@ -54,7 +54,8 @@ class Posting::Base < ActiveRecord::Base
   #   # TODO: Reestablish indexes on associated waves
   #   # indexes wave.topic,       :as => :wave_topic
   #   # indexes wave.description, :as => :wave_description
-  #   indexes [ user.first_name, user.last_name], :as => :user_name
+  #   indexes [ user.first_name, user.last_name], :as => :full_name
+  #   indexes user.handle
   #   indexes user_id
   #   has :created_at
   #   has :updated_at

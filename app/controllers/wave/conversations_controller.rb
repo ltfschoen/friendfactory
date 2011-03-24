@@ -24,7 +24,7 @@ class Wave::ConversationsController < ApplicationController
     @title = current_site.name
     @wave = current_user.conversations.site(current_site).find_by_id(params[:id])
     if @wave.present? && @wave.recipient.present?
-      @title += " with #{@wave.recipient.first_name}"
+      @title += " with #{@wave.recipient.handle}"
     end
     respond_to do |format|
       format.html { render :action => 'show' }

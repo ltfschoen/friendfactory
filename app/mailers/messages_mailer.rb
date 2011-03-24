@@ -7,7 +7,7 @@ class MessagesMailer < ActionMailer::Base
   def new_message_notification(message)
     @message = message
     email = Rails.env.development? ? 'michael@michaelbamford.com' : @message.receiver.email    
-    mail :to => email, :subject => "Message from #{@message.sender.first_name} at FriskyHands"
+    mail :to => email, :subject => "Message from #{@message.sender.handle} at FriskyHands"
   end
 
 end

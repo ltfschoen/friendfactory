@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   attr_reader :current_site, :invitation_code
 
-  validates_presence_of :first_name  
+  validates_presence_of :handle
   validates_presence_of :current_site, :on => :create
 
   validates_each :invitation_code,
@@ -186,17 +186,16 @@ class User < ActiveRecord::Base
   #   self.sent_messages.create(attrs)
   # end
 
-  def handle
-    self.handle || full_name
+  def handle    
+    self[:handle].try(:humanize) || first_name
   end
   
   def full_name
-    lname = self[:last_name].humanize if self[:last_name].present?
-    [ first_name, lname ].compact * ' '
+    [ first_name, self[:last_name].try(:humanize) ].compact * ' '
   end
   
   def first_name
-    self[:first_name].humanize if self[:first_name].present?
+    self[:first_name].try(:humanize)
   end
   
   def to_s

@@ -25,7 +25,7 @@
                     %td.avatar
                       = avatar_image_tag(@wave.avatar, :style => :thumb, :gender => @wave.user_info.gender)
                     %td.username<
-                      = @wave.user.first_name
+                      = @wave.user.handle
                     %td.age<
                       = f.text_field :age, :placeholder => 'age', :class => 'ui-widget'
                 %div

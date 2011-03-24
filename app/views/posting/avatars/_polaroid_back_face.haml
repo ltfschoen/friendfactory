@@ -11,7 +11,7 @@
               %td.avatar<
                 = avatar_image_tag(avatar, :style => :thumb, :anonymous => true, :gender => user_info.gender)
               %td.username<
-                = user.first_name
+                = user.handle
               %td.age<
                 = user_info.age.present? ? user_info.age : '&nbsp;'.html_safe
           %table.detail

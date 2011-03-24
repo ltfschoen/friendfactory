@@ -39,8 +39,7 @@
       .panel.signup.hidden
         %h3 Sign up!
         = form_for User.new, :url => users_path do |f|
-          = f.text_field :first_name, :class => 'ui-widget', :placeholder => 'first name'
-          = f.text_field :last_name, :class => 'ui-widget', :placeholder => 'last name'
+          = f.text_field :handle, :class => 'ui-widget', :placeholder => 'first name or handle'
           = f.text_field :email, :class => 'ui-widget', :placeholder => 'email@address.com'
           = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'
           = f.password_field :password_confirmation, :class => 'password ui-widget', :placeholder => 'password confirmation'
