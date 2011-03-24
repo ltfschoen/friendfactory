@@ -2,26 +2,22 @@ require 'spec_helper'
 
 describe User do
   
-  fixtures :users
-  
   describe 'attributes' do
-    let(:attrs) do
-      { :first_name => 'duncan',
-        :email => 'duncan@test.com',
-        :password => 'test',
-        :password_confirmation => 'test' }
-    end
 
     let(:user) do
-      User.new(attrs)
+      Factory.build(:adam)
     end
-  
-    it "is valid with valid attributes" do
+    
+    it 'is valid with valid attributes' do      
       user.should be_valid
     end
-  
-    it 'requires a first_name' do
-      user.first_name = nil
+
+    it 'requires a current_site' do
+      Factory.build(:adam, :current_site => nil).should_not be_valid
+    end
+    
+    it 'requires a handle' do
+      user.handle = nil
       user.should_not be_valid
     end
 
@@ -47,16 +43,19 @@ describe User do
     it 'is not an admin by default' do
       user.should_not be_an_admin
     end
-  end
-  
-  describe 'admin privileges' do
-    it 'is not an admin' do
-      users(:adam).should_not be_an_admin
-    end
 
-    it 'is an admin' do
-      users(:charlie).should be_an_admin
+    describe 'invite sites' do
+      it "valid with an invitation" do
+        pending
+        user = Factory.build(:adam, :current_site => Factory(:invite_site))
+        # user.should be_valid
+      end
+
+      it "requires an invitation" do
+        user = Factory.build(:adam, :current_site => Factory(:invite_site))        
+        user.should_not be_valid
+      end
     end
   end
-  
+    
 end
