@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
       site
     end
   end
-      
+        
   has_many :waves, :class_name => 'Wave::Base'
   has_many :profiles, :class_name => 'Wave::Profile'  
   
@@ -59,15 +59,11 @@ class User < ActiveRecord::Base
   has_many :conversations,
       :class_name => 'Wave::Conversation',
       :order      => 'created_at desc' do        
-    def site(site)
-      if site.present?
-        joins(:sites).where('sites_waves.site_id = ?', site.id)        
-      end
+    def site(site)      
+      joins(:sites).where('sites_waves.site_id = ?', site.id) if site.present?
     end
     def with(receiver, site)
-      if receiver.present?
-        site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first
-      end
+      site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first if receiver.present?
     end    
   end
 
@@ -124,13 +120,13 @@ class User < ActiveRecord::Base
   after_create do |user|
     create_profile(user.current_site)
   end
-
-  def create_profile(site)
-    profiles.new.tap { |profile| site.waves << profile }
-  end
   
   def initialize_profile(site)
     create_profile(site) if profile(site).nil?
+  end
+
+  def create_profile(site)
+    profiles.new.tap { |profile| site.waves << profile }
   end
 
   def avatar(site)
@@ -186,18 +182,18 @@ class User < ActiveRecord::Base
   #   self.sent_messages.create(attrs)
   # end
 
-  def handle    
-    self[:handle].try(:humanize) || first_name
+  def handle(site)
+    read_attribute(:handle) || first_name
+  end
+
+  def first_name(site)
+    read_attribute(:first_name).try(:humanize)
   end
   
-  def full_name
-    [ first_name, self[:last_name].try(:humanize) ].compact * ' '
+  def full_name(site)
+    [ read_attribute(:first_name).try(:humanize), read_attribute(:last_name).try(:humanize) ].compact * ' '
   end
-  
-  def first_name
-    self[:first_name].try(:humanize)
-  end
-  
+    
   def to_s
     "{ :id => #{self.id}, :full_name => #{full_name} }"
   end

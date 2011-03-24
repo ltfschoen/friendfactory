@@ -50,8 +50,8 @@ module ApplicationHelper
   end
   
   def link_to_profile(user, opts = {})
-    name = opts[:label] || user.handle
-    if user.profile(current_site)
+    if user.profile(current_site).present?
+      name = opts[:label] || user.handle(current_site)
       link_to(name, wave_profile_path(user.profile(current_site)), :class => 'profile')
     end
   end

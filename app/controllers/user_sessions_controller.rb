@@ -14,7 +14,7 @@ class UserSessionsController < ApplicationController
         user = @user_session.record
         user.initialize_profile(current_site)
         clear_lurker
-        flash[:notice] = "Welcome back" + (user.handle? ? ", #{user.handle}" : '') + '!'
+        flash[:notice] = "Welcome back" + (user.handle(current_site) ? ", #{user.handle(current_site)}" : '') + '!'
         format.html { redirect_back_or_default(root_path) }
       else
         flash[:notice] = "Sorry, but the #{@user_session.errors.full_messages.first.downcase}."

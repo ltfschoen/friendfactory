@@ -19,10 +19,10 @@
         .delivered.hidden
         .address
           .message.received
-            = avatar_image_tag conversation.recipient, :style => 'thimble', :gender => conversation.recipient.user_info.gender
+            = avatar_image_tag conversation.recipient, :style => 'thimble', :gender => conversation.recipient.user_info(current_site).gender
             = link_to_profile(conversation.recipient)
           .message.sent
-            = avatar_image_tag conversation.user, :style => 'thimble', :gender => conversation.user.user_info.gender
+            = avatar_image_tag conversation.user, :style => 'thimble', :gender => conversation.user.user_info(current_site).gender
             = link_to_profile(conversation.user)
         .button-bar
           = f.submit 'Send'

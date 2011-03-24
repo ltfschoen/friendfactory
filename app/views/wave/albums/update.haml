@@ -4,7 +4,7 @@
       =# form_for @wave do |f|
       .post_it.canvas.attachment
         .content
-          = avatar_image_tag(@wave.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => @wave.user.user_info.gender)
+          = avatar_image_tag(@wave.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => @wave.user.user_info(current_site).gender)
           =# f.text_area :topic, :placeholder => 'Caption'
     %td
       %ul.posting_photos

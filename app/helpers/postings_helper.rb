@@ -30,7 +30,7 @@ module PostingsHelper
           [ user_or_avatar.user, user_or_avatar ]
 
       if user.present? && avatar.present?
-        opts.reverse_merge!(:alt => user.handle)
+        opts.reverse_merge!(:alt => user.handle(current_site))
         online = 'online' if (user.online? && (opts[:online_badge] == true))
         klass = (klass << online).compact * ' '
         
