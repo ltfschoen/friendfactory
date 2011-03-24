@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110320224444) do
+ActiveRecord::Schema.define(:version => 20110324064641) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -224,6 +224,9 @@ ActiveRecord::Schema.define(:version => 20110320224444) do
     t.text     "about_me"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "handle"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   create_table "user_info_deleted", :id => false, :force => true do |t|
