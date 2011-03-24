@@ -6,7 +6,7 @@ namespace :ff do
     
     namespace :load do      
       task :models do
-        ENV['FIXTURES_PATH'] = 'spec/fixtures'
+        ENV['FIXTURES_PATH'] = 'test/fixtures'
         Rake::Task[:'db:fixtures:load'].invoke
       end
       
@@ -18,7 +18,7 @@ namespace :ff do
       task :avatars => :environment do
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
-        image_fixtures = Dir[File.join(Rails.root, 'spec', 'fixtures', 'images', 'avatars', '*.{jpg, jpeg, png}')]
+        image_fixtures = Dir[File.join(Rails.root, 'test', 'fixtures', 'images', 'avatars', '*.{jpg, jpeg, png}')]
         image_fixtures.each do |fixture|
           user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
           if user
@@ -41,7 +41,7 @@ namespace :ff do
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
         wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
         if wave
-          image_fixtures = Dir[File.join(Rails.root, 'spec', 'fixtures', 'images', 'photos', '*.{jpg, jpeg, png}')]
+          image_fixtures = Dir[File.join(Rails.root, 'test', 'fixtures', 'images', 'photos', '*.{jpg, jpeg, png}')]
           image_fixtures.each do |fixture|
             user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
             if user

@@ -3,6 +3,7 @@ adam:
   email: adam@test.com
   first_name: adam
   last_name: ant
+  handle: AdamA
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
   state: enabled
@@ -12,6 +13,7 @@ bert:
   email: bert@test.com
   first_name: bert
   last_name: bacharach
+  handle: BertB
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
   state: enabled
@@ -21,6 +23,7 @@ charlie:
   email: charlie@test.com
   first_name: charlie
   last_name: chang
+  handle: CharlieC
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
   admin: true
