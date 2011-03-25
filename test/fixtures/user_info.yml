@@ -6,6 +6,9 @@ adam_user_info_1:
   orientation: 1
   relationship: 1
   location: Amsterdam
+  handle: AdamA
+  first_name: adam
+  last_name: ant
   
 bert_user_info_1:
   id: 2
@@ -15,6 +18,9 @@ bert_user_info_1:
   orientation: 2
   relationship: 2
   location: Berlin
+  handle: BertB
+  first_name: bert
+  last_name: bacharach
     
 charlie_user_info_1:
   id: 3
@@ -24,6 +30,9 @@ charlie_user_info_1:
   orientation: 3
   relationship: 3
   location: Cairo
+  handle: CharlieC
+  first_name: charlie
+  last_name: chang
 
 adam_user_info_2:
   id: 11
@@ -33,6 +42,9 @@ adam_user_info_2:
   orientation: 1
   relationship: 1
   location: Amsterdam
+  handle: AdamA
+  first_name: adam
+  last_name: ant
   
 bert_user_info_2:
   id: 12
@@ -42,3 +54,6 @@ bert_user_info_2:
   orientation: 2
   relationship: 2
   location: Berlin
+  handle: BertB
+  first_name: bert
+  last_name: bacharach

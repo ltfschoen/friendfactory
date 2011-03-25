@@ -52,7 +52,7 @@ bert_profile_wave_2:
   state: published
   created_at: <%= now = Time.now %>
   updated_at: <%= now %>
-  
+
 popular_wave_1:
   id: 4
   type: Wave::Community
