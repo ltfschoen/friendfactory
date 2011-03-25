@@ -30,9 +30,7 @@ class WelcomeController < ApplicationController
   end
   
   def new_user
-    @user ||= User.new.tap do |user|
-      user.invitations.build(:code => params[:invite])
-    end
+    User.new.tap { |user| user.profiles.build }
   end
     
 end

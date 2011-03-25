@@ -10,10 +10,9 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     @user_session.remember_me = true || params.has_key?(:remember_me)
     respond_to do |format|
-      if user = login_user(@user_session)
-        user = @user_session.record
-        user.initialize_profile(current_site)
+      if login_user(@user_session)
         clear_lurker
+        user = @user_session.record
         flash[:notice] = "Welcome back" + (user.handle(current_site) ? ", #{user.handle(current_site)}" : '') + '!'
         format.html { redirect_back_or_default(root_path) }
       else

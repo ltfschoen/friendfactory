@@ -46,12 +46,27 @@ class UserInfo < ActiveRecord::Base
     true
   end
   
-  after_save do |user_info|
-    profile = user_info.profile
-    if profile.present?
+  after_save do |user_info|    
+    if profile = user_info.profile
       profile.touch
     end
     true
+  end
+  
+  def handle
+    self[:handle] || first_name
+  end
+  
+  def first_name
+    self[:first_name].try(:titleize)
+  end
+  
+  def last_name
+    self[:last_name].try(:titleize)
+  end
+  
+  def full_name
+    ([ first_name, last_name ].compact * ' ').strip
   end
   
   def gender_description

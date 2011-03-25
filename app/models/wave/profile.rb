@@ -1,4 +1,8 @@
 class Wave::Profile < Wave::Base
+
+  extend Forwardable
+  
+  validates_presence_of :handle, :unless => :first_name
   
   has_and_belongs_to_many :avatars,
       :class_name              => 'Posting::Avatar',
@@ -9,17 +13,29 @@ class Wave::Profile < Wave::Base
       :after_add               => [ :active_avatar, :touch ]
 
   # has_many :events, :through => :invitations
+
+  def_delegators :profile_resource,
+      :handle, :handle=,
+      :first_name, :first_name=,
+      :last_name, :last_name=,
+      :gender, :gender=
   
-  after_create do |profile|
+  before_create do |profile|
     if profile.resource.nil?
       profile.resource = UserInfo.new(:user_id => profile.user_id)
-      profile.save
     end
-    true
+  end
+  
+  after_create do |profile|
+    profile.publish!
   end
   
   alias :user_info :resource
   alias :profile_info :resource
+
+  def profile_resource
+    self.resource ||= UserInfo.new    
+  end
   
   def active_avatar(avatar)
     if avatar.active?
