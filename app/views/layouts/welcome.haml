@@ -33,6 +33,7 @@
   
   %body{ :class => current_site, :'data-site'=> current_site }
     .container.container_16.clearfix
+      = render :partial => File.join('layouts', current_site.name, 'badge')
       = yield
     .page.footer
       %p

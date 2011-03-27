@@ -8,15 +8,15 @@
   .grid_3.omega
     &nbsp;
 - else
-  .grid_6.push_1.prepend-top.blurb.alpha
-    %p<
-      Provide your email address and we'll send you instructions how to reset your password right away!
-  .grid_4.push_1.omega
-    .panel.new_password
-      %h3 Reset Password
-      %p<
-      = form_tag passwords_path do
-        = text_field_tag 'email', nil, :placeholder => 'email@address.com'
-        .button-bar
-          = button_tag 'Reset my password', :class => 'reset button', :disable_with => 'Reset my password'
-          = link_to 'Back', welcome_path, :class => 'back button'
+  .creative.prepend-top.prefix_2.grid_12.suffix_2
+    .prepend-top.grid_6.push_1.blurb.alpha
+      %p Provide your email address and we'll send you instructions how to reset your password right away!
+    .grid_4.push_1.omega
+      .panel.new_password
+        %h3 Reset Password
+        %p<
+        = form_tag passwords_path do
+          = text_field_tag 'email', nil, :placeholder => 'email@address.com'
+          .button-bar
+            = button_tag 'Reset my password', :class => 'reset button', :disable_with => 'Reset my password'
+            = link_to 'Back', welcome_path, :class => 'back button'
