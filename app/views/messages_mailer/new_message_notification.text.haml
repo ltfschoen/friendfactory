@@ -1,7 +1,7 @@
 :plain    
-  Hey #{@message.receiver.handle},
+  Hey #{@message.receiver.handle(@message.site)},
 
-  You have a new message from #{@message.sender.handle}.
+  You have a new message from #{@message.sender.handle(@message.site)}.
 
   To get your message, click the following link:
 
