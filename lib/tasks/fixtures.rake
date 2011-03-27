@@ -43,7 +43,7 @@ namespace :ff do
         if wave
           image_fixtures = Dir[File.join(Rails.root, 'test', 'fixtures', 'images', 'photos', '*.{jpg, jpeg, png}')]
           image_fixtures.each do |fixture|
-            user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
+            user = UserInfo.find_by_first_name(File.basename(fixture, '.*').split('-')[0]).try(:user)
             if user
               photo = Posting::Photo.new(:image => File.new(fixture), :user => user)
               wave.postings << photo
