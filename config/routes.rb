@@ -63,8 +63,8 @@ Friskyfactory::Application.routes.draw do
   # Menu bar equivalents
   get   'login'   => 'user_sessions#create'  
   match 'logout'  => 'user_sessions#destroy', :via => [ :get, :delete ]
-  get   'welcome' => 'welcome#index'
-  match 'launch'  => 'welcome#launch', :via => [ :get, :post ], :as => 'launch'
+    
+  resource 'welcome', :only => [ :show, :create ], :controller => 'welcome'
 
   scope :module => 'wave' do
     get 'wave'            => 'communities#show'

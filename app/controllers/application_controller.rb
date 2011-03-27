@@ -78,10 +78,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def require_launch
-    redirect_to launch_url
-  end
-  
   def store_location
     session[:return_to] = request.fullpath
   end

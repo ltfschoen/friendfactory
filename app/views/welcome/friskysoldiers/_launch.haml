@@ -15,12 +15,12 @@
     &nbsp;
   .grid_6<
     .panel
-      - if flash[:launch_user]
+      - if flash[:launch_user].present?
         %h4 Thanks!
         %p We'll drop you an email when we're ready!              
       - else
         %p Provide your email address and we'll let you know when we're ready.
-        = form_for LaunchUser.new, :url => launch_path do |f|
+        = form_for new_launch_user, :url => welcome_path do |f|
           = f.text_field :email, :placeholder => 'email@address.com'
           = f.submit 'Thanks'        
   .grid_3.omega<

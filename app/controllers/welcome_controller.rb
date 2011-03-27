@@ -1,22 +1,25 @@
 class WelcomeController < ApplicationController
 
-  before_filter :require_no_user,     :only => [ :index ]
-  before_filter :require_launch_site, :only => [ :index ]
-  before_filter :clear_lurker,        :only => [ :index ]
+  before_filter :require_no_user
+  before_filter :clear_lurker
 
-  helper_method :new_user
+  helper_method :new_user, :new_launch_user
   
-  def index
-    store_reentry_location
-    redirect_to launch_url if current_site.launch?
+  def show
+    respond_to do |format|
+      if current_site.launch?
+        format.html { render :action => 'launch' }
+      else
+        format.html { render }
+      end
+    end
   end
   
-  def launch
+  def create
     respond_to do |format|
       if request.post?
-        LaunchUser.create(params[:launch_user].merge(:site => current_site))
-        flash[:launch_user] = true
-        format.html { redirect_to launch_path }
+        flash[:launch_user] = new_launch_user.save
+        format.html { redirect_to welcome_path }
       else
         format.html
       end
@@ -25,12 +28,16 @@ class WelcomeController < ApplicationController
 
   private
   
-  def require_launch_site
-    redirect_to launch_url if current_site.launch?
+  def new_user
+    @user ||= User.new.tap { |user| user.profiles.build }
   end
   
-  def new_user
-    User.new.tap { |user| user.profiles.build }
+  def new_launch_user
+    @launch_user ||= begin
+      LaunchUser.new(params[:launch_user]).tap do |user|
+        user.site = current_site.name
+      end
+    end
   end
     
 end
