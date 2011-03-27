@@ -6,8 +6,8 @@ class PasswordsMailer < ActionMailer::Base
   # with the following lookup:
   #   en.user_session_mailer.forgot_password.subject
 
-  def reset(user)
-    @user = user
+  def reset(user, current_site)
+    @user, @current_site = user, current_site
     email = Rails.env.production? ? @user.email : 'michael@michaelbamford.com'
     mail :to => email, :subject => "Reset FriskyHands Password"
   end

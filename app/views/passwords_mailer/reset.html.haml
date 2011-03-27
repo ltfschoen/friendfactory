@@ -5,7 +5,7 @@
       h1 { font-size: 1em; }
   %body
     %p
-      = "Hey #{@user.handle},"
+      = "Hey #{@user.handle(@current_site)},"
     %p
       A request was sent to FriskyHands to reset your FriskyHands' password. To do so, click the following link:
     %p

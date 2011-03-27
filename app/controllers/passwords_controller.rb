@@ -7,11 +7,10 @@ class PasswordsController < ApplicationController
     render :layout => 'welcome'
   end
   
-  def create
-    @user = User.find_by_email(params[:email])
-    if @user
+  def create    
+    if @user = User.find_by_email(params[:email])
       @user.reset_password!
-      PasswordsMailer.reset(@user).deliver
+      PasswordsMailer.reset(@user, current_site).deliver
       flash[:notice] = "Thanks! Instructions to reset your password have been emailed to #{@user.email}"
       redirect_to welcome_path
     else
@@ -20,7 +19,7 @@ class PasswordsController < ApplicationController
     end
   end
   
-  # Requested from PasswordsMailer email link.
+  # Requested from PasswordsMailer email link
   def edit
     render :layout => 'welcome'
   end
