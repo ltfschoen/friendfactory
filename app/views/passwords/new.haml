@@ -1,14 +1,13 @@
-- if flash[:notice].present?
-  .grid_3.alpha
-    &nbsp;
-  .grid_6.prepend-top.flash.notice
-    %p<
-      = flash[:notice]
-    = link_to 'Back to Reset Password'
-  .grid_3.omega
-    &nbsp;
-- else
-  .creative.prepend-top.prefix_2.grid_12.suffix_2
+.creative.prepend-top.prefix_2.grid_12.suffix_2
+  - if flash[:notice].present?
+    .grid_3.alpha<
+      &nbsp;
+    .grid_6.flash.notice<
+      %p= flash[:notice]
+      = link_to 'Back to Reset Password'
+    .grid_3.omega<
+      &nbsp;
+  - else
     .prepend-top.grid_6.push_1.blurb.alpha
       %p Provide your email address and we'll send you instructions how to reset your password right away!
     .grid_4.push_1.omega

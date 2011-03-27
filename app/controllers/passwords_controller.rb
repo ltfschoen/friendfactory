@@ -19,7 +19,7 @@ class PasswordsController < ApplicationController
     end
   end
   
-  # Requested from PasswordsMailer email link
+  # PasswordsMailer email link
   def edit
     render :layout => 'welcome'
   end
