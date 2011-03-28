@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
 
   before_filter :require_no_user
+  before_filter :require_launch_site, :only => [ :launch, :create ]
   before_filter :clear_lurker
 
   helper_method :new_user, :new_launch_user
@@ -17,7 +18,7 @@ class WelcomeController < ApplicationController
   
   def create
     respond_to do |format|      
-      flash[:launch_user] = new_launch_user.save if current_site.launch?
+      flash[:launch_user] = new_launch_user.save
       format.html { redirect_to welcome_path }
     end
   end
@@ -34,6 +35,10 @@ class WelcomeController < ApplicationController
         user.site = current_site.name
       end
     end
+  end
+  
+  def require_launch_site
+    redirect_to welcome_path unless current_site.launch?
   end
     
 end
