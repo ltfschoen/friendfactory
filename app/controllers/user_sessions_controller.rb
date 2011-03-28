@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
         format.html { redirect_back_or_default(root_path) }
       else
         flash[:notice] = "Sorry, but the #{@user_session.errors.full_messages.first.downcase}."
-        format.html { redirect_back_to_reentry }
+        format.html { redirect_to welcome_path }
       end
     end
   end

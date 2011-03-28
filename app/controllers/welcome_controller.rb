@@ -10,19 +10,15 @@ class WelcomeController < ApplicationController
       if current_site.launch?
         format.html { render :action => 'launch' }
       else
-        format.html { render }
+        format.html
       end
     end
   end
   
   def create
-    respond_to do |format|
-      if request.post?
-        flash[:launch_user] = new_launch_user.save
-        format.html { redirect_to welcome_path }
-      else
-        format.html
-      end
+    respond_to do |format|      
+      flash[:launch_user] = new_launch_user.save if current_site.launch?
+      format.html { redirect_to welcome_path }
     end
   end
 

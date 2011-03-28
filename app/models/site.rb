@@ -21,5 +21,5 @@ class Site < ActiveRecord::Base
   def layout
     name
   end
-
+  
 end

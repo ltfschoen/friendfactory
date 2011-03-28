@@ -12,8 +12,6 @@ class Wave::Profile < Wave::Base
       :order                   => 'updated_at desc',
       :after_add               => [ :active_avatar, :touch ]
 
-  # has_many :events, :through => :invitations
-
   def_delegators :profile_resource,
       :handle, :handle=,
       :first_name, :first_name=,

@@ -55,7 +55,7 @@ Friskyfactory::Application.routes.draw do
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
   # User and User Sessions
-  resources :users, :only => [ :new, :create ]  
+  resources :users, :only => [ :create ]  
   resources :user_sessions, :only => [ :new, :create, :destroy ] do
     get 'lurk', :on => :new
   end

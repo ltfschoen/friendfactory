@@ -92,10 +92,10 @@ class ApplicationController < ActionController::Base
     session[:reentry_to] = nil
   end
   
-  def redirect_back_to_reentry
-    redirect_to(session[:reentry_to])
-    session[:reentry_to] = nil
-  end
+  # def redirect_back_to_reentry
+  #   redirect_to(session[:reentry_to])
+  #   session[:reentry_to] = nil
+  # end
   
   def store_lurker
     session[:lurker] = true

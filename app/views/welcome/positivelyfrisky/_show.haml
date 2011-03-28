@@ -11,14 +11,14 @@
     .grid_1.alpha<
       &nbsp;
     .grid_6.prepend-top.blurb.alpha
-      - if flash[:error].present?
+      - if new_user.errors.present?
         %p Oh no! Can you fix this?
         %ul.flash.error
-          - flash[:error].each do |error|
+          - new_user.errors.full_messages.each do |error|
             %li= error
       - else
-        %p
-          Find new friends and lovers in a fun, uplifting, stigma-free environment where privacy is a priority.    
+        %p Find new friends and lovers in a fun, uplifting, stigma-free environment where privacy is a priority.
+
     .grid_4<
       .panel.login
         %h3 Log in!

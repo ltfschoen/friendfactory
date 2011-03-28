@@ -2,19 +2,28 @@ class User < ActiveRecord::Base
 
   include ActiveRecord::Transitions
 
-  attr_reader :invitation_code, :recently_added_site, :recently_added_profile
+  attr_accessor :invitation_code
+  attr_accessor :enrollment_site
+  attr_reader   :enrollment_profile
 
-  validates_presence_of :recently_added_profile, :on => :create
-  
+  validates_presence_of :enrollment_site, :on => :create
+
+  validates_each :enrollment_site,
+      :on => :update,
+      :allow_nil => true do |user, attribute, value|
+    if user.sites.where(:id => value.id).present?
+      user.errors.add(attribute, 'already a member of site')
+    end
+  end  
+
   validates_each :invitation_code,
-      :if => lambda { |user| user.recently_added_site && user.recently_added_site.invite_only? },
-      :message => 'is not a valid invitation code' do |user, attribute, value|
-    unless user.invitations.where(:code => value, :site_id => user.recently_added_site.id).present?
-      user.errors.add(attribute)
+      :if => lambda { |user| user.enrollment_site.present? && user.enrollment_site.invite_only? } do |user, attribute, value|
+    unless user.invitations.where(:code => value, :site_id => user.enrollment_site.id).present?
+      user.errors.add(attribute, 'is not a valid invitation code')
     end
   end
-    
-  validates_associated :profiles
+  
+  after_save :site_enrollment
   
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
@@ -35,14 +44,11 @@ class User < ActiveRecord::Base
   scope :online, lambda { { :conditions =>
       [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::InactivityTimeout).to_s(:db) ] } }
   
-  has_and_belongs_to_many :sites, :uniq => true,
-      :before_add => :validate_not_already_on_site,
-      :after_add  => :set_recently_added_site
+  has_and_belongs_to_many :sites, :uniq => true, :before_add => :validate_enrollment_site
 
-  has_many :waves, :class_name => 'Wave::Base'  
-  has_many :profiles, :class_name => 'Wave::Profile'    
-  has_many :inboxes, :class_name => 'Wave::Inbox'
-  
+  has_many :waves, :class_name => 'Wave::Base'
+  has_many :profiles, :class_name => 'Wave::Profile'  
+  has_many :inboxes, :class_name => 'Wave::Inbox'  
   has_many :conversations, :class_name => 'Wave::Conversation', :order => 'created_at desc' do        
     def site(site)
       joins(:sites).where('sites_waves.site_id = ?', site.id) if site.present?
@@ -65,36 +71,42 @@ class User < ActiveRecord::Base
   # has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   # has_many :admirers, :through => :inverse_friendships, :source => :user
 
-  def validate_not_already_on_site(site)
-    raise "User already on site" if sites.where(:id => site.id).present?
+  def validate_enrollment_site(site)
+    raise "User already a member" if sites.where(:id => site.id).present?
+  end
+  
+  def validate_associated_records_for_profiles
+    if enrollment_site.present? && !enrollment_profile.try(:handle).present?
+      errors.add(:handle, "can't be blank")
+    end
   end
 
-  def set_recently_added_site(site)
-    raise "No profile available to add to site" unless defined?(@recently_added_profile)
-    @recently_added_profile.sites << site
-    @recently_added_site = site
+  def site_enrollment
+    if enrollment_site.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
+      @enrollment_site, @enrollment_profile = nil, nil
+    end
   end
-
 
   # ===  Build assocations ===
   
   def invitation=(attrs)
     @invitation_code = attrs["code"]
-  end
-    
+  end  
+
   def profile=(attrs)
     build_profile(attrs)
   end
 
   def build_profile(attrs)
-    @recently_added_profile = profiles.build(attrs)
+    @enrollment_profile = profiles.build(attrs)
   end
   
 
   # === Profile ===
 
-  def profile(site)
-    profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
+  def profile(site = enrollment_site)
+    site === enrollment_site ? enrollment_profile :
+        profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
   end
   
   def avatar(site)
@@ -162,7 +174,7 @@ class User < ActiveRecord::Base
 
   # ===
   
-  def self.find_or_create_with_profile(params)
+  def self.find_or_create_by_email(params)
     existing_user_with_profile(params) || create_user_with_profile(params)
   end
   
