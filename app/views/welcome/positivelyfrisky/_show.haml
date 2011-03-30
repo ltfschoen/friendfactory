@@ -35,8 +35,8 @@
       .panel.signup.hidden
         %h3 Sign up!
         = form_for @user do |f|
-          = f.label :invitation_code, 'Invitation Code', :class => 'placeholder'
-          = f.label :invitation_code, 'Use your valid membership code to join PositivelyFrisky'
+          =# f.label :invitation_code, 'Invitation Code', :class => 'placeholder'
+          = f.label :invitation_code, 'Valid invitation code required to join PositivelyFrisky'
           = f.text_field :invitation_code, :class => 'ui-widget', :placeholder => 'invitation code'
           = f.label :handle, 'First name or Handle', :class => 'placeholder'
           = f.text_field :handle, :class => 'ui-widget', :placeholder => 'first name or handle'
