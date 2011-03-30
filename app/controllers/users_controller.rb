@@ -10,11 +10,13 @@ class UsersController < ApplicationController
 
   def create
     @user = new_user_enrollment(params[:user])
-    respond_to do |format|      
-      if ((@user.existing_record? && login(user_email_and_password, :skip_enrollment_validation => true)) || @user.new_record?) && @user.save
+    respond_to do |format|
+      if @user.valid? && correct_credentials?(@user)
+        @user.save
         format.html { redirect_to root_path }
       else
-        flash.now[:errors] = @user.errors.full_messages + user_session.errors.full_messages
+        flash.now[:errors] = @user.errors.full_messages
+        flash.now[:errors] += user_session.errors.full_messages if user_session
         format.html { render :template => 'welcome/show', :layout => 'welcome' }
       end
     end    
@@ -30,9 +32,13 @@ class UsersController < ApplicationController
   end
   
   private
-  
+    
+  def correct_credentials?(user)
+    (user.existing_record? && login(user_email_and_password, :skip_enrollment_validation => true)) || @user.new_record?
+  end
+
   def user_email_and_password
     params[:user].select { |k, v| [ 'email', 'password' ].include?(k) }
   end
-    
+  
 end

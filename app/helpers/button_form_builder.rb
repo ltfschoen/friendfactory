@@ -27,7 +27,28 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
   #   opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
   #   super(label, opts)
   # end
-
+  
+  def existing_user_password_label(attribute, label, *args)
+    opts = args.extract_options!
+    css_class = opts[:class] || ''
+    if @object.new_record? || (@object.existing_record? && @object.site_ids.include?(opts[:current_site].id))
+      css_class = [ css_class, 'hidden' ].compact * ' '
+    end
+    label(attribute, label, opts.merge(:class => css_class))
+  end
+  
+  def new_user_password_confirmation_field(attribute, label, *args)
+    opts = args.extract_options!
+    label_css_class = 'placeholder'
+    password_field_css_class = opts[:class] || ''
+    if @object.existing_record? && !@object.site_ids.include?(opts[:current_site].id)
+      label_css_class = [ label_css_class, 'hidden' ] * ' '
+      password_field_css_class = [ password_field_css_class, 'hidden' ].compact * ' '      
+    end
+    label(attribute, label, :class => label_css_class) +
+    password_field(attribute, opts.merge(:class => password_field_css_class))
+  end
+  
   private
   
   def placeholder(placeholder, label)
@@ -40,5 +61,5 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
       placeholder
     end
   end
-    
+  
 end
