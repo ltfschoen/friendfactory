@@ -22,7 +22,7 @@
     .grid_4<
       .panel.login
         %h3 Log in!
-        = link_to 'Password?', new_password_path, :class => 'new_password'
+        = link_to 'Password?', new_password_path, :class => 'new_password'          
         = form_for UserSession.new, :url => user_sessions_path do |f|
           = f.text_field :email, :placeholder => 'email@address.com'
           = f.password_field :password, :class => 'password', :placeholder => 'password'
@@ -39,9 +39,11 @@
           = f.text_field :email, :class => 'ui-widget', :placeholder => 'email@address.com'
           = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'
           = f.label :password, "Use your friskyfactory password", :class => 'hidden'
-          = f.password_field :password_confirmation, :class => 'password ui-widget', :placeholder => 'password confirmation'
+          - unless @user.existing_record?
+            = f.password_field :password_confirmation, :class => 'password ui-widget', :placeholder => 'password confirmation'
           .button-bar
             = f.submit 'Register'
-            = link_to 'Back', root_path, :class => 'button'
+            - unless @user.invitation_code.present?
+              = link_to 'Back', root_path, :class => 'button'
     .grid_1.omega<
       &nbsp;

@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
         @launch_user = LaunchUser.new
         format.html { render :action => 'launch' }
       else
-        @user = User.new.tap { |user| user.profiles.build }
+        @user = find_or_create_user_by_invitation_code
         format.html
       end
     end
@@ -24,6 +24,16 @@ class WelcomeController < ApplicationController
   end
   
   private
+  
+  def find_or_create_user_by_invitation_code
+    invitation = Invitation.find_all_by_code(params[:invite])
+    user = (invitation.length == 1 && invitation.first.user) || User.new
+    user.tap do |user|
+      user.handle = user.profiles.first.try(:handle)
+      user.enrollment_site = current_site
+      user.invitation_code = params[:invite]
+    end
+  end
     
   def new_launch_user
     LaunchUser.new(params[:launch_user]).tap do |user|

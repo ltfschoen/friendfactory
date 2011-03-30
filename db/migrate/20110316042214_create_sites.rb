@@ -29,7 +29,7 @@ class CreateSites < ActiveRecord::Migration
     
     Rake::Task['ff:db:seed'].invoke
 
-    say 'now perform the following rake task:'
+    say 'Please perform the following rake task:'
     say 'ff:fix:sites_waves', true
   end
 

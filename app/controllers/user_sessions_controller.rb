@@ -1,4 +1,8 @@
+require 'user_enrollment'
+
 class UserSessionsController < ApplicationController
+
+  include UserEnrollment
 
   before_filter :require_lurker, :only => :new
     
@@ -7,16 +11,13 @@ class UserSessionsController < ApplicationController
   end  
   
   def create
-    @user_session = UserSession.new(params[:user_session])
-    @user_session.remember_me = true || params.has_key?(:remember_me)
     respond_to do |format|
-      if @user_session.save && user = @user_session.record
-        clear_lurker
-        flash[:notice] = "Welcome back, #{user.handle(current_site)}!"
-        format.html { redirect_back_or_default(root_path) }
+      if login(params[:user_session], :skip_enrollment_validation => false)
+        flash[:notice] = "Welcome back, #{user_session.record.handle(current_site)}!"
+        format.html { redirect_back_or_default(root_path) }          
       else
-        flash[:notice] = "Sorry, but that #{@user_session.errors.full_messages.first.downcase}."
-        format.html { redirect_to welcome_path }
+        flash[:notice] = "Sorry, but that #{user_session.errors.full_messages.first.downcase}."
+        format.html { redirect_to welcome_path }          
       end
     end
   end
@@ -44,5 +45,5 @@ class UserSessionsController < ApplicationController
       current_user_session.destroy
     end
   end
-
+    
 end

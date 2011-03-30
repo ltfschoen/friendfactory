@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     end
   end
     
-  after_save :enroll_in_site
+  after_save :save_enrollment
   
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :sites, :uniq => true, :before_add => :validate_enrollment_site
 
   has_many :waves, :class_name => 'Wave::Base'
-  has_many :profiles, :class_name => 'Wave::Profile'  
+  has_many :profiles, :class_name => 'Wave::Profile', :order => 'created_at desc'
   has_many :inboxes, :class_name => 'Wave::Inbox'  
   has_many :conversations, :class_name => 'Wave::Conversation', :order => 'created_at desc' do        
     def site(site)
@@ -81,25 +81,25 @@ class User < ActiveRecord::Base
     end
   end
 
-  def enroll_in_site
+  def save_enrollment
     if enrollment_site.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
       @enrollment_site, @enrollment_profile = nil, nil
     end
   end
   
-  def new_enrollment(site, handle, invitation_code = nil)
+  def self.new_user_with_enrollment(site, params)
+    User.new(params).tap do |user|
+      user.enrollment_site = site
+    end
+  end
+
+  def enroll(site, handle, invitation_code = nil)
     self.enrollment_site = site
     self.handle = handle
     self.invitation_code = invitation_code
     self
   end
   
-  def self.new_user_enrollment(site, params)
-    User.new(params).tap do |user|
-      user.enrollment_site = site
-    end
-  end
-
 
   # ===  Build assocations ===
     
@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
     build_profile(:handle => handle)
   end
 
-  def build_profile(attrs)
+  def build_profile(attrs= {})
     @enrollment_profile = profiles.build(attrs)
   end
   
