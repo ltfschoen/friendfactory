@@ -55,7 +55,10 @@ Friskyfactory::Application.routes.draw do
   resources :passwords, :only => [ :new, :create, :edit, :update ]  
 
   # User and User Sessions
-  resources :users, :only => [ :create ]  
+  resources :users, :only => [ :create, :update ] do
+    get 'member', :on => :collection
+  end
+  
   resources :user_sessions, :only => [ :new, :create, :destroy ] do
     get 'lurk', :on => :new
   end
@@ -65,7 +68,8 @@ Friskyfactory::Application.routes.draw do
   match 'logout'  => 'user_sessions#destroy', :via => [ :get, :delete ]
   
   # Welcome  
-  resource 'welcome', :only => [ :show, :create ], :controller => 'welcome'
+  resource 'welcome', :only => [ :show ], :controller => 'welcome'
+  post     'launch' => 'welcome#launch'
 
   scope :module => 'wave' do
     get 'wave'            => 'communities#show'

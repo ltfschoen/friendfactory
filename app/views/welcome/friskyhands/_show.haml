@@ -11,10 +11,10 @@
     .grid_1.alpha<
       &nbsp;
     .grid_6.prepend-top.blurb.alpha
-      - if new_user.errors.present?
+      - if flash[:errors].present?
         %p Oh no! Can you fix this?
         %ul.flash.error
-          - new_user.errors.full_messages.each do |error|
+          - flash[:errors].each do |error|
             %li= error
       - else
         %p Your privacy and safety are our number-one concerns. No search engine nor any other web site can access your FriskyHands' secured profile.
@@ -32,11 +32,11 @@
         
       .panel.signup.hidden
         %h3 Sign up!
-        = form_for new_user, :url => users_path do |f|
-          = f.fields_for :profile do |profile|
-            = profile.text_field :handle, :class => 'ui-widget', :placeholder => 'first name or handle'
+        = form_for @user do |f|
+          = f.text_field :handle, :class => 'ui-widget', :placeholder => 'first name or handle'
           = f.text_field :email, :class => 'ui-widget', :placeholder => 'email@address.com'
           = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'
+          = f.label :password, "Use your friskyfactory password", :class => 'hidden'
           = f.password_field :password_confirmation, :class => 'password ui-widget', :placeholder => 'password confirmation'
           .button-bar
             = f.submit 'Register'

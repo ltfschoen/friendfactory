@@ -15,4 +15,16 @@ jQuery(function($) {
 		$('button.toggle').trigger('click');
 	}
 	
+	$('input#user_email').change(function(event) {
+		$.getJSON('/users/member', { email: $(event.target).val() }, function(data) {			
+			if (data['member'] == true) {
+				$('input#user_password_confirmation').hide();
+				$("label[for='user_password']").show();
+			} else {
+				$('input#user_password_confirmation').show();
+				$("label[for='user_password']").hide();				
+			}
+		});
+	}).trigger('change');
+	
 });

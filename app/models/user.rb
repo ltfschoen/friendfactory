@@ -10,20 +10,20 @@ class User < ActiveRecord::Base
 
   validates_each :enrollment_site,
       :on => :update,
-      :allow_nil => true do |user, attribute, value|
+      :allow_nil => true do |user, attribute, value|    
     if user.sites.where(:id => value.id).present?
-      user.errors.add(attribute, 'already a member of site')
+      user.errors.add(:base, 'Already a member of this site')
     end
   end  
 
   validates_each :invitation_code,
       :if => lambda { |user| user.enrollment_site.present? && user.enrollment_site.invite_only? } do |user, attribute, value|
     unless user.invitations.where(:code => value, :site_id => user.enrollment_site.id).present?
-      user.errors.add(attribute, 'is not a valid invitation code')
+      user.errors.add(:base, "That email does not have an invite to this site with that invitation code")
     end
   end
-  
-  after_save :site_enrollment
+    
+  after_save :enroll_in_site
   
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
@@ -81,20 +81,30 @@ class User < ActiveRecord::Base
     end
   end
 
-  def site_enrollment
+  def enroll_in_site
     if enrollment_site.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
       @enrollment_site, @enrollment_profile = nil, nil
     end
   end
+  
+  def new_enrollment(site, handle, invitation_code = nil)
+    self.enrollment_site = site
+    self.handle = handle
+    self.invitation_code = invitation_code
+    self
+  end
+  
+  def self.new_user_enrollment(site, params)
+    User.new(params).tap do |user|
+      user.enrollment_site = site
+    end
+  end
+
 
   # ===  Build assocations ===
-  
-  def invitation=(attrs)
-    @invitation_code = attrs["code"]
-  end  
-
-  def profile=(attrs)
-    build_profile(attrs)
+    
+  def handle=(handle)
+    build_profile(:handle => handle)
   end
 
   def build_profile(attrs)
@@ -108,15 +118,15 @@ class User < ActiveRecord::Base
     site === enrollment_site ? enrollment_profile :
         profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
   end
+
+  def handle(site = enrollment_site)
+    profile(site).try(:handle)
+  end
   
   def avatar(site)
     profile(site).avatar
   end
-  
-  def handle(site)
-    profile(site).handle
-  end
-  
+        
   def first_name(site)
     profile(site).first_name
   end
@@ -131,8 +141,7 @@ class User < ActiveRecord::Base
   
   def gender(site)
     profile(site).gender
-  end
-  
+  end  
   
   # TODO Delete this. Should not expose the resource relationship.. who cares
   # about a profile's resource?? The profile should expose the interesting
@@ -174,16 +183,16 @@ class User < ActiveRecord::Base
 
   # ===
   
-  def self.find_or_create_by_email(params)
-    existing_user_with_profile(params) || create_user_with_profile(params)
-  end
-  
   def self.online?(user)
     online.include?(user)
   end
   
   def online?
     User.online?(self)
+  end
+  
+  def existing_record?
+    !new_record?
   end
   
   def to_s
@@ -193,18 +202,5 @@ class User < ActiveRecord::Base
   def reset_password!
     reset_perishable_token!
   end
-  
-  private
-  
-  def self.existing_user_with_profile(params)
-    if user = User.find_by_email(params[:email])
-      user.build_profile(params[:profile])
-      user
-    end
-  end
-  
-  def self.create_user_with_profile(params)
-    User.new(params)    
-  end
-  
+    
 end

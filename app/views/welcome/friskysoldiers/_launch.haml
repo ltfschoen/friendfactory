@@ -8,7 +8,7 @@
         %p We'll drop you an email when we're ready!              
       - else
         %p Provide your email address and we'll let you know when we're ready.
-        = form_for new_launch_user, :url => welcome_path do |f|
+        = form_for @launch_user, :url => launch_path do |f|
           = f.text_field :email, :placeholder => 'email@address.com'
           = f.submit 'Thanks'        
   .grid_3.omega<
