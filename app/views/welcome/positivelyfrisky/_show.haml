@@ -24,7 +24,9 @@
         %h3 Log in!
         = link_to 'Password?', new_password_path, :class => 'new_password'          
         = form_for UserSession.new, :url => user_sessions_path do |f|
+          = f.label :email, 'Email', :class => 'placeholder'
           = f.text_field :email, :placeholder => 'email@address.com'
+          = f.label :email, 'Password', :class => 'placeholder'
           = f.password_field :password, :class => 'password', :placeholder => 'password'
           .button-bar
             = f.submit 'Login'
@@ -33,14 +35,19 @@
       .panel.signup.hidden
         %h3 Sign up!
         = form_for @user do |f|
-          = f.text_field :invitation_code, :class => 'ui-widget', :placeholder => 'invitation code'
+          = f.label :invitation_code, 'Invitation Code', :class => 'placeholder'
           = f.label :invitation_code, 'Provide a valid membership code to join PositivelyFrisky'
+          = f.text_field :invitation_code, :class => 'ui-widget', :placeholder => 'invitation code'
+          = f.label :handle, 'First name or Handle', :class => 'placeholder'
           = f.text_field :handle, :class => 'ui-widget', :placeholder => 'first name or handle'
+          = f.label :email, 'Email', :class => 'placeholder'
           = f.text_field :email, :class => 'ui-widget', :placeholder => 'email@address.com'
+          = f.label :password, 'Password', :class => 'placeholder'
           = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'
           - css_class = @user.new_record? ? 'hidden' : ''
           = f.label :password, "Use your friskyfactory password", :class => css_class
           - css_class = @user.existing_record? ? 'hidden' : ''
+          = f.label :password, 'Retype your password', :class => 'placeholder'
           = f.password_field :password_confirmation, :class => "password ui-widget #{css_class}", :placeholder => 'password confirmation'
           .button-bar
             = f.submit 'Register'

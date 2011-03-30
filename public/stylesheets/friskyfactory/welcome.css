@@ -135,3 +135,11 @@ ul.flash.error {
 .password-edit table td {
     vertical-align: middle;
 }
+
+form {
+	clear:both;
+}
+
+label {
+	display: block;
+}

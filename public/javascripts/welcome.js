@@ -8,7 +8,9 @@ jQuery(function($) {
 		$('.panel.login, .panel.signup').toggle();
 	});
 
-	$('input:not([type="hidden"])').placehold();
+	if (Modernizr.input.placeholder) {
+		$('label.placeholder').hide();		
+	}
 	
 	var $invitationCode = $('input#user_invitation_code').val();
 	if ($('li', 'ul.flash.error').length > 0 || $invitationCode.length > 0) {
