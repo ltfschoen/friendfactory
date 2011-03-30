@@ -1,17 +1,20 @@
 friskyhands:
     id: 1
     name: friskyhands
+    display_name: FriskyHands
     launch: false
     invite_only: false
 
 positivelyfrisky:
     id: 2
     name: positivelyfrisky
+    display_name: PositivelyFrisky
     launch: false
     invite_only: true
 
 friskysoldiers:
     id: 3
     name: friskysoldiers
+    display_name: FriskySoldiers
     launch: true
     invite_only: false

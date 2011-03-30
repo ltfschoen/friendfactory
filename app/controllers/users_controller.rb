@@ -6,13 +6,12 @@ class UsersController < ApplicationController
 
   before_filter :require_no_user
   
-  helper_method :new_user
-
   def create
     @user = new_user_enrollment(params[:user])
     respond_to do |format|
       if @user.valid? && correct_credentials?(@user)
         @user.save
+        flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.handle(current_site)}!"
         format.html { redirect_to root_path }
       else
         flash.now[:errors] = @user.errors.full_messages
