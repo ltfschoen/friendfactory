@@ -55,7 +55,7 @@ h3 {
 	color: #FFF;
 	font-size: 1.4em;
 	text-shadow: 1px 2px 1px #701518;
-	margin-bottom: 12px;
+	margin-bottom: 0.2em;
 }
 
 h4 {
@@ -81,6 +81,7 @@ input.password {
 .blurb p {
     padding-right: 20px;
     font-size: 1.4em;
+	margin: 0;
 }
 
 .panel.login,

@@ -47,7 +47,7 @@
           - css_class = @user.new_record? ? 'hidden' : ''
           = f.label :password, "Use your friskyfactory password", :class => css_class
           - css_class = @user.existing_record? ? 'hidden' : ''
-          = f.label :password, 'Retype your password', :class => 'placeholder'
+          = f.label :password, 'Retype your password', :class => "placeholder #{css_class}"
           = f.password_field :password_confirmation, :class => "password ui-widget #{css_class}", :placeholder => 'password confirmation'
           .button-bar
             = f.submit 'Register'
