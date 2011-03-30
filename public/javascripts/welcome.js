@@ -25,6 +25,6 @@ jQuery(function($) {
 				$("label[for='user_password']").hide();				
 			}
 		});
-	}).trigger('change');
+	});
 	
 });
