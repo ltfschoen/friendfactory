@@ -20,7 +20,7 @@
             .left-info-pane.grid_2.alpha<
               &nbsp;
             .center-pane.grid_6<
-              = text_field_tag 'wave_event[promoter_name]', current_user.full_name
+              = text_field_tag 'wave_event[promoter_name]', current_user.handle(current_site)
               .presents
                 Presents
               = f.text_area  :description, :placeholder => 'event title'
