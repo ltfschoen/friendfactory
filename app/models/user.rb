@@ -107,10 +107,8 @@ class User < ActiveRecord::Base
     build_profile(:handle => handle)
   end
 
-  def build_profile(attrs= {})
-    @enrollment_profile = profiles.build(attrs).tap do |profile|
-      profile.current_site = current_site
-    end
+  def build_profile(attrs = {})
+    @enrollment_profile = profiles.build(attrs)
   end
   
 
