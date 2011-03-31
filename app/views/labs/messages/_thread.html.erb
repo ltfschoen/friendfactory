@@ -4,7 +4,7 @@
 <%= content_tag_for(:div, head) do %>
 	<div class='grid_4 alpha'>
 		<%= avatar_image_tag(head.sender.avatar, :style => :thumb) -%>
-		<div class='full_name'><%= head.sender.full_name -%></div>
+		<div class='full_name'><%= head.sender.handle(current_site) -%></div>
 		<div class='created_at'><%= time_ago_in_words(head.created_at) -%>&nbsp;ago</div>
 	</div>
 	<div class='grid_9 body'>
