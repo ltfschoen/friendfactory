@@ -5,3 +5,12 @@
 .header.primary ul.nav li a {
 	background-image: url(/images/positivelyfrisky/header.png);
 }
+
+body {
+	background: url('/images/positivelyfrisky/grey-fibers.png') repeat top center #666;
+}
+
+.page.footer {
+	color: #FFF;
+}
+
