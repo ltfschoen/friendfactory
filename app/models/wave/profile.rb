@@ -4,7 +4,7 @@ class Wave::Profile < Wave::Base
 
   extend Forwardable
   include TagScrubber
-  
+
   validates_presence_of :handle, :unless => :first_name
   
   has_and_belongs_to_many :avatars,
