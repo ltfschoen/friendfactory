@@ -1,7 +1,7 @@
 class Wave::Profile < Wave::Base
 
   extend Forwardable
-  
+    
   validates_presence_of :handle, :unless => :first_name
   
   has_and_belongs_to_many :avatars,
@@ -16,12 +16,27 @@ class Wave::Profile < Wave::Base
       :handle, :handle=,
       :first_name, :first_name=,
       :last_name, :last_name=,
-      :gender, :gender=
+      :gender, :gender=,
+      :full_name
   
-  before_create do |profile|
+  acts_as_taggable
+  attr_accessor :current_site
+  validates_presence_of :current_site, :message => "required for tagging and can't be blank"
+
+  before_validation do |profile|
     if profile.resource.nil?
       profile.resource = UserInfo.new(:user_id => profile.user_id)
     end
+  end
+    
+  before_save do |profile|
+    tag_list = [
+      profile.resource.gender_description,
+      profile.resource.orientation_description,
+      profile.resource.deafness_description,
+      scrub_tag(profile.resource.location_description)
+    ].compact * ','
+    profile.set_tag_list_on(profile.current_site.to_sym, tag_list)
   end
   
   after_create do |profile|
@@ -63,5 +78,35 @@ class Wave::Profile < Wave::Base
   def touch(avatar=nil)
     super()
   end
+  
+  private
+    
+  def scrub_tag(dirty_tag)
+    unless dirty_tag.blank?
+      tag = reduce(unpunctuate(dirty_tag.strip))
+      transpose(tag) || titleize(tag)
+    end
+  end
+  
+  def unpunctuate(tag)
+    tag.gsub(/,|-|_/, ' ').gsub(/[^[:alnum:][:space:]]+/, '').gsub(/\s{2,}/, ' ').strip    
+  end
+
+  def reduce(tag)
+    rejects = Admin::Tag.where(['taggable_type = ? and corrected is null', self.class.name]).order('defective asc').map(&:defective)
+    tag.strip.gsub(/#{rejects * '|'}/i, '').strip
+  end
+  
+  def transpose(tag)
+    Admin::Tag.where(['taggable_type = ? and corrected is not null', self.class.name]).order('corrected asc, defective asc').each do |transpose|
+      result = /#{transpose.defective}/i.match(tag)
+      return transpose.corrected.strip if result.present?
+    end
+    nil
+  end
+  
+  def titleize(tag)
+    tag.titleize if tag.present?
+  end  
 
 end

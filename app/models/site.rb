@@ -22,4 +22,10 @@ class Site < ActiveRecord::Base
     name
   end
   
+  def to_sym
+    name.to_sym
+  end
+  
+  alias :intern :to_sym
+  
 end

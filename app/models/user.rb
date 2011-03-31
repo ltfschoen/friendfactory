@@ -108,15 +108,22 @@ class User < ActiveRecord::Base
   end
 
   def build_profile(attrs= {})
-    @enrollment_profile = profiles.build(attrs)
+    @enrollment_profile = profiles.build(attrs).tap do |profile|
+      profile.current_site = current_site
+    end
   end
   
 
   # === Profile ===
 
   def profile(site = enrollment_site)
-    site === enrollment_site ? enrollment_profile :
-        profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
+    if site == enrollment_site
+      enrollment_profile      
+    else
+      profile = profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
+      profile.current_site = site if profile
+      profile
+    end
   end
 
   def handle(site = enrollment_site)
@@ -149,7 +156,6 @@ class User < ActiveRecord::Base
   def user_info(site)
     profile(site).resource
   end
-
 
   # === Conversations ===
   
@@ -196,7 +202,7 @@ class User < ActiveRecord::Base
   end
   
   def to_s
-    "{ :id => #{self.id}, :full_name => #{full_name} }"
+    email
   end
   
   def reset_password!

@@ -1,9 +1,5 @@
-require 'tag_scrubber'
-
 class UserInfo < ActiveRecord::Base
 
-  include TagScrubber
-  
   GuyGender    = 1
   GirlGender   = 2
   TrannyGender = 3
@@ -22,35 +18,13 @@ class UserInfo < ActiveRecord::Base
 
   set_table_name 'user_info'
 
-  acts_as_taggable
-
   belongs_to :user
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
-  
-  before_save do |user_info|
-    tag_list = [
-      user_info.gender_description,
-      user_info.orientation_description,
-      user_info.deafness_description
-    ].compact * ','
     
-    if location_tags = scrub_tag(user_info.location_description)
-      if tag_list.present?
-        tag_list += (',' + location_tags)
-      else
-        tag_list = location_tags
-      end
-    end
-    
-    self.tag_list = tag_list
-    true
-  end
-  
-  after_save do |user_info|    
+  after_save do |user_info|
     if profile = user_info.profile
       profile.touch
     end
-    true
   end
   
   def handle
@@ -66,7 +40,7 @@ class UserInfo < ActiveRecord::Base
   end
   
   def full_name
-    ([ first_name, last_name ].compact * ' ').strip
+    [ first_name, last_name ].compact * ' '
   end
   
   def gender_description
