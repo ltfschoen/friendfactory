@@ -1,7 +1,10 @@
+require 'tag_scrubber'
+
 class Wave::Profile < Wave::Base
 
   extend Forwardable
-    
+  include TagScrubber
+  
   validates_presence_of :handle, :unless => :first_name
   
   has_and_belongs_to_many :avatars,
@@ -20,13 +23,12 @@ class Wave::Profile < Wave::Base
       :full_name
   
   acts_as_taggable
+  
   attr_accessor :current_site
   validates_presence_of :current_site, :message => "required for tagging and can't be blank"
 
   before_validation do |profile|
-    if profile.resource.nil?
-      profile.resource = UserInfo.new(:user_id => profile.user_id)
-    end
+    profile.resource ||= UserInfo.new(:user_id => profile.user_id)
   end
     
   before_save do |profile|
@@ -47,7 +49,7 @@ class Wave::Profile < Wave::Base
   alias :profile_info :resource
 
   def profile_resource
-    self.resource ||= UserInfo.new    
+    resource ||= UserInfo.new(:user_id => user_id)
   end
   
   def active_avatar(avatar)
@@ -78,35 +80,5 @@ class Wave::Profile < Wave::Base
   def touch(avatar=nil)
     super()
   end
-  
-  private
-    
-  def scrub_tag(dirty_tag)
-    unless dirty_tag.blank?
-      tag = reduce(unpunctuate(dirty_tag.strip))
-      transpose(tag) || titleize(tag)
-    end
-  end
-  
-  def unpunctuate(tag)
-    tag.gsub(/,|-|_/, ' ').gsub(/[^[:alnum:][:space:]]+/, '').gsub(/\s{2,}/, ' ').strip    
-  end
-
-  def reduce(tag)
-    rejects = Admin::Tag.where(['taggable_type = ? and corrected is null', self.class.name]).order('defective asc').map(&:defective)
-    tag.strip.gsub(/#{rejects * '|'}/i, '').strip
-  end
-  
-  def transpose(tag)
-    Admin::Tag.where(['taggable_type = ? and corrected is not null', self.class.name]).order('corrected asc, defective asc').each do |transpose|
-      result = /#{transpose.defective}/i.match(tag)
-      return transpose.corrected.strip if result.present?
-    end
-    nil
-  end
-  
-  def titleize(tag)
-    tag.titleize if tag.present?
-  end  
 
 end

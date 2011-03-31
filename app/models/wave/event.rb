@@ -1,5 +1,7 @@
 require 'tag_scrubber'
 
+require 'tag_scrubber'
+
 class Wave::Event < Wave::Base  
 
   extend Forwardable
