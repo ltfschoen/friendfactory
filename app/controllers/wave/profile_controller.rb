@@ -17,7 +17,10 @@ class Wave::ProfileController < ApplicationController
   end
   
   def update
-    current_user.profile(current_site).user_info.update_attributes(params[:user_info])
+    if profile = current_user.profile(current_site)
+      profile.resource.update_attributes(params[:user_info])
+      profile.save
+    end
     respond_to do |format|
       format.html { redirect_to profile_path }
     end

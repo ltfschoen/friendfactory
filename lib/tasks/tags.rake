@@ -1,9 +1,8 @@
 namespace :ff do
-  namespace :tags do
+  namespace :tags do    
     desc 'Scrub user_info tags'
-    task :refresh => :environment do
-      UserInfo.all.each { |user_info| user_info.touch && user_info.save! }
-      ActsAsTaggableOn::Tag.all.select{ |t| t.taggings.empty? }.each{ |t| t.delete }
-    end
+    task :refresh_all => :environment do
+      Admin::Tag.refresh_all
+    end    
   end
 end

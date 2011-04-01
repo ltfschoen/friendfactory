@@ -2,10 +2,7 @@ require 'tag_scrubber'
 
 class Wave::Profile < Wave::Base
 
-  extend Forwardable
   include TagScrubber
-
-  validates_presence_of :handle, :unless => :first_name
   
   has_and_belongs_to_many :avatars,
       :class_name              => 'Posting::Avatar',
@@ -15,20 +12,16 @@ class Wave::Profile < Wave::Base
       :order                   => 'updated_at desc',
       :after_add               => [ :active_avatar, :touch ]
 
-  def_delegators :profile_resource,
-      :handle, :handle=,
-      :first_name, :first_name=,
-      :last_name, :last_name=,
-      :gender, :gender=,
-      :full_name
+  delegate :handle, :handle=, :first_name, :gender, :age, :to => :resource
   
-  acts_as_taggable
-  
+  acts_as_taggable  
   attr_accessor :current_site
-  validates_presence_of :current_site, :message => "required for tagging and can't be blank"
+  validates_presence_of :current_site, :message => 'required for tagging'
+
+  validates_presence_of :handle, :unless => :first_name
 
   before_validation do |profile|
-    profile.resource ||= UserInfo.new(:user_id => profile.user_id)
+    profile.resource.present?
   end
     
   before_save do |profile|
@@ -38,7 +31,7 @@ class Wave::Profile < Wave::Base
       profile.resource.deafness_description,
       scrub_tag(profile.resource.location_description)
     ].compact * ','
-    profile.set_tag_list_on(profile.current_site.to_sym, tag_list)
+    profile.set_tag_list_on(profile.current_site, tag_list)
   end
   
   after_create do |profile|
@@ -46,12 +39,15 @@ class Wave::Profile < Wave::Base
   end
   
   alias :user_info :resource
-  alias :profile_info :resource
 
-  def profile_resource
-    resource ||= UserInfo.new(:user_id => user_id)
+  def resource
+    super || self.resource = UserInfo.new.tap { |user_info| user_info.user = user }
   end
   
+  def tag_list
+    current_site.present? ? tag_list_on(current_site) : []  
+  end
+    
   def active_avatar(avatar)
     if avatar.active?
       # Following update didn't work. Used update_all instead.

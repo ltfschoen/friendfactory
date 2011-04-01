@@ -9,9 +9,9 @@ class Site < ActiveRecord::Base
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id' do
-    def type(type)
-      where(:type => type)
-    end
+    def type(*types)
+      where('type in (?)', types.map(&:to_s))
+    end  
   end
   
   def to_s

@@ -53,13 +53,7 @@ class Admin::TagsController < ApplicationController
   end
   
   def commit
-    ActsAsTaggableOn::Tag.delete_all
-    ActsAsTaggableOn::Tagging.delete_all
-    
-    UserInfo.all.each { |user_info| user_info.save! }
-    Wave::Event.all.each { |event| event.save! }
-    
-    # ActsAsTaggableOn::Tag.all.select{ |t| t.taggings.empty? }.each{ |t| t.delete }
+    Tag.refresh_all
     respond_to do |format|
       format.html { redirect_to(admin_tags_path, :notice => 'Changes committed.') }
     end

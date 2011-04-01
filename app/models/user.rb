@@ -118,9 +118,9 @@ class User < ActiveRecord::Base
     if site == enrollment_site
       enrollment_profile      
     else
-      profile = profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
-      profile.current_site = site if profile
-      profile
+      profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first.tap do |profile|
+        profile.current_site = site
+      end
     end
   end
 

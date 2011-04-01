@@ -18,7 +18,7 @@ class UserInfo < ActiveRecord::Base
 
   set_table_name 'user_info'
 
-  belongs_to :user
+  belongs_to :user  
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
     
   after_save do |user_info|
