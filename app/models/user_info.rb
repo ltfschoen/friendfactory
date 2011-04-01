@@ -23,7 +23,7 @@ class UserInfo < ActiveRecord::Base
     
   after_save do |user_info|
     if profile = user_info.profile
-      profile.touch
+      profile.set_tag_list && profile.save
     end
   end
   
