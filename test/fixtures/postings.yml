@@ -4,7 +4,7 @@ text_posting:
   user_id: 1
   body: Text Posting
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now = Time.now.utc %>
   updated_at: <%= now %>
       
 comment_posting:

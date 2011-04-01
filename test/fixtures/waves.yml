@@ -6,7 +6,7 @@ adam_profile_wave_1:
   resource_id: 1
   resource_type: UserInfo
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now = Time.now.utc %>
   updated_at: <%= now %>
 
 bert_profile_wave_1:
@@ -17,7 +17,7 @@ bert_profile_wave_1:
   resource_id: 2
   resource_type: UserInfo
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
   
 charlie_profile_wave_1:
@@ -28,7 +28,7 @@ charlie_profile_wave_1:
   resource_id: 3
   resource_type: UserInfo
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
 adam_profile_wave_2:
@@ -39,7 +39,7 @@ adam_profile_wave_2:
   resource_id: 11
   resource_type: UserInfo
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
 bert_profile_wave_2:
@@ -50,7 +50,7 @@ bert_profile_wave_2:
   resource_id: 12
   resource_type: UserInfo
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
 popular_wave_1:
@@ -60,7 +60,7 @@ popular_wave_1:
   slug: popular
   description: Get going!
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
 popular_wave_2:
@@ -71,7 +71,7 @@ popular_wave_2:
   slug: popular
   description: Get going!
   state: published
-  created_at: <%= now = Time.now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
   
 event_wave:
@@ -84,5 +84,5 @@ event_wave:
   resource_id: 1
   resource_type: Resource::Event
   description: Lorem ipsum
-  created_at: <%= now = Time.now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
