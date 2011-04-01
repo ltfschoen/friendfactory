@@ -1,12 +1,11 @@
 require 'tag_scrubber'
 
-require 'tag_scrubber'
-
 class Wave::Event < Wave::Base  
 
   extend Forwardable
   include TagScrubber
   
+  attr_readonly :user_id
   attr_accessible :promoter_name,
       :description,
       :start_date, :start_time,
@@ -15,64 +14,48 @@ class Wave::Event < Wave::Base
       :location,
       :body
 
-  def_delegators :event_info,
-      :start_date,  :start_date=,
-      :end_date,    :end_date=,
-      :url,         :url=,
-      :location,    :location=,
-      :body,        :body=
+  def_delegators :event_resource,
+      :start_date, :start_date=,
+      :end_date, :end_date=,
+      :url, :url=,
+      :location, :location=,
+      :body, :body=
 
-  validates_presence_of :user_id, :promoter_name, :description
+  alias_attribute :promoter_name, :topic
   
-  attr_readonly :user_id
-
   acts_as_taggable
   acts_as_slugable :source_column => :description, :slug_column => :slug
 
-  # has_many :profiles, :through => :invitations
+  validates_presence_of :user_id, :promoter_name, :description
 
   before_save do |event|
-    if event.location.present?
-      self.tag_list = scrub_tag(event.location.city)
-    end
-    true
+    self.tag_list = scrub_tag(event.location.city) if event.location.present?
   end
 
   after_save do |event|
-    event.event_info.save
-    wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
-    if wave
+    if wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
       posting = Posting::WaveProxy.new(:user_id => event.user_id)
       posting.resource = event
-      posting.save    
       wave.postings << posting
+      posting.publish!
     end
-    true
   end
 
-  def initialize(attrs={})
-    start_date = attrs.delete('start_date')
-    if start_date
+  def initialize(attrs={})    
+    if start_date = attrs.delete('start_date')
       start_date += " #{attrs['start_time(4i)']}:#{attrs['start_time(5i)']}" 
       attrs.delete('start_time(4i)')
       attrs.delete('start_time(5i)')
     end
     super(attrs.merge(:start_date => start_date))
   end
-
-  def promoter_name=(name)
-    self.topic = name
-  end
   
-  def promoter_name
-    self.topic
-  end
-  
-  def event_info
+  def event_resource
     self.resource ||= Resource::Event.new
   end
   
   def start_time=(start_time)
+    # TODO
   end
   
 end
