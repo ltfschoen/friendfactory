@@ -8,22 +8,8 @@ class Wave::EventsController < ApplicationController
   @@per_page = 30
   
   def index
-    @waves = if params[:tag]
-      params[:tag] = params[:tag].downcase.gsub(/-/, ' ')
-      # TODO To be site-scoped
-      Wave::Event.
-        tagged_with(params[:tag]).
-        where(:state => :published).
-        order('updated_at desc').
-        paginate(:page => params[:page], :per_page => @@per_page)        
-    else
-      current_site.waves.
-        type(Wave::Event).
-        where(:state => :published).
-        order('updated_at desc').
-        paginate(:page => params[:page], :per_page => @@per_page)      
-    end
-    @tags = Wave::Event.tag_counts_on(:tags).order('name asc')
+    @waves = find_events_tagged_with(params[:tag]) || find_all_events
+    @tags = tag_counts_on_current_site
     respond_to do |format|
       format.html
     end
@@ -32,10 +18,36 @@ class Wave::EventsController < ApplicationController
   def create
     @wave = Wave::Event.new(params[:wave_event])
     @wave.user = current_user
-    @wave.save
     respond_to do |format|
-      format.js { render :layout => false }
+      if current_site.waves << @wave
+        format.js { render :layout => false }
+      end
     end
-  end  
+  end
+  
+  private
+  
+  def find_events_tagged_with(tag)
+    return unless tag.present?
+    Wave::Event.tagged_with(scrubbed_tag(tag), :on => current_site).
+        where(:state => :published).
+        order('updated_at desc').
+        paginate(:page => params[:page], :per_page => @@per_page)
+  end
+  
+  def find_all_events
+    current_site.waves.type(Wave::Event).
+        where(:state => :published).
+        order('updated_at desc').
+        paginate(:page => params[:page], :per_page => @@per_page)      
+  end
+  
+  def scrubbed_tag(tag)
+    tag.downcase.gsub(/-/, ' ')
+  end
+  
+  def tag_counts_on_current_site
+    Wave::Event.tag_counts_on(current_site).order('name asc')
+  end
   
 end

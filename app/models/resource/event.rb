@@ -3,6 +3,12 @@ module Resource
     
     has_one :event, :as => :resource, :class_name => 'Wave::Event'
     belongs_to :location
+
+    after_update do |event_resource|
+      if event = event_resource.event
+        event.set_tag_list && event.save
+      end
+    end
     
     def start_date=(date)      
       if date.present?

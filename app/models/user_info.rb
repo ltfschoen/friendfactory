@@ -21,7 +21,7 @@ class UserInfo < ActiveRecord::Base
   belongs_to :user  
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
     
-  after_save do |user_info|
+  after_update do |user_info|
     if profile = user_info.profile
       profile.set_tag_list && profile.save
     end

@@ -2,7 +2,7 @@ namespace :ff do
   namespace :fixtures do
     
     desc "Load friskyfactory fixtures"
-    task :load => [ :'load:models', :'load:trigger_callbacks', :'load:avatars', :'load:photos' ] # ts:rebuild
+    task :load => [ :'load:models', :'load:taggables', :'load:avatars', :'load:photos' ] # ts:rebuild
     
     namespace :load do      
       task :models do
@@ -10,9 +10,10 @@ namespace :ff do
         Rake::Task[:'db:fixtures:load'].invoke
       end
       
-      task :trigger_callbacks do
-        UserInfo.all.map(&:save)
-        Wave::Event.all.map(&:save)        
+      task :taggables => :environment do
+        (Wave::Profile.all +  Wave::Event.all).each do |taggable|
+          taggable.set_tag_list && taggable.save
+        end
       end
 
       task :avatars => :environment do

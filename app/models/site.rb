@@ -8,7 +8,8 @@ class Site < ActiveRecord::Base
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
-      :association_foreign_key => 'wave_id' do
+      :association_foreign_key => 'wave_id',
+      :after_add               => :set_tag_list_for_wave do
     def type(*types)
       where('type in (?)', types.map(&:to_s))
     end  
@@ -27,5 +28,9 @@ class Site < ActiveRecord::Base
   end
   
   alias :intern :to_sym
+  
+  def set_tag_list_for_wave(wave)
+    wave.set_tag_list_for_site(self)    
+  end
   
 end

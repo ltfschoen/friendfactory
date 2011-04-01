@@ -23,16 +23,12 @@ class Wave::Event < Wave::Base
 
   alias_attribute :promoter_name, :topic
   
-  acts_as_taggable
   acts_as_slugable :source_column => :description, :slug_column => :slug
 
   validates_presence_of :user_id, :promoter_name, :description
 
-  before_save do |event|
-    self.tag_list = scrub_tag(event.location.city) if event.location.present?
-  end
-
-  after_save do |event|
+  after_create do |event|
+    event.publish!
     if wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
       posting = Posting::WaveProxy.new(:user_id => event.user_id)
       posting.resource = event
@@ -40,7 +36,7 @@ class Wave::Event < Wave::Base
       posting.publish!
     end
   end
-
+  
   def initialize(attrs={})    
     if start_date = attrs.delete('start_date')
       start_date += " #{attrs['start_time(4i)']}:#{attrs['start_time(5i)']}" 
@@ -56,6 +52,16 @@ class Wave::Event < Wave::Base
   
   def start_time=(start_time)
     # TODO
+  end
+
+  def set_tag_list_for_site(site)
+    set_tag_list && save
+  end
+    
+  def set_tag_list
+    if location.present? && location.city.present?
+      sites.each { |site| set_tag_list_on(site, scrub_tag(location.city)) }
+    end
   end
   
 end

@@ -14,18 +14,12 @@ class Wave::Profile < Wave::Base
 
   delegate :handle, :handle=, :first_name, :gender, :age, :to => :resource
   
-  acts_as_taggable  
-
   validates_presence_of :handle, :unless => :first_name
 
   before_validation do |profile|
     profile.resource.present?
   end
-    
-  before_save do |profile|
-    profile.set_tag_list
-  end
-  
+      
   after_create do |profile|
     profile.publish!
   end
@@ -64,15 +58,21 @@ class Wave::Profile < Wave::Base
   def photos
     self.postings.only(Posting::Photo)
   end
+  
+  def set_tag_list_for_site(site)
+    set_tag_list && save
+  end
 
   def set_tag_list
-    tag_list = [
-        resource.gender_description,
-        resource.orientation_description,
-        resource.deafness_description,
-        scrub_tag(resource.location_description)
-    ].compact * ','
-    sites.each { |site| set_tag_list_on(site, tag_list) }
+    if resource.present?
+      tag_list = [
+          resource.gender_description,
+          resource.orientation_description,
+          resource.deafness_description,
+          scrub_tag(resource.location_description)
+      ].compact * ','
+      sites.each { |site| set_tag_list_on(site, tag_list) }
+    end
   end
   
   def touch(avatar=nil)

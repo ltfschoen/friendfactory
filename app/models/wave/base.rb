@@ -20,13 +20,16 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
+  acts_as_taggable
+
   belongs_to :user
 
   has_and_belongs_to_many :sites,
       :class_name              => 'Site',
       :join_table              => 'sites_waves',
       :foreign_key             => 'wave_id',
-      :association_foreign_key => 'site_id'      
+      :association_foreign_key => 'site_id',
+      :after_add               => :set_tag_list_for_site
 
   has_and_belongs_to_many :postings,
       :class_name              => 'Posting::Base',
@@ -34,22 +37,23 @@ class Wave::Base < ActiveRecord::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
       :conditions              => 'parent_id is null',
-      :order                   => 'updated_at desc' do
-        
+      :order                   => 'updated_at desc' do        
     def only(*types)
       where('type in (?)', types.map(&:to_s))
-    end
-    
+    end    
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
-    end
-    
+    end    
     def published
       where(:state => :published)
     end    
   end
   
   belongs_to :resource, :polymorphic => true
+  
+  def set_tag_list_for_site(site)
+    # Overridde in inherited classes
+  end
   
   def self.default
     Wave::Base.first
