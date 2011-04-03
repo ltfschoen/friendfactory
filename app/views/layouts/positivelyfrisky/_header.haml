@@ -7,8 +7,6 @@
       = link_to 'Roll Call', roll_call_path
     %li#nav-3
       = link_to 'Events', events_path
-    %li#nav-4
-      = link_to_facebook_shop
     %li#nav-5{ :class => "#{'current' if current_page?(:controller => 'wave/profile', :action => 'show')}" }
       = link_to 'Bio', profile_path
     %li#nav-6
@@ -23,5 +21,3 @@
   - else
     - if current_user && current_user.avatar(current_site).nil?
       Create a profile on your #{link_to('Bio', profile_path)} page
-  %div.links
-    = link_to_facebook

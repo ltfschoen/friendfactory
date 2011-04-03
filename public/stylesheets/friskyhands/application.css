@@ -5,3 +5,19 @@
 .header.primary ul.nav li a {
 	background-image: url(/images/friskyhands/header.png);
 }
+
+.header.secondary a:visited,
+.header.secondary a:active {
+    color: #664;
+}
+
+.header.secondary .flash {
+    color: #664;
+}
+
+.header.secondary a:hover {
+    color: #CCA;
+    background-color: #553;
+}
+
+

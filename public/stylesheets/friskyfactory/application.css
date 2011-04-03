@@ -387,7 +387,6 @@ a.bio {
 
 .header.secondary .flash {
     float: left;
-    color: #664;
 }
 
 .header.secondary .links {
@@ -395,21 +394,11 @@ a.bio {
     float: right;
 }
 
-.header.secondary a {
+/*.header.secondary a {
     margin: 0 4px;
     padding: 2px;
     border-bottom: 1px dotted #664;
-}
-
-.header.secondary a:visited,
-.header.secondary a:active {
-    color: #664;
-}
-
-.header.secondary a:hover {
-    color: #CCA;
-    background-color: #553;
-}
+}*/
 
 a.web_logos {
 	background: url(/images/friskyfactory/web_logos.png);

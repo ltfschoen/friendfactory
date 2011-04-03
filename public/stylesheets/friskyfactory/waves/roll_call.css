@@ -12,28 +12,19 @@
 
 .tag-cloud {
     text-align: center;
-/*	background: url('/images/friskyfactory/golden_fibers.png') repeat-y top center  #CEC2A2;*/
 	padding: 10px 20px;
 }
 
 .tag-cloud a,
 .tag-cloud a:visited {
-    color: #501508;
     margin: 0 4px;
-    padding: 2px 6px;
+    padding: 4px 8px;
     border-bottom: 0px;
     white-space: nowrap;
-}
-
-.tag-cloud a:hover,
-.tag-cloud a.current:hover {
-    color: #CCA;
-    background-color: rgb(80, 21, 8);
-}
-
-.tag-cloud a.current {
-    color: #CCA;
-    background-color: rgb(140, 55, 44);
+	display: inline-block;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
 }
 
 .tag-cloud a.tag1 { font-size: 0.6em; }

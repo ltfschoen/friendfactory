@@ -14,3 +14,11 @@ body {
 	color: #FFF;
 }
 
+.header.secondary { 
+	color: #FFF
+}
+
+.header.secondary a:visited,
+.header.secondary a:active {
+    color: #FFF;
+}
