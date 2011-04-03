@@ -1,0 +1,6 @@
+-# cache(profile.cache_key) do
+.wave[profile]
+  .polaroid-container
+    .polaroid{ :'data-profile_id' => profile.id }
+      = render :partial => 'profile_front_face', :locals => { :profile => profile } 
+      = render :partial => 'profile_back_face', :locals => { :profile => profile } 
