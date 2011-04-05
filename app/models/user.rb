@@ -84,6 +84,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_by_invitation_code(invitation_code)
+    invitations = Posting::Invitation.find_all_by_code(invitation_code)    
+    if invitations.length == 1
+      invitation = invitations.first
+      (invitation.invitee || User.new).tap do |user|
+        user.handle = user.profiles.first.try(:handle)
+        user.email ||= invitation.email
+        user.invitation_code = invitation_code
+      end
+    end
+  end
+
   def save_enrollment
     if enrollment_site.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
       @enrollment_site, @enrollment_profile = nil, nil
