@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates_each :invitation_code,
       :if => lambda { |user| user.enrollment_site.present? && user.enrollment_site.invite_only? } do |user, attribute, value|
-    unless user.invitations.where(:code => value, :site_id => user.enrollment_site.id).present?
+    unless user.invitations.where(:subject => value, :resource_id => user.enrollment_site.id).present?
       user.errors.add(:base, "That email does not have an invite to this site with that invitation code")
     end
   end
@@ -63,8 +63,11 @@ class User < ActiveRecord::Base
   alias :conversation :conversations
 
   has_many :postings, :class_name => 'Posting::Base'
-  has_many :invitations, :foreign_key => 'email', :primary_key => 'email'    
-  has_many :sponsorships, :class_name  => 'Invitation', :foreign_key => 'sponsor_id'
+  has_many :invitations, :foreign_key => 'body', :primary_key => 'email', :class_name => 'Posting::Invitation' do
+    def site(site)
+      where(:resource_id => site.id)
+    end
+  end
 
   # has_many :friendships
   # has_many :friends,  :through => :friendships

@@ -1,3 +1,11 @@
 popular_wave_text_posting:
   posting_id: 1
   wave_id: 4
+
+adam_invitation_wave_invitation_posting_1:
+  posting_id: 3
+  wave_id: 6
+
+adam_invitation_wave_invitation_posting_2:
+  posting_id: 4
+  wave_id: 6

@@ -86,3 +86,10 @@ event_wave:
   description: Lorem ipsum
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
+
+adam_invitation_wave:
+  id: 6
+  user_id: 1
+  type: Wave::Invitation
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>

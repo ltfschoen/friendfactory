@@ -159,11 +159,16 @@ ActiveRecord::Schema.define(:version => 20110324064641) do
     t.boolean  "rsvp"
   end
 
+  create_table "resource_invitations", :force => true do |t|
+    t.datetime "expires_at"
+  end
+
   create_table "sites", :force => true do |t|
     t.string   "name",                                        :null => false
     t.string   "display_name",                                :null => false
     t.boolean  "launch",                   :default => false
     t.boolean  "invite_only",              :default => false
+    t.string   "customs"
     t.string   "analytics_domain_name"
     t.string   "analytics_account_number"
     t.datetime "created_at"

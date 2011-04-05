@@ -14,7 +14,7 @@ comment_posting:
   user_id: 2 %>
   body: Comment
   state: published
-  created_at: <%= now %>
+  created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
 # message:
@@ -25,3 +25,27 @@ comment_posting:
 #   receiver_id: <%= Fixtures.identify(:bert) %>
 #   body: <%= Faker::Lorem::sentences(3) %>
 #   created_at: <%= Date.today %>
+
+invitation_posting_1:
+  id: 3
+  user_id: 1
+  subject: c3
+  body: charlie@test.com
+  type: Posting::Invitation
+  state: offered  
+  resource_id: 2
+  resource_type: Site
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
+invitation_posting_2:
+  id: 4
+  user_id: 1
+  subject: d4
+  body: duncan@test.com
+  type: Posting::Invitation
+  state: offered
+  resource_id: 2
+  resource_type: Site
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>

@@ -26,12 +26,14 @@ class WelcomeController < ApplicationController
   private
   
   def find_or_create_user_by_invitation_code
-    invitation = Invitation.find_all_by_code(params[:invite])
-    user = (invitation.length == 1 && invitation.first.user) || User.new
-    user.tap do |user|
-      user.handle = user.profiles.first.try(:handle)
-      user.enrollment_site = current_site
-      user.invitation_code = params[:invite]
+    invitation_code = params[:invite]
+    invitations = Posting::Invitation.find_all_by_code(invitation_code)    
+    invitee = invitations.length == 1 ?
+        invitations.first.invitee || User.new(:email => invitations.first.email) : User.new
+    invitee.tap do |user|
+      invitee.handle = invitee.profiles.first.try(:handle)
+      invitee.enrollment_site = current_site
+      invitee.invitation_code = invitation_code
     end
   end
     
