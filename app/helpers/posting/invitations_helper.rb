@@ -1,0 +1,2 @@
+module Posting::InvitationsHelper
+end

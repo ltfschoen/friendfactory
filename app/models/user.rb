@@ -74,14 +74,10 @@ class User < ActiveRecord::Base
     end
   end
   
-  def invitation_wave(site)
-    waves.type(Wave::Invitation).
-        joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
-        where(:sites_waves => { :site_id => site.id }).limit(1).
-        merge(Wave::Base.published).
-        try(:first)
+  def find_or_create_invitation_wave(site)
+    invitation_wave(site) || create_invitation_wave(site)
   end
-  
+    
   # has_many :friendships
   # has_many :friends,  :through => :friendships
   # has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
@@ -239,6 +235,20 @@ class User < ActiveRecord::Base
   
   def validate_enrollment_site(site)
     raise "User already a member" if sites.where(:id => site.id).present?
+  end
+
+  def invitation_wave(site)
+    waves.type(Wave::Invitation).
+        joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
+        where(:sites_waves => { :site_id => site.id }).limit(1).
+        merge(Wave::Base.published).
+        try(:first)
+  end
+  
+  def create_invitation_wave(site)
+    wave = Wave::Invitation.new.tap { |wave| wave.user = self }
+    site.waves << wave && wave.publish!
+    wave
   end
     
 end

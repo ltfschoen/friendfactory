@@ -8,17 +8,21 @@
           .content
             = avatar_image_tag(@wave.user.avatar(current_site), :class => 'headshot', :style => 'polaroid', :gender => @wave.user.gender(current_site))
   .grid_6
-    =# form_for [ @wave, :posting ], :url => wave_invitation_path do |f|
     .polaroid.edit
-      .face-container
-        .back.face
-          .content.scrollable
-            .items
-              .photo-grid
-                = render_photo_grid(@invitation_postings)
-          .button-bar
-            =# f.submit "OK"
-            =# link_to 'Cancel', profile_path, :class => 'cancel button'
-              
-:javascript
-  $("div.button-bar button[type='submit']").button({ icons: { primary: 'ui-icon-check' }, text: false });
+      = form_for Posting::Invitation.new, :url => wave_posting_invitations_path(@wave), :remote => true do |f|
+        .face-container
+          .back.face
+            .content.scrollable
+              .items
+                .photo-grid
+                  = render_photo_grid(@wave, @invitation_postings)
+              %p.unobtrusive
+                Click an empty box to invite a buddy            
+            %table.button-bar.hidden
+              %tr
+                %td.input
+                  = hidden_field_tag :li_eq
+                  = f.text_field :body, :placeholder => "buddy's email"
+                %td.ok-cancel
+                  = f.submit 'OK'
+                  = f.button 'Cancel', :class => 'cancel'

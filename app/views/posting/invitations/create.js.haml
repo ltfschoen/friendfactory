@@ -1,0 +1,5 @@
+- if @posting.existing_record?
+  :plain
+    $("li:eq(#{@li_eq})", '.wave_invitation .polaroid.edit')
+      .find('a.new_posting_invitation')
+        .html("#{escape_javascript(avatar_or_placeholder_image_tag(@wave, @posting, :class => 'thumb'))}");

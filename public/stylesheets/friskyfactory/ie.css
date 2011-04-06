@@ -40,3 +40,12 @@
 	background-position: -220px 0;
 	width: 55px;
 }
+
+.wave_invitation .polaroid td.input {
+	text-align: left;
+}
+
+.wave_invitation .polaroid td.ok-cancel {
+		text-align: right;
+}
+

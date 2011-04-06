@@ -58,12 +58,7 @@ class Wave::Base < ActiveRecord::Base
   def set_tag_list_for_site(site)
     # Overridden in inherited classes
   end
-  
-  def site=(site)
-    raise "Site assignment only available for new waves" unless new_record? 
-    self.sites = [ site ]
-  end
-  
+    
   def self.default
     Wave::Base.first
   end

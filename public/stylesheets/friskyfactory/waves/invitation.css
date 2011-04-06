@@ -1,0 +1,42 @@
+.wave_invitation .polaroid p.unobtrusive {
+	margin-top: 274px;
+	text-align: center;
+}
+
+.wave_invitation .polaroid li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.wave_invitation .polaroid .button-bar {	
+	top: -15;
+	width: 100%;
+}
+
+.wave_invitation .polaroid .button-bar td:nth-child(1) {
+	text-align: left;
+}
+
+.wave_invitation .polaroid .button-bar td:nth-child(2) {
+	text-align: right;
+}
+
+.wave_invitation .polaroid input#posting_invitation_body {
+	width: 12em;
+}
+
+.wave_invitation .polaroid .photo-grid img.thumb {
+	margin: 0 !important;
+}
+
+.wave_invitation .polaroid .photo-grid li {
+	margin-right: 6px;
+	margin-bottom: 8px;
+	display: block;
+	float: left;
+}
+
+.wave_invitation .polaroid .photo-grid li.omega {
+	margin-right: 0;
+}

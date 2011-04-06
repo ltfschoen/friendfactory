@@ -64,4 +64,9 @@ class Posting::Base < ActiveRecord::Base
   def to_s
     self[:type].to_s + ':' + self[:id].to_s
   end
+  
+  def existing_record?
+    !new_record?
+  end
+  
 end

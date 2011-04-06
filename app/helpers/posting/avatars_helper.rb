@@ -5,7 +5,8 @@ module Posting::AvatarsHelper
   end
   
   def empty_image_tag(opts = {})
-    image_tag 'friskyfactory/ffffff.gif', :site => false, :class => opts[:class]
+    css_class = [ 'empty', opts.delete(:class) ].compact * ' '
+    image_tag 'friskyfactory/ffffff.gif', :site => false, :class => css_class
   end
   
 end
