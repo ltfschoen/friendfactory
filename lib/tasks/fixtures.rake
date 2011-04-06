@@ -20,10 +20,12 @@ namespace :ff do
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
         image_fixtures = Dir[File.join(Rails.root, 'test', 'fixtures', 'images', 'avatars', '*.{jpg, jpeg, png}')]
-        image_fixtures.each do |fixture|
-          user = User.find_by_first_name(File.basename(fixture, '.*').split('-')[0])
-          if user
-            avatar = Posting::Avatar.new(:image => File.new(fixture), :user => user)
+        image_fixtures.each do |fixture|          
+          if user = UserInfo.find_by_first_name(File.basename(fixture, '.*').split('-')[0]).profile.user
+            avatar = Posting::Avatar.new.tap do |avatar|
+              avatar.image = File.new(fixture)
+              avatar.user = user
+            end
             user.profiles.each { |profile| profile.avatars << avatar }
             avatar.publish!
           end
