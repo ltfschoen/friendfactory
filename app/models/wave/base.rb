@@ -20,10 +20,11 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
+  scope :published, where(:state => :published)
+
   acts_as_taggable
 
   belongs_to :user
-
   has_and_belongs_to_many :sites,
       :class_name              => 'Site',
       :join_table              => 'sites_waves',

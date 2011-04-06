@@ -77,8 +77,9 @@ class User < ActiveRecord::Base
   def invitation_wave(site)
     waves.type(Wave::Invitation).
         joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
-        where(:state => :published, :sites_waves => { :site_id => site.id }).
-        limit(1).try(:first)
+        where(:sites_waves => { :site_id => site.id }).limit(1).
+        merge(Wave::Base.published).
+        try(:first)
   end
 
   # has_many :friendships
