@@ -46,9 +46,15 @@ class User < ActiveRecord::Base
   
   has_and_belongs_to_many :sites, :uniq => true, :before_add => :validate_enrollment_site
 
-  has_many :waves, :class_name => 'Wave::Base'
+  has_many :waves, :class_name => 'Wave::Base' do
+    def type(*types)
+      where('type in (?)', types.map(&:to_s))
+    end
+  end
+
   has_many :profiles, :class_name => 'Wave::Profile', :order => 'created_at desc'
   has_many :inboxes, :class_name => 'Wave::Inbox'  
+
   has_many :conversations, :class_name => 'Wave::Conversation', :order => 'created_at desc' do        
     def site(site)
       joins(:sites).where('sites_waves.site_id = ?', site.id) if site.present?
@@ -58,8 +64,7 @@ class User < ActiveRecord::Base
     end    
   end
 
-  # Syntatic sugar:
-  # <user1>.conversation.with.<user2>
+  # Syntatic sugar: <user1>.conversation.with.<user2>
   alias :conversation :conversations
 
   has_many :postings, :class_name => 'Posting::Base'
@@ -67,6 +72,13 @@ class User < ActiveRecord::Base
     def site(site)
       where(:resource_id => site.id)
     end
+  end
+  
+  def invitation_wave(site)
+    waves.type(Wave::Invitation).
+        joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
+        where(:state => :published, :sites_waves => { :site_id => site.id }).
+        limit(1).try(:first)
   end
 
   # has_many :friendships

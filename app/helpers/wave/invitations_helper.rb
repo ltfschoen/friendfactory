@@ -1,0 +1,2 @@
+module Wave::InvitationsHelper
+end

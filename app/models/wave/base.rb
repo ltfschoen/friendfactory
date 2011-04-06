@@ -52,7 +52,12 @@ class Wave::Base < ActiveRecord::Base
   belongs_to :resource, :polymorphic => true
   
   def set_tag_list_for_site(site)
-    # Overridde in inherited classes
+    # Overridden in inherited classes
+  end
+  
+  def site=(site)
+    raise "Site assignment only available for new waves" unless new_record? 
+    self.sites = [ site ]
   end
   
   def self.default
