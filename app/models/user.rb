@@ -81,15 +81,11 @@ class User < ActiveRecord::Base
         merge(Wave::Base.published).
         try(:first)
   end
-
+  
   # has_many :friendships
   # has_many :friends,  :through => :friendships
   # has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   # has_many :admirers, :through => :inverse_friendships, :source => :user
-
-  def validate_enrollment_site(site)
-    raise "User already a member" if sites.where(:id => site.id).present?
-  end
   
   def validate_associated_records_for_profiles
     if enrollment_site.present? && !enrollment_profile.try(:handle).present?
@@ -106,12 +102,6 @@ class User < ActiveRecord::Base
         user.email ||= invitation.email
         user.invitation_code = invitation_code
       end
-    end
-  end
-
-  def save_enrollment
-    if enrollment_site.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
-      @enrollment_site, @enrollment_profile = nil, nil
     end
   end
   
@@ -231,6 +221,24 @@ class User < ActiveRecord::Base
   
   def reset_password!
     reset_perishable_token!
+  end
+
+  
+  private
+  
+  def invitation_for_site(site)
+    invitations.site(site).order('created_at desc').limit(1).try(:first)
+  end
+  
+  def save_enrollment
+    if enrollment_site.present? && enrollment_profile.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
+      invitation_for_site(enrollment_site).accept!
+      @enrollment_site, @enrollment_profile = nil, nil
+    end
+  end
+  
+  def validate_enrollment_site(site)
+    raise "User already a member" if sites.where(:id => site.id).present?
   end
     
 end
