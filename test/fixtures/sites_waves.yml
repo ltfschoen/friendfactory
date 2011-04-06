@@ -29,3 +29,8 @@ positivelyfrisky_adam_profile_wave:
 positivelyfrisky_bert_profile_wave:
   site_id: 2
   wave_id: 12
+
+positivelyfrisky_adam_invitation_wave:
+  site_id: 2
+  wave_id: 6
+  

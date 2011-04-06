@@ -1,0 +1,24 @@
+.wave[@wave]
+  .grid_2
+    &nbsp;
+  .grid_6
+    .polaroid.edit
+      .face-container
+        .front.face
+          .content
+            = avatar_image_tag(@wave.user.avatar(current_site), :class => 'headshot', :style => 'polaroid', :gender => @wave.user.gender(current_site))
+  .grid_6
+    =# form_for [ @wave, :posting ], :url => wave_invitation_path do |f|
+    .polaroid.edit
+      .face-container
+        .back.face
+          .content.scrollable
+            .items
+              .photo-grid
+                = render_photo_grid(@invitation_postings)
+          .button-bar
+            =# f.submit "OK"
+            =# link_to 'Cancel', profile_path, :class => 'cancel button'
+              
+:javascript
+  $("div.button-bar button[type='submit']").button({ icons: { primary: 'ui-icon-check' }, text: false });

@@ -49,3 +49,15 @@ invitation_posting_2:
   resource_type: Site
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
+
+invitation_posting_5:
+  id: 5
+  user_id: 1
+  subject: b2
+  body: bert@test.com
+  type: Posting::Invitation
+  state: accepted
+  resource_id: 2
+  resource_type: Site
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>

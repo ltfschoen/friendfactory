@@ -42,6 +42,9 @@ class Wave::Base < ActiveRecord::Base
     def only(*types)
       where('type in (?)', types.map(&:to_s))
     end    
+    def type(*types)
+      where('type in (?)', types.map(&:to_s))
+    end    
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
     end    

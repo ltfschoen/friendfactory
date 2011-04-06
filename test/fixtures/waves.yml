@@ -91,5 +91,6 @@ adam_invitation_wave:
   id: 6
   user_id: 1
   type: Wave::Invitation
+  state: published
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>

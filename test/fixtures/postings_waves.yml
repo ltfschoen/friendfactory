@@ -9,3 +9,7 @@ adam_invitation_wave_invitation_posting_1:
 adam_invitation_wave_invitation_posting_2:
   posting_id: 4
   wave_id: 6
+
+adam_invitation_wave_invitation_posting_3:
+  posting_id: 5
+  wave_id: 6
