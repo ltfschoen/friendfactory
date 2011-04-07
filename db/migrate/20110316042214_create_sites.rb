@@ -28,6 +28,8 @@ class CreateSites < ActiveRecord::Migration
     add_index :sites_users, [ :site_id, :user_id ]
     add_index :sites_users, :user_id
     
+    say 'Seeding the database...'
+    say 'ff:db:seed', true 
     Rake::Task['ff:db:seed'].invoke
 
     say 'Please perform the following rake task:'
