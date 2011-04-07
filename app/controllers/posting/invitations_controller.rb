@@ -3,10 +3,10 @@ class Posting::InvitationsController < ApplicationController
   def create
     @li_eq = params[:li_eq]
     @posting = new_posting_invitation
-    @wave = current_user.waves.find_by_id(params[:wave_id])
+    @wave = current_user.waves.find_by_id(params[:wave_id])    
     if @wave && @wave.postings << @posting
       @posting.code = @posting.id
-      @posting.publish!
+      @posting.offer!
     end
     respond_to do |format|
       format.js { render :layout => false }

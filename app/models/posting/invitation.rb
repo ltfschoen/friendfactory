@@ -15,6 +15,10 @@ class Posting::Invitation < Posting::Base
     state :rejected
     state :retracted
     
+    event :offer do
+      transitions :to => :offered, :from => [ :unpublished ]
+    end
+    
     event :accept do
       transitions :to => :accepted, :from => [ :offered ]
     end
