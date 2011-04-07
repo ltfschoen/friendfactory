@@ -41,13 +41,11 @@ namespace :ff do
       
       task :photos => :environment do
         require 'active_record/fixtures'
-        ActiveRecord::Base.establish_connection(Rails.env.to_sym)
-        wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
-        if wave
+        ActiveRecord::Base.establish_connection(Rails.env.to_sym)        
+        if wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
           image_fixtures = Dir[File.join(Rails.root, 'test', 'fixtures', 'images', 'photos', '*.{jpg, jpeg, png}')]
-          image_fixtures.each do |fixture|
-            user = UserInfo.find_by_first_name(File.basename(fixture, '.*').split('-')[0]).try(:user)
-            if user
+          image_fixtures.each do |fixture|            
+            if user = UserInfo.find_by_first_name(File.basename(fixture, '.*').split('-')[0]).try(:user)
               photo = Posting::Photo.new(:image => File.new(fixture), :user => user)
               wave.postings << photo
               photo.publish!
