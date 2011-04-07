@@ -1,42 +1,55 @@
-.wave_invitation .polaroid p.unobtrusive {
+.wave_invitation .polaroid.edit p.unobtrusive {
 	margin-top: 274px;
 	text-align: center;
 }
 
-.wave_invitation .polaroid li {
+.wave_invitation .polaroid.edit li {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.wave_invitation .polaroid .button-bar {	
+.wave_invitation .polaroid.edit .button-bar {	
 	top: -15;
 	width: 100%;
 }
 
-.wave_invitation .polaroid .button-bar td:nth-child(1) {
+.wave_invitation .polaroid.edit .button-bar td:nth-child(1) {
 	text-align: left;
 }
 
-.wave_invitation .polaroid .button-bar td:nth-child(2) {
+.wave_invitation .polaroid.edit .button-bar td:nth-child(2) {
 	text-align: right;
 }
 
-.wave_invitation .polaroid input#posting_invitation_body {
+.wave_invitation .polaroid.edit input#posting_invitation_body {
 	width: 12em;
 }
 
-.wave_invitation .polaroid .photo-grid img.thumb {
+.wave_invitation .polaroid.edit .photo-grid img.thumb {
 	margin: 0 !important;
 }
 
-.wave_invitation .polaroid .photo-grid li {
+.wave_invitation .polaroid.edit .photo-grid li {
+	background-color: rgb(255, 248, 220);
 	margin-right: 6px;
 	margin-bottom: 8px;
 	display: block;
 	float: left;
 }
 
-.wave_invitation .polaroid .photo-grid li.omega {
+.wave_invitation .polaroid.edit .photo-grid li.omega {
 	margin-right: 0;
+}
+
+.wave_invitation .polaroid.edit img.empty.thumb,
+.wave_invitation .polaroid.edit img.placeholder.thumb {
+	-webkit-transition: opacity 0.1s linear;
+	-moz-transition: opacity 0.1s linear;
+	transition: opacity 0.1s linear;
+}
+
+.wave_invitation .polaroid.edit img.empty.thumb:hover,
+.wave_invitation .polaroid.edit img.placeholder.thumb:hover {
+	opacity: 0.6;
 }

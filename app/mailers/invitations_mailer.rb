@@ -11,7 +11,7 @@ class InvitationsMailer < ActionMailer::Base
   def new_invitation_mail(invitation)
     @invitation = invitation
     email = Rails.env.production? ? @invitation.email : 'michael@michaelbamford.com'
-    mail :to => email, :subject => "Invitation to join #{@invitation.site}"
+    mail :to => email, :subject => "Invitation to join #{@invitation.site.display_name}"
   end
   
 end

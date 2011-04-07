@@ -22,6 +22,7 @@
               %tr
                 %td.input
                   = hidden_field_tag :li_eq
+                  = hidden_field_tag :_method
                   = f.text_field :body, :placeholder => "buddy's email"
                 %td.ok-cancel
                   = f.submit 'OK'

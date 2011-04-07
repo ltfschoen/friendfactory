@@ -1,5 +1,8 @@
-- if @posting.existing_record?
+- if @posting.existing_record? && !@posting.changed?
   :plain
-    $("li:eq(#{@li_eq})", '.wave_invitation .polaroid.edit')
-      .find('a.new_posting_invitation')
-        .html("#{escape_javascript(avatar_or_placeholder_image_tag(@wave, @posting, :class => 'thumb'))}");
+    $('.wave_invitation .polaroid.edit')
+      .find("li:eq(#{@li_eq}) a")
+        .html("#{escape_javascript(avatar_or_placeholder_image_tag(@wave, @posting, :class => 'thumb'))}")
+      .end()
+      .find('input#posting_invitation_body').val('').end()
+      .find('input#method').val('').end();

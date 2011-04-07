@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     def type(*types)
       where('type in (?)', types.map(&:to_s))
     end
+    def site(site)
+      joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
+      where(:sites_waves => { :site_id => site.id })
+    end
   end
 
   has_many :profiles, :class_name => 'Wave::Profile', :order => 'created_at desc'

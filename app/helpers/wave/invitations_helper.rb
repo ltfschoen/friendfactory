@@ -10,6 +10,7 @@ module Wave::InvitationsHelper
     if posting.accepted? && posting.invitee
       avatar_image_tag(posting.invitee, opts)
     else
+      opts.merge!(:title => posting.email, :'data-url' => wave_posting_invitation_path(wave, posting), :'data-method' => 'put')
       link_to(placeholder_image_tag(opts), edit_wave_posting_invitation_path(wave, posting), :class => 'edit_posting_invitation')
     end
   end
@@ -34,10 +35,9 @@ module Wave::InvitationsHelper
   end
       
   def list_item_tag_with_empty_image(wave, opts)
-    css_class = opts[:class]
-    image_tag = empty_image_tag(:class => 'thumb', :site => false)
+    image_tag = empty_image_tag(:class => 'thumb', :site => false, :'data-url' => wave_posting_invitations_path(wave), :'data-method' => 'post')
     anchor_tag = link_to(image_tag, new_wave_posting_invitation_path(wave), :class => 'new_posting_invitation')
-    content_tag(:li, anchor_tag, :class => css_class)
+    content_tag(:li, anchor_tag, :class => opts[:class])
   end
     
 end

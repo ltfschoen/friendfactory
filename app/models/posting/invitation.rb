@@ -5,9 +5,22 @@ class Posting::Invitation < Posting::Base
   alias_attribute :email, :body
   alias_attribute :sponsor, :user
 
+  attr_reader :redeliver_invitation_mail
+  
   belongs_to :invitee, :foreign_key => 'body', :primary_key => 'email', :class_name => 'User'
 
-  validates_presence_of :code, :site, :sponsor
+  validates_presence_of :site, :sponsor
+  
+  after_create do |invitation|    
+    invitation.code ||= invitation.id
+    invitation.offer!
+  end
+  
+  after_update do |invitation|
+    if invitation.redeliver_invitation_mail
+      deliver_invitation_mail
+    end
+  end
   
   state_machine do
     state :offered
@@ -31,13 +44,23 @@ class Posting::Invitation < Posting::Base
       transitions :to => :retracted, :from => [ :offered, :accepted ]
     end    
   end
+
+  def email=(new_email)
+    if new_email != self.email
+      write_attribute(:body, new_email)
+      @redeliver_invitation_mail = true
+    end
+  end
   
   def self.find_all_by_code(code)
     find_all_by_subject(code)
   end
   
   def deliver_invitation_mail
-    InvitationsMailer.new_invitation_mail(self).deliver
+    if email.present?
+      InvitationsMailer.new_invitation_mail(self).deliver
+      @redeliver_invitation_mail = false
+    end
   end
-  
+    
 end
