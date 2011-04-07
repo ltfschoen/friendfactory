@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   attr_accessor :invitation_code
   attr_accessor :enrollment_site
   attr_reader   :enrollment_profile
+  attr_accessor :enrollment_override
 
   validates_presence_of :enrollment_site, :on => :create
 
@@ -17,7 +18,8 @@ class User < ActiveRecord::Base
   end  
 
   validates_each :invitation_code,
-      :if => lambda { |user| user.enrollment_site.present? && user.enrollment_site.invite_only? } do |user, attribute, value|
+      :if => lambda { |user| !user.enrollment_override &&
+          (user.enrollment_site.present? && user.enrollment_site.invite_only?) } do |user, attribute, value|
     unless user.invitations.where(:subject => value, :resource_id => user.enrollment_site.id).present?
       user.errors.add(:base, "That email does not have an invite to this site with that invitation code")
     end
@@ -107,11 +109,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def enroll(site, handle, invitation_code = nil)
-    self.enrollment_site = site
-    self.handle = handle
-    self.invitation_code = invitation_code
-    self
+  def enroll(site, handle, invitation_code = nil, enrollment_override = false)
+    self.tap do |user|
+      user.enrollment_site = site
+      user.handle = handle
+      user.invitation_code = invitation_code
+      user.enrollment_override = enrollment_override
+    end
   end
   
 
