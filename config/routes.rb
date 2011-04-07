@@ -69,8 +69,9 @@ Friskyfactory::Application.routes.draw do
   match 'logout'  => 'user_sessions#destroy', :via => [ :get, :delete ]
   
   # Welcome  
-  resource 'welcome', :only => [ :show ], :controller => 'welcome'
-  post     'launch' => 'welcome#launch'
+  # resource 'welcome', :only => [ :show ], :controller => 'welcome'
+  get  'welcome(/:invite)' => 'welcome#show', :as => 'welcome'
+  post 'launch' => 'welcome#launch'
 
   scope :module => 'wave' do
     get 'wave'            => 'communities#show'
