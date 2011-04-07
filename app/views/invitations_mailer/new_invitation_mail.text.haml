@@ -1,6 +1,11 @@
-Invitations#invite
+Hey there!
 
-= debug(@invitation)
+You're friend #{@invitation.sponsor.handle(@invitation.site)} at #{@invitation.site.display_name} has invited you to join.
+
+Click the following link to join right away!
+
+= link_to(nil, welcome_url(:invite => @invitation.code))
 
 - unless Rails.env.production?
-  %h2 This is a demonstration email that would be sent to your invitee
+  = '- ' * 20
+  This is a demonstration email that would be sent to your invitee
