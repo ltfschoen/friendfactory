@@ -232,8 +232,8 @@ class User < ActiveRecord::Base
   
   def save_enrollment
     if enrollment_site.present? && enrollment_profile.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
-      invitation_for_site(enrollment_site).accept!
-      @enrollment_site, @enrollment_profile = nil, nil
+      invitation_for_site(enrollment_site).accept! unless enrollment_override
+      @enrollment_site, @enrollment_profile, @enrollment_override = nil, nil, nil
     end
   end
   
