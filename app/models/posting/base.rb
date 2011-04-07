@@ -23,8 +23,7 @@ class Posting::Base < ActiveRecord::Base
   
   has_many :children,
       :class_name  => 'Posting::Base',
-      :foreign_key => 'parent_id',
-      :order       => 'updated_at asc' do
+      :foreign_key => 'parent_id' do
     def postings
       find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at desc'
     end    

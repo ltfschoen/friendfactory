@@ -7,12 +7,22 @@ text_posting:
   created_at: <%= now = Time.now.utc %>
   updated_at: <%= now %>
       
-comment_posting:
+comment_posting_1:
   id: 2
   type: Posting::Comment
   parent_id: 1 %>
   user_id: 2 %>
-  body: Comment
+  body: This is the first comment (id=2)
+  state: published
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
+comment_posting_2:
+  id: 21
+  type: Posting::Comment
+  parent_id: 1 %>
+  user_id: 2 %>
+  body: This is the second comment (id=21)
   state: published
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
