@@ -16,7 +16,7 @@ class Posting::Invitation < Posting::Base
     state :retracted
     
     event :offer do
-      transitions :to => :offered, :from => [ :unpublished ]
+      transitions :to => :offered, :from => [ :unpublished ], :on_transition => :deliver_invitation_mail
     end
     
     event :accept do
@@ -34,6 +34,10 @@ class Posting::Invitation < Posting::Base
   
   def self.find_all_by_code(code)
     find_all_by_subject(code)
+  end
+  
+  def deliver_invitation_mail
+    InvitationsMailer.new_invitation_mail(self).deliver
   end
   
 end
