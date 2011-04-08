@@ -3,9 +3,8 @@ Friskyfactory::Application.routes.draw do
   # To show waves
   namespace :wave do
     resources :communities, :only => [ :show ]
-    resources :rollcalls,   :only => [ :index ], :controller => 'roll_calls', :as => 'roll_calls'
     resources :events,      :only => [ :index, :create ]
-    resources :profiles,    :only => [ :show ] do      
+    resources :profiles,    :only => [ :index, :show ] do
       member { get 'photos' }
       get 'conversation' => 'conversations#show'
     end
