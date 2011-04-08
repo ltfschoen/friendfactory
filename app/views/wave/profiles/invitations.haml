@@ -1,0 +1,13 @@
+- fill_with = image_tag('friskyfactory/ffffff.gif', :class => "thumb", :site => false)
+- fill_with_omega = image_tag('friskyfactory/ffffff.gif', :class => "thumb omega", :site => false)
+- fill_with_matrix = [ fill_with, fill_with, fill_with_omega ] * 3
+
+- fill_with_matrix.zip(@invitations).in_groups_of(3) do |fill_with_photo_row|
+  - fill_with_photo_row.each_with_index do |invitation_with_fill, idx|
+    - if invitation_with_fill[1]
+      - if invitation_with_fill[1].accepted? && invitation_with_fill[1].invitee
+        = avatar_image_tag(invitation_with_fill[1].invitee, :class => "thumb#{' omega' if idx == 2 }")
+      - else
+        = placeholder_image_tag :class => "thumb#{' omega' if idx == 2 }", :title => invitation_with_fill[1].email
+    - else
+      = invitation_with_fill[0]

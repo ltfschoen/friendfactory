@@ -25,25 +25,26 @@
         .photo-grid
           - 1.upto(9) do |i|
             = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
-        .invitation-grid
-          %h4 Invitation Grid
-        -#   = image_tag 'chat-b-side.png', :width=>'260px'
-        -# %div
-        -#   = image_tag 'message-b-side.png', :width=>'260px'
-        -# %div
-        -#   = image_tag 'photos-b-side.png', :width=>'260px'
-        -# %div
-        -#   = image_tag 'profile-b-side.png', :width=>'260px'
+
+        - if current_site.invite_only?
+          .photo-grid
+            - 1.upto(9) do |i|
+              = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
+            =# render_photo_grid(@wave, @invitation_postings)
+
     %ul.buddy-bar.secondary
       %li
         = link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
+
     %ul.buddy-bar.primary.navi
       -# %li
       -#   = link_to 'Chat', 'chat', :class => 'chat icon'
       %li= link_to 'Profile', 'profile', :class => 'mini-profile icon'
       %li= link_to 'Photos', 'photos', :class => 'photos icon'
+      - if current_site.invite_only?
+        %li= link_to 'Invitations', '#invitations', :class => 'invitations icon'
       - if current_user
         %li= link_to 'Message', profile_conversation_path(profile), :class => 'conversation icon last'
-        %li= link_to 'Invitations', '#invitations', :class => 'invitations icon'
+
     - if content_for?(:polaroid_back_face)
       = content_for(:polaroid_back_face)

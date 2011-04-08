@@ -29,6 +29,15 @@ class Wave::ProfilesController < ApplicationController
     end
   end
   
+  def invitations
+    if wave = Wave::Profile.find_by_id(params[:id])
+      @invitations = wave.postings.type(Posting::Invitation).order('created_at asc').limit(Wave::InvitationsHelper::MaximumDefaultImages)
+    end
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+  
   private
 
   def find_profiles_tagged_with(tag)

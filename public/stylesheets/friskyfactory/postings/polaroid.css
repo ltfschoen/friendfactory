@@ -241,6 +241,11 @@ div.polaroid a.icon.headshot {
 	background-position: -200px -1px;
 }
 
+div.polaroid a.icon.invitations {
+	background-position: -276px -2px;
+	width: 20px;
+}
+
 .polaroid-container {
 	height: 356px;
 	width: 320px;

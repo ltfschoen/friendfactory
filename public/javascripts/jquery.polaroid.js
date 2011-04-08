@@ -62,9 +62,18 @@
 							onSeek: function(event, idx) {
 								if (idx == 1) {
 									// Load the Photo Grid pane
-									var $photoGrid = $(this.getRoot()).find('.photo-grid');
-									var id = $photoGrid.closest('.polaroid').attr('data-profile_id');
+									var $photoGrid = $(this.getRoot()).find('.photo-grid:eq(0)'),
+										id = $photoGrid.closest('.polaroid').attr('data-profile_id');
 									$photoGrid.load('/wave/profiles/' + id + '/photos');
+								}
+								
+								if (idx == 2) {
+									// Load the Invitation Grid pane
+									var $photoGrid = $(this.getRoot()).find('.photo-grid:eq(1)');
+									if ($photoGrid.length > 0) {
+										var id = $photoGrid.closest('.polaroid').attr('data-profile_id');
+										$photoGrid.load('/wave/profiles/' + id + '/invitations');
+									}
 								}
 							}
 						}).navigator()						
@@ -149,7 +158,16 @@
 	      	        					var $photoGrid = $(this.getRoot()).find('.photo-grid');
 	      	        					var id = $photoGrid.closest('.polaroid').attr('data-profile_id');
 	                					$photoGrid.load('/wave/profiles/' + id + '/photos');
-									} // if
+									}
+									
+									if (idx == 2) {
+										// Load the Invitation Grid pane
+										var $photoGrid = $(this.getRoot()).find('.photo-grid:eq(1)');
+										if ($photoGrid.length > 0) {
+											var id = $photoGrid.closest('.polaroid').attr('data-profile_id');
+											$photoGrid.load('/wave/profiles/' + id + '/invitations');
+										}
+									}
 	      	    				} // onSeek
 							}).navigator();
 

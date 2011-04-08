@@ -4,16 +4,22 @@ Friskyfactory::Application.routes.draw do
   namespace :wave do
     resources :communities, :only => [ :show ]
     resources :events,      :only => [ :index, :create ]
+    
     resources :profiles,    :only => [ :index, :show ] do
-      member { get 'photos' }
+      member do
+        get 'photos'
+        get 'invitations'
+      end
       get 'conversation' => 'conversations#show'
     end
+    
     resources :conversations, :only => [ :index, :show ] do
       member do
         put 'close'
         get 'popup'
       end
     end
+    
     resources :albums, :only => [ :new, :create ] do
       resources :photos, :only => [ :show ], :controller => 'albums'
     end
