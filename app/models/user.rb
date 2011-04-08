@@ -24,6 +24,12 @@ class User < ActiveRecord::Base
       user.errors.add(:base, "That email does not have an invite to this site with that invitation code")
     end
   end
+
+  def validate_associated_records_for_profiles
+    if enrollment_site.present? && !enrollment_profile.try(:handle).present?
+      errors.add(:handle, "can't be blank")
+    end
+  end
     
   after_save :save_enrollment
   
@@ -89,12 +95,6 @@ class User < ActiveRecord::Base
   # has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   # has_many :admirers, :through => :inverse_friendships, :source => :user
   
-  def validate_associated_records_for_profiles
-    if enrollment_site.present? && !enrollment_profile.try(:handle).present?
-      errors.add(:handle, "can't be blank")
-    end
-  end
-
   def self.find_by_invitation_code(invitation_code)
     invitations = Posting::Invitation.find_all_by_code(invitation_code)    
     if invitations.length == 1

@@ -22,6 +22,15 @@ class Posting::Invitation < Posting::Base
     end
   end
   
+  def distribute(sites)
+    sites.each do |site|
+      if profile = user.profile(site)
+        profile.postings << self
+      end
+    end
+    super
+  end
+
   state_machine do
     state :offered
     state :accepted

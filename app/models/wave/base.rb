@@ -37,7 +37,8 @@ class Wave::Base < ActiveRecord::Base
       :join_table              => 'postings_waves',
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
-      :conditions              => 'parent_id is null' do
+      :conditions              => 'parent_id is null',
+      :after_add               => :distribute_posting do
     def only(*types)
       where('type in (?)', types.map(&:to_s))
     end    
@@ -53,13 +54,20 @@ class Wave::Base < ActiveRecord::Base
   end
   
   belongs_to :resource, :polymorphic => true
-  
-  def set_tag_list_for_site(site)
-    # Overridden in inherited classes
-  end
-    
+
   def self.default
     Wave::Base.first
   end
-  
+
+  def set_tag_list_for_site(site)
+    # Override in inherited classes.
+  end
+
+  def distribute_posting(posting)
+    unless posting.ignore_distribute_callback
+      posting.ignore_distribute_callback = true
+      posting.distribute(sites)
+    end
+  end
+
 end

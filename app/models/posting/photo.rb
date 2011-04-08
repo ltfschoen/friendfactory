@@ -18,12 +18,14 @@ class Posting::Photo < Posting::Base
 
   before_create :set_dimensions
   
-  publish_to :wave => Wave::Profile
-
-  # has_and_belongs_to_many :profiles,
-  #     :class_name  => 'Wave::Profile',
-  #     :join_table  => 'postings_waves',
-  #     :foreign_key => 'posting_id'
+  def distribute(sites)
+    sites.each do |site|
+      if profile = user.profile(site)
+        profile.postings << self
+      end
+    end
+    super
+  end
 
   private
   

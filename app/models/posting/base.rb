@@ -6,6 +6,8 @@ class Posting::Base < ActiveRecord::Base
 
   # attr_readonly :user_id
 
+  attr_accessor :ignore_distribute_callback
+
   acts_as_tree :order => 'created_at asc'
   
   state_machine do
@@ -45,6 +47,12 @@ class Posting::Base < ActiveRecord::Base
     after_create Publisher.new(destination, &block)
   end
 
+  def distribute(sites)
+    # Override in inherited classes. Make sure
+    # to call super after finishing distribution.
+    self.ignore_distribute_callback = false
+  end
+  
   # Thinking-Sphinx
   # define_index do
   #   indexes body
