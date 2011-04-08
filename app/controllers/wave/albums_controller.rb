@@ -25,7 +25,8 @@ class Wave::AlbumsController < ApplicationController
     if params[:wave_id].present?
       Wave::Album.find_by_id(params[:wave_id])
     else
-      Wave::Album.create(:user => current_user, :state => :unpublished)
+      Wave::Album.new(:state => :unpublished).tap { |wave| wave.user = current_user }
+      current_site.waves << wave
     end
   end
 
