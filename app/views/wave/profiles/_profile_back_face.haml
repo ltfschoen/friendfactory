@@ -13,7 +13,7 @@
               %td.age<
                 = profile.age.present? ? profile.age : '&nbsp;'.html_safe
           %table.detail              
-            - with_options :partial => 'profile_signal', :object => profile do |profile_signal|
+            - with_options :partial => 'wave/profiles/profile_signal', :object => profile do |profile_signal|
               - if current_site.name == 'friskyhands'
                 = profile_signal.render :locals => { :attribute => :deafness }
               = profile_signal.render :locals => { :attribute => :gender }

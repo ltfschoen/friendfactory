@@ -1,4 +1,3 @@
-- avatar = @profile.avatar
 .current_user.wave[@profile]
   .grid_2
     &nbsp;
@@ -7,13 +6,13 @@
       - content_for :polaroid_front_face do
         .button-bar
           #{link_to 'Edit', edit_profile_path, :class => 'edit button'}
-      = render :partial => 'posting/avatars/polaroid_front_face', :locals => { :profile => @profile, :avatar => avatar }
+      = render :partial => 'wave/profiles/profile_front_face', :locals => { :profile => @profile }
   .grid_6
     .polaroid.edit
       - content_for :polaroid_back_face do
         .button-bar
           #{link_to 'Edit', edit_profile_path, :class => 'edit button'}
-      = render :partial => 'posting/avatars/polaroid_back_face', :locals => { :profile => @profile, :avatar => avatar }
+      = render :partial => 'wave/profiles/profile_back_face', :locals => { :profile => @profile }
   .grid_2
     &nbsp;
 

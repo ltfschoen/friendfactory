@@ -14,7 +14,7 @@ class Wave::ProfilesController < ApplicationController
   end
   
   def show
-    @profile = Wave::Profile.find_by_id(params[:id])
+    @wave = Wave::Profile.find_by_id(params[:id])
     respond_to do |format|
       format.html { render :layout => false }
     end
