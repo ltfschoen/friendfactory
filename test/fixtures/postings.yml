@@ -27,15 +27,6 @@ comment_posting_2:
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
-# message:
-#   id: 3
-#   type: Posting::Message
-#   private: true
-#   user_id: <%= Fixtures.identify(:bert) %>
-#   receiver_id: <%= Fixtures.identify(:bert) %>
-#   body: <%= Faker::Lorem::sentences(3) %>
-#   created_at: <%= Date.today %>
-
 invitation_posting_1:
   id: 3
   user_id: 1
@@ -71,3 +62,12 @@ invitation_posting_5:
   resource_type: Site
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
+
+# message:
+#   id: 3
+#   type: Posting::Message
+#   private: true
+#   user_id: <%= Fixtures.identify(:bert) %>
+#   receiver_id: <%= Fixtures.identify(:bert) %>
+#   body: <%= Faker::Lorem::sentences(3) %>
+#   created_at: <%= Date.today %>

@@ -13,3 +13,15 @@ adam_invitation_wave_invitation_posting_2:
 adam_invitation_wave_invitation_posting_3:
   posting_id: 5
   wave_id: 6
+  
+adam_profile_wave_invitation_posting_1:
+  posting_id: 3
+  wave_id: 1
+
+adam_profile_wave_invitation_posting_2:
+  posting_id: 4
+  wave_id: 1
+
+adam_profile_wave_invitation_posting_3:
+  posting_id: 5
+  wave_id: 1
