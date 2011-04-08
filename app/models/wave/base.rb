@@ -38,19 +38,33 @@ class Wave::Base < ActiveRecord::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
       :conditions              => 'parent_id is null',
-      :after_add               => :distribute_posting do
+      :after_add               => :distribute_posting do    
     def only(*types)
       where('type in (?)', types.map(&:to_s))
     end    
+    
     def type(*types)
       where('type in (?)', types.map(&:to_s))
     end    
+    
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
     end    
+    
     def published
       where(:state => :published)
-    end    
+    end
+    
+    def <<(wave_or_posting)
+      if wave_or_posting.is_a?(Wave::Base)
+        wave_or_posting = Posting::WaveProxy.new.tap do |proxy|
+          proxy.user = wave_or_posting.user
+          proxy.resource = wave_or_posting
+          proxy.state = :published
+        end
+      end
+      super(wave_or_posting)
+    end
   end
   
   belongs_to :resource, :polymorphic => true
@@ -69,5 +83,5 @@ class Wave::Base < ActiveRecord::Base
       posting.distribute(sites)
     end
   end
-
+  
 end
