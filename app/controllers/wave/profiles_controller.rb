@@ -44,7 +44,6 @@ class Wave::ProfilesController < ApplicationController
     return unless tag.present?
     Wave::Profile.tagged_with(scrubbed_tag(tag), :on => current_site).
         where(:state => :published).
-        includes(:avatars).
         order('updated_at desc').
         paginate(:page => params[:page], :per_page => @@per_page)
   end
@@ -52,7 +51,6 @@ class Wave::ProfilesController < ApplicationController
   def find_all_profiles
     current_site.waves.type(Wave::Profile).
         where(:state => :published).
-        includes(:avatars).
         order('updated_at desc').
         paginate(:page => params[:page], :per_page => @@per_page)    
   end
