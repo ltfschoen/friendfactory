@@ -6,33 +6,32 @@ class User < ActiveRecord::Base
   attr_accessor :invitation_code
   attr_accessor :enrollment_site
   attr_reader   :enrollment_profile
-  attr_accessor :enrollment_override
+  attr_accessor :invitation_override
 
   validates_presence_of :enrollment_site, :on => :create
 
-  validates_each :enrollment_site,
-      :on => :update,
-      :allow_nil => true do |user, attribute, value|    
-    if user.sites.where(:id => value.id).present?
-      user.errors.add(:base, 'Already a member of this site')
-    end
-  end  
-
   validate do |user|
+    user.validate_enrollment_site
     user.validate_invitation_code
     user.validate_invitation_code_state
     user.validate_associated_records_for_profiles
   end
+  
+  def validate_enrollment_site 
+    return if enrollment_site.blank?
+    return if sites.where(:id => enrollment_site.id).empty?
+    errors.add(:base, 'Already a member of this site')
+  end
     
   def validate_invitation_code
-    return if enrollment_override || enrollment_site.blank?
+    return if invitation_override || enrollment_site.blank?
     return if not enrollment_site.invite_only?
     return if invitation_for_site(enrollment_site).present?
     errors.add(:base, "That email does not have an invite to this site with that invitation code")
   end
   
   def validate_invitation_code_state
-    return if enrollment_override || enrollment_site.blank?
+    return if invitation_override || enrollment_site.blank?
     invitation = invitation_for_site(enrollment_site)    
     return if invitation.nil? || invitation.anonymous? || invitation.offered?
     errors.add(:base, "That invitation code has already been previously #{invitation_for_site(enrollment_site).current_state}")
@@ -43,8 +42,10 @@ class User < ActiveRecord::Base
     return if enrollment_profile.handle.present?
     errors.add(:handle, "can't be blank")
   end
-      
-  after_save :save_enrollment
+  
+  validates_uniqueness_of :email
+  
+  after_save :perform_enrollment
   
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
@@ -65,7 +66,7 @@ class User < ActiveRecord::Base
   scope :online, lambda { { :conditions =>
       [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::InactivityTimeout).to_s(:db) ] } }
   
-  has_and_belongs_to_many :sites, :uniq => true, :before_add => :validate_enrollment_site
+  has_and_belongs_to_many :sites, :uniq => true, :before_add => :raise_exception_if_already_enrolled
 
   has_many :waves, :class_name => 'Wave::Base' do
     def type(*types)
@@ -126,12 +127,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def enroll(site, handle, invitation_code = nil, enrollment_override = false)
+  def enroll(site, handle, invitation_code = nil, invitation_override = false)
     self.tap do |user|
       user.enrollment_site = site
       user.handle = handle
       user.invitation_code = invitation_code
-      user.enrollment_override = enrollment_override
+      user.invitation_override = invitation_override
     end
   end
   
@@ -248,18 +249,23 @@ class User < ActiveRecord::Base
   private
   
   def invitation_for_site(site)
-    invitations.site(site).where(:subject => invitation_code).order('created_at desc').limit(1).try(:first) ||
-        site.invitations.anonymous(invitation_code)
+    @invitation_for_site ||=
+      (invitations.site(site).where(:subject => invitation_code).order('created_at desc').limit(1).try(:first) ||
+        site.invitations.anonymous(invitation_code))
   end
 
-  def save_enrollment
-    if enrollment_site.present? && enrollment_profile.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
-      invitation_for_site(enrollment_site).accept! unless enrollment_override
-      @enrollment_site, @enrollment_profile, @enrollment_override = nil, nil, nil
+  def perform_enrollment
+    if enrollment_site.present?
+      if (sites << enrollment_site) && (enrollment_profile.sites << enrollment_site)
+        if enrollment_site.invite_only? && !invitation_override
+          invitation_for_site(enrollment_site).accept!  
+        end
+        @enrollment_site, @enrollment_profile, @invitation_override = nil, nil, nil
+      end
     end
   end
-  
-  def validate_enrollment_site(site)
+    
+  def raise_exception_if_already_enrolled(site)
     raise "User already a member" if sites.where(:id => site.id).present?
   end
 

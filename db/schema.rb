@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110324064641) do
+ActiveRecord::Schema.define(:version => 20110409075604) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -234,6 +234,9 @@ ActiveRecord::Schema.define(:version => 20110324064641) do
     t.string   "last_name"
   end
 
+  add_index "user_info", ["first_name"], :name => "index_user_info_on_first_name"
+  add_index "user_info", ["handle"], :name => "index_user_info_on_handle"
+
   create_table "user_info_deleted", :id => false, :force => true do |t|
     t.integer  "id",           :default => 0, :null => false
     t.integer  "user_id"
@@ -274,6 +277,7 @@ ActiveRecord::Schema.define(:version => 20110324064641) do
     t.boolean  "admin",              :default => false
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["handle"], :name => "index_users_on_handle"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
