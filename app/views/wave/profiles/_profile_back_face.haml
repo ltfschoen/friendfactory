@@ -12,15 +12,8 @@
                 = profile.handle
               %td.age<
                 = profile.age.present? ? profile.age : '&nbsp;'.html_safe
-          %table.detail              
-            - with_options :partial => 'wave/profiles/profile_signal', :object => profile do |profile_signal|
-              - if current_site.name == 'friskyhands'
-                = profile_signal.render :locals => { :attribute => :deafness }
-              = profile_signal.render :locals => { :attribute => :gender }
-              = profile_signal.render :locals => { :attribute => :orientation, :label => 'Preference' }
-              = profile_signal.render :locals => { :attribute => :relationship }
-              = profile_signal.render :locals => { :attribute => :birthday }
-              = profile_signal.render :locals => { :attribute => :location }
+          %table.detail
+            = render_profile_signals(profile)
                           
         .photo-grid
           - 1.upto(9) do |i|
@@ -30,7 +23,6 @@
           .photo-grid
             - 1.upto(9) do |i|
               = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
-            =# render_photo_grid(@wave, @invitation_postings)
 
     %ul.buddy-bar.secondary
       %li
