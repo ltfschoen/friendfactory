@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   include ActiveRecord::Transitions
+  include ActiveModel::Validations
 
   attr_accessor :invitation_code
   attr_accessor :enrollment_site
@@ -17,20 +18,32 @@ class User < ActiveRecord::Base
     end
   end  
 
-  validates_each :invitation_code,
-      :if => lambda { |user| !user.enrollment_override &&
-          (user.enrollment_site.present? && user.enrollment_site.invite_only?) } do |user, attribute, value|
-    unless user.invitations.where(:subject => value, :resource_id => user.enrollment_site.id).present?
-      user.errors.add(:base, "That email does not have an invite to this site with that invitation code")
-    end
+  validate do |user|
+    user.validate_invitation_code
+    user.validate_invitation_code_state
+    user.validate_associated_records_for_profiles
+  end
+    
+  def validate_invitation_code
+    return if enrollment_override || enrollment_site.blank?
+    return if not enrollment_site.invite_only?
+    return if invitation_for_site(enrollment_site).present?
+    errors.add(:base, "That email does not have an invite to this site with that invitation code")
+  end
+  
+  def validate_invitation_code_state
+    return if enrollment_override    
+    invitation = invitation_for_site(enrollment_site)    
+    return if invitation.nil? || invitation.anonymous? || invitation.offered?
+    errors.add(:base, "That invitation code has been previously #{invitation_for_site(enrollment_site).current_state}")
   end
 
   def validate_associated_records_for_profiles
-    if enrollment_site.present? && !enrollment_profile.try(:handle).present?
-      errors.add(:handle, "can't be blank")
-    end
+    return if enrollment_site.blank? || enrollment_profile.blank?
+    return if enrollment_profile.handle.present?
+    errors.add(:handle, "can't be blank")
   end
-    
+      
   after_save :save_enrollment
   
   acts_as_authentic do |config|
@@ -120,6 +133,10 @@ class User < ActiveRecord::Base
       user.invitation_code = invitation_code
       user.enrollment_override = enrollment_override
     end
+  end
+  
+  def enroll!(*args)
+    enroll(*args) && save!
   end
   
 
@@ -231,9 +248,10 @@ class User < ActiveRecord::Base
   private
   
   def invitation_for_site(site)
-    invitations.site(site).order('created_at desc').limit(1).try(:first)
+    invitations.site(site).where(:subject => invitation_code).order('created_at desc').limit(1).try(:first) ||
+        site.invitations.anonymous(invitation_code)
   end
-  
+
   def save_enrollment
     if enrollment_site.present? && enrollment_profile.present? && sites << enrollment_site && enrollment_profile.sites << enrollment_site
       invitation_for_site(enrollment_site).accept! unless enrollment_override

@@ -34,18 +34,13 @@ class Posting::Invitation < Posting::Base
   state_machine do
     state :offered
     state :accepted
-    state :retracted
     
     event :offer do
       transitions :to => :offered, :from => [ :unpublished ], :on_transition => :deliver_invitation_mail
     end
     
     event :accept do
-      transitions :to => :accepted, :from => [ :offered ]
-    end
-    
-    event :retract do
-      transitions :to => :retracted, :from => [ :offered, :accepted ]
+      transitions :to => :accepted, :from => [ :offered, :accepted ]
     end    
   end
 
@@ -54,6 +49,10 @@ class Posting::Invitation < Posting::Base
       write_attribute(:body, new_email)
       @redeliver_invitation_mail = true
     end
+  end
+  
+  def anonymous?
+    email.blank?
   end
   
   def self.find_all_by_code(code)
