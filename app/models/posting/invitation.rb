@@ -34,7 +34,6 @@ class Posting::Invitation < Posting::Base
   state_machine do
     state :offered
     state :accepted
-    state :rejected
     state :retracted
     
     event :offer do
@@ -45,10 +44,6 @@ class Posting::Invitation < Posting::Base
       transitions :to => :accepted, :from => [ :offered ]
     end
     
-    event :reject do
-      transitions :to => :rejected, :from => [ :offered ]
-    end
-
     event :retract do
       transitions :to => :retracted, :from => [ :offered, :accepted ]
     end    
