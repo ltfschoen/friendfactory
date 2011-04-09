@@ -32,10 +32,10 @@ class User < ActiveRecord::Base
   end
   
   def validate_invitation_code_state
-    return if enrollment_override    
+    return if enrollment_override || enrollment_site.blank?
     invitation = invitation_for_site(enrollment_site)    
     return if invitation.nil? || invitation.anonymous? || invitation.offered?
-    errors.add(:base, "That invitation code has been previously #{invitation_for_site(enrollment_site).current_state}")
+    errors.add(:base, "That invitation code has already been previously #{invitation_for_site(enrollment_site).current_state}")
   end
 
   def validate_associated_records_for_profiles
