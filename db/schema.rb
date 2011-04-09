@@ -26,15 +26,15 @@ ActiveRecord::Schema.define(:version => 20110324064641) do
   end
 
   create_table "invitations", :force => true do |t|
-    t.string   "code",       :null => false
-    t.integer  "site_id",    :null => false
-    t.integer  "sponsor_id", :null => false
-    t.string   "email"
+    t.integer  "event_id"
+    t.integer  "profile_id"
+    t.integer  "attendance"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "invitations", ["email", "code", "site_id"], :name => "index_invitations_on_email_and_code_and_site_id"
+  add_index "invitations", ["event_id", "profile_id"], :name => "index_invitations_on_event_id_and_profile_id"
+  add_index "invitations", ["profile_id"], :name => "index_invitations_on_profile_id"
 
   create_table "launch_users", :force => true do |t|
     t.string   "email"
@@ -168,7 +168,6 @@ ActiveRecord::Schema.define(:version => 20110324064641) do
     t.string   "display_name",                                :null => false
     t.boolean  "launch",                   :default => false
     t.boolean  "invite_only",              :default => false
-    t.string   "customs"
     t.string   "analytics_domain_name"
     t.string   "analytics_account_number"
     t.datetime "created_at"
