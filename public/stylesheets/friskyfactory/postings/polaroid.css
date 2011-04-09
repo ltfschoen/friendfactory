@@ -110,7 +110,8 @@ div.polaroid .back.face table.header td.age {
 }
 
 div.polaroid .back.face table.header td.age input {
-    width: 3em;
+    width: 2em;
+	text-align: center;
 }
 
 div.polaroid .back.face table.detail {
@@ -126,7 +127,15 @@ div.polaroid .back.face table.detail td {
 div.polaroid .back.face table.detail td.label {
     width: 96px;
     color: #999;
-} 
+}
+
+div.polaroid.edit .back.face input#user_info_location {
+	width: 12em;
+}
+
+/*div.polaroid.edit .back.face table.detail td.label {
+	padding-right: 6px;
+}*/
 
 div.polaroid .back.face table.detail td.detail {
     color: #666;
