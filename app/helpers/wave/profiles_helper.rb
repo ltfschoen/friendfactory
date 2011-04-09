@@ -6,6 +6,9 @@ module Wave::ProfilesHelper
         if current_site.name == 'friskyhands'
           html.safe_concat(profile_signal.render(:locals => { :attribute => :deafness }))
         end
+        if current_site.name == 'positivelyfrisky'
+          html.safe_concat(profile_signal.render(:locals => { :attribute => :hiv_status, :label => 'HIV Status' }))
+        end
         html.safe_concat(profile_signal.render(:locals => { :attribute => :gender }))
         html.safe_concat(profile_signal.render(:locals => { :attribute => :orientation, :label => 'Preference' }))
         html.safe_concat(profile_signal.render(:locals => { :attribute => :relationship }))

@@ -16,8 +16,13 @@ class UserInfo < ActiveRecord::Base
 	Deafness =
 	    (a = [ 'Deaf', 'Hard of Hearing', 'Hearing', 'CODA' ]).zip((1..a.length).to_a)
 
+	HivStatus =
+	    (a = [ 'Positive', 'Negative', "Don't Know" ]).zip((1..a.length).to_a)
+
   set_table_name 'user_info'
 
+  alias_attribute :hiv_status, :deafness
+  
   belongs_to :user  
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
     
@@ -61,6 +66,10 @@ class UserInfo < ActiveRecord::Base
   
   def birthday_description
     self.dob.strftime('%e %B') if self.dob.present?
+  end
+  
+  def hiv_status_description
+    HivStatus.rassoc(self[:deafness]).try(:first)
   end
   
   def location_description

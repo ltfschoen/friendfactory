@@ -34,6 +34,10 @@
                       %tr
                         %td.label Deafness
                         %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
+                    - if current_site.name == 'positivelyfrisky'
+                      %tr
+                        %td.label HIV Status
+                        %td.detail= f.select(:hiv_status, UserInfo::HivStatus, :include_blank => true)
                     %tr
                       %td.label Gender
                       %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
