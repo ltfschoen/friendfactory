@@ -24,12 +24,12 @@ class Wave::ProfileController < ApplicationController
   end
   
   def avatar
-    if profile = current_user.profile(current_site)
+    if wave = current_user.profile(current_site)
       posting = Posting::Avatar.new(params[:posting_avatar]).tap do |avatar|
         avatar.user = current_user
         avatar.active = true
       end
-      profile.avatars << posting
+      wave.postings << posting
       posting.publish!
     end
     respond_to do |format|

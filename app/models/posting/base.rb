@@ -41,7 +41,12 @@ class Posting::Base < ActiveRecord::Base
       :foreign_key             => 'posting_id',
       :association_foreign_key => 'wave_id',
       :join_table              => 'postings_waves',
-      :order                   => 'updated_at desc'
+      :order                   => 'updated_at desc' do
+    def type(*types)
+      where('type in (?)', types.map(&:to_s))
+    end
+  end
+
 
   def self.publish_to(destination, &block)
     after_create Publisher.new(destination, &block)

@@ -26,7 +26,7 @@ namespace :ff do
               avatar.image = File.new(fixture)
               avatar.user = user
             end
-            user.profiles.each { |profile| profile.avatars << avatar }
+            user.profiles.each { |profile| profile.postings << avatar }
             avatar.publish!
           end
         end

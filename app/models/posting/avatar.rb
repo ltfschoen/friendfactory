@@ -18,21 +18,21 @@ class Posting::Avatar < Posting::Base
   validates_attachment_content_type :image, :content_type => [ 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png' ]
 
   before_create :set_dimensions  
-
-  publish_to :slug => Wave::CommunitiesController::DefaultWaveSlug do |wave, posting|
-    if wave.present? && posting.present?
-      postings_to_unpublish = wave.postings \
-        .where(
-          :user_id    => posting.user_id,
-          :type       => Posting::Avatar,
-          :created_at => (Time.now - RepublishDuration)..Time.now) \
-        .where('id <> ?', posting.id)
-      wave.postings.delete(postings_to_unpublish)
+  
+  def distribute(sites)
+    sites.each do |site|
+      if wave = site.waves.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
+        postings_to_remove = wave.postings.
+            where(:user_id => self.user_id, :type => Posting::Avatar, :created_at => (Time.now - RepublishDuration)..Time.now)
+        wave.postings.delete(postings_to_remove)
+        wave.postings << self
+      end
     end
+    super
   end
 
   def profile
-    waves.where('type = (?)', Wave::Profile).limit(1).first
+    waves.type(Wave::Profile).limit(1).first
   end
     
   private

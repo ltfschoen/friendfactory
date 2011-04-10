@@ -38,7 +38,9 @@ class Wave::Base < ActiveRecord::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'posting_id',
       :conditions              => 'parent_id is null',
-      :after_add               => :distribute_posting do    
+      :before_add              => :before_add_posting_to_wave,
+      :after_add               => :after_add_posting_to_wave do
+
     def only(*types)
       where('type in (?)', types.map(&:to_s))
     end    
@@ -68,6 +70,16 @@ class Wave::Base < ActiveRecord::Base
   end
   
   belongs_to :resource, :polymorphic => true
+
+  def before_add_posting_to_wave(posting)
+    # Override in inherited wave classes.
+  end
+
+  def after_add_posting_to_wave(posting)
+    # Override in inherited wave classes.
+    # Make sure to call super.
+    distribute_posting(posting)
+  end
 
   def self.default
     Wave::Base.first
