@@ -20,4 +20,6 @@
     background-color: #553;
 }
 
-
+body {
+	background: url('/images/friskyhands/golden-fibers.jpg') repeat top center #666;
+}

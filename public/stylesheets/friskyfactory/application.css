@@ -3,7 +3,6 @@ body, p, h1, h2, h3, label, input, textarea, a, .formError {
 }
 
 body {
-	background: url('/images/friskyfactory/golden_fibers.png') repeat-y top center #CEC2A2;
 	-moz-user-select: auto;
 	-khtml-user-select: auto;
 	-webkit-user-select: auto;
