@@ -24,8 +24,13 @@ class Wave::ProfileController < ApplicationController
   end
   
   def avatar
-    if params[:posting_avatar]     
-      current_user.profile(current_site).avatars.create(:image => params[:posting_avatar][:image], :user_id => current_user.id, :active => true)
+    if profile = current_user.profile(current_site)
+      posting = Posting::Avatar.new(params[:posting_avatar]).tap do |avatar|
+        avatar.user = current_user
+        avatar.active = true
+      end
+      profile.avatars << posting
+      posting.publish!
     end
     respond_to do |format|
       format.js { render :layout => false }
