@@ -4,6 +4,8 @@ class AddHandleToProfile < ActiveRecord::Migration
     add_column :user_info, :first_name, :string
     add_column :user_info, :last_name, :string
     
+    UserInfo.reset_column_information
+
     say "Invoking ff:fix:profile_handles"
     Rake::Task[:'ff:fix:profile_handles'].invoke
     

@@ -234,9 +234,6 @@ ActiveRecord::Schema.define(:version => 20110409075604) do
     t.string   "last_name"
   end
 
-  add_index "user_info", ["first_name"], :name => "index_user_info_on_first_name"
-  add_index "user_info", ["handle"], :name => "index_user_info_on_handle"
-
   create_table "user_info_deleted", :id => false, :force => true do |t|
     t.integer  "id",           :default => 0, :null => false
     t.integer  "user_id"

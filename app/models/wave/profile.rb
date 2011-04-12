@@ -4,7 +4,7 @@ class Wave::Profile < Wave::Base
 
   include TagScrubber
   
-  delegate :handle, :handle=, :first_name, :gender, :age, :to => :resource
+  delegate :handle, :handle=, :first_name, :first_name=, :last_name, :last_name=, :gender, :age, :to => :resource
   
   validates_presence_of :handle, :unless => :first_name
 
