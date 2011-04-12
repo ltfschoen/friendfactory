@@ -15,11 +15,7 @@ class Site < ActiveRecord::Base
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id',
-      :after_add               => :set_tag_list_for_wave do
-    def type(*types)
-      where('type in (?)', types.map(&:to_s))
-    end  
-  end
+      :after_add               => :set_tag_list_for_wave
   
   def to_s
     name

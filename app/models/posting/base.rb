@@ -23,6 +23,10 @@ class Posting::Base < ActiveRecord::Base
     end
   end
   
+  scope :type, lambda { |*types| where('type in (?)', types.map(&:to_s)) }
+  scope :user, lambda { |user| where(:user_id => user.id) }
+  scope :published, where(:state => :published)
+  
   has_many :children,
       :class_name  => 'Posting::Base',
       :foreign_key => 'parent_id' do
@@ -41,12 +45,7 @@ class Posting::Base < ActiveRecord::Base
       :foreign_key             => 'posting_id',
       :association_foreign_key => 'wave_id',
       :join_table              => 'postings_waves',
-      :order                   => 'updated_at desc' do
-    def type(*types)
-      where('type in (?)', types.map(&:to_s))
-    end
-  end
-
+      :order                   => 'updated_at desc'
 
   def self.publish_to(destination, &block)
     after_create Publisher.new(destination, &block)

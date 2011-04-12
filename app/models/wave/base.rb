@@ -20,6 +20,8 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
+  scope :type, lambda { |*types| where('type in (?)', types.map(&:to_s)) }
+  scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
 
   acts_as_taggable
@@ -40,22 +42,10 @@ class Wave::Base < ActiveRecord::Base
       :conditions              => 'parent_id is null',
       :before_add              => :before_add_posting_to_wave,
       :after_add               => :after_add_posting_to_wave do
-
-    def only(*types)
-      where('type in (?)', types.map(&:to_s))
-    end    
-    
-    def type(*types)
-      where('type in (?)', types.map(&:to_s))
-    end    
     
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
     end    
-    
-    def published
-      where(:state => :published)
-    end
     
     def <<(wave_or_posting)
       if wave_or_posting.is_a?(Wave::Base)

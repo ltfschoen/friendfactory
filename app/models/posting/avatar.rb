@@ -1,6 +1,6 @@
 class Posting::Avatar < Posting::Base
 
-  RepublishDuration = 6.hours
+  RepublishWindow = 6.hours
   
   has_attached_file :image,
       :styles => {
@@ -22,9 +22,7 @@ class Posting::Avatar < Posting::Base
   def distribute(sites)
     sites.each do |site|
       if wave = site.waves.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
-        postings_to_remove = wave.postings.
-            where(:user_id => self.user_id, :type => Posting::Avatar, :created_at => (Time.now - RepublishDuration)..Time.now)
-        wave.postings.delete(postings_to_remove)
+        wave.postings.type(Posting::Avatar).user(self.user).published.where(:created_at => (Time.now - RepublishWindow)...Time.now).map(&:unpublish!)
         wave.postings << self
       end
     end
