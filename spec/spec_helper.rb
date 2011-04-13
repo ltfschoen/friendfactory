@@ -47,3 +47,7 @@ end
 #   @user_session = nil
 # end
 
+# def current_site(stubs = {})
+#   @current_site ||= mock_model(Site, stubs)
+# end
+
