@@ -18,7 +18,6 @@ jQuery(function($) {
 
 });
 
-
 function onYouTubePlayerAPIReady() {
 	$('a', '.youtube_video_player').live('click', function(event) {
 		event.preventDefault();
@@ -26,7 +25,7 @@ function onYouTubePlayerAPIReady() {
 		new YT.Player($(this).closest('.youtube_video_player').get(0), {
 			height: '260',
 			width: '400',
-			videoId: getYouTubeVideoId($(this).attr('href')),
+			videoId: $(this).data('vid'),
 			playerVars: {
 				'disablekb': 1,
 				// 'controls': 0,
@@ -40,12 +39,6 @@ function onYouTubePlayerAPIReady() {
 	});	
 }
 
-
-function getYouTubeVideoId(url) {
-	return url.match("[\\?&]v=([^&#]*)")[1];
-}
-
-
 function onPlayerReady(event) {
 	$(event.target.a.parentNode).find('a').remove();
   	event.target.playVideo();
@@ -58,13 +51,10 @@ function onPlayerStateChange(event) {
   // }
 }
 
-
 function onPlayerError(event) {
 	alert(event.data);
 }
 
-
 function stopVideo() {
   // player.stopVideo();
 }
-

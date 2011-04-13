@@ -5,5 +5,5 @@
         = render_attachment(video)
       %td
         .video_player.youtube_video_player{ :'data-vid' => video.body }
-          = link_to_youtube_video_image(video.body)
+          = link_to_youtube_video_image(video)
         = render_comments(video)
