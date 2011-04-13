@@ -14,8 +14,7 @@ class Site < ActiveRecord::Base
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
-      :association_foreign_key => 'wave_id',
-      :after_add               => :set_tag_list_for_wave
+      :association_foreign_key => 'wave_id'
   
   def to_s
     name
@@ -30,9 +29,5 @@ class Site < ActiveRecord::Base
   end
   
   alias :intern :to_sym
-  
-  def set_tag_list_for_wave(wave)
-    wave.set_tag_list_for_site(self)    
-  end
   
 end

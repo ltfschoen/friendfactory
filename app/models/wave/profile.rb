@@ -52,10 +52,6 @@ class Wave::Profile < Wave::Base
     self.postings.only(Posting::Photo)
   end
   
-  def set_tag_list_for_site(site)
-    set_tag_list && save
-  end
-
   def set_tag_list
     if resource.present?
       tag_list = [
@@ -64,7 +60,7 @@ class Wave::Profile < Wave::Base
           resource.deafness_description,
           scrub_tag(resource.location_description)
       ].compact * ','
-      sites.each { |site| set_tag_list_on(site, tag_list) }
+      super(tag_list)
     end
   end
 

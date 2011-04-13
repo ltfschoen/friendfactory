@@ -54,13 +54,9 @@ class Wave::Event < Wave::Base
     # TODO
   end
 
-  def set_tag_list_for_site(site)
-    set_tag_list && save
-  end
-    
   def set_tag_list
     if location.present? && location.city.present?
-      sites.each { |site| set_tag_list_on(site, scrub_tag(location.city)) }
+      super(scrub_tag(location.city))
     end
   end
   

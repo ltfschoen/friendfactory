@@ -31,8 +31,7 @@ class Wave::Base < ActiveRecord::Base
       :class_name              => 'Site',
       :join_table              => 'sites_waves',
       :foreign_key             => 'wave_id',
-      :association_foreign_key => 'site_id',
-      :after_add               => :set_tag_list_for_site
+      :association_foreign_key => 'site_id'
 
   has_and_belongs_to_many :postings,
       :class_name              => 'Posting::Base',
@@ -61,22 +60,21 @@ class Wave::Base < ActiveRecord::Base
   
   belongs_to :resource, :polymorphic => true
 
-  def before_add_posting_to_wave(posting)
-    # Override in inherited wave classes.
-  end
-
-  def after_add_posting_to_wave(posting)
-    # Override in inherited wave classes.
-    # Make sure to call super.
-    distribute_posting(posting)
+  before_save do |wave|
+    wave.set_tag_list
   end
 
   def self.default
     Wave::Base.first
   end
 
-  def set_tag_list_for_site(site)
-    # Override in inherited classes.
+  def before_add_posting_to_wave(posting)
+    # Override in inherited wave classes.
+  end
+
+  def after_add_posting_to_wave(posting)
+    # Override in inherited classes then call super.
+    distribute_posting(posting)
   end
 
   def distribute_posting(posting)
@@ -85,5 +83,12 @@ class Wave::Base < ActiveRecord::Base
       posting.distribute(sites)
     end
   end
-  
+
+  def set_tag_list(tag_list = nil)
+    # Override in inherited classes then call super
+    if tag_list.present?
+      sites.each { |site| set_tag_list_on(site, tag_list) }
+    end
+  end
+
 end

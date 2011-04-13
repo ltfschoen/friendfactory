@@ -11,9 +11,7 @@ namespace :ff do
       end
       
       task :taggables => :environment do
-        (Wave::Profile.all +  Wave::Event.all).each do |taggable|
-          taggable.set_tag_list && taggable.save
-        end
+        Admin::Tag.refresh_all
       end
 
       task :avatars => :environment do

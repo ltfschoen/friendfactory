@@ -6,12 +6,7 @@ class Admin::Tag < ActiveRecord::Base
   def self.refresh_all
     ActsAsTaggableOn::Tag.delete_all
     ActsAsTaggableOn::Tagging.delete_all    
-    Site.all.each do |site|
-      site.waves.type(Wave::Profile, Wave::Event).each do |wave|
-        wave.current_site = site
-        wave.save!
-      end
-    end    
+    Wave::Base.type(Wave::Profile, Wave::Event).each { |wave| wave.save! }
   end
   
 end
