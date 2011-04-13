@@ -34,8 +34,7 @@ class Wave::EventsController < ApplicationController
   end
   
   def find_all_events
-    current_site.waves.type(Wave::Event).
-        where(:state => :published).
+    current_site.waves.type(Wave::Event).published.
         order('updated_at desc').
         paginate(:page => params[:page], :per_page => @@per_page)      
   end
