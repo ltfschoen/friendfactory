@@ -4,7 +4,7 @@ class Posting::Base < ActiveRecord::Base
   
   set_table_name :postings
 
-  # attr_readonly :user_id
+  # TODO: attr_readonly :user_id
 
   attr_accessor :ignore_distribute_callback
 

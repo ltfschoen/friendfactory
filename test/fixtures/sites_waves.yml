@@ -22,6 +22,10 @@ friskyhands_site_event_wave:
   site_id: 1
   wave_id: 5
 
+positivelyfrisky_site_popular_wave:
+  site_id: 1
+  wave_id: 14
+
 positivelyfrisky_site_event_wave:
   site_id: 2
   wave_id: 8

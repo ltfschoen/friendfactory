@@ -50,3 +50,7 @@ end
 def current_site(site)
   @current_site ||= controller.stub(:current_site).and_return(site)
 end
+
+def current_user(user)
+  @current_user ||= controller.stub(:current_user).and_return(user)
+end
