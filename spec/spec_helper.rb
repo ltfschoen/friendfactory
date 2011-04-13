@@ -47,7 +47,6 @@ end
 #   @user_session = nil
 # end
 
-# def current_site(stubs = {})
-#   @current_site ||= mock_model(Site, stubs)
-# end
-
+def current_site(site)
+  @current_site ||= controller.stub(:current_site).and_return(site)
+end

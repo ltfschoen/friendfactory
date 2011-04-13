@@ -5,7 +5,7 @@ describe WelcomeController do
   fixtures :sites
   
   describe 'current_site' do    
-    let(:site) { Site.find_by_name('friskyhands') }
+    let(:site) { sites(:friskyhands) }
     
     it 'should support production urls' do
       request.stub(:host => "#{site.name}.com")

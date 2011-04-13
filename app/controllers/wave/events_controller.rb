@@ -2,8 +2,6 @@ class Wave::EventsController < ApplicationController
 
   DefaultEventSlug = 'events'
   
-  before_filter :require_lurker
-
   cattr_reader :per_page
   @@per_page = 30
   
