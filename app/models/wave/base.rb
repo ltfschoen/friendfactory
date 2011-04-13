@@ -89,6 +89,7 @@ class Wave::Base < ActiveRecord::Base
     if tag_list.present?
       sites.each { |site| set_tag_list_on(site, tag_list) }
     end
+    tag_list
   end
 
 end
