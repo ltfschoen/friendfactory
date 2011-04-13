@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Posting::Video do
   
-  let(:valid_attrs) { { :url => 'http://youtube.com/v=lzRKEv6cHuk' } }
+  let(:valid_attrs) { { :url => 'http://youtube.com/watch?v=lzRKEv6cHuk' } }
 
   let(:video) { Posting::Video.new(valid_attrs).tap { |video| video.user = mock_model(User) } }
 
@@ -56,6 +56,17 @@ describe Posting::Video do
       video.save!
       video.reload
       video.user.should == adam
+    end
+  end
+  
+  describe "vid" do
+    it "youtube url" do
+      video.vid.should == 'lzRKEv6cHuk'      
+    end
+    
+    it "youtu.be url" do
+      video.url = 'http://youtu.be/lzRKEv6cHuk'
+      video.vid.should == 'lzRKEv6cHuk'
     end
   end
   
