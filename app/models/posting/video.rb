@@ -12,11 +12,15 @@ class Posting::Video < Posting::Base
   validates_presence_of :url
   validates_presence_of :user
   
+  attr_readonly :user_id
+  
   validate do |posting|
-    VALID_URLS.each do |valid_url|
-      return if valid_url.match(posting.url).present?
+    if posting.url.present?
+      VALID_URLS.each do |valid_url|
+        return if valid_url.match(posting.url).present?
+      end
+      posting.errors.add(:url, 'not recognized')
     end
-    posting.errors.add(:url, 'not recognized')
   end
     
 end

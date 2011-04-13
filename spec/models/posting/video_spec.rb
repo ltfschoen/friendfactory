@@ -33,7 +33,7 @@ describe Posting::Video do
       video.should_not be_valid
     end
     
-    it "has malfoormed youtu.be url" do
+    it "has malformed youtu.be url" do
       video.url = 'http://youtu.be/v=123'
       video.should_not be_valid
     end
@@ -43,6 +43,19 @@ describe Posting::Video do
     it "doesn't allow user" do
       video = Posting::Video.new(valid_attrs.merge(:user => mock_model(User)))
       video.user.should be_nil
+    end
+  end
+  
+  describe "read only" do
+    fixtures :users
+    it 'user' do
+      adam = users(:adam)
+      video.user = adam
+      video.save!
+      video.user = users(:bert)
+      video.save!
+      video.reload
+      video.user.should == adam
     end
   end
   
