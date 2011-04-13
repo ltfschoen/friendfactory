@@ -51,6 +51,12 @@ class Posting::Base < ActiveRecord::Base
     after_create Publisher.new(destination, &block)
   end
 
+  def attributes=(attrs)
+    sanitize_for_mass_assignment(attrs).each do |k, v|
+      send("#{k}=", v)
+    end
+  end
+
   def distribute(sites)
     # Override in inherited classes. Make sure
     # to call super after finishing distribution.
