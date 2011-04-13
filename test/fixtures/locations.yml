@@ -1,6 +1,10 @@
 woolooware:
   id: 1
   name: At my home!
-  address: 390 Woolooware Rd, Burraneer New South Wales 2230, Australia
+  address: 390 Woolooware Rd
+  city: Burraneer
+  state: NSW
+  country: Australia
+  post_code: 2230
   lat: -34.0717115
   lng: 151.1374752

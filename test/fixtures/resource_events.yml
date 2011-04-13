@@ -1,4 +1,4 @@
-event_resource:
+event_resource_1:
   id: 1
   location_id: 1
   start_date: <%= Date.today %>
@@ -10,4 +10,11 @@ event_resource:
     fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
     culpa qui officia deserunt mollit anim id est laborum.
   url: www.bambam.com
+
+event_resource_2:
+  id: 2
+  location_id: 1
+  start_date: <%= Date.today %>
+  body: Dumb Ass event
+  url: www.dumbasses.com
   

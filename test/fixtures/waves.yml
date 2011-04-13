@@ -74,7 +74,7 @@ popular_wave_2:
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
   
-event_wave:
+event_wave_1:
   id: 5
   user_id: 1
   type: Wave::Event
@@ -82,6 +82,19 @@ event_wave:
   slug: bam-bam
   state: published
   resource_id: 1
+  resource_type: Resource::Event
+  description: Lorem ipsum
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
+event_wave_2:
+  id: 7
+  user_id: 1
+  type: Wave::Event
+  topic: Dumb Asses
+  slug: dumb-asses
+  state: published
+  resource_id: 2
   resource_type: Resource::Event
   description: Lorem ipsum
   created_at: <%= now += 1.second %>
