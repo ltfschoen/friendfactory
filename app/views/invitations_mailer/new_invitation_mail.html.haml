@@ -6,7 +6,3 @@
   Click the following link to join right away!
 %p
   = link_to nil, welcome_url(:host => "#{@invitation.site.name}.com", :invite => @invitation.code)
-- unless Rails.env.production?
-  %hr
-  %p
-    %strong This is a demonstration email that would be sent to your invitee

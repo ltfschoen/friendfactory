@@ -1,10 +1,10 @@
 = "Hey #{@user.handle(@current_site)},"
 
-A request was sent to FriskyHands to reset your FriskyHands' password. To do so, click the following link:
+A request was sent to #{@current_site.name} to reset your FriskyHands' password. To do so, click the following link:
 
 = edit_password_url(:id => @user.perishable_token, :host => "#{@current_site.name}.com")
 
-(If you didn't request to reset your FriskyHands' password, you can safely ignore this email).
+(If you didn't request to reset your password, you can safely ignore this email).
 
 From
 Michael
