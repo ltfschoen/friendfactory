@@ -7,6 +7,7 @@ class Admin::Tag < ActiveRecord::Base
     ActsAsTaggableOn::Tag.delete_all
     ActsAsTaggableOn::Tagging.delete_all    
     Wave::Base.type(Wave::Profile, Wave::Event).each { |wave| wave.save! }
+    true
   end
   
 end

@@ -8,7 +8,7 @@ module TagScrubber
   end
   
   def unpunctuate(tag)
-    tag.gsub(/,|-|_/, ' ').gsub(/[^[:alnum:][:space:]]+/, '').gsub(/\s{2,}/, ' ').strip    
+    tag.gsub(/\/|,|-|_/, ' ').gsub(/[^[:alnum:][:space:]]+/, '').gsub(/\s{2,}/, ' ').strip
   end
 
   def reduce(tag)
