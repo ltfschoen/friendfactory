@@ -73,7 +73,7 @@ popular_wave_2:
   state: published
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
-  
+
 event_wave_published:
   id: 5
   user_id: 1
