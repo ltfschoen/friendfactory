@@ -13,6 +13,9 @@ class AddHandleToProfile < ActiveRecord::Migration
     say 'remove_column :user, :handle', true
     say 'remove_column :user, :first_name', true
     say 'remove_column :user, :last_name', true
+
+    say "Invoking ff:fix:admin_tags"
+    Rake::Task[:'ff:fix:admin_tags'].invoke
   end
 
   def self.down
