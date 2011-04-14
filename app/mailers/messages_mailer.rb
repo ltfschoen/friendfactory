@@ -4,7 +4,7 @@ class MessagesMailer < ActionMailer::Base
     @message = message
     email = Rails.env.production? ? @message.receiver.email : 'michael@michaelbamford.com'
     mail :to   => email,
-      :from    => "messages@#{message.site.name}.com",
+      :from    => "mailer@#{message.site.name}.com",
       :subject => "Message from #{@message.sender.handle(@message.site)} at #{@message.site.display_name}"
   end
 
