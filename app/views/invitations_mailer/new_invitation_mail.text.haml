@@ -1,10 +1,10 @@
 Hey there!
 
-You're friend #{@invitation.sponsor.handle(@invitation.site)} at #{@invitation.site.display_name} has invited you to join.
+Your friend #{@invitation.sponsor.handle(@invitation.site)} at #{@invitation.site.display_name} has invited you to join.
 
 Click the following link to join right away!
 
-= link_to(nil, welcome_url(:invite => @invitation.code))
+#{welcome_url(:host => "#{@invitation.site.name}.com", :invite => @invitation.code)}
 
 - unless Rails.env.production?
   = '- ' * 20
