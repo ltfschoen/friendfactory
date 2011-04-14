@@ -51,11 +51,11 @@ Friskyfactory::Application.configure do
   config.action_mailer.smtp_settings = {
       :address              => 'smtp.gmail.com',
       :port                 => 587,
-      :domain               => 'tagwaymedia.com',
-      :user_name            => 'michael@friskyhands.com',
-      :password             => 'lee201',
+      :domain               => 'friskyfactory.com',
+      :user_name            => 'mailer@friskyfactory.com',
+      :password             => 'lee201AA',
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
 
-  config.action_mailer.default_url_options = { :host => 'friskyhands.com' }  
+  config.action_mailer.default_url_options = { :host => 'friskyfactory.com' }  
 end

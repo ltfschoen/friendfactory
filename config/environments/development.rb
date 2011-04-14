@@ -17,7 +17,7 @@ Friskyfactory::Application.configure do
   config.cache_store = :mem_cache_store, 'localhost:11211'
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -29,14 +29,14 @@ Friskyfactory::Application.configure do
   config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,
-      :domain               => 'localhost',
-      :user_name            => 'michael@friskyhands.com',
-      :password             => 'lee201',
+      :domain               => 'friskyfactory.com',
+      :user_name            => 'mailer@friskyfactory.com',
+      :password             => 'lee201AA',
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
 
   config.action_mailer.default_url_options = {
-      :host => 'localhost',
+      :host => 'friskyfactory.localhost',
       :port => 3000 }
 
 end
