@@ -18,11 +18,10 @@ class Posting::Message < Posting::Base
     if wave = find_or_create_recipient_wave(posting)
       wave.messages << posting
       wave.touch
-      if !posting.receiver.online? && posting.receiver.emailable?
-        MessagesMailer.new_message_notification(posting).deliver
-      end
     end
-    true
+    if !posting.receiver.online? && posting.receiver.emailable?
+      MessagesMailer.new_message_notification(posting).deliver
+    end
   end
 
   # def read?
