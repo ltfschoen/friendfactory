@@ -1,2 +1,22 @@
-%h4
-  Conversation
+.wave[@wave]
+  .thread
+    .unobtrusive.time_ago= "Started #{time_ago_in_words(@wave.created_at)} ago"
+    - @wave.messages.published.each do |posting|
+      %li= render :partial => 'posting/messages/message', :object => posting
+      =# render :partial => 'posting/messages/message', :collection => @wave.messages.published
+  = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => @wave.id), :remote => true do |f|
+    .message-input
+      = f.text_area :body
+    .button-bar
+      = f.submit 'Send'
+
+/ .grid_3.omega
+/   .address
+/     .message.received
+/       = avatar_image_tag @wave.recipient, :style => 'thimble', :gender => @wave.recipient.user_info(current_site).gender
+/       = link_to_profile(@wave.recipient)
+/     .message.sent
+/       = avatar_image_tag @wave.user, :style => 'thimble', :gender => @wave.user.user_info(current_site).gender
+/       = link_to_profile(@wave.user)
+/   .button-bar
+/     = f.submit 'Send'

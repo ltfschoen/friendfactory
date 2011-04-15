@@ -9,7 +9,7 @@
 			
 			return this.each(function() {
 
-				$this = $(this);  // .postcard
+				var $this = $(this);  // .postcard
 				
 				var channel_id = $this.attr('id');
 				var channel = pusher.subscribe(channel_id);

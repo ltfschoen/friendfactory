@@ -14,11 +14,11 @@
 	position: absolute;
 }
 
-.polaroid .content.scrollable .items div {
+.polaroid .content.scrollable .items .pane {
 	float: left;
 	width: 260px;
 }
 
-.polaroid .content.scrollable .items .signals {
+.polaroid .content.scrollable .items .pane.signals {
 	height: 300px;
 }

@@ -86,7 +86,9 @@ class User < ActiveRecord::Base
       joins(:sites).where('sites_waves.site_id = ?', site.id) if site.present?
     end
     def with(receiver, site)
-      site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first if receiver.present?
+      if receiver.present? && site.present?
+        site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first
+      end
     end    
   end
 

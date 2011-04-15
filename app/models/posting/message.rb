@@ -19,6 +19,9 @@ class Posting::Message < Posting::Base
       wave.messages << posting
       wave.touch
     end
+  end
+  
+  after_commit do |posting|
     if !posting.receiver.online? && posting.receiver.emailable?
       MessagesMailer.new_message_notification(posting).deliver
     end
