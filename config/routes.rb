@@ -7,8 +7,10 @@ Friskyfactory::Application.routes.draw do
     
     resources :profiles,    :only => [ :index, :show ] do
       member do
+        get 'signals'
         get 'photos'
         get 'invitations'
+        get 'conversation'
       end
       get 'conversation' => 'conversations#show'
     end

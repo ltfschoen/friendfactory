@@ -18,3 +18,7 @@
 	float: left;
 	width: 260px;
 }
+
+.polaroid .content.scrollable .items .signals {
+	height: 300px;
+}

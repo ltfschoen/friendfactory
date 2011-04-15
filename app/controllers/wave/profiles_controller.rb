@@ -20,6 +20,15 @@ class Wave::ProfilesController < ApplicationController
     end
   end
   
+  # === Panes ===
+
+  def signals
+    @profile = Wave::Profile.find_by_id(params[:id])
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
   def photos    
     if wave = Wave::Profile.find_by_id(params[:id])
       @photos = wave.postings.type(Posting::Photo).order('created_at desc').limit(9)
@@ -38,6 +47,12 @@ class Wave::ProfilesController < ApplicationController
     end
   end
   
+  def conversation
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
   private
 
   def find_profiles_tagged_with(tag)

@@ -70,6 +70,8 @@ div.polaroid .front.face table.header td.status {
 
 div.polaroid.edit .front.face table.detail {
     margin-top: 6px;
+	float: left;
+	top: 0;
 }
 
 div.polaroid.edit .front.face table.detail td {
@@ -199,14 +201,10 @@ div.polaroid a.icon {
 	display: block;
 	text-decoration: none;
 	text-indent: -5000px;
-	margin-right: 6px;
+	margin-left: 6px;
 	width: 18px;
 	height: 20px;
 	background: url(/images/friskyfactory/buddy-bar.png) top left no-repeat;	
-}
-
-div.polaroid a.icon.last {
-	margin-right: 0px;
 }
 
 div.polaroid a.icon.comment {

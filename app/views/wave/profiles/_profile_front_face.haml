@@ -23,7 +23,7 @@
         %li= link_to 'Photos', 'photos', :class => 'flip photos icon'
         - if current_site.invite_only?
           %li= link_to 'Invitations', '#invitations', :class => 'flip invitations icon'
-        - if current_user
-          %li= link_to 'Message', profile_conversation_path(profile), :class => 'conversation icon last'
+        - if current_user.present?
+          %li= link_to 'Chat', profile_conversation_path(profile), :class => 'flip chat icon last'
       - if content_for?(:polaroid_front_face)
         = content_for(:polaroid_front_face)

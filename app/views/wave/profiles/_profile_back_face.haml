@@ -3,40 +3,26 @@
     = link_to 'Close', wave_profile_path(profile), :class => 'close hidden'
     .content.scrollable
       .items
-        .mini-profile
-          %table.header<
-            %tr
-              %td.avatar<
-                = avatar_image_tag(profile.avatar, :style => :thumb, :anonymous => true, :gender => profile.gender)
-              %td.username<
-                = profile.handle
-              %td.age<
-                = profile.age.present? ? profile.age : '&nbsp;'.html_safe
-          %table.detail
-            = render_profile_signals(profile)
-                          
-        .photo-grid
+        .pane.signals.mini-profile{ :'data-pane' => 'signals' }
+        .pane.photos.photo-grid{ :'data-pane' => 'photos' }
           - 1.upto(9) do |i|
             = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
-
-        - if current_site.invite_only?
-          .photo-grid
-            - 1.upto(9) do |i|
-              = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
+        .pane.invitations.photo-grid{ :'data-pane' => 'invitations' }
+          - 1.upto(9) do |i|
+            = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
+        .pane.conversation{ :'data-pane' => 'conversation' }
+          %h3 Chat
 
     %ul.buddy-bar.secondary
-      %li
-        = link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
+      %li= link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
 
     %ul.buddy-bar.primary.navi
-      -# %li
-      -#   = link_to 'Chat', 'chat', :class => 'chat icon'
       %li= link_to 'Profile', 'profile', :class => 'mini-profile icon'
       %li= link_to 'Photos', 'photos', :class => 'photos icon'
       - if current_site.invite_only?
-        %li= link_to 'Invitations', '#invitations', :class => 'invitations icon'
-      - if current_user
-        %li= link_to 'Message', profile_conversation_path(profile), :class => 'conversation icon last'
+        %li= link_to 'Invitations', 'invitations', :class => 'invitations icon'
+      - if current_user.present?
+        %li= link_to 'Chat', profile_conversation_path(profile), :class => 'chat icon'
 
     - if content_for?(:polaroid_back_face)
       = content_for(:polaroid_back_face)
