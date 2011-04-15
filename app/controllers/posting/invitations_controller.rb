@@ -3,8 +3,9 @@ class Posting::InvitationsController < ApplicationController
   def create
     @li_eq = params[:li_eq]
     @posting = new_posting_invitation
-    @wave = find_invitation_wave
-    @wave.postings << @posting
+    if @wave = find_invitation_wave
+      @wave.postings << @posting
+    end
     respond_to do |format|
       format.js { render :layout => false }
     end
@@ -13,8 +14,9 @@ class Posting::InvitationsController < ApplicationController
   def update
     @li_eq = params[:li_eq]
     @wave = find_invitation_wave
-    @posting = find_invitation_posting(@wave)
-    @posting.update_attributes(params[:posting_invitation])
+    if @posting = find_invitation_posting(@wave)
+      @posting.update_attributes(params[:posting_invitation])
+    end
     respond_to do |format|
       format.js { render :action => 'create', :layout => false }
     end

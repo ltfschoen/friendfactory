@@ -3,7 +3,7 @@ class Wave::InvitationsController < ApplicationController
   before_filter :require_user
   
   def index
-    @wave = current_user.find_or_create_invitation_wave(current_site)
+    @wave = current_user.find_or_create_invitation_wave_for_site(current_site)
     @invitation_postings = @wave.postings.type(Posting::Invitation).order('created_at asc').limit(Wave::InvitationsHelper::MaximumDefaultImages)
     respond_to do |format|
       format.html

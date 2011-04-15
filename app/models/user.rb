@@ -99,11 +99,7 @@ class User < ActiveRecord::Base
       where(:resource_id => site.id)
     end
   end
-  
-  def find_or_create_invitation_wave(site)
-    invitation_wave(site) || create_invitation_wave(site)
-  end
-    
+      
   # has_many :friendships
   # has_many :friends,  :through => :friendships
   # has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
@@ -193,6 +189,7 @@ class User < ActiveRecord::Base
     profile(site).resource
   end
 
+
   # === Conversations ===
   
   def create_conversation_with(receiver, site)
@@ -223,6 +220,26 @@ class User < ActiveRecord::Base
   end
 
 
+  # == Invitations
+
+  def find_or_create_invitation_wave_for_site(site)
+    invitation_wave_for_site(site) || create_invitation_wave_for_site(site)
+  end
+
+  def invitation_for_site(site)
+    @invitation_for_site ||=
+      (invitations.site(site).where(:subject => invitation_code).order('created_at desc').limit(1).try(:first) ||
+        site.invitations.anonymous(invitation_code))
+  end
+
+  def invitation_wave_for_site(site)
+    waves.type(Wave::Invitation).published.
+        joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
+        where(:sites_waves => { :site_id => site.id }).
+        limit(1).try(:first)
+  end
+
+
   # ===
   
   def self.online?(user)
@@ -248,12 +265,6 @@ class User < ActiveRecord::Base
   
   private
   
-  def invitation_for_site(site)
-    @invitation_for_site ||=
-      (invitations.site(site).where(:subject => invitation_code).order('created_at desc').limit(1).try(:first) ||
-        site.invitations.anonymous(invitation_code))
-  end
-
   def perform_enrollment
     if enrollment_site.present?
       if (sites << enrollment_site) && (enrollment_profile.sites << enrollment_site)
@@ -268,16 +279,8 @@ class User < ActiveRecord::Base
   def raise_exception_if_already_enrolled(site)
     raise "User already a member" if sites.where(:id => site.id).present?
   end
-
-  def invitation_wave(site)
-    waves.type(Wave::Invitation).
-        joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
-        where(:sites_waves => { :site_id => site.id }).limit(1).
-        merge(Wave::Base.published).
-        try(:first)
-  end
   
-  def create_invitation_wave(site)
+  def create_invitation_wave_for_site(site)
     wave = Wave::Invitation.new.tap { |wave| wave.user = self }
     site.waves << wave && wave.publish!
     wave
