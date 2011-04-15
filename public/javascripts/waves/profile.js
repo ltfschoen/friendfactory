@@ -4,9 +4,9 @@ jQuery(function($) {
 		profileId = $profile.data('profile_id');
 
 	$profile
-		.find('.signals')
-			.load('/wave/profiles/' + profileId + '/signals')
-		.end()
+		// .find('.signals')
+		// 	.load('/wave/profiles/' + profileId + '/signals')
+		// .end()
 		
 		.find('form')
 			.bind('ajax:before', function(event) {

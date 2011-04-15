@@ -7,12 +7,13 @@
         .face-container
           .front.face
             .content
-              = avatar_image_tag(@wave.avatar, :class => 'headshot', :style => 'polaroid', :anonymous => true, :gender => @wave.gender)
-              %table.detail.button-bar
-                %tr
-                  %td= f.file_field :image
-                %tr
-                  %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo', :as_button => false
+              .pane.avatar
+                = avatar_image_tag(@wave.avatar, :class => 'headshot', :style => 'polaroid', :anonymous => true, :gender => @wave.gender)
+                %table.detail.button-bar
+                  %tr
+                    %td= f.file_field :image
+                  %tr
+                    %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo', :as_button => false
   .grid_6
     = form_for @wave.user_info, :url => profile_path do |f|
       .polaroid.edit
@@ -20,39 +21,40 @@
           .back.face
             .content.scrollable
               .items
-                %div
-                  %table.header
-                    %tr
-                      %td.avatar
-                        = avatar_image_tag(@wave.avatar, :style => :thumb, :gender => @wave.gender)
-                      %td.username<
-                        = @wave.handle
-                      %td.age<
-                        = f.text_field :age, :placeholder => 'age', :maxlength => 2, :class => 'ui-widget'
-                  %table.detail
-                    - if current_site.name == 'friskyhands'
+                .pane.signals
+                  %div
+                    %table.header
                       %tr
-                        %td.label Deafness
-                        %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
-                    - if current_site.name == 'positivelyfrisky'
+                        %td.avatar
+                          = avatar_image_tag(@wave.avatar, :style => :thumb, :gender => @wave.gender)
+                        %td.username<
+                          = @wave.handle
+                        %td.age<
+                          = f.text_field :age, :placeholder => 'age', :maxlength => 2, :class => 'ui-widget'
+                    %table.detail
+                      - if current_site.name == 'friskyhands'
+                        %tr
+                          %td.label Deafness
+                          %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
+                      - if current_site.name == 'positivelyfrisky'
+                        %tr
+                          %td.label HIV Status
+                          %td.detail= f.select(:hiv_status, UserInfo::HivStatus, :include_blank => true)
                       %tr
-                        %td.label HIV Status
-                        %td.detail= f.select(:hiv_status, UserInfo::HivStatus, :include_blank => true)
-                    %tr
-                      %td.label Gender
-                      %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
-                    %tr
-                      %td.label Preference
-                      %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
-                    %tr
-                      %td.label Relationship
-                      %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)
-                    %tr
-                      %td.label Birthday
-                      %td.detail= f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date'}
-                    %tr
-                      %td.label Location
-                      %td.detail= f.text_field :location, :placeholder => 'town or city, state', :maxlength => 20, :class => 'ui-widget'
+                        %td.label Gender
+                        %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
+                      %tr
+                        %td.label Preference
+                        %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
+                      %tr
+                        %td.label Relationship
+                        %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)
+                      %tr
+                        %td.label Birthday
+                        %td.detail= f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date'}
+                      %tr
+                        %td.label Location
+                        %td.detail= f.text_field :location, :placeholder => 'town or city, state', :maxlength => 20, :class => 'ui-widget'
             .button-bar
               = f.submit 'OK'
               = f.button 'Cancel', :class => 'cancel button'

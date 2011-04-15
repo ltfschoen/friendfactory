@@ -68,7 +68,7 @@ div.polaroid .face a.close {
 	text-indent: -1000em;
 }
 
-div.polaroid .front.face table.header {
+div.polaroid .pane.avatar table.header {
 	font-size: 18px;
 	font-family: Chalkduster;
 	color: rgb(0, 0, 0);
@@ -77,12 +77,12 @@ div.polaroid .front.face table.header {
 	height: 38px;
 }
 
-div.polaroid .front.face table.header td.username {
+div.polaroid .pane.avatar table.header td.username {
 	text-align: left;
 	vertical-align: top;
 }
 
-div.polaroid .front.face table.header td.status {
+div.polaroid .pane.avatar table.header td.status {
 	vertical-align: top;
 	padding-top: 6px;
 	text-align: right;
@@ -91,28 +91,28 @@ div.polaroid .front.face table.header td.status {
 	color: #666;
 }
 
-div.polaroid.edit .front.face table.detail {
+div.polaroid.edit .pane.avatar table.detail {
     margin-top: 6px;
 	float: left;
 	top: 0;
 }
 
-div.polaroid.edit .front.face table.detail td {
+div.polaroid.edit .pane.avatar table.detail td {
     height: 28px;
     vertical-align: middle;
 }
 
-div.polaroid .front.face img.avatar.polaroid {
+div.polaroid .pane.avatar img.avatar.polaroid {
     width: 258px;
     height: 258px;
     border: 1px solid lightgray;
 }
 
-div.polaroid .back.face img.thumb {
+div.polaroid .face img.thumb {
     border: 1px solid lightgray;
 }
 
-div.polaroid .back.face table.header {
+div.polaroid .pane.signals table.header {
 	color: rgb(34,65,108);
     width: 254px;
     margin-bottom: 8px;
@@ -120,54 +120,50 @@ div.polaroid .back.face table.header {
 	font-family: Chalkduster;
 }
 
-div.polaroid .back.face table.header td.avatar {
+div.polaroid .pane.signals table.header td.avatar {
     width: 74px;
 }
 
-div.polaroid .back.face table.header td.username {
+div.polaroid .pane.signals table.header td.username {
 	text-align: left;
 	vertical-align: middle;
 }
 
-div.polaroid .back.face table.header td.age {
+div.polaroid .pane.signals table.header td.age {
     text-align: right;
     vertical-align: middle;
 }
 
-div.polaroid .back.face table.header td.age input {
+div.polaroid .pane.signals table.header td.age input {
     width: 2em;
 	text-align: center;
 }
 
-div.polaroid .back.face table.detail {
+div.polaroid .pane.signals table.detail {
 	color: gray;
 	width: 260px;
 }
 
-div.polaroid .back.face table.detail td {
+div.polaroid .pane.signals table.detail td {
     height: 28px;
     vertical-align: middle;
 }
 
-div.polaroid .back.face table.detail td.label {
+div.polaroid .pane.signals table.detail td.label {
     width: 96px;
     color: #999;
 }
 
-div.polaroid.edit .back.face input#user_info_location {
+div.polaroid.edit .pane.signals input#user_info_location {
 	width: 12em;
 }
 
-/*div.polaroid.edit .back.face table.detail td.label {
-	padding-right: 6px;
-}*/
-
-div.polaroid .back.face table.detail td.detail {
+div.polaroid .pane.signals table.detail td.detail {
     color: #666;
     border-bottom: 1px dotted lightgray;
 }
 
-div.polaroid .back.face .photo-grid img.thumb {
+div.polaroid .pane.photo-grid img.thumb {
     display: block;
     float: left;
     width: 80px;
@@ -176,31 +172,28 @@ div.polaroid .back.face .photo-grid img.thumb {
     background-color: #fff;
 }
 
-div.polaroid .back.face .photo-grid img.omega {
+div.polaroid .pane.photo-grid img.omega {
     margin-right: 0;
 }
 
-
-/*** Chat Pane ***/
-
-div.polaroid .conversation.pane .wave_conversation {
+div.polaroid .pane.conversation .wave_conversation {
 	height: 300px;
 	width: 260px;
 }
 
-div.polaroid .conversation.pane .thread {
+div.polaroid .pane.conversation .thread {
     height: 228px;
 	color: gray;
 	font-size: 12px;
 	overflow: auto;
 }
 
-div.polaroid .conversation.pane .thread .time_ago {
+div.polaroid .pane.conversation .thread .time_ago {
 	text-align: center;
 	margin-bottom: 6px;
 }
 
-div.polaroid .conversation.pane .posting_message {
+div.polaroid .pane.conversation .posting_message {
 	margin: 4px 5px;
 	min-width: 10px;
 	position: relative; 
@@ -212,13 +205,13 @@ div.polaroid .conversation.pane .posting_message {
 	background-color: #f9f9f9;	
 }
 
-div.polaroid .conversation.pane .posting_message.received {
+div.polaroid .pane.conversation .posting_message.received {
 	float: left;
 	text-align: left;
 	border: 2px solid rgba(139, 0, 0, 0.5); 
 }
 
-/*div.polaroid .conversation.pane .posting_message.received:before {
+/*div.polaroid .pane.conversation .posting_message.received:before {
 	content: ""; 
 	position: absolute;
 	bottom: -7px; 
@@ -235,7 +228,7 @@ div.polaroid .conversation.pane .posting_message.received {
 	border-bottom-right-radius: 18px 10px;
 }*/
 
-/*div.polaroid .conversation.pane .posting_message.received:after {
+/*div.polaroid .pane.conversation .posting_message.received:after {
 	content: ""; 
 	position: absolute;
 	bottom: -7px;
@@ -251,14 +244,14 @@ div.polaroid .conversation.pane .posting_message.received {
 	border-bottom-right-radius: 10px 20px; 
 }*/
 
-div.polaroid .conversation.pane .posting_message.sent {
+div.polaroid .pane.conversation .posting_message.sent {
 	clear: right;
 	float: right;
 	text-align: right;
 	border: 2px solid rgba(90, 143, 0, 0.5); 
 }
 
-/*div.polaroid .conversation.pane .posting_message.sent:before {
+/*div.polaroid .pane.conversation .posting_message.sent:before {
 	content: ""; 
 	position: absolute;
 	bottom: -7px; 
@@ -275,7 +268,7 @@ div.polaroid .conversation.pane .posting_message.sent {
 	border-bottom-left-radius: 18px 10px;
 }*/
 
-/*div.polaroid .conversation.pane .posting_message.sent:after {
+/*div.polaroid .pane.conversation .posting_message.sent:after {
 	content: ""; 
 	position: absolute;
 	bottom: -7px; 
@@ -291,14 +284,14 @@ div.polaroid .conversation.pane .posting_message.sent {
 	border-bottom-left-radius: 10px 20px; 
 }*/
 
-div.polaroid .conversation.pane .message-input {
+div.polaroid .pane.conversation .message-input {
 	position: relative;
 	height: 40px;
 	width: 232px;
 	margin-top: 12px;
 }
 
-div.polaroid .conversation.pane textarea {
+div.polaroid .pane.conversation textarea {
 	width: 240px;
     height: 36px;
 	background: none;
@@ -311,7 +304,7 @@ div.polaroid .conversation.pane textarea {
 	border: 2px solid rgba(90, 143, 0, 0.5); 	
 }
 
-div.polaroid .conversation.pane .message-input:before {
+div.polaroid .pane.conversation .message-input:before {
 	content: ""; 
 	position: absolute;
 	bottom: -17px; 
@@ -328,7 +321,7 @@ div.polaroid .conversation.pane .message-input:before {
 	border-bottom-left-radius: 18px 10px;
 }
 
-div.polaroid .conversation.pane .message-input:after {
+div.polaroid .pane.conversation .message-input:after {
 	content: ""; 
 	position: absolute;
 	bottom: -17px; 
@@ -344,13 +337,11 @@ div.polaroid .conversation.pane .message-input:after {
 	border-bottom-left-radius: 10px 20px; 
 }
 
-div.polaroid .conversation.pane .thread, 
-div.polaroid .conversation.pane textarea,
-div.polaroid .conversation.pane button {
+div.polaroid .pane.conversation .thread, 
+div.polaroid .pane.conversation textarea,
+div.polaroid .pane.conversation button {
 	cursor: default;
 }
-
-/*** Nav ***/
 
 div.polaroid .button-bar {
     float: right;
@@ -443,8 +434,6 @@ div.polaroid a.icon.invitations {
 	background-position: -276px -2px;
 	width: 20px;
 }
-
-/*** Floats ***/
 
 .floating div.polaroid .face {
 	cursor: move;

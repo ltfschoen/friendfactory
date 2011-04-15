@@ -22,6 +22,3 @@
         %li= link_to 'Invitations', 'invitations', :class => 'invitations icon'
       - if current_user.present?
         %li= link_to 'Chat', profile_conversation_path(profile), :class => 'chat icon'
-
-    - if content_for?(:polaroid_back_face)
-      = content_for(:polaroid_back_face)
