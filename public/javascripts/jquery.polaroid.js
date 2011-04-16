@@ -87,8 +87,17 @@
 		
 		if (Modernizr.csstransforms3d) {
 			
-			return this.each(function() {							
-				$this = $(this); // a polaroid
+			return this.each(function() {
+				var $this = $(this), // a polaroid
+					$backFace = $this.find('.back.face'),
+					transitionDuration = $this.css('-webkit-transition-duration');
+									
+				console.log(transitionDuration);
+				
+				$this.css({ '-webkit-transition-duration': '0s' })
+					.addClass('flipped');
+					
+				$backFace.find('.content').css({ opacity: 0.0 });
 
 				if (settings['close-button'] === true) {
 					$('a.close', $this).click(function(event) {
@@ -100,9 +109,8 @@
 					});
 				}
 				
-				$this.find('.back.face')
-					.css('-webkit-transform', 'rotateY(180deg)')
-
+				$backFace
+					// .css('-webkit-transform', 'rotateY(180deg)')
 					.find('.scrollable')
 						.scrollable({
 							items: 'items',
@@ -117,28 +125,26 @@
 					
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
-							event.preventDefault();	
-							$(this).closest('.polaroid').toggleClass('flipped');
+							event.preventDefault();							
+							$backFace.find('.content').fadeTo('fast', 0.0);
+							$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
 						})
 					.end()										
 				.end()
 				
 				.find('.front.face .buddy-bar a.flip')
-					.click(function(event) {
-						event.preventDefault();	
-				
+					.click(function(event) {			
 						var idx = $(this).closest('li').index();
-						var $polaroid = $(this).closest('.polaroid')
-						var $backFace = $polaroid.find('.back.face');
-				
-						// Manually scroll to correct pane. Have to secretly
-						// undo the rotate to do the scroll.							
-						$backFace.css('-webkit-transform', 'rotateY(0deg)');
-						$backFace.find('.scrollable').scrollable().seekTo(idx, 0);
-						$backFace.css('-webkit-transform', 'rotateY(180deg)');
-							
-						// Do the flip
-						$polaroid.toggleClass('flipped');
+
+						event.preventDefault();	
+						
+						// Undo the rotate and manually scroll to correct pane.
+						$backFace.css('-webkit-transform', 'rotateY(180deg)')
+							.find('.scrollable').scrollable().seekTo(idx, 0);							
+						$backFace.css('-webkit-transform', 'none')
+							.find('.content').delay(1000).fadeTo('fast', 1.0);													
+
+						$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
 					})
 				.end();
 						
@@ -147,7 +153,7 @@
 		} else {
 						
 			return this.each(function() {				
-				$this = $(this); // a polaroid
+				var $this = $(this); // a polaroid
 				
 				$this.find('.face-container:eq(1)').hide();
 				
@@ -202,4 +208,3 @@
 	}; // fn.polaroid
 	
 })(jQuery);
-
