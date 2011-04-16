@@ -8,8 +8,9 @@
 
 		channel.bind('message', function(data) {
 			$.get(data['url'], function(partial) {
-				var threadDiv = $('.thread', data['dom_id']).append(partial)[0];
-				threadDiv.scrollTop = threadDiv.scrollHeight;				
+				var $threadDiv = $('.thread', data['dom_id']).append(partial);
+				// $threadDiv[0].scrollTop = $threadDiv[0].scrollHeight;
+				$threadDiv.scrollTo('max', 200);
 			});
 		});
 
@@ -44,8 +45,8 @@
 						$thread = $this.closest('.wave_conversation').find('.thread');
 
 					$thread.append($("<li><div class='posting posting_message sent'>" + $textarea.val() + "</div></li>"));
-					$thread[0].scrollTop = $thread[0].scrollHeight;
-					// $thread.scrollTo('max', 0);					
+					// $thread[0].scrollTop = $thread[0].scrollHeight;
+					$thread.scrollTo('max', 200);
 					$textarea.val('');
 				})
 			.end()
