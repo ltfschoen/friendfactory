@@ -17,6 +17,7 @@ class Posting::Photo < Posting::Base
   validates_attachment_content_type :image, :content_type => [ 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png' ]
 
   before_create :set_dimensions
+  before_create :randomize_file_name
   
   def distribute(sites)
     sites.each do |site|
@@ -37,6 +38,11 @@ class Posting::Photo < Posting::Base
       self.height = dimensions.height
       self.horizontal = dimensions.horizontal?
     end
-    true
   end
+  
+  def randomize_file_name
+    extension = File.extname(image_file_name).downcase
+    self.image.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
+  end
+
 end
