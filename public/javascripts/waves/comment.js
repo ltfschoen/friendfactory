@@ -1,9 +1,11 @@
 jQuery(function($) {
 
 	$('.posting_comments').masonry({
-		singleMode: true, 
+		singleMode: true,
 		itemSelector: '.posting_comment:visible'
 	});
+	
+	$.waypoints('refresh');
 
 	$('a.new_posting_comment')
 		.bind('click', function(event) {
@@ -14,8 +16,8 @@ jQuery(function($) {
 						.css({ opacity: 0.0 })
 						.slideDown(function() {
 							$(this).fadeTo('fast', 1.0)
-								.find('textarea')
-									.val('').focus();
+								.find('textarea').val('').focus();
+								// $.waypoints('refresh');
 						});				
 			});
 	});
@@ -44,6 +46,7 @@ jQuery(function($) {
 					.fadeTo('fast', 0.0, function() {
 						$(this).slideUp(function() {
 							$(this).prev('a.new_posting_comment').fadeTo('fast', 1.0);
+							// $.waypoints('refresh');
 						});
 					});
 				return false;

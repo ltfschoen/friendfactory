@@ -18,9 +18,31 @@
 
 jQuery(function($) {	
 
+	(function() {
+		var $loading = $("<div class='loading'><p>Loading more postings&hellip;</p></div>"),
+			$footer = $('.page.footer'),
+			href = $(".pagination a[rel='next']").attr('href'),
+			opts = { offset: function() { return ($.waypoints('viewportHeight') + 100); } }
+
+		$footer.waypoint(function(event, direction) {
+			$footer.waypoint('remove');			
+			$('.pagination').html($loading)
+				
+			$.get(href, function(data) {
+				var $data = $(data);
+				$('#postings-container').append($data.find('#postings-container'));
+				// $loading.detach();
+				$('.pagination').replaceWith($data.find('.pagination'));
+				$footer.waypoint(opts);
+			});
+		}, opts);		
+	})();
+
+
 	$('.tab_contents')
 		.insertAfter('ul.posting_post_its:first');
-
+	$.waypoints('refresh');	
+	
 
 	$('.tab_content')
 		.bind('reset', function(event) {
@@ -144,5 +166,5 @@ jQuery(function($) {
 
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
-
+			
 });

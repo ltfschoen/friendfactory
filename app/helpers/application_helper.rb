@@ -66,7 +66,7 @@ module ApplicationHelper
     suffix = opts[:suffix] || 'ago'
     prefix = opts[:prefix]
     content_tag(:span, :class => 'distance_of_time') do
-      returning String.new do |html|
+      String.new.tap do |html|
         html << "#{prefix}&nbsp;" if prefix.present?
         html << super(date)
         html << "&nbsp;#{suffix}" if suffix.present?

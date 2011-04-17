@@ -1,13 +1,9 @@
 .wave.clearfix[@wave]
-  .grid_5<
-    &nbsp;
-  .grid_6<
+  .grid_6.push_5<
     = render :partial => 'nav'
-  .grid_5<
-    &nbsp;
   .grid_16<
     = render :partial => 'tab_content'
-  .grid_16<
+  .grid_16#postings-container<
     = render_postings @postings
   .grid_16<
     = will_paginate @postings

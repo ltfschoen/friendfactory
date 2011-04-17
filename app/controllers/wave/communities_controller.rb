@@ -5,7 +5,7 @@ class Wave::CommunitiesController < ApplicationController
   before_filter :require_user
 
   cattr_reader :per_page
-  @@per_page = 60
+  @@per_page = 30
   
   def show
     @wave = current_site.waves.find_by_slug(params[:slug] || DefaultWaveSlug)
