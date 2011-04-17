@@ -23,31 +23,23 @@
 	-webkit-perspective: 1200;
 }
 
-.csstransforms3d div.polaroid {
+.csstransforms3d .polaroid-container > div.polaroid {
 	position: absolute;	
 	-webkit-transform-style: preserve-3d;	
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: 1s;        
 }
 
-.csstransforms3d div.polaroid.flipped {
+.csstransforms3d .polaroid-container > div.polaroid.flipped {
     -webkit-transform: rotateY(180deg);
 }
 
-.csstransforms3d div.polaroid .face {
+.csstransforms3d .polaroid-container > div.polaroid .face {
 	-webkit-backface-visibility: hidden;    
 }
 
-.csstransforms3d div.polaroid .front.face {
+.csstransforms3d .polaroid-container > div.polaroid .front.face {
 	-webkit-transform: rotateY(180deg);
-}
-
-.csstransforms3d div.polaroid.edit {
-	position: relative;
-}
-
-.csstransforms3d div.polaroid.edit .front.face {
-	-webkit-transform: none;
 }
 
 div.polaroid {

@@ -22,9 +22,10 @@
             %table.button-bar.hidden
               %tr
                 %td.input
-                  = hidden_field_tag :li_eq
-                  = hidden_field_tag :_method
                   = f.text_field :body, :placeholder => "buddy's email"
+                  %div{ :style => 'margin:0;padding:0;display:inline' }
+                    = hidden_field_tag :li_eq
+                    = hidden_field_tag :_method
                 %td.ok-cancel
                   = f.submit 'OK'
                   = f.button 'Cancel', :class => 'cancel'
