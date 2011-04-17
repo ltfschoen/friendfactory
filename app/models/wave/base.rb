@@ -22,11 +22,13 @@ class Wave::Base < ActiveRecord::Base
 
   scope :type, lambda { |*types| where('type in (?)', types.map(&:to_s)) }
   scope :user, lambda { |user| where(:user_id => user.id) }
+  scope :site, lambda { |site| joins(:sites).where(:sites => { :id => site.id })}
   scope :published, where(:state => :published)
 
   acts_as_taggable
 
   belongs_to :user
+
   has_and_belongs_to_many :sites,
       :class_name              => 'Site',
       :join_table              => 'sites_waves',

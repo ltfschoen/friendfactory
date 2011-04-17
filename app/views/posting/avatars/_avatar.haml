@@ -4,6 +4,6 @@
       %td.avatar.thumb
         = render_attachment(avatar)
       %td
-        = render :partial => 'wave/profiles/profile', :object => avatar.profile
+        = render :partial => 'wave/profiles/profile', :object => avatar.profile(current_site)
         = render_comments(avatar)
 

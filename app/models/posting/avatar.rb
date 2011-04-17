@@ -29,8 +29,8 @@ class Posting::Avatar < Posting::Base
     super
   end
 
-  def profile
-    waves.type(Wave::Profile).limit(1).first
+  def profile(site)
+    waves.type(Wave::Profile).site(site).order('created_at desc').limit(1).try(:first)
   end
     
   private
