@@ -65,8 +65,8 @@ end
 def new_album_with_photos(user, fixtures)
   album = Wave::Album.new.tap { |wave| wave.state = :published }
   user.waves << album  
-  fixtures.each do |fixture|            
-    photo = Posting::Photo.new(:image => File.new(fixture), :user => user)
+  fixtures.each do |fixture|
+    photo = Posting::Photo.new(:image => File.new(fixture)).tap { |photo| photo.user = user }
     album.postings << photo
     photo.publish!
   end

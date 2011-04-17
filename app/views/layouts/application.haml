@@ -15,8 +15,7 @@
       'friskyfactory/postings/', |
       "#{current_site}/application", |
       "#{current_site}/waves/", |
-      "#{current_site}/postings/", |
-        :media => 'screen', :cache => "#{current_site}/cached"
+      "#{current_site}/postings/", :media => 'screen', :cache => "#{current_site}/cached"
 
     / [if IE]
       = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
@@ -44,20 +43,19 @@
         'jquery.masonry.min.js', |
         'jquery.fileupload', |
         'jquery.fileupload-ui', |
+        'jquery.flip.min', |
         'jquery.scrollTo-1.4.2-min', |
         'waypoints.min', |
         'rails', |
         'jquery.form', |
         'jquery.remotipart', |
-        'jquery.flip', |
         'ff.effects', |
-        'jquery.polaroid', |
-        'jquery.postcard', |
-        'jquery.ticket', |
+        'ff.polaroid', |
+        'ff.postcard', |
+        'ff.ticket', |
         'application', |
         'waves/', |
-        'postings/', |
-          :cache => 'cached'
+        'postings/', :cache => 'cached'
 
     = yield(:javascripts)    
     - if page_js = yield(:pagejs).present?

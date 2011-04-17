@@ -38,6 +38,7 @@ class Posting::Photo < Posting::Base
       self.height = dimensions.height
       self.horizontal = dimensions.horizontal?
     end
+    true # important!
   end
   
   def randomize_file_name
