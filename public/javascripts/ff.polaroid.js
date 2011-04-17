@@ -1,6 +1,7 @@
 (function($) {
 	
-	$.fn.chat = function() {		
+	$.fn.chat = function() {
+
 		var $this = $(this), // wave_conversation	
 			pusher = new Pusher('064cfff6a7f7e44b07ae'),
 			channelId = $this.attr('id'),
@@ -54,8 +55,7 @@
 			.find('.thread')
 				.each(function(idx, thread) {
 					thread.scrollTop = thread.scrollHeight;
-				})
-			.end()
+				});
 	}
 
 	

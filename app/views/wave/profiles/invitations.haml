@@ -8,6 +8,6 @@
       - if invitation_with_fill[1].accepted? && invitation_with_fill[1].invitee
         = avatar_image_tag(invitation_with_fill[1].invitee, :class => "thumb#{' omega' if idx == 2 }")
       - else
-        = placeholder_image_tag :class => "thumb#{' omega' if idx == 2 }", :title => invitation_with_fill[1].email
+        = placeholder_image_tag :class => "thumb#{' omega' if idx == 2 }", :title => 'Awaiting acceptance'
     - else
       = invitation_with_fill[0]

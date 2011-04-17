@@ -6,7 +6,8 @@
       .face-container
         .front.face
           .content
-            = avatar_image_tag(@wave.user.avatar(current_site), :class => 'headshot', :style => 'polaroid', :gender => @wave.user.gender(current_site))
+            .pane.avatar
+              = avatar_image_tag(@wave.user.avatar(current_site), :class => 'headshot', :style => 'polaroid', :gender => @wave.user.gender(current_site))
   .grid_6
     .polaroid.edit
       = form_for Posting::Invitation.new, :url => wave_posting_invitations_path(@wave), :remote => true do |f|
@@ -14,7 +15,7 @@
           .back.face
             .content.scrollable
               .items
-                .photo-grid
+                .pane.photo-grid
                   = render_photo_grid(@wave, @invitation_postings)
               %p.unobtrusive
                 Click an empty box to invite a buddy            

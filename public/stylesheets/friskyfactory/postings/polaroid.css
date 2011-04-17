@@ -24,6 +24,7 @@
 }
 
 .csstransforms3d div.polaroid {
+	position: absolute;	
 	-webkit-transform-style: preserve-3d;	
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: 1s;        
@@ -41,8 +42,15 @@
 	-webkit-transform: rotateY(180deg);
 }
 
+.csstransforms3d div.polaroid.edit {
+	position: relative;
+}
+
+.csstransforms3d div.polaroid.edit .front.face {
+	-webkit-transform: none;
+}
+
 div.polaroid {
-	position: absolute;
 	height: 350px;
 	width: 290px; 
 }
