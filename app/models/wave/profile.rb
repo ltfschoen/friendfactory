@@ -51,16 +51,17 @@ class Wave::Profile < Wave::Base
   def photos
     self.postings.only(Posting::Photo)
   end
-  
-  def set_tag_list
+    
+  def set_tag_list_on(site, tag_list)
     if resource.present?
       tag_list = [
+          tag_list,
           resource.gender_description,
           resource.orientation_description,
-          resource.deafness_description,
+          custom_signal_description_for_site(site),
           scrub_tag(resource.location_description)
       ].compact * ','
-      super(tag_list)
+      super(site, tag_list)
     end
   end
 
@@ -73,7 +74,14 @@ class Wave::Profile < Wave::Base
     end
   end
 
-  def touch(avatar=nil)
+  def custom_signal_description_for_site(site)
+    case site.name
+    when 'friskyhands' then resource.deafness_description
+    when 'positivelyfrisky' then resource.hiv_status_description
+    end
+  end
+
+  def touch(avatar = nil)
     super()
   end
 

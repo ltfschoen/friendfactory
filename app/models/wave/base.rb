@@ -63,7 +63,9 @@ class Wave::Base < ActiveRecord::Base
   belongs_to :resource, :polymorphic => true
 
   before_save do |wave|
-    wave.set_tag_list
+    wave.sites.each do |site|
+      wave.set_tag_list_on(site, nil)
+    end
   end
 
   def self.default
@@ -84,14 +86,6 @@ class Wave::Base < ActiveRecord::Base
       posting.ignore_distribute_callback = true
       posting.distribute(sites)
     end
-  end
-
-  def set_tag_list(tag_list = nil)
-    # Override in inherited classes then call super
-    if tag_list.present?
-      sites.each { |site| set_tag_list_on(site, tag_list) }
-    end
-    tag_list
   end
 
 end

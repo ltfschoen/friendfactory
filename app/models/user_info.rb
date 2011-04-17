@@ -28,7 +28,9 @@ class UserInfo < ActiveRecord::Base
     
   after_update do |user_info|
     if profile = user_info.profile
-      profile.set_tag_list && profile.save
+      profile.sites.each do |site|
+        profile.set_tag_list_on(site, nil) && profile.save
+      end
     end
   end
   
