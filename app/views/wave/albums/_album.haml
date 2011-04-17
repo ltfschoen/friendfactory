@@ -5,5 +5,4 @@
       %li
         .posting[photo]
           .photo.canvas
-            - css_class = (photo_count > 1) ? 'small' : ''
-            = link_to(render_photo(photo, :class => css_class), wave_album_photo_path(album, photo), :target => '_blank')
+            = link_to_album_photo(album, photo, :class => ((photo_count > 1) ? 'small' : ''))
