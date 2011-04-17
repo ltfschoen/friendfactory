@@ -94,7 +94,9 @@ jQuery(function($) {
 		var $loading = $("<div class='loading'><p>Loading more postings&hellip;</p></div>"),
 			$footer = $('.page.footer'),
 			opts = { offset: '110%' };
-			
+		
+		if ($('.pagination').length === 0) return;
+		
 		$footer.waypoint(function(event, direction) {
 			$footer.waypoint('remove');			
 			$('.pagination').find('*').hide().end().prepend($loading);
