@@ -49,3 +49,6 @@
 		text-align: right;
 }
 
+form#new_posting_video input#posting_video_url {
+	width: 278px;
+}
