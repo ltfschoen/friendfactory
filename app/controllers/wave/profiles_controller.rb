@@ -30,9 +30,7 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def photos    
-    if wave = Wave::Profile.find_by_id(params[:id])
-      @photos = wave.postings.type(Posting::Photo).order('created_at desc').limit(9)
-    end
+    @wave = Wave::Profile.find_by_id(params[:id])
     respond_to do |format|
       format.html { render :layout => false }
     end

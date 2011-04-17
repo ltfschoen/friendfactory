@@ -3,7 +3,7 @@ class Wave::AlbumsController < ApplicationController
   before_filter :require_user  
     
   def show
-    if @wave = Wave::Album.find_by_id(params[:album_id])    
+    if @wave = Wave::Base.find_by_id(params[:album_id])
       @start_slide = start_slide(params[:id])
     end
     respond_to do |format|

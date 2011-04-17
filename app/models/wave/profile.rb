@@ -49,7 +49,7 @@ class Wave::Profile < Wave::Base
   end
 
   def photos
-    self.postings.only(Posting::Photo)
+    postings.type(Posting::Photo).published.order('created_at desc').limit(9)
   end
     
   def set_tag_list_on(site, tag_list)

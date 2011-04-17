@@ -10,4 +10,9 @@ module Posting::AvatarsHelper
     image_tag 'friskyfactory/ffffff.gif', opts.merge(:site => false, :class => css_class)
   end
   
+  def empty_thumb_image_tag(opts = {})
+    css_class = [ 'thumb', opts.delete(:class) ].compact.join(' ')
+    empty_image_tag(:class => css_class)
+  end
+
 end
