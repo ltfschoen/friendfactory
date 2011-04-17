@@ -35,7 +35,6 @@
       .panel.signup.hidden
         %h3 Sign up!
         = form_for @user do |f|
-          =# f.label :invitation_code, 'Invitation Code', :class => 'placeholder'
           = f.label :invitation_code, 'Valid invitation code required to join PositivelyFrisky'
           = f.text_field :invitation_code, :class => 'ui-widget', :placeholder => 'invitation code'
           = f.label :handle, 'First name or Handle', :class => 'placeholder'
@@ -46,14 +45,7 @@
           = f.label :password, 'Password', :class => 'placeholder'
           = f.existing_user_password_label :password, 'Use your friskyfactory password', :current_site => current_site
           = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'          
-          -# css_class = @user.new_record? ? 'hidden' : ''
-          =# f.label :password, "Use your friskyfactory password", :class => css_class
-
-          -# css_class = @user.existing_record? ? 'hidden' : ''
-          =# f.label :password, 'Retype your password', :class => "placeholder #{css_class}"
-          =# f.password_field :password_confirmation, :class => "password ui-widget #{css_class}", :placeholder => 'password confirmation'
-          = f.new_user_password_confirmation_field :password_confirmation, 'Retype your password', :current_site => current_site, :class => 'password ui-widget', :placeholder => 'password_confirmation'
-          
+          = f.new_user_password_confirmation_field :password_confirmation, 'Retype your password', :current_site => current_site, :class => 'password ui-widget', :placeholder => 'password_confirmation'          
           .button-bar
             = f.submit 'Register'
             - unless @user.invitation_code.present?

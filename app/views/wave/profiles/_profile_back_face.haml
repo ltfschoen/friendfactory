@@ -18,7 +18,6 @@
     %ul.buddy-bar.primary.navi
       %li= link_to 'Profile', 'profile', :class => 'mini-profile icon'
       %li= link_to 'Photos', 'photos', :class => 'photos icon'
-      - if current_site.invite_only?
-        %li= link_to 'Invitations', 'invitations', :class => 'invitations icon'
+      %li= link_to 'Invitations', 'invitations', :class => 'invitations icon'
       - if current_user.present?
         %li= link_to 'Chat', profile_conversation_path(profile), :class => 'chat icon'

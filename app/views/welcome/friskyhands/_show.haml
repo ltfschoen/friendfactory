@@ -35,22 +35,15 @@
       .panel.signup.hidden
         %h3 Sign up!
         = form_for @user do |f|
+          = f.hidden_field :invitation_code
           = f.label :handle, 'First name or Handle', :class => 'placeholder'
           = f.text_field :handle, :class => 'ui-widget', :placeholder => 'first name or handle'
           = f.label :email, 'Email', :class => 'placeholder'
           = f.text_field :email, :class => 'ui-widget', :placeholder => 'email@address.com'
           = f.label :password, 'Password', :class => 'placeholder'
-          = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'
-          
-          -# css_class = @user.new_record? ? 'hidden' : ''
-          =# f.label :password, "Use your friskyfactory password", :class => css_class
-          = f.existing_user_password_label :password, 'Use your friskyfactory password', :current_site => current_site
-          
-          -# css_class = @user.existing_record? ? 'hidden' : ''
-          =# f.label :password, 'Retype your password', :class => "placeholder #{css_class}"
-          =# f.password_field :password_confirmation, :class => "password ui-widget #{css_class}", :placeholder => 'password confirmation'
-          = f.new_user_password_confirmation_field :password_confirmation, 'Retype your password', :current_site => current_site, :class => 'password ui-widget', :placeholder => 'password_confirmation'
-          
+          = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'          
+          = f.existing_user_password_label :password, 'Use your friskyfactory password', :current_site => current_site          
+          = f.new_user_password_confirmation_field :password_confirmation, 'Retype your password', :current_site => current_site, :class => 'password ui-widget', :placeholder => 'password_confirmation'          
           .button-bar
             = f.submit 'Register'
             = link_to 'Back', root_path, :class => 'button'
