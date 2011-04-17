@@ -1,12 +1,5 @@
 jQuery(function($) {
 
-	$('.posting_comments').masonry({
-		singleMode: true,
-		itemSelector: '.posting_comment:visible'
-	});
-	
-	$.waypoints('refresh');
-
 	$('a.new_posting_comment')
 		.bind('click', function(event) {
 			event.preventDefault();

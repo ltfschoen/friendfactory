@@ -18,32 +18,9 @@
 
 jQuery(function($) {	
 
-	(function() {
-		var $loading = $("<div class='loading'><p>Loading more postings&hellip;</p></div>"),
-			$footer = $('.page.footer'),
-			href = $(".pagination a[rel='next']").attr('href'),
-			opts = { offset: function() { return ($.waypoints('viewportHeight') + 100); } }
-
-		$footer.waypoint(function(event, direction) {
-			$footer.waypoint('remove');			
-			$('.pagination').html($loading)
-				
-			$.get(href, function(data) {
-				var $data = $(data);
-				$('#postings-container').append($data.find('#postings-container'));
-				// $loading.detach();
-				$('.pagination').replaceWith($data.find('.pagination'));
-				$footer.waypoint(opts);
-			});
-		}, opts);		
-	})();
-
-
 	$('.tab_contents')
 		.insertAfter('ul.posting_post_its:first');
-	$.waypoints('refresh');	
 	
-
 	$('.tab_content')
 		.bind('reset', function(event) {
 			$('form', this).get(0).reset();
@@ -166,5 +143,64 @@ jQuery(function($) {
 
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
+
+
+	$('.posting_comments', '.wave_community').masonry({
+		singleMode: false,
+		columnWidth: 222,
+		itemSelector: 'li',
+		resizeable: false
+	});
+	
+
+	(function() {
+		var $loading = $("<div class='loading'><p>Loading more postings&hellip;</p></div>"),
+			$footer = $('.page.footer'),
+			opts = { offset: '110%' };
 			
+		$footer.waypoint(function(event, direction) {
+			$footer.waypoint('remove');			
+			$('.pagination').find('*').hide().end().prepend($loading);
+				
+			$.get($(".pagination a[rel='next']").attr('href'), function(data) {
+				var $data = $(data),
+					$content = $data.find('#postings-container');
+
+				$('#postings-container').append($content);
+
+				$('.posting_comments', $content).masonry({
+					singleMode: true,
+					itemSelector: '.posting_comment:visible'					
+				});
+				
+				$.waypoints('refresh');
+				
+				setTimeout(function() {
+					$('.posting_photos', $content).masonry({
+						singleMode: false,
+						columnWidth: 1,
+						itemSelector: 'li',
+						resizeable: false
+					});
+					$.waypoints('refresh');
+				}, 1200);
+
+				$('.pagination').replaceWith($data.find('.pagination'));				
+				$.waypoints('refresh');
+				$footer.waypoint(opts);
+			});
+		}, opts);		
+	})();
+			
+});
+
+
+$(window).load(function() {
+	$('.posting_photos', '.wave_community').masonry({
+		singleMode: false,
+		columnWidth: 1,
+		itemSelector: 'li',
+		resizeable: false
+	});
+	$.waypoints('refresh');
 });

@@ -5,15 +5,6 @@ jQuery(function($) {
 		imgTag += (photo.horizontal ? 'h4x6"' : 'v4x6"') + '></div>';
 		return '<div class="posting '+ photo.dom_id + '">' + imgTag + '</div>';
 	}
-
-
-	$('.posting_photos', '.wave_community').masonry({
-		singleMode: false,
-		columnWidth: 1,
-		itemSelector: 'li',
-		resizeable: false
-	});
-	
 	
 	$('#wave_album.tab_content')
 		.live('reset', function() {

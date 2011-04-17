@@ -2,8 +2,8 @@
   .posting[wave_proxy]
     %table
       %tr
-        %td
+        %td.attachment
           = render_attachment(wave_proxy)
-        %td
+        %td.posting
           = render_wave(wave_proxy.resource)
           = render_comments(wave_proxy)

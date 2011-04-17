@@ -54,9 +54,8 @@
         'jquery.postcard', |
         'jquery.ticket', |
         'application', |
-        'broadcast', |
-        'waves/', |
         'postings/', |
+        'waves/', |
           :cache => 'cached'
 
     = yield(:javascripts)    
@@ -69,8 +68,6 @@
     = csrf_meta_tag    
     
   %body{ :class => current_site, :'data-site_name' => current_site }
-    - if browser_is('ie')
-      = render :partial => 'layouts/chrome_frame'
     .floating-container.container_16.clearfix
     .container.container_16.clearfix
       = render :partial => "layouts/#{current_site}/header" unless @popup.present?
