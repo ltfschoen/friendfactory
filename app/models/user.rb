@@ -227,18 +227,18 @@ class User < ActiveRecord::Base
   def find_or_create_invitation_wave_for_site(site)
     invitation_wave_for_site(site) || create_invitation_wave_for_site(site)
   end
+  
+  def find_invitation_wave_by_id(id)
+    waves.type(Wave::Invitation).published.find_by_id(id)
+  end
 
   def invitation_for_site(site)
-    @invitation_for_site ||=
-      (invitations.site(site).where(:subject => invitation_code).order('created_at desc').limit(1).try(:first) ||
-        site.invitations.anonymous(invitation_code))
+    invitations.site(site).where(:subject => invitation_code).order('created_at desc').limit(1).try(:first) ||
+        site.invitations.anonymous(invitation_code)
   end
 
   def invitation_wave_for_site(site)
-    waves.type(Wave::Invitation).published.
-        joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
-        where(:sites_waves => { :site_id => site.id }).
-        limit(1).try(:first)
+    waves.site(site).type(Wave::Invitation).published.limit(1).try(:first)
   end
 
 
@@ -285,7 +285,7 @@ class User < ActiveRecord::Base
   def create_invitation_wave_for_site(site)
     wave = Wave::Invitation.new.tap { |wave| wave.user = self }
     site.waves << wave && wave.publish!
-    wave
+    wave.reload
   end
     
 end
