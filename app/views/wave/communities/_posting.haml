@@ -1,0 +1,6 @@
+.grid_3.avatar.thumb.alpha
+  = render_attachment(posting)
+.grid_13.omega
+  = render_posting(posting)
+  = render_comments(posting)
+= render_postings(posting.children.postings)

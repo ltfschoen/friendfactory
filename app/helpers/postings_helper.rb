@@ -1,10 +1,5 @@
 module PostingsHelper
   
-  def render_attachment(object)
-    render(:partial => 'posting/post_its/attachment', :locals => { :post_it => object })
-  end
-
-
   def avatar_image_tag(user_or_avatar, opts = {})
     if user_or_avatar.is_a?(Hash)
       opts = user_or_avatar

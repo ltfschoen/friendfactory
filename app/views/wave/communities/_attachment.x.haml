@@ -1,0 +1,9 @@
+.post_it.canvas.attachment<
+  .content<
+    = avatar_image_tag(posting.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => posting.user.gender(current_site))
+    .header
+      = link_to_profile(posting.user)
+      %span.created_at<
+        = "posted #{distance_of_time_in_words_to_now(posting.created_at)}".html_safe
+    .subject
+      = posting.subject

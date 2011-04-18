@@ -8,6 +8,13 @@ module WavesHelper
       else 'Public'
     end
   end
+  
+  def render_posting(posting)
+    unless posting.nil?
+      posting_type = posting.class.name.demodulize.tableize
+      render :partial => File.join('posting', posting_type, posting_type.singularize), :object => posting
+    end
+  end
 
   # Roll Calls Controller
   include ActsAsTaggableOn::TagsHelper
