@@ -1,9 +1,0 @@
-<% content = yield(:sidebar) %>
-<% unless content.nil? %>
-<%= content %>
-<% else %>
-<div class='grid_3'>
-<%# avatar_image_tag(current_user, :style => :thumb, :online_badge => false, :class => 'button') %>
-<p class='flash'><%= flash[:notice] || '&nbsp;' %></p>
-</div>
-<% end %>

@@ -1,7 +1,0 @@
-.hidden
-  - form_for UserSession.new, :url => login_path do |f|
-    = f.text_field :email, :class => 'ui-widget'
-    = f.password_field :password, :class => 'ui-widget'
-    = f.submit 'Login!'
-    = f.button 'Just Lurk', :class => 'lurk'
-  #form_errors
