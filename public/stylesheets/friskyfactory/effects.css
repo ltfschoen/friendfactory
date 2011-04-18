@@ -1,0 +1,74 @@
+@-webkit-keyframes BOUNCE {
+	0% {
+		-webkit-transform: translateY(0px);
+	}
+	40% {
+		-webkit-transform: translateY(-14px);
+	}
+	70% {
+		-webkit-transform: translateY(-15px);
+	}	
+	80% {
+		-webkit-transform: translateY(38px);
+	}
+	100% {
+		-webkit-transform: translateY(0px);
+	}
+}
+
+.bounce {
+	-webkit-animation-name: BOUNCE;
+	-webkit-animation-duration: 1.25s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes SHAKE {
+	0% {
+		-webkit-transform: translateX(0px);
+	}
+	20% {
+		-webkit-transform: translateX(-2px);
+	}
+	40% {
+		-webkit-transform: translateX(2px);
+	}
+	60% {
+		-webkit-transform: translateX(-2px);
+	}
+	80% {
+		-webkit-transform: translateX(2px);
+	}
+	100% {
+		-webkit-transform: translateX(0px);
+	}
+}
+
+.shake {
+	-webkit-animation-name: SHAKE;
+	-webkit-animation-duration: 0.25s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+}
+
+@-webkit-keyframes PULSE {
+  from {
+	-webkit-transform: scale(1.0);
+    opacity: 1.0;
+  }
+  25% {
+	-webkit-transform: scale(0.98);
+    opacity: 0.5;
+  }
+  to {
+	-webkit-transform: scale(1.0);
+    opacity: 1.0;
+  }
+}
+
+.pulse {
+  -webkit-animation-name: PULSE;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: ease-in-out;
+}

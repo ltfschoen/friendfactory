@@ -47,6 +47,31 @@ div.polaroid {
 	width: 290px; 
 }
 
+div.polaroid .content {
+	width: 260px;
+	height: 300px;
+	margin-bottom: 5px;
+}
+
+div.polaroid .content.scrollable {
+	position: relative;
+	overflow: hidden;
+}
+
+div.polaroid .content.scrollable .items {
+	width: 1600px;
+	position: absolute;
+}
+
+div.polaroid .content.scrollable .items .pane {
+	float: left;
+	width: 260px;
+}
+
+div.polaroid .content.scrollable .items .pane.signals {
+	height: 300px;
+}
+
 div.polaroid .face {
 	position: absolute;
 	height: 320px;
