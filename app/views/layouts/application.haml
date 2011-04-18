@@ -8,7 +8,6 @@
     = stylesheet_links |
       'reset', 'forms', '960', |
       'friskyfactory/application', |
-      'friskyfactory/admin', |
       'friskyfactory/effects', |
       "#{current_site}/jquery-ui", |
       'friskyfactory/waves/', |
@@ -47,8 +46,6 @@
         'jquery.scrollTo-1.4.2-min', |
         'waypoints.min', |
         'rails', |
-        'jquery.form', |
-        'jquery.remotipart', |
         'ff.effects', |
         'ff.polaroid', |
         'ff.postcard', |
@@ -60,9 +57,7 @@
     = yield(:javascripts)    
     - if page_js = yield(:pagejs).present?
       :javascript
-        jQuery(function($){
-          #{page_js}
-        });
+        jQuery(function($){ #{page_js} });
         
     = csrf_meta_tag    
     

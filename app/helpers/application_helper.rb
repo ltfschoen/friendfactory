@@ -17,11 +17,7 @@ module ApplicationHelper
   def stylesheet(*files)
     options = files.extract_options!
     options.reverse_merge!(:site => false)
-    site_name = if options[:site] == false
-      'friskyfactory'
-    else
-      current_site.name
-    end
+    site_name = (options[:site] == false) ? 'friskyfactory' : current_site.name
     files.map! { |file| File.join(site_name, *file) }
     content_for(:stylesheets) { stylesheet_link_tag(files) }
   end

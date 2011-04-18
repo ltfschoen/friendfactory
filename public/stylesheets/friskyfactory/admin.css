@@ -1,9 +1,6 @@
-.admin {
-}
-
 .admin table {
 	display: block;
-	height: 30em;
+/*	height: 30em;*/
 	margin: 0 auto;	
 	overflow: auto;
 }
