@@ -14,10 +14,10 @@ class Wave::EventsController < ApplicationController
   end
   
   def create
-    @wave = Wave::Event.new(params[:wave_event])
-    @wave.user = current_user
+    @wave = Wave::Event.new(params[:wave_event]).tap { |event| event.user = current_user }
     respond_to do |format|
-      if current_site.waves << @wave
+      if current_site.waves << @wave && current_site.home_wave.postings << @wave
+        @wave.publish!
         format.js { render :layout => false }
       end
     end

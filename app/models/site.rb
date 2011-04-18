@@ -15,6 +15,10 @@ class Site < ActiveRecord::Base
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
+
+  def home_wave
+    waves.site(self).type(Wave::Community).published.order('created_at asc').limit(1).try(:first)
+  end
   
   def to_s
     name

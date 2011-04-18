@@ -26,16 +26,6 @@ class Wave::Event < Wave::Base
   acts_as_slugable :source_column => :description, :slug_column => :slug
 
   validates_presence_of :user_id, :promoter_name, :description
-
-  after_create do |event|
-    event.publish!
-    if wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
-      posting = Posting::WaveProxy.new(:user_id => event.user_id)
-      posting.resource = event
-      wave.postings << posting
-      posting.publish!
-    end
-  end
   
   def initialize(attrs={})    
     if start_date = attrs.delete('start_date')

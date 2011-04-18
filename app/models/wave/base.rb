@@ -20,9 +20,9 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
+  scope :site, lambda { |site| joins(:sites).where(:sites => { :id => site.id })}
   scope :type, lambda { |*types| where('type in (?)', types.map(&:to_s)) }
   scope :user, lambda { |user| where(:user_id => user.id) }
-  scope :site, lambda { |site| joins(:sites).where(:sites => { :id => site.id })}
   scope :published, where(:state => :published)
 
   acts_as_taggable
@@ -66,10 +66,6 @@ class Wave::Base < ActiveRecord::Base
     wave.sites.each do |site|
       wave.set_tag_list_on(site, nil)
     end
-  end
-
-  def self.default
-    Wave::Base.first
   end
 
   def before_add_posting_to_wave(posting)
