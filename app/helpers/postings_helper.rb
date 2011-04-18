@@ -61,4 +61,9 @@ module PostingsHelper
     end
   end
   
+  def render_posting(posting)
+    posting_type = posting.class.name.demodulize.tableize
+    render :partial => File.join('posting', posting_type, posting_type.singularize), :object => posting
+  end
+  
 end

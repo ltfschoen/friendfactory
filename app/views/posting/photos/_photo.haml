@@ -1,10 +1,4 @@
 - unless photo.nil?
   .posting[photo]
-    %table
-      %tr
-        %td.avatar.thumb
-          = render_attachment(photo)
-        %td
-          .photo.canvas
-            = render_photo(photo)
-          = render_comments(photo)
+    .photo.canvas
+      = render_photo(photo)

@@ -20,7 +20,7 @@ module Wave::CommunityHelper
         html.safe_concat(rendered_post_its * '')
         html.safe_concat(content_tag(:ul, '', :class => 'postings clearfix'))
       else
-        postings.in_groups(number_of_breaks) do |postings_in_break|
+        postings.in_groups(number_of_breaks) do |postings_in_break|          
           html.safe_concat(rendered_post_its.shift) unless rendered_post_its.empty?
           html.safe_concat(content_tag(:ul, :class => 'postings clearfix') do
             postings_in_break.inject(String.new.html_safe) do |buffer, posting|
@@ -44,7 +44,7 @@ module Wave::CommunityHelper
       end
     end
   end
-  
+
   def render_attachment(posting)
     render :partial => 'attachment', :locals => { :posting => posting }
   end

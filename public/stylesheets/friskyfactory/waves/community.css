@@ -25,9 +25,8 @@
 }
 
 .wave_community ul.postings a.new_posting_comment {
-	position: absolute;
-	bottom: 0;
-	right: 0;
+	clear: left;
+	float: right;
 }
 
 .wave_community ul.postings > li .canvas {

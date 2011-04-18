@@ -1,6 +1,7 @@
-.grid_3.avatar.thumb.alpha
-  = render_attachment(posting)
-.grid_13.omega
-  = render_posting(posting)
-  = render_comments(posting)
-= render_postings(posting.children.postings)
+- unless posting.nil?
+  .posting
+    .grid_2.avatar.thumb.alpha
+      = render_attachment(posting)
+    .grid_14.omega
+      = render_posting(posting)
+      = render_comments(posting)
