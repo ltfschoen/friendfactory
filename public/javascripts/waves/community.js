@@ -18,6 +18,9 @@
 
 jQuery(function($) {	
 
+	$('#postings-container', '.wave_community')
+		.css({'visibility': 'hidden', 'opacity': '0.0' });
+	
 	$('.tab_contents')
 		.insertAfter('ul.posting_post_its:first');
 	
@@ -79,6 +82,9 @@ jQuery(function($) {
 
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
+
+	$('#postings-container', '.wave_community')
+		.css({ 'visibility': 'visible' }).fadeTo(900, 1.0);
 	
 	(function() {		
 		var $loading = $("<p class='loading grid_4 push_6'>Loading More Postings&hellip;</p>"),
@@ -147,5 +153,5 @@ $(window).load(function() {
 			resizeable: false
 		});
 
-	$.waypoints('refresh');
+	$.waypoints('refresh');	
 });
