@@ -1,19 +1,13 @@
+html {
+	background-color: #9C180C;	
+}
+
 body {
 	background: url(/images/friskyhands/background-24.jpg) no-repeat top center;	
 	background-color: #9C180C;
 }
 
-label {
-    color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-}
-
 p {
-    color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-}
-
-ul.flash.error li {
     color: #501518;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
@@ -42,9 +36,11 @@ h4 {
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-/*.button-bar a {
-    margin-top: 0.5em;
-}*/
+label {
+    color: #501518;
+/*	color: #FFF;*/
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
 
 .panel.login a.new_password {
     color: #FFF;
@@ -54,11 +50,7 @@ h4 {
     color: #FFF;
 }
 
-.password-edit label {
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);    
-}
-
-label {
-	color: #FFF;
+.flash.error li {
+    color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }

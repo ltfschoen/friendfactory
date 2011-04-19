@@ -1,32 +1,6 @@
-.container {
-	padding-top: 4em;
-	text-align: center;
-}
-
-body {
-	background-color: #FFF;
-}
-
-label {
-	font-weight: normal;
-    font-size: 1em;
-    line-height: 1.4em;    
-  	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-}
-
 p {
     font-size: 1.2em;
-    line-height: 1.4em;    
-    color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-}
-
-ul.flash.error li {
-    font-size: 1.1em;
     line-height: 1.4em;
-    color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 img {
@@ -35,42 +9,49 @@ img {
 
 a, a:link, a:hover, a:visited, a:active {
     border-bottom: 1px dotted #FFF;
-    color: #501518;
 }
 
 h1 {
 	font-size: 3em;
-	color: #FFF;
-	text-shadow: 4px 8px 6px #701518;
 }
 
 h2 {
 	font-size: 2em;
 	line-height: 1.4em;
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 h3 {
-	color: #FFF;
 	font-size: 1.4em;
-	text-shadow: 1px 2px 1px #701518;
 	margin-bottom: 0.2em;
 }
 
 h4 {
 	padding-right: 1em;
 	font-size: 1.8em;
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 	line-height: 1.4em;
 	font-weight: normal;
+}
+
+form {
+	clear:both;
+}
+
+label {
+	display: block;	
+	font-weight: normal;
+    font-size: 1em;
+    line-height: 1.4em;
 }
 
 input[type='text'],
 input[type='password'],
 input.password {
     width: 210px;
+}
+
+.container {
+	padding-top: 4em;
+	text-align: center;
 }
 
 .creative {
@@ -102,7 +83,6 @@ input.password {
 .panel.login a.new_password {
     float: right;
     font-size: small;
-    color: #FFF;
 }
 
 .panel p {
@@ -110,37 +90,17 @@ input.password {
     margin-top: 0.6em;
 }
 
-ul.flash.error {
+.flash.error {
 	margin-left: 1em;
 	list-style: disc outside;
 	marker-offset: auto;
 }
 
+.flash.error li {
+    font-size: 1.1em;
+    line-height: 1.4em;
+}
+
 .flash.notice {
     text-align: center;
-}
-
-.flash.notice a {
-    color: #FFF;
-}
-
-.password-edit h3 {
-    text-align: center;
-}
-
-.password-edit label {
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);    
-}
-
-.password-edit table td {
-    vertical-align: middle;
-}
-
-form {
-	clear:both;
-}
-
-label {
-	display: block;
 }

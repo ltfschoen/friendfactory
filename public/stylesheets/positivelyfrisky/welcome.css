@@ -1,20 +1,15 @@
+html {
+	background-color: #52356F;
+}
+
 body {
 	background: url(/images/positivelyfrisky/background-24.jpg) no-repeat top center;	
 	background-color: #52356F;
 }
 
-label {
-	color: #FFF;
-}
-
 p {
     color: #FFF;
 	text-shadow: 0 1px 2px #0B007E;
-}
-
-ul.flash.error li {
-    color: #FFF;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 a, a:link, a:hover, a:visited, a:active {
@@ -45,6 +40,10 @@ h4 {
 	text-shadow: 0 3px 3px #4A007E;
 }
 
+label {
+	color: #FFF;
+}
+
 input[disabled] {
 	color: #AAA;
 }
@@ -57,7 +56,7 @@ input[disabled] {
     color: #FFF;
 }
 
-.password-edit label {
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);    
+.flash.error li {
+    color: #FFF;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }

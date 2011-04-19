@@ -1,6 +1,5 @@
-.container {
-	padding-top: 4em;
-	text-align: center;
+html {
+	background-color: #415943;
 }
 
 body {
@@ -8,131 +7,49 @@ body {
 	background-color: #415943;
 }
 
-label {
-	font-weight: normal;
-    font-size: 1em;
-    color: #0b007E;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-    line-height: 1.4em;    
-}
-
 p {
-    font-size: 1.2em;
     color: #FFF;
 	text-shadow: 0 1px 2px #0b007E;
-    line-height: 1.4em;    
-}
-
-ul.flash.error li {
-    font-size: 1.1em;
-    color: #0b007E;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-    line-height: 1.4em;
-}
-
-img {
-	width: 100%;
 }
 
 a, a:link, a:hover, a:visited, a:active {
-    border-bottom: 1px dotted #FFF;
     color: #FFF;
 }
 
 h1 {
-	font-size: 3em;
 	text-shadow: 4px 8px 6px #374C39;
 	color: #FFF;
 }
 
 h2 {
-	font-size: 2em;
-	line-height: 1.4em;
 	color: #374C39;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 h3 {
 	color: #FFF;
-	font-size: 1.4em;
 	text-shadow: 1px 2px 1px #374C39;
-	margin-bottom: 12px;
 }
 
 h4 {
-	padding-right: 1em;
-	font-size: 1.8em;
 	color: #FFF;
 	text-shadow: 0 3px 3px #374C39;
-	line-height: 1.4em;
-	font-weight: normal;
 }
 
-input[type='text'],
-input[type='password'],
-input.password {
-    width: 210px;
-}
-
-.creative {
-    text-align: center;
-    padding-bottom: 4em;
-}
-
-.blurb p {
-    padding-right: 20px;
-    font-size: 1.4em;
-}
-
-.panel.login,
-.panel.signup,
-.panel.new_password {
-	padding-top: 1em;
-	width: 100%;
-}
-
-.button-bar {
-	float: left;
-}
-
-.panel.login h3 {
-    float: left;
+label {
+    color: #0b007E;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .panel.login a.new_password {
-    float: right;
     color: #FFF;
-    font-size: small;
-}
-
-.panel p {
-    clear: both;
-    margin-top: 0.6em;
-}
-
-ul.flash.error {
-	margin-left: 1em;
-	list-style: disc outside;
-	marker-offset: auto;
-}
-
-.flash.notice {
-    text-align: center;
 }
 
 .flash.notice a {
     color: #FFF;
 }
 
-.password-edit h3 {
-    text-align: center;
-}
-
-.password-edit label {
-	color: #501518;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);    
-}
-
-.password-edit table td {
-    vertical-align: middle;
+.flash.error li {
+    color: #0b007E;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
