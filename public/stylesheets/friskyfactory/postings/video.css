@@ -23,12 +23,12 @@ form#new_posting_video .button-bar {
 	padding: 2px 4px;	
 	background-color: #FFF;
 	text-align: center;
-    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);	
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 form#new_posting_video input#posting_video_url {

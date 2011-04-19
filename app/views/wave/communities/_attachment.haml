@@ -1,3 +1,2 @@
 .attachment<
-  .content<
-    = avatar_image_tag(posting.user, :style => :thumb, :align => 'left', :anonymous => true, :gender => posting.user.gender(current_site))
+  = avatar_image_tag(posting.user, :style => :thumb, :anonymous => true, :gender => posting.user.gender(current_site))

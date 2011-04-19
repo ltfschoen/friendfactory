@@ -30,10 +30,31 @@
 	margin-top: -60px;
 }
 
+.wave_community .attachment img.avatar.thumb {
+	width: 80px;
+	height: 80px;
+	background-color: #FFF;
+	padding: 4px 4px 18px 4px;
+	border: 1px solid #CDCDCD;
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    transform: rotate(-2deg);	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
 .wave_community ul.postings > li .canvas {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
 	transform: rotate(-2deg);
+}
+
+.wave_community .canvas {
+	-webkit-transition: -webkit-transform 0.1s ease-in;
 }
 
 .wave_community ul.postings > li:nth-of-type(even) .canvas {
@@ -124,10 +145,6 @@
 	top: 0;
 	right: 0;
 	margin: 0;
-}
-
-.wave_community .canvas {
-	-webkit-transition: -webkit-transform 0.1s ease-in;
 }
 
 .wave_community #posting_photo_upload_well {
