@@ -33,7 +33,13 @@
 .wave_community .attachment img.avatar.thumb {
 	width: 80px;
 	height: 80px;
-	background-color: #FFF;
+	background-color: #FFF;	
+	background: -webkit-gradient(radial, 40 40, 10, 40 60, 80, from(#FFF), to(#E2E2E2));
+	-webkit-background-origin: border-box;
+	-webkit-background-clip: border-box;
+	background-image: -moz-radial-gradient(center, circle farthest-corner, #FFF 50%, #E2E2E2 100%);
+	-moz-background-origin: border-box;
+	-moz-background-clip: border-box;
 	padding: 4px 4px 18px 4px;
 	border: 1px solid #CDCDCD;
     -webkit-transform: rotate(-2deg);
