@@ -1,7 +1,7 @@
 .header.primary { 
-	background: url(/images/friskysoldiers/header.png) no-repeat top center;
+	background: url('/images/friskysoldiers/header.png') no-repeat top center;
 }
 
 .header.primary ul.nav li a {
-	background-image: url(/images/friskysoldiers/header.png);
+	background-image: url('/images/friskysoldiers/header.png');
 }

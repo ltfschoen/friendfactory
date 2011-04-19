@@ -1,13 +1,13 @@
+body {
+	background: url('/images/positivelyfrisky/fibers.jpg') repeat top center #90869E;
+}
+
 .header.primary { 
-	background: url(/images/positivelyfrisky/header.png) no-repeat top center;
+	background: url('/images/positivelyfrisky/header.png') no-repeat top center;
 }
 
 .header.primary ul.nav li a {
-	background-image: url(/images/positivelyfrisky/header.png);
-}
-
-body {
-	background: url('/images/positivelyfrisky/fibers.jpg') repeat top center #90869E;
+	background-image: url('/images/positivelyfrisky/header.png');
 }
 
 .page.footer {

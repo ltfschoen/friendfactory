@@ -1,9 +1,13 @@
+body {
+	background: url('/images/friskyhands/fibers.jpg') repeat top center #B6A27D;
+}
+
 .header.primary { 
-	background: url(/images/friskyhands/header.png) no-repeat top center;
+	background: url('/images/friskyhands/header.png') no-repeat top center;
 }
 
 .header.primary ul.nav li a {
-	background-image: url(/images/friskyhands/header.png);
+	background-image: url('/images/friskyhands/header.png');
 }
 
 .header.secondary a:visited,
@@ -18,8 +22,4 @@
 .header.secondary a:hover {
     color: #CCA;
     background-color: #553;
-}
-
-body {
-	background: url('/images/friskyhands/fibers.jpg') repeat top center #B6A27D;
 }
