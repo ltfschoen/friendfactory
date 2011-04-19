@@ -79,17 +79,7 @@ jQuery(function($) {
 
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
-
-
-	$('.posting_comments', '.wave_community')
-		.masonry({
-			singleMode: false,
-			columnWidth: 222,
-			itemSelector: 'li',
-			resizeable: false
-		});
 	
-
 	(function() {		
 		var $loading = $("<div class='loading'><p>Loading more postings&hellip;</p></div>"),
 			$footer = $('.page.footer'),
@@ -106,14 +96,6 @@ jQuery(function($) {
 					$content = $data.find('#postings-container');
 
 				$('#postings-container').append($content);
-
-				$('.posting_comments', $content)
-					.masonry({
-						singleMode: true,
-						itemSelector: '.posting_comment:visible'					
-					});
-				
-				$.waypoints('refresh');
 				
 				setTimeout(function() {
 					$('.posting_photos', $content)
@@ -123,11 +105,19 @@ jQuery(function($) {
 							itemSelector: 'li',
 							resizeable: false
 						});
+						
+					$('.posting_comments', $content)
+						.masonry({
+							singleMode: false,
+							columnWidth: 222,
+							itemSelector: 'li',
+							resizeable: false
+						});
+						
 					$.waypoints('refresh');
 				}, 1200);
 
 				$('.pagination').replaceWith($data.find('.pagination'));				
-				$.waypoints('refresh');
 				$footer.waypoint(opts);
 			});
 		}, opts);
@@ -146,6 +136,13 @@ $(window).load(function() {
 			resizeable: false
 		});
 
-	$.waypoints('refresh');
+	$('.posting_comments', '.wave_community')
+		.masonry({
+			singleMode: false,
+			columnWidth: 222,
+			itemSelector: 'li',
+			resizeable: false
+		});
 
+	$.waypoints('refresh');
 });
