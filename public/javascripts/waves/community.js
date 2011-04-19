@@ -81,17 +81,20 @@ jQuery(function($) {
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
 	
 	(function() {		
-		var $loading = $("<div class='loading'><p>Loading more postings&hellip;</p></div>"),
+		var $loading = $("<p class='loading grid_4 push_6'>Loading More Postings&hellip;</p>"),
 			$footer = $('.page.footer'),
 			opts = { offset: '110%' };
 		
 		if ($('.pagination').length === 0) return;
 		
-		$footer.waypoint(function(event, direction) {
-			$footer.waypoint('remove');			
-			$('.pagination').find('*').hide().end().prepend($loading);
+		$footer.waypoint(function(event, direction) {			
+			var $pagination = $('.pagination'),
+				href = $("a[rel='next']", $pagination).attr('href');
+			
+			$footer.waypoint('remove');
+			$pagination.html($loading).pulse();	
 				
-			$.get($(".pagination a[rel='next']").attr('href'), function(data) {
+			$.get(href, function(data) {
 				var $data = $(data),
 					$content = $data.find('#postings-container');
 
@@ -117,7 +120,7 @@ jQuery(function($) {
 					$.waypoints('refresh');
 				}, 1200);
 
-				$('.pagination').replaceWith($data.find('.pagination'));				
+				$pagination.replaceWith($data.find('.pagination'));
 				$footer.waypoint(opts);
 			});
 		}, opts);

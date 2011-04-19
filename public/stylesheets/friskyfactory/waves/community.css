@@ -158,3 +158,12 @@
     -moz-transform: rotate(-2deg);	
 	margin: 6px;
 }
+
+.wave_community .loading {
+    margin: 0 4px;
+    padding: 4px 8px;
+    border-bottom: 0px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;	
+}
