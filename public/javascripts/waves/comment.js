@@ -1,48 +1,31 @@
-jQuery(function($) {
+(function($) {
 
-	$('a.new_posting_comment')
-		.bind('click', function(event) {
-			event.preventDefault();
-			$(this).fadeTo('fast', 0.0, function() {
-				$(this).closest('.posting')
-					.find('.posting_comment.form')
-						.css({ opacity: 0.0 })
-						.slideDown(function() {
-							$(this).fadeTo('fast', 1.0)
-								.find('textarea').val('').focus();
-								// $.waypoints('refresh');
-						});				
-			});
-	});
+	$.fn.comment = function (callback) {
+		var $this = $(this);
+	
+		$this.find('form.new_posting_comment')
+			.bind('ajax:before', function(event) {
+				$(this).find('.button-bar')
+					.css({ opacity: 0.0 });
+			})
 
+			.bind('ajax:complete', function(event) {
+				$(this).find('.button-bar')
+					.css({ opacity: 1.0 });
+			})
 
-	$('form.new_posting_comment')
-		.buttonize()
+			.find('textarea')
+				.autoResize({ extraSpace: 12, limit: 152 })
+			.end()
+
+			.find('button.cancel')
+				.bind('click', function(event) {
+					event.preventDefault();
+					if (callback !== undefined) { callback(event); }
+				});
+				
+		$this.buttonize();
+		return $this;
+	};
 		
-		.bind('ajax:before', function(event) {
-			$(this).find('.button-bar')
-				.css({ opacity: 0.0 });
-		})
-		
-		.bind('ajax:complete', function(event) {
-			$(this).find('.button-bar')
-				.css({ opacity: 1.0 });
-		})
-		
-		.find('textarea')
-			.autoResize({ extraSpace: 12, limit: 152 })
-		.end()
-
-		.find('button.cancel')
-			.bind('click', function(event) {
-				$(this).closest('.posting_comment')
-					.fadeTo('fast', 0.0, function() {
-						$(this).slideUp(function() {
-							$(this).prev('a.new_posting_comment').fadeTo('fast', 1.0);
-							// $.waypoints('refresh');
-						});
-					});
-				return false;
-			});
-
-});
+})(jQuery);

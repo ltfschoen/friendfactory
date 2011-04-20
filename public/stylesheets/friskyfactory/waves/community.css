@@ -25,9 +25,7 @@
 }
 
 .wave_community ul.postings a.new_posting_comment {
-	clear: left;
-	float: right;
-	margin-top: -60px;
+	margin-top: 6px;
 }
 
 .wave_community .attachment img.avatar.thumb {

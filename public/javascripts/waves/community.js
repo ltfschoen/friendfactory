@@ -85,6 +85,49 @@ jQuery(function($) {
 
 	$('#postings-container', '.wave_community')
 		.css({ 'visibility': 'visible' }).fadeTo(900, 1.0);
+
+
+	$('ul.posting_comments', '.wave_community').each(function() {
+		var $this = $(this);		
+		if ($('li', $this).length > 0) {
+			$this.next('a.new_posting_comment').css({ opacity: 0.0 });
+		}
+	});
+
+	$('a.new_posting_comment', '.wave_community')
+		.bind('click', function(event) {
+			var $this = $(this),
+				$comments = $this.closest('ul.posting_comments');
+
+			event.preventDefault();
+			
+			$this.fadeTo('fast', 0.0);
+			$.get($this.attr('href'), function(data) {
+				var $content = $(data);
+					
+				$content
+					.css({ opacity: 0.0 })
+					.insertAfter($comments)
+					.slideDown('fast')
+					.fadeTo('fast', 1.0)
+					
+				$content
+					.comment(function(event) {
+						var $comment = $(event.target).closest('.posting_comment');
+						$comment
+							.fadeTo('fast', 0.0)
+							.slideUp('fast', function() {
+								$this.fadeTo('fast', 1.0, function() {
+									$comment.remove();
+									$.waypoints('refresh');	
+								});								
+							});
+					});
+				
+				$.waypoints('refresh');
+			});		
+	});
+
 	
 	(function() {		
 		var $loading = $("<p class='loading grid_4 push_6'>Loading More Postings&hellip;</p>"),
@@ -144,14 +187,19 @@ $(window).load(function() {
 			itemSelector: 'li',
 			resizeable: false
 		});
-
+	
 	$('.posting_comments', '.wave_community')
 		.masonry({
-			singleMode: false,
-			columnWidth: 222,
-			itemSelector: 'li',
-			resizeable: false
-		});
-
+				singleMode: false,
+				columnWidth: 222,
+				itemSelector: 'li',
+				resizeable: false
+			},
+			function() {			
+				var $this = $(this).last(),
+					$newCommentLink = $this.closest('ul.posting_comments').next('a.new_posting_comment');					
+				$newCommentLink.appendTo($this).fadeTo('fast', 1.0);
+		})
+	
 	$.waypoints('refresh');	
 });

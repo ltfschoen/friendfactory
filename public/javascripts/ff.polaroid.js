@@ -92,8 +92,6 @@
 				var $this = $(this), // a polaroid
 					$backFace = $this.find('.back.face'),
 					transitionDuration = $this.css('-webkit-transition-duration');
-									
-				console.log(transitionDuration);
 				
 				$this.css({ '-webkit-transition-duration': '0s' })
 					.addClass('flipped');
