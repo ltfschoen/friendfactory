@@ -6,12 +6,13 @@ class InvitationsMailer < ActionMailer::Base
   #   en.invitations.invitation.subject
   #
 
+  default :from => "mailer@friskyfactory.com"
+
   def new_invitation_mail(invitation)
     @invitation = invitation
     email = Rails.env.production? ? @invitation.email : 'michael@michaelbamford.com'
-    mail :to     => email,
-        :from    => "invitations@#{@invitation.site.name}.com",
-        :subject => "Invitation from #{@invitation.sponsor.handle(@invitation.site)} to join #{@invitation.site.display_name}!"
+    subject = "Invitation from #{@invitation.sponsor.handle(@invitation.site)} to join #{@invitation.site.display_name}!"
+    mail :to => email, :subject => subject
   end
   
 end
