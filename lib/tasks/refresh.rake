@@ -33,5 +33,11 @@ namespace :ff do
 end
 
 def timestamp
-  ENV['DUMP_DATE'] || Time.now.strftime('%Y%m%d')
+  ENV['DUMP_DATE'] || most_recent_dump_timestamp || Time.now.strftime('%Y%m%d')
+end
+
+def most_recent_dump_timestamp
+  Dir[File.join(Rails.root, 'db', 'dumps', '*')].map do |f|
+    File.basename(f).match(/dump\.([0-9]{8})/)[1].to_i rescue nil
+  end.compact.sort.last.to_s
 end
