@@ -5,4 +5,4 @@
 %p
   Click the following link to join right away!
 %p
-  = link_to nil, welcome_url(:host => "#{@invitation.site.name}.com", :invite => @invitation.code)
+  = link_to nil, welcome_url(:host => @host, :invite => @invitation.code)

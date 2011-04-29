@@ -9,7 +9,7 @@
     %p
       A request was sent to #{@current_site.name} to reset your FriskyHands' password. To do so, click the following link:
     %p
-      = edit_password_url(:id => @user.perishable_token, :host => "#{@current_site.name}.com")
+      = edit_password_url(:id => @user.perishable_token, :host => @host)
     %p
       (If you didn't request to reset your password, you can safely ignore this email).
     %p

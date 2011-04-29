@@ -4,4 +4,4 @@ Your friend #{@invitation.sponsor.handle(@invitation.site)} at #{@invitation.sit
 
 Click the following link to join right away!
 
-#{welcome_url(:host => "#{@invitation.site.name}.com", :invite => @invitation.code)}
+#{welcome_url(:host => @host, :invite => @invitation.code)}
