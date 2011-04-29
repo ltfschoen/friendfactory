@@ -49,11 +49,11 @@ Friskyfactory::Application.configure do
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address              => 'smtp.gmail.com',
-      :port                 => 587,
+      :address              => 'smtp.postmarkapp.com',
+      :port                 => 25,
       :domain               => 'friskyfactory.com',
-      :user_name            => 'mailer@friskyfactory.com',
-      :password             => 'lee201AA',
+      :user_name            => '3c6bca6d-6cd7-4476-bf7a-a2959f5778c7',
+      :password             => '3c6bca6d-6cd7-4476-bf7a-a2959f5778c7',
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
 
