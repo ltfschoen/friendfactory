@@ -63,13 +63,15 @@ class Wave::Base < ActiveRecord::Base
   belongs_to :resource, :polymorphic => true
 
   before_save do |wave|
+    empty_tag_list = nil
     wave.sites.each do |site|
-      wave.set_tag_list_on(site, nil)
+      # Override set_tag_list_on in inherited classes and call super.
+      wave.set_tag_list_on(site, empty_tag_list)
     end
   end
 
   def before_add_posting_to_wave(posting)
-    # Override in inherited wave classes.
+    # Override in inherited classes.
   end
 
   def after_add_posting_to_wave(posting)

@@ -93,7 +93,7 @@ event_wave_unpublished:
   type: Wave::Event
   topic: Dumb Asses
   slug: dumb-asses
-  state: published
+  state: unpublished
   resource_id: 2
   resource_type: Resource::Event
   description: Lorem ipsum

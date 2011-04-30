@@ -6,6 +6,7 @@ class Wave::Event < Wave::Base
   include TagScrubber
   
   attr_readonly :user_id
+  
   attr_accessible :promoter_name,
       :description,
       :start_date, :start_time,
@@ -44,9 +45,9 @@ class Wave::Event < Wave::Base
     # TODO
   end
 
-  def set_tag_list
+  def set_tag_list_on(site, tag_list)
     if location.present? && location.city.present?
-      super(scrub_tag(location.city))
+      super(site, scrub_tag(location.city))
     end
   end
   

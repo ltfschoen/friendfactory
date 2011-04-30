@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Wave::EventsController do
 
-  fixtures :sites, :waves, :sites_waves, :locations
+  fixtures :sites, :waves, :sites_waves, :resource_events, :locations
 
   set_fixture_class :waves => 'Wave::Event'
        

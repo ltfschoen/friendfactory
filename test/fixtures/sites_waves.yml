@@ -14,9 +14,13 @@ friskyhands_site_charlie_profile_wave:
   site_id: 1
   wave_id: 3
 
-friskyhands_site_event_wave:
+friskyhands_site_published_event_wave:
   site_id: 1
   wave_id: 5
+  
+friskyhands_site_unpublished_event_wave:
+  site_id: 1
+  wave_id: 7  
 
 positivelyfrisky_site_popular_wave:
   site_id: 2
