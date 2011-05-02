@@ -27,32 +27,10 @@ comment_posting_2:
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
-invitation_posting_1:
-  id: 3
-  user_id: 1
-  subject: c3
-  body: charlie@test.com
-  type: Posting::Invitation
-  state: offered  
-  resource_id: 2
-  resource_type: Site
-  created_at: <%= now += 1.second %>
-  updated_at: <%= now %>
 
-invitation_posting_2:
-  id: 4
-  user_id: 1
-  subject: d4
-  body: duncan@test.com
-  type: Posting::Invitation
-  state: offered
-  resource_id: 2
-  resource_type: Site
-  created_at: <%= now += 1.second %>
-  updated_at: <%= now %>
+# Invitations
 
-invitation_posting_5:
-  id: 5
+invitation_posting_for_bert:
   user_id: 1
   subject: b2
   body: bert@test.com
@@ -63,8 +41,29 @@ invitation_posting_5:
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
-invitation_posting_6:
-  id: 6
+invitation_posting_for_charlie:
+  user_id: 1
+  subject: c3
+  body: charlie@test.com
+  type: Posting::Invitation
+  state: offered  
+  resource_id: 2
+  resource_type: Site
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
+invitation_posting_for_duncan:
+  user_id: 1
+  subject: d4
+  body: duncan@test.com
+  type: Posting::Invitation
+  state: offered
+  resource_id: 2
+  resource_type: Site
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
+invitation_posting_for_anonymous:
   user_id: 1
   subject: e5
   type: Posting::Invitation

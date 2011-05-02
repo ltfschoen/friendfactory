@@ -11,35 +11,34 @@ class User < ActiveRecord::Base
   validates_presence_of :enrollment_site, :on => :create
 
   validate do |user|
-    user.validate_enrollment_site
-    user.validate_invitation_code
-    user.validate_invitation_code_state
-    user.validate_associated_records_for_profiles
+    if user.new_record? || enrollment_site.present?
+      user.validate_enrollment_site
+      user.validate_invitation_code
+      user.validate_invitation_code_state
+      user.validate_associated_records_for_profiles
+    end
   end
   
-  def validate_enrollment_site 
-    return if enrollment_site.blank?
-    return if sites.where(:id => enrollment_site.id).empty?
+  def validate_enrollment_site
+    return if enrollment_site.blank? || sites.where(:id => enrollment_site.id).empty?
     errors.add(:base, 'Already a member of this site')
   end
     
   def validate_invitation_code
     return if invitation_override || enrollment_site.blank?
-    return if not enrollment_site.invite_only?
-    return if invitation_for_site(enrollment_site).present?
+    return if !enrollment_site.invite_only? || invitation_for_site(enrollment_site).present?
     errors.add(:base, "That email does not have an invite to this site with that invitation code")
   end
   
   def validate_invitation_code_state
     return if invitation_override || enrollment_site.blank?
     invitation = invitation_for_site(enrollment_site)    
-    return if invitation.nil? || invitation.anonymous? || invitation.offered?
+    return if invitation.nil? || invitation.offered?
     errors.add(:base, "That invitation code has already been previously #{invitation_for_site(enrollment_site).current_state}")
   end
 
   def validate_associated_records_for_profiles
-    return if enrollment_site.blank? || enrollment_profile.blank?
-    return if enrollment_profile.handle.present?
+    return if enrollment_profile.present? && enrollment_profile.handle.present?
     errors.add(:handle, "can't be blank")
   end
   
@@ -271,7 +270,8 @@ class User < ActiveRecord::Base
     if enrollment_site.present?
       if (sites << enrollment_site) && (enrollment_profile.sites << enrollment_site)
         if enrollment_site.invite_only? && !invitation_override
-          invitation_for_site(enrollment_site).accept!  
+          invitation = invitation_for_site(enrollment_site)
+          invitation.accept! unless invitation.anonymous?
         end
         @enrollment_site, @enrollment_profile, @invitation_override = nil, nil, nil
       end
