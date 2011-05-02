@@ -2,10 +2,8 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'factory_girl'
 require 'authlogic/test_case'
-
-# include Authlogic::TestCase
+# require 'factory_girl'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -29,7 +27,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 end
-
 
 # def current_user(stubs = {})
 #   @current_user ||= mock_model(User, stubs)

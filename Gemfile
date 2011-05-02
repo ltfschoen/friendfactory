@@ -31,6 +31,7 @@ gem 'haml'
 gem 'acts-as-taggable-on'
 gem 'pusher'
 gem 'will_paginate', '~> 3.0.pre2'
+gem 'whenever', :require => false
 # gem 'responsalizr'
 # gem 'postageapp'
 # gem 'exifr'
@@ -43,10 +44,10 @@ gem 'will_paginate', '~> 3.0.pre2'
 # and rake tasks are available in development mode:
 
 group :development, :test do
-  gem 'rspec-rails', '>= 2.4.1'
-  gem 'webrat'
+  gem 'rspec-rails', '>= 2.5.0'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
-  gem 'faker'
+  # gem 'webrat'
+  # gem 'faker'
 end
 
 group :production do

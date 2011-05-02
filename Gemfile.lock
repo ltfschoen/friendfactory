@@ -1,12 +1,13 @@
 GIT
   remote: git://github.com/thoughtbot/factory_girl.git
-  revision: 0946f6d4bb266f0087d8e4a96528146d1c9ed8fe
+  revision: 4f5f5df39a1b565160ad7138a1f7d7a7c836664d
   specs:
-    factory_girl (2.0.0.beta1)
+    factory_girl (2.0.0.beta2)
 
 GEM
   remote: http://rubygems.org/
   specs:
+    aaronh-chronic (0.3.9)
     abstract (1.0.0)
     actionmailer (3.0.1)
       actionpack (= 3.0.1)
@@ -44,8 +45,6 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    faker (0.9.5)
-      i18n (~> 0.4)
     haml (3.0.25)
     i18n (0.4.2)
     jquery-rails (0.2.6)
@@ -60,7 +59,6 @@ GEM
     memcache-client (1.8.5)
     mime-types (1.16)
     mysql2 (0.2.6)
-    nokogiri (1.4.4)
     paperclip (2.3.8)
       activerecord
       activesupport
@@ -90,19 +88,19 @@ GEM
       thor (~> 0.14.0)
     rake (0.8.7)
     remotipart (0.2.1)
-    rspec (2.4.0)
-      rspec-core (~> 2.4.0)
-      rspec-expectations (~> 2.4.0)
-      rspec-mocks (~> 2.4.0)
-    rspec-core (2.4.0)
-    rspec-expectations (2.4.0)
+    rspec (2.5.0)
+      rspec-core (~> 2.5.0)
+      rspec-expectations (~> 2.5.0)
+      rspec-mocks (~> 2.5.0)
+    rspec-core (2.5.1)
+    rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.4.0)
-    rspec-rails (2.4.1)
+    rspec-mocks (2.5.0)
+    rspec-rails (2.5.0)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
       railties (~> 3.0)
-      rspec (~> 2.4.0)
+      rspec (~> 2.5.0)
     ruby-hmac (0.4.0)
     signature (0.1.2)
       ruby-hmac
@@ -111,10 +109,9 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
-    webrat (0.7.3)
-      nokogiri (>= 1.2.0)
-      rack (>= 1.0)
-      rack-test (>= 0.5.3)
+    whenever (0.6.7)
+      aaronh-chronic (>= 0.3.9)
+      activesupport (>= 2.3.4)
     will_paginate (3.0.pre2)
 
 PLATFORMS
@@ -124,7 +121,6 @@ DEPENDENCIES
   acts-as-taggable-on
   authlogic
   factory_girl!
-  faker
   haml
   jquery-rails
   memcache-client
@@ -133,7 +129,7 @@ DEPENDENCIES
   pusher
   rails (= 3.0.1)
   remotipart
-  rspec-rails (>= 2.4.1)
+  rspec-rails (>= 2.5.0)
   transitions
-  webrat
+  whenever
   will_paginate (~> 3.0.pre2)
