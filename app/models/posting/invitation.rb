@@ -1,5 +1,7 @@
 class Posting::Invitation < Posting::Base
   
+  EXPIRATION_AGE = 8.days
+  
   alias_attribute :site, :resource
   alias_attribute :code, :subject
   alias_attribute :email, :body
@@ -48,6 +50,10 @@ class Posting::Invitation < Posting::Base
       transitions :to => :expired, :from => [ :offered ]
     end
   end
+  
+  scope :offered, where(:state => :offered)
+  scope :days_old, lambda { |age| where('created_at >= ? and created_at < ?', Date.today - (age + 1.day), Date.today - age) }
+  scope :expiring, lambda { where('created_at < ?', Date.today - EXPIRATION_AGE) }
 
   def email=(new_email)
     if new_email != self.email
