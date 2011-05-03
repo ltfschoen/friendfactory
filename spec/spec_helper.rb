@@ -58,14 +58,17 @@ def login(site, user)
 end
 
 # http://wincent.com/knowledge-base/Fixtures_considered_harmful%3F
+# http://jasonsrailsblog.blogspot.com/2008/09/rspec-helper-extention.html
 class Hash
-  # for excluding keys
   def except(*exclusions)
     self.reject { |key, value| exclusions.include? key.to_sym }
   end
 
-  # for overriding keys
   def with(overrides = {})
     self.merge overrides
+  end
+  
+  def only(*keys)
+    self.reject { |key,value| !keys.include?(key.to_sym ) }
   end
 end
