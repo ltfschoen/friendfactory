@@ -34,6 +34,7 @@ class Posting::Invitation < Posting::Base
   state_machine do
     state :offered
     state :accepted
+    state :expired
     
     event :offer do
       transitions :to => :offered, :from => [ :unpublished ], :on_transition => :deliver_invitation_mail
@@ -42,6 +43,10 @@ class Posting::Invitation < Posting::Base
     event :accept do
       transitions :to => :accepted, :from => [ :offered, :accepted ]
     end    
+    
+    event :expire do
+      transitions :to => :expired, :from => [ :offered ]
+    end
   end
 
   def email=(new_email)

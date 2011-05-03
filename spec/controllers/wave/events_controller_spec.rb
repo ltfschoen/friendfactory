@@ -2,16 +2,15 @@ require 'spec_helper'
 
 describe Wave::EventsController do
 
-  fixtures :sites, :waves, :sites_waves, :resource_events, :locations
-
+  fixtures :all
   set_fixture_class :waves => 'Wave::Event'
        
   describe "GET index" do
     describe 'friskyhands' do
       before(:each) do
-        current_site(sites(:friskyhands))
+        login(:friskyhands, :adam)
       end
-    
+      
       it "assigns FH's published events to @waves" do
         get :index
         assigns[:waves].should == [ waves(:event_wave_published) ]
@@ -26,7 +25,7 @@ describe Wave::EventsController do
     
     describe 'positivelyfrisky' do
       it 'assigns PF published events to @waves' do
-        current_site(sites(:positivelyfrisky))
+        login(:positivelyfrisky, :adam)
         get :index
         assigns[:waves].should == [ waves(:event_wave_positivelyfrisky) ]       
       end      

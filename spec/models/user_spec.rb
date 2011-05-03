@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe User do  
+
+  include Authlogic::TestCase
+  
+  before(:each) do
+    activate_authlogic
+    UserSession.stub!(:find).and_return(mock(UserSession, :record => mock_model(User)))
+  end
   
   describe 'attributes' do    
     let(:attrs) do
@@ -103,15 +110,15 @@ describe User do
         
         it "should be in accepted state after accepted" do
           site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '333', :email => ernie.email)
-          ernie.enroll!(site, 'ernie', '333')
+          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :email => ernie.email)
+          ernie.enroll!(site, 'ernie', '666')
           invitation.reload
           invitation.state.should == 'accepted'
         end
       end
       
       describe "with an anonymous invitation" do
-        it "is valid for an existing user" do
+        it "is valid for an existing user" do          
           ernie.enroll!(sites(:friskyhands), 'ernie')
           ernie.enroll(sites(:positivelyfrisky), 'ernie', 'e5')
           ernie.should be_valid
@@ -122,10 +129,18 @@ describe User do
           ernie.should be_valid
         end
         
-        it "is invalid if invitation not in offered state" do
+        it "is invalid if invitation in accepted state" do
           site = sites(:positivelyfrisky)
           invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666')
           invitation.accept!
+          ernie.enroll(site, 'ernie', '666')          
+          ernie.should_not be_valid
+        end
+
+        it "is invalid if invitation in expired state" do
+          site = sites(:positivelyfrisky)
+          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666')
+          invitation.expire!
           ernie.enroll(site, 'ernie', '666')          
           ernie.should_not be_valid
         end

@@ -21,7 +21,7 @@ RSpec.configure do |config|
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/test/fixtures"
-
+  
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -44,10 +44,28 @@ end
 #   @user_session = nil
 # end
 
-def current_site(site)
-  @current_site ||= controller.stub(:current_site).and_return(site)
+# def current_site(site)
+#   @current_site ||= controller.stub(:current_site).and_return(site)
+# end
+
+# def current_user(user)
+#   @current_user ||= controller.stub(:current_user).and_return(user)
+# end
+
+def login(site, user)
+  UserSession.stub!(:find).and_return(mock(UserSession, { :record => users(user) }))
+  Site.stub!(:find_by_name).and_return(sites(site))
 end
 
-def current_user(user)
-  @current_user ||= controller.stub(:current_user).and_return(user)
+# http://wincent.com/knowledge-base/Fixtures_considered_harmful%3F
+class Hash
+  # for excluding keys
+  def except(*exclusions)
+    self.reject { |key, value| exclusions.include? key.to_sym }
+  end
+
+  # for overriding keys
+  def with(overrides = {})
+    self.merge overrides
+  end
 end
