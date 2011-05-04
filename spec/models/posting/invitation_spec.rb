@@ -2,12 +2,36 @@ require 'spec_helper'
 
 describe Posting::Invitation do
 
+  fixtures :sites, :users, :postings
+  set_fixture_class :wave => 'Wave::Base', :postings => 'Posting::Base'
+  
+  describe "deliver mail" do
+    
+    let(:invitation) { postings(:invitation_posting_for_charlie) }
+
+    it "when status changed to offer" do
+      new_invitation = Posting::Invitation.new(:site => sites(:friskyhands), :sponsor => users(:adam), :body => "zed@test.com")
+      InvitationsMailer.should_receive(:new_invitation_mail).with(new_invitation).and_return(mock(Mail::Message).as_null_object)
+      new_invitation.save!
+      new_invitation.offer!
+    end
+    
+    describe "redelivery" do
+      it "when email updated" do
+        InvitationsMailer.should_receive(:new_invitation_mail).with(invitation).and_return(mock(Mail::Message).as_null_object)
+        invitation.update_attributes(:email => 'zed@test.com')
+      end
+      
+      it "only when email updated" do
+        InvitationsMailer.should_not_receive(:new_invitation_mail)
+        invitation.update_attributes(:email => invitation.email)
+      end      
+    end
+        
+  end
+
   describe "reinvitations" do
-
-    fixtures :sites, :users
-
     let(:today) { DateTime.civil(1968, 3, 21, 1) }
-
     let(:invitations) { @invitations }
 
     before(:each) { Date.stub!(:today).and_return(today) }
@@ -51,24 +75,7 @@ describe Posting::Invitation do
       InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'19680313']).ordered.and_return(mail_message)
       InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'19680312']).ordered.and_return(mail_message)
       Posting::Invitation.redeliver_mail
-    end
-    
-    describe "redelivery" do      
-      fixtures :postings  
-      set_fixture_class :postings => 'Posting::Base'
-      
-      let(:invitation) { postings(:invitation_posting_for_charlie) }
-      
-      it "when email is updated" do
-        InvitationsMailer.should_receive(:new_invitation_mail).with(invitation).and_return(mock(Mail::Message).as_null_object)
-        invitation.update_attributes(:email => 'zed@test.com')
-      end
-      
-      it "not done when email not updated" do
-        InvitationsMailer.should_not_receive(:new_invitation_mail)
-        invitation.update_attributes(:email => invitation.email)
-      end      
-    end
+    end    
   end
 
 end

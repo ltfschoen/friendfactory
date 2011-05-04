@@ -74,7 +74,7 @@ class Posting::Invitation < Posting::Base
   end
     
   def deliver_mail
-    if email.present? && offered?
+    if email.present?
       InvitationsMailer.new_invitation_mail(self).deliver
       self.needs_redelivery = false
     end
