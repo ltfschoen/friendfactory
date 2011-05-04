@@ -5,6 +5,7 @@ class Posting::InvitationsController < ApplicationController
     @posting = new_posting_invitation
     if @wave = current_user.find_invitation_wave_by_id(params[:wave_id])
       @wave.postings << @posting
+      @posting.offer!
     end
     respond_to do |format|
       format.js { render :layout => false }
@@ -13,9 +14,9 @@ class Posting::InvitationsController < ApplicationController
 
   def update
     @li_eq = params[:li_eq]
-    if @wave = current_user.find_invitation_wave_by_id(params[:wave_id])
-      @posting = @wave.postings.find_by_id(params[:id])
-      @posting.try(:update_attributes, params[:posting_invitation])
+    @wave = current_user.find_invitation_wave_by_id(params[:wave_id])
+    if @wave && @posting = @wave.postings.find_by_id(params[:id])
+      @posting.update_attributes(params[:posting_invitation])
     end
     respond_to do |format|
       format.js { render :action => 'create', :layout => false }
