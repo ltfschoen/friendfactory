@@ -51,8 +51,8 @@ class Posting::Invitation < Posting::Base
   end
   
   scope :offered, where(:state => :offered)
-  scope :days_old, lambda { |age| offered.where('created_at >= ? and created_at < ?', Date.today - (age + 1.day), Date.today - age) }
-  scope :expiring, lambda { offered.where('created_at < ?', Date.today - EXPIRATION_AGE) }
+  scope :days_old, lambda { |age| offered.where('created_at >= ? and created_at < ?', Date.today.at_midnight - (age + 1.day), Date.today.at_midnight - age) }
+  scope :expiring, lambda { offered.where('created_at < ?', Date.today.at_midnight - EXPIRATION_AGE) }
 
   def self.find_all_by_code(code)
     find_all_by_subject(code)
