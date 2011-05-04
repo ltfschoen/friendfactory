@@ -22,6 +22,11 @@ describe Posting::Invitation do
         invitation.update_attributes(:email => 'zed@test.com')
       end
       
+      it "when email as body attribute updated" do
+        InvitationsMailer.should_receive(:new_invitation_mail).with(invitation).and_return(mock(Mail::Message).as_null_object)
+        invitation.update_attributes(:body => 'zed@test.com')
+      end
+      
       it "only when email updated" do
         InvitationsMailer.should_not_receive(:new_invitation_mail)
         invitation.update_attributes(:email => invitation.email)

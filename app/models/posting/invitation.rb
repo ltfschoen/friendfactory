@@ -69,6 +69,8 @@ class Posting::Invitation < Posting::Base
     end
   end
   
+  alias :body= :email=
+  
   def anonymous?
     email.blank?
   end
