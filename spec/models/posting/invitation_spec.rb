@@ -52,6 +52,23 @@ describe Posting::Invitation do
       InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'19680312']).ordered.and_return(mail_message)
       Posting::Invitation.redeliver_mail
     end
+    
+    describe "redelivery" do      
+      fixtures :postings  
+      set_fixture_class :postings => 'Posting::Base'
+      
+      let(:invitation) { postings(:invitation_posting_for_charlie) }
+      
+      it "when email is updated" do
+        InvitationsMailer.should_receive(:new_invitation_mail).with(invitation).and_return(mock(Mail::Message).as_null_object)
+        invitation.update_attributes(:email => 'zed@test.com')
+      end
+      
+      it "not done when email not updated" do
+        InvitationsMailer.should_not_receive(:new_invitation_mail)
+        invitation.update_attributes(:email => invitation.email)
+      end      
+    end
   end
 
 end
