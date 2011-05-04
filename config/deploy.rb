@@ -1,4 +1,5 @@
 # require 'bundler/capistrano'
+require "whenever/capistrano"
 
 set :application, 'friskyfactory'
 set :domain, 'ff01'
@@ -15,6 +16,8 @@ role :db,  domain, :primary => true
 
 ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
+
+set :whenever_command, "bundle exec whenever"
 
 after 'deploy:symlink', 'deploy:config_symlinks'
 # after "deploy:symlink", "deploy:thinking_sphinx"
@@ -39,13 +42,13 @@ namespace :deploy do
 
   desc "Stop nginx (noop)"
   task :stop, :roles => :app do
-    # Do nothing
-  end  
-
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :app do
-    run "cd #{release_path} && whenever --update-crontab #{application} --set environment=#{fetch(:rails_env)}"
+    # Noop
   end
+
+  # desc "Update the crontab file"
+  # task :update_crontab, :roles => :app do
+  #   run "cd #{release_path} && whenever --update-crontab #{application} --set environment=#{fetch(:rails_env)}"
+  # end
   
   desc "Full index of Sphinx models"
   task :thinking_sphinx, :roles => :app do
@@ -63,6 +66,7 @@ task :staging do
     tag
   end
   set :rails_env, 'staging'
+  set :whenever_environment, 'staging'
   set :deploy_to, '/home/mrcap/friskyfactory/staging'
 end
 
@@ -75,6 +79,7 @@ task :production do
     tag
   end
   set :rails_env, 'production'
+  set :whenever_environment, 'production'
   set :deploy_to, '/home/mrcap/friskyfactory/production'
 end
 

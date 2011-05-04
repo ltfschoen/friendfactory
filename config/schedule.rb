@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 5.minutes do
-  rake "thinking_sphinx:reindex"
+# every 5.minutes do
+#   rake "thinking_sphinx:reindex"
+# end
+
+every 1.day, :at => '1:00am' do
+  rake "ff:invitations:redeliver"
 end
