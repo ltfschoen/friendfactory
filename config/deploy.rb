@@ -21,7 +21,6 @@ set :whenever_command, "bundle exec whenever"
 
 after 'deploy:symlink', 'deploy:config_symlinks'
 # after "deploy:symlink", "deploy:thinking_sphinx"
-# after "deploy:symlink", "deploy:update_crontab"
  
 namespace :deploy do
   task :config_symlinks do
@@ -45,11 +44,6 @@ namespace :deploy do
     # Noop
   end
 
-  # desc "Update the crontab file"
-  # task :update_crontab, :roles => :app do
-  #   run "cd #{release_path} && whenever --update-crontab #{application} --set environment=#{fetch(:rails_env)}"
-  # end
-  
   desc "Full index of Sphinx models"
   task :thinking_sphinx, :roles => :app do
     run "cd #{current_path} && rake thinking_sphinx:stop RAILS_ENV=#{fetch(:rails_env)}"

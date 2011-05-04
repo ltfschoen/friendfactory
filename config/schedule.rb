@@ -23,6 +23,8 @@
 #   rake "thinking_sphinx:reindex"
 # end
 
-every 1.day, :at => '1:00am' do
-  rake "ff:invitations:redeliver"
+if environment == 'production'
+  every 1.day, :at => '1:00am' do
+    rake "ff:invitations:redeliver"
+  end
 end
