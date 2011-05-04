@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Wave::EventsController do
 
   fixtures :all
-  set_fixture_class :waves => 'Wave::Event'
+  set_fixture_class :waves => 'Wave::Base', :postings => 'Posting::Base'
        
   describe "GET index" do
     describe 'friskyhands' do

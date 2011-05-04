@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Posting::VideosController do
   
   fixtures :users, :sites, :waves, :sites_waves
-
-  set_fixture_class :waves => 'Wave::Base'
+  set_fixture_class :waves => 'Wave::Base', :postings => 'Posting::Base'
 
   let(:wave) { waves(:friskyhands_community_wave) }
   let(:video_url) { "http://youtu.be/lzRKEv6cHuk" }    
