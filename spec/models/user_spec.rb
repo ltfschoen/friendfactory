@@ -101,8 +101,7 @@ describe User do
         
         it "is invalid if invitation exists but not in offered state" do
           site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :email => ernie.email)
-          invitation.accept!
+          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :email => ernie.email, :state => 'accepted')
           ernie.enroll(site, 'ernie', '666')
           ernie.should_not be_valid
           ernie.errors.full_messages.join.should match(/has already been previously accepted/)
@@ -111,6 +110,7 @@ describe User do
         it "should be in accepted state after accepted" do
           site = sites(:positivelyfrisky)
           invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :email => ernie.email)
+          invitation.offer!
           ernie.enroll!(site, 'ernie', '666')
           invitation.reload
           invitation.state.should == 'accepted'
@@ -131,15 +131,14 @@ describe User do
         
         it "is invalid if invitation in accepted state" do
           site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666')
-          invitation.accept!
+          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :state => 'accepted')
           ernie.enroll(site, 'ernie', '666')          
           ernie.should_not be_valid
         end
 
         it "is invalid if invitation in expired state" do
           site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666')
+          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :state => 'offered')          
           invitation.expire!
           ernie.enroll(site, 'ernie', '666')          
           ernie.should_not be_valid
@@ -148,6 +147,7 @@ describe User do
         it "should remain in offered state after being accepted" do
           site = sites(:positivelyfrisky)
           invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666')
+          invitation.offer!
           ernie.enroll!(site, 'ernie', '666')
           invitation.reload
           invitation.state.should == 'offered'
