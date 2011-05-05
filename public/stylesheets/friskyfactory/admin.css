@@ -19,3 +19,26 @@
 	text-align: center;
 	margin: 10px auto;
 }
+
+.admin.invitation table {
+	width: 100%;
+}
+
+.admin.invitation td {
+	vertical-align: middle;
+}
+
+.positivelyfrisky .admin.invitation td {
+	color: #FFF;
+}
+
+.admin.invitation li {
+	float: left;
+	margin-right: 10px;
+}
+.admin.invitation img.thumb {
+	width: 80px;
+	height: 80px;
+	background-color: #FFF;
+	border: 1px solid lightgrey;
+}

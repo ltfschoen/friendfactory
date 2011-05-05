@@ -100,6 +100,10 @@ Friskyfactory::Application.routes.draw do
     resources :tags, :except => [ :show ] do
       collection { get 'commit' }
     end
+    namespace :invitation do
+      resources :universals, :only => [ :index ]
+      resources :personals, :only => [ :index ]
+    end
   end
   
   # The priority is based upon order of creation:

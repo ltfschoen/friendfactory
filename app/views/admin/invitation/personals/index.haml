@@ -1,0 +1,19 @@
+- stylesheet 'admin'
+
+.grid_16
+  .admin.invitation.personal
+    %table
+      - @waves.each do |wave|
+        %tr
+          %td
+            = wave.user.first_name(current_site)
+            %br
+              = wave.user.email
+          %td
+            %ul
+              - wave.postings.each do |invitation|
+                %li
+                  - if invitation.accepted? && invitation.invitee
+                    = avatar_image_tag(invitation.invitee, :class => "thumb")
+                  - else
+                    = placeholder_image_tag :class => "thumb", :title => invitation.email
