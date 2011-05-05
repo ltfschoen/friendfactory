@@ -61,12 +61,9 @@ describe User do
     end
   end
 
-  describe 'enrollment' do
-    let(:duncan) do
-      User.new(:email => 'duncan@test.com', :password => 'test', :password_confirmation => 'test')      
-    end
-    
+  describe 'enrollment' do    
     fixtures :sites, :users, :postings
+    set_fixture_class :waves => 'Wave::Base', :postings => 'Posting::Base'
 
     describe "already enrolled" do
       it "is invalid at an open site" do
@@ -83,6 +80,10 @@ describe User do
     end
     
     describe "invite-only sites" do
+      let(:duncan) do
+        User.new(:email => 'duncan@test.com', :password => 'test', :password_confirmation => 'test')      
+      end
+            
       let(:ernie) do
         User.new(:email => 'ernie@test.com', :password => 'test', :password_confirmation => 'test')
       end
@@ -175,6 +176,10 @@ describe User do
         
     describe "open sites" do
       describe "without an invitation" do
+        let(:duncan) do
+          User.new(:email => 'duncan@test.com', :password => 'test', :password_confirmation => 'test')      
+        end
+        
         it "is valid for an existing user" do
           duncan.enroll!(sites(:positivelyfrisky), 'duncan', 'd4')
           duncan.enroll(sites(:friskyhands), 'duncan')
