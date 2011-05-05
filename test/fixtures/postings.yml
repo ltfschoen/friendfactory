@@ -31,6 +31,7 @@ comment_posting_2:
 # Invitations
 
 invitation_posting_for_bert:
+  id: 3
   user_id: 1
   subject: b2
   body: bert@test.com
@@ -42,6 +43,7 @@ invitation_posting_for_bert:
   updated_at: <%= now %>
 
 invitation_posting_for_charlie:
+  id: 4
   user_id: 1
   subject: c3
   body: charlie@test.com
@@ -53,6 +55,7 @@ invitation_posting_for_charlie:
   updated_at: <%= now %>
 
 invitation_posting_for_duncan:
+  id: 5
   user_id: 1
   subject: d4
   body: duncan@test.com
@@ -64,6 +67,7 @@ invitation_posting_for_duncan:
   updated_at: <%= now %>
 
 invitation_posting_for_anonymous:
+  id: 6
   user_id: 1
   subject: e5
   type: Posting::Invitation
