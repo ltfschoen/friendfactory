@@ -1,27 +1,19 @@
 - stylesheet 'admin'
 
-.wave.header
-  %h1 User Info Tag Scrubber
-.grid_3
-  &nbsp;
-.grid_10
-  .admin
-    .button-bar
-      = button_bar = [ link_to('Add Scrubbed Tag', new_admin_tag_path), link_to('Commit', commit_admin_tags_path) ].join('&nbsp;|&nbsp;').html_safe
-    %table
+.grid_14.push_1.admin
+  .button-bar
+    = button_bar = [ link_to('Add Scrubbed Tag', new_admin_tag_path), link_to('Commit', commit_admin_tags_path) ].join('&nbsp;|&nbsp;').html_safe
+  %table
+    %tr
+      %th Defective
+      %th Corrected
+      %th
+    - @tags.each do |tag|
       %tr
-        %th Defective
-        %th Corrected
-        %th
-      - @tags.each do |tag|
-        %tr
-          %td= tag.defective
-          %td= tag.corrected
-          %td.actions
-            = link_to 'Edit', edit_admin_tag_path(tag)
-            = link_to 'Delete', tag, :confirm => 'Are you sure?', :method => :delete    
-    .button-bar
-      = button_bar
-
-.grid_3
-  &nbsp;
+        %td= tag.defective
+        %td= tag.corrected
+        %td.actions
+          = link_to 'Edit', edit_admin_tag_path(tag)
+          = link_to 'Delete', tag, :confirm => 'Are you sure?', :method => :delete    
+  .button-bar
+    = button_bar

@@ -59,6 +59,7 @@ GEM
     memcache-client (1.8.5)
     mime-types (1.16)
     mysql2 (0.2.6)
+    nokogiri (1.4.4)
     paperclip (2.3.8)
       activerecord
       activesupport
@@ -109,6 +110,10 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
+    webrat (0.7.3)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
     whenever (0.6.7)
       aaronh-chronic (>= 0.3.9)
       activesupport (>= 2.3.4)
@@ -131,5 +136,6 @@ DEPENDENCIES
   remotipart
   rspec-rails (>= 2.5.0)
   transitions
+  webrat (>= 0.7.2)
   whenever
   will_paginate (~> 3.0.pre2)
