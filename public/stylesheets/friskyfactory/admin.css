@@ -1,4 +1,4 @@
-.admin {
+.admin.canvas {
 	background-color: rgb(249, 249, 243);
 	background:
 		-webkit-gradient(linear, 0 0%, 0 80, from(lightgrey), to(rgba(249, 249, 243, 0))),
@@ -21,9 +21,19 @@
 	padding: 20px 0;
 }
 
+.admin.canvas > * {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.admin.canvas h1 {
+	font-size: 1.2em;
+	color: #000;
+	margin-top: 0px;
+}
+
 .admin table {
 	display: block;
-	margin: 0 20px;	
 	overflow: auto;
 }
 
