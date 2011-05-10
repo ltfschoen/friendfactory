@@ -8,6 +8,7 @@
         %th Created
         %th State
         %th Expiration
+        %th &nbsp;
       - @postings.each do |posting|
         %tr
           %td= posting.user.handle(current_site)
@@ -15,3 +16,9 @@
           %td= posting.created_at.to_date.to_s(:long)
           %td= posting.state.titleize
           %td n/a
+          %td.actions
+            = link_to 'Edit', edit_admin_invitation_universal_path(posting)
+            = link_to 'Delete', admin_invitation_universal_path(posting), :confirm => 'Are you sure?', :method => :delete
+    .button-bar
+      = link_to('Add Universal Invitation', new_admin_invitation_universal_path)
+

@@ -21,11 +21,6 @@
 	padding: 20px 0;
 }
 
-.admin.canvas > * {
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
 .admin.canvas h1 {
 	font-size: 1.2em;
 	color: #000;
@@ -33,18 +28,26 @@
 }
 
 .admin table {
-	display: block;
-	overflow: auto;
+	margin: 0 auto;
+	width: 100%;
 }
 
 .admin table th,
 .admin table td {
 	text-align: left;
-	padding: 5px;	
+	padding: 5px 20px;
+}
+
+.admin table td + td {
+	border-left: 1px dotted grey;	
+}
+
+.admin table tr:nth-child(even) {
+	background: rgba(120, 120, 120, 0.1);
 }
 
 .admin table td.actions {
-	text-align: right;
+	text-align: center;
 } 
 
 .admin .button-bar {
