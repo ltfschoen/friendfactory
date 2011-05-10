@@ -51,10 +51,10 @@ class Posting::Invitation < Posting::Base
   end
   
   scope :offered, where(:state => :offered)
-  scope :days_old, lambda { |age| offered.where('created_at >= ? and created_at < ?', Date.today.at_midnight - (age + 1.day), Date.today.at_midnight - age) }
-  scope :expiring, lambda { offered.where('created_at < ?', Date.today.at_midnight - EXPIRATION_AGE) }
+  scope :days_old, lambda { |age| where('created_at >= ? and created_at < ?', Date.today.at_midnight - (age + 1.day), Date.today.at_midnight - age) }
+  scope :expiring, lambda { where('created_at < ?', Date.today.at_midnight - EXPIRATION_AGE) }
   scope :universal, lambda { where(:body => nil) }
-  scope :site, lambda { |site| where(:resource => site) }
+  scope :site, lambda { |site| where(:resource_id => site.id, :resource_type => Site) }
 
   def self.find_all_by_code(code)
     find_all_by_subject(code)
@@ -97,7 +97,7 @@ class Posting::Invitation < Posting::Base
   def self.redeliver_aging_mail
     count = 0
     [ FIRST_REMINDER_AGE, SECOND_REMINDER_AGE, THIRD_REMINDER_AGE ].each do |age|
-      days_old(age).each do |invitation|
+      offered.days_old(age).each do |invitation|
         InvitationsMailer.new_invitation_mail(invitation).deliver && count += 1        
       end
     end    
@@ -106,7 +106,7 @@ class Posting::Invitation < Posting::Base
   
   def self.redeliver_expiring_mail
     count = 0
-    expiring.each do |invitation|
+    offered.expiring.each do |invitation|
       InvitationsMailer.new_invitation_mail(invitation).deliver && count += 1      
     end
     count
