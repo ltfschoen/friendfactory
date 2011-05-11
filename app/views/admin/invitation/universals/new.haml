@@ -1,0 +1,6 @@
+- stylesheet 'admin'
+- javascript 'admin'
+.grid_14.push_1.admin.canvas
+  %h1 New Universal Invitation
+  = form_for @posting, :url => admin_invitation_universals_path do |f|
+    = render :partial => 'form', :locals => { :f => f }

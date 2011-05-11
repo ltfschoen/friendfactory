@@ -21,51 +21,69 @@
 	padding: 20px 0;
 }
 
-.admin.canvas h1 {
+.admin h1 {
 	font-size: 1.2em;
 	color: #000;
 	margin-top: 0px;
+	margin-left: 20px;
 }
 
-.admin table {
+.admin table.index {
 	margin: 0 auto;
 	width: 100%;
 }
 
-.admin table th,
-.admin table td {
+.admin table.index th,
+.admin table.index td {
 	text-align: left;
 	padding: 5px 20px;
 }
 
-.admin table td + td {
+.admin table.index th + th,
+.admin table.index td + td {
 	border-left: 1px dotted grey;	
 }
 
-.admin table tr:nth-child(even) {
+.admin table.index tr:nth-child(even) {
 	background: rgba(120, 120, 120, 0.1);
 }
 
-.admin table td.actions {
+.admin table.index td.actions {
 	text-align: center;
-} 
-
-.admin .button-bar {
-	text-align: center;
-	margin: 10px auto;
+}
+.admin table.index td.actions a:nth-child(1) {
+	margin-right: 5px;
 }
 
-.admin.invitation td {
+.admin.invitations table.index td {
 	vertical-align: middle;
 }
 
-.admin.invitation li {
+.admin.invitations table.index li {
 	float: left;
 	margin-right: 10px;
 }
-.admin.invitation img.thumb {
+.admin.invitations table.index img.thumb {
 	width: 80px;
 	height: 80px;
 	background-color: #FFF;
 	border: 1px solid lightgrey;
+}
+
+.admin form {
+	margin-left: 20px;
+}
+
+.admin table.index form.posting_invitation_state {
+	margin-left: 0px;
+}
+
+.admin label {
+	font-size: 12px;
+	margin-right: 20px;
+}
+
+.admin .button-bar {
+	text-align: center;
+	margin: 10px auto;
 }

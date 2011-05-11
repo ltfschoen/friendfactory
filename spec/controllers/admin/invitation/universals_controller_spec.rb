@@ -16,15 +16,25 @@ describe Admin::Invitation::UniversalsController do
     end
   end
   
-  describe 'GET index' do
+  describe "as an adminstrator" do
     let(:invitation) { mock_model(Posting::Invitation).as_null_object }
-        
+      
     before(:each) { login(:positivelyfrisky, :adam) }
-    
-    it "assigns universal invitations to @postings" do
-      Posting::Invitation.stub_chain(:offered, :universal, :site).and_return([ invitation ])
-      get :index
-      assigns(:postings).should == [ invitation ]
+
+    describe "GET index" do    
+      it "assigns universal invitations to @postings" do
+        Posting::Invitation.stub_chain(:offered, :universal, :site).and_return([ invitation ])
+        get :index
+        assigns(:postings).should == [ invitation ]
+      end
+    end
+  
+    describe "GET edit" do
+      it "assigns the universal to edit to @posting" do
+        Posting::Invitation.stub_chain(:offered, :universal, :site, :find_by_id).with('42').and_return(invitation)
+        get :edit, :id => '42'
+        assigns(:posting).should == invitation
+      end
     end
   end
   

@@ -1,0 +1,23 @@
+- if @posting.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@posting.errors.count, "error")
+      prohibited this invitation from being saved:
+    %ul
+      - @posting.errors.full_messages.each do |msg|
+        %li= msg
+.field
+%table
+  %tr
+    %td
+      = f.label :code
+    %td
+      = f.text_field :code
+      = f.submit 'OK'
+      = link_to 'Back', admin_invitation_universals_path, :class => 'button cancel'
+  %tr
+    %td
+      &nbsp;
+    %td
+      %p.unobtrusive
+        Leave blank to create an automatically generated number

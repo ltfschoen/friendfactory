@@ -2,7 +2,7 @@
 .grid_14.push_1.admin.canvas
   .button-bar
     = button_bar = [ link_to('Add Scrubbed Tag', new_admin_tag_path), link_to('Commit', commit_admin_tags_path) ].join('&nbsp;|&nbsp;').html_safe
-  %table
+  %table.index
     %tr
       %th Defective
       %th Corrected

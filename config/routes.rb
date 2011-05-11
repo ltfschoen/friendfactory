@@ -101,7 +101,7 @@ Friskyfactory::Application.routes.draw do
       collection { get 'commit' }
     end
     namespace :invitation do
-      resources :universals, :only => [ :index ]
+      resources :universals, :only => [ :index, :new, :create, :edit, :update, :destroy ]
       resources :personals, :only => [ :index ]
     end
   end

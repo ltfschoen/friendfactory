@@ -1,24 +1,26 @@
 - stylesheet 'admin'
-- unless @postings.empty?
-  .grid_14.push_1.admin.canvas.invitation
-    %table
+- javascript 'admin'
+.grid_14.push_1.admin.canvas.invitation
+  %table.index
+    %tr
+      %th Inviter
+      %th Code
+      %th Created
+      %th State
+      %th Expiration
+      %th &nbsp;
+    - @postings.each do |posting|
       %tr
-        %th Inviter
-        %th Code
-        %th Created
-        %th State
-        %th Expiration
-        %th &nbsp;
-      - @postings.each do |posting|
-        %tr
-          %td= posting.user.handle(current_site)
-          %td= posting.code
-          %td= posting.created_at.to_date.to_s(:long)
-          %td= posting.state.titleize
-          %td n/a
-          %td.actions
-            = link_to 'Edit', edit_admin_invitation_universal_path(posting)
-            = link_to 'Delete', admin_invitation_universal_path(posting), :confirm => 'Are you sure?', :method => :delete
-    .button-bar
-      = link_to('Add Universal Invitation', new_admin_invitation_universal_path)
-
+        %td= posting.user.handle(current_site)
+        %td= posting.code
+        %td= posting.created_at.to_date.to_s(:long)
+        %td
+          = form_for posting, :url => admin_invitation_universal_path(posting), :remote => true, :html => { :method => :put, :class => 'posting_invitation_state', :'data-type' => :json } do |f|
+            = f.select(:state, [ %w{ Offered offered }, %w{ Expired expired } ])
+            = image_tag('friskyfactory/ajax-loader-small.gif', :site => false, :class => 'spinner', :style => 'visibility:hidden')
+        %td n/a
+        %td.actions
+          = link_to 'Edit', edit_admin_invitation_universal_path(posting)
+          = link_to 'Delete', admin_invitation_universal_path(posting), :confirm => 'Are you sure?', :method => :delete
+  .button-bar
+    = link_to('Add Universal Invitation', new_admin_invitation_universal_path)
