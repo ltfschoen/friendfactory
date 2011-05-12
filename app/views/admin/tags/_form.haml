@@ -7,15 +7,13 @@
       %ul
         - @tag.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :defective
-    %br/
-    = f.text_field :defective
-  .field
-    = f.label :corrected
-    %br/
-    = f.text_field :corrected
-  .actions
-    = f.submit 'OK'
-    = link_to 'Back', admin_tags_path, :class => 'button'
-
+  %table
+    %tr
+      %td= f.label :defective
+      %td= f.text_field :defective
+    %tr
+      %td= f.label :corrected
+      %td
+        = f.text_field :corrected
+        = f.submit 'OK'
+        = link_to 'Cancel', admin_tags_path, :class => 'button cancel'
