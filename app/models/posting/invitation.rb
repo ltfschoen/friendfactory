@@ -48,6 +48,10 @@ class Posting::Invitation < Posting::Base
     event :expire do
       transitions :to => :expired, :from => [ :offered ]
     end
+    
+    event :unpublish do
+      transitions :to => :unpublished, :from => [ :offered, :expired ]
+    end
   end
   
   scope :offered, where(:state => :offered)

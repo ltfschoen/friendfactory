@@ -3,7 +3,7 @@ class Admin::Invitation::UniversalsController < ApplicationController
   before_filter :require_admin
   
   def index
-    @postings = Posting::Invitation.universal.site(current_site).order('created_at desc')
+    @postings = Posting::Invitation.universal.site(current_site).where([ 'state <> ?', 'unpublished' ]).order('created_at desc')
     respond_to do |format|
       format.html
     end
@@ -45,6 +45,16 @@ class Admin::Invitation::UniversalsController < ApplicationController
         format.html { render :action => 'edit' }
         format.json { render :json => { :updated => false }}
       end
+    end
+  end
+  
+  def destroy
+    @posting = Posting::Invitation.universal.site(current_site).find_by_id(params[:id])    
+    if @posting
+      @posting.unpublish!
+    end
+    respond_to do |format|
+      format.html { redirect_to admin_invitation_universals_path }
     end
   end
   
