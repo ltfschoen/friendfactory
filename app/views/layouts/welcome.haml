@@ -30,6 +30,7 @@
           :cache => 'welcome-cached'
   
   %body{ :class => current_site, :'data-site'=> current_site }
+    = image_tag 'background-24.jpg', :class => 'background'
     .container.container_16.clearfix
       = render :partial => File.join('layouts', current_site.name, 'badge')
       = yield

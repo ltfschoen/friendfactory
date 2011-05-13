@@ -1,3 +1,12 @@
+img.background {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+}
+
 p {
     font-size: 1.2em;
     line-height: 1.4em;
@@ -26,7 +35,7 @@ h3 {
 }
 
 h4 {
-	padding-right: 1em;
+/*	padding-right: 1em;*/
 	font-size: 1.8em;
 	line-height: 1.4em;
 	font-weight: normal;
