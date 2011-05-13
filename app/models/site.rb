@@ -34,4 +34,13 @@ class Site < ActiveRecord::Base
   
   alias :intern :to_sym
   
+  def create_default_wave
+    unless waves.type(Wave::Community).find_by_slug(Wave::CommunitiesController::DefaultWaveSlug).present?
+      wave = Wave::Community.new(:slug => Wave::CommunitiesController::DefaultWaveSlug)
+      self.waves << wave
+      wave.publish!
+      wave
+    end
+  end
+  
 end
