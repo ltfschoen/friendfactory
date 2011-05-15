@@ -23,7 +23,7 @@ describe Admin::Invitation::UniversalsController do
 
     describe "GET index" do    
       it "assigns universal invitations to @postings" do
-        Posting::Invitation.stub_chain(:offered, :universal, :site).and_return([ invitation ])
+        Posting::Invitation.stub_chain(:universal, :site, :where, :order).and_return([ invitation ])
         get :index
         assigns(:postings).should == [ invitation ]
       end
@@ -31,7 +31,7 @@ describe Admin::Invitation::UniversalsController do
   
     describe "GET edit" do
       it "assigns the universal to edit to @posting" do
-        Posting::Invitation.stub_chain(:offered, :universal, :site, :find_by_id).with('42').and_return(invitation)
+        Posting::Invitation.stub_chain(:universal, :site, :find_by_id).with('42').and_return(invitation)
         get :edit, :id => '42'
         assigns(:posting).should == invitation
       end
