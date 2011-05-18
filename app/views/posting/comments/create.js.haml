@@ -5,7 +5,7 @@
       $container = $posting.closest('.posting-container'),
       $comments = $container.find('.posting_comments'),
       $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
-  
+
     $container
       .find('.posting_comment.editable')
         .css({ opacity: 0.0 })
@@ -24,7 +24,7 @@
         $comment.delay(300).fadeTo('fast', 1.0);
       });
 
-		$.waypoints('refresh');
+    $.waypoints('refresh');
         
 - else
   :plain
