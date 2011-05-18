@@ -99,14 +99,16 @@ jQuery(function($) {
 						
 			event.preventDefault();			
 			$this
-				.fadeTo('fast', 0.0)
-				.closest('.posting-container')
-					.find('.posting_comment.editable')
-						.css({ opacity: 0.0 })
-						.slideDown('fast')					
-						.fadeTo('fast', 1.0)
-						.find('textarea').focus();
-			
+				.fadeTo('fast', 0.0, function() {
+					$this
+						.closest('.posting-container')
+						.find('.posting_comment.editable')
+							.css({ opacity: 0.0 })
+							.slideDown('fast')					
+							.fadeTo('fast', 1.0)
+							.find('textarea').focus();					
+				});
+
 			$.waypoints('refresh');			
 		});
 
