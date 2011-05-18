@@ -96,6 +96,10 @@
     right: -5px;
 }
 
+.wave_community ul.posting_comments > li {
+	float: left;
+}
+
 .wave_community ul.posting_comments > li .comment.canvas {
     -webkit-transform: none;
     -moz-transform: none;

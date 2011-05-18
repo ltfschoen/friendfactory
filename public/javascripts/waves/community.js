@@ -17,9 +17,6 @@
 
 
 jQuery(function($) {	
-
-	$('#postings-container', '.wave_community')
-		.css({'visibility': 'hidden', 'opacity': '0.0' });
 	
 	$('.tab_contents')
 		.insertAfter('ul.posting_post_its:first');
@@ -83,50 +80,98 @@ jQuery(function($) {
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
 
-	$('#postings-container', '.wave_community')
-		.css({ 'visibility': 'visible' }).fadeTo(900, 1.0);
-
-
-	$('ul.posting_comments', '.wave_community').each(function() {
-		var $this = $(this);		
-		if ($('li', $this).length > 0) {
-			$this.next('a.new_posting_comment').css({ opacity: 0.0 });
-		}
-	});
+	$('.posting_comment.editable', '.wave_community')
+		.hide()
+		.comment(function(event) {
+			$(event.target).closest('.posting_comment')
+				.css({ opacity: 0.0 })
+				.slideUp('fast', function() {
+					$(this).closest('.posting-container')
+						.find('a.new_posting_comment')
+							.fadeTo('fast', 1.0);
+				});
+		});
 
 	$('a.new_posting_comment', '.wave_community')
-		.bind('click', function(event) {
-			var $this = $(this),
-				$comments = $this.closest('ul.posting_comments');
-
-			event.preventDefault();
+		.live('click', function(event) {
+			var $this = $(this);
+						
+			event.preventDefault();			
+			$this
+				.fadeTo('fast', 0.0)
+				.closest('.posting-container')
+					.find('.posting_comment.editable')
+						.css({ opacity: 0.0 })
+						.slideDown('fast')					
+						.fadeTo('fast', 1.0)
+						.find('textarea').focus();
 			
-			$this.fadeTo('fast', 0.0);
-			$.get($this.attr('href'), function(data) {
-				var $content = $(data);
-					
-				$content
-					.css({ opacity: 0.0 })
-					.insertAfter($comments)
-					.slideDown('fast')
-					.fadeTo('fast', 1.0)
-					
-				$content
-					.comment(function(event) {
-						var $comment = $(event.target).closest('.posting_comment');
-						$comment
-							.fadeTo('fast', 0.0)
-							.slideUp('fast', function() {
-								$this.fadeTo('fast', 1.0, function() {
-									$comment.remove();
-									$.waypoints('refresh');	
-								});								
-							});
-					});
-				
-				$.waypoints('refresh');
-			});		
-	});
+			$.waypoints('refresh');
+			
+			// $.get($commentLink.attr('href'), function(data) {
+			// 	var $comment = $(data);
+			// 	
+			// 	$comment
+			// 		.comment(function(event) {
+			// 			$comment
+			// 				.fadeTo('fast', 0.0)
+			// 				.slideUp('fast', function() {
+			// 					$comment.remove();
+			// 					$commentLink.fadeTo('fast', 1.0);
+			// 					$.waypoints('refresh');
+			// 				});
+			// 		})
+			// 		.css({ opacity: 0.0 })				
+			// 		.hide()
+			// 		.insertBefore($commentLink)
+			// 		.slideDown('fast')						
+			// 		.fadeTo('fast', 1.0);
+			// 		// .find('textarea').focus();					
+			// 
+			// 	// $comments.masonry({ appendedContent: $comment.closest('li') }, function() {
+			// 	// 	$(this)
+			// 	// 		.find('.posting_comment')
+			// 	// 			.fadeTo('fast', 1.0)
+			// 	// 			.find('textarea').focus();
+			// 	// });
+			// 		
+			// 	$.waypoints('refresh');
+			// });			
+		});
+
+	// $('a.new_posting_comment', '.wave_community')
+	// 	.bind('click', function(event) {
+	// 		var $this = $(this),
+	// 			$comments = $this.closest('ul.posting_comments');
+	// 
+	// 		event.preventDefault();
+	// 		
+	// 		$this.fadeTo('fast', 0.0);
+	// 		$.get($this.attr('href'), function(data) {
+	// 			var $content = $(data);
+	// 				
+	// 			$content
+	// 				.css({ opacity: 0.0 })
+	// 				.insertAfter($comments)
+	// 				.slideDown('fast')
+	// 				.fadeTo('fast', 1.0)
+	// 				
+	// 			$content
+	// 				.comment(function(event) {
+	// 					var $comment = $(event.target).closest('.posting_comment');
+	// 					$comment
+	// 						.fadeTo('fast', 0.0)
+	// 						.slideUp('fast', function() {
+	// 							$this.fadeTo('fast', 1.0, function() {
+	// 								$comment.remove();
+	// 								$.waypoints('refresh');	
+	// 							});								
+	// 						});
+	// 				});
+	// 			
+	// 			$.waypoints('refresh');
+	// 		});		
+	// });
 
 	
 	(function() {		
@@ -190,16 +235,11 @@ $(window).load(function() {
 	
 	$('.posting_comments', '.wave_community')
 		.masonry({
-				singleMode: false,
-				columnWidth: 222,
-				itemSelector: 'li',
-				resizeable: false
-			},
-			function() {			
-				var $this = $(this).last(),
-					$newCommentLink = $this.closest('ul.posting_comments').next('a.new_posting_comment');					
-				$newCommentLink.appendTo($this).fadeTo('fast', 1.0);
-		})
+			singleMode: false,
+			columnWidth: 222,
+			itemSelector: 'li',
+			resizeable: false
+		});
 	
 	$.waypoints('refresh');	
 });

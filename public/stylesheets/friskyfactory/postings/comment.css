@@ -1,7 +1,3 @@
-.posting_comment {
-	float: left;
-}
-
 .posting_comment .body {
     background: url(/images/friskyfactory/note-paper_01.png) no-repeat top left;
     width: 190px;
@@ -42,7 +38,7 @@ a.new_posting_comment {
 	height: 36px;
 }
 
-.posting_comment form.new_posting_comment textarea {
+.new_posting_comment textarea {
 	margin: 0;
 	padding-right: 0;
 	padding-top: 0;
@@ -56,7 +52,7 @@ a.new_posting_comment {
 	resize: none;
 }
 
-.posting_comment form.new_posting_comment .button-bar {
+.new_posting_comment .button-bar {
     text-align: right;
     margin-top: -5px;
     margin-bottom: -5px;

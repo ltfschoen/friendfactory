@@ -12,13 +12,21 @@ class Posting::CommentsController < ApplicationController
   def create
     posting = Posting::Base.find_by_id(params[:posting_id])
     if posting.present?      
-      @comment = Posting::Comment.new(:body => params[:posting_comment][:body], :user_id => current_user.id)
+      @comment = new_posting_comment
       posting.children << @comment
       @comment.publish!
     end
     respond_to do |format|
       format.js { render :layout => false }
     end
+  end
+  
+  private
+  
+  def new_posting_comment
+    Posting::Comment.new(:body => params[:posting_comment][:body]).tap do |posting|
+      posting.user = current_user
+    end    
   end
   
 end
