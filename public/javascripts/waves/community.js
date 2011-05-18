@@ -18,6 +18,16 @@
 
 jQuery(function($) {	
 	
+	function hideCommentForm(event) {
+		$(event.target).closest('.posting_comment')
+			.css({ opacity: 0.0 })
+			.slideUp('fast', function() {
+				$(this).closest('.posting-container')
+					.find('a.new_posting_comment')
+						.fadeTo('fast', 1.0);
+			});
+	}
+	
 	$('.tab_contents')
 		.insertAfter('ul.posting_post_its:first');
 	
@@ -83,15 +93,7 @@ jQuery(function($) {
 
 	$('.posting_comment.editable', '.wave_community')
 		.hide()
-		.comment(function(event) {
-			$(event.target).closest('.posting_comment')
-				.css({ opacity: 0.0 })
-				.slideUp('fast', function() {
-					$(this).closest('.posting-container')
-						.find('a.new_posting_comment')
-							.fadeTo('fast', 1.0);
-				});
-		});
+		.comment(hideCommentForm);
 
 	$('a.new_posting_comment', '.wave_community')
 		.live('click', function(event) {
@@ -125,13 +127,20 @@ jQuery(function($) {
 				href = $("a[rel='next']", $pagination).attr('href');
 			
 			$footer.waypoint('remove');
-			$pagination.html($loading).pulse();	
-				
+			$pagination.html($loading).pulse();
+			
 			$.get(href, function(data) {
 				var $data = $(data),
 					$content = $data.find('#postings-container');
 
 				$('#postings-container').append($content);
+
+				$content
+					.find('.posting_comment.editable')
+						.hide()
+						.comment(hideCommentForm);
+								
+				$('.polaroid-container > .polaroid', $content).polaroid();					
 				
 				setTimeout(function() {
 					$('.posting_photos', $content)
