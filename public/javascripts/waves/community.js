@@ -80,6 +80,7 @@ jQuery(function($) {
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
 
+
 	$('.posting_comment.editable', '.wave_community')
 		.hide()
 		.comment(function(event) {
@@ -106,72 +107,8 @@ jQuery(function($) {
 						.fadeTo('fast', 1.0)
 						.find('textarea').focus();
 			
-			$.waypoints('refresh');
-			
-			// $.get($commentLink.attr('href'), function(data) {
-			// 	var $comment = $(data);
-			// 	
-			// 	$comment
-			// 		.comment(function(event) {
-			// 			$comment
-			// 				.fadeTo('fast', 0.0)
-			// 				.slideUp('fast', function() {
-			// 					$comment.remove();
-			// 					$commentLink.fadeTo('fast', 1.0);
-			// 					$.waypoints('refresh');
-			// 				});
-			// 		})
-			// 		.css({ opacity: 0.0 })				
-			// 		.hide()
-			// 		.insertBefore($commentLink)
-			// 		.slideDown('fast')						
-			// 		.fadeTo('fast', 1.0);
-			// 		// .find('textarea').focus();					
-			// 
-			// 	// $comments.masonry({ appendedContent: $comment.closest('li') }, function() {
-			// 	// 	$(this)
-			// 	// 		.find('.posting_comment')
-			// 	// 			.fadeTo('fast', 1.0)
-			// 	// 			.find('textarea').focus();
-			// 	// });
-			// 		
-			// 	$.waypoints('refresh');
-			// });			
+			$.waypoints('refresh');			
 		});
-
-	// $('a.new_posting_comment', '.wave_community')
-	// 	.bind('click', function(event) {
-	// 		var $this = $(this),
-	// 			$comments = $this.closest('ul.posting_comments');
-	// 
-	// 		event.preventDefault();
-	// 		
-	// 		$this.fadeTo('fast', 0.0);
-	// 		$.get($this.attr('href'), function(data) {
-	// 			var $content = $(data);
-	// 				
-	// 			$content
-	// 				.css({ opacity: 0.0 })
-	// 				.insertAfter($comments)
-	// 				.slideDown('fast')
-	// 				.fadeTo('fast', 1.0)
-	// 				
-	// 			$content
-	// 				.comment(function(event) {
-	// 					var $comment = $(event.target).closest('.posting_comment');
-	// 					$comment
-	// 						.fadeTo('fast', 0.0)
-	// 						.slideUp('fast', function() {
-	// 							$this.fadeTo('fast', 1.0, function() {
-	// 								$comment.remove();
-	// 								$.waypoints('refresh');	
-	// 							});								
-	// 						});
-	// 				});
-	// 			
-	// 			$.waypoints('refresh');
-	// 		});		
-	// });
 
 	
 	(function() {		

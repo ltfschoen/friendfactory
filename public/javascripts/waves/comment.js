@@ -15,7 +15,7 @@
 			})
 
 			.find('textarea')
-				.autoResize({ extraSpace: 12, limit: 152 })
+				.autoResize({ extraSpace: 0, limit: 130 })
 			.end()
 
 			.find('button.cancel')
