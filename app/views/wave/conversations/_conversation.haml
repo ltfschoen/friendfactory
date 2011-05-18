@@ -19,10 +19,14 @@
         .delivered.hidden
         .address
           .message.received
-            = avatar_image_tag conversation.recipient, :style => 'thimble', :gender => conversation.recipient.user_info(current_site).gender
-            = link_to_profile(conversation.recipient)
+            =# avatar_image_tag conversation.recipient, :style => 'thimble', :gender => conversation.recipient.user_info(current_site).gender
+            - conversation_recipient = conversation.recipient
+            = avatar_image_tag conversation_recipient, :style => 'thimble', :online_badge => false
+            = link_to_profile(conversation_recipient)
           .message.sent
-            = avatar_image_tag conversation.user, :style => 'thimble', :gender => conversation.user.user_info(current_site).gender
-            = link_to_profile(conversation.user)
+            =# avatar_image_tag conversation.user, :style => 'thimble', :gender => conversation.user.user_info(current_site).gender
+            - conversation_user = conversation.user
+            = avatar_image_tag conversation_user, :style => 'thimble', :online_badge => false
+            = link_to_profile(conversation_user)
         .button-bar
           = f.submit 'Send'

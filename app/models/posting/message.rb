@@ -4,6 +4,7 @@ class Posting::Message < Posting::Base
   attr_accessor :site
 
   alias_attribute :sender, :user
+  alias_attribute :sender_id, :user_id
 
   attr_accessible :subject, :body, :sender, :receiver, :site
   

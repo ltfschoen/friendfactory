@@ -1,2 +1,2 @@
-.message[message]{ :class => (message.sender == current_user ? 'sent' : 'received') }<
+.message[message]{ :class => (message.sender_id == current_user.id ? 'sent' : 'received') }<
   = message.body
