@@ -19,8 +19,8 @@ Site.find_or_create_by_name(
     :analytics_domain_name    => '.friskysoldiers.com').create_default_wave
 
 Site.find_or_create_by_name(
-    :name                     => 'dizmdaze',
-    :display_name             => 'Dizmdaze',
+    :name                     => 'dizmdayz',
+    :display_name             => 'Dizmdayz',
     :launch                   => false,
     :analytics_account_number => 'UA-19948002-4',
-    :analytics_domain_name    => '.dizmdaze.com').create_default_wave
+    :analytics_domain_name    => '.dizmdayz.com').create_default_wave

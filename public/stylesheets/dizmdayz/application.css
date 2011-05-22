@@ -1,13 +1,13 @@
 body {
-	background: url('/images/dizmdaze/fibers.jpg') repeat top center #90869E;
+	background: url('/images/dizmdayz/fibers.jpg') repeat top center #90869E;
 }
 
 .header.primary { 
-	background: url('/images/dizmdaze/header.png') no-repeat top center;
+	background: url('/images/dizmdayz/header.png') no-repeat top center;
 }
 
 .header.primary ul.nav li a {
-	background-image: url('/images/dizmdaze/header.png');
+	background-image: url('/images/dizmdayz/header.png');
 }
 
 .page.footer {
