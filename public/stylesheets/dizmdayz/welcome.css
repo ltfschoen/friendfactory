@@ -3,8 +3,11 @@ html {
 }
 
 body {
-	background: url('/images/dizmdayz/background.jpg') repeat-y top center;
+	background-image: url('/images/dizmdayz/background-header.jpg'), url('/images/dizmdayz/background-footer.jpg'), url('/images/dizmdayz/background.jpg');
+	background-position: top center, bottom center, top center;
+	background-repeat: no-repeat, no-repeat, repeat-y;
 	background-color: #000;
+	padding: 100px 0 160px 0;
 }
 
 p {
