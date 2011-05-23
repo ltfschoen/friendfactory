@@ -87,7 +87,7 @@ class UserInfo < ActiveRecord::Base
   end
 
   def military_service_description
-    BoardType.rassoc(self[:deafness]).try(:first)
+    MilitaryService.rassoc(self[:deafness]).try(:first)
   end
   
   def location_description

@@ -46,6 +46,10 @@
                         %tr
                           %td.label Board Type
                           %td.detail= f.select(:board_type, UserInfo::BoardType, :include_blank => true)                      
+                      - if current_site.name == 'friskyforces'
+                        %tr
+                          %td.label Service
+                          %td.detail= f.select(:military_service, UserInfo::MilitaryService, :include_blank => true)                      
                       %tr
                         %td.label Gender
                         %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
