@@ -1,3 +1,7 @@
+body {
+	background: url('/images/friskyforces/fibers.jpg') repeat top center #415943;
+}
+
 .header.primary { 
 	background: url('/images/friskyforces/header.png') no-repeat top center;
 }
@@ -5,3 +9,17 @@
 .header.primary ul.nav li a {
 	background-image: url('/images/friskyforces/header.png');
 }
+
+.page.footer {
+	color: #FFF;
+}
+
+.header.secondary { 
+	color: #FFF
+}
+
+.header.secondary a:visited,
+.header.secondary a:active {
+    color: #FFF;
+}
+
