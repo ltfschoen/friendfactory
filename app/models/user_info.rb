@@ -22,11 +22,14 @@ class UserInfo < ActiveRecord::Base
 	BoardType =
 	    (a = [ 'Surf', 'Snow', 'Skate' ]).zip((1..a.length).to_a)
 
+  MilitaryService = 
+	    (a = [ 'Seaman', 'Airman', 'Soldier', 'Guard', 'Reserve' ]).zip((1..a.length).to_a)
 
   set_table_name 'user_info'
 
   alias_attribute :hiv_status, :deafness
   alias_attribute :board_type, :deafness
+  alias_attribute :military_service, :deafness
     
   belongs_to :user  
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
@@ -80,6 +83,10 @@ class UserInfo < ActiveRecord::Base
   end
   
   def board_type_description
+    BoardType.rassoc(self[:deafness]).try(:first)
+  end
+
+  def military_service_description
     BoardType.rassoc(self[:deafness]).try(:first)
   end
   

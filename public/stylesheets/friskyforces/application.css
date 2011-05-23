@@ -1,0 +1,7 @@
+.header.primary { 
+	background: url('/images/friskyforces/header.png') no-repeat top center;
+}
+
+.header.primary ul.nav li a {
+	background-image: url('/images/friskyforces/header.png');
+}

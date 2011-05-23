@@ -12,11 +12,11 @@ Site.find_or_create_by_name(
     :analytics_domain_name    => '.positivelyfrisky.com').create_default_wave
 
 Site.find_or_create_by_name(
-    :name                     => 'friskysoldiers',
-    :display_name             => 'FriskySoldiers',
+    :name                     => 'friskyforces',
+    :display_name             => 'FriskyForces',
     :launch                   => true,
     :analytics_account_number => 'UA-19948002-3',
-    :analytics_domain_name    => '.friskysoldiers.com').create_default_wave
+    :analytics_domain_name    => '.friskyforces.com').create_default_wave
 
 Site.find_or_create_by_name(
     :name                     => 'dizmdayz',

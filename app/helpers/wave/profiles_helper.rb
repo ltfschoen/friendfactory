@@ -16,6 +16,9 @@ module Wave::ProfilesHelper
         if [ 'friskyhands', 'positivelyfrisky' ].include?(current_site.name)
           html.safe_concat(profile_signal.render(:locals => { :attribute => :orientation, :label => 'Preference' }))
         end
+        if current_site.name == 'friskyforces'
+          html.safe_concat(profile_signal.render(:locals => { :attribute => :military_service, :label => 'Service' }))
+        end
         html.safe_concat(profile_signal.render(:locals => { :attribute => :relationship }))
         html.safe_concat(profile_signal.render(:locals => { :attribute => :birthday }))
         html.safe_concat(profile_signal.render(:locals => { :attribute => :location }))     
