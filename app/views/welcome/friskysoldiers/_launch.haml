@@ -1,15 +1,12 @@
-.creative.prepend-top.prefix_2.grid_12.suffix_2
-  .grid_3.alpha<
-    &nbsp;
-  .grid_6<
-    .panel
-      - if flash[:launch_user].present?
-        %h4 Thanks!
-        %p We'll drop you an email when we're ready!              
-      - else
-        %p Provide your email address and we'll let you know when we're ready.
-        = form_for @launch_user, :url => launch_path do |f|
-          = f.text_field :email, :placeholder => 'email@address.com'
-          = f.submit 'Thanks'        
-  .grid_3.omega<
-    &nbsp;
+= render :partial => File.join('welcome', current_site.name, 'badge')
+.grid_8.prefix_4.prepend-top
+  %h4 Coming Spring 2011
+.creative.pane.grid_6.prefix_5.prepend-top
+  - if flash[:launch_user].present?
+    %h4 Thanks!
+    %p We'll drop you an email when we're ready!              
+  - else
+    %p Provide your email address and we'll let you know when we're ready.
+    = form_for @launch_user, :url => launch_path do |f|
+      = f.text_field :email, :placeholder => 'email@address.com'
+      = f.submit 'Thanks'        
