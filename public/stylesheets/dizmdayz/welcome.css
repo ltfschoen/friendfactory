@@ -3,8 +3,8 @@ html {
 }
 
 body {
-/*	background: url(/images/dizmdaze/background-24.jpg) no-repeat top center;*/
-	background-color: #EEF7FC;
+	background: url('/images/dizmdayz/background.jpg') repeat-y top center;
+	background-color: #000;
 }
 
 p {
