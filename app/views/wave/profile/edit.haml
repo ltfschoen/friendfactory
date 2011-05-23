@@ -42,12 +42,17 @@
                         %tr
                           %td.label HIV Status
                           %td.detail= f.select(:hiv_status, UserInfo::HivStatus, :include_blank => true)
+                      - if current_site.name == 'dizmdayz'
+                        %tr
+                          %td.label Board Type
+                          %td.detail= f.select(:board_type, UserInfo::BoardType, :include_blank => true)                      
                       %tr
                         %td.label Gender
                         %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
-                      %tr
-                        %td.label Preference
-                        %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
+                      - if [ 'friskyhands', 'positivelyfrisky' ].include?(current_site.name)                      
+                        %tr
+                          %td.label Preference
+                          %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
                       %tr
                         %td.label Relationship
                         %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)

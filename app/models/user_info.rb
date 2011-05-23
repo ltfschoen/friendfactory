@@ -18,11 +18,16 @@ class UserInfo < ActiveRecord::Base
 
 	HivStatus =
 	    (a = [ 'Positive', 'Negative', "Don't Know" ]).zip((1..a.length).to_a)
+	    
+	BoardType =
+	    (a = [ 'Surf', 'Snow', 'Skate' ]).zip((1..a.length).to_a)
+
 
   set_table_name 'user_info'
 
   alias_attribute :hiv_status, :deafness
-  
+  alias_attribute :board_type, :deafness
+    
   belongs_to :user  
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
     
@@ -72,6 +77,10 @@ class UserInfo < ActiveRecord::Base
   
   def hiv_status_description
     HivStatus.rassoc(self[:deafness]).try(:first)
+  end
+  
+  def board_type_description
+    BoardType.rassoc(self[:deafness]).try(:first)
   end
   
   def location_description
