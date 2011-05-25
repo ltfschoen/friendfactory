@@ -20,7 +20,16 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 			.end()
 			
 			.find('a.button.cancel')
-				.button({ icons: { primary: 'ui-icon-close' }, text: options.text });
+				.button({ icons: { primary: 'ui-icon-close' }, text: options.text })
+			.end()
+
+			.find('a.button.new')
+				.button({ icons: { primary: 'ui-icon-document' }, text: options.text })
+			.end()
+
+			.find('a.button.edit')
+				.button({ icons: { primary: 'ui-icon-pencil' }, text: options.text })
+			.end();
 		
 		return $this;
 	};

@@ -104,7 +104,7 @@ Friskyfactory::Application.routes.draw do
       resources :universals, :only => [ :index, :new, :create, :edit, :update, :destroy ]
       resources :personals, :only => [ :index ]
     end
-    resources :sites, :only => [ :index ]    
+    resources :sites, :only => [ :index, :new, :create, :edit, :update ]
   end
     
   # The priority is based upon order of creation:

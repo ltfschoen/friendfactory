@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110409075604) do
+ActiveRecord::Schema.define(:version => 20110525054823) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -172,9 +172,10 @@ ActiveRecord::Schema.define(:version => 20110409075604) do
     t.string   "analytics_account_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "css"
   end
 
-  add_index "sites", ["name"], :name => "index_sites_on_name"
+  add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true
 
   create_table "sites_users", :id => false, :force => true do |t|
     t.integer "site_id"

@@ -1,18 +1,19 @@
 - stylesheet 'admin'
 - unless @waves.empty?
-  .grid_14.push_1.admin.canvas.invitations
+  .grid_14.push_1.admin.canvas.invitation.personal
     %table.index
-      - @waves.each do |wave|
-        %tr
-          %td
-            = wave.user.first_name(current_site)
-            %br/
-            = wave.user.email
-          %td
-            %ul
-              - wave.postings.each do |invitation|
-                %li
-                  - if invitation.accepted? && invitation.invitee
-                    = avatar_image_tag(invitation.invitee, :class => "thumb")
-                  - else
-                    = placeholder_image_tag :class => "thumb", :title => invitation.email
+      %tbody
+        - @waves.each do |wave|
+          %tr
+            %td
+              = wave.user.first_name(current_site)
+              %br/
+              = wave.user.email
+            %td
+              %ul
+                - wave.postings.each do |invitation|
+                  %li
+                    - if invitation.accepted? && invitation.invitee
+                      = avatar_image_tag(invitation.invitee, :class => "thumb")
+                    - else
+                      = placeholder_image_tag :class => "thumb", :title => invitation.email

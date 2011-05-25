@@ -1,0 +1,27 @@
+- stylesheet 'admin'
+- javascript 'admin'
+.grid_16.admin.canvas.site
+  %table.index
+    %thead
+      %tr
+        %th Site
+        %th Display Name
+        %th Analytics Domain Name
+        %th Analytics Account No
+        %th.launch Launch Only
+        %th.invite_only Invitation Only
+        %th.state State
+    %tbody  
+      - @sites.each do |site|
+        %tr
+          %td= link_to(site.name, edit_admin_site_path(site))
+          %td= link_to(site.display_name, edit_admin_site_path(site))
+          %td= link_to(site.analytics_domain_name || '', edit_admin_site_path(site))
+          %td= link_to(site.analytics_account_number || '', edit_admin_site_path(site))
+          %td.launch= check_box_tag('site[launch]', '0', site.launch, :remote => true)
+          %td.invite_only= check_box_tag('site[invite_only]', '0', site.invite_only, :remote => true)
+          %td.state OK
+  .button-bar.footer
+    - if flash[:notice].present?
+      %span.flash.notice= flash[:notice]
+    = link_to 'New Site', new_admin_site_path, :class => 'button new'

@@ -1,0 +1,59 @@
+%table.form
+  %tr
+    %td
+      = f.label :name
+      %br/
+      %span.unobtrusive
+        Name of the site in the url
+    %td
+      = f.text_field :name, :placeholder => 'excellentsite'
+      = f.error_message_on :name
+  %tr
+    %td
+      = f.label :display_name
+      %br/
+      %span.unobtrusive
+        Name of the site to display on web pages
+    %td
+      = f.text_field :display_name, :placeholder => 'Excellent Site'
+      = f.error_message_on :display_name
+  %tr
+    %td
+      = f.label :analytics_domain_name
+      %br/
+      %span.unobtrusive
+        Copy from Google analytics
+    %td
+      = f.text_field :analytics_domain_name, :placeholder => '.excellent-site.com'
+      = f.error_message_on :analytics_domain_name
+  %tr
+    %td
+      = f.label :analytics_account_number
+      %br/
+      %span.unobtrusive
+        Copy from Google analytics
+    %td
+      = f.text_field :analytics_account_number, :placeholder => 'UA-xxxxxxxx-x'
+      = f.error_message_on :analytics_account_number
+  %tr
+    %td.stylesheet
+      =f.label :css, 'Stylesheet'
+      %br/
+      %span.unobtrusive
+        Supports SCSS
+    %td
+      =f.text_area :css
+  %tr
+    %td &nbsp;
+    %td
+      = f.check_box :launch
+      = f.label :launch, "'Coming Soon' launch page"
+  %tr
+    %td &nbsp;
+    %td
+      = f.check_box :invite_only
+      = f.label :invite_only, 'Requires an invitation to join'
+    
+.button-bar
+  = f.submit 'Save'
+  = link_to 'Cancel', admin_sites_path, :class => 'button cancel'

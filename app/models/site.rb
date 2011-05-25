@@ -1,6 +1,8 @@
 class Site < ActiveRecord::Base  
 
   validates_presence_of :name
+  validates_uniqueness_of :name
+  validates_presence_of :display_name
 
   has_many :invitations, :as => :resource, :class_name => 'Posting::Invitation' do
     def anonymous(code)

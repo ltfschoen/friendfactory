@@ -18,7 +18,7 @@
 	-moz-border-radius: 4px;
 	border-radius: 4px;	
 	border: none;
-	padding: 20px 0;
+	padding: 18px 4px 6px 4px;
 }
 
 .admin h1 {
@@ -44,8 +44,22 @@
 	border-left: 1px dotted grey;	
 }
 
-.admin table.index tr:nth-child(even) {
-	background: rgba(120, 120, 120, 0.1);
+.admin table.index tbody tr:nth-child(odd) {
+	background-color: rgba(120, 120, 120, 0.1);
+}
+
+.admin table.index tbody tr:hover {
+	background-color: #FFFFE8;
+}
+
+.admin .flash.notice {
+	color: green;
+	margin-right: 8px;
+}
+
+.admin.invitation.personal table.index tbody tr,
+.admin.invitation.personal table.index tbody tr:hover {
+	background-color: inherit;
 }
 
 .admin table.index td.actions {
@@ -55,15 +69,19 @@
 	margin-right: 5px;
 }
 
-.admin.invitations table.index td {
+.admin.invitation table.index td {
 	vertical-align: middle;
 }
 
-.admin.invitations table.index li {
+.admin table.index a {
+	color: #000;
+}
+
+.admin.invitation table.index li {
 	float: left;
 	margin-right: 10px;
 }
-.admin.invitations table.index img.thumb {
+.admin.invitation table.index img.thumb {
 	width: 80px;
 	height: 80px;
 	background-color: #FFF;
@@ -74,16 +92,79 @@
 	margin-left: 20px;
 }
 
+.admin div.field_with_errors, 
+.admin .formError {
+	display: inline;
+}
+
+.admin .field_with_errors label,
+.admin .formError {
+	color: darkred;
+}
+
+.admin .field_with_errors input {
+	border: 1px solid darkred;
+	color: darkred;
+}
+
 .admin table.index form.posting_invitation_state {
 	margin-left: 0px;
 }
 
 .admin label {
-	font-size: 12px;
+	font-size: small;
 	margin-right: 20px;
 }
 
 .admin .button-bar {
+	text-align: right;
+	margin: 10px 12px;
+}
+
+.admin .button-bar.footer {
+	margin-bottom: 0;
+}
+
+.admin.site table.form {
+	text-align: left;
+}
+
+.admin.site th.launch,
+.admin.site td.launch,
+.admin.site th.invite_only,
+.admin.site td.invite_only,
+.admin.site th.state,
+.admin.site td.state {
 	text-align: center;
-	margin: 10px auto;
+}
+
+.admin.site td.state {
+	color: green;
+}
+
+.admin.site table.form td {
+	vertical-align: bottom;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.admin.site table.form td.stylesheet {
+	vertical-align: top;
+}
+
+.admin.site table.form textarea[name='site[css]'] {
+	height: 16em;
+	width: 40em;
+}
+
+.admin.site table.form tr td:nth-child(1) {
+	padding-right: 20px;
+}
+
+.admin.site table.form label[for='site_launch'] {
+	font-weight: normal;
+}
+
+.admin.site table.form label[for='site_invite_only'] {
+	font-weight: normal;
 }
