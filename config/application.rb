@@ -54,8 +54,8 @@ module Friskyfactory
     config.filter_parameters += [:password]
     
     config.generators do |g|
-      # g.template_engine :haml
-      # g.test_framework :rspec, :fixture => true, :views => true
+      g.template_engine :haml
+      g.test_framework :rspec, :fixture => true, :views => true
       # g.fixture_replacement :factory_girl, :dir => "spec/support/factories"
     end
   end

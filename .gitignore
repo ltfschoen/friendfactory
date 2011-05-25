@@ -4,6 +4,7 @@ db/*.sqlite3
 log/*.log
 log/*.pid
 tmp/**/*
+bin/*
 index/*
 db/sphinx/*
 config/database.yml

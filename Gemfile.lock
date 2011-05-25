@@ -46,6 +46,11 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     haml (3.0.25)
+    haml-rails (0.3.4)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      haml (~> 3.0)
+      railties (~> 3.0)
     i18n (0.4.2)
     jquery-rails (0.2.6)
       rails (~> 3.0)
@@ -103,6 +108,7 @@ GEM
       railties (~> 3.0)
       rspec (~> 2.5.0)
     ruby-hmac (0.4.0)
+    sass (3.1.1)
     signature (0.1.2)
       ruby-hmac
     thor (0.14.6)
@@ -127,6 +133,7 @@ DEPENDENCIES
   authlogic
   factory_girl!
   haml
+  haml-rails
   jquery-rails
   memcache-client
   mysql2
@@ -135,6 +142,7 @@ DEPENDENCIES
   rails (= 3.0.1)
   remotipart
   rspec-rails (>= 2.5.0)
+  sass (>= 3.1.1)
   transitions
   webrat (>= 0.7.2)
   whenever

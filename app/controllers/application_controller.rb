@@ -3,8 +3,6 @@ require 'pusher'
 
 class ApplicationController < ActionController::Base
 
-  # include ActionController::Sites
-    
   protect_from_forgery
 
   filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?

@@ -28,10 +28,13 @@ gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
 gem 'remotipart'
 gem 'haml'
+gem 'haml-rails'
+gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on'
 gem 'pusher'
 gem 'will_paginate', '~> 3.0.pre2'
 gem 'whenever', :require => false
+
 # gem 'responsalizr'
 # gem 'postageapp'
 # gem 'exifr'
