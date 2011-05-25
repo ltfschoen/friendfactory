@@ -106,6 +106,8 @@ Friskyfactory::Application.routes.draw do
     end
     resources :sites, :only => [ :index, :new, :create, :edit, :update ]
   end
+  
+  get 'stylesheets/:layout.:format' => 'admin/sites#stylesheets', :as => 'site_stylesheet'
     
   # The priority is based upon order of creation:
   # first created -> highest priority.

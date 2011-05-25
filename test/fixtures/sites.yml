@@ -12,9 +12,9 @@ positivelyfrisky:
     launch: false
     invite_only: true
 
-friskysoldiers:
+friskyforces:
     id: 3
-    name: friskysoldiers
-    display_name: FriskySoldiers
+    name: friskyforces
+    display_name: FriskyForces
     launch: true
     invite_only: false

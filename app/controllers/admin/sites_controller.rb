@@ -1,6 +1,6 @@
 class Admin::SitesController < ApplicationController
 
-  before_filter :require_admin
+  before_filter :require_admin, :except => [ :stylesheets ]
 
   def index
     @sites = Site.order('name asc')
@@ -39,6 +39,12 @@ class Admin::SitesController < ApplicationController
       else
         format.html { render :action => "edit" }
       end
+    end
+  end
+  
+  def stylesheets
+    respond_to do |format|
+      format.css { render :layout => false }
     end
   end
 

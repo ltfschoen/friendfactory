@@ -1,7 +1,7 @@
-.ticket .front.face {
+html.application .ticket .front.face {
 	background: url('/images/friskyhands/ticket.png');
 }
 
-.ticket .back.face {
+html.application .ticket .back.face {
 	background: url('/images/friskyhands/ticket.png') 0 -250px;
 }

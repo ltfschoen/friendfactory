@@ -1,55 +1,59 @@
-html {
+html.welcome {
 	background-color: #415943;
 }
 
-body {
+html.welcome body {
 	background: url('/images/friskyforces/background.jpg') no-repeat top center;	
 	background-color: #415943;
 }
 
-p {
+html.welcome p {
     color: #FFF;
 	text-shadow: 0 1px 2px #0b007E;
 }
 
-a, a:link, a:hover, a:visited, a:active {
+html.welcome a,
+html.welcome a:link,
+html.welcome a:hover,
+html.welcome a:visited,
+html.welcome a:active {
     color: #FFF;
 }
 
-h1 {
+html.welcome h1 {
 	text-shadow: 4px 8px 6px #374C39;
 	color: #FFF;
 }
 
-h2 {
+html.welcome h2 {
 	color: #374C39;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-h3 {
+html.welcome h3 {
 	color: #FFF;
 	text-shadow: 1px 2px 1px #374C39;
 }
 
-h4 {
+html.welcome h4 {
 	color: #FFF;
 	text-shadow: 0 3px 3px #374C39;
 }
 
-label {
+html.welcome label {
     color: #0b007E;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-.panel.login a.new_password {
+html.welcome .panel.login a.new_password {
     color: #FFF;
 }
 
-.flash.notice a {
+html.welcome .flash.notice a {
     color: #FFF;
 }
 
-.flash.error li {
+html.welcome .flash.error li {
     color: #0b007E;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }

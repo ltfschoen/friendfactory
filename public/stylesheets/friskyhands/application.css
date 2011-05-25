@@ -1,25 +1,25 @@
-body {
+html.application body {
 	background: url('/images/friskyhands/fibers.jpg') repeat top center #B6A27D;
 }
 
-.header.primary { 
+html.application .header.primary { 
 	background: url('/images/friskyhands/header.png') no-repeat top center;
 }
 
-.header.primary ul.nav li a {
+html.application .header.primary ul.nav li a {
 	background-image: url('/images/friskyhands/header.png');
 }
 
-.header.secondary a:visited,
-.header.secondary a:active {
+html.application .header.secondary a:visited,
+html.application .header.secondary a:active {
     color: #664;
 }
 
-.header.secondary .flash {
+html.application .header.secondary .flash {
     color: #664;
 }
 
-.header.secondary a:hover {
+html.application .header.secondary a:hover {
     color: #CCA;
     background-color: #553;
 }

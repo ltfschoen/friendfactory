@@ -9,12 +9,13 @@
       'reset', 'forms', '960', |
       'friskyfactory/application', |
       'friskyfactory/effects', |
-      "#{current_site}/jquery-ui", |
+      'friskyfactory/jquery-ui', |
       'friskyfactory/waves/', |
       'friskyfactory/postings/', |
-      "#{current_site}/application", |
-      "#{current_site}/waves/", |
-      "#{current_site}/postings/", :media => 'screen', :cache => "#{current_site}/application.cached"
+      :media => 'screen', |
+      :cache => 'application.css'
+      
+    = stylesheet_link_tag 'application'
 
     / [if IE]
       = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
