@@ -38,10 +38,11 @@ input[type='text'], input[type='password'], textarea {
 }
 
  /* MJB: Added button */
-input[type=text], input[type=password],
+input[type='text'], input[type='password'],
 input.text, input.title,
 textarea, select,
 button,
+a.button,
 input.password {
   margin: 0.5em 0;
 }
