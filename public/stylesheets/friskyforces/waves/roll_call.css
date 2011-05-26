@@ -1,17 +1,17 @@
 html.application .tag-cloud a,
 html.application .tag-cloud a:visited {
-    color: #501508;
+    color: #CCA;
 }
 
 html.application .tag-cloud a:hover {
     color: #CCA;
-    background-color: rgb(80, 21, 8);
+    background-color: rgb(63, 63, 23);
 }
 
 html.application .tag-cloud a.current,
 html.application .tag-cloud a.current:hover {
     color: #CCA;
-    background-color: rgb(140, 55, 44);
+    background-color: rgb(63, 63, 23);
 }
 
 html.application .tag-cloud a.current,

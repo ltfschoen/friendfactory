@@ -15,7 +15,7 @@
       :media => 'screen', |
       :cache => File.join('friskyfactory', 'friskyfactory')
       
-    = stylesheet_link_tag current_site.name
+    = stylesheet_link_tag current_site.name, :media => 'screen'
 
     / [if IE]
       = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'

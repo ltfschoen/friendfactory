@@ -8,14 +8,12 @@
     = stylesheet_links |
       'reset', 'forms', '960', |
       'friskyfactory/application', |
-      'friskyfactory/effects', |
+      'friskyfactory/welcome', |
       'friskyfactory/jquery-ui', |
-      'friskyfactory/waves/', |
-      'friskyfactory/postings/', |
       :media => 'screen', |
-      :cache => File.join('friskyfactory', 'friskyfactory')
+      :cache => File.join('friskyfactory', 'welcome')
 
-    = stylesheet_link_tag 'welcome', :media => 'screen'
+    = stylesheet_link_tag current_site.name, :media => 'screen'
 
     / [if IE]
       = stylesheet_link_tag 'friskyfactory/ie', :media => 'screen'
