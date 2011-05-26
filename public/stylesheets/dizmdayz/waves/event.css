@@ -1,7 +1,0 @@
-.ticket .front.face {
-	background: url('/images/dizmdaze/ticket.png');
-}
-
-.ticket .back.face {
-	background: url('/images/dizmdaze/ticket.png') 0 -250px;
-}

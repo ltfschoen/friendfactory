@@ -3,7 +3,7 @@
   %head
     %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
     %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
-    %title= @title || current_site
+    %title= @title || current_site.display_name
 
     = stylesheet_links |
       'reset', 'forms', '960', |
@@ -13,9 +13,9 @@
       'friskyfactory/waves/', |
       'friskyfactory/postings/', |
       :media => 'screen', |
-      :cache => 'application'
+      :cache => 'friskyfactory'
       
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag current_site.name
 
     / [if IE]
       = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'

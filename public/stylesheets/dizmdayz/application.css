@@ -1,217 +1,218 @@
-body {
+html.application body {
 	background-image: url('/images/dizmdayz/background-header.jpg'), url('/images/dizmdayz/background.jpg');
 	background-position: top center, top center;
 	background-repeat: no-repeat, repeat-y;
 	background-color: #000;
 }
 
-.header.primary {
+html.application .header.primary {
 	background: url('/images/dizmdayz/header.png') no-repeat top center;
 	margin-top: 140px;
+	margin-bottom: 30px;
 }
 
-.header.primary ul.nav li a {
+html.application .header.primary ul.nav li a {
 	background-image: url('/images/dizmdayz/header.png');
 }
 
-.page.footer {
+html.application .page.footer {
 	color: #000;
 }
 
-.header.secondary { 
+html.application .header.secondary { 
 	color: #FFF
 }
 
-.header.secondary a:visited,
-.header.secondary a:active {
+html.application .header.secondary a:visited,
+html.application .header.secondary a:active {
     color: #FFF;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-1 {
+html.application .header.primary ul.nav li#nav-1 {
 	top: 70px;
 	left: 300px;
 }
 
-.header.primary ul.nav li#nav-1 a {
+html.application .header.primary ul.nav li#nav-1 a {
 	width: 60px;
 	height: 16px;
 	background-position: -250px -70px;
 }
 
-.header.primary ul.nav li#nav-1 a:hover,
-.header.primary ul.nav li#nav-1.current a:hover {
+html.application .header.primary ul.nav li#nav-1 a:hover,
+html.application .header.primary ul.nav li#nav-1.current a:hover {
 	background-position: -250px -129px;
 }
 
-.header.primary ul.nav li#nav-1 a:active,
-.header.primary ul.nav li#nav-1.current a:active {
+html.application .header.primary ul.nav li#nav-1 a:active,
+html.application .header.primary ul.nav li#nav-1.current a:active {
 	background-position: -250px -129px;
 }
 
-.header.primary ul.nav li#nav-1.current a {
+html.application .header.primary ul.nav li#nav-1.current a {
 	background-position: -250px -129px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-2 {
+html.application .header.primary ul.nav li#nav-2 {
 	top: 70px;
 	left: 380px;
 }
 
-.header.primary ul.nav li#nav-2 a {
+html.application .header.primary ul.nav li#nav-2 a {
 	width: 80px;
 	height: 16px;
 	background-position: -330px -70px;
 }
 
-.header.primary ul.nav li#nav-2 a:hover,
-.header.primary ul.nav li#nav-2.current a:hover {
+html.application .header.primary ul.nav li#nav-2 a:hover,
+html.application .header.primary ul.nav li#nav-2.current a:hover {
     background-position: -330px -129px;
 }
 
-.header.primary ul.nav li#nav-2 a:active,
-.header.primary ul.nav li#nav-2.current a:active {
+html.application .header.primary ul.nav li#nav-2 a:active,
+html.application .header.primary ul.nav li#nav-2.current a:active {
     background-position: -330px -129px;
 }
 
-.header.primary ul.nav li#nav-2.current a {
+html.application .header.primary ul.nav li#nav-2.current a {
     background-position: -330px -129px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-3 {
+html.application .header.primary ul.nav li#nav-3 {
 	top: 70px;
 	left: 478px;
 }
 
-.header.primary ul.nav li#nav-3 a {
+html.application .header.primary ul.nav li#nav-3 a {
 	width: 60px;
 	height: 16px;
 	background-position: -428px -70px;
 }
 
-.header.primary ul.nav li#nav-3 a:hover,
-.header.primary ul.nav li#nav-3.current a:hover {
+html.application .header.primary ul.nav li#nav-3 a:hover,
+html.application .header.primary ul.nav li#nav-3.current a:hover {
     background-position: -428px -129px;
 }
 
-.header.primary ul.nav li#nav-3 a:active,
-.header.primary ul.nav li#nav-3.current a:active {
+html.application .header.primary ul.nav li#nav-3 a:active,
+html.application .header.primary ul.nav li#nav-3.current a:active {
     background-position: -428px -129px;
 }
 
-.header.primary ul.nav li#nav-3.current a {
+html.application .header.primary ul.nav li#nav-3.current a {
     background-position: -428px -129px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-4 {
+html.application .header.primary ul.nav li#nav-4 {
 	top: 70px;
 	left: 570px;
 }
 
-.header.primary ul.nav li#nav-4 a {
+html.application .header.primary ul.nav li#nav-4 a {
 	width: 60px;
 	height: 16px;
 	background-position: -520px -70px;
 }
 
-.header.primary ul.nav li#nav-4 a:hover,
-.header.primary ul.nav li#nav-4.current a:hover {
+html.application .header.primary ul.nav li#nav-4 a:hover,
+html.application .header.primary ul.nav li#nav-4.current a:hover {
     background-position: -520px -129px;
 }
 
-.header.primary ul.nav li#nav-4 a:active,
-.header.primary ul.nav li#nav-4.current a:active {
+html.application .header.primary ul.nav li#nav-4 a:active,
+html.application .header.primary ul.nav li#nav-4.current a:active {
     background-position: -520px -129px;
 }
 
-.header.primary ul.nav li#nav-4.current a {
+html.application .header.primary ul.nav li#nav-4.current a {
     background-position: -520px -129px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-5 {
+html.application .header.primary ul.nav li#nav-5 {
 	top: 70px;
 	left: 660px;
 }
 
-.header.primary ul.nav li#nav-5 a {
+html.application .header.primary ul.nav li#nav-5 a {
 	width: 50px;
 	height: 16px;
 	background-position: -610px -70px;
 }
 
-.header.primary ul.nav li#nav-5 a:hover,
-.header.primary ul.nav li#nav-5.current a:hover {
+html.application .header.primary ul.nav li#nav-5 a:hover,
+html.application .header.primary ul.nav li#nav-5.current a:hover {
 	background-position: -610px -129px;
 }
 
-.header.primary ul.nav li#nav-5 a:active,
-.header.primary ul.nav li#nav-5.current a:active {
+html.application .header.primary ul.nav li#nav-5 a:active,
+html.application .header.primary ul.nav li#nav-5.current a:active {
 	background-position: -610px -129px;
 }
 
-.header.primary ul.nav li#nav-5.current a {
+html.application .header.primary ul.nav li#nav-5.current a {
 	background-position: -610px -129px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-6 {
+html.application .header.primary ul.nav li#nav-6 {
 	top: 70px;
 	left: 736px;
 }
 
-.header.primary ul.nav li#nav-6 a {
+html.application .header.primary ul.nav li#nav-6 a {
 	width: 52px;
 	height: 16px;
 	background-position: -686px -70px;
 }
 
-.header.primary ul.nav li#nav-6 a:hover,
-.header.primary ul.nav li#nav-6.current a:hover {
+html.application .header.primary ul.nav li#nav-6 a:hover,
+html.application .header.primary ul.nav li#nav-6.current a:hover {
 	background-position: -686px -129px;
 }
 
-.header.primary ul.nav li#nav-6 a:active,
-.header.primary ul.nav li#nav-6.current a:active {
+html.application .header.primary ul.nav li#nav-6 a:active,
+html.application .header.primary ul.nav li#nav-6.current a:active {
 	background-position: -686px -129px;
 }
 
-.header.primary ul.nav li#nav-6.current a {
+html.application .header.primary ul.nav li#nav-6.current a {
 	background-position: -686px -129px;
 }
 
 /* * * */
 
-.header.primary ul.nav li#nav-8 {
+html.application .header.primary ul.nav li#nav-8 {
 	top: 70px;
 	left: 820px;
 }
 
-.header.primary ul.nav li#nav-8 a {
+html.application .header.primary ul.nav li#nav-8 a {
 	width: 70px;
 	height: 16px;
 	background-position: -770px -70px;
 }
 
-.header.primary ul.nav li#nav-8 a:hover,
-.header.primary ul.nav li#nav-8.current a:hover {
+html.application .header.primary ul.nav li#nav-8 a:hover,
+html.application .header.primary ul.nav li#nav-8.current a:hover {
     background-position: -770px -129px;
 }
 
-.header.primary ul.nav li#nav-8 a:active,
-.header.primary ul.nav li#nav-8.current a:active {
+html.application .header.primary ul.nav li#nav-8 a:active,
+html.application .header.primary ul.nav li#nav-8.current a:active {
     background-position: -770px -129px;
 }
 
-.header.primary ul.nav li#nav-8.current a {
+html.application .header.primary ul.nav li#nav-8.current a {
     background-position: -770px -129px;
 }

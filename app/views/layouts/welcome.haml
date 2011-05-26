@@ -2,17 +2,18 @@
 %html.welcome.no-js
   %head
     %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-    - if browser_is('ie')
-      %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
-    %title= current_site.name.titleize
+    %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+    %title= current_site.display_name
     
-    = stylesheet_link_tag |
+    = stylesheet_links |
       'reset', 'forms', '960', |
       'friskyfactory/application', |
-      'friskyfactory/welcome', |
-      'friskyfactory/jquery-ui.css', |
+      'friskyfactory/effects', |
+      'friskyfactory/jquery-ui', |
+      'friskyfactory/waves/', |
+      'friskyfactory/postings/', |
       :media => 'screen', |
-      :cache => 'welcome'
+      :cache => 'friskyfactory'
 
     = stylesheet_link_tag 'welcome', :media => 'screen'
 

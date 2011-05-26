@@ -28,6 +28,7 @@
 }
 
 .ticket .front.face {
+	background: url('/images/friskyfactory/ticket.png');	
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
@@ -84,6 +85,7 @@
 }
 
 .ticket .back.face {
+	background: url('/images/friskyfactory/ticket.png') 0 -250px;	
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
