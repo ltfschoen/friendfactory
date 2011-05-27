@@ -1,8 +1,7 @@
 class Site < ActiveRecord::Base  
 
-  validates_presence_of :name
+  validates_presence_of   :name, :display_name
   validates_uniqueness_of :name
-  validates_presence_of :display_name
 
   has_many :invitations, :as => :resource, :class_name => 'Posting::Invitation' do
     def anonymous(code)
@@ -10,13 +9,15 @@ class Site < ActiveRecord::Base
     end
   end
   
-  has_and_belongs_to_many :users
-  
+  has_and_belongs_to_many :users  
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
+
+  has_many :assets
+  accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
 
   def home_wave
     waves.site(self).type(Wave::Community).published.order('created_at asc').limit(1).try(:first)

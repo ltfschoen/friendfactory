@@ -2,5 +2,4 @@
 - javascript 'admin'
 .grid_14.push_1.admin.canvas.site
   %h1 New Site
-  = form_for @site, :url => admin_sites_path, :html => { :method => :put } do |f|    
-    = render :partial => 'form', :locals => { :f => f }
+  = render :partial => 'form'

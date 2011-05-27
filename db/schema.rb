@@ -10,12 +10,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110525054823) do
+ActiveRecord::Schema.define(:version => 20110526122102) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
     t.string "defective",     :null => false
     t.string "corrected"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.string   "name"
+    t.integer  "site_id"
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "friendships", :force => true do |t|
