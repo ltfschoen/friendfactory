@@ -27,7 +27,7 @@ jQuery(function($) {
 		.buttonize({ text: true })
 		
 		.find('input[type="file"]')
-			.bind('change', function() {
+			.live('change', function() {
 				var $this = $(this),
 					$tr = $this.closest('.tr.asset'),
 					seq = $tr.prevAll('.tr.asset').andSelf().length;
