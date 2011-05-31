@@ -10,11 +10,17 @@ class Posting::MessagesController < ApplicationController
     end
   end
 
-  def create    
-    if @wave = current_user.conversations.site(current_site).find_by_id(params[:wave_id])
-      posting_message_params = params[:posting_message].merge(:sender => current_user, :receiver => @wave.recipient, :site => current_site)
-      @posting = @wave.messages.create(posting_message_params)
-      broadcast_posting(@posting, (@posting.waves - [ @wave ]))
+  def create
+    if @wave = current_user.conversations.find_by_id(params[:wave_id])
+      @posting = Posting::Message.new(params[:posting_message]).tap do |posting|
+        posting.sender = current_user
+        posting.receiver = @wave.receiver
+        posting.site = current_site
+      end
+      if @wave.messages << @posting
+        @posting.publish!
+        broadcast_posting(@posting, (@posting.waves - [ @wave ]))
+      end
     end
     respond_to do |format|
       format.js { render :layout => false }
