@@ -43,7 +43,7 @@
 				.bind('ajax:loading', function() {
 					var $this = $(this),
 						$textarea = $this.find('textarea#posting_message_body'),
-						$thread = $this.closest('.wave_conversation').find('.thread');
+						$thread = $this.closest('.wave_conversation').find('.thread ul.messages');
 
 					$thread.append($("<li><div class='posting posting_message sent'>" + $textarea.val() + "</div></li>"));
 					// $thread[0].scrollTop = $thread[0].scrollHeight;

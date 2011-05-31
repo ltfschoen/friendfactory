@@ -222,6 +222,10 @@ div.polaroid .pane.conversation .thread .time_ago {
 	margin-bottom: 6px;
 }
 
+div.polaroid .pane.conversation .thread ul.messages {
+	list-style: none;
+}
+
 div.polaroid .pane.conversation .posting_message {
 	margin: 4px 5px;
 	min-width: 10px;
