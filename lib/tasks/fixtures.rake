@@ -2,12 +2,20 @@ namespace :ff do
   namespace :fixtures do
     
     desc "Load friskyfactory fixtures"
-    task :load => [ :'load:models', :'load:taggables', :'load:avatars', :'load:photos' ] # ts:rebuild
+    task :load => [ :'load:models', :'load:css', :'load:taggables', :'load:avatars', :'load:photos' ] # ts:rebuild
     
     namespace :load do      
       task :models do
         ENV['FIXTURES_PATH'] = 'test/fixtures'
         Rake::Task[:'db:fixtures:load'].invoke
+      end
+      
+      task :css => :environment do
+        Dir[File.join(Rails.root, 'test', 'fixtures', 'css', '*.css')].each do |file|
+          if site = Site.find_by_name(File.basename(file, '.css'))
+            site.update_attribute(:css, IO.read(file))
+          end
+        end
       end
       
       task :taggables => :environment do
