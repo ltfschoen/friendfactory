@@ -3,8 +3,9 @@ class Posting::MessagesController < ApplicationController
   before_filter :require_user
 
   def show
-    wave = current_user.conversations.site(current_site).find_by_id(params[:wave_id])
-    @posting = wave.postings.find_by_id(params[:id]) if wave.present?
+    if wave = current_user.conversations.find_by_id(params[:wave_id])
+      @posting = wave.postings.find_by_id(params[:id])
+    end
     respond_to do |format|
       format.html { render :layout => false }
     end
@@ -17,7 +18,8 @@ class Posting::MessagesController < ApplicationController
         posting.receiver = @wave.receiver
         posting.site = current_site
       end
-      if @wave.messages << @posting
+      if @posting.valid?
+        @wave.messages << @posting
         @posting.publish!
         broadcast_posting(@posting, (@posting.waves - [ @wave ]))
       end

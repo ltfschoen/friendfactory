@@ -24,49 +24,34 @@ describe Posting::MessagesController do
       response.should be_successful
     end
   end
-  
-  # describe "GET index" do
-  #   it "assigns all messages as @messages" do
-  #     Message.stub(:find).with(:all).and_return([mock_message])
-  #     get :index
-  #     assigns[:messages].should == [mock_message]
-  #   end
-  # end
-  # 
-  # describe "GET show" do
-  #   it "assigns the requested message as @message" do
-  #     Message.stub(:find).with("37").and_return(mock_message)
-  #     get :show, :id => "37"
-  #     assigns[:message].should equal(mock_message)
-  #   end
-  # end
-  # 
-  # describe "GET new" do
-  #   it "assigns a new message as @message" do
-  #     pending do
-  #       Message.stub(:new).and_return(mock_message)
-  #       get :new
-  #       assigns[:message].should equal(mock_message)
-  #     end
-  #   end
-  # end
-  # 
-  # describe "GET edit" do
-  #   it "assigns the requested message as @message" do
-  #     pending do
-  #       Message.stub(:find).with("37").and_return(mock_message)
-  #       get :edit, :id => "37"
-  #       assigns[:message].should equal(mock_message)
-  #     end
-  #   end
-  # end
+    
+  describe "GET show" do    
+    it "assigns the requested message as @posting" do
+      login(:friskyhands, :adam).stub_chain(:conversations, :find_by_id).and_return(mock_conversation)
+      mock_conversation.stub_chain(:postings, :find_by_id).with('42').and_return(mock_message)
+      get :show, { :wave_id => "37", :id => "42" }
+      assigns[:posting].should equal(mock_message)
+    end
+    
+    it "does not assign @posting when wave not found" do
+      login(:friskyhands, :adam).stub_chain(:conversations, :find_by_id).and_return(nil)
+      post :show, { :wave_id => "37", :id => "42" }
+      assigns[:posting].should be_nil
+    end
+
+    it "does not assign @posting when posting not found" do
+      login(:friskyhands, :adam).stub_chain(:conversations, :find_by_id).and_return(mock_conversation)
+      mock_conversation.stub_chain(:postings, :find_by_id).and_return(nil)
+      post :show, { :wave_id => "37", :id => "42" }
+      assigns[:posting].should be_nil
+    end
+  end
   
   describe "POST create" do
     let(:adam) { users(:adam) }
     
     before(:each) do
-      adam.stub_chain(:conversations, :find_by_id).and_return(mock_conversation.as_null_object)
-      login(:friskyhands, :adam)
+      login(:friskyhands, :adam).stub_chain(:conversations, :find_by_id).and_return(mock_conversation.as_null_object)      
     end
     
     it "always renders create.js" do
@@ -102,95 +87,24 @@ describe Posting::MessagesController do
     end
   
     describe "with invalid params" do
-  #     it "assigns a newly created but unsaved message as @message" do
-  #       pending do
-  #         Message.stub(:new).with({'these' => 'params'}).and_return(mock_message(:save => false))
-  #         post :create, :message => {:these => 'params'}
-  #         assigns[:message].should equal(mock_message)
-  #       end
-  #     end
-  # 
-  #     it "re-renders the 'new' template" do
-  #       pending do
-  #         Message.stub(:new).and_return(mock_message(:save => false))
-  #         post :create, :message => {}
-  #         response.should render_template('new')
-  #       end
-  #     end
+      it "assigns a newly created but unsaved message as @posting" do        
+        Posting::Message.stub(:new).and_return(mock_message(:valid? => false).as_null_object)
+        post :create, { :wave_id => "42" }
+        assigns[:posting].should equal(mock_message)
+      end
+
+      it "does not assign an invalid message to the wave's messages" do        
+        mock_conversation.stub(:messages).and_return(messages = double)
+        Posting::Message.stub(:new).and_return(mock_message(:valid? => false).as_null_object)
+        messages.should_not_receive(:<<)
+        post :create, { :wave_id => "42" }        
+      end
+      
+      it "@posting is not defined when wave not found" do
+        adam.stub_chain(:conversations, :find_by_id).and_return(nil)
+        assigns[:posting].should be_nil
+        post :create, { :wave_id => "42" }        
+      end      
     end  
   end
-  
-  # describe "PUT update" do
-  #   describe "with valid params" do
-  #     it "updates the requested message" do
-  #       pending do
-  #         Message.should_receive(:find).with("37").and_return(mock_message)
-  #         mock_message.should_receive(:update_attributes).with({'these' => 'params'})
-  #         put :update, :id => "37", :message => {:these => 'params'}
-  #       end
-  #     end
-  # 
-  #     it "assigns the requested message as @message" do
-  #       pending do
-  #         Message.stub(:find).and_return(mock_message(:update_attributes => true))
-  #         put :update, :id => "1"
-  #         assigns[:message].should equal(mock_message)
-  #       end
-  #     end
-  # 
-  #     it "redirects to the message" do
-  #       pending do
-  #         Message.stub(:find).and_return(mock_message(:update_attributes => true))
-  #         put :update, :id => "1"
-  #         response.should redirect_to(message_url(mock_message))
-  #       end
-  #     end
-  #   end
-  # 
-  #   describe "with invalid params" do
-  #     it "updates the requested message" do
-  #       pending do
-  #         Message.should_receive(:find).with("37").and_return(mock_message)
-  #         mock_message.should_receive(:update_attributes).with({'these' => 'params'})
-  #         put :update, :id => "37", :message => {:these => 'params'}
-  #       end
-  #     end
-  # 
-  #     it "assigns the message as @message" do
-  #       pending do
-  #         Message.stub(:find).and_return(mock_message(:update_attributes => false))
-  #         put :update, :id => "1"
-  #         assigns[:message].should equal(mock_message)
-  #       end
-  #     end
-  # 
-  #     it "re-renders the 'edit' template" do
-  #       pending do
-  #         Message.stub(:find).and_return(mock_message(:update_attributes => false))
-  #         put :update, :id => "1"
-  #         response.should render_template('edit')
-  #       end
-  #     end
-  #   end
-  # 
-  # end
-  # 
-  # describe "DELETE destroy" do
-  #   it "destroys the requested message" do
-  #     pending do
-  #       Message.should_receive(:find).with("37").and_return(mock_message)
-  #       mock_message.should_receive(:destroy)
-  #       delete :destroy, :id => "37"
-  #     end
-  #   end
-  # 
-  #   it "redirects to the messages list" do
-  #     pending do 
-  #       Message.stub(:find).and_return(mock_message(:destroy => true))
-  #       delete :destroy, :id => "1"
-  #       response.should redirect_to(messages_url)
-  #     end
-  #   end
-  # end
-
 end

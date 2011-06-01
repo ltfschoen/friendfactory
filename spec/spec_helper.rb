@@ -53,8 +53,10 @@ end
 # end
 
 def login(site, user)
-  UserSession.stub!(:find).and_return(mock(UserSession, { :record => users(user) }))
+  user_record = users(user)
+  UserSession.stub!(:find).and_return(mock(UserSession, { :record => user_record }))
   Site.stub!(:find_by_name).and_return(sites(site))
+  user_record
 end
 
 # http://wincent.com/knowledge-base/Fixtures_considered_harmful%3F
