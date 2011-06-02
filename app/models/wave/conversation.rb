@@ -14,7 +14,6 @@ class Wave::Conversation < Wave::Base
   end
 
   alias :recipient :resource
-  alias :receiver  :resource
 
   private
     

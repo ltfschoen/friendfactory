@@ -15,7 +15,7 @@ class Posting::MessagesController < ApplicationController
     if @wave = current_user.conversations.find_by_id(params[:wave_id])
       @posting = Posting::Message.new(params[:posting_message]).tap do |posting|
         posting.sender = current_user
-        posting.receiver = @wave.receiver
+        posting.receiver = @wave.recipient
         posting.site = current_site
       end
       if @posting.valid?

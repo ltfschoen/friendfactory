@@ -6,14 +6,13 @@ class Posting::Message < Posting::Base
   alias_attribute :sender, :user
   alias_attribute :sender_id, :user_id
 
-  attr_accessible :subject, :body, :sender, :receiver, :site
-  
+  attr_accessible :subject, :body, :sender, :receiver, :site  
   attr_readonly :user, :receiver, :site
+
+  validates_presence_of :user, :receiver, :site
   
   has_many :notifications
   
-  validates_presence_of :user, :receiver, :site
-
   after_create do |posting|
     posting.publish!
     if wave = find_or_create_recipient_wave(posting)
@@ -23,7 +22,8 @@ class Posting::Message < Posting::Base
   end
   
   after_commit do |posting|
-    if !posting.receiver.online? && posting.receiver.emailable?
+    receiver = posting.receiver
+    if !receiver.online? && receiver.emailable?
       MessagesMailer.new_message_notification(posting).deliver
     end
   end

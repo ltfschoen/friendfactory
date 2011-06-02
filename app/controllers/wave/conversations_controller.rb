@@ -5,6 +5,9 @@ class Wave::ConversationsController < ApplicationController
   def index
     inbox = current_user.inbox(current_site) || current_user.create_inbox(current_site)
     @waves = inbox.waves
+    @profiles = inbox.waves.map do |conversation|
+      conversation.recipient.profile(current_site)
+    end
     respond_to do |format|
       format.html
     end
