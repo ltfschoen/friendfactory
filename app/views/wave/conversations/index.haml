@@ -1,5 +1,3 @@
-.inbox.clearfix
-  = render :partial => 'conversation', :collection => @waves
 .wave.inbox.roll_call.grid_16
   - @profiles.in_groups_of(3) do |group|
     - group.each_with_index do |profile, idx|
