@@ -3,3 +3,5 @@
     - group.each_with_index do |profile, idx|
       - unless profile.nil?
         = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
+.grid_16
+  = will_paginate @profiles

@@ -117,7 +117,7 @@ jQuery(function($) {
 	
 	(function() {		
 		var $loading = $("<p class='loading grid_4 push_6'>Loading More Postings&hellip;</p>"),
-			$footer = $('.page.footer'),
+			$footer = $('.wave_community + .page.footer'),
 			opts = { offset: '110%' };
 		
 		if ($('.pagination').length === 0) return;
