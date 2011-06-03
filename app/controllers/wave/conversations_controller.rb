@@ -4,10 +4,8 @@ class Wave::ConversationsController < ApplicationController
 
   def index
     inbox = current_user.inbox(current_site) || current_user.create_inbox(current_site)
-    @waves = inbox.waves
-    @profiles = inbox.waves.map do |conversation|
-      conversation.recipient.profile(current_site)
-    end
+    recipient_user_ids = inbox.waves.select('resource_id').map(&:resource_id)
+    @profiles = Wave::Profile.where('user_id in (?)', recipient_user_ids).joins(:sites).where(:sites => { :id => current_site.id })
     respond_to do |format|
       format.html
     end
