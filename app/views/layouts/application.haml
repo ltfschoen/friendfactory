@@ -13,7 +13,7 @@
       'friskyfactory/waves/', |
       'friskyfactory/postings/', |
       :media => 'screen', |
-      :cache => File.join('friskyfactory', 'wcache')
+      :cache => 'friskyfactory/cache/application'
       
     = stylesheet_link_tag current_site.name, :media => 'screen'
 
@@ -26,34 +26,35 @@
         #{page_css}
 
     - if Rails.env.development?
-      = javascript_include_tag 'jquery.js', 'jquery-ui.js', 'jquery.tools.min.js', 'debug.js'
+      = javascript_include_tag 'lib/jquery/jquery.js', 'lib/jquery/jquery-ui.js', 'lib/jquery/jquery.tools.min.js', 'debug.js'
     - else
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js'
       = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js'
       = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
       
     = javascript_includes |
-        'modernizr-1.6.min', |
-        'jquery.topzindex.min', |
-        'jquery.Storage', |
-        'jquery.placehold-0.3.min', |
-        'jquery.textareaCounter.plugin', |
-        'pusher.min.js', |
-        'autoresize.jquery.min.js', |
-        'jquery.masonry.min.js', |
-        'jquery.fileupload', |
-        'jquery.fileupload-ui', |
-        'jquery.flip.min', |
-        'jquery.scrollTo-1.4.2-min', |
-        'waypoints.min', |
+        'lib/modernizr-1.6.min', |
+        'lib/jquery/jquery.topzindex.min', |
+        'lib/jquery/jquery.Storage', |
+        'lib/jquery/jquery.placehold-0.3.min', |
+        'lib/jquery/jquery.textareaCounter.plugin', |
+        'lib/pusher.min.js', |
+        'lib/jquery/autoresize.jquery.min.js', |
+        'lib/jquery/jquery.masonry.min.js', |
+        'lib/jquery/jquery.fileupload', |
+        'lib/jquery/jquery.fileupload-ui', |
+        'lib/jquery/jquery.flip.min', |
+        'lib/jquery/jquery.scrollTo-1.4.2-min', |
+        'lib/jquery/waypoints.min', |
         'rails', |
-        'ff.effects', |
-        'ff.polaroid', |
-        'ff.postcard', |
-        'ff.ticket', |
+        'lib/ff.effects', |
+        'lib/ff.polaroid', |
+        'lib/ff.postcard', |
+        'lib/ff.ticket', |
         'application', |
         'waves/', |
-        'postings/', :cache => 'cached'
+        'postings/', |
+        :cache => 'cache/application'
 
     = yield(:javascripts)    
     - if page_js = yield(:pagejs).present?

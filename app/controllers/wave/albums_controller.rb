@@ -7,7 +7,7 @@ class Wave::AlbumsController < ApplicationController
       @start_slide = start_slide(params[:id])
     end
     respond_to do |format|
-      format.html { render :layout => 'wave_album' }
+      format.html { render :layout => 'album' }
     end
   end
     
