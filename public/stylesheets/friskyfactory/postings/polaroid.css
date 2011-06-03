@@ -241,9 +241,9 @@ div.polaroid .pane.conversation .thread {
 	clear: both;
 }
 
-div.polaroid .pane.conversation .time-ago {
-	position: relative;
-	top: 10px;
+div.polaroid .pane.conversation .thread .time-ago {
+	text-align: right;
+	margin: 2px 6px;
 }
 
 div.polaroid .pane.conversation .thread ul.messages {
