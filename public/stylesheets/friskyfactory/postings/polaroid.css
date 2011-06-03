@@ -210,16 +210,32 @@ div.polaroid .pane.conversation .wave_conversation {
 	width: 260px;
 }
 
+div.polaroid .pane.conversation .header {
+	height: 38px;
+	width: 260px;
+	border-bottom: 1px solid #CCC;
+	margin-bottom: 4px;
+}
+
+div.polaroid .pane.conversation img.avatar.thimble {
+	float: right;
+}
+
+div.polaroid .pane.conversation img.avatar.thimble.recipient {
+	float: left;
+}
+
 div.polaroid .pane.conversation .thread {
-    height: 228px;
+    height: 184px;
 	color: gray;
 	font-size: 12px;
 	overflow: auto;
+	clear: both;
 }
 
-div.polaroid .pane.conversation .thread .time_ago {
-	text-align: center;
-	margin-bottom: 6px;
+div.polaroid .pane.conversation .time-ago {
+	position: relative;
+	top: 10px;
 }
 
 div.polaroid .pane.conversation .thread ul.messages {

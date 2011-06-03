@@ -14,7 +14,7 @@ module PostingsHelper
         :link_to_profile => true)    
     
     if opts[:style].to_sym == :thimble
-      opts[:style], opts[:class] = :thumb, 'thimble'
+      opts[:style], opts[:class] = :thumb, [ 'thimble', opts[:class] ].compact.join(' ')
     end
 
     klass = [ 'avatar', opts[:style], opts[:class] ]

@@ -1,6 +1,9 @@
 .wave[@wave]
-  .thread
-    .unobtrusive.time_ago= "Started #{time_ago_in_words(@wave.created_at)} ago"
+  .header
+    = avatar_image_tag(@wave.recipient, :style => :thimble, :class => 'recipient', :link_to_profile => false)
+    = avatar_image_tag(@wave.user, :style => :thimble)
+    / .unobtrusive.time-ago= "Started #{time_ago_in_words(@wave.created_at)} ago"
+  .thread    
     %ul.messages
       - @wave.messages.published.each do |posting|
         %li= render :partial => 'posting/messages/message', :object => posting

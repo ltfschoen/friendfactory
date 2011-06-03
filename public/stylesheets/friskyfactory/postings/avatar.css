@@ -1,10 +1,19 @@
 img.avatar.thumb {
 	padding: 0px;
 	border: 2px solid #CDCDCD;
-    width: 60px;
-    height: 60px;
+	width: 60px;
+	height: 60px;
 }
 
 img.avatar.thumb.online {
 	border: 2px solid green;
+}
+
+img.avatar.thimble {
+	width: 30px;
+	height: 30px;
+	border: 1px solid lightgray;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
