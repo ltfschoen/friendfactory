@@ -217,12 +217,20 @@ div.polaroid .pane.conversation .header {
 	margin-bottom: 4px;
 }
 
-div.polaroid .pane.conversation img.avatar.thimble {
+div.polaroid .pane.conversation .header img.avatar.thimble {
 	float: right;
 }
 
-div.polaroid .pane.conversation img.avatar.thimble.recipient {
+div.polaroid .pane.conversation .header img.avatar.thimble.recipient {
 	float: left;
+	margin-right: 6px;
+}
+
+div.polaroid .pane.conversation .header div.recipient {
+	float: left;
+	position: relative;
+	top: 8px;
+	font-size: small;
 }
 
 div.polaroid .pane.conversation .thread {
