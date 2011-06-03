@@ -1,8 +1,5 @@
 jQuery(document).ready(function($) {  
 
-	// Set up static polaroids
-	$('.polaroid-container > .polaroid').polaroid();
-
 	// Set up static postcards
 	$('.postcard').postcard();
 

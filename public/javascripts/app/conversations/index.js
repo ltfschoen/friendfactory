@@ -24,4 +24,6 @@ jQuery(function($) {
 			.attr('data-remote', 'true')
 			.attr('data-method', 'put');
 
+	$('div.polaroid', '.inbox').polaroid();
+
 });
