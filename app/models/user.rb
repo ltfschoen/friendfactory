@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_many :profiles, :class_name => 'Wave::Profile', :order => 'created_at desc'
+  has_many :profiles, :class_name => 'Wave::Profile'
   has_many :inboxes, :class_name => 'Wave::Inbox'  
 
   has_many :conversations, :class_name => 'Wave::Conversation', :order => 'created_at desc' do        
