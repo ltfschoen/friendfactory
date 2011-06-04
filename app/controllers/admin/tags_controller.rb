@@ -21,9 +21,9 @@ class Admin::TagsController < ApplicationController
   end
 
   def create
-    params[:admin_tag][:defective] = params[:admin_tag][:defective].strip
+    params[:admin_tag][:defective].strip!
     params[:admin_tag][:corrected] = nil if params[:admin_tag][:corrected].length == 0
-    @tag = Admin::Tag.new(params[:admin_tag].merge({:taggable_type => 'UserInfo'}))
+    @tag = Admin::Tag.new(params[:admin_tag].merge(:taggable_type => 'Wave::Profile'))
     respond_to do |format|
       if @tag.save
         format.html { redirect_to(admin_tags_path, :notice => 'Tag was successfully created.') }
@@ -53,7 +53,7 @@ class Admin::TagsController < ApplicationController
   end
   
   def commit
-    Tag.refresh_all
+    Admin::Tag.refresh_all
     respond_to do |format|
       format.html { redirect_to(admin_tags_path, :notice => 'Changes committed.') }
     end
