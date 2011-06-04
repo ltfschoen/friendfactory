@@ -14,7 +14,11 @@
       'friskyfactory/postings/', |
       :media => 'screen', |
       :cache => 'friskyfactory/cache/application'
-      
+
+    - file_name = "app/#{controller_name}.css"
+    - if File.exists?("public/stylesheets/#{file_name}")
+      = stylesheet_link_tag file_name
+
     = stylesheet_link_tag current_site.name, :media => 'screen'
 
     / [if IE]
@@ -57,7 +61,7 @@
         'postings/', |
         :cache => 'cache/application'
 
-    - file_name = "app/#{controller_name}/#{action_name}.js"
+    - file_name = "app/#{controller_name}.js"
     - if File.exists?("public/javascripts/#{file_name}")
       = javascript_include_tag file_name
 

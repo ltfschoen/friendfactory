@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-	$('.postcard', '.inbox')
+	$('.postcard', '.wave_inbox')
 		.draggable({
 			cancel: '.thread, textarea, button',
 			stack: '.wave_conversation',
@@ -24,6 +24,6 @@ jQuery(function($) {
 			.attr('data-remote', 'true')
 			.attr('data-method', 'put');
 
-	$('div.polaroid', '.inbox').polaroid({ pane: 3 });
+	$('div.polaroid', '.wave_inbox').polaroid({ pane: 3 });
 
 });
