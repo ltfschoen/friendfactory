@@ -19,6 +19,8 @@ class Posting::Avatar < Posting::Base
 
   before_create :set_dimensions  
   
+  scope :activated, where(:active => true)
+  
   def distribute(sites)
     sites.each do |site|
       if wave = site.waves.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)

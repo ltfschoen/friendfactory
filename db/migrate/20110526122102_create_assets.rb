@@ -1,6 +1,6 @@
 class CreateAssets < ActiveRecord::Migration
   def self.up
-    create_table :assets do |t|
+    create_table :assets, :force => true do |t|
       t.string  :name
       t.integer :site_id
       t.string  :asset_file_name

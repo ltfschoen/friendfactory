@@ -1,7 +1,15 @@
-.wave.inbox.roll_call.grid_16
-  - @profiles.in_groups_of(3) do |group|
-    - group.each_with_index do |profile, idx|
-      - unless profile.nil?
-        = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
-.grid_16
-  = will_paginate @profiles
+.wave.roll_call.grid_16[@inbox]
+  - if @profiles.length == 0
+    .push_2.grid_12.suffix_2.alpha.omega
+      .notice.canvas
+        %p You haven't started chatting or messaging anyone
+  - else
+    - if false
+      - @profiles.each do |profile|
+        = profile_avatar_image_tag(profile, :style => 'thumb')      
+    = will_paginate @conversation_ids, :class => 'grid_16 pagination append-bottom'
+    - @profiles.in_groups_of(3) do |group|
+      - group.each_with_index do |profile, idx|
+        - unless profile.nil?
+          = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
+    = will_paginate @conversation_ids, :class => 'grid_16 pagination append-top'

@@ -19,25 +19,41 @@ class Wave::Profile < Wave::Base
   alias :user_info :resource
 
   def after_add_posting_to_wave(posting)
-    active_avatar(posting)
+    set_active_avatar(posting)
     touch(posting)
     super
   end
   
-  def avatars
-    postings.type(Posting::Avatar)
-  end
+  # Use an association to provide eager loading.
+  has_many :avatars,
+      :through      => :publications,
+      :source       => :resource,
+      :source_type  => 'Posting::Base',
+      :conditions => { :type => Posting::Avatar, :parent_id => nil }
+  
+  # Use an association to provide eager loading.
+  # Can't use has_one :active_avatar becauses condition clause
+  # isn't respected and all associated postings (not just avatars)
+  # are eagerly loaded and a completely wrong posting will be returned.
+  has_many :active_avatars,
+      :through      => :publications,
+      :source       => :resource,
+      :source_type  => 'Posting::Base',
+      :conditions   => { 'postings.type' => Posting::Avatar, 'postings.parent_id' => nil, 'postings.state' => :published, 'postings.active' => true },
+      :order        => 'created_at desc'
 
-  def avatar
-    avatars.where('active = ?', true).limit(1).first
+  def active_avatar
+    active_avatars.sort_by{ |avatar| avatar.created_at }.last
   end
+  
+  alias :avatar :active_avatar
   
   def avatar?
     avatar.present?
   end
-    
+        
   def avatar_id
-    avatar.id if avatar.present?
+    avatar.try(:id)
   end
 
   def resource
@@ -67,7 +83,7 @@ class Wave::Profile < Wave::Base
 
   private
   
-  def active_avatar(avatar)
+  def set_active_avatar(avatar)
     if avatar.active?
       avatar_ids = avatars.map(&:id)
       Posting::Avatar.update_all([ 'active = ?', false], [ 'id in (?)', (avatar_ids - [ avatar.id ]) ])

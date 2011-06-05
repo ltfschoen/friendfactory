@@ -31,18 +31,12 @@ namespace :ff do
             avatar = Posting::Avatar.new.tap do |avatar|
               avatar.image = File.new(fixture)
               avatar.user = user
+              avatar.active = true
             end
             user.profiles.each { |profile| profile.postings << avatar }
             avatar.publish!
           end
-        end
-        
-        # Set last avatar of each user as active
-        User.all.each do |user|
-          user.profiles.each do |profile|            
-            profile.avatars.last.update_attribute(:active, true) unless profile.avatars.empty?
-          end
-        end
+        end        
       end
       
       task :photos => :environment do

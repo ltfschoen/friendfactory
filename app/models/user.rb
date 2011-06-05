@@ -78,8 +78,8 @@ class User < ActiveRecord::Base
   end
 
   has_many :profiles, :class_name => 'Wave::Profile'
-  has_many :inboxes, :class_name => 'Wave::Inbox'  
 
+  has_many :inboxes, :class_name => 'Wave::Inbox'
   has_many :conversations, :class_name => 'Wave::Conversation', :order => 'created_at desc' do        
     def site(site)
       joins(:sites).where('sites_waves.site_id = ?', site.id) if site.present?
@@ -152,10 +152,12 @@ class User < ActiveRecord::Base
   # === Profile ===
 
   def profile(site = enrollment_site)
+    raise "No site provided" if site.nil?
     if site == enrollment_site
       enrollment_profile      
     else
-      @profile ||= profiles.joins(:sites).where(:sites => { :id => site.id }).order('updated_at desc').limit(1).first
+      @cached_profiles ||= {}
+      @cached_profiles[site.name.to_sym] ||= profiles.site(site).published.order('updated_at desc').limit(1).first
     end
   end
 

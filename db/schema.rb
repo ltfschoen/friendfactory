@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526122102) do
+ActiveRecord::Schema.define(:version => 20110604222733) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -150,6 +150,25 @@ ActiveRecord::Schema.define(:version => 20110526122102) do
 
   add_index "postings_waves", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
   add_index "postings_waves", ["wave_id"], :name => "index_postings_waves_on_wave_id"
+
+  create_table "postings_waves_sans_id", :id => false, :force => true do |t|
+    t.integer "posting_id"
+    t.integer "wave_id"
+  end
+
+  add_index "postings_waves_sans_id", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
+  add_index "postings_waves_sans_id", ["wave_id"], :name => "index_postings_waves_on_wave_id"
+
+  create_table "publications", :force => true do |t|
+    t.integer  "wave_id",       :null => false
+    t.integer  "resource_id",   :null => false
+    t.string   "resource_type", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "publications", ["resource_id"], :name => "index_publications_on_resource_id"
+  add_index "publications", ["wave_id", "resource_id"], :name => "index_publications_on_wave_id_and_resource_id"
 
   create_table "resource_events", :force => true do |t|
     t.integer  "location_id"

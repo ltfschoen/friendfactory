@@ -20,7 +20,7 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
-  scope :site, lambda { |site| joins(:sites).where(:sites => { :id => site.id })}
+  scope :site, lambda { |site| joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').where('`sites_waves`.`site_id` = ?', site.id) }
   scope :type, lambda { |*types| where('type in (?)', types.map(&:to_s)) }
   scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
@@ -35,19 +35,19 @@ class Wave::Base < ActiveRecord::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'site_id'
 
-  has_and_belongs_to_many :postings,
-      :class_name              => 'Posting::Base',
-      :join_table              => 'postings_waves',
-      :foreign_key             => 'wave_id',
-      :association_foreign_key => 'posting_id',
-      :conditions              => 'parent_id is null',
-      :before_add              => :before_add_posting_to_wave,
-      :after_add               => :after_add_posting_to_wave do
-    
+  has_many :publications, :foreign_key => 'wave_id'
+
+  has_many :postings,
+      :through     => :publications,
+      :source      => :resource,
+      :source_type => 'Posting::Base',
+      :conditions  => 'parent_id is null',
+      :before_add  => :before_add_posting_to_wave,
+      :after_add   => :after_add_posting_to_wave do
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
-    end    
-    
+    end
+
     def <<(wave_or_posting)
       if wave_or_posting.is_a?(Wave::Base)
         wave_or_posting = Posting::WaveProxy.new.tap do |proxy|

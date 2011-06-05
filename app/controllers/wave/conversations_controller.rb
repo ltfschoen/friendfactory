@@ -6,17 +6,9 @@ class Wave::ConversationsController < ApplicationController
   @@per_page = 12
 
   def index
-    inbox = current_user.inbox(current_site) || current_user.create_inbox(current_site)
-    recipient_user_ids = inbox.waves.select('resource_id').
-        order('updated_at desc').
-        map(&:resource_id)
-      
-    @profiles = Wave::Profile.
-        where('user_id in (?)', recipient_user_ids).
-        joins(:sites).
-        where(:sites => { :id => current_site.id }).
-        paginate(:page => params[:page], :per_page => @@per_page)
-        
+    @inbox = current_user.inbox(current_site) || current_user.create_inbox(current_site)
+    @conversation_ids = @inbox.conversation_ids.paginate(:page => params[:page], :per_page => @@per_page)
+    @profiles = @inbox.recipient_profiles(current_site, @conversation_ids)
     respond_to do |format|
       format.html
     end

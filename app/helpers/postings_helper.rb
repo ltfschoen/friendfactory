@@ -1,5 +1,12 @@
 module PostingsHelper
   
+  def profile_avatar_image_tag(profile, opts)
+    if profile.avatar.present?
+      html = image_tag(profile.avatar.image.url(opts[:style]), :site => false)
+      block_given? ? yield(html) : html
+    end
+  end
+  
   def avatar_image_tag(user_or_avatar, opts = {})
     if user_or_avatar.is_a?(Hash)
       opts = user_or_avatar

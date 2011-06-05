@@ -5,5 +5,4 @@
     = render :partial => 'tab_content'
   .grid_16#postings-container
     = render_postings @postings
-  .grid_16
-    = will_paginate @postings
+  = will_paginate @postings, :class => 'grid_16 pagination append-top'

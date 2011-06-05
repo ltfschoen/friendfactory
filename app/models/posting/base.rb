@@ -40,12 +40,9 @@ class Posting::Base < ActiveRecord::Base
     
   belongs_to :user
   belongs_to :resource, :polymorphic => true  
-  has_and_belongs_to_many :waves,
-      :class_name              => 'Wave::Base',
-      :foreign_key             => 'posting_id',
-      :association_foreign_key => 'wave_id',
-      :join_table              => 'postings_waves',
-      :order                   => 'updated_at desc'
+  
+  has_many :publications, :as => :resource
+  has_many :waves, :through => :publications, :order => 'updated_at desc'
 
   def self.publish_to(destination, &block)
     after_create Publisher.new(destination, &block)
