@@ -216,3 +216,113 @@ html.application .header.primary ul.nav li#nav-8.current a:active {
 html.application .header.primary ul.nav li#nav-8.current a {
     background-position: -770px -129px;
 }
+
+html.application .wave_community .loading {
+	color: #FFF;
+	background-color: rgb(82, 53, 111);
+}
+
+html.application .wave_community .loading {
+	-webkit-box-shadow: 0px 0px 4px 4px #888;
+	-moz-box-shadow: 0px 0px 4px 4px #888;
+	box-shadow: 0px 0px 4px 4px #888;
+}
+
+html.application .tag-cloud a:hover {
+	color: #FFF;
+	background-color: rgba(82, 53, 111, 0.6);
+}
+
+html.application .tag-cloud a.current,
+html.application .tag-cloud a.current:hover {
+	color: #FFF;
+	background-color: rgb(82, 53, 111);
+}
+
+
+html.application .tag-cloud a,
+html.application .tag-cloud a:visited {
+	color: #FFF;
+}
+
+html.application .tag-cloud a.current,
+html.application .tag-cloud a:visited.current {
+	-webkit-box-shadow: 0px 0px 4px 4px #888;
+	-moz-box-shadow: 0px 0px 4px 4px #888;
+	box-shadow: 0px 0px 4px 4px #888;
+}
+
+html.welcome html {
+	background-color: #EEF7FC;
+}
+
+html.welcome body {
+	background-image: url('/images/dizmdayz/background-header.jpg'), url('/images/dizmdayz/background-footer.jpg'), url('/images/dizmdayz/background.jpg');
+	background-position: top center, bottom center, top center;
+	background-repeat: no-repeat, no-repeat, repeat-y;
+	background-color: #000;
+	padding: 100px 0 160px 0;
+}
+
+html.welcome p {
+	color: #010101;
+	text-shadow: 0 1px 2px #FFF
+}
+
+html.welcome a,
+html.welcome a:link,
+html.welcome a:hover,
+html.welcome a:visited,
+html.welcome a:active {
+	color: #010101;
+}
+
+html.welcome a.ui-button,
+html.welcome a.ui-button:link,
+html.welcome a.ui-button:hover,
+html.welcome a.ui-button:visited,
+html.welcome a.ui-button:active {
+	color: inherit;
+}
+
+html.welcome h1 {
+	color: #010101;
+	text-shadow: 0 1px 2px #FFF
+}
+
+html.welcome h2 {
+	color: #010101;
+	text-shadow: 0 1px 2px #FFF
+}
+
+html.welcome h3 {
+	color: #010101;
+	text-shadow: 0 1px 2px #FFF
+}
+
+html.welcome h4 {
+	color: #010101;
+	text-shadow: 0 1px 2px #FFF
+}
+
+html.welcome label {
+	color: #010101;
+}
+
+html.welcome input[disabled] {
+	color: #AAA;
+}
+
+html.welcome .panel.login a.new_password {
+	color: #010101;
+}
+
+html.welcome .flash.notice a {
+	color: #010101;
+}
+
+html.welcome .flash.error li {
+	color: #FFF;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
