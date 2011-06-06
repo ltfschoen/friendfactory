@@ -1,0 +1,4 @@
+.admin.invitation.personal table.index tbody tr,
+.admin.invitation.personal table.index tbody tr:hover {
+	background-color: inherit;
+}
