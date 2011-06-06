@@ -11,7 +11,7 @@
       'friskyfactory/welcome', |
       'friskyfactory/jquery-ui', |
       :media => 'screen', |
-      :cache => 'friskyfactory/cache/welcome'
+      :cache => 'friskyfactory/welcome.cache'
 
     = stylesheet_link_tag current_site.name, :media => 'screen'
 
@@ -29,7 +29,7 @@
       'rails', |
       'lib/jquery/jquery.placehold-0.3.min', |
       'app/layouts/welcome', |
-      :cache => 'cache/welcome'
+      :cache => 'welcome.cache'
 
   %body{ :class => current_site, :'data-site'=> current_site }
     .container.container_16.clearfix

@@ -14,7 +14,7 @@ namespace :ff do
 
       desc "Seed the db with sites' CSS"
       task :css => :environment do
-        Dir[File.join(Rails.root, 'config', 'db', 'seeds', '*.css')].each do |file|
+        Dir[File.join(Rails.root, 'db', 'seeds', '*.css')].each do |file|
           if site = Site.find_by_name(File.basename(file, '.css'))
             site.update_attribute(:css, IO.read(file))
           end
