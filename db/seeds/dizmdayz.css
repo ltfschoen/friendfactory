@@ -1,18 +1,18 @@
 html.application body {
-	background-image: url('/images/dizmdayz/background-header.jpg'), url('/images/dizmdayz/background.jpg');
+	background-image: url($background-header), url($background);
 	background-position: top center, top center;
 	background-repeat: no-repeat, repeat-y;
 	background-color: #000;
 }
 
 html.application .header.primary {
-	background: url('/images/dizmdayz/header.png') no-repeat top center;
+	background: url($header) no-repeat top center;
 	margin-top: 140px;
 	margin-bottom: 30px;
 }
 
 html.application .header.primary ul.nav li a {
-	background-image: url('/images/dizmdayz/header.png');
+	background-image: url($header);
 }
 
 html.application .page.footer {
@@ -257,7 +257,7 @@ html.welcome html {
 }
 
 html.welcome body {
-	background-image: url('/images/dizmdayz/background-header.jpg'), url('/images/dizmdayz/background-footer.jpg'), url('/images/dizmdayz/background.jpg');
+	background-image: url($background-header), url($background-footer), url($background);
 	background-position: top center, bottom center, top center;
 	background-repeat: no-repeat, no-repeat, repeat-y;
 	background-color: #000;
