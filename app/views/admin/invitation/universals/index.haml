@@ -1,5 +1,6 @@
 - stylesheet 'admin'
-- javascript 'admin'
+- javascript 'app/admin/invitation/invitations'
+
 .grid_14.push_1.admin.notice.canvas.invitation
   - unless @postings.empty?
     %table.index
@@ -26,4 +27,4 @@
               = link_to 'Edit', edit_admin_invitation_universal_path(posting)
               = link_to 'Delete', admin_invitation_universal_path(posting), :confirm => 'Are you sure?', :method => :delete
   .button-bar
-    = link_to('Add Universal Invitation', new_admin_invitation_universal_path)
+    = link_to 'Add Universal Invitation', new_admin_invitation_universal_path, :class => 'button new'

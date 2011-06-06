@@ -61,7 +61,7 @@
         'postings/', |
         :cache => 'application.cache'
 
-    - file_name = "app/#{controller_name}.js"
+    - file_name = "app/#{controller.request.path_parameters[:controller]}/#{controller_name}.js"
     - if File.exists?("public/javascripts/#{file_name}")
       = javascript_include_tag file_name
 
