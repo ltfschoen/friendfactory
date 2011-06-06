@@ -1,13 +1,13 @@
 html.application body {
-	background: url('/images/positivelyfrisky/fibers.jpg') repeat top center #90869E;
+	background: url($fibers) repeat top center #90869E;
 }
 
 html.application .header.primary { 
-	background: url('/images/positivelyfrisky/header.png') no-repeat top center;
+	background: url($header) no-repeat top center;
 }
 
 html.application .header.primary ul.nav li a {
-	background-image: url('/images/positivelyfrisky/header.png');
+	background-image: url($header);
 }
 
 html.application .page.footer {
@@ -63,7 +63,7 @@ html.welcome {
 }
 
 html.welcome body {
-	background: url('/images/positivelyfrisky/background.jpg') no-repeat top center;
+	background: url($background) no-repeat top center;
 	background-color: #52356F;
 }
 

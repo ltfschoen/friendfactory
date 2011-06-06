@@ -23,7 +23,9 @@ module ApplicationHelper
   end
     
   def image_tag(source, opts = {})    
-    source = File.join(current_site.name, source) unless opts.delete(:site) == false
+    if (opts.delete(:site) == true) && (asset = current_site.assets.find_by_name(File.basename(source, '.*')))
+      source = asset.asset.url(:original)
+    end
     super(source, opts)
   end
   

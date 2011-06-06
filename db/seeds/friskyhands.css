@@ -1,13 +1,13 @@
 html.application body {
-	background: url('/images/friskyhands/fibers.jpg') repeat top center #B6A27D;
+	background: url($fibers) repeat top center #B6A27D;
 }
 
 html.application .header.primary { 
-	background: url('/images/friskyhands/header.png') no-repeat top center;
+	background: url($header) no-repeat top center;
 }
 
 html.application .header.primary ul.nav li a {
-	background-image: url('/images/friskyhands/header.png');
+	background-image: url($header);
 }
 
 html.application .header.secondary a:visited,
@@ -63,7 +63,7 @@ html.welcome {
 }
 
 html.welcome body {
-	background: url('/images/friskyhands/background.jpg') no-repeat top center;
+	background: url($background) no-repeat top center;
 	background-color: #9C180C;
 }
 
@@ -102,7 +102,7 @@ html.welcome h4 {
 
 html.welcome label {
 	color: #501518;
-/*	color: #FFF;*/
+	color: #FFF;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 

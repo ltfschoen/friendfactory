@@ -1,13 +1,13 @@
 html.application body {
-	background: url('/images/friskyforces/fibers.jpg') repeat top center #415943;
+	background: url($fibers) repeat top center #415943;
 }
 
 html.application .header.primary {
-	background: url('/images/friskyforces/header.png') no-repeat top center;
+	background: url($header) no-repeat top center;
 }
 
 html.application .header.primary ul.nav li a {
-	background-image: url('/images/friskyforces/header.png');
+	background-image: url($header);
 }
 
 html.application .page.footer {
@@ -62,7 +62,7 @@ html.welcome {
 }
 
 html.welcome body {
-	background: url('/images/friskyforces/background.jpg') no-repeat top center;
+	background: url($background) no-repeat top center;
 	background-color: #415943;
 }
 
