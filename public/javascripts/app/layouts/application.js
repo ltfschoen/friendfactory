@@ -11,18 +11,14 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 			options = $.extend({}, $.fn.buttonize.defaults, customOptions || {});
 			
 		$this
-			.find('button[type="submit"]')
+			.find('button[type="submit"], a.button.submit')
 				.button({ icons: { primary: 'ui-icon-check' }, text: options.text })
 			.end()
-
-			.find('button.cancel')
+			
+			.find('button.cancel, a.button.cancel')
 				.button({ icons: { primary: 'ui-icon-close' }, text: options.text })
 			.end()
 			
-			.find('a.button.cancel')
-				.button({ icons: { primary: 'ui-icon-close' }, text: options.text })
-			.end()
-
 			.find('a.button.new')
 				.button({ icons: { primary: 'ui-icon-document' }, text: options.text })
 			.end()

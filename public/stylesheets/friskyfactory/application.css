@@ -389,12 +389,6 @@ a.bio {
     float: right;
 }
 
-/*.header.secondary a {
-    margin: 0 4px;
-    padding: 2px;
-    border-bottom: 1px dotted #664;
-}*/
-
 a.web_logos {
 	background: url(/images/friskyfactory/web_logos.png);
 	width: 14px;
@@ -431,6 +425,10 @@ a.facebook {
 	-moz-border-radius: 4px;
 	border-radius: 4px;	
 	border: none;
-	padding: 18px 8px;
+	padding: 18px 8px;	
+	text-align: left;
 }
 
+.notice.canvas.centered {
+	text-align: center;
+}

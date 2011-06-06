@@ -1,7 +1,8 @@
-- stylesheet 'admin'
-.grid_14.push_1.admin.notice.canvas
-  .button-bar
-    = button_bar = [ link_to('Add Scrubbed Tag', new_admin_tag_path), link_to('Commit', commit_admin_tags_path) ].join('&nbsp;|&nbsp;').html_safe
+- stylesheet 'app/admin/admin'
+.grid_14.push_1.admin.tags.notice.canvas
+  .button-bar.header
+    = link_to 'New Tag Correction', new_admin_tag_path, :class => 'button new'
+    = link_to 'Commit', commit_admin_tags_path, :class => 'button submit'
   %table.index
     %tr
       %th Defective
@@ -15,4 +16,5 @@
           = link_to 'Edit', edit_admin_tag_path(tag)
           = link_to 'Delete', tag, :confirm => 'Are you sure?', :method => :delete    
   .button-bar
-    = button_bar
+    = link_to 'New Tag Correction', new_admin_tag_path, :class => 'button new'
+    = link_to 'Commit', commit_admin_tags_path, :class => 'button submit'

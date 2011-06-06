@@ -1,6 +1,8 @@
-- stylesheet 'admin'
-
-- unless @waves.empty?
+- stylesheet 'app/admin/admin'
+- if @waves.length == 0
+  .grid_12.push_2.suffix_2.notice.canvas.centered
+    %p No personal invitations have been created.
+- else
   .grid_14.push_1.admin.notice.canvas.invitation.personal
     %table.index
       %tbody

@@ -15,19 +15,19 @@
       :media => 'screen', |
       :cache => 'friskyfactory/application.cache'
 
-    = stylesheet_link_tag current_site.name, :media => 'screen'
-
-    - file_name = "app/#{controller_name}.css"
+    - file_name = "friskyfactory/app/#{controller.request.path_parameters[:controller]}/#{controller_name}.css"
     - if File.exists?("public/stylesheets/#{file_name}")
       = stylesheet_link_tag file_name
-
-    / [if IE]
-      = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
       
     = yield(:stylesheets)
+    = stylesheet_link_tag current_site.name, :media => 'screen'
+
     - if page_css = yield(:pagecss).present?
       :css
         #{page_css}
+
+    / [if IE]
+      = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
 
     - if Rails.env.development?
       = javascript_include_tag 'lib/jquery/jquery.js', 'lib/jquery/jquery-ui.js', 'lib/jquery/jquery.tools.min.js', 'debug.js'

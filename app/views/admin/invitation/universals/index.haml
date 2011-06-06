@@ -1,8 +1,12 @@
-- stylesheet 'admin'
+- stylesheet 'app/admin/admin'
 - javascript 'app/admin/invitation/invitations'
-
-.grid_14.push_1.admin.notice.canvas.invitation
-  - unless @postings.empty?
+- if @postings.length == 0
+  .grid_12.push_2.suffix_2.notice.canvas.centered
+    %p
+      No Universal Invitations.
+      = link_to 'Create on now.', new_admin_invitation_universal_path, :class => 'button new'
+- else
+  .grid_14.push_1.admin.tags.notice.canvas.invitation
     %table.index
       %thead
         %tr
@@ -26,5 +30,5 @@
             %td.actions
               = link_to 'Edit', edit_admin_invitation_universal_path(posting)
               = link_to 'Delete', admin_invitation_universal_path(posting), :confirm => 'Are you sure?', :method => :delete
-  .button-bar
-    = link_to 'Add Universal Invitation', new_admin_invitation_universal_path, :class => 'button new'
+    .button-bar
+      = link_to 'Add Universal Invitation', new_admin_invitation_universal_path, :class => 'button new'
