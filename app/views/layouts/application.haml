@@ -17,7 +17,7 @@
 
     - file_name = "friskyfactory/app/#{controller.request.path_parameters[:controller]}/#{controller_name}.css"
     - if File.exists?("public/stylesheets/#{file_name}")
-      = stylesheet_link_tag file_name
+      = stylesheet_link_tag file_name, :media => 'screen'
       
     = yield(:stylesheets)
     = stylesheet_link_tag current_site.name, :media => 'screen'

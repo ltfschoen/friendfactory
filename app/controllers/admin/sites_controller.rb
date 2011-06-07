@@ -48,13 +48,20 @@ class Admin::SitesController < ApplicationController
   end
   
   def stylesheets
-    variables = current_site.assets.inject([]) do |memo, asset|
-      memo << "$#{asset.name}:'#{asset.asset.url(:original)}';" if asset.name.present?
-      memo
-    end
-    @engine = Sass::Engine.new((variables << current_site.css).join, :syntax => :scss)
+    # Stylesheet requests come in on assets hosts, so current
+    # is not accurate. Use site name in the requested file:
+    # http://<asset_host>.com/stylesheeets/<site>.css
     respond_to do |format|
-      format.css { render :text => @engine.render }
+      if site = Site.find_by_name(params[:site_name])      
+        variables = site.assets.inject([]) do |memo, asset|
+          memo << "$#{asset.name}:'#{asset.asset.url(:original)}';" if asset.name.present?
+          memo
+        end
+        @engine = Sass::Engine.new((variables << site.css).join, :syntax => :scss)
+        format.css { render :text => @engine.render }
+      else
+        format.css { render :nothing => true }
+      end
     end
   end
 
