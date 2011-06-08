@@ -12,6 +12,7 @@ class CreatePublications < ActiveRecord::Migration
     ActiveRecord::Base.connection.select_all('select posting_id, wave_id from postings_waves').each do |posting_wave|
       ::Publication.create!(:wave_id => posting_wave['wave_id'], :resource_id => posting_wave['posting_id'], :resource_type => 'Posting::Base')
     end
+    drop_table :postings_waves_as_habtm rescue nil
     rename_table :postings_waves, :postings_waves_as_habtm
   end
 
