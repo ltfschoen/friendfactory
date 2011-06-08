@@ -9,7 +9,8 @@ class Site < ActiveRecord::Base
     end
   end
   
-  has_and_belongs_to_many :users  
+  has_and_belongs_to_many :users
+  
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
@@ -19,9 +20,7 @@ class Site < ActiveRecord::Base
   has_many :assets
   accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
 
-  def home_wave
-    waves.site(self).type(Wave::Community).published.order('created_at asc').limit(1).try(:first)
-  end
+  after_create :create_home_wave
   
   def to_s
     name
@@ -36,8 +35,14 @@ class Site < ActiveRecord::Base
   end
   
   alias :intern :to_sym
+
+  def home_wave
+    waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).try(:first)
+  end
   
-  def create_default_wave
+  private
+  
+  def create_home_wave
     unless waves.type(Wave::Community).find_by_slug(Wave::CommunitiesController::DefaultWaveSlug).present?
       wave = Wave::Community.new(:slug => Wave::CommunitiesController::DefaultWaveSlug)
       self.waves << wave
