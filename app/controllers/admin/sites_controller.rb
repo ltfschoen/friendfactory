@@ -20,7 +20,6 @@ class Admin::SitesController < ApplicationController
   end
 
   def create
-    raise params.inspect
     @site = Site.new(params[:site])
     respond_to do |format|
       if @site.save
