@@ -1,0 +1,7 @@
+friskyhands_gender_signal:
+  site_id: 1
+  signal_id: 1
+
+friskyhands_orientation_signal:
+  site_id: 1
+  signal_id: 2

@@ -1,0 +1,35 @@
+male:
+  signal_id: 1
+  name: male
+  display_name: Male
+  ordinal_position: 1
+
+female:
+  signal_id: 1
+  name: female
+  display_name: Female
+  ordinal_position: 2
+    
+trans:
+  signal_id: 1
+  name: trans
+  display_name: Trans
+  ordinal_position: 3
+
+gay:
+  signal_id: 2
+  name: gay
+  display_name: Gay
+  ordinal_position: 1
+
+straight:
+  signal_id: 2
+  name: straight
+  display_name: Straight
+  ordinal_position: 2
+    
+bi:
+  signal_id: 2
+  name: bi
+  display_name: Bi
+  ordinal_position: 3

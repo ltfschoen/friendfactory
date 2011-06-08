@@ -1,0 +1,11 @@
+gender:
+  id: 1
+  name: gender
+  display_name: Gender
+  type: Signal::Gender
+  
+orientation:
+  id: 2
+  name: orientation
+  display_name: Orientation
+  type: Signal::Orientation

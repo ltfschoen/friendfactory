@@ -17,6 +17,12 @@ class Site < ActiveRecord::Base
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
 
+  has_and_belongs_to_many :signals,
+      :class_name              => 'Signal::Base',
+      :join_table              => 'sites_signals',
+      :foreign_key             => 'site_id',
+      :association_foreign_key => 'signal_id'
+      
   has_many :assets
   accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
 

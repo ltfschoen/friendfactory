@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110604222733) do
+ActiveRecord::Schema.define(:version => 20110608054950) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -192,6 +192,24 @@ ActiveRecord::Schema.define(:version => 20110604222733) do
     t.datetime "expires_at"
   end
 
+  create_table "signal_ranges", :force => true do |t|
+    t.integer  "signal_id",        :null => false
+    t.string   "name",             :null => false
+    t.string   "display_name",     :null => false
+    t.string   "value"
+    t.integer  "ordinal_position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "signals", :force => true do |t|
+    t.string   "name",         :null => false
+    t.string   "display_name", :null => false
+    t.string   "type",         :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sites", :force => true do |t|
     t.string   "name",                                        :null => false
     t.string   "display_name",                                :null => false
@@ -205,6 +223,16 @@ ActiveRecord::Schema.define(:version => 20110604222733) do
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true
+
+  create_table "sites_signals", :id => false, :force => true do |t|
+    t.integer  "site_id"
+    t.integer  "signal_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sites_signals", ["signal_id"], :name => "index_sites_signals_on_signal_id"
+  add_index "sites_signals", ["site_id", "signal_id"], :name => "index_sites_signals_on_site_id_and_signal_id"
 
   create_table "sites_users", :id => false, :force => true do |t|
     t.integer "site_id"
