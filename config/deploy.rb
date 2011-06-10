@@ -84,6 +84,7 @@ namespace :ff do
       task :default do
         sql
         images
+        assets
         deploy.restart
       end
 
@@ -100,6 +101,12 @@ namespace :ff do
         filename = File.join(shared_path, 'dumps', "images.#{dump_date}.tar.gz")
         run "cd #{current_path} && rm -rf public/system/images/* && tar -xf #{filename} -C public/system"
       end
+
+      task :assets do
+        staging
+        filename = File.join(shared_path, 'dumps', "assets.#{dump_date}.tar.gz")
+        run "cd #{current_path} && rm -rf public/system/assets/* && tar -xf #{filename} -C public/system"
+      end
     end
 
     namespace :dump do
@@ -107,6 +114,7 @@ namespace :ff do
       task :default do
         ff.db.dump.sql
         ff.db.dump.images
+        ff.db.dump.assets
       end
       
       task :sql do
@@ -119,16 +127,22 @@ namespace :ff do
       
       task :images do
         production        
-        on_rollback { delete "#{shared_path}/dumps/#{tar_filename}" }
-        run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{tar_filename} images/*"
+        on_rollback { delete "#{shared_path}/dumps/#{images_tar_filename}" }
+        run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{images_tar_filename} images/*"
+      end
+
+      task :assets do
+        production
+        on_rollback { delete "#{shared_path}/dumps/#{assets_tar_filename}" }
+        run "cd #{current_path}/public/system && tar -czf #{shared_path}/dumps/#{assets_tar_filename} assets/*"
       end
 
       desc "Show available production dumps"
       task :status do
         production
         db_dumps = capture("ls #{File.join(shared_path, 'dumps', '*.sql')}").strip
-        image_dumps = capture("ls #{File.join(shared_path, 'dumps', '*.tar.gz')}").strip
-        puts db_dumps, image_dumps
+        tar_dumps = capture("ls #{File.join(shared_path, 'dumps', '*.tar.gz')}").strip
+        puts db_dumps, tar_dumps
       end
 
       desc "Remove old dumps. DUMP_DATE=yyyymmdd"
@@ -139,7 +153,8 @@ namespace :ff do
           exit
         end
         run "rm #{shared_path}/dumps/#{dump_filename}"
-        run "rm #{shared_path}/dumps/#{tar_filename}"
+        run "rm #{shared_path}/dumps/#{images_tar_filename}"
+        run "rm #{shared_path}/dumps/#{assets_tar_filename}"        
       end            
     end
       
@@ -148,6 +163,7 @@ namespace :ff do
       task :default do
         sql
         images
+        assets
       end
       
       task :sql do
@@ -157,7 +173,12 @@ namespace :ff do
       
       task :images do
         production
-        get "#{shared_path}/dumps/#{tar_filename}", "db/dumps/#{tar_filename}"
+        get "#{shared_path}/dumps/#{images_tar_filename}", "db/dumps/#{images_tar_filename}"
+      end
+
+      task :assets do
+        production
+        get "#{shared_path}/dumps/#{assets_tar_filename}", "db/dumps/#{assets_tar_filename}"
       end
     end
   end
@@ -167,8 +188,12 @@ def dump_filename
   "dump.#{dump_date}.sql"
 end
 
-def tar_filename
+def images_tar_filename
   "images.#{dump_date}.tar.gz"
+end
+
+def assets_tar_filename
+  "assets.#{dump_date}.tar.gz"
 end
 
 def dump_date
