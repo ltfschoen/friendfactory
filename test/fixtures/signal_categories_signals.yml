@@ -1,77 +1,64 @@
 friskyhands_male:
-  site_id: 1
   signal_id: 1
   category_id: 1
   ordinal: 1
   
 friskyhands_female:
-  site_id: 1
   signal_id: 2
   category_id: 1
   ordinal: 2
         
 friskyhands_gay:
-  site_id: 1
   signal_id: 4
   category_id: 2
   ordinal: 1
     
 friskyhands_straight:
-  site_id: 1
   signal_id: 5
   category_id: 2
   ordinal: 2
       
 friskyhands_bi:
-  site_id: 1
   signal_id: 6
   category_id: 2
   ordinal: 3
   
 positivelyfrisky_male:
-  site_id: 2
   signal_id: 1
   category_id: 3
   ordinal: 1
     
 positivelyfrisky_female:
-  site_id: 2
   signal_id: 2
   category_id: 3
   ordinal: 2
     
 positivelyfrisky_trans:
-  site_id: 2
   signal_id: 3
   category_id: 3
   ordinal: 3
       
 positivelyfrisky_gay:
-  site_id: 2
   signal_id: 4
   category_id: 4
   ordinal: 1
       
 positivelyfrisky_straight:
-  site_id: 2
   signal_id: 5
   category_id: 4
   ordinal: 2
   
 positivelyfrisky_bi:
-  site_id: 2
   signal_id: 6
   category_id: 4
   ordinal: 3
   
 positivelyfrisky_hivneg:
-  site_id: 2
   signal_id: 7
   category_id: 5
   ordinal: 1
       
 positivelyfrisky_hivpoz:
-  site_id: 2
   signal_id: 8
   category_id: 5
   ordinal: 2

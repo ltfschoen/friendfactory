@@ -25,5 +25,4 @@ class Signal::Category < ActiveRecord::Base
   def set_site_on_signals_categories(signal)
     category_signals.where(:signal_id => signal.id).first.update_attribute(:site_id, self[:site_id])
   end
-  
 end

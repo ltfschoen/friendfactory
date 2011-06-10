@@ -18,13 +18,16 @@ class Site < ActiveRecord::Base
       :association_foreign_key => 'wave_id'
 
   has_many :signal_categories, :class_name => 'Signal::Category', :foreign_key => 'site_id'
-  has_many :site_signals, :class_name => 'Signal::CategorySignal'
-  has_many :signals, :through => :site_signals, :uniq => true
+  has_many :signal_category_signals, :class_name => 'Signal::CategorySignal', :through => :signal_categories, :source => :category_signals
       
   has_many :assets
   accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
 
   after_create :create_home_wave
+
+  def signals
+    Signal::Base.find_all_by_id(signal_category_signals.map(&:signal_id))
+  end
   
   def to_s
     name

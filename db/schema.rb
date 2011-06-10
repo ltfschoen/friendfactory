@@ -203,11 +203,12 @@ ActiveRecord::Schema.define(:version => 20110608054950) do
   add_index "signal_categories", ["site_id"], :name => "index_signal_categories_on_site_id"
 
   create_table "signal_categories_signals", :force => true do |t|
-    t.integer "site_id"
     t.integer "signal_id"
     t.integer "category_id"
     t.integer "ordinal"
   end
+
+  add_index "signal_categories_signals", ["category_id", "signal_id"], :name => "index_signal_categories_signals_on_category_id_and_signal_id"
 
   create_table "signals", :force => true do |t|
     t.string "name",         :null => false

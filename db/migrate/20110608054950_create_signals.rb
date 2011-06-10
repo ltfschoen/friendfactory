@@ -17,12 +17,11 @@ class CreateSignals < ActiveRecord::Migration
     add_index :signal_categories, :site_id
 
     create_table :signal_categories_signals, :force => true do |t|
-      t.integer :site_id
       t.integer :signal_id
       t.integer :category_id
       t.integer :ordinal
     end
-    add_index :signal_categories_signals, [ :category_id, :signal_id, :site_id ], :uniq => true
+    add_index :signal_categories_signals, [ :category_id, :signal_id ], :uniq => true
   end
 
   def self.down
