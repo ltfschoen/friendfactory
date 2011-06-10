@@ -1,17 +1,7 @@
 namespace :ff do
   namespace :db do
     desc "Refresh development with production db and images from local dumps. DUMP_DATE=yyyymmdd"
-    task :refresh => [ :'refresh:sql', :'refresh:images', :slugs ]
-
-    desc "Set the default wave"
-    task :slugs => :environment do      
-      wave = Wave::Base.find_by_slug('shared')
-      if wave.present?
-        wave.slug = Wave::CommunitiesController::DefaultWaveSlug
-        wave.save
-      end
-    end
-      
+    task :refresh => [ :'refresh:sql', :'refresh:images' ]      
     namespace :refresh do
       desc "Refresh development with production sql from local. DUMP_DATE=yyyymmdd"
       task :sql => :environment do
@@ -27,7 +17,7 @@ namespace :ff do
         if File.exists?("db/dumps/#{tar_filename}")
           sh "rm -rf public/system/images/* && tar -xf db/dumps/#{tar_filename} -C public/system"
         end
-      end      
+      end
     end
   end
 end
