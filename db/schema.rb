@@ -192,23 +192,30 @@ ActiveRecord::Schema.define(:version => 20110608054950) do
     t.datetime "expires_at"
   end
 
-  create_table "signal_ranges", :force => true do |t|
-    t.integer  "signal_id",        :null => false
-    t.string   "name",             :null => false
-    t.string   "display_name",     :null => false
-    t.string   "value"
-    t.integer  "ordinal_position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "signal_categories", :force => true do |t|
+    t.string  "name",         :null => false
+    t.string  "display_name"
+    t.integer "site_id"
+    t.string  "subject_type"
+    t.integer "ordinal"
+  end
+
+  add_index "signal_categories", ["site_id"], :name => "index_signal_categories_on_site_id"
+
+  create_table "signal_categories_signals", :force => true do |t|
+    t.integer "site_id"
+    t.integer "signal_id"
+    t.integer "category_id"
+    t.integer "ordinal"
   end
 
   create_table "signals", :force => true do |t|
-    t.string   "name",         :null => false
-    t.string   "display_name", :null => false
-    t.string   "type",         :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "name",         :null => false
+    t.string "display_name"
+    t.string "type"
   end
+
+  add_index "signals", ["name"], :name => "index_signals_on_name", :unique => true
 
   create_table "sites", :force => true do |t|
     t.string   "name",                                        :null => false
@@ -224,13 +231,14 @@ ActiveRecord::Schema.define(:version => 20110608054950) do
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true
 
-  create_table "sites_signals", :id => false, :force => true do |t|
-    t.integer  "site_id"
-    t.integer  "signal_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "sites_signals", :force => true do |t|
+    t.integer "site_id"
+    t.integer "signal_id"
+    t.integer "category_id"
+    t.integer "ordinal"
   end
 
+  add_index "sites_signals", ["category_id"], :name => "index_sites_signals_on_category_id"
   add_index "sites_signals", ["signal_id"], :name => "index_sites_signals_on_signal_id"
   add_index "sites_signals", ["site_id", "signal_id"], :name => "index_sites_signals_on_site_id_and_signal_id"
 

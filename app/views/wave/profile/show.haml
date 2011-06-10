@@ -19,14 +19,19 @@
               .pane.signals.mini-profile
                 %table.header<
                   %tr
-                    %td.avatar<
-                      = avatar_image_tag(@profile.avatar, :style => :thumb, :anonymous => true, :gender => @profile.gender)
-                    %td.username<
-                      = @profile.handle
-                    %td.age<
-                      = @profile.age.present? ? @profile.age : '&nbsp;'.html_safe
+                    %td.avatar= avatar_image_tag(@profile.avatar, :style => :thumb, :anonymous => true, :gender => @profile.gender)
+                    %td.username= @profile.handle
+                    %td.age= @profile.age.present? ? @profile.age : '&nbsp;'.html_safe
                 %table.detail
-                  = render_profile_signals(@profile)
+                  =# render_profile_signals(@profile)
+                  - current_site.signal_categories.subject_type(Wave::Profile).each do |signal_category|
+                    = render :partial => 'wave/profiles/signal_category', :object => signal_category
+                  %tr
+                    %td.label Birthday
+                    %td.detail= @profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe
+                  %tr
+                    %td.label Location
+                    %td.detail= @profile.location
           .button-bar
             #{link_to 'Edit', edit_profile_path, :class => 'edit button'}      
   .grid_2

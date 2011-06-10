@@ -20,6 +20,10 @@ namespace :ff do
           end
         end
       end
+      
+      desc "Seed the db with sites' signals"
+      task :signals => :environment do
+      end
     end
     
   end

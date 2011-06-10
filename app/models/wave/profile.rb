@@ -4,17 +4,16 @@ class Wave::Profile < Wave::Base
 
   include TagScrubber
   
-  delegate :handle, :handle=, :first_name, :first_name=, :last_name, :last_name=, :gender, :age, :to => :resource
+  delegate :handle, :handle=, :first_name, :last_name, :age, :dob, :location, :to => :resource
   
-  validates_presence_of :handle, :unless => :first_name
+  # Signals
+  delegate :gender, :orientation, :relationship, :deafness, :hiv_status, :board_type, :military_service, :to => :resource
+  
+  before_validation :'resource.present?'
+  before_update     :'resource.save'  
+  after_create      :'publish!'
 
-  before_validation do |profile|
-    profile.resource.present?
-  end
-      
-  after_create do |profile|
-    profile.publish!
-  end
+  validates_presence_of :handle, :unless => :first_name
   
   alias :user_info :resource
 
@@ -70,17 +69,13 @@ class Wave::Profile < Wave::Base
     
   def set_tag_list_on(site, tag_list)
     if resource.present?
-      tag_list = [
-          tag_list,
-          resource.gender_description,
-          resource.orientation_description,
-          custom_signal_description_for_site(site),
-          scrub_tag(resource.location_description)
-      ].compact * ','
+      signal_ids = [ resource.gender, resource.orientation, resource.relationship, resource.deafness ]
+      signal_display_names = Signal::Base.find_all_by_id(signal_ids).map(&:display_name)          
+      tag_list = [ tag_list, signal_display_names, scrub_tag(resource.location) ].flatten.compact * ','
       super(site, tag_list)
     end
   end
-
+  
   private
   
   def set_active_avatar(avatar)
@@ -90,15 +85,8 @@ class Wave::Profile < Wave::Base
     end
   end
 
-  def custom_signal_description_for_site(site)
-    case site.name
-    when 'friskyhands' then resource.deafness_description
-    when 'positivelyfrisky' then resource.hiv_status_description
-    end
-  end
-
   def touch(avatar = nil)
     super()
   end
-
+  
 end

@@ -1,0 +1,5 @@
+%tr{ :class => signal_category.name }
+  %td.label
+    = signal_category.display_name
+  %td.detail
+    = signal_category.signals.where(:id => @profile.send(signal_category.name.to_sym)).first.try(:display_name)

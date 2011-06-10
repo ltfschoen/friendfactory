@@ -36,6 +36,12 @@
       %td
         = f.text_field :analytics_account_number, :placeholder => 'UA-xxxxxxxx-x'
         = f.error_message_on :analytics_account_number
+        
+    %tr.signals
+      - @site.signals.each do |signal|
+        %td
+          = f.signal.name
+          
     %tr.stylesheet
       %td
         =f.label :css, 'Stylesheet'

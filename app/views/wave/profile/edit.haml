@@ -17,7 +17,7 @@
                   %tr
                     %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo', :as_button => false
   .grid_6
-    = form_for @wave.user_info, :url => profile_path do |f|
+    = form_for @wave.resource, :url => profile_path do |f|
       .polaroid.edit
         .face-container
           .back.face
@@ -27,42 +27,56 @@
                   %div
                     %table.header
                       %tr
-                        %td.avatar
-                          = avatar_image_tag(@wave.avatar, :style => :thumb, :gender => @wave.gender)
-                        %td.username<
-                          = @wave.handle
-                        %td.age<
-                          = f.text_field :age, :placeholder => 'age', :maxlength => 2, :class => 'ui-widget'
-                    %table.detail
-                      - if current_site.name == 'friskyhands'
+                        %td.avatar= avatar_image_tag(@wave.avatar, :style => :thumb, :gender => @wave.gender)
+                        %td.username= @wave.handle
+                        %td.age= f.text_field :age, :placeholder => 'age', :maxlength => 2, :class => 'ui-widget'
+                        
+                    %table.detail                    
+                      - current_site.signal_categories.subject_type(Wave::Profile).each do |category|
+                        %tr
+                          %td.label= category.display_name
+                          %td.detail= f.collection_select(category.name.to_sym, category.signals, :id, :display_name, { :include_blank => true })
+                    
+                          
+                      - if false && current_site.name == 'friskyhands'
                         %tr
                           %td.label Deafness
                           %td.detail= f.select(:deafness, UserInfo::Deafness, :include_blank => true)
-                      - if current_site.name == 'positivelyfrisky'
+                          
+                      - if false && current_site.name == 'positivelyfrisky'
                         %tr
                           %td.label HIV Status
                           %td.detail= f.select(:hiv_status, UserInfo::HivStatus, :include_blank => true)
-                      - if current_site.name == 'dizmdayz'
+                          
+                      - if false && current_site.name == 'dizmdayz'
                         %tr
                           %td.label Board Type
-                          %td.detail= f.select(:board_type, UserInfo::BoardType, :include_blank => true)                      
-                      - if current_site.name == 'friskyforces'
+                          %td.detail= f.select(:board_type, UserInfo::BoardType, :include_blank => true)
+                          
+                      - if false && current_site.name == 'friskyforces'
                         %tr
                           %td.label Service
-                          %td.detail= f.select(:military_service, UserInfo::MilitaryService, :include_blank => true)                      
-                      %tr
-                        %td.label Gender
-                        %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
-                      - if [ 'friskyhands', 'positivelyfrisky' ].include?(current_site.name)                      
+                          %td.detail= f.select(:military_service, UserInfo::MilitaryService, :include_blank => true)
+
+                      - if false
+                        %tr
+                          %td.label Gender
+                          %td.detail= f.select(:gender, UserInfo::Gender, :include_blank => true)
+                        
+                      - if false && [ 'friskyhands', 'positivelyfrisky' ].include?(current_site.name)                      
                         %tr
                           %td.label Preference
                           %td.detail= f.select(:orientation, UserInfo::Orientation, :include_blank => true)
-                      %tr
-                        %td.label Relationship
-                        %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)
+                          
+                      - if false
+                        %tr
+                          %td.label Relationship
+                          %td.detail= f.select(:relationship, UserInfo::Relationship, :include_blank => true)
+
                       %tr
                         %td.label Birthday
-                        %td.detail= f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date'}
+                        %td.detail= f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date' }
+
                       %tr
                         %td.label Location
                         %td.detail= f.text_field :location, :placeholder => 'town or city, state', :maxlength => 20, :class => 'ui-widget'
