@@ -1,20 +1,29 @@
 # =============
 # Template Site
 
-site = nil
-unless site = Site.find_by_name('friskyfactory')
-  puts " * friskyfactory"
+if ENV['FORCE'] == "true"
+  puts "Forced deletion of signals"
+  Signal::Base.delete_all
+  Signal::Category.delete_all
+  Signal::CategorySignal.delete_all  
+end
+
+puts "   * #{Site::TemplateSiteName}"
+
+site = Site.template rescue nil
+unless site.present?
+  puts "  * creating template site"
   site = Site.create(
-    :name => 'friskyfactory',
+    :name => Site::TemplateSiteName,
     :display_name => 'FriskyFactory',
     :analytics_account_number => '',
     :analytics_domain_name => '')  
 end
 
 ## CSS
-file = File.join(Rails.root, 'db', 'seeds', 'friskyfactory.css')
+file = File.join(Rails.root, 'db', 'seeds', "#{Site::TemplateSiteName}.css")
 if File.exists?(file)  
-  puts " * #{File.basename(file)}"
+  puts "   * #{site.name}/css"
   site.update_attribute(:css, IO.read(file))    
 end
 
@@ -30,17 +39,16 @@ def create_signal(*names)
   names.inject([]) do |memo, name|
     name, display_name = name.is_a?(Array) ? [ name.first, name.last ] : [ name, name.titleize ]
     unless signal = Signal::Base.find_by_name(name)
-      puts " * #{name}"
-      signal = Signal::SingleValue.create(:name => name, :display_name => display_name)
+      puts "   * #{name}"
+      signal = Signal::Nominal.create(:name => name, :display_name => display_name)
     end
     memo << signal
   end
 end
 
-
 def create_signal_category(site, name, display_name, *signals)
   unless site.signal_categories.where(:name => name).first.present?
-    puts " * #{site.name}/#{name}"
+    puts "   * #{site.name}/#{name}"
     category = site.signal_categories.create(:name => name, :display_name => display_name)
     category.signals << signals
   end
