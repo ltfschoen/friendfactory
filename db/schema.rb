@@ -210,9 +210,9 @@ ActiveRecord::Schema.define(:version => 20110608054950) do
   add_index "signal_categories_signals", ["category_id", "signal_id"], :name => "index_signal_categories_signals_on_category_id_and_signal_id"
 
   create_table "signals", :force => true do |t|
-    t.string "name",                                     :null => false
+    t.string "name",         :null => false
     t.string "display_name"
-    t.string "type",         :default => "Signal::Base"
+    t.string "type"
   end
 
   add_index "signals", ["name"], :name => "index_signals_on_name", :unique => true

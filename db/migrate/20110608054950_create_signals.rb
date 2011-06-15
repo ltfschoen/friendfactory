@@ -21,11 +21,17 @@ class CreateSignals < ActiveRecord::Migration
       t.integer :ordinal
     end
     add_index :signal_categories_signals, [ :category_id, :signal_id ], :uniq => true
-    
-    say "Invoking ff:db:seed to load signals"
+
+    say "Seeding the database to load signals"
+    say "ff:db:seed", true
     Rake::Task[:'ff:db:seed'].invoke
-    
-    say "Invoking ff:fix:profile_signals to migrate profiles to signals"
+
+    say "Migrating sites to signals"
+    say "ff:fix:site_signals", true
+    Rake::Task[:'ff:fix:site_signals'].invoke
+
+    say "Migrating profiles to signals"
+    say "ff:fix:profile_signals", true
     Rake::Task[:'ff:fix:profile_signals'].invoke
   end
 

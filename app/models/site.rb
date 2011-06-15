@@ -21,9 +21,10 @@ class Site < ActiveRecord::Base
 
   has_many :signal_categories,
       :class_name  => 'Signal::Category',
-      :foreign_key => 'site_id' do
-    def clone
-      all.map(&:clone)
+      :foreign_key => 'site_id',
+      :order       => 'ordinal asc' do
+    def clone(*category_names)
+      (category_names.empty? ? all : where('`signal_categories`.`name` in (?)', category_names.map(&:to_s))).map(&:clone)
     end
   end
   
@@ -35,6 +36,8 @@ class Site < ActiveRecord::Base
   has_many :assets
   accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
 
+  scope :all, lambda { where([ '`sites`.`name` <> ?', TemplateSiteName ])}
+  
   after_create :create_home_wave
 
   def signals
@@ -58,16 +61,16 @@ class Site < ActiveRecord::Base
   def home_wave
     waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).try(:first)
   end
-  
-  def self.template
-    Site.find_by_name(Site::TemplateSiteName) || raise("No template site")
-  end
-  
+    
   def clone
     super.tap do |clone|
       clone.name, clone.display_name = nil, nil
       clone.signal_categories = self.signal_categories.clone
     end
+  end
+
+  def self.template
+    Site.find_by_name(Site::TemplateSiteName) || raise("No template site")
   end
   
   private

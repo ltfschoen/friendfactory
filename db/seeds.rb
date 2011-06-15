@@ -12,7 +12,7 @@ puts "   * #{Site::TemplateSiteName}"
 
 site = Site.template rescue nil
 unless site.present?
-  puts "  * creating template site"
+  puts "   * creating template site"
   site = Site.create(
     :name => Site::TemplateSiteName,
     :display_name => 'FriskyFactory',
@@ -31,10 +31,6 @@ end
 # =======
 # Signals
 
-def ordinal
-  Time.now.strftime('%H%M')
-end
-
 def create_signal(*names)
   names.inject([]) do |memo, name|
     name, display_name = name.is_a?(Array) ? [ name.first, name.last ] : [ name, name.titleize ]
@@ -46,11 +42,17 @@ def create_signal(*names)
   end
 end
 
-def create_signal_category(site, name, display_name, *signals)
+def category_ordinal
+  @ordinal ||= 0; @ordinal += 1
+end
+
+def create_signal_category(site, name, display_name, signals)
   unless site.signal_categories.where(:name => name).first.present?
     puts "   * #{site.name}/#{name}"
-    category = site.signal_categories.create(:name => name, :display_name => display_name)
-    category.signals << signals
+    category = site.signal_categories.create(:name => name, :display_name => display_name, :ordinal => category_ordinal)
+    signals.each_with_index do |signal, idx|
+      category.categories_signals.create(:signal_id => signal.id, :ordinal => idx)
+    end
   end
 end
 
