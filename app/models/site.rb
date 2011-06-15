@@ -1,5 +1,7 @@
 class Site < ActiveRecord::Base  
 
+  TemplateSiteName = 'friskyfactory'
+
   validates_presence_of   :name, :display_name
   validates_uniqueness_of :name
 
@@ -17,8 +19,18 @@ class Site < ActiveRecord::Base
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
 
-  has_many :signal_categories, :class_name => 'Signal::Category', :foreign_key => 'site_id'
-  has_many :signal_category_signals, :class_name => 'Signal::CategorySignal', :through => :signal_categories, :source => :category_signals
+  has_many :signal_categories,
+      :class_name  => 'Signal::Category',
+      :foreign_key => 'site_id' do
+    def clone
+      all.map(&:clone)
+    end
+  end
+  
+  has_many :signal_categories_signals,
+      :class_name => 'Signal::CategorySignal',
+      :through    => :signal_categories,
+      :source     => :categories_signals
       
   has_many :assets
   accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
@@ -26,7 +38,7 @@ class Site < ActiveRecord::Base
   after_create :create_home_wave
 
   def signals
-    Signal::Base.find_all_by_id(signal_category_signals.map(&:signal_id))
+    Signal::Base.find_all_by_id(signal_categories_signals.map(&:signal_id))
   end
   
   def to_s
@@ -45,6 +57,17 @@ class Site < ActiveRecord::Base
 
   def home_wave
     waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).try(:first)
+  end
+  
+  def self.template
+    Site.find_by_name(Site::TemplateSiteName) || raise("No template site")
+  end
+  
+  def clone
+    super.tap do |clone|
+      clone.name, clone.display_name = nil, nil
+      clone.signal_categories = self.signal_categories.clone
+    end
   end
   
   private
