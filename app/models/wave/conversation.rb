@@ -1,13 +1,12 @@
 class Wave::Conversation < Wave::Base
 
-  has_and_belongs_to_many :messages,
-      :class_name              => 'Posting::Message',
-      :foreign_key             => 'wave_id',
-      :association_foreign_key => 'posting_id',
-      :join_table              => 'postings_waves',
-      :conditions              => 'parent_id is null',
-      :order                   => 'created_at asc',
-      :after_add               => :publish_to_inbox do
+  has_many :messages,
+      :through     => :publications,
+      :source      => :resource,
+      :source_type => 'Posting::Base',
+      :conditions  => { :parent_id => nil, :type => Posting::Message },
+      :order       => 'created_at asc',
+      :after_add   => :publish_to_inbox do
     def published
       where(:state => :published)
     end
