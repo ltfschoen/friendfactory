@@ -6,8 +6,11 @@ class Wave::Profile < Wave::Base
   
   delegate :handle, :handle=, :first_name, :last_name, :age, :dob, :location, :to => :resource
   
-  # Signals
-  delegate :gender, :orientation, :relationship, :deafness, :hiv_status, :board_type, :military_service, :to => :resource
+  # Default Signals
+  delegate :gender, :orientation, :relationship, :to => :resource
+  
+  # Custom Signals
+  delegate :deafness, :hiv_status, :board_type, :military_service, :to => :resource
   
   before_validation :'resource.present?'
   before_update     :'resource.save'  
@@ -66,10 +69,18 @@ class Wave::Profile < Wave::Base
   def photos
     postings.type(Posting::Photo).published.order('created_at desc').limit(9)
   end
+
+  def after_save
+    empty_tag_list = nil
+    wave.sites.each do |site|
+      # Override set_tag_list_on in inherited classes and call super.
+      # wave.set_tag_list_on(site, empty_tag_list)
+    end
+  end
     
   def set_tag_list_on(site, tag_list)
     if resource.present?
-      signal_ids = [ resource.gender, resource.orientation, resource.relationship, resource.deafness ]
+      signal_ids = site.signal_categories.map { |category| resource.send(:"#{category.name}_id") }
       signal_display_names = Signal::Base.find_all_by_id(signal_ids).map(&:display_name)          
       tag_list = [ tag_list, signal_display_names, scrub_tag(resource.location) ].flatten.compact * ','
       super(site, tag_list)
