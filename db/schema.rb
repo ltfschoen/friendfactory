@@ -143,13 +143,13 @@ ActiveRecord::Schema.define(:version => 20110608054950) do
     t.boolean  "horizontal"
   end
 
-  create_table "postings_waves", :id => false, :force => true do |t|
+  create_table "postings_waves_as_habtm", :id => false, :force => true do |t|
     t.integer "posting_id"
     t.integer "wave_id"
   end
 
-  add_index "postings_waves", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
-  add_index "postings_waves", ["wave_id"], :name => "index_postings_waves_on_wave_id"
+  add_index "postings_waves_as_habtm", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
+  add_index "postings_waves_as_habtm", ["wave_id"], :name => "index_postings_waves_on_wave_id"
 
   create_table "postings_waves_sans_id", :id => false, :force => true do |t|
     t.integer "posting_id"
@@ -196,7 +196,6 @@ ActiveRecord::Schema.define(:version => 20110608054950) do
     t.string  "name",         :null => false
     t.string  "display_name"
     t.integer "site_id"
-    t.string  "subject_type"
     t.integer "ordinal"
   end
 

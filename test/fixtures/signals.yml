@@ -1,47 +1,47 @@
 male_signal:
   id: 1
-  name: male
+  name: gender_male
   display_name: Male
   type: Signal::Base
       
 female_signal:
   id: 2
-  name: female
+  name: gender_female
   display_name: Female
   type: Signal::Base
 
 trans_signal:
   id: 3
-  name: trans
+  name: gender_trans
   display_name: Trans
   type: Signal::Base
 
 gay_signal:
   id: 4
-  name: gay
+  name: orientation_gay
   display_name: Gay
   type: Signal::Base
 
 straight_signal:
   id: 5
-  name: straight
+  name: orientation_straight
   display_name: Straight
   type: Signal::Base
 
 bi_signal:
   id: 6
-  name: bi
+  name: orientation_bisexual
   display_name: Bi
   type: Signal::Base
 
 hivneg:
   id: 7
-  name: hivneg
+  name: hiv_status_negative
   display_name: HIV-
   type: Signal::Base
 
 hivpoz:
   id: 8
-  name: hivpoz
+  name: hiv_status_positive
   display_name: HIV+
   type: Signal::Base

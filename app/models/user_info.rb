@@ -1,36 +1,18 @@
 class UserInfo < ActiveRecord::Base
-
-  # GuyGender    = 1
-  # GirlGender   = 2
-  # TrannyGender = 3
-
-  # Gender =
-  #     ([ 'Guy', 'Girl', 'Trans' ].zip([ GuyGender, GirlGender, TrannyGender ]))
-
-  # Orientation =
-  #     (a = [ 'Gay', 'Lesbian', 'Straight', 'Bisexual', 'Trans' ]).zip((1..a.length).to_a)
-			
-  # Relationship = 
-  #     (a = [ 'Single', 'In a Relationship', 'Married', 'Looking for a Relationship', 'Friends Only' ]).zip((1..a.length).to_a)
-	    
-  # Deafness =
-  #     (a = [ 'Deaf', 'Hard of Hearing', 'Hearing', 'CODA' ]).zip((1..a.length).to_a)
-
-  # HivStatus =
-  #     (a = [ 'Positive', 'Negative', "Don't Know" ]).zip((1..a.length).to_a)
-	    
-  # BoardType =
-  #     (a = [ 'Surf', 'Snow', 'Skate' ]).zip((1..a.length).to_a)
-
-  # MilitaryService = 
-  #       (a = [ 'Seaman', 'Airman', 'Soldier', 'Guard', 'Reserve' ]).zip((1..a.length).to_a)
-
   set_table_name 'user_info'
 
-  alias_attribute :hiv_status,       :deafness
-  alias_attribute :board_type,       :deafness
-  alias_attribute :military_service, :deafness
-    
+  alias_attribute :hiv_status,          :deafness
+  alias_attribute :board_type,          :deafness
+  alias_attribute :military_service,    :deafness
+
+  alias_attribute :gender_id,           :gender
+  alias_attribute :orientation_id,      :orientation
+  alias_attribute :relationship_id,     :relationship
+  alias_attribute :deafness_id,         :deafness
+  alias_attribute :hiv_status_id,       :deafness
+  alias_attribute :board_type_id,       :deafness
+  alias_attribute :military_service_id, :deafness
+      
   belongs_to :user  
 
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
@@ -58,5 +40,4 @@ class UserInfo < ActiveRecord::Base
   def full_name
     [ first_name, last_name ].compact * ' '
   end
-
 end
