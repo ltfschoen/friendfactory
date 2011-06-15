@@ -38,7 +38,6 @@ def migrate_signal(old_signal_name, resource)
   if map = self.class.const_get(old_signal_name.to_s.pluralize.classify, false)
     if signal_ordinal = resource.send(old_signal_name.downcase)
       new_signal_name = map[signal_ordinal - 1]
-      puts "#{resource.id}: #{old_signal_name}(#{signal_ordinal}) => #{new_signal_name}(#{signals[new_signal_name]})"
       resource.update_attribute(:"#{old_signal_name}_id", signals[new_signal_name])
     end
   end  
