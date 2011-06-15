@@ -1,9 +1,9 @@
 namespace :ff do
   namespace :db do
     desc "Refresh development with production db and images from local dumps. DUMP_DATE=yyyymmdd"
-    task :refresh => [ :'refresh:sql', :'refresh:images' ]      
+    task :refresh => [ :'refresh:sql', :'refresh:images', :'refresh:assets' ]      
     namespace :refresh do
-      desc "Refresh development with production sql from local. DUMP_DATE=yyyymmdd"
+      desc "Refresh development with local sql dump. DUMP_DATE=yyyymmdd"
       task :sql => :environment do
         require 'yaml'
         database  = YAML::load_file("config/database.yml")
@@ -11,13 +11,21 @@ namespace :ff do
         sh "mysql -u #{database['development']['username']} -p#{database['development']['password']} #{database['development']['database']} < db/dumps/#{dump_filename}"
       end
     
-      desc "Refresh development with production images from local tar dump. DUMP_DATE=yyyymmdd"
+      desc "Refresh development with images from local tar dump. DUMP_DATE=yyyymmdd"
       task :images => :environment do
         tar_filename = "images.#{timestamp}.tar.gz"
         if File.exists?("db/dumps/#{tar_filename}")
           sh "rm -rf public/system/images/* && tar -xf db/dumps/#{tar_filename} -C public/system"
         end
       end
+      
+      desc "Refresh development with assets from local tar dump. DUMP_DATE=yyyymmdd"
+      task :assets => :environment do
+        tar_filename = "assets.#{timestamp}.tar.gz"
+        if File.exists?("db/dumps/#{tar_filename}")
+          sh "rm -rf public/system/images/* && tar -xf db/dumps/#{tar_filename} -C public/system"
+        end
+      end      
     end
   end
 end

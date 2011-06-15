@@ -1,0 +1,120 @@
+html.application body {
+	background: url($fibers) repeat top center #B6A27D;
+}
+
+html.application .header.primary { 
+	background: url($header) no-repeat top center;
+}
+
+html.application .header.primary ul.nav li a {
+	background-image: url($header);
+}
+
+html.application .header.secondary a:visited,
+html.application .header.secondary a:active {
+	color: #664;
+}
+
+html.application .header.secondary .flash {
+	color: #664;
+}
+
+html.application .header.secondary a:hover {
+	color: #CCA;
+	background-color: #553;
+}
+
+html.application .wave_community .loading {
+	color: #CCA;
+	background-color: rgb(140, 55, 44);
+}
+
+html.application .wave_community .loading {
+	-webkit-box-shadow: 0px 0px 4px 2px rgba(255, 248, 220, 0.5);
+	-moz-box-shadow: 0px 0px 4px 2px rgba(255, 248, 220, 0.5);
+	box-shadow: 0px 0px 4px 2px rgba(255, 248, 220, 0.5);
+}
+
+html.application .tag-cloud a,
+html.application .tag-cloud a:visited {
+	color: #501508;
+}
+
+html.application .tag-cloud a:hover {
+	color: #CCA;
+	background-color: rgb(80, 21, 8);
+}
+
+html.application .tag-cloud a.current,
+html.application .tag-cloud a.current:hover {
+	color: #CCA;
+	background-color: rgb(140, 55, 44);
+}
+
+html.application .tag-cloud a.current,
+html.application .tag-cloud a:visited.current {
+	-webkit-box-shadow: 0px 0px 4px 2px rgba(255, 248, 220, 0.5);
+	-moz-box-shadow: 0px 0px 4px 2px rgba(255, 248, 220, 0.5);
+	box-shadow: 0px 0px 4px 2px rgba(255, 248, 220, 0.5);
+}
+
+html.welcome {
+	background-color: #9C180C;
+}
+
+html.welcome body {
+	background: url($background) no-repeat top center;
+	background-color: #9C180C;
+}
+
+html.welcome p {
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+html.welcome a,
+html.welcome a:link,
+html.welcome a:hover,
+html.welcome a:visited,
+html.welcome a:active {
+	color: #501518;
+}
+
+html.welcome h1 {
+	color: #FFF;
+	text-shadow: 4px 8px 6px #701518;
+}
+
+html.welcome h2 {
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+html.welcome h3 {
+	color: #FFF;
+	text-shadow: 1px 2px 1px #701518;
+}
+
+html.welcome h4 {
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+html.welcome label {
+	color: #501518;
+	color: #FFF;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+html.welcome .panel.login a.new_password {
+	color: #FFF;
+}
+
+html.welcome .flash.notice a {
+	color: #FFF;
+}
+
+html.welcome .flash.error li {
+	color: #501518;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
