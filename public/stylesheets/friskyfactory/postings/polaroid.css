@@ -84,6 +84,10 @@ div.polaroid .face {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;	
+	
+/*	background-color: #FFF;
+	zoom: 2;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=135, Strength=3);*/
 }
 
 div.polaroid .face a.close {
@@ -252,7 +256,6 @@ div.polaroid .pane.conversation .thread ul.messages {
 div.polaroid .pane.conversation .posting_message {
 	margin: 4px 5px;
 	min-width: 10px;
-/*	position: relative; */
 	padding: 3px 5px; 
 	background: none;
 	-moz-border-radius: 5px;
@@ -265,7 +268,7 @@ div.polaroid .pane.conversation .posting_message.received {
 	clear: both;
 	float: left;
 	text-align: left;
-	border: 2px solid rgba(139, 0, 0, 0.5); 
+	border: 2px solid #DE8080;
 }
 
 /*div.polaroid .pane.conversation .posting_message.received:before {
@@ -305,7 +308,7 @@ div.polaroid .pane.conversation .posting_message.sent {
 	clear: both;
 	float: right;
 	text-align: right;
-	border: 2px solid rgba(90, 143, 0, 0.5); 
+	border: 2px solid #99CC66;
 }
 
 /*div.polaroid .pane.conversation .posting_message.sent:before {
@@ -358,7 +361,7 @@ div.polaroid .pane.conversation textarea {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	border: 2px solid rgba(90, 143, 0, 0.5); 	
+	border: 2px solid #99CC66;
 }
 
 div.polaroid .pane.conversation .message-input:before {
@@ -370,8 +373,7 @@ div.polaroid .pane.conversation .message-input:before {
 	height: 5px;
 	border-style: solid; 
 	border-width: 0 0 2px 2px; 
-	border-color: rgba(90, 143, 0, 0.5);
-	background: transparent;
+	border-color: #99CC66;
 	background-color: #f9f9f9;
 	-webkit-border-bottom-left-radius: 18px 10px;
 	-moz-border-radius-bottomleft: 18px 10px;
@@ -386,9 +388,8 @@ div.polaroid .pane.conversation .message-input:after {
 	width: 4px; 
 	height: 5px; 
 	border-style: solid;
-	border-width: 0 0 2px 2px;
-	border-color: rgba(90, 143, 0, 0.5); 
-	background: transparent;
+	border-width: 0 0 2px 2px;	
+	border-color: #99CC66;
 	-webkit-border-bottom-left-radius: 10px 20px;
 	-moz-border-radius-bottomleft: 10px 20px; 
 	border-bottom-left-radius: 10px 20px; 
