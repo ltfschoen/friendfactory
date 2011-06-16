@@ -1,13 +1,13 @@
 (function($) {
 
 	$.fn.polaroid = function(options) {
-
 		var settings = {
-				'close-button' : false
+				'close-button' : false,
+				'set-focus' : true
 			},
 
 			panes = {
-				init: function(scrollable, idx) {
+				init: function(scrollable, idx, setFocus) {
 					var panes = this,
 						$pane = $(scrollable.getRoot()).find('.pane:eq(' + idx + ')'),
 						paneName = $pane.data('pane'),
@@ -15,7 +15,7 @@
 					
 					$pane.load('/wave/profiles/' + profileId + '/' + paneName, function(event) {
 						if (panes[paneName] !== undefined) {
-							panes[paneName]($pane);
+							panes[paneName]($pane, setFocus);
 						}						
 					});					
 				},
@@ -25,9 +25,11 @@
 					$pane.find('.message-input').hide();
 				},
 
-				conversation: function($pane) {
-					$pane.find('.wave_conversation').chat();
-					$pane.find('textarea').focus();
+				conversation: function($pane, setFocus) {
+					$pane.find('.wave_conversation').chat();					
+					if (setFocus === true) {						
+						$pane.find('textarea').focus();						
+					}
 				}
 			}
 
@@ -37,7 +39,8 @@
 			return this.each(function() {
 				var $this = $(this), // a polaroid
 					$backFace = $this.find('.back.face'),
-					transitionDuration = $this.css('-webkit-transition-duration');
+					transitionDuration = $this.css('-webkit-transition-duration'),
+					setFocus = settings['set-focus'];
 
 				if (settings['pane'] === undefined) {
 					$this.css({ '-webkit-transition-duration': '0s' }).addClass('flipped');
@@ -66,7 +69,7 @@
 								panes.tearDown(this, idx);
 							},
 							onSeek: function(event, idx) {
-								panes.init(this, idx);
+								panes.init(this, idx, setFocus);
 							}
 						}).navigator()
 					.end()
@@ -99,13 +102,15 @@
 
 				if (settings['pane'] !== undefined) {
 					$backFace.find('.scrollable').scrollable().seekTo(settings['pane'], 0);
+					setFocus = true;
 				}
 			}); // each
 			
 		} else {
 			// no-csstransforms3d
 			return this.each(function() {
-				var $this = $(this), // a polaroid				
+				var $this = $(this), // a polaroid
+					setFocus = settings['set-focus'],							
 					scrollableSettings = {
 						items: 'items',
 						keyboard: false,
@@ -115,9 +120,9 @@
 							panes.tearDown(this, idx);
 						},									
 	   	    			onSeek: function(event, idx) {
-							panes.init(this, idx);
+							panes.init(this, idx, setFocus);
 	   	    			}						
-					};				
+					};	
 								
 				if (settings['close-button'] === true) {
 					$('a.close', $this).live('click', function(event) {
@@ -212,9 +217,9 @@
 								.navigator();
 						
 					$this.find('.scrollable').scrollable().seekTo(settings['pane'], 0);
-					
-				} // if		
-			}); // each			
+					setFocus = true;					
+				} // if
+			}); // each						
 		} // if		
 	}; // fn.polaroid
 	
