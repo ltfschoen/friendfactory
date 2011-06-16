@@ -56,6 +56,7 @@ input.password {
 
 .creative {
     padding-bottom: 4em;
+	text-align: left;
 }
 
 .blurb p {
@@ -70,10 +71,6 @@ input.password {
 	padding-top: 1em;
 	width: 100%;
 }
-
-/*.button-bar a {
-    margin-top: 0.5em;
-}*/
 
 .panel.login h3 {
     float: left;
@@ -102,4 +99,8 @@ input.password {
 
 .flash.notice {
     text-align: center;
+}
+
+form.edit_user {
+	text-align: left;
 }

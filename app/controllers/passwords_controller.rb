@@ -7,7 +7,7 @@ class PasswordsController < ApplicationController
     render :layout => 'welcome'
   end
   
-  def create    
+  def create
     if @user = User.find_by_email(params[:email])
       @user.reset_password!
       PasswordsMailer.reset(@user, current_site).deliver
@@ -27,7 +27,6 @@ class PasswordsController < ApplicationController
   def update
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
-    @user.save
     if @user.save
       flash[:notice] = 'Your password was successfully updated.'
       redirect_to root_path

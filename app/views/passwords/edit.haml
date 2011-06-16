@@ -1,7 +1,6 @@
 - submit_message ||= "Update Password & Login"
-.grid_4.alpha
-  &nbsp;
-.grid_4.password-edit
+= render :partial => File.join('welcome', current_site.name, 'badge')
+.grid_4.push_6.prepend-top
   = form_for @user, :url => password_path, :method => :put do |f|
     %table
       %tr
@@ -17,5 +16,3 @@
         %tr
           %td.formError
             %p= @user.errors.full_messages.first
-.grid_4.omega
-  &nbsp;
