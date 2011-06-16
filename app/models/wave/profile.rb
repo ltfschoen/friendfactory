@@ -41,7 +41,7 @@ class Wave::Profile < Wave::Base
       :through      => :publications,
       :source       => :resource,
       :source_type  => 'Posting::Base',
-      :conditions   => { 'postings.type' => Posting::Avatar, 'postings.parent_id' => nil, 'postings.state' => :published, 'postings.active' => true },
+      :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true }},
       :order        => 'created_at desc'
 
   def active_avatar
