@@ -9,9 +9,10 @@
 
 		channel.bind('message', function(data) {
 			$.get(data['url'], function(partial) {
-				var $threadDiv = $('.thread', data['dom_id']);
-				$threadDiv.append(partial);
-				$threadDiv.scrollTo('max', 90);
+				var $thread = $('.thread', data['dom_id']),
+					$threadMessages = $thread.find('ul.messages');
+				$threadMessages.append('<li>' + partial + '</li>');
+				$thread.scrollTo('max', 90);
 			});
 		});
 
