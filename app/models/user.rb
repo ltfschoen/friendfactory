@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
   
   scope :online, lambda { { :conditions =>
-      [ 'last_request_at >= ? and current_login_at is not null', (Time.now - UserSession::InactivityTimeout).to_s(:db) ] } }
+      [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] } }
   
   has_and_belongs_to_many :sites, :uniq => true, :before_add => :raise_exception_if_already_enrolled
 
