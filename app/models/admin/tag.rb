@@ -5,8 +5,14 @@ class Admin::Tag < ActiveRecord::Base
   
   def self.refresh_all
     ActsAsTaggableOn::Tag.delete_all
-    ActsAsTaggableOn::Tagging.delete_all    
-    Wave::Base.type(Wave::Profile, Wave::Event).each { |wave| wave.save! }
+    ActsAsTaggableOn::Tagging.delete_all
+    Wave::Base.type(Wave::Profile, Wave::Event).each do |wave|
+      wave.sites.each do |site|
+        if wave.respond_to?(:set_tag_list_on)
+          wave.set_tag_list_on!(site)
+        end
+      end
+    end
     true
   end
   

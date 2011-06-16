@@ -45,7 +45,7 @@ class Wave::Event < Wave::Base
     # TODO
   end
 
-  def set_tag_list_on(site, tag_list)
+  def set_tag_list_on(site)
     if location.present? && location.city.present?
       super(site, scrub_tag(location.city))
     end

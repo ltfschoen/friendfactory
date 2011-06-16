@@ -18,6 +18,7 @@ namespace :ff do
       migrate_profiles(:positivelyfrisky) { |resource| migrate_signal(:hiv_status, resource) }
       migrate_profiles(:friskyforces) { |resource| migrate_signal(:military_service, resource) }
       migrate_profiles(:dizmdayz) { |resource| migrate_signal(:board_type, resource) }
+      Admin::Tag.refresh_all
     end    
 
     def migrate_profiles(site_name)

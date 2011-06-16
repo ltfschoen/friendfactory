@@ -17,6 +17,8 @@ class Wave::EventsController < ApplicationController
     @wave = Wave::Event.new(params[:wave_event]).tap { |event| event.user = current_user }
     respond_to do |format|
       if current_site.waves << @wave && current_site.home_wave.postings << @wave
+        # TODO: Move to before_save callback
+        @wave.set_tag_list_on(current_site)
         @wave.publish!
         format.js { render :layout => false }
       end

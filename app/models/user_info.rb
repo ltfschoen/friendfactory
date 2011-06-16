@@ -17,14 +17,6 @@ class UserInfo < ActiveRecord::Base
 
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
     
-  after_update do |user_info|
-    if profile = user_info.profile
-      profile.sites.each do |site|
-        profile.set_tag_list_on(site, nil) && profile.save
-      end
-    end
-  end
-  
   def handle
     self[:handle] || first_name
   end
