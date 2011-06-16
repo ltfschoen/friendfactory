@@ -228,8 +228,7 @@ div.polaroid .pane.conversation .header img.avatar.thimble.recipient {
 
 div.polaroid .pane.conversation .header div.recipient {
 	float: left;
-	position: relative;
-	top: 8px;
+	margin-top: 8px;
 	font-size: small;
 }
 
@@ -253,7 +252,7 @@ div.polaroid .pane.conversation .thread ul.messages {
 div.polaroid .pane.conversation .posting_message {
 	margin: 4px 5px;
 	min-width: 10px;
-	position: relative; 
+/*	position: relative; */
 	padding: 3px 5px; 
 	background: none;
 	-moz-border-radius: 5px;
@@ -263,13 +262,14 @@ div.polaroid .pane.conversation .posting_message {
 }
 
 div.polaroid .pane.conversation .posting_message.received {
+	clear: both;
 	float: left;
 	text-align: left;
 	border: 2px solid rgba(139, 0, 0, 0.5); 
 }
 
 /*div.polaroid .pane.conversation .posting_message.received:before {
-	content: ""; 
+	content: "";
 	position: absolute;
 	bottom: -7px; 
 	left: 4px; 
@@ -302,7 +302,7 @@ div.polaroid .pane.conversation .posting_message.received {
 }*/
 
 div.polaroid .pane.conversation .posting_message.sent {
-	clear: right;
+	clear: both;
 	float: right;
 	text-align: right;
 	border: 2px solid rgba(90, 143, 0, 0.5); 

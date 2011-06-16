@@ -1,17 +1,17 @@
 (function($) {
 
 	$.fn.polaroid = function(options) {
-		
+
 		var settings = {
 				'close-button' : false
 			},
-			
+
 			panes = {
 				init: function(scrollable, idx) {
 					var panes = this,
 						$pane = $(scrollable.getRoot()).find('.pane:eq(' + idx + ')'),
 						paneName = $pane.data('pane'),
-						profileId = $pane.closest('.polaroid').attr('data-profile_id');						
+						profileId = $pane.closest('.polaroid').attr('data-profile_id');
 					
 					$pane.load('/wave/profiles/' + profileId + '/' + paneName, function(event) {
 						if (panes[paneName] !== undefined) {
@@ -19,22 +19,28 @@
 						}						
 					});					
 				},
-				
+
+				tearDown: function(scrollable, idx) {
+					var $pane = $(scrollable.getRoot()).find('.pane.conversation');
+					$pane.find('.message-input').hide();
+				},
+
 				conversation: function($pane) {
 					$pane.find('.wave_conversation').chat();
+					$pane.find('textarea').focus();
 				}
 			}
-		
-		$.extend(settings, options);		
-		
-		if (Modernizr.csstransforms3d) {			
+
+		$.extend(settings, options);
+
+		if (Modernizr.csstransforms3d) {
 			return this.each(function() {
 				var $this = $(this), // a polaroid
 					$backFace = $this.find('.back.face'),
 					transitionDuration = $this.css('-webkit-transition-duration');
-				
+
 				if (settings['pane'] === undefined) {
-					$this.css({ '-webkit-transition-duration': '0s' }).addClass('flipped');					
+					$this.css({ '-webkit-transition-duration': '0s' }).addClass('flipped');
 					$backFace.find('.content').css({ opacity: 0.0 });
 				}
 
@@ -47,7 +53,7 @@
 						return false;
 					});
 				}
-				
+
 				$backFace
 					// .css('-webkit-transform', 'rotateY(180deg)')
 					.find('.scrollable')
@@ -56,42 +62,47 @@
 							keyboard: false,
 							next: '',
 							prev: '',
+							onBeforeSeek: function(event, idx) {
+								panes.tearDown(this, idx);
+							},
 							onSeek: function(event, idx) {
 								panes.init(this, idx);
 							}
-						}).navigator()						
+						}).navigator()
 					.end()
-					
+
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
 							event.preventDefault();							
-							$backFace.find('.content').fadeTo('fast', 0.0);
-							$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
+							$backFace.find('.content').fadeTo('fast', 0.0, function(){
+								$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
+							});
+							// $this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
 						})
-					.end()										
+					.end()
 				.end()
-				
+
 				.find('.front.face .buddy-bar a.flip')
 					.click(function(event) {
 						var idx = $(this).closest('li').index();
-						event.preventDefault();						
+						event.preventDefault();
 
 						// Undo the rotate and manually scroll to correct pane.
 						$backFace.css('-webkit-transform', 'rotateY(180deg)')
 							.find('.scrollable').scrollable().seekTo(idx, 0);
 						$backFace.css('-webkit-transform', 'none')
-							.find('.content').delay(900).fadeTo('fast', 1.0);													
+							.find('.content').delay(900).fadeTo('fast', 1.0);
 
 						$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
 					})
 				.end();
-				
+
 				if (settings['pane'] !== undefined) {
 					$backFace.find('.scrollable').scrollable().seekTo(settings['pane'], 0);
-				}				
+				}
 			}); // each
 			
-		} else {			
+		} else {
 			// no-csstransforms3d
 			return this.each(function() {
 				var $this = $(this), // a polaroid				
@@ -99,7 +110,10 @@
 						items: 'items',
 						keyboard: false,
 						next: '',
-						prev: '',							
+						prev: '',
+						onBeforeSeek: function(event, idx) {
+							panes.tearDown(this, idx);
+						},									
 	   	    			onSeek: function(event, idx) {
 							panes.init(this, idx);
 	   	    			}						

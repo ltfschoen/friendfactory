@@ -9,9 +9,9 @@
 
 		channel.bind('message', function(data) {
 			$.get(data['url'], function(partial) {
-				var $threadDiv = $('.thread', data['dom_id']).append(partial);
-				// $threadDiv[0].scrollTop = $threadDiv[0].scrollHeight;
-				$threadDiv.scrollTo('max', 200);
+				var $threadDiv = $('.thread', data['dom_id']);
+				$threadDiv.append(partial);
+				$threadDiv.scrollTo('max', 90);
 			});
 		});
 
@@ -20,7 +20,11 @@
 				.find('button[type="submit"]')
 					.hide()
 				.end()
-				
+
+				.find('.message-input')
+					.show()
+				.end()
+
 				.find('textarea')
 					.bind('keydown', function(event) {
 						if (event.keyCode == '13') {
@@ -39,15 +43,15 @@
 					var msg = $(this).find('textarea').val();
 					if (msg.length == 0) { return false; }			
 				})
-				
+
 				.bind('ajax:loading', function() {
 					var $this = $(this),
 						$textarea = $this.find('textarea#posting_message_body'),
-						$thread = $this.closest('.wave_conversation').find('.thread ul.messages');
+						$thread = $this.closest('.wave_conversation').find('.thread'),
+						$threadMessages = $thread.find('ul.messages');
 
-					$thread.append($("<li><div class='posting posting_message sent'>" + $textarea.val() + "</div></li>"));
-					// $thread[0].scrollTop = $thread[0].scrollHeight;
-					$thread.scrollTo('max', 200);
+					$threadMessages.append($("<li><div class='posting posting_message sent'>" + $textarea.val() + "</div></li>"));
+					$thread.scrollTo('max', 90);
 					$textarea.val('');
 				})
 			.end()
