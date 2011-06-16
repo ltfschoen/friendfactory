@@ -2,7 +2,7 @@ namespace :ff do
   namespace :fixtures do
     
     desc "Load friskyfactory fixtures"
-    task :load => [ :'load:models', :'load:taggables', :'load:avatars', :'load:photos', :'ff:db:seed:css' ] # ts:rebuild
+    task :load => [ :'load:models', :'load:taggables', :'load:avatars', :'load:photos', :'ff:db:seed', :'ff:sites:load' ] # ts:rebuild
     
     namespace :load do
       task :models do

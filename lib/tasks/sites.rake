@@ -38,7 +38,7 @@ namespace :ff do
         File.join(Rails.root, 'db', 'seeds')
       end
       
-      def template_ste
+      def template_site
         @template_site ||= Site.template
       end
     end
