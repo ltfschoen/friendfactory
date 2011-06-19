@@ -2,46 +2,28 @@
   #new_event_overlay.tab_content.nav-content.hidden
     = form_for Wave::Event.new, :remote => true do |f|
       .ticket
-        .front.face<
-          .grid_10.alpha<  
-            .header.grid_10.alpha.omega<
-              .grid_3.alpha<
-                &nbsp;
-              .grid_4<
-                = f.text_field :start_date, { :class => 'date' }
-              .grid_3.omega<
-                .time
-                  Time
-                  = time_select 'wave_event', 'start_time', { :ignore_date => true, :minute_step => 10, :default => Time.now }, { :class => 'time' }
-            .header-url.grid_10.alpha.omega<
-              = f.text_field :url, { :placeholder => 'http:// (optional)' }
-            .left-info-pane.grid_2.alpha<
-              &nbsp;
-            .center-pane.grid_6<
-              = text_field_tag 'wave_event[promoter_name]', current_user.handle(current_site)
-              .presents
-                Presents
-              = f.text_area  :description, :placeholder => 'event title'
-            .right-info-pane.grid_2.omega<
-              &nbsp;
-          .stub-pane.grid_2.omega<
+        .front.face
+          .grid_10.alpha
+            .header.grid_10.alpha.omega
+              = f.text_field :start_date, { :class => 'date', :placeholder => 'Event Date' }
+            .body.grid_6.prefix_2.suffix_2.alpha.omega
+              = text_field_tag 'wave_event[promoter_name]', current_user.handle(current_site), :placeholder => 'Event Host'
+              .presents Presents
+              = f.text_area  :description, :placeholder => 'Event Title'
+          .stub.grid_2.omega
             &nbsp;
-
         .back.face<
-          .stub-pane.grid_2.alpha
+          .stub.grid_2.alpha
             &nbsp;          
           .map.grid_4
-          .info-pane.grid_5
-            = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'place name'
-            = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'city, state'
+          .body.grid_6.omega
+            = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'Location Name'
+            = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'Address (Street, City, State)'
             = hidden_field_tag 'wave_event[location[city]]'
             = hidden_field_tag 'wave_event[location[state]]'
             = hidden_field_tag 'wave_event[location[lat]]'
             = hidden_field_tag 'wave_event[location[lng]]'
-            = f.text_area :body, :placeholder => 'additional information'
-          .photos.grid_1.omega
-            &nbsp;          
-        
+            = f.text_area :body, :placeholder => 'Other information and directions'
       .button-bar
         = f.submit :OK
         = f.button :Cancel, :class => 'cancel'

@@ -3,6 +3,29 @@
 	width: 70px;
 }
 
+.wave.events .event {
+	margin: 10px 0;
+}
+
+.wave.events .event {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    postition: relative;
+}
+
+.wave.events .event:nth-child(even) {
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
+}
+
+.wave.events .event:nth-child(3n) {
+	position: relative;
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    top: -20px;
+    right: 30px;
+}
+
 .ticket-container {
 	width: 700px;
 	height: 254px;
@@ -52,29 +75,12 @@
 	overflow: hidden;
 }
 
-.ticket .front.face .header-url {	
-	height: 20px;
-	padding-top: 4px;
-	text-align: center;
-}
-
-.ticket .front.face .header-url a,
-.ticket .front.face .header-url a:visited {
-	color: #fff;	
-}
-
-.ticket .front.face .left-info_pane {
-	position: relative;
-}
-
 .ticket .front.face .start_date {
 	text-align: center;
 }
 
 .ticket .front.face .center-pane {
 	text-align: center;
-	margin-left: 5px;
-	margin-top: 5px;
 }
 
 .ticket .front.face .promoter_name {
@@ -85,7 +91,6 @@
 
 .ticket .front.face .presents {
 	font-size: small;
-	color: gray;
 	text-align: center;
 	margin: 10px 0;
 	text-transform: uppercase;
@@ -135,134 +140,64 @@
 	margin-left: 18px;
 }
 
-#new_event_overlay form {
+#new_wave_event {
 	position: relative;
 	margin: 0 auto;
 	width: 700px;
 }
 
-#new_event_overlay .front.face .header {
+#new_wave_event .front.face .header {
 	height: 38px;
 	padding-top: 0;
 }	
 
-#new_event_overlay .front.face .header-url {
-	height: 24px;
-	padding-top: 0;
-}	
-
-#new_event_overlay .presents {
-	margin: 0;
-}
-
-#new_event_overlay input#wave_event_start_date {
+#new_wave_event input#wave_event_start_date {
 	display: block;
-	position: relative;
-	top: 11px;
-	width: 17em;
-	height: 24px;
-	margin: 0 auto;
+	margin: 12px auto 0;
 	text-align: center;
-	padding: 2px;
 	border: 0;
 	cursor: pointer;
 	overflow: hidden;
-	background: transparent;
+	font-size: 100%;
 }
 
-#new_event_overlay div.time {
-	display: block;
-	position: relative;
-	top: 11px;
-	right: 22px;
-	text-align: right;
-	font-size: 12px;
-	height: 24px;	
-	overflow: hidden;
-}
-
-#new_event_overlay select.time {
-	width: 4em;
-}
-
-#new_event_overlay input#wave_event_url {
-	display: block;
-	position: relative;
-	top: 2px;
-	height: 18px;
-	background-color: transparent;
-	color: #fff !important;
-	width: 17em;
-	margin: 0 auto;
-	text-align: center;	
-	padding: 2px;
-	border: 0;
-	cursor: pointer;
-}
-
-#new_event_overlay .front.face .center-pane {
+#new_wave_event .front.face .body {
 	margin-top: 0;
+	text-align: center;
 }
 
-#new_event_overlay input#wave_event_promoter_name {
+#new_wave_event .body input,
+#new_wave_event .body textarea {
+	width: 95%;
+}
+
+#new_wave_event .back.face .body {
+	margin-top: 10px;
+}
+
+#new_wave_event .back.face .body input,
+#new_wave_event .back.face .body textarea {
+	width: 290px;
+}
+
+#new_wave_event input#wave_event_promoter_name {
 	font-size: 24px;
 	text-align: center;
-	background: none;
 }
 
-#new_event_overlay textarea#wave_event_description {
-	font-size: 16px;
+#new_wave_event textarea#wave_event_description {
+	font-size: 90%;
 	height: 60px;
 	text-align: center;
 	resize: none;
-	background: none;
-	color: black;
 }
 
-#new_event_overlay textarea#wave_event_body {
-	height: 112px;
+#new_wave_event textarea#wave_event_body {
+	height: 110px;
 	resize: none;
 }
 
-#new_event_overlay input#wave_event_location_name {
-	margin-top: 0;
-}
-
-#new_event_overlay .back.face .info-pane {
-	overflow: hidden;
-}
-
-#new_event_overlay textarea#wave_event_body {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	margin-bottom: 0;
-}
-
-#new_event_overlay .button-bar {
+#new_wave_event .button-bar {
 	text-align: right;
 	padding-right: 20px;
-}
-
-.wave.events .event {
-	margin: 10px 0;
-}
-
-.wave.events .event {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-    postition: relative;
-}
-
-.wave.events .event:nth-child(even) {
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-}
-
-.wave.events .event:nth-child(3n) {
-	position: relative;
-    -webkit-transform: rotate(-3deg);
-    -moz-transform: rotate(-3deg);
-    top: -30px;
-    right: 30px;
 }
