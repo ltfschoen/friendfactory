@@ -67,38 +67,28 @@
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
+	text-align: center;
 }
 
 .ticket .front.face .header {
 	height: 20px;
-	padding-top: 17px;
-	overflow: hidden;
-}
-
-.ticket .front.face .start_date {
-	text-align: center;
-}
-
-.ticket .front.face .center-pane {
-	text-align: center;
+	margin: 20px auto 10px;
 }
 
 .ticket .front.face .promoter_name {
 	font-size: 24px;
-	text-align: center;
-	margin: 10px 0;
+	margin: 10px auto;
 }
 
 .ticket .front.face .presents {
 	font-size: small;
-	text-align: center;
-	margin: 10px 0;
+	margin: 20px auto;
 	text-transform: uppercase;
 }
 
 .ticket .front.face .description {
-	text-align: center;
 	font-size: 16px;
+	margin-top: 20px
 }
 
 .ticket-container > .ticket .back.face {
@@ -148,17 +138,17 @@
 
 #new_wave_event .front.face .header {
 	height: 38px;
-	padding-top: 0;
+	margin: 12px auto 0;
 }	
 
+#new_wave_event .front.face .presents {
+	margin: 5px auto;
+}
+
 #new_wave_event input#wave_event_start_date {
-	display: block;
-	margin: 12px auto 0;
 	text-align: center;
-	border: 0;
 	cursor: pointer;
-	overflow: hidden;
-	font-size: 100%;
+	font-size: 16px;
 }
 
 #new_wave_event .front.face .body {
@@ -166,9 +156,9 @@
 	text-align: center;
 }
 
-#new_wave_event .body input,
-#new_wave_event .body textarea {
-	width: 95%;
+#new_wave_event .front.face input,
+#new_wave_event .front.face textarea {
+	width: 300px;
 }
 
 #new_wave_event .back.face .body {
@@ -190,6 +180,7 @@
 	height: 60px;
 	text-align: center;
 	resize: none;
+	overflow: hidden;
 }
 
 #new_wave_event textarea#wave_event_body {

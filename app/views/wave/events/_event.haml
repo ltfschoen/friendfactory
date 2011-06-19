@@ -12,21 +12,15 @@
                   = event.start_date.to_s(:event_date)
               .grid_3.omega
                 &nbsp;              
-            .header-url.grid_10.alpha.omega
-              = link_to(event.url, "http://#{event.url}")
           
-            .left-info-pane.grid_2.alpha
-              &nbsp;          
-            .center-pane.grid_6
-              .promoter_name<
-                = event.promoter_name
-              .presents<
-                Presents
-              .description<
-                = event.description
-
-            .right-info-pane.grid_2.omega
-              &nbsp;
+            .grid_2.alpha
+              &nbsp;                      
+            .body.grid_6
+              .promoter_name= event.promoter_name
+              .presents Presents
+              .description= event.description
+            .grid_2.omega
+              &nbsp;              
           .stub.grid_2.omega
             %ul.navi
               %li= link_to 'Show', wave_event_path(event), :class => 'flip'

@@ -9,7 +9,7 @@
             .body.grid_6.prefix_2.suffix_2.alpha.omega
               = text_field_tag 'wave_event[promoter_name]', current_user.handle(current_site), :placeholder => 'Event Host'
               .presents Presents
-              = f.text_area  :description, :placeholder => 'Event Title'
+              = f.text_area  :description, :maxlength => 130, :placeholder => 'Event Title'
           .stub.grid_2.omega
             &nbsp;
         .back.face<
@@ -17,13 +17,13 @@
             &nbsp;          
           .map.grid_4
           .body.grid_6.omega
-            = text_field_tag 'wave_event[location[name]]', nil, :placeholder => 'Location Name'
-            = text_field_tag 'wave_event[location[address]]', nil, :placeholder => 'Address (Street, City, State)'
+            = text_field_tag 'wave_event[location[name]]', nil, :maxlength => 130, :placeholder => 'Location Name'
+            = text_field_tag 'wave_event[location[address]]', nil, :maxlength => 130, :placeholder => 'Address (Street, City, State)'
             = hidden_field_tag 'wave_event[location[city]]'
             = hidden_field_tag 'wave_event[location[state]]'
             = hidden_field_tag 'wave_event[location[lat]]'
             = hidden_field_tag 'wave_event[location[lng]]'
-            = f.text_area :body, :placeholder => 'Other information and directions'
+            = f.text_area :body, :maxlength => 2000, :placeholder => 'Other information and directions'
       .button-bar
         = f.submit :OK
         = f.button :Cancel, :class => 'cancel'
