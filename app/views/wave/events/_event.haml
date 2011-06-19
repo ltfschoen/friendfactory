@@ -27,13 +27,15 @@
 
             .right-info-pane.grid_2.omega
               &nbsp;
-                    
-          .stub-pane.grid_2.omega
-            &nbsp;        
+          .stub.grid_2.omega
+            %ul.navi
+              %li= link_to 'Show', wave_event_path(event), :class => 'flip'
+            
       .face-container
         .back.face
-          .stub-pane.grid_2.alpha
-            &nbsp;
+          .stub.grid_2.alpha
+            %ul.navi
+              %li= link_to 'Show', wave_event_path(event), :class => 'flip'
           .map.grid_4
             - location = event.location
             - if location.present? && location.lat? && location.lng?

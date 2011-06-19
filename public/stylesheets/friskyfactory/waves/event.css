@@ -13,6 +13,7 @@
 	position: absolute;
 	width: 700px;
 	height: 254px;
+	background-color: transparent;
 	-webkit-transform-style: preserve-3d;	
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 1s;
@@ -25,6 +26,17 @@
 .ticket-container > .ticket .face {
 	position: absolute;
 	-webkit-backface-visibility: hidden;    
+}
+
+.ticket a.flip {
+	display: block;
+	text-decoration: none;
+	text-indent: -5000px;
+	width: 18px;
+	height: 20px;
+	margin-top: 208px;
+	margin-left: 62px;
+	background: url(/images/friskyfactory/buddy-bar.png) top left no-repeat;	
 }
 
 .ticket .front.face {
@@ -84,15 +96,15 @@
 	font-size: 16px;
 }
 
+.ticket-container > .ticket .back.face {
+	-webkit-transform: rotateY(180deg);
+}
+
 .ticket .back.face {
 	background: url('/images/friskyfactory/ticket.png') 0 -250px;	
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
-}
-
-.ticket-container > .ticket .back.face {
-	-webkit-transform: rotateY(180deg);
 }
 
 .ticket .back.face .info-pane {
@@ -118,37 +130,15 @@
 	margin-bottom: 0px;
 }
 
-/*#new_event_overlay {
-	background: url('/images/friskyfactory/golden_fibers.png') repeat-y top center #CEC2A2;
-	padding: 5px 20px 10px 20px;
-	-webkit-box-shadow: 0 0 90px #000;	
-	-moz-box-shadow:0 0 90px 5px #000;
-	box-shadow:0 0 90px 5px #000;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-}*/
-
-/*#new_event_overlay h1 {
-	text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);	
-	text-align: center;
-}*/
-
-/*#new_event_overlay .close {
-	background-image: url(/images/friskyfactory/close.png);
-	position: absolute;
-	right: -15px;
-	top: -15px;
-	cursor: pointer;
-	height: 35px;
-	width: 35px;
-}*/
+.ticket .back.face ul.navi a.flip {
+	background-position: -200px 0;
+	margin-left: 18px;
+}
 
 #new_event_overlay form {
 	position: relative;
 	margin: 0 auto;
 	width: 700px;
-/*	font-family: 'Arial';*/
 }
 
 #new_event_overlay .front.face .header {

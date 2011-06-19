@@ -94,12 +94,12 @@ var colors = {
 	red:[255,0,0],
 	silver:[192,192,192],
 	white:[255,255,255],
-	yellow:[255,255,0],
-	transparent: [255,255,255]
+	yellow:[255,255,0]
+	// transparent: [255,255,255]
 };
 
 var acceptHexColor=function(color) {
-	if(color && color.indexOf("#")==-1 && color.indexOf("(")==-1){
+	if(color && color.indexOf("#")==-1 && color.indexOf("(")==-1 && color !== 'transparent'){
 		return "rgb("+colors[color].toString()+")";
 	} else {
 		return color;
