@@ -1,9 +1,6 @@
 - if current_user
-  #new_event_overlay.hidden<
-    %h1<    
-      Create a New Event    
-    -# TODO Remove user_id assignment. Mass-assignment not allowed!
-    = form_for Wave::Event.new(:user_id => current_user.id), :remote => true do |f|
+  #new_event_overlay.tab_content.nav-content.hidden
+    = form_for Wave::Event.new, :remote => true do |f|
       .ticket
         .front.face<
           .grid_10.alpha<  
@@ -17,7 +14,7 @@
                   Time
                   = time_select 'wave_event', 'start_time', { :ignore_date => true, :minute_step => 10, :default => Time.now }, { :class => 'time' }
             .header-url.grid_10.alpha.omega<
-              = f.text_field :url, { :placeholder => 'http:// (optional)' }            
+              = f.text_field :url, { :placeholder => 'http:// (optional)' }
             .left-info-pane.grid_2.alpha<
               &nbsp;
             .center-pane.grid_6<
@@ -41,9 +38,10 @@
             = hidden_field_tag 'wave_event[location[state]]'
             = hidden_field_tag 'wave_event[location[lat]]'
             = hidden_field_tag 'wave_event[location[lng]]'
-            = f.text_area :body, :placeholder => 'additional information'          
+            = f.text_area :body, :placeholder => 'additional information'
           .photos.grid_1.omega
             &nbsp;          
         
-        .button-bar.grid_12.alpha.omega<
-          = f.submit 'Create'
+      .button-bar
+        = f.submit :OK
+        = f.button :Cancel, :class => 'cancel'

@@ -41,6 +41,11 @@
 	width: 55px;
 }
 
+.wave_events ul.nav li.wave_event a {
+	background-position: -150px;
+	width: 70px;
+}
+
 .wave_invitation .polaroid td.input {
 	text-align: left;
 }

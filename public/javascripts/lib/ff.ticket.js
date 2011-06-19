@@ -33,15 +33,12 @@
 							$ticket.find('.back.face').click(function(event) {
 								event.preventDefault();
 								$ticket.revertFlip();
-							}); // click
-						} // onEnd						
-					}); // flip
-					
+							});
+						} // onEnd
+					}); // flip				
 				}); // click
-			}) //each
-			
-		} // if
-		
-	} // fn.ticket
+			})			
+		}		
+	}
 	
 })(jQuery);

@@ -23,13 +23,11 @@
   .grid_2<
     &nbsp;
   .grid_12<
-    - if current_user
-      .tab_contents
-        = render :partial => 'new'
+    .tab_contents.nav-content
+      = render :partial => 'new'
     %ul.waves
       = render :partial => 'event', :collection => @waves
   .grid_2<
     &nbsp;
     
-.grid_16<
-  = will_paginate @waves
+.grid_16= will_paginate(@waves)
