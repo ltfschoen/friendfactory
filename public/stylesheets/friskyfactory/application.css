@@ -442,6 +442,6 @@ a.facebook {
 	color: darkred;
 }
 
-:-moz-placeholder {
+.field-error:-moz-placeholder {
 	color: darkred;
 }

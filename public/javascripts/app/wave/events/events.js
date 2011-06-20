@@ -4,8 +4,8 @@ jQuery(function($) {
 
 	function updateMap(address, callback) {
 		var params = encodeURIComponent('location[address]=' + address);
-		$.get('/locations/geocode', params, function(resp) {
-			if (resp) {
+		$.get('/locations/geocode', params, function(resp) {			
+			if (resp && resp['link_url'] !== undefined) {
 				$('div.map', $ticket).html(
 					'<a href="' + resp['link_url'] + '" target="_blank"><img src="' + resp['map_url'] + '" class="map"></a>');
 				
@@ -33,6 +33,7 @@ jQuery(function($) {
 		}, 'json')
 	}
 
+
 	$('form.new_wave_event', '.nav-content')
 		.buttonize()
 
@@ -42,14 +43,11 @@ jQuery(function($) {
 		
 		.live('ajax:loading', function() {
 			var $address = $('#wave_event_location_address');
-			$(this).find('.button-bar').fadeTo('fast', 0.0);			
+			$(this).find('.button-bar button').addClass('ui-state-disabled');
+			
 			if (($('div.map img').length == 0) && ($address.val().length > 0)) {
 				updateMap($address.val());
 			}
-		})
-		
-		.live('ajax:complete', function() {
-			$(this).find('.button-bar').fadeTo('fast', 1.0);
 		})
 		
 		.find('#wave_event_location_address')
@@ -76,7 +74,10 @@ jQuery(function($) {
 		$form[0].reset();
 		$form.find('textarea, input[type="text"]')
 			.placehold()
-			.removeClass('field-error');
+			.removeClass('field-error')
+			.end()
+			.find('.button-bar button')
+			.removeClass('ui-state-disabled');
 
 		return $;
 	});
@@ -97,14 +98,15 @@ jQuery(function($) {
 					.addClass('current');					
 				
 				$tab_content					
-					.css({ opacity: 0.0 })
+					.css({ opacity: 0.0, visibility: 'hidden' })					
 					.prependTo('.tab_contents')
 					.trigger('reset')
 					.delay(1200)
 					.slideDown(function() {
 						$tab_content
+							.css({ visibility: 'visible' })						
 							.find('form').trigger('reset').end()
-							.fadeTo('fast', 1.0);
+							.fadeTo('fast', 1.0)
 					});
 					
 			} else {

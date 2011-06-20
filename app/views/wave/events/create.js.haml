@@ -5,8 +5,9 @@
     $('#new_event_overlay').hideNavContent();
 - else
   - @wave.errors.each do |field, message|
-    :plain
+    :plain      
       $('#new_wave_event')
+        .find('.button-bar button').removeClass('ui-state-disabled').end()
         .find("#wave_event_#{field}").addClass('field-error').end()
         .find('textarea, input[type="text"]').placehold();
 

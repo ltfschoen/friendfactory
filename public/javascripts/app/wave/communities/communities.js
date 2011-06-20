@@ -43,11 +43,13 @@ jQuery(function($) {
 					.addClass('current');					
 				
 				$tab_content
-					.css({ opacity: 0.0 })
+					.css({ opacity: 0.0, visibility: 'hidden' })
 					.prependTo('.tab_contents')
 					.delay(1200)
 					.slideDown(function() {
-						$tab_content.fadeTo('fast', 1.0);
+						$tab_content
+							.css({ visibility: 'visible' })						
+							.fadeTo('fast', 1.0);
 					});
 					
 			} else {
