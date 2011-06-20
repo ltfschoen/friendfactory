@@ -29,10 +29,8 @@
 	padding-right: 20px;
 }
 
-.admin.site table.form tr.stylesheet td {
-	vertical-align: top;
-}
-
+.admin.site table.form tr.signals td,
+.admin.site table.form tr.stylesheet td,
 .admin.site table.form tr.assets td {
 	vertical-align: top;
 }

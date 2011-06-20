@@ -38,9 +38,18 @@
         = f.error_message_on :analytics_account_number
         
     %tr.signals
-      - @site.signals.each do |signal|
-        %td
-          = f.signal.name
+      %td
+        %label Signals
+      %td
+        %table
+          - @site.signal_categories.each do |signal_category|
+            %tr
+              %td
+                %em= signal_category.display_name
+              %td
+                - signal_category.signals.each do |signal|
+                  = signal.display_name
+                  %br/
           
     %tr.stylesheet
       %td
