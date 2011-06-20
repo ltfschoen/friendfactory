@@ -35,11 +35,14 @@ jQuery(function($) {
 
 	$('form.new_wave_event', '.nav-content')
 		.buttonize()
+
+		.live('ajax:before', function() {
+			$(this).trigger('scrub.placehold');			
+		})
 		
 		.live('ajax:loading', function() {
 			var $address = $('#wave_event_location_address');
-			$(this).find('.button-bar').fadeTo('fast', 0.0);
-			
+			$(this).find('.button-bar').fadeTo('fast', 0.0);			
 			if (($('div.map img').length == 0) && ($address.val().length > 0)) {
 				updateMap($address.val());
 			}
@@ -61,15 +64,21 @@ jQuery(function($) {
 
 		.find('button.cancel')
 			.bind('click', function(event) {
-				event.preventDefault();
 				$(this).hideNavContent();
+				return false;
 			});
 
 	
 	$('.nav-content').bind('reset', function(event) {
+		var $form = $('form', this);
+
 		event.preventDefault();
-		event.target.reset();
-		$(event.target).find('textarea, input[type="text"]').placehold();
+		$form[0].reset();
+		$form.find('textarea, input[type="text"]')
+			.placehold()
+			.removeClass('field-error');
+
+		return $;
 	});
 
 			
@@ -90,6 +99,7 @@ jQuery(function($) {
 				$tab_content					
 					.css({ opacity: 0.0 })
 					.prependTo('.tab_contents')
+					.trigger('reset')
 					.delay(1200)
 					.slideDown(function() {
 						$tab_content

@@ -7,9 +7,9 @@
             .header.grid_10.alpha.omega
               = f.text_field :start_date, { :class => 'date', :placeholder => 'Event Date' }
             .body.grid_6.prefix_2.suffix_2.alpha.omega
-              = text_field_tag 'wave_event[promoter_name]', current_user.handle(current_site), :placeholder => 'Event Host'
+              = text_field_tag 'wave_event[promoter_name]', current_user.handle(current_site), :placeholder => 'Event Host*'
               .presents Presents
-              = f.text_area  :description, :maxlength => 130, :placeholder => 'Event Title'
+              = f.text_area  :description, :maxlength => 130, :placeholder => 'Event Title*'
           .stub.grid_2.omega
             &nbsp;
         .back.face<

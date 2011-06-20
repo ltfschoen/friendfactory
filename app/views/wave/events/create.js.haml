@@ -1,2 +1,13 @@
-$('ul.waves').prepend("#{escape_javascript(render :partial => 'wave/events/event', :object => @wave)}");
-$("##{dom_id(@wave)} .ticket-container > .ticket").ticket();
+- if @wave.valid?
+  :plain
+    $('ul.waves').prepend("#{escape_javascript(render :partial => 'wave/events/event', :object => @wave)}");    
+    $("##{dom_id(@wave)} .ticket-container > .ticket").ticket();
+    $('#new_event_overlay').hideNavContent();
+- else
+  - @wave.errors.each do |field, message|
+    :plain
+      $('#new_wave_event')
+        .find("#wave_event_#{field}").addClass('field-error').end()
+        .find('textarea, input[type="text"]').placehold();
+
+    

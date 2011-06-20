@@ -432,3 +432,16 @@ a.facebook {
 .notice.canvas.centered {
 	text-align: center;
 }
+
+.field-error {
+	border-color: darkred !important;
+	color: darkred !important;
+}
+
+.field-error::-webkit-input-placeholder {
+	color: darkred;
+}
+
+:-moz-placeholder {
+	color: darkred;
+}
