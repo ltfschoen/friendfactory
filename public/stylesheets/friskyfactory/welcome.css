@@ -59,6 +59,10 @@ input.password {
 	text-align: left;
 }
 
+.creative.launch {
+	text-align: center;
+}
+
 .blurb p {
     padding-right: 20px;
     font-size: 1.4em;
