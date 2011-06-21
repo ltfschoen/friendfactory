@@ -22,7 +22,8 @@ class Site < ActiveRecord::Base
   has_many :signal_categories,
       :class_name  => 'Signal::Category',
       :foreign_key => 'site_id',
-      :order       => 'ordinal asc' do
+      :order       => 'ordinal asc',
+      :dependent   => :destroy do
     def clone(*category_names)
       (category_names.empty? ? all : where('`signal_categories`.`name` in (?)', category_names.map(&:to_s))).map(&:clone)
     end

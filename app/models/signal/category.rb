@@ -6,7 +6,8 @@ class Signal::Category < ActiveRecord::Base
   
   has_many :categories_signals,
       :class_name  => 'Signal::CategorySignal',
-      :foreign_key => 'category_id' do
+      :foreign_key => 'category_id',
+      :dependent   => :destroy do
     def clone
       all.map(&:clone)
     end
