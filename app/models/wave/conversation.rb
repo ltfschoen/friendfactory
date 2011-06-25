@@ -17,6 +17,7 @@ class Wave::Conversation < Wave::Base
   private
     
   def publish_to_inbox(message)
+    touch
     inbox = user.inbox(message.site)
     unless inbox.nil? || inbox.wave_ids.include?(id)
       inbox.waves << self

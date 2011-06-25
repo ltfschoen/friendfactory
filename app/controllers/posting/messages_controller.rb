@@ -17,10 +17,10 @@ class Posting::MessagesController < ApplicationController
         posting.sender = current_user
         posting.receiver = @wave.recipient
         posting.site = current_site
+        posting.state = :published
       end
-      if @posting.valid?
+      if @posting.save
         @wave.messages << @posting
-        @posting.publish!
         broadcast_posting(@posting, (@posting.waves - [ @wave ]))
       end
     end
@@ -35,7 +35,11 @@ class Posting::MessagesController < ApplicationController
     waves.each do |wave|
       channel_id = dom_id(wave)
       Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, posting), :dom_id => "##{channel_id}" })
-    end
+    end    
+    receiver = posting.receiver
+    if !receiver.online? && receiver.emailable?
+      MessagesMailer.new_message_notification(posting).deliver
+    end    
   end
   
 end
