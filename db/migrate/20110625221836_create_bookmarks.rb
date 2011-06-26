@@ -1,13 +1,16 @@
 class CreateBookmarks < ActiveRecord::Migration
   def self.up
-    create_table :bookmarks do |t|
-      t.integer  :user_id
+    create_table :bookmarks, :force => true do |t|
       t.integer  :wave_id
-      t.timestamps
+      t.integer  :user_id
+      t.datetime :created_at
+      t.datetime :read_at
     end
+    add_index :bookmarks, [ :wave_id, :user_id ]
+    add_index :bookmarks, :user_id
   end
 
   def self.down
-    drop_table :bookmarks
+    drop_table :bookmarks rescue nil
   end
 end

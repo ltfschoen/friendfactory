@@ -7,8 +7,8 @@ class Wave::Conversation < Wave::Base
       :conditions  => { :parent_id => nil, :type => Posting::Message },
       :order       => 'created_at asc',
       :after_add   => :publish_to_inbox do
-    def published
-      where(:state => :published)
+    def received
+      where('`postings`.`user_id` <> ?', proxy_owner.user_id)
     end
   end
 
@@ -25,6 +25,10 @@ class Wave::Conversation < Wave::Base
   
   def last_read_at
     bookmark.last_read_at
+  end
+
+  def unread_messages_count
+    last_read_at.nil? ? messages.received.published.count : messages.received.published.since(last_read_at).count
   end
 
   private

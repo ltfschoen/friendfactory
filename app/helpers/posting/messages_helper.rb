@@ -4,7 +4,7 @@ module Posting::MessagesHelper
     if message.sender_id == current_user.id
       'sent'
     else
-      'received' + (message.created_at > last_read_at ? ' unread' : '')
+      'received' + (last_read_at.nil? || (message.created_at > last_read_at) ? ' unread' : '')
     end
   end
   

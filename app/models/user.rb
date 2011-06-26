@@ -80,6 +80,7 @@ class User < ActiveRecord::Base
   has_many :profiles, :class_name => 'Wave::Profile'
 
   has_many :inboxes, :class_name => 'Wave::Inbox'
+
   has_many :conversations, :class_name => 'Wave::Conversation', :order => 'created_at desc' do        
     def site(site)
       joins(:sites).where('sites_waves.site_id = ?', site.id) if site.present?
@@ -225,6 +226,12 @@ class User < ActiveRecord::Base
       inbox.waves = conversations.site(site)
       site.waves << inbox
       inbox
+    end
+  end
+
+  def unread_messages_count(site)
+    conversations.site(site).inject(0) do |count, conversation|
+      count += conversation.unread_messages_count
     end
   end
 

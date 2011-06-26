@@ -29,11 +29,14 @@ ActiveRecord::Schema.define(:version => 20110625221836) do
   end
 
   create_table "bookmarks", :force => true do |t|
-    t.integer  "user_id"
     t.integer  "wave_id"
+    t.integer  "user_id"
     t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "read_at"
   end
+
+  add_index "bookmarks", ["user_id"], :name => "index_bookmarks_on_user_id"
+  add_index "bookmarks", ["wave_id", "user_id"], :name => "index_bookmarks_on_wave_id_and_user_id"
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"

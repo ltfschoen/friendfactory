@@ -1,5 +1,6 @@
 .header.primary.grid_16
-  = link_to 'FriskyHands', root_path, :class => 'badge'    
+  = link_to 'FriskyHands', root_path, :class => 'badge'
+  = link_to_unread_messages_unless_current(inbox_path)
   %ul.nav
     %li#nav-1{ :class => "#{'current' if current_page?(:controller => '/wave/communities', :action => 'show')}" }
       = link_to 'Wave', root_path

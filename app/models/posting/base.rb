@@ -23,9 +23,10 @@ class Posting::Base < ActiveRecord::Base
     end
   end
   
-  scope :type, lambda { |*types| where('type in (?)', types.map(&:to_s)) }
+  scope :type, lambda { |*types| where('`postings`.`type` in (?)', types.map(&:to_s)) }
   scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
+  scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
   
   has_many :children,
       :class_name  => 'Posting::Base',
