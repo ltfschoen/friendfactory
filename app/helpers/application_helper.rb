@@ -88,12 +88,14 @@ module ApplicationHelper
   
   def link_to_unread_messages
     if current_user
-      unread_messages_count = current_user.unread_messages_count(current_site)
+      unread_messages_count = current_user.unread_messages_count(current_site)      
       link_to(unread_messages_count, inbox_path, :class => 'unread') if unread_messages_count > 0
     end
   end
   
-  def link_to_unread_messages_unless_current(path)    
-    link_to_unread_messages unless current_page?(path)
+  def link_to_unread_messages_unless_inbox
+    unless [ inbox_path, wave_conversations_path ].detect{ |path| current_page?(path) }.present?
+      link_to_unread_messages
+    end
   end
 end

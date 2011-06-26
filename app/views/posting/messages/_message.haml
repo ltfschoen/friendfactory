@@ -1,3 +1,4 @@
-- last_read_at ||= @last_read_at
-.message[message]{ :class => message_css_class(message, last_read_at) }<
-  = message.body
+- if message.body.present?
+  - last_read_at ||= @last_read_at
+  .message[message]{ :class => message_css_class(message, last_read_at) }<
+    = message.body

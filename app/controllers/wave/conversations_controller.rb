@@ -6,9 +6,13 @@ class Wave::ConversationsController < ApplicationController
   @@per_page = 12
 
   def index
-    @inbox = current_user.inbox(current_site) || current_user.create_inbox(current_site)
-    @conversation_ids = @inbox.conversation_ids.paginate(:page => params[:page], :per_page => @@per_page)
-    @profiles = @inbox.recipient_profiles(current_site, @conversation_ids)
+    @conversation_ids = current_user.conversations.select('DISTINCT `waves`.`id`, `waves`.`resource_id`').site(current_site).
+        joins('LEFT OUTER JOIN `publications` on `waves`.`id` = `publications`.`wave_id`').
+        where('`publications`.`resource_id` is not null').
+        paginate(:page => params[:page], :per_page => @@per_page)
+
+    recipient_user_ids = @conversation_ids.map(&:resource_id)
+    @profiles = Wave::Profile.site(current_site).where(:user_id => recipient_user_ids)
     respond_to do |format|
       format.html
     end
