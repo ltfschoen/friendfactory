@@ -12,7 +12,7 @@
     - else
       - @conversation_ids.in_groups_of(3) do |group|
         - group.each_with_index do |conversation_id, idx|
-          - profile = @profiles.detect { |profile| profile.user_id == conversation_id.resource_id }
-          - unless profile.nil?
+          - unless conversation_id.nil?
+            - profile = @profiles.detect { |profile| profile.user_id == conversation_id.resource_id }
             = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
     = will_paginate @conversation_ids, :class => 'grid_16 pagination append-top'
