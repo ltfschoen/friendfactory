@@ -3,7 +3,8 @@ class Posting::MessagesController < ApplicationController
   before_filter :require_user
 
   def show
-    if wave = current_user.conversations.find_by_id(params[:wave_id])
+    if wave = current_user.conversations.find_by_id(params[:wave_id]).try(:read)
+      @last_read_at = wave.read_at
       @posting = wave.postings.find_by_id(params[:id])
     end
     respond_to do |format|
@@ -28,9 +29,9 @@ class Posting::MessagesController < ApplicationController
       format.js { render :layout => false }
     end
   end
-  
+
   private
-  
+
   def broadcast_posting(posting, waves)
     waves.each do |wave|
       channel_id = dom_id(wave)

@@ -1,2 +1,3 @@
-.message[message]{ :class => (message.sender_id == current_user.id ? 'sent' : 'received') }<
+- last_read_at ||= @last_read_at
+.message[message]{ :class => message_css_class(message, last_read_at) }<
   = message.body

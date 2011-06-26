@@ -59,7 +59,9 @@ class Wave::Base < ActiveRecord::Base
       super(wave_or_posting)
     end
   end
-  
+
+  has_many :bookmarks, :foreign_key => 'wave_id'
+
   belongs_to :resource, :polymorphic => true
 
   # before_save do |wave|

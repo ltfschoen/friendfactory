@@ -7,7 +7,7 @@
     .unobtrusive.time-ago= "Started #{time_ago_in_words(@wave.created_at)} ago"
     %ul.messages
       - @wave.messages.published.each do |posting|
-        %li= render :partial => 'posting/messages/message', :object => posting
+        %li= render :partial => 'posting/messages/message', :object => posting, :locals => { :last_read_at => @wave.last_read_at }
   = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => @wave.id), :remote => true do |f|
     .message-input
       = f.text_area :body

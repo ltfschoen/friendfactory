@@ -94,6 +94,8 @@ class User < ActiveRecord::Base
   # Syntatic sugar: <user1>.conversation.with.<user2>
   alias :conversation :conversations
 
+  has_many :bookmarks
+  
   has_many :postings, :class_name => 'Posting::Base'
   has_many :invitations, :foreign_key => 'body', :primary_key => 'email', :class_name => 'Posting::Invitation' do
     def site(site)
@@ -194,7 +196,11 @@ class User < ActiveRecord::Base
 
 
   # === Conversations ===
-  
+
+  def conversation_with(receiver, current_site)
+    conversation.with(receiver, current_site) || create_conversation_with(receiver, current_site)
+  end
+
   def create_conversation_with(receiver, site)
     if receiver.present? && site.present?
       wave = conversations.build
@@ -212,16 +218,15 @@ class User < ActiveRecord::Base
         order('updated_at desc').limit(1).first
     end
   end
-  
+
   def create_inbox(site)
     if site.present?
       inbox = inboxes.build
-      inbox.waves = conversations.site(site)    
+      inbox.waves = conversations.site(site)
       site.waves << inbox
       inbox
     end
   end
-
 
   # == Invitations
 

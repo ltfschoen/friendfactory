@@ -14,7 +14,8 @@ class Posting::Message < Posting::Base
   has_many :notifications
   
   after_create do |posting|
-    if wave = find_or_create_recipient_wave(posting)
+    if (posting.receiver.id != posting.sender_id) &&
+        wave = posting.receiver.conversation_with(posting.sender, posting.site)
       wave.messages << posting
     end
   end
@@ -22,13 +23,5 @@ class Posting::Message < Posting::Base
   def receiver
     @receiver || waves.where('user_id <> ?', user_id).limit(1).first.try(:user)
   end
-      
-  private
-  
-  def find_or_create_recipient_wave(posting)
-    if posting.receiver != posting.sender
-      posting.receiver.conversation.with(posting.sender, posting.site) || posting.receiver.create_conversation_with(posting.sender, posting.site)
-    end
-  end
-        
+
 end

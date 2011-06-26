@@ -11,7 +11,9 @@
 			$.get(data['url'], function(partial) {
 				var $thread = $('.thread', data['dom_id']),
 					$threadMessages = $thread.find('ul.messages');
-				$threadMessages.append('<li>' + partial + '</li>');
+				$threadMessages
+					.append('<li>' + partial + '</li>')
+					.find('.posting_message.received.unread').removeClass('unread');
 				$thread.scrollTo('max', 90);
 			});
 		});
@@ -51,7 +53,9 @@
 						$thread = $this.closest('.wave_conversation').find('.thread'),
 						$threadMessages = $thread.find('ul.messages');
 
-					$threadMessages.append($("<li><div class='posting posting_message sent'>" + $textarea.val() + "</div></li>"));
+					$threadMessages					
+						.append($("<li><div class='posting posting_message sent'>" + $textarea.val() + "</div></li>"))
+						.find('.posting_message.received.unread').removeClass('unread');
 					$thread.scrollTo('max', 90);
 					$textarea.val('');
 				})

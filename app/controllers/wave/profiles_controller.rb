@@ -46,8 +46,9 @@ class Wave::ProfilesController < ApplicationController
   end
   
   def conversation
-    receiver = Wave::Profile.find_by_id(params[:id]).try(:user)
-    @wave = current_user.conversation.with(receiver, current_site) || current_user.create_conversation_with(receiver, current_site)
+    if receiver = Wave::Profile.find_by_id(params[:id]).try(:user)
+      @wave = current_user.conversation_with(receiver, current_site).read
+    end
     respond_to do |format|
       format.html { render :layout => false }
     end

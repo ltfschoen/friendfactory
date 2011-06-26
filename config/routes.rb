@@ -41,7 +41,7 @@ Friskyfactory::Application.routes.draw do
       resources :photos,       :only => [ :new, :create, :update, :destroy ]
       resources :post_its,     :only => [ :new, :create ]
       resources :videos,       :only => [ :new, :create ]
-      resources :messages,     :only => [ :create, :show ]
+      resources :messages,     :only => [ :show, :create ]
       resources :wave_proxies, :only => [ :create ]
       resources :invitations,  :only => [ :new, :create, :edit, :update ]
     end

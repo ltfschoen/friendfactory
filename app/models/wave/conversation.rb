@@ -14,6 +14,19 @@ class Wave::Conversation < Wave::Base
 
   alias :recipient :resource
 
+  def read
+    bookmark.read
+    self
+  end
+  
+  def read_at
+    bookmark.read_at
+  end
+  
+  def last_read_at
+    bookmark.last_read_at
+  end
+
   private
     
   def publish_to_inbox(message)
@@ -25,4 +38,8 @@ class Wave::Conversation < Wave::Base
     end
   end
 
+  def bookmark
+    @bookmark ||= (bookmarks.where(:user_id => user_id).order('created_at asc').limit(1).first || bookmarks.create(:user_id => user_id))
+  end
+  
 end
