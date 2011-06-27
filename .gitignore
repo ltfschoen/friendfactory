@@ -12,10 +12,6 @@ config/*.sphinx.conf
 *.tmproj
 db/dumps/*
 public/system
-public/stylesheets/cached.css
-public/stylesheets/**/cached.css
-public/stylesheets/welcome-cached.css
-public/stylesheets/**/welcome-cached.css
-public/javascripts/cached.js
-public/javascripts/welcome-cached.js
+public/stylesheets/**/*.cache.css
+public/javascripts/*.cache.js
 

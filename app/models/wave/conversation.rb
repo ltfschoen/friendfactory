@@ -11,6 +11,15 @@ class Wave::Conversation < Wave::Base
       where('`postings`.`user_id` <> ?', proxy_owner.user_id)
     end
   end
+  
+  scope :unread,
+      joins('LEFT OUTER JOIN bookmarks ON `waves`.`id` = `bookmarks`.`wave_id`').
+      where('(`waves`.`updated_at` > `bookmarks`.`read_at`) OR (`bookmarks`.`read_at` IS NULL)')
+
+  scope :chatty,
+      select('DISTINCT `waves`.*').
+      joins('LEFT OUTER JOIN `publications` on `waves`.`id` = `publications`.`wave_id`').
+      where('`publications`.`resource_id` is not null')
 
   alias :recipient :resource
 
@@ -25,6 +34,10 @@ class Wave::Conversation < Wave::Base
   
   def last_read_at
     bookmark.last_read_at
+  end
+
+  def unread?
+    last_read_at.nil? || (last_read_at < updated_at)
   end
 
   def unread_messages_count

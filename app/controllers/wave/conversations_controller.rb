@@ -6,11 +6,7 @@ class Wave::ConversationsController < ApplicationController
   @@per_page = 12
 
   def index
-    @conversation_ids = current_user.conversations.select('DISTINCT `waves`.`id`, `waves`.`resource_id`').site(current_site).
-        joins('LEFT OUTER JOIN `publications` on `waves`.`id` = `publications`.`wave_id`').
-        where('`publications`.`resource_id` is not null').
-        paginate(:page => params[:page], :per_page => @@per_page)
-
+    @conversation_ids = current_user.conversations.chatty.site(current_site).order('created_at desc').paginate(:page => params[:page], :per_page => @@per_page)
     recipient_user_ids = @conversation_ids.map(&:resource_id)
     @profiles = Wave::Profile.site(current_site).where(:user_id => recipient_user_ids)
     respond_to do |format|

@@ -3,11 +3,12 @@
     = avatar_image_tag(@wave.recipient, :style => :thimble, :class => 'recipient', :link_to_profile => false)
     .recipient= @wave.recipient.handle(current_site)
     = avatar_image_tag(@wave.user, :style => :thimble)
-  .thread    
-    .unobtrusive.time-ago= "Started #{time_ago_in_words(@wave.created_at)} ago"
-    %ul.messages
-      - @wave.messages.published.each do |posting|
-        %li= render :partial => 'posting/messages/message', :object => posting, :locals => { :last_read_at => @wave.last_read_at }
+  - cache("#{@wave.cache_key}-#{@wave.last_read_at.nil? || (@wave.updated_at > @wave.last_read_at) ? 'U' : 'R'}") do
+    .thread
+      .unobtrusive.time-ago= "Started #{time_ago_in_words(@wave.created_at)} ago"
+      %ul.messages
+        - @wave.messages.published.each do |posting|
+          %li= render :partial => 'posting/messages/message', :object => posting, :locals => { :last_read_at => @wave.last_read_at }
   = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => @wave.id), :remote => true do |f|
     .message-input
       = f.text_area :body

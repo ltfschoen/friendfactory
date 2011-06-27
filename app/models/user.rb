@@ -80,16 +80,12 @@ class User < ActiveRecord::Base
   has_many :profiles, :class_name => 'Wave::Profile'
 
   has_many :inboxes, :class_name => 'Wave::Inbox'
-
-  has_many :conversations, :class_name => 'Wave::Conversation', :order => '`waves`.`created_at` desc' do
-    # def site(site)
-    #   joins(:sites).where('sites_waves.site_id = ?', site.id) if site.present?
-    # end
+  has_many :conversations, :class_name => 'Wave::Conversation' do
     def with(receiver, site)
       if receiver.present? && site.present?
         site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first
       end
-    end    
+    end
   end
 
   # Syntatic sugar: <user1>.conversation.with.<user2>

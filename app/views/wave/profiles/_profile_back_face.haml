@@ -11,6 +11,8 @@
           - 1.upto(9) do |i|
             = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
         .pane.conversation{ :'data-pane' => 'conversation' }
+          .header
+          .thread
 
     %ul.buddy-bar.secondary
       %li= link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
