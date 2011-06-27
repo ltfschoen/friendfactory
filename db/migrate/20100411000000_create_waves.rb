@@ -1,6 +1,6 @@
 class CreateWaves < ActiveRecord::Migration
   def self.up
-    create_table :waves do |t|
+    create_table :waves, :force => true do |t|
       t.string    :type
       t.string    :slug
       t.integer   :user_id

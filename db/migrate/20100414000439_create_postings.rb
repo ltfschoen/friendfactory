@@ -1,6 +1,6 @@
 class CreatePostings < ActiveRecord::Migration
   def self.up
-    create_table :postings do |t|
+    create_table :postings, :force => true do |t|
       t.string    :type
       t.string    :slug
       t.integer   :user_id
