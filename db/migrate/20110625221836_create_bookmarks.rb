@@ -8,6 +8,9 @@ class CreateBookmarks < ActiveRecord::Migration
     end
     add_index :bookmarks, [ :wave_id, :user_id ]
     add_index :bookmarks, :user_id
+    
+    say "Randomize uploaded image filenames"
+    say "ff:fix:randomize_file_names", true
   end
 
   def self.down

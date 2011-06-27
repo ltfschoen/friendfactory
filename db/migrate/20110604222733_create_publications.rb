@@ -14,6 +14,9 @@ class CreatePublications < ActiveRecord::Migration
     end
     drop_table :postings_waves_as_habtm rescue nil
     rename_table :postings_waves, :postings_waves_as_habtm
+    
+    say "Drop table postings_waves_as_habtm"
+    say "drop_table :postings_waves_as_habtm", true
   end
 
   def self.down

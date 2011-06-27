@@ -28,13 +28,11 @@ class CreateSites < ActiveRecord::Migration
     add_index :sites_users, [ :site_id, :user_id ]
     add_index :sites_users, :user_id
     
-    say 'Seeding the database...'
+    say 'Seeding the database for sites'
     say 'ff:db:seed', true 
-    Rake::Task['ff:db:seed'].invoke
 
-    say 'Fixing friskyhands site to have all existing waves and users...'
+    say 'Fixing friskyhands site to have all existing waves and users'
     say 'ff:fix:sites_waves', true
-    Rake::Task['ff:fix:sites_waves'].invoke
   end
 
   def self.down
