@@ -1,7 +1,15 @@
 namespace :ff do
   namespace :db do
+
+    desc "Seed the db regardless of migrations"
+    task :seed => :environment do
+      Rake::Task['db:seed'].clear_prerequisites
+      Rake::Task['db:seed'].invoke
+    end
+    
     desc "Refresh development with production db and images from local dumps. DUMP_DATE=yyyymmdd"
     task :refresh => [ :'refresh:sql', :'refresh:images', :'refresh:assets' ]      
+
     namespace :refresh do
       desc "Refresh development with local sql dump. DUMP_DATE=yyyymmdd"
       task :sql => :environment do
