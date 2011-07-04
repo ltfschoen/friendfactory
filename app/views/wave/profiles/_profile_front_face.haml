@@ -10,20 +10,15 @@
               = profile.handle
             %td.status
               -# Looking for fun
-        -# %ul.buddy-bar.secondary
-        -#   %li
-        -#     = link_to 'Comment', '#', :class => 'comment icon'
-        -#   %li.comment-count
-        -#     4
+        %ul.buddy-bar.secondary
+          %li= link_to 'Profile', wave_profile_path(profile), :class => 'icon profile'
         %ul.buddy-bar.primary
           -# %li= link_to 'Block', '#', :class => 'block icon'
           -# %li= link_to 'Buddy', '#', :class => 'buddy icon'
           -# %li= link_to 'Pin', '#', :class => 'pin icon'
-          -# %li= link_to 'Chat', 'chat', :class => 'flip chat icon'
-          %li= link_to 'Profile', 'profile', :class => 'flip mini-profile icon'
+          %li= link_to 'Stats', 'profile', :class => 'flip mini-profile icon'
           %li= link_to 'Photos', 'photos', :class => 'flip photos icon'
           %li= link_to 'Invitations', '#invitations', :class => 'flip invitations icon'
-          - if current_user.present?
-            %li= link_to 'Chat', profile_conversation_path(profile), :class => 'flip chat icon last'
+          %li= link_to 'Chat', profile_conversation_path(profile), :class => 'flip chat icon last'
         - if content_for?(:polaroid_front_face)
           = content_for(:polaroid_front_face)

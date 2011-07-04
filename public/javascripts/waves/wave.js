@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
 	$('.ticket-container > .ticket').ticket();
 	
 	// Set up static click-to-polaroid from a.profile
-	$('a[href^="/wave/profiles"].profile').live('click', function(event) {
+	$('a[href^="/wave/profiles"].profile', '.attachment').live('click', function(event) {
 		event.preventDefault();
 		$('<div class="floating"></div>')
 			.appendTo('.floating-container')
