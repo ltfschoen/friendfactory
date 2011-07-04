@@ -17,3 +17,26 @@ img.avatar.thimble {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
+
+.attachment img.avatar.thumb  {
+	width: 80px;
+	height: 80px;
+	background-color: #FFF;	
+	background: -webkit-gradient(radial, 40 40, 10, 40 60, 80, from(#FFF), to(#E2E2E2));
+	-webkit-background-origin: border-box;
+	-webkit-background-clip: border-box;
+	background-image: -moz-radial-gradient(center, circle farthest-corner, #FFF 50%, #E2E2E2 100%);
+	-moz-background-origin: border-box;
+	-moz-background-clip: border-box;
+	padding: 4px 4px 18px 4px;
+	border: 1px solid #CDCDCD;
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    transform: rotate(-2deg);	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}

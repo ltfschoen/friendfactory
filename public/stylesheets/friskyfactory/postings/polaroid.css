@@ -447,6 +447,16 @@ div.polaroid a.icon {
 	background: url(/images/friskyfactory/buddy-bar.png) top left no-repeat;	
 }
 
+div.polaroid ul.buddy-bar.secondary a.icon {
+	margin-left: 0px;
+	margin-right: 6px;
+}
+
+div.polaroid a.icon.profile {
+	width: 22px;
+	background-position: -300px -1px;
+}
+
 div.polaroid a.icon.comment {
 	width: 18px;
 	background-position: 0 -3px;
