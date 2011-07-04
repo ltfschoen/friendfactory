@@ -3,9 +3,9 @@ class Wave::ProfilesController < ApplicationController
   before_filter :require_user
 
   cattr_reader :per_page
-  @@per_page = 102
 
   def index
+    @@per_page = 102
     @waves = find_profiles_tagged_with(params[:tag]) || find_all_profiles
     @tags = tag_counts_for_current_site
     respond_to do |format|
@@ -16,7 +16,15 @@ class Wave::ProfilesController < ApplicationController
   def show
     @wave = Wave::Profile.find_by_id(params[:id])
     respond_to do |format|
-      format.html { render :layout => false }
+      format.html do
+        if request.xhr?
+          render(:partial => 'profile', :object => @wave)
+        else
+          @@per_page = 50
+          @postings = @wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+          render
+        end
+      end
     end
   end
   
