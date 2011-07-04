@@ -1,22 +1,5 @@
-jQuery(function($) {
-	$('div.polaroid', '.wave_community').polaroid();
-});
-
-
-
-
 jQuery(function($) {	
-	
-	function hideCommentForm(event) {
-		$(event.target).closest('.posting_comment')
-			.css({ opacity: 0.0 })
-			.slideUp('fast', function() {
-				$(this).closest('.posting-container')
-					.find('a.new_posting_comment')
-						.fadeTo('fast', 1.0);
-			});
-	}
-	
+		
 	$('.tab_contents')
 		.insertAfter('ul.posting_post_its:first');
 	
@@ -81,11 +64,8 @@ jQuery(function($) {
 	$('textarea', '.tab_content .post_it.attachment')
 		.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
 
-
-	$('.posting_comment.editable', '.wave_community')
-		.hide()
-		.comment(hideCommentForm);
-
+	$('.wave_community').community();	
+		
 	$('a.new_posting_comment', '.wave_community')
 		.live('click', function(event) {
 			var $this = $(this);
@@ -128,8 +108,7 @@ jQuery(function($) {
 
 				$content
 					.find('.posting_comment.editable')
-						.hide()
-						.comment(hideCommentForm);
+						.comment();
 								
 				$('.polaroid-container > .polaroid', $content).polaroid();					
 				

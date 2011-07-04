@@ -1,7 +1,5 @@
 class Posting::Avatar < Posting::Base
 
-  RepublishWindow = 6.hours
-  
   has_attached_file :image,
       :styles => {
           :thumb    => [ '100x100#', :jpg ],
@@ -21,16 +19,6 @@ class Posting::Avatar < Posting::Base
   before_create :randomize_file_name
   
   scope :activated, where(:active => true)
-  
-  def distribute(sites)
-    sites.each do |site|
-      if wave = site.waves.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
-        wave.postings.type(Posting::Avatar).user(self.user).published.where(:created_at => (Time.now - RepublishWindow)...Time.now).map(&:unpublish!)
-        wave.postings << self
-      end
-    end
-    super
-  end
 
   def profile(site)
     waves.type(Wave::Profile).site(site).order('created_at desc').limit(1).try(:first)
