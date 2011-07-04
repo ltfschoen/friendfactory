@@ -8,6 +8,8 @@ class CreateWaves < ActiveRecord::Migration
       t.string    :description
       t.timestamps
     end
+    add_index :waves, :type
+    add_index :waves, :user_id
   end
 
   def self.down
