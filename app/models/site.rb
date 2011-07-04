@@ -37,8 +37,6 @@ class Site < ActiveRecord::Base
   has_many :assets
   accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
 
-  scope :all, lambda { where([ '`sites`.`name` <> ?', TemplateSiteName ])}
-  
   after_create :create_home_wave
 
   def signals
