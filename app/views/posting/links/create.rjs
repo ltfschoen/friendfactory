@@ -1,5 +1,0 @@
-if @posting.present? && @posting.valid?
-  page['#postings'].prepend(render(:partial => 'link', :object => @posting)).find("##{dom_id(@posting)}").effect('highlight', {}, 3000)
-else
-  page['.flash'].text("Couldn't save your link - #{@posting.errors.full_messages}")  
-end

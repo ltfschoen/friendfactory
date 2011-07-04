@@ -1,18 +1,2 @@
 .posting[link]
-  %table
-    %tr
-      %td.avatar.thumb
-        = avatar_image_tag(link.user, :style => :thumb)
-      %td
-        %div
-          = link_to_profile(link.user)
-          \ #{distance_of_time_in_words_to_now(link.created_at)}
-          %h2.link
-            - if link.subject.empty?
-              = link_to link.body
-            - else
-              = link_to link.subject, link.body
-        = render :partial => 'posting/comments/comment', :collection => link.children.comments
-        %div{:id => "posting_#{link.id}_new_comment_well"}
-        = render :partial => 'posting/comments/new', :locals => { :parent => link }
-  = render_postings(link.children.postings)
+ = link_to link.url, link.url

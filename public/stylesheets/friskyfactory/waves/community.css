@@ -19,6 +19,11 @@
 	width: 55px;
 }
 
+.wave_community ul.nav li:nth-child(5) a {
+	background-position: -326px 0;
+	width: 55px;
+}
+
 .wave_community ul.posting_post_its,
 .wave_community ul.postings > li {
 	margin-bottom: 40px;

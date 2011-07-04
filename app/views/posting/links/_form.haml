@@ -1,13 +1,5 @@
-%table
-  %tr
-    %td{ :colspan => '2' }
-      %h2= label
-  %tr
-    %td.avatar.thumb= avatar_image_tag(current_user, :style => :thumb)
-    %td
-      - form_for(Posting::Link.new, :url => wave_links_path(:wave_id => wave)) do |f|
-        = f.text_field :subject, :placeholder => 'Caption'
-        = f.text_field :body, :placeholder => 'URL'
-        .button_bar
-          = f.submit :OK
-          = f.button :Cancel, :class => 'cancel'
+= form_for Posting::Link.new, :url => wave_posting_links_path(@wave), :remote => true do |f|
+  .button-bar
+    = f.text_field :url, :placeholder => 'http:// to something to share'
+    = f.submit 'OK'
+    = f.button 'Cancel', :class => 'cancel'

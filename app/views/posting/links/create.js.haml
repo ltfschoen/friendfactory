@@ -1,0 +1,14 @@
+- if @posting.valid?
+  :plain
+    var
+      $posting = $("#{escape_javascript(render(:partial => 'link', :object => @posting))}"),
+      $currentTab = $('ul.wave.nav li.current');
+          
+    $currentTab.removeClass('current');
+    $($('a', $currentTab).attr('rel')).hide().trigger('reset');
+    $posting.prependTo('ul.postings:first').wrap('<li>').embedly();
+    
+    $('.flash').text('');
+
+- else
+  $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")

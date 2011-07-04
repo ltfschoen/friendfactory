@@ -1,0 +1,21 @@
+.posting_link .embed {
+	display: inline-block;
+	background: #FFF;
+	padding: 10px;
+    -webkit-box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.4);	
+}
+
+form#new_posting_link .button-bar {
+	display: inline-block;
+	padding: 2px 12px;	
+	background-color: #FFF;
+	text-align: left;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
