@@ -42,7 +42,7 @@ class Posting::Base < ActiveRecord::Base
   end
     
   belongs_to :user
-  belongs_to :resource, :polymorphic => true  
+  # belongs_to :resource, :polymorphic => true  
   
   has_many :publications, :as => :resource
   has_many :waves, :through => :publications, :order => 'updated_at desc'

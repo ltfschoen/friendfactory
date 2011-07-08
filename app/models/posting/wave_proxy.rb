@@ -1,5 +1,3 @@
 class Posting::WaveProxy < Posting::Base
-  after_save do |proxy|
-    proxy.resource.save
-  end
+  belongs_to :resource, :class_name => 'Wave::Base', :foreign_key => 'resource_id'
 end

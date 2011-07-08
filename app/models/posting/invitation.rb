@@ -5,12 +5,13 @@ class Posting::Invitation < Posting::Base
   THIRD_REMINDER_AGE  = 7.days
   EXPIRATION_AGE      = 8.days
   
-  alias_attribute :site, :resource
+  belongs_to :site, :foreign_key => 'resource_id'
+  belongs_to :invitee, :foreign_key => 'body', :primary_key => 'email', :class_name => 'User'
+
+  # alias_attribute :site, :resource
   alias_attribute :code, :subject
   alias_attribute :email, :body
   alias_attribute :sponsor, :user
-
-  belongs_to :invitee, :foreign_key => 'body', :primary_key => 'email', :class_name => 'User'
 
   validates_presence_of :site, :sponsor
   
@@ -58,7 +59,7 @@ class Posting::Invitation < Posting::Base
   scope :days_old, lambda { |age| where('created_at >= ? and created_at < ?', Date.today.at_midnight - (age + 1.day), Date.today.at_midnight - age) }
   scope :expiring, lambda { where('created_at < ?', Date.today.at_midnight - EXPIRATION_AGE) }
   scope :universal, lambda { where(:body => nil) }
-  scope :site, lambda { |site| where(:resource_id => site.id, :resource_type => Site) }
+  scope :site, lambda { |site| where(:resource_id => site.id) }
 
   def self.find_all_by_code(code)
     find_all_by_subject(code)
