@@ -1,12 +1,12 @@
 - stylesheet 'app/admin/admin'
 - javascript 'app/admin/invitation/invitations'
 - if @postings.length == 0
-  .grid_12.push_2.suffix_2.notice.canvas.centered
+  .grid_12.push_2.suffix_2.blank.canvas.centered
     %p
       No Universal Invitations.
       = link_to 'Create on now.', new_admin_invitation_universal_path, :class => 'button new'
 - else
-  .grid_14.push_1.admin.notice.canvas.invitation.universals
+  .grid_14.push_1.admin.blank.canvas.invitation.universals
     %table.index
       %thead
         %tr

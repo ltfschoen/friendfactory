@@ -419,7 +419,7 @@ a.facebook {
 	background-position: -96px 0;
 }
 
-.notice.canvas {
+.blank.canvas {
 	background-color: rgb(249, 249, 243);
 	background:
 		-webkit-gradient(linear, 0 0%, 0 80, from(lightgrey), to(rgba(249, 249, 243, 0))),
@@ -443,7 +443,7 @@ a.facebook {
 	text-align: left;
 }
 
-.notice.canvas.centered {
+.blank.canvas.centered {
 	text-align: center;
 }
 
