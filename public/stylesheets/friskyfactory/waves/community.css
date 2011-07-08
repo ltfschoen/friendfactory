@@ -105,6 +105,7 @@
     right: 5px;
 }
 
+.wave_community .link.canvas,
 .wave_community .video.canvas {
     -webkit-transform: none !important;
     -moz-transform: none !important;

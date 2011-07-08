@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  original_url: MyText
+  url: MyText
+  type: MyString
+  cache_age: MyString
+  safe: false
+  safe_type: MyString
+  safe_message: MyText
+  object_type: MyString
+  object_url: MyString
+  object_html: MyText
+  object_width: 1
+  object_height: 1
+  content: MyText
+
+two:
+  original_url: MyText
+  url: MyText
+  type: MyString
+  cache_age: MyString
+  safe: false
+  safe_type: MyString
+  safe_message: MyText
+  object_type: MyString
+  object_url: MyString
+  object_html: MyText
+  object_width: 1
+  object_height: 1
+  content: MyText

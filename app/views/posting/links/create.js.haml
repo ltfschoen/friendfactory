@@ -6,8 +6,7 @@
           
     $currentTab.removeClass('current');
     $($('a', $currentTab).attr('rel')).hide().trigger('reset');
-    $posting.prependTo('ul.postings:first').wrap('<li>').embedly();
-    
+    $posting.prependTo('ul.postings:first').wrap('<li>');    
     $('.flash').text('');
 
 - else

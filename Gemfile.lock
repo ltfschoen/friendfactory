@@ -43,6 +43,8 @@ GEM
     builder (2.1.2)
     crack (0.1.8)
     diff-lcs (1.1.2)
+    embedly (1.0.0)
+      querystring
     erubis (2.6.6)
       abstract (>= 1.0.0)
     haml (3.0.25)
@@ -74,6 +76,7 @@ GEM
       multi_json (~> 1.0)
       ruby-hmac (~> 0.4.0)
       signature (~> 0.1.2)
+    querystring (0.1.0)
     rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
@@ -131,6 +134,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on
   authlogic
+  embedly
   factory_girl!
   haml
   haml-rails

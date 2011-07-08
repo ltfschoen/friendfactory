@@ -1,1 +1,1 @@
-Embedly = '7212c914a60111e0a96a4040d3dc5c07'
+EmbedlyKey = '7212c914a60111e0a96a4040d3dc5c07'

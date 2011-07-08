@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110625221836) do
+ActiveRecord::Schema.define(:version => 20110706041458) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -76,17 +76,6 @@ ActiveRecord::Schema.define(:version => 20110625221836) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "memberships", :force => true do |t|
-    t.string   "code",       :null => false
-    t.integer  "site_id",    :null => false
-    t.integer  "inviter_id"
-    t.integer  "invitee_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "memberships", ["code"], :name => "index_memberships_on_code"
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
@@ -161,14 +150,6 @@ ActiveRecord::Schema.define(:version => 20110625221836) do
   add_index "postings_waves_as_habtm", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
   add_index "postings_waves_as_habtm", ["wave_id"], :name => "index_postings_waves_on_wave_id"
 
-  create_table "postings_waves_sans_id", :id => false, :force => true do |t|
-    t.integer "posting_id"
-    t.integer "wave_id"
-  end
-
-  add_index "postings_waves_sans_id", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
-  add_index "postings_waves_sans_id", ["wave_id"], :name => "index_postings_waves_on_wave_id"
-
   create_table "publications", :force => true do |t|
     t.integer  "wave_id",       :null => false
     t.integer  "resource_id",   :null => false
@@ -179,6 +160,15 @@ ActiveRecord::Schema.define(:version => 20110625221836) do
 
   add_index "publications", ["resource_id"], :name => "index_publications_on_resource_id"
   add_index "publications", ["wave_id", "resource_id"], :name => "index_publications_on_wave_id_and_resource_id"
+
+  create_table "resource_embeds", :force => true do |t|
+    t.integer "resource_link_id"
+    t.string  "type"
+    t.boolean "primary",          :default => false
+    t.text    "body"
+    t.integer "width"
+    t.integer "height"
+  end
 
   create_table "resource_events", :force => true do |t|
     t.integer  "location_id"
@@ -200,6 +190,27 @@ ActiveRecord::Schema.define(:version => 20110625221836) do
 
   create_table "resource_invitations", :force => true do |t|
     t.datetime "expires_at"
+  end
+
+  create_table "resource_links", :force => true do |t|
+    t.integer "posting_id"
+    t.text    "original_url"
+    t.text    "url"
+    t.string  "type"
+    t.integer "cache_age"
+    t.boolean "safe"
+    t.string  "safe_type"
+    t.text    "safe_message"
+    t.string  "provider_name"
+    t.string  "provider_url"
+    t.string  "provider_display"
+    t.text    "favicon_url"
+    t.text    "title"
+    t.text    "description"
+    t.text    "author_name"
+    t.text    "author_url"
+    t.text    "content"
+    t.integer "location_id"
   end
 
   create_table "signal_categories", :force => true do |t|
@@ -240,17 +251,6 @@ ActiveRecord::Schema.define(:version => 20110625221836) do
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true
-
-  create_table "sites_signals", :force => true do |t|
-    t.integer "site_id"
-    t.integer "signal_id"
-    t.integer "category_id"
-    t.integer "ordinal"
-  end
-
-  add_index "sites_signals", ["category_id"], :name => "index_sites_signals_on_category_id"
-  add_index "sites_signals", ["signal_id"], :name => "index_sites_signals_on_signal_id"
-  add_index "sites_signals", ["site_id", "signal_id"], :name => "index_sites_signals_on_site_id_and_signal_id"
 
   create_table "sites_users", :id => false, :force => true do |t|
     t.integer "site_id"
