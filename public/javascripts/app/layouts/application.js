@@ -3,7 +3,6 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
   jQuery.browser.safari = false;
 }
 
-
 (function($) {
 	var aliasedFadeTo = $.fn.fadeTo;
 	
@@ -27,7 +26,6 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 			return aliasedFadeTo.apply(this, arguments);			
 		}
 	};
-
 	
 	// var aliasedHide = $.fn.hide;
 	
@@ -56,3 +54,20 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 	// };
 
 })(jQuery);
+
+jQuery(function($) {
+
+	$('.posting-container').live('init', function() {
+		$(this).find('.posting').trigger('init');
+		return false;
+	});
+	
+	$('.posting').live('init', function(event) {
+		return false;
+	});
+
+	$('form').live('reset', function(event) {
+		$('textarea, input', this).placehold();
+	})
+	
+});

@@ -37,5 +37,9 @@ form#new_posting_link .button-bar {
 }
 
 form#new_posting_link input#posting_link_url {
-	width: 290px;
+	width: 270px;
+}
+
+form#new_posting_link .spinner {
+	margin-top: 2px;
 }

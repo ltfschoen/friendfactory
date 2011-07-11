@@ -4,8 +4,6 @@ class Resource::Link < ActiveRecord::Base
   
   set_inheritance_column nil
 
-  attr_reader :images
-
   has_many :embeds,
       :class_name  => 'Resource::Embed',
       :foreign_key => 'resource_link_id' do
@@ -31,6 +29,10 @@ class Resource::Link < ActiveRecord::Base
     nil
   end
     
+  def images
+    @images || []
+  end  
+    
   private
   
   def build_embeds(new_embeds)
@@ -42,9 +44,11 @@ class Resource::Link < ActiveRecord::Base
   end
   
   def download_images(image_urls)
-    @images = image_urls.map do |image_url|
-      download_image(image_url.to_options[:url])
-    end.compact
+    if image_urls.present?
+      @images = image_urls.map do |image_url|
+        download_image(image_url.to_options[:url])
+      end.compact
+    end
   end
   
   def download_image(image_url)

@@ -7,8 +7,9 @@
       $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
 
     $container
-      .find('.posting_comment.editable')
+      .find('.posting_comment form')
         .css({ opacity: 0.0 })
+        .trigger('reset')
         .slideUp(function() {       
           $container.find('a.new_posting_comment')
             .delay(600)

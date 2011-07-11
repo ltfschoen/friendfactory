@@ -5,9 +5,15 @@
       $currentTab = $('ul.wave.nav li.current');
           
     $currentTab.removeClass('current');
-    $($('a', $currentTab).attr('rel')).hide().trigger('reset');
-    $posting.prependTo('ul.postings:first').wrap('<li>').trigger('init');
+    
+    $($('a', $currentTab).attr('rel'))
+      .hide()
+      .find('form')
+      .trigger('reset');
+      
     $('.flash').text('');
 
+    $posting.trigger('init');
+    $posting.prependTo('ul.postings:first').wrap('<li>');
 - else
   $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")

@@ -1,5 +1,5 @@
 - if current_user
-  .posting_comment.editable
+  .posting.posting_comment
     = form_for Posting::Comment.new, :url => posting_comments_path(posting), :html => { :id => "posting_#{posting.id}_new_comment" }, :remote => true do |f|
       .body
         = f.text_area :body, :maxlength => 130
@@ -8,3 +8,4 @@
           = f.button 'Cancel', :class => 'cancel'
       .footer
         &nbsp;
+    = link_to_new_comment(posting)
