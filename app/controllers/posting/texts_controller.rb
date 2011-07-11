@@ -1,6 +1,4 @@
-class Posting::TextsController < ApplicationController
-  
-  before_filter :require_user
+class Posting::TextsController < Posting::BaseController
   
   def new
     @wave = Wave::Base.find_by_id(params[:wave_id])

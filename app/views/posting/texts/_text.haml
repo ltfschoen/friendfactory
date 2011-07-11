@@ -1,7 +1,5 @@
 .posting[text]
   .text.canvas
     .content
-      = avatar_image_tag(text.user, :style => :thumb, :anonymous => false, :gender => text.user.user_info(current_site).gender)
-      = link_to_profile(text.user)
       %h1= text.subject || '&nbsp'.html_safe
       = text.body || '&nbsp'.html_safe

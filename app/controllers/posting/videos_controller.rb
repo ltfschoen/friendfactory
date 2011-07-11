@@ -1,6 +1,4 @@
-class Posting::VideosController < ApplicationController
-  
-  before_filter :require_user
+class Posting::VideosController < Posting::BaseController
   
   def create
     @posting = Posting::Video.new(params[:posting_video]).tap { |video| video.user = current_user }

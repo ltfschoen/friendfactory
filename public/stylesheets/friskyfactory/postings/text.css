@@ -1,10 +1,11 @@
 .text.canvas {
     background: url('/images/friskyfactory/index-card.png') no-repeat top left;
-    width: 372px;
+    width: 385px;
 	height: 238px;
 	margin-top: -14px;
+	margin-left: -4px;
 	padding-top: 20px;
-	padding-left: 10px;
+	padding-left: 0px;
 	padding-right: 8px;
 	padding-bottom: 13px;
 }
@@ -28,21 +29,6 @@
 	font-size: 13px;
     line-height: 20px;
 	overflow: hidden;
-}
-
-.text.canvas img.avatar.thumb {
-	float: left;
-	position: relative;
-	top: -4px;
-	left: -4px;
-	margin: 0 8px 0 0;
-	width: 50px;
-	height: 50px;
-    -webkit-box-shadow: 2px 2px 4px #666;
-    -moz-box-shadow: 3px 3px 4px #666;
-    box-shadow: 3px 3px 4px #666;
-    -webkit-transform: rotate(-6deg);
-    -moz-transform: rotate(-6deg);
 }
 
 .text.canvas textarea {

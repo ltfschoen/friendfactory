@@ -32,10 +32,6 @@ module WavesHelper
     @new_posting_post_it ||= new_posting(Posting::PostIt)
   end
   
-  def new_posting_text
-    @new_posting_text ||= new_posting(Posting::Text)
-  end
-
   def new_posting_photo
     @new_posting_photo ||= new_posting(Posting::Photo)
   end

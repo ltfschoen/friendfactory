@@ -1,17 +1,32 @@
 - if current_user
-  .tab_contents
+  - image_tag = avatar_image_tag(current_user, :style => :thumb, :anonymous => true)
+  .tab_contents.nav-container
     #posting_text.tab_content.clearfix.hidden
-      = render :partial => 'posting/texts/form'
+      .grid_2.attachment.alpha
+        = image_tag
+      .grid_14.omega
+        = render :partial => 'posting/texts/form'
+        
     #posting_post_it.nav.tab_content.clearfix.hidden
       = render :partial => 'posting/post_its/form'
+      
     #wave_album.tab_content.clearfix.hidden
-      = render :partial => 'wave/albums/new'
+      .grid_2.attachment.alpha
+        = image_tag
+      .grid_14.omega
+        = render :partial => 'wave/albums/new'
+      
     #posting_video_upload.tab_content.clearfix.hidden
-      = render :partial => 'posting/videos/form'
+      .grid_2.attachment.alpha
+        = image_tag
+      .grid_14.omega
+        = render :partial => 'posting/videos/form'
+      
     / #new_event_overlay.tab_content.nav-content.hidden      
     /   =# render :partial => 'wave/events/new'
+    
     #posting_link.tab_content.clearfix.hidden
       .grid_2.attachment.alpha
-        = avatar_image_tag(current_user, :style => :thumb, :anonymous => true)
+        = image_tag
       .grid_14.omega
         = render :partial => 'posting/links/form'

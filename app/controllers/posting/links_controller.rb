@@ -1,7 +1,4 @@
-class Posting::LinksController < ApplicationController
-
-  before_filter :require_user
-  before_filter :require_resolver
+class Posting::LinksController < Posting::BaseController
 
   @@embedly_api = Embedly::API.new :key => EmbedlyKey
 
@@ -23,12 +20,6 @@ class Posting::LinksController < ApplicationController
     respond_to do |format|
       format.js { render :layout => false }
     end
-  end
-  
-  private
-  
-  def require_resolver
-    @resolver = params[:resolver]
   end
 
 end

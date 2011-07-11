@@ -1,10 +1,21 @@
 - if @posting.present? && @posting.valid?
   :plain
-    var $posting = $("#{escape_javascript(render(:partial => 'text', :object => @posting))}");
-    $posting.prependTo('ul.postings:first').wrap('<li>');
-    var $currentTab = $('ul.wave.nav li.current').removeClass('current');
-    $($('a', $currentTab).attr('rel')).hide().trigger('reset');    
+    var
+      $posting = $("#{escape_javascript(render(:partial => "wave/#{resolver}/posting", :object => @posting))}"),
+      $currentTab = $('ul.wave.nav li.current');
+    
+    $currentTab.removeClass('current');
+    
+    $($('a', $currentTab).attr('rel'))
+      .hide()
+      .find('form')
+      .trigger('reset');
+      
     $('.flash').text('');
+    
+    $posting.prependTo('ul.postings:first').wrap('<li>');
+    $posting.trigger('init');
+
 - else
   :plain
     $('.flash')

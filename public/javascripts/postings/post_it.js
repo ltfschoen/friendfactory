@@ -60,6 +60,9 @@ jQuery(function($) {
 		});
 
 
+	// $('textarea', '.tab_content#posting_post_it')
+	// 	.textareaCount({ 'maxCharacterSize': 108 });
+
 	$('form.new_posting_post_it')
 		.buttonize()
 		

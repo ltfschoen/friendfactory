@@ -13,7 +13,10 @@
       
     $('.flash').text('');
 
-    $posting.trigger('init');
     $posting.prependTo('ul.postings:first').wrap('<li>');
+    $posting.trigger('init');
+
 - else
-  $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")
+  :plain
+    $('.flash')
+      .text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")

@@ -1,15 +1,10 @@
-= form_for new_posting_text, :url => wave_posting_texts_path(@wave), :remote => true do |f|
-  %table
-    %tr
-      %td.avatar.thumb
-        &nbsp;
-      %td
-        .text.canvas
-          .content
-            = avatar_image_tag(new_posting_text.user, :style => :thumb, :anonymous => false, :gender => new_posting_text.user.user_info(current_site).gender)
-            = link_to_profile(new_posting_text.user)
-            = f.text_area :subject, :placeholder => 'Subject (optional)'
-            = f.text_area :body, :placeholder => 'Say something!'
-        .button-bar
-          = f.submit :OK, :disable_with => 'OK'
-          = f.button :Cancel, :class => 'cancel'
+.posting.posting_text.form
+  = form_for Posting::Text.new, :url => wave_posting_texts_path(@wave), :remote => true do |f|
+    = hidden_field_tag :resolver, controller_name
+    .text.canvas
+      .content
+        = f.text_area :subject, :placeholder => 'Subject (optional)'
+        = f.text_area :body, :placeholder => 'Say something!'
+    .button-bar
+      = f.submit :OK, :disable_with => 'OK'
+      = f.button :Cancel, :class => 'cancel'

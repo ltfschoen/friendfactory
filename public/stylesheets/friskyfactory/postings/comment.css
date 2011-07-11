@@ -1,3 +1,7 @@
+.posting_comment {
+	float: left;
+}
+
 .posting_comment .body {
     background: url(/images/friskyfactory/note-paper_01.png) no-repeat top left;
     width: 190px;

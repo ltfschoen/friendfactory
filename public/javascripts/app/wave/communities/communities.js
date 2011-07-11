@@ -1,16 +1,10 @@
 jQuery(function($) {	
 		
-	$('.tab_contents')
+	$('.nav-container')
 		.insertAfter('ul.posting_post_its:first')
-		.find('form').trigger('reset');
-	
-	// $('.tab_content')
-	// 	.bind('reset', function(event) {
-	// 		$('form', this).get(0).reset();
-	// 		$('textarea, input', this).placehold();
-	// 	})
-	// 	.trigger('reset');
-	
+		.find('form')
+		.trigger('reset');
+		
 	$('a', 'ul.wave.community.nav').bounceable().shakeable();
 
 	$('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
@@ -41,7 +35,6 @@ jQuery(function($) {
 			}	
 		});
 
-
 	// $('form', '.tab_content')
 	// 	.live('ajax:loading', function() {
 	// 		$(this)
@@ -64,33 +57,8 @@ jQuery(function($) {
 
 	// $('textarea', '.tab_content .post_it.attachment')
 	// 	.textareaCount({ 'maxCharacterSize': 70 }, function(data){});
-		
-	$('.wave_community')
-		.bind('refresh', function() {
-			$.waypoints('refresh');
-		})
-		.find('.posting-container')
-			.trigger('init');
-		
-	// $('a.new_posting_comment', '.wave_community')
-	// 	.live('click', function(event) {
-	// 		var $this = $(this);
-	// 					
-	// 		event.preventDefault();			
-	// 		$this
-	// 			.fadeTo('fast', 0.0, function() {
-	// 				$this
-	// 					.closest('.posting-container')
-	// 					.find('.posting_comment form')
-	// 						.css({ opacity: 0.0 })
-	// 						.slideDown('fast')					
-	// 						.fadeTo('fast', 1.0)
-	// 						.find('textarea').focus();					
-	// 			});
-	// 
-	// 		$.waypoints('refresh');			
-	// 	});
-
+	
+	$('.posting').trigger('init')
 	
 	(function() {		
 		var $loading = $("<p class='loading grid_4 push_6'>Loading More Postings&hellip;</p>"),

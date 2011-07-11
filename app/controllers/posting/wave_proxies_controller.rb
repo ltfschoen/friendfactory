@@ -1,5 +1,7 @@
 class Posting::WaveProxiesController < ApplicationController
 
+  before_filter :require_user
+
   def create
     wave.postings << new_posting_wave_proxy if wave.present?
     respond_to do |format|
