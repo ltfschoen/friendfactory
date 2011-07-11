@@ -1,5 +1,6 @@
-= form_for Posting::Link.new, :url => wave_posting_links_path(@wave), :remote => true do |f|
+= form_for Posting::Link.new, :url => wave_posting_links_path(@wave), :remote => true do |f|  
+  = hidden_field_tag :resolver, controller_name
   .button-bar
-    = f.text_field :url, :placeholder => 'http:// to something to share'
+    = f.text_field :url, :placeholder => 'http:// to something to share on this wave'
     = f.submit 'OK'
     = f.button 'Cancel', :class => 'cancel'

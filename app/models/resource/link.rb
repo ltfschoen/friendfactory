@@ -1,6 +1,7 @@
 require 'open-uri'
 
 class Resource::Link < ActiveRecord::Base
+  
   set_inheritance_column nil
 
   attr_reader :images
@@ -26,8 +27,8 @@ class Resource::Link < ActiveRecord::Base
       download_images(response[:images])
       true
     end
-  # rescue
-  #   nil
+  rescue
+    nil
   end
     
   private

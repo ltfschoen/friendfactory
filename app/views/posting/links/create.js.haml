@@ -1,12 +1,12 @@
 - if @posting.valid?
   :plain
     var
-      $posting = $("#{escape_javascript(render(:partial => 'link', :object => @posting))}"),
+      $posting = $("#{escape_javascript(render(:partial => "wave/#{resolver}/posting", :object => @posting))}"),
       $currentTab = $('ul.wave.nav li.current');
           
     $currentTab.removeClass('current');
     $($('a', $currentTab).attr('rel')).hide().trigger('reset');
-    $posting.prependTo('ul.postings:first').wrap('<li>');    
+    $posting.prependTo('ul.postings:first').wrap('<li>').trigger('init');
     $('.flash').text('');
 
 - else

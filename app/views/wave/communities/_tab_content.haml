@@ -11,4 +11,7 @@
     / #new_event_overlay.tab_content.nav-content.hidden      
     /   =# render :partial => 'wave/events/new'
     #posting_link.tab_content.clearfix.hidden
-      = render :partial => 'posting/links/form'
+      .grid_2.attachment.alpha
+        = avatar_image_tag(current_user, :style => :thumb, :anonymous => true)
+      .grid_14.omega
+        = render :partial => 'posting/links/form'

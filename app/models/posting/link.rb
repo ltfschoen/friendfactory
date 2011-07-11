@@ -19,28 +19,27 @@ class Posting::Link < Posting::Base
   end
 
   def embedify
-    if build_resource(:url => url).embedify
-      build_photos(resource.images)
-      self
-    end
+    build_resource(:url => url).embedify
   end
 
   def photos
     children.type(Posting::Photo)
   end
 
-  private
-
-  def build_photos(images)
-    self.children = images.map do |image|
-      Posting::Photo.new(:image => image) do |posting|
-        posting.state = :published
+  def build_photos
+    if resource.present?
+      resource.images.each do |image|
+        children << Posting::Photo.new(:image => image) do |posting|
+          posting.state = :published
+        end
       end
     end
   end
 
+  private
+
   def set_user_id_on_photos
-    self.children.type(Posting::Photo).each { |photo| photo.user_id = self.user_id }
+    photos.each { |photo| photo.user_id = self.user_id }
   end
 
 end

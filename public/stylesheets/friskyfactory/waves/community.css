@@ -112,6 +112,10 @@
 	transform: none !important;	
 }
 
+.wave_community .new_posting_link {
+	margin-top: 20px;
+}
+
 .wave_community ul.postings > li .photo.canvas {
     -webkit-transform: none;
     -moz-transform: none;

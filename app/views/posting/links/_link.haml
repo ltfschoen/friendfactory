@@ -1,5 +1,5 @@
 .posting[link]
-  .blank.canvas.link
+  .link.blank.canvas
     - unless link.embeds.primary.present?
       - link.photos.each do |photo|
         = image_tag(photo.image.url(:thumb), :site => false)

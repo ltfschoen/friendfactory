@@ -8,9 +8,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
 
   helper :all
-  helper_method :current_user_session, :current_user
-  helper_method :current_site  
-  helper_method :presenter
+  helper_method :current_user_session, :current_user, :current_site, :presenter, :resolver
 
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
@@ -99,6 +97,10 @@ class ApplicationController < ActionController::Base
         
   def presenter
     @presenter ||= ApplicationPresenter.new(params)
+  end
+  
+  def resolver
+    @resolver ||= controller_name
   end
 
 end

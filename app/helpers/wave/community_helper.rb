@@ -46,7 +46,7 @@ module Wave::CommunityHelper
   end
 
   def render_attachment(posting)
-    render :partial => 'attachment', :locals => { :posting => posting }
+    render :partial => "wave/#{resolver}/attachment", :locals => { :posting => posting }
   end
   
 end

@@ -1,6 +1,7 @@
 class Posting::LinksController < ApplicationController
 
   before_filter :require_user
+  before_filter :require_resolver
 
   @@embedly_api = Embedly::API.new :key => EmbedlyKey
 
@@ -10,16 +11,24 @@ class Posting::LinksController < ApplicationController
       @posting = Posting::Link.new(params[:posting_link]) do |link|
         link.user = current_user
         link.state = :published
-      end
-      @posting.embedify
-      if @posting.valid?
+        link.embedify
+        link.build_photos
+      end      
+      if @posting.valid?        
         wave.postings << @posting
         current_user.profile(current_site).postings << @posting
+        @posting.children(true)
       end
     end
     respond_to do |format|
       format.js { render :layout => false }
     end
+  end
+  
+  private
+  
+  def require_resolver
+    @resolver = params[:resolver]
   end
 
 end
