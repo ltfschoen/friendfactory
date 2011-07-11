@@ -1,7 +1,7 @@
 jQuery(function($) {
 
 	$('.posting_text.form').live('init', function(event) {
-		$(this).find('form.new_posting_text')
+		$('form.new_posting_text', this)
 			.buttonize()
 			.bind('reset', function() {
 				$(this).find('input, button').removeAttr('disabled');

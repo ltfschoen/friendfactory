@@ -28,9 +28,6 @@ module WavesHelper
   end
   
   # Communities Controller
-  def new_posting_post_it
-    @new_posting_post_it ||= new_posting(Posting::PostIt)
-  end
   
   def new_posting_photo
     @new_posting_photo ||= new_posting(Posting::Photo)

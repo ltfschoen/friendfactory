@@ -3,8 +3,7 @@
     = hidden_field_tag :resolver, controller_name
     .text.canvas
       .content
-        = f.text_area :subject, :placeholder => 'Subject (optional)'
-        = f.text_area :body, :placeholder => 'Say something!'
+        = f.text_area :body, :placeholder => 'About me'
     .button-bar
       = f.submit :OK, :disable_with => 'OK'
       = f.button :Cancel, :class => 'cancel'

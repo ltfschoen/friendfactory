@@ -1,5 +1,6 @@
 .posting[text]
   .text.canvas
     .content
-      %h1= text.subject || '&nbsp'.html_safe
+      - if text.subject.present?
+        %h1= text.subject
       = text.body || '&nbsp'.html_safe

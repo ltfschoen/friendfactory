@@ -132,16 +132,6 @@
 	float: left;
 }
 
-.wave_community ul.posting_post_its form .canvas,
-.wave_community ul.posting_post_its > li .canvas {
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-	transform: rotate(2deg);
-	top: 0;
-	right: 0;
-	margin: 0;
-}
-
 .wave_community #posting_photo_upload_well {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);	
