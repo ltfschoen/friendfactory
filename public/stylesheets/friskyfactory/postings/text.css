@@ -11,22 +11,18 @@
 }
 
 .text.canvas h1 {
-    color: #501508;
-	font-size: 13px;
     line-height: 20px;
 	margin: 0;
 }
 
 .text.canvas .content {
 	position: relative;
-    color: #501508;
 	width: 332px;
 	height: 208px;
 	margin: 0;
 	padding-top: 20px;
 	padding-left: 20px;
 	padding-right: 20px;
-	font-size: 13px;
     line-height: 20px;
 	overflow: hidden;
 }
@@ -44,8 +40,6 @@
 .text.canvas textarea#posting_text_subject {
 	width: 256px;
 	height: 38px;
-	color: #501508;
-	font-size: 13px;
 	font-weight: bold;
 	overflow: hidden;
 }

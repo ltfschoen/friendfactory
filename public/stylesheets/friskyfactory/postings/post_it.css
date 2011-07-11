@@ -3,8 +3,6 @@
     width: 173px;
 	height: 122px;
 	padding: 5px 8px 20px 6px;
-    line-height: 1.2em;
-	font-size: small;
     color: #111;
 }
 
@@ -17,7 +15,7 @@
 	height: 120px;
 	padding: 7px 10px 0 10px;
 	overflow: hidden;
-	line-height: 16px;
+/*	line-height: 16px;*/
 }
 
 .post_it.canvas img.avatar.thumb {
