@@ -1,0 +1,6 @@
+.wave.wave_community.albums.grid_16
+  - @waves.each do |wave|
+    %ul.posting_photos
+      - wave.photos.each do |photo|
+        %li.posting.photo.canvas[photo]
+          = link_to_album_photo(wave, photo, :class => 'small')

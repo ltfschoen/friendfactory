@@ -1,6 +1,10 @@
 class Wave::AlbumsController < ApplicationController
   
   before_filter :require_user  
+
+  def index
+    @waves = Wave::Album.published.order('created_at desc')
+  end
     
   def show
     if @wave = Wave::Base.find_by_id(params[:album_id])
