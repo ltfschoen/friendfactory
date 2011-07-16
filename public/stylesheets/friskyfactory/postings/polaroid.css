@@ -113,6 +113,7 @@ div.polaroid .pane.avatar table.header {
 div.polaroid .pane.avatar table.header td.username {
 	text-align: left;
 	vertical-align: top;
+	font-size: 18px;
 }
 
 div.polaroid .pane.avatar table.header td.status {

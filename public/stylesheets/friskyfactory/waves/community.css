@@ -33,49 +33,8 @@
 	margin-top: 6px;
 }
 
-.wave_community ul.postings > li .canvas {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-	transform: rotate(-2deg);
-}
-
 .wave_community .canvas {
 	-webkit-transition: -webkit-transform 0.1s ease-in;
-}
-
-.wave_community ul.postings > li:nth-of-type(even) .canvas {
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg)
-	transform: rotate(2deg);
-}
-
-.wave_community ul.postings > li:nth-of-type(3n) .canvas {
-    -webkit-transform: none;
-    -moz-transform: none;
-	transform: none;
-    top: -5px;
-    right: 10px;
-}
-
-.wave_community ul.postings > li:nth-of-type(5n) .canvas {
-    -webkit-transform: rotate(3deg);
-    -moz-transform: rotate(3deg);
-	transform: rotate(3deg);
-    right: 5px;
-}
-
-.wave_community ul.postings > li:nth-of-type(8n) .canvas {
-    -webkit-transform: rotate(-3deg);
-    -moz-transform: rotate(-3deg);
-	transform: rotate(-3deg);
-    top: 8px;
-    right: 5px;
-	margin-bottom: 20px;
-}
-
-.wave_community ul.postings > li:nth-of-type(11n) .canvas {
-    top: 3px;
-    right: -5px;
 }
 
 .wave_community ul.posting_comments > li {

@@ -30,9 +30,6 @@ img.avatar.thimble {
 	-moz-background-clip: border-box;
 	padding: 4px 4px 18px 4px;
 	border: 1px solid #CDCDCD;
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-    transform: rotate(-2deg);	
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
