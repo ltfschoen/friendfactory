@@ -1,5 +1,6 @@
 jQuery(function($) {	
-	$('div.polaroid').polaroid();
+	$('div.polaroid', '.roll_call').polaroid();
+	$('.posting', '.wave_profile').trigger('init');
 });
 
 $(window).load(function() {

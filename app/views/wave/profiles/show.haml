@@ -1,8 +1,9 @@
-.wave.wave_community.clearfix[@wave]
-  .grid_6.push_5
-    =# render :partial => 'nav'
-  .grid_16
-    =# render :partial => 'tab_content'
+.wave.wave_community[@wave]
+  - if false && current_user && current_user.id == @wave.user_id
+    .grid_6.push_5
+      = render :partial => 'wave/communities/nav'
+    .grid_16
+      = render :partial => 'wave/communities/tab_content'
   .grid_16#postings-container
     = render_postings @postings
   = will_paginate @postings, :class => 'grid_16 pagination append-top'
