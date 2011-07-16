@@ -1,13 +1,8 @@
-.grid_1
-  &nbsp;
-.grid_14
-  .tag-cloud
-    - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
-      - css_class = 'tag4' if tag.name.downcase == 'deaf' && current_site.name == 'friskyhands' # TODO !!!
-      - css_class += " current" if tag.name.downcase == params[:tag]
-      = link_to tag.name, roll_call_path(:tag => tag.name.gsub(/\s/, '-').downcase), :class => css_class
-.grid_1
-  &nbsp;
+.grid_16.tag-cloud
+  - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
+    - css_class = 'tag4' if tag.name.downcase == 'deaf' && current_site.name == 'friskyhands' # TODO !!!
+    - css_class += " current" if tag.name.downcase == params[:tag]
+    = link_to tag.name, roll_call_path(:tag => tag.name.gsub(/\s/, '-').downcase), :class => css_class
 .wave.roll_call.grid_16
   - @waves.in_groups_of(3) do |group|
     - group.each_with_index do |profile, idx|

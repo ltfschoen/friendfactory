@@ -12,7 +12,9 @@
 
 .tag-cloud {
     text-align: center;
-	padding: 10px 20px;
+	margin: 10px 0;
+	font-size: 22px;
+	line-height: 0.4em;
 }
 
 .tag-cloud a,
