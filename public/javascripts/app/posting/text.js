@@ -26,8 +26,6 @@ jQuery(function($) {
 						.hideNavContent();
 					return false;
 				});
-
-		return false;
 	});
 
 });

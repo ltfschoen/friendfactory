@@ -3,18 +3,17 @@ jQuery(function($) {
 	$('<script>')
 		.attr('src', 'http://www.youtube.com/player_api')
 		.attr('type', 'text/javascript')
-		.insertBefore('script:first');
-		
-		
-	$('form.new_posting_video', '.tab_content')
-		.buttonize()
-		
-		.find('button.cancel')
-			.bind('click', function() {
-				$(this).hideTabContent();
-				return false;
-			})
-		.end()
+		.insertBefore('script:first');		
+
+	$('.posting_video.form').live('init', function(event) {		
+		$('form.new_posting_video', this)
+			.buttonize()		
+			.find('button.cancel')
+				.bind('click', function() {
+					$(this).hideTabContent();
+					return false;
+				});
+	});
 
 });
 

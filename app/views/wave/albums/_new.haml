@@ -1,16 +1,17 @@
-= form_for new_wave_album, :html => { :multipart => true } do |f|
-  = hidden_field_tag :publish_id, @wave.id
-  = hidden_field_tag :wave_id
-  %table
-    %tr
-      %td
-        %ul.posting_photos
-        .photo.canvas.dropzone
-          = image_tag 'friskyfactory/ffffff.gif', :class => 'photo h4x6 small', :site => false
-          %p.unobtrusive<
-            Choose or drag photos here
-          = fields_for :posting_photo do |photo|
-            = photo.file_field :image
-          .button-bar
-            = f.submit 'Finished', :class => 'submit'
-            = f.button 'Cancel', :class => 'cancel'
+.posting.posting_album.form
+  = form_for Wave::Album.new, :html => { :multipart => true } do |f|
+    = hidden_field_tag :publish_id, @wave.id
+    = hidden_field_tag :wave_id
+    %table
+      %tr
+        %td
+          %ul.posting_photos
+          .photo.canvas.dropzone
+            = image_tag 'friskyfactory/ffffff.gif', :class => 'photo h4x6 small', :site => false
+            %p.unobtrusive<
+              Choose or drag photos here
+            = fields_for :posting_photo do |photo|
+              = photo.file_field :image
+            .button-bar
+              = f.submit 'Finished', :class => 'submit'
+              = f.button 'Cancel', :class => 'cancel'

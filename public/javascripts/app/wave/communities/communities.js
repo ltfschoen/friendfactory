@@ -14,8 +14,7 @@ jQuery(function($) {
 			var $this = $(this),
 				$tab_content = $($this.attr('rel'));
 				
-			event.preventDefault();
-						
+			event.preventDefault();					
 			if (!$this.closest('li').hasClass('current')) {
 				$this.trigger('bounce')
 					.closest('li')
@@ -29,12 +28,12 @@ jQuery(function($) {
 						$tab_content
 							.css({ visibility: 'visible' })
 							.fadeTo('fast', 1.0);
-					});
-					
+					});					
 			} else {
 				$this.trigger('shake');
 			}	
 		});
+
 
 	function insertPostItsContainer() {
 		$('<ul class="posting_post_its clearfix"></ul>')
@@ -72,22 +71,21 @@ jQuery(function($) {
 
 	$('a[rel="#posting_post_it"]', 'ul.wave.nav')
 		.click(function(event) {
-			event.preventDefault();
 			var $this = $(this);
 			
+			event.preventDefault();			
 			if (true || !$this.closest('li').hasClass('current')) {
 				$this.trigger('bounce')
 					.closest('li').addClass('current');
-
 				
 				if ($('ul.posting_post_its').length === 0) {
 					insertPostItsContainer();
-				}				
+				}			
 				
 				setTimeout(dropLastPostIt, 1100);
 
-				var postItForm = $($this.attr('rel')).find('form');
-				var delay = ($('li', 'ul.posting_post_its:eq(0)').length) < 5 ? 900 : 2000;
+				var postItForm = $($this.attr('rel')).find('form'),
+					delay = ($('li', 'ul.posting_post_its:eq(0)').length) < 5 ? 900 : 2000;
 				setTimeout(function() { revealFirstPostIt(postItForm) }, delay);
 				
 			} else {
@@ -96,8 +94,26 @@ jQuery(function($) {
 		});
 			
 	$('.posting').trigger('init');
+
+	$('a[href^="/wave/profiles"].profile', '.attachment').live('click', function(event) {
+		event.preventDefault();
+		$('<div class="floating"></div>')
+			.appendTo('.floating-container')
+			.load($(this).attr('href'), function() {	 			
+				$(this).position({
+					my: 'left center',
+					of: event,
+					offset: '30 0',
+					collision: 'fit'
+				})	
+				.draggable()
+				.find('.polaroid-container > .polaroid')
+					.polaroid({ 'close-button' : true });
+			});
+	});
 		
-	(function() {		
+	(function() {
+		return;	
 		var $loading = $("<p class='loading grid_4 push_6'>Loading More Postings&hellip;</p>"),
 			$footer = $('.wave_community + .page.footer'),
 			opts = { offset: '110%' };

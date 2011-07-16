@@ -1,6 +1,6 @@
 module Posting::WaveProxiesHelper
   
-  def render_wave(wave)
+  def render_wave_as_posting(wave)
     unless wave.nil?
       wave_type = wave.class.name.demodulize.tableize
       file_name = File.join('wave', wave_type, wave_type.singularize)

@@ -33,8 +33,6 @@ jQuery(function($) {
 						.closest('li').removeClass('current');					
 					return false;
 				});
-
-		return false;
 	});
 
 });
