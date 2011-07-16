@@ -1,9 +1,8 @@
 jQuery(function($) {	
-	$('.wave_profile').community();	
+	$('div.polaroid').polaroid();
 });
 
 $(window).load(function() {
-
 	$('.posting_photos', '.wave_community')
 		.masonry({
 			singleMode: false,
@@ -19,5 +18,4 @@ $(window).load(function() {
 			itemSelector: 'li',
 			resizeable: false
 		});
-
 });
