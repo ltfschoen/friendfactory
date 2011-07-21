@@ -16,37 +16,6 @@
 	vertical-align: baseline;
 }
 
-.wave_community ul.nav li.posting_text a {
-	background-position: 0 0;
-}
-
-.wave_community ul.nav li.posting_post_it a {
-	background-position: -50px 0;
-}
-
-.wave_community ul.nav li.wave_album a {
-	background-position: -100px 0;
-}
-
-.wave_community ul.nav li.posting_video {
-	width: 55px;	
-}
-
-.wave_community ul.nav li.posting_video a {
-	background-position: -220px 0;
-	width: 55px;
-}
-
-.wave_community ul.nav li.posting_link a {
-	background-position: -326px 0;
-	width: 70px;
-}
-
-.wave_events ul.nav li.wave_event a {
-	background-position: -150px;
-	width: 70px;
-}
-
 .wave_invitation .polaroid td.input {
 	text-align: left;
 }
@@ -59,10 +28,3 @@ form#new_posting_video input#posting_video_url {
 	width: 278px;
 }
 
-div.polaroid .pane.conversation .message-input:before {
-	border-color: transparent;
-}
-
-div.polaroid .pane.conversation .message-input:after {
-	border-color: transparent;
-}
