@@ -10,8 +10,8 @@
       'friskyfactory/application', |
       'friskyfactory/effects', |
       'friskyfactory/jquery-ui', |
-      'friskyfactory/waves/', |
       'friskyfactory/postings/', |
+      'friskyfactory/waves/', |
       :media => 'screen', |
       :cache => 'friskyfactory/application.cache'
 
@@ -66,6 +66,9 @@
     - file_name = "app/#{controller.request.path_parameters[:controller]}/#{controller_name}.js"
     - if File.exists?("public/javascripts/#{file_name}")
       = javascript_include_tag file_name
+
+    / [if lt IE 9]
+      = javascript_include_tag 'ie-8', :media => 'screen'
 
     = yield(:javascripts)    
     - if page_js = yield(:pagejs).present?

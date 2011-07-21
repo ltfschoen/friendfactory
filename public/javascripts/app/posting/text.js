@@ -3,6 +3,7 @@ jQuery(function($) {
 	$('.posting_text.form').live('init', function(event) {
 		$('form.new_posting_text', this)
 			.buttonize()
+			
 			.bind('reset', function() {
 				$(this).find('input, button').removeAttr('disabled');
 				return $(this);
@@ -17,7 +18,9 @@ jQuery(function($) {
 			.live('ajax:complete', function() {
 				$('.canvas', this).pulse();
 			})
-			
+
+			.find('textarea').placehold().end()
+						
 			.find('button.cancel')
 				.bind('click', function() {
 					var $this = $(this);

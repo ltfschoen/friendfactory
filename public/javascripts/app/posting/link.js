@@ -1,8 +1,10 @@
 jQuery(function($) {		
 
-	$('.posting_link.form').live('init', function(event) {		
-		$('form.new_posting_link', this)
-			.buttonize()		
+	$('form.new_posting_link').live('init', function(event) {
+		$(this)
+			.buttonize()			
+			.find('input[type="text"]').placehold().end()
+			
 			.live('reset', function() {
 				$(this)
 					.find('input').removeAttr('disabled').end()

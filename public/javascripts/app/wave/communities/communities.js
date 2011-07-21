@@ -93,7 +93,7 @@ jQuery(function($) {
 			}			
 		});
 			
-	$('.posting').trigger('init');
+	$('.posting, form.new_posting').trigger('init');
 
 	$('a[href^="/wave/profiles"].profile', '.attachment').live('click', function(event) {
 		event.preventDefault();

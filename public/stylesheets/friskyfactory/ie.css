@@ -3,10 +3,6 @@
 	font-size: 12px;
 }
 
-.ui-button {
-	margin-right: 0.4em;
-}
-
 #login a.button {
 	position: relative;
 	margin: 0.5em 0.4em 0.5em 0;
@@ -41,13 +37,13 @@
 	width: 55px;
 }
 
-.wave_events ul.nav li.wave_event a {
-	background-position: -150px;
+.wave_community ul.nav li.posting_link a {
+	background-position: -326px 0;
 	width: 70px;
 }
 
-.wave_events ul.nav li.posting_link a {
-	background-position: -326px 0;
+.wave_events ul.nav li.wave_event a {
+	background-position: -150px;
 	width: 70px;
 }
 

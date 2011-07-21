@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-	$('.posting_comment').live('init', function(event) {		
+	$('.posting_comment').live('init', function(event) {
 		var $this = $(this);
 
 		$this
@@ -15,14 +15,14 @@ jQuery(function($) {
 						.find('.button-bar')
 						.css({ opacity: 1.0 });
 				})
-				
+
 				.find('textarea')
 					.autoResize({ extraSpace: 0, limit: 130 })
 				.end()
-				
+
 				.find('button.cancel')
 					.bind('click', function(event) {
-						event.preventDefault();				
+						event.preventDefault();
 						$(event.target).closest('form')
 							.css({ opacity: 0.0 })
 							.trigger('reset')
@@ -37,23 +37,23 @@ jQuery(function($) {
 
 			.find('a.new_posting_comment')
 				.live('click', function(event) {
-					var $this = $(this);						
-					event.preventDefault();			
+					var $this = $(this);
+					event.preventDefault();
 					$this
 						.fadeTo('fast', 0.0, function() {
 							$this
 								.closest('.posting-container')
 								.find('.posting_comment form')
 									.css({ opacity: 0.0 })
-									.slideDown('fast')					
+									.slideDown('fast')
 									.fadeTo('fast', 1.0)
-									.find('textarea').focus();					
+									.find('textarea').focus();
 						});
-					$.waypoints('refresh');			
+					$.waypoints('refresh');
 				});
 
-		$this.buttonize();		
-		return false;		
+		$this.buttonize();
+		return false;
 	});
 
 });

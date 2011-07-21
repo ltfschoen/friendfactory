@@ -5,9 +5,10 @@ jQuery(function($) {
 		.attr('type', 'text/javascript')
 		.insertBefore('script:first');		
 
-	$('.posting_video.form').live('init', function(event) {		
-		$('form.new_posting_video', this)
+	$('form.new_posting_video').live('init', function(event) {		
+		$(this)
 			.buttonize()		
+			.find('input[type="text"]').placehold().end()
 			.find('button.cancel')
 				.bind('click', function() {
 					$(this).hideTabContent();
