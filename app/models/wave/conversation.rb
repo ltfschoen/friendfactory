@@ -28,6 +28,8 @@ class Wave::Conversation < Wave::Base
     self
   end
   
+  alias :read! :read
+  
   def read_at
     bookmark.read_at
   end

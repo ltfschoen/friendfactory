@@ -8,8 +8,11 @@ class CreateBookmarks < ActiveRecord::Migration
     end
     add_index :bookmarks, [ :wave_id, :user_id ]
     add_index :bookmarks, :user_id
+
+    say "Initializing bookmarks"
+    Wave::Conversation.all.each{ |conversation| conversation.read! }
     
-    say "Randomize uploaded image filenames"
+    say "Please run task to randomize uploaded image filenames"
     say "ff:fix:randomize_file_names", true
   end
 
