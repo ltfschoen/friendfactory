@@ -47,6 +47,7 @@ Friskyfactory::Application.routes.draw do
 
   # To add a comment to a posting
   resources :postings, :only => [] do |posting|
+    member { delete 'unpublish' => 'posting/base#unpublish' }
     scope :module => :posting do
       resources :comments, :only => [ :new, :create ]
     end

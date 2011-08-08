@@ -94,6 +94,8 @@ jQuery(function($) {
 		});
 			
 	$('.posting, form.new_posting').trigger('init');
+	
+	$('.remove', '.posting-container').button({ icons: { primary: 'ui-icon-close' }, text: false });
 
 	$('a[href^="/wave/profiles"].profile', '.attachment').live('click', function(event) {
 		event.preventDefault();

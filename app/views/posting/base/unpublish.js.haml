@@ -1,0 +1,9 @@
+- if @posting.present? && @posting.unpublished?
+  :plain
+    var $posting = $("##{dom_id(@posting)}").closest('li');
+    $posting.fadeTo('slow', 0.0, function() {
+      $posting.slideUp(1200, 'easeOutBounce', function() {
+        $posting.remove();      
+      });
+    });
+    

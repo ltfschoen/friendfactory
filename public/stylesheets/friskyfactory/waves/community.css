@@ -24,6 +24,16 @@
 	width: 55px;
 }
 
+.wave_community .posting-container {
+	position: relative;
+}
+
+.wave_community .posting-container .remove {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
 .wave_community ul.posting_post_its,
 .wave_community ul.postings > li {
 	margin-bottom: 40px;
