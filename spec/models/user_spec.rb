@@ -146,6 +146,7 @@ describe User do
         end
         
         it "should remain in offered state after being accepted" do
+          pending
           site = sites(:positivelyfrisky)
           invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666')
           invitation.offer!

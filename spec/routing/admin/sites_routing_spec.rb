@@ -23,6 +23,7 @@ describe Admin::SitesController do
     end
 
     it "recognizes and generates #stylesheets" do
+      pending
       { :get => "/stylesheets/welcome.css" }.should route_to(:controller => "admin/sites", :action => "stylesheets", :layout => "welcome", :format => "css")
     end
   end

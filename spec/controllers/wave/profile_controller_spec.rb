@@ -20,11 +20,13 @@ describe Wave::ProfileController do
 
     describe "GET show" do
       it 'assigns @profile' do
+        pending
         get :show
         assigns[:profile].should == users(:adam).profile
       end
       
       it 'renders show' do
+        pending
         get :show
         response.should render_template('wave/profile/show')
       end
@@ -36,6 +38,7 @@ describe Wave::ProfileController do
       end
       
       it 'renders avatar' do
+        pending
         xhr :post, :avatar, :posting_avatar => { :image => fixture_file_upload(image, 'image/jpeg') }
         response.should render_template('wave/profile/avatar')        
       end
