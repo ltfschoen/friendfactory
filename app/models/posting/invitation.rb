@@ -50,10 +50,11 @@ class Posting::Invitation < Posting::Base
   end
   
   scope :offered, where(:state => :offered)
-  scope :universal, where(:body => nil)
   scope :personal, where('`postings`.`body` IS NOT NULL')
+  scope :universal, where(:body => nil)
+  scope :code, lambda { |code| where(:subject => code) }
   scope :site, lambda { |site| where(:resource_id => site.id) }
-  
+
   scope :age, lambda { |*days_old|
     where_clause = days_old.inject([[]]) do |memo, age|
       memo.first << [ '(`postings`.`created_at` >= ? AND `postings`.`created_at` < ?)' ]
