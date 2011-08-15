@@ -24,7 +24,5 @@
 # end
 
 every 1.day, :at => '1:00am' do
-  if [ 'production', 'staging' ].include?(Rails.env)
-    rake "ff:invitations:redeliver"
-  end
+  rake "ff:invitations:redeliver"
 end
