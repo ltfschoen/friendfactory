@@ -1,86 +1,109 @@
 require 'spec_helper'
 
 describe Posting::Invitation do
-
-  fixtures :sites, :users, :postings
-  set_fixture_class :wave => 'Wave::Base', :postings => 'Posting::Base'
-  
-  describe "deliver mail" do
-    
-    let(:invitation) { postings(:invitation_posting_for_charlie) }
-
-    it "when status changed to offer" do
-      new_invitation = Posting::Invitation.new(:site => sites(:friskyhands), :sponsor => users(:adam), :body => "zed@test.com")
-      InvitationsMailer.should_receive(:new_invitation_mail).with(new_invitation).and_return(mock(Mail::Message).as_null_object)
-      new_invitation.save!
-      new_invitation.offer!
+  describe "email changed" do
+    let(:invitation) { @invitation }
+    before(:each) do 
+      @invitation = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => "yack@test.com")
     end
     
-    describe "redelivery" do
-      it "when email updated" do
-        InvitationsMailer.should_receive(:new_invitation_mail).with(invitation).and_return(mock(Mail::Message).as_null_object)
-        invitation.update_attributes(:email => 'zed@test.com')
+    it "doesn't change on first assignment for a new record" do
+      invitation.should_not be_email_changed
+      invitation.email.should == 'yack@test.com'
+    end
+
+    it "does change when assigned new email to email attribute" do
+      invitation.update_attribute(:email, 'zed@test.com')
+      invitation.should be_email_changed
+      invitation.email.should == 'zed@test.com'
+    end    
+
+    it "does change when assigned new email to body attribute" do
+      invitation.update_attribute(:body, 'zed@test.com')
+      invitation.should be_email_changed
+      invitation.body.should == 'zed@test.com'
+    end    
+  end
+  
+  describe 'scopes' do
+    describe 'personal and universal' do
+      let(:personal_invitation)  { @personal }
+      let(:universal_invitation) { @universal }
+      
+      before(:each) do
+        Posting::Invitation.delete_all        
+        @personal = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => 'zed@test.com')
+        @universal = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => nil)
       end
       
-      it "when email as body attribute updated" do
-        InvitationsMailer.should_receive(:new_invitation_mail).with(invitation).and_return(mock(Mail::Message).as_null_object)
-        invitation.update_attributes(:body => 'zed@test.com')
+      it "shows personal invitations" do
+        Posting::Invitation.personal.should == [ personal_invitation ]
       end
-      
-      it "only when email updated" do
-        InvitationsMailer.should_not_receive(:new_invitation_mail)
-        invitation.update_attributes(:email => invitation.email)
+
+      it "shows universal invitations" do
+        Posting::Invitation.universal.should == [ universal_invitation ]
       end      
     end
-        
-  end
-
-  describe "reinvitations" do
-    let(:today) { DateTime.civil(1968, 3, 21, 1) }
-    let(:invitations) { @invitations }
-
-    before(:each) { Date.stub!(:today).and_return(today) }
     
-    before(:each) do
-      @invitations = 0.upto(9).inject({}) do |memo, age|
-        created_at = today - age.day
-        invitation = Posting::Invitation.create!(
-            :site => sites(:friskyhands),
-            :sponsor => users(:adam),
-            :body => "invite-#{age}",
-            :state => 'offered',
-            :created_at => created_at)
-        memo[created_at.strftime('%Y%m%d').to_sym] = invitation
-        memo
-      end
-    end
+    describe 'days old, aging and expiring' do
+      let(:today) { DateTime.civil(2011, 1, 15, 1) }
+      let(:invitations) { @invitations }      
 
-    describe "scopes" do
+      before(:each) do
+        Date.stub!(:today).and_return(today)
+        Posting::Invitation.stub!(:FIRST_REMINDER_AGE).and_return(1.day)
+        Posting::Invitation.stub!(:SECOND_REMINDER_AGE).and_return(7.days)
+        Posting::Invitation.stub!(:EXPIRATION_AGE).and_return(10.days)
+
+        Posting::Invitation.delete_all
+        @invitations = 0.upto(12).inject({}) do |memo, age|
+          created_at = today - age.days
+          invitation = Posting::Invitation.create!(
+              :site       => mock_model(Site),
+              :sponsor    => mock_model(User),
+              :body       => "user-#{age}@test.com",
+              :state      => 'offered',
+              :created_at => created_at)
+          memo[created_at.strftime('%Y%m%d').to_sym] = invitation
+          memo
+        end
+      end
+
       it "for 1 day old invitations" do
-        Posting::Invitation.days_old(1.day).should == [ invitations[:'19680319'] ]
-      end
-
-      it "for 3-day-old invitations" do
-        Posting::Invitation.days_old(3.days).should == [ invitations[:'19680317'] ]
+        Posting::Invitation.age(1.day).should == [ invitations[:'20110113'] ]
       end
 
       it "for 7-day-old invitations" do
-        Posting::Invitation.days_old(7.days).should == [ invitations[:'19680313'] ]
+        Posting::Invitation.age(7.days).should == [ invitations[:'20110107'] ]
       end
 
+      it "for aging invitations" do
+        Posting::Invitation.aging.should == [ invitations[:'20110107'], invitations[:'20110113'] ]
+      end
+    
       it "for expiring invitations" do
-        Posting::Invitation.expiring.should == [ invitations[:'19680312'] ]
+        Posting::Invitation.expiring.should == [ invitations[:'20110103'], invitations[:'20110104'] ]
       end
     end
-
-    it "are mailed via the InvitationsMailer" do
-      mail_message = mock(Mail::Message).as_null_object
-      InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'19680319']).ordered.and_return(mail_message)
-      InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'19680317']).ordered.and_return(mail_message)
-      InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'19680313']).ordered.and_return(mail_message)
-      InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'19680312']).ordered.and_return(mail_message)
-      Posting::Invitation.redeliver_mail
-    end    
+    
+    describe 'redundant and not redundant' do
+      fixtures :users      
+      let(:redundant_invitation)     { @redundant }
+      let(:not_redundant_invitation) { @not_redundant }
+      
+      before(:each) do
+        Posting::Invitation.delete_all
+        @redundant = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => users(:adam).email)
+        @not_redundant = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => 'zed@test.com')
+      end
+      
+      it "shows redundant invitations" do
+        Posting::Invitation.redundant.should == [ redundant_invitation ]
+      end
+      
+      it "shows not redundant invitations" do
+        Posting::Invitation.not_redundant.should == [ not_redundant_invitation ]
+      end
+    end
   end
-
 end

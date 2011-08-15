@@ -1,14 +1,12 @@
 class Posting::Invitation < Posting::Base
   
   FIRST_REMINDER_AGE  = 1.day
-  SECOND_REMINDER_AGE = 3.days
-  THIRD_REMINDER_AGE  = 7.days
-  EXPIRATION_AGE      = 8.days
+  SECOND_REMINDER_AGE = 7.days
+  EXPIRATION_AGE      = 10.days
   
   belongs_to :site, :foreign_key => 'resource_id'
   belongs_to :invitee, :foreign_key => 'body', :primary_key => 'email', :class_name => 'User'
 
-  # alias_attribute :site, :resource
   alias_attribute :code, :subject
   alias_attribute :email, :body
   alias_attribute :sponsor, :user
@@ -18,10 +16,6 @@ class Posting::Invitation < Posting::Base
   after_create do |invitation|    
     invitation.code ||= invitation.id
     invitation.save!
-  end
-  
-  after_update do |invitation|    
-    invitation.deliver_mail if invitation.needs_redelivery?
   end
   
   def distribute(sites)
@@ -39,7 +33,7 @@ class Posting::Invitation < Posting::Base
     state :expired
     
     event :offer do
-      transitions :to => :offered, :from => [ :unpublished ], :on_transition => :deliver_mail
+      transitions :to => :offered, :from => [ :unpublished ]
     end
     
     event :accept do
@@ -56,65 +50,59 @@ class Posting::Invitation < Posting::Base
   end
   
   scope :offered, where(:state => :offered)
-  scope :days_old, lambda { |age| where('created_at >= ? and created_at < ?', Date.today.at_midnight - (age + 1.day), Date.today.at_midnight - age) }
-  scope :expiring, lambda { where('created_at < ?', Date.today.at_midnight - EXPIRATION_AGE) }
-  scope :universal, lambda { where(:body => nil) }
+  scope :universal, where(:body => nil)
+  scope :personal, where('`postings`.`body` IS NOT NULL')
   scope :site, lambda { |site| where(:resource_id => site.id) }
+  
+  scope :age, lambda { |*days_old|
+    where_clause = days_old.inject([[]]) do |memo, age|
+      memo.first << [ '(`postings`.`created_at` >= ? AND `postings`.`created_at` < ?)' ]
+      memo << [ Date.today.at_midnight - (age + 1.day), Date.today.at_midnight - age ]
+      memo
+    end
+    where(*[ where_clause.shift.join(' OR '), where_clause ].flatten)
+  }
+  
+  scope :not_redundant, lambda {
+    joins('LEFT OUTER JOIN `users` ON `postings`.`body` = `users`.`email`').
+    where('`users`.`id` IS NULL') }
+
+  scope :redundant, lambda {
+    joins('LEFT OUTER JOIN `users` ON `postings`.`body` = `users`.`email`').
+    where('`users`.`id` IS NOT NULL') }
+  
+  scope :aging, lambda {
+    age(FIRST_REMINDER_AGE, SECOND_REMINDER_AGE).
+    order('`postings`.`created_at` ASC') }
+
+  scope :expiring, lambda {
+    where('`postings`.`created_at` < ?', Date.today.at_midnight - EXPIRATION_AGE).
+    order('`postings`.`created_at` ASC') }
 
   def self.find_all_by_code(code)
     find_all_by_subject(code)
   end
 
-  def self.redeliver_mail
-    redeliver_aging_mail + redeliver_expiring_mail
-  end
-
   def email=(new_email)
     if new_email != self.email
       write_attribute(:body, new_email)
-      self.needs_redelivery = true
+      set_email_changed unless new_record?
     end
   end
   
   alias :body= :email=
+
+  def email_changed?
+    @email_changed
+  end
   
   def anonymous?
     email.blank?
   end
     
-  def deliver_mail
-    if email.present?
-      InvitationsMailer.new_invitation_mail(self).deliver
-      self.needs_redelivery = false
-    end
-  end
-  
-  def needs_redelivery=(value)
-    @needs_redelivery = value
-  end
-  
-  def needs_redelivery?
-    @needs_redelivery && offered?
-  end
-  
   private
-  
-  def self.redeliver_aging_mail
-    count = 0
-    [ FIRST_REMINDER_AGE, SECOND_REMINDER_AGE, THIRD_REMINDER_AGE ].each do |age|
-      offered.days_old(age).each do |invitation|
-        InvitationsMailer.new_invitation_mail(invitation).deliver && count += 1        
-      end
-    end    
-    count
-  end
-  
-  def self.redeliver_expiring_mail
-    count = 0
-    offered.expiring.each do |invitation|
-      InvitationsMailer.new_invitation_mail(invitation).deliver && count += 1      
-    end
-    count
-  end
-    
+
+  def set_email_changed    
+    @email_changed = true
+  end    
 end
