@@ -23,7 +23,7 @@ gem 'mysql2'
 # gem 'aws-s3', :require => 'aws/s3'
 
 gem 'jquery-rails'
-gem 'transitions', :require => [ 'transitions', 'active_record/transitions' ]
+gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
 gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
 gem 'remotipart'

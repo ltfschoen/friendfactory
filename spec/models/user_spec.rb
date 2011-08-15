@@ -9,7 +9,7 @@ describe User do
     UserSession.stub!(:find).and_return(mock(UserSession, :record => mock_model(User)))
   end
   
-  describe 'attributes' do    
+  describe 'attributes' do
     let(:attrs) do
       { :email => 'zed@test.com',
         :handle => 'zed',
@@ -58,6 +58,16 @@ describe User do
 
     it 'is not an admin by default' do
       User.new(attrs).should_not be_an_admin
+    end
+  end
+
+  describe 'state' do
+    fixtures :sites, :users
+
+    it 'disabled is not emailable' do
+      user = users(:adam)
+      user.disable!
+      user.should_not be_emailable
     end
   end
 

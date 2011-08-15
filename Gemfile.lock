@@ -115,7 +115,7 @@ GEM
     signature (0.1.2)
       ruby-hmac
     thor (0.14.6)
-    transitions (0.0.9)
+    transitions (0.0.10)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
@@ -147,7 +147,7 @@ DEPENDENCIES
   remotipart
   rspec-rails (>= 2.5.0)
   sass (>= 3.1.1)
-  transitions
+  transitions (>= 0.0.10)
   webrat (>= 0.7.2)
   whenever
   will_paginate (~> 3.0.pre2)

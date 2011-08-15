@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
       transitions :to => :enabled, :from => [ :disabled ]
     end    
     event :disable do
-      transitions :to => :disabled, :from => [ :enabled ]
+      transitions :to => :disabled, :from => [ :enabled ], :on_transition => :disable_email!
     end
   end
   
@@ -273,6 +273,9 @@ class User < ActiveRecord::Base
     reset_perishable_token!
   end
 
+  def disable_email!
+    update_attribute(:emailable, false)
+  end
   
   private
   
@@ -297,5 +300,4 @@ class User < ActiveRecord::Base
     site.waves << wave && wave.publish!
     wave.reload
   end
-    
 end
