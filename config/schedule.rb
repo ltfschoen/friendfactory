@@ -23,8 +23,8 @@
 #   rake "thinking_sphinx:reindex"
 # end
 
-if environment == 'production'
-  every 1.day, :at => '1:00am' do
+every 1.day, :at => '1:00am' do
+  if [ 'production', 'staging' ].include?(Rails.env)
     rake "ff:invitations:redeliver"
   end
 end
