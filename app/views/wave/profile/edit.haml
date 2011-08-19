@@ -4,7 +4,7 @@
   .grid_2
     &nbsp;
   .grid_6
-    = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true }, :remote => true do |f|
+    = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true } do |f|
       .polaroid.edit
         .face-container
           .front.face

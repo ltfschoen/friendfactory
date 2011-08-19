@@ -31,20 +31,26 @@ class Wave::ProfileController < ApplicationController
   end
   
   def avatar
-    posting = Posting::Avatar.new(params[:posting_avatar]).tap do |avatar|
+    @posting = new_posting_avatar
+    if @posting.valid?
+      current_user.profile(current_site).postings << @posting
+      home_wave = current_site.home_wave
+      home_wave.postings.type(Posting::Avatar).user(@posting.user).published.where(:created_at => (Time.now - RepublishWindow)...Time.now).map(&:unpublish!)
+      home_wave.postings << @posting
+    end
+    respond_to do |format|
+      format.html { redirect_to profile_path }
+    end
+  end
+  
+  private
+
+  def new_posting_avatar
+    Posting::Avatar.new(params[:posting_avatar]) do |avatar|
       avatar.user = current_user
       avatar.active = true
       avatar.state = :published
     end
-    if posting.valid?
-      current_user.profile(current_site).postings << posting
-      home_wave = current_site.home_wave
-      home_wave.postings.type(Posting::Avatar).user(posting.user).published.where(:created_at => (Time.now - RepublishWindow)...Time.now).map(&:unpublish!)
-      home_wave.postings << posting
-    end
-    respond_to do |format|
-      format.js { render :layout => false }
-    end
   end
-  
+
 end
