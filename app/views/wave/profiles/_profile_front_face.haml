@@ -1,6 +1,6 @@
 .face-container
   .front.face
-    = link_to 'Close', wave_profile_path(profile), :class => 'close hidden'
+    = link_to 'Close', wave_profile_path(profile), :class => 'close'
     .content
       .pane.avatar
         = avatar_image_tag(profile.avatar, :class => 'headshot', :anonymous => true, :gender => profile.gender, :link_to_profile => false)

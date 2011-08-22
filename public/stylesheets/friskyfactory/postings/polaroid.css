@@ -511,6 +511,7 @@ div.polaroid a.icon.invitations {
     box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
 }
 
-.floating div.polaroid .face a.close {
+.floating div.polaroid .face a.close,
+.wave_inbox div.polaroid .face a.close {
 	display: block;
 }

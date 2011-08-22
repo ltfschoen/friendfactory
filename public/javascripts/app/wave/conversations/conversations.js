@@ -24,6 +24,6 @@ jQuery(function($) {
 			.attr('data-remote', 'true')
 			.attr('data-method', 'put');
 
-	$('div.polaroid', '.wave_inbox').polaroid({ pane: 3, 'set-focus': false });
+	$('div.polaroid', '.wave_inbox').polaroid({ 'pane': 3, 'set-focus': false, 'close-button': true });
 
 });

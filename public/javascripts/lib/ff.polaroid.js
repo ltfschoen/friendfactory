@@ -49,9 +49,12 @@
 
 				if (settings['close-button'] === true) {
 					$('a.close', $this).click(function(event) {
-						$(event.target).closest('.floating')
+						$(event.target).closest('.wave_profile')
 							.fadeOut(function() {
-								$(this).remove();
+								var $this = $(this),
+									$floating = $(this).closest('.floating');
+								$this.remove();
+								$floating.remove();
 							});
 						return false;
 					});
