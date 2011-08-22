@@ -82,7 +82,7 @@ describe Posting::Invitation do
       end
     
       it "for expiring invitations" do
-        Posting::Invitation.expiring.should == [ invitations[:'20110103'], invitations[:'20110104'] ]
+        Posting::Invitation.expiring.should == [ invitations[:'20110104'] ]
       end
     end
     

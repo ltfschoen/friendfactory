@@ -77,7 +77,8 @@ class Posting::Invitation < Posting::Base
     order('`postings`.`created_at` ASC') }
 
   scope :expiring, lambda {
-    where('`postings`.`created_at` < ?', Date.today.at_midnight - EXPIRATION_AGE).
+    # where('`postings`.`created_at` < ?', Date.today.at_midnight - EXPIRATION_AGE).
+    age(EXPIRATION_AGE).
     order('`postings`.`created_at` ASC') }
 
   def self.find_all_by_code(code)
