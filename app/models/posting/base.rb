@@ -57,6 +57,12 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
+  def sticky_until=(sticky_until = nil)
+    if sticky_until.present?
+      write_attribute(:sticky_until, (Time.zone.parse(sticky_until).utc.tomorrow - 1.second rescue nil))
+    end
+  end
+
   def distribute(sites)
     # Override in inherited classes. Make sure
     # to call super after finishing distribution.

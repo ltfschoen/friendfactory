@@ -9,7 +9,7 @@ class Wave::CommunitiesController < ApplicationController
   
   def show
     @wave = current_site.home_wave
-    @postings = @wave.postings.published.includes(:user).order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+    @postings = @wave.postings.published.includes(:user).order('sticky_until desc, updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
     respond_to do |format|
       format.html
     end

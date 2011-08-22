@@ -8,7 +8,7 @@ jQuery(function($) {
 
 	$('.posting_album.form').bind('init', function() {
 		$('form.new_wave_album', this)
-			.buttonize({ text: true })
+			.buttonize()
 			
 			.live('reset', function() {			
 				$(this)
@@ -18,24 +18,25 @@ jQuery(function($) {
 			})
 			
 			.find('button.submit')
-				.bind('click', function(event) {
-					event.preventDefault();
-			
-					var $form = $(this).closest('form'),							
+				.bind('click', function(event) {			
+					var	$form = $(this).closest('form'),							
 						publishId = $form.find('#publish_id').val(),
 						albumId = $form.find('#wave_id').val();
+
+					event.preventDefault();
 			
 					if (albumId !== '') {
 						var url = '/waves/' + publishId + '/posting/wave_proxies',
-							$tabContent = $form.closest('tab_content');
-					
+							$tabContent = $form.closest('tab_content'),
+							stickyUntil = $form.find('#sticky_until').val();
+						
 						$tabContent.fadeTo('fast', 0.0, function() {
 							$tabContent.slideUp(800, 'easeOutBounce', function() {
 								$tabContent.trigger('reset');
 							});
 						});
-										
-						$.post(url, { resource_id: albumId }, function(){}, 'script');
+
+						$.post(url, { resource_id: albumId, sticky_until: stickyUntil }, function() {}, 'script');
 					}
 				})
 			.end()

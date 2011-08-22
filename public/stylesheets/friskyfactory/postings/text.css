@@ -52,9 +52,8 @@
 }
 
 .new_posting_text .button-bar {
-	margin-top: -56px;
-	margin-left: 300px;
-	padding: 0;
-	width: 80px;
-	text-align: center;	
+	margin-left: 5px;
+	padding: 0 10px 0 ;
+	width: 355px;
+	text-align: right;	
 }

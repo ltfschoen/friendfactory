@@ -7,13 +7,14 @@ class Posting::LinksController < Posting::BaseController
     if wave = current_site.waves.find_by_id(params[:wave_id])
       @posting = Posting::Link.new(params[:posting_link]) do |link|
         link.user = current_user
-        link.state = :published
+        link.sticky_until = params[:posting_link][:sticky_until] if current_user.admin?
         link.embedify
         link.build_photos
       end      
-      if @posting.valid?        
+      if @posting.save
         wave.postings << @posting
         current_user.profile(current_site).postings << @posting
+        @posting.publish!
         @posting.children(true)
       end
     end

@@ -51,7 +51,7 @@ module Wave::CommunityHelper
   
   def render_unpublish_button(posting)
     if current_user.admin? || (current_user.id == posting.user_id)
-      render(:partial => 'unpublish', :locals => { :posting => posting })
+      render(:partial => "wave/#{resolver}/unpublish", :locals => { :posting => posting })
     end
   end
   

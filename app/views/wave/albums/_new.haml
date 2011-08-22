@@ -12,6 +12,7 @@
               Choose or drag photos here
             = fields_for :posting_photo do |photo|
               = photo.file_field :image
-            .button-bar
-              = f.submit 'Finished', :class => 'submit'
-              = f.button 'Cancel', :class => 'cancel'
+          .button-bar.blank.canvas
+            = sticky_until_tag if current_user.admin?
+            = f.submit :OK, :class => 'submit'
+            = f.button 'Cancel', :class => 'cancel'

@@ -4,6 +4,7 @@
     .text.canvas
       .content
         = f.text_area :body, :placeholder => 'About me'
-    .button-bar
+    .button-bar.canvas.blank
+      = f.sticky_until if current_user.admin?
       = f.submit :OK, :disable_with => 'OK'
       = f.button :Cancel, :class => 'cancel'

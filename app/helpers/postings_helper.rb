@@ -1,5 +1,7 @@
 module PostingsHelper
-  
+
+  DateName = Struct.new(:date, :day_name)
+
   def profile_avatar_image_tag(profile, opts)
     if profile.avatar.present?
       html = image_tag(profile.avatar.image.url(opts[:style]), :site => false)
@@ -74,4 +76,15 @@ module PostingsHelper
     render :partial => File.join('posting', posting_type, posting_type.singularize), :object => posting
   end
   
+  def day_names_from_today
+    today = Date.today
+    1.upto(6).inject([]) do |memo, num|
+      date = today + num.days
+      memo << DateName.new(date, date.strftime("%A"))
+    end
+  end
+
+  def sticky_until_tag
+    "Sticky&nbsp;until&nbsp;#{select_tag(:sticky_until, options_from_collection_for_select(day_names_from_today, :date, :day_name), :include_blank => true)}".html_safe
+  end
 end

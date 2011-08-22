@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110706041458) do
+ActiveRecord::Schema.define(:version => 20110819082422) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(:version => 20110706041458) do
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
-    t.datetime "image_updated_at"
+    t.datetime "sticky_until"
     t.integer  "width"
     t.integer  "height"
     t.boolean  "horizontal"
@@ -419,6 +419,8 @@ ActiveRecord::Schema.define(:version => 20110706041458) do
   end
 
   add_index "waves", ["resource_id", "resource_type"], :name => "index_waves_on_resource_id_and_resource_type"
+  add_index "waves", ["type"], :name => "index_waves_on_type"
+  add_index "waves", ["user_id"], :name => "index_waves_on_user_id"
 
   create_table "waves_deleted", :id => false, :force => true do |t|
     t.integer  "id",            :default => 0, :null => false

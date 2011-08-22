@@ -1,6 +1,8 @@
 class ButtonFormBuilder < ActionView::Helpers::FormBuilder
 
   include PlaceholderTextHelper
+
+  DateName = Struct.new(:date, :day_name)
   
   def submit(label, opts = {})
     if opts.delete(:as_button) == false
@@ -27,6 +29,11 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
   #   opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
   #   super(label, opts)
   # end
+  
+  def sticky_until
+    @template.content_tag(:span, "Sticky&nbsp;until&nbsp;".html_safe) +
+      collection_select(:sticky_until, day_names_from_today, :date, :day_name, :include_blank => true)
+  end
   
   def existing_user_password_label(attribute, label, *args)
     opts = args.extract_options!
@@ -62,4 +69,11 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
   
+  def day_names_from_today
+    today = Date.today
+    1.upto(6).inject([]) do |memo, num|
+      date = today + num.days
+      memo << DateName.new(date, date.strftime("%A"))
+    end
+  end
 end
