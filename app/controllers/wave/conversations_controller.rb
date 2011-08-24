@@ -38,6 +38,7 @@ class Wave::ConversationsController < ApplicationController
   def close    
     if @wave = current_user.inbox(current_site).find_by_id(params[:id])
       @wave.unpublish!
+      @wave.read
     end
     respond_to do |format|
       format.js { render :layout => false }
