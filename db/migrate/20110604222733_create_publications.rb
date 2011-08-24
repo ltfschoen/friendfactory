@@ -6,12 +6,14 @@ class CreatePublications < ActiveRecord::Migration
       t.string    :resource_type, :null => false
       t.timestamps
     end
-    add_index :publications, [ :wave_id, :resource_id ]
-    add_index :publications, [ :resource_id ]
+    add_index :publications, [ :wave_id, :resource_id, :resource_type ]
+    add_index :publications, [ :resource_id, :resource_type ]
+    
     say 'migrating postings_waves to publications'
     ActiveRecord::Base.connection.select_all('select posting_id, wave_id from postings_waves').each do |posting_wave|
       ::Publication.create!(:wave_id => posting_wave['wave_id'], :resource_id => posting_wave['posting_id'], :resource_type => 'Posting::Base')
     end
+    
     drop_table :postings_waves_as_habtm rescue nil
     rename_table :postings_waves, :postings_waves_as_habtm
     

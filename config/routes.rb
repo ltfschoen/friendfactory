@@ -15,8 +15,8 @@ Friskyfactory::Application.routes.draw do
     end    
     resources :conversations, :only => [ :index, :show ] do
       member do
-        put 'close'
-        get 'popup'
+        put :close
+        get :popup
       end
     end    
     resources :albums, :only => [ :index, :new, :create ] do

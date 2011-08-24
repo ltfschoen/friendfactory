@@ -14,14 +14,13 @@ class Posting::Message < Posting::Base
   has_many :notifications
   
   after_create do |posting|
-    if (posting.receiver.id != posting.sender_id) &&
-        wave = posting.receiver.conversation_with(posting.sender, posting.site)
+    if (posting.receiver.id != posting.sender_id) && (wave = posting.receiver.conversation_with(posting.sender, posting.site))
       wave.messages << posting
     end
   end
 
   def receiver
-    @receiver || waves.where('user_id <> ?', user_id).limit(1).first.try(:user)
+    @receiver || waves.where('`waves`.`user_id` <> ?', user_id).limit(1).first.try(:user)
   end
 
 end

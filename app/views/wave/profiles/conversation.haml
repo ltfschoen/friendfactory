@@ -1,4 +1,4 @@
-.wave[@wave]
+.wave[@wave]{ :'data-id' => @wave.id }
   .header
     = avatar_image_tag(@wave.recipient, :style => :thimble, :class => 'recipient', :link_to_profile => false)
     .recipient= @wave.recipient.handle(current_site)

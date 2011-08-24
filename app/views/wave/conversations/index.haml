@@ -3,16 +3,10 @@
     %p You haven't started chatting or messaging anyone.
 - else
   .wave.wave_inbox.roll_call.grid_16
-    = will_paginate @conversation_ids, :class => 'grid_16 pagination append-bottom'
-    - if false
-      - @profiles.in_groups_of(3) do |group|
-        - group.each_with_index do |profile, idx|
-          - unless profile.nil?
-            = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
-    - else
-      - @conversation_ids.in_groups_of(3) do |group|
-        - group.each_with_index do |conversation_id, idx|
-          - unless conversation_id.nil?
-            - profile = @profiles.detect { |profile| profile.user_id == conversation_id.resource_id }
-            = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
-    = will_paginate @conversation_ids, :class => 'grid_16 pagination append-top'
+    = will_paginate @conversations, :class => 'grid_16 pagination append-bottom'
+    - @conversations.in_groups_of(3) do |group|
+      - group.each_with_index do |conversation, idx|
+        - unless conversation.nil?
+          - profile = @profiles.detect { |profile| profile.user_id == conversation.resource_id }
+          = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
+    = will_paginate @conversation, :class => 'grid_16 pagination append-top'

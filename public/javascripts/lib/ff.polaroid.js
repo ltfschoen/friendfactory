@@ -52,9 +52,20 @@
 						$(event.target).closest('.wave_profile')
 							.fadeOut(function() {
 								var $this = $(this),
-									$floating = $(this).closest('.floating');
+									$floating = $(this).closest('.floating'),
+									paneIdx = $backFace.find('.scrollable').scrollable().getIndex();									
 								$this.remove();
 								$floating.remove();
+								
+								if (paneIdx === 3) {
+									var conversationId = $backFace.find('.wave_conversation').data('id');
+									$.ajax({
+										url: '/wave/conversations/' + conversationId + '/close',
+										data: [],
+										dataType: 'script',
+										type: 'PUT'
+									});
+								}
 							});
 						return false;
 					});

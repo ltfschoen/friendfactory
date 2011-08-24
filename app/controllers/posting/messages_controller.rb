@@ -14,13 +14,13 @@ class Posting::MessagesController < ApplicationController
 
   def create
     if @wave = current_user.conversations.find_by_id(params[:wave_id])
-      @posting = Posting::Message.new(params[:posting_message]).tap do |posting|
+      @posting = Posting::Message.new(params[:posting_message]) do |posting|
         posting.sender = current_user
         posting.receiver = @wave.recipient
         posting.site = current_site
-        posting.state = :published
       end
       if @posting.save
+        @posting.publish!
         @wave.messages << @posting
         broadcast_posting(@posting, (@posting.waves - [ @wave ]))
       end

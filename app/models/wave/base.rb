@@ -48,20 +48,13 @@ class Wave::Base < ActiveRecord::Base
       where('type not in (?)', types.map(&:to_s))
     end
 
-    def <<(wave_or_posting)
-      if wave_or_posting.is_a?(Wave::Base)
-        wave_or_posting = Posting::WaveProxy.new.tap do |proxy|
-          proxy.user = wave_or_posting.user
-          proxy.resource = wave_or_posting
-          proxy.state = :published
-        end
-      end
-      super(wave_or_posting)
-    end
+    def <<(posting)      
+      super(posting.is_a?(Wave::Base) ? posting.new_proxy : posting)
+    end    
   end
 
   has_many :bookmarks, :foreign_key => 'wave_id'
-
+  
   belongs_to :resource, :polymorphic => true
 
   # before_save do |wave|
@@ -93,4 +86,11 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
+  def new_proxy
+    Posting::WaveProxy.new do |proxy|
+      proxy.user = self.user
+      proxy.resource = self
+      proxy.state = :published
+    end
+  end  
 end

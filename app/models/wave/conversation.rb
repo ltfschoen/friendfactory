@@ -6,7 +6,7 @@ class Wave::Conversation < Wave::Base
       :source_type => 'Posting::Base',
       :conditions  => { :parent_id => nil, :type => Posting::Message },
       :order       => 'created_at asc',
-      :after_add   => :publish_to_inbox do
+      :after_add   => :touch_and_publish do
     def received
       where('`postings`.`user_id` <> ?', proxy_owner.user_id)
     end
@@ -19,7 +19,7 @@ class Wave::Conversation < Wave::Base
   scope :chatty,
       select('DISTINCT `waves`.*').
       joins('LEFT OUTER JOIN `publications` on `waves`.`id` = `publications`.`wave_id`').
-      where('`publications`.`resource_id` is not null')
+      where('`publications`.`resource_id` IS NOT NULL')
 
   alias :recipient :resource
 
@@ -48,13 +48,8 @@ class Wave::Conversation < Wave::Base
 
   private
     
-  def publish_to_inbox(message)
-    touch
-    inbox = user.inbox(message.site)
-    unless inbox.nil? || inbox.wave_ids.include?(id)
-      inbox.waves << self
-      publish! unless published?
-    end
+  def touch_and_publish(message)
+    published? ? touch : publish!
   end
 
   def bookmark

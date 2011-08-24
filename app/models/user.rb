@@ -80,6 +80,7 @@ class User < ActiveRecord::Base
   has_many :profiles, :class_name => 'Wave::Profile'
 
   has_many :inboxes, :class_name => 'Wave::Inbox'
+  
   has_many :conversations, :class_name => 'Wave::Conversation' do
     def with(receiver, site)
       if receiver.present? && site.present?
@@ -88,7 +89,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Syntatic sugar: <user1>.conversation.with.<user2>
+  # Syntatic sugar:
+  # <user1>.conversation.with.<user2>
   alias :conversation :conversations
 
   has_many :bookmarks
@@ -104,6 +106,10 @@ class User < ActiveRecord::Base
   # has_many :friends,  :through => :friendships
   # has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   # has_many :admirers, :through => :inverse_friendships, :source => :user
+  
+  def inbox(site)
+    conversations.site(site).chatty.published
+  end
   
   def self.find_by_invitation_code(invitation_code)
     invitations = Posting::Invitation.find_all_by_code(invitation_code)    
@@ -208,23 +214,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def inbox(site)
-    if site.present?
-      site.waves.
-        where('type = ? and user_id = ?', Wave::Inbox, self.id).
-        order('updated_at desc').limit(1).first
-    end
-  end
-
-  def create_inbox(site)
-    if site.present?
-      inbox = inboxes.build
-      inbox.waves = conversations.site(site)
-      site.waves << inbox
-      inbox
-    end
-  end
-
   def unread_messages_count(site)
     conversations.site(site).inject(0) do |count, conversation|
       count += conversation.unread_messages_count
@@ -299,5 +288,5 @@ class User < ActiveRecord::Base
     wave = Wave::Invitation.new.tap { |wave| wave.user = self }
     site.waves << wave && wave.publish!
     wave.reload
-  end
+  end  
 end
