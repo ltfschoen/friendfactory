@@ -43,10 +43,9 @@ describe "Invitation rake tasks" do
       rake[task_name].prerequisites.should include("environment")      
     end
     
-    it "redelivers via the InvitationsMailer" do
+    it "redelivers email with the InvitationsMailer" do
       mail_message = mock(Mail::Message).as_null_object
-      InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'20110103']).ordered.and_return(mail_message)
-      InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'20110104']).ordered.and_return(mail_message)      
+      InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'20110104']).ordered.and_return(mail_message)
       InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'20110107']).ordered.and_return(mail_message)
       InvitationsMailer.should_receive(:new_invitation_mail).with(invitations[:'20110113']).ordered.and_return(mail_message)
       rake[task_name].invoke      
