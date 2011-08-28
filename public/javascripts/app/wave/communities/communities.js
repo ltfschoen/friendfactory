@@ -113,59 +113,6 @@ jQuery(function($) {
 					.polaroid({ 'close-button' : true });
 			});
 	});
-		
-	(function() {
-		return;	
-		var $loading = $("<p class='loading grid_4 push_6'>Loading More Postings&hellip;</p>"),
-			$footer = $('.wave_community + .page.footer'),
-			opts = { offset: '110%' };
-		
-		if ($('.pagination').length === 0) return;
-		
-		$footer.waypoint(function(event, direction) {
-			var $pagination = $('.pagination'),
-				href = $("a[rel='next']", $pagination).attr('href');
-			
-			$footer.waypoint('remove');
-			$pagination.html($loading).pulse();
-			
-			$.get(href, function(data) {
-				var $data = $(data),
-					$content = $data.find('#postings-container');
-
-				$('#postings-container').append($content);
-
-				$content.find('.posting_comment').trigger('init');
-								
-				$('.polaroid-container > .polaroid', $content).polaroid();
-				
-				setTimeout(function() {
-					$('.posting_photos', $content)
-						.masonry({
-							singleMode: false,
-							columnWidth: 1,
-							itemSelector: 'li',
-							resizeable: false
-						});
-						
-					$('.posting_comments', $content)
-						.masonry({
-							singleMode: false,
-							columnWidth: 222,
-							itemSelector: 'li',
-							resizeable: false
-						});
-						
-					$.waypoints('refresh');
-				}, 1200);
-
-				$pagination.replaceWith($data.find('.pagination'));
-				$footer.waypoint(opts);
-			});
-		}, opts);
-	})();
-			
-});
 
 
 $(window).load(function() {
