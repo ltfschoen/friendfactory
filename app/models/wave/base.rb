@@ -21,7 +21,7 @@ class Wave::Base < ActiveRecord::Base
   end
 
   scope :site, lambda { |site| joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').where('`sites_waves`.`site_id` = ?', site.id) }
-  scope :type, lambda { |*types| where('type in (?)', types.map(&:to_s)) }
+  scope :type, lambda { |*types| where('`waves`.`type` in (?)', types.map(&:to_s)) }
   scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
 

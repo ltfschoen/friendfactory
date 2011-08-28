@@ -1,5 +1,6 @@
+- javascript 'app/wave/communities/communities'
 .wave.wave_community[@wave]
-  - if false && current_user && current_user.id == @wave.user_id
+  - if current_user.present? && (current_user.id == @wave.user_id)
     .grid_6.push_5
       = render :partial => 'wave/communities/nav'
     .grid_16

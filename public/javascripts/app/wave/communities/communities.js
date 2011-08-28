@@ -1,5 +1,5 @@
-jQuery(function($) {	
-		
+jQuery(function($) {
+	
 	$('.nav-container')
 		.insertAfter('ul.posting_post_its:first')
 		.find('form')
@@ -113,6 +113,7 @@ jQuery(function($) {
 					.polaroid({ 'close-button' : true });
 			});
 	});
+});
 
 
 $(window).load(function() {

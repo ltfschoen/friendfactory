@@ -70,13 +70,13 @@
     - if File.exists?("public/javascripts/#{file_name}")
       = javascript_include_tag file_name
 
-    / [if lt IE 9]
-      = javascript_include_tag 'ie-8', :media => 'screen'
-
     = yield(:javascripts)    
     - if page_js = yield(:pagejs).present?
       :javascript
         jQuery(function($){ #{page_js} });
+
+    / [if lt IE 9]
+      = javascript_include_tag 'ie-8', :media => 'screen'
         
     = csrf_meta_tag    
     

@@ -16,8 +16,8 @@ class Site < ActiveRecord::Base
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
-      :foreign_key             => 'site_id',
-      :association_foreign_key => 'wave_id'
+      :foreign_key             => '`site_id`',
+      :association_foreign_key => '`wave_id`'
 
   has_many :signal_categories,
       :class_name  => 'Signal::Category',

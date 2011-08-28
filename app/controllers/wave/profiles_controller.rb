@@ -14,7 +14,7 @@ class Wave::ProfilesController < ApplicationController
   end
   
   def show
-    @wave = Wave::Profile.find_by_id(params[:id])
+    @wave = current_site.waves.type(Wave::Profile).find_by_id(params[:id])
     respond_to do |format|
       format.html do
         if request.xhr?
