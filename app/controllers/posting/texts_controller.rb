@@ -1,9 +1,11 @@
 class Posting::TextsController < Posting::BaseController
-  
+
+  before_filter :require_user
+
   def new
     @wave = Wave::Base.find_by_id(params[:wave_id])
   end
-  
+
   def create
     @posting = nil
     if wave = current_site.waves.find_by_id(params[:wave_id])
@@ -15,7 +17,7 @@ class Posting::TextsController < Posting::BaseController
         wave.postings << @posting
         @posting.publish!
       end
-    end    
+    end
     respond_to do |format|
       format.js { render :layout => false }
     end
