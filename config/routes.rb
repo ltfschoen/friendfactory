@@ -10,6 +10,7 @@ Friskyfactory::Application.routes.draw do
         get 'photos'
         get 'invitations'
         get 'conversation'
+        put :buddy
       end
       get 'conversation' => 'conversations#show'
     end    
@@ -27,7 +28,9 @@ Friskyfactory::Application.routes.draw do
   # To manage a user's profile
   scope :module => :wave do
     resource :profile, :only => [ :show, :edit, :update ], :controller => 'profile' do
-      member { post 'avatar' }
+      member do
+        post 'avatar'
+      end
     end
   end
 
@@ -53,6 +56,12 @@ Friskyfactory::Application.routes.draw do
     end
   end
   
+  # Friendships
+  resources :friendships, :only => [ :index ] do
+    put ':id/buddy', :on => :new, :action => :buddy , :as => 'buddy'
+  end
+  get 'buddies' => 'friendships#index'
+
   # To get geocoded location
   resources :locations, :only => [] do
     get 'geocode', :on => :collection

@@ -44,6 +44,13 @@ class Wave::Profile < Wave::Base
       :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true }},
       :order        => 'created_at desc'
 
+  has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => '`friend_id`'
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
+  def admirers(site)
+    inverse_friends.map{ |user| user.profile(site) }
+  end
+
   def active_avatar
     active_avatars.sort_by{ |avatar| avatar.created_at }.last
   end

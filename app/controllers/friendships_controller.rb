@@ -2,23 +2,22 @@ class FriendshipsController < ApplicationController
 
   before_filter :require_user
 
-  def create    
-    @friend = User.find_by_id(params[:friend_id])
-    if @friend != current_user
-      friendship = current_user.friendships.create(:friend => @friend)
-      @posting = friendship.posting if friendship
-    end
+  cattr_reader :per_page
+
+  def index
+    @@per_page = 102
+    @waves = current_user.friends.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
     respond_to do |format|
-      format.js
+      format.html
     end
   end
 
-  # def destroy
-  #   @friendship = current_user.friendships.find(params[:id])
-  #   @friendship.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to(friendships_url) }
-  #   end
-  # end
+  def buddy
+    respond_to do |format|
+      if profile = current_site.waves.type(Wave::Profile).find_by_id(params[:id])
+        format.json { render :json => { :buddied => current_user.toggle_friendship(profile) }}
+      end
+    end
+  end
 
 end

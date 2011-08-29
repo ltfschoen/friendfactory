@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe FriendshipsController do
   describe "routing" do
+    it 'recognizes #buddy' do
+      { :put => '/friendships/new/42/buddy' }.should route_to(:controller => 'friendships', :action => 'buddy', :id => '42')
+    end
+
+    it 'recognizes buddy_new_friendship_path' do
+      buddy_new_friendship_path(:id => '42').should == '/friendships/new/42/buddy'
+    end
+
     # it "recognizes and generates #index" do
     #   { :get => "/buddies" }.should route_to(:controller => "buddies", :action => "index")
     # end

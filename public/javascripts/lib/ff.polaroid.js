@@ -39,6 +39,7 @@
 			return this.each(function() {
 				var $this = $(this), // a polaroid
 					$backFace = $this.find('.back.face'),
+					$frontFace = $this.find('.front.face'),
 					transitionDuration = $this.css('-webkit-transition-duration'),
 					setFocus = settings['set-focus'];
 
@@ -95,24 +96,27 @@
 								$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
 							});
 							// $this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
+						});
+				
+				$frontFace
+					.find('a.buddy')
+						.live('ajax:success', function(data, status, xhr) {
+							$(this).toggleClass('buddied', status['buddied']);
 						})
 					.end()
-				.end()
+					.find('.buddy-bar a.flip')
+						.click(function(event) {
+							var idx = $(this).closest('li').index();
+							event.preventDefault();
 
-				.find('.front.face .buddy-bar a.flip')
-					.click(function(event) {
-						var idx = $(this).closest('li').index();
-						event.preventDefault();
+							// Undo the rotate and manually scroll to correct pane.
+							$backFace.css('-webkit-transform', 'rotateY(180deg)')
+								.find('.scrollable').scrollable().seekTo(idx, 0);
+							$backFace.css('-webkit-transform', 'none')
+								.find('.content').delay(900).fadeTo('fast', 1.0);
 
-						// Undo the rotate and manually scroll to correct pane.
-						$backFace.css('-webkit-transform', 'rotateY(180deg)')
-							.find('.scrollable').scrollable().seekTo(idx, 0);
-						$backFace.css('-webkit-transform', 'none')
-							.find('.content').delay(900).fadeTo('fast', 1.0);
-
-						$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
-					})
-				.end();
+							$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
+						});
 
 				if (settings['pane'] !== undefined) {
 					$backFace.find('.scrollable').scrollable().seekTo(settings['pane'], 0);

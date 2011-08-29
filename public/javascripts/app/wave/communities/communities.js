@@ -97,7 +97,7 @@ jQuery(function($) {
 	
 	$('.remove', '.posting-container').button({ icons: { primary: 'ui-icon-close' }, text: false });
 
-	$('a[href^="/wave/profiles"].profile').live('click', function(event) {
+	$('a[href^="/wave/profiles"].profile', '.attachment').live('click', function(event) {
 		event.preventDefault();
 		$('<div class="floating"></div>')
 			.appendTo('.floating-container')

@@ -21,5 +21,5 @@
       %li= link_to 'Profile', 'profile', :class => 'mini-profile icon'
       %li= link_to 'Photos', 'photos', :class => 'photos icon'
       %li= link_to 'Invitations', 'invitations', :class => 'invitations icon'
-      - if current_user.present?
+      - if current_user.present? && (current_user.id != profile.user_id)
         %li= link_to 'Chat', profile_conversation_path(profile), :class => 'chat icon'

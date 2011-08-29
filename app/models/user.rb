@@ -102,10 +102,14 @@ class User < ActiveRecord::Base
     end
   end
       
-  # has_many :friendships
-  # has_many :friends,  :through => :friendships
-  # has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
-  # has_many :admirers, :through => :inverse_friendships, :source => :user
+  has_many :friendships
+  has_many :friends, :through => :friendships
+
+  def toggle_friendship(profile)
+    # return false if self.id == profile.user_id
+    (is_a_friend = friends.include?(profile)) ? friends.delete(profile) : friends << profile
+    !is_a_friend
+  end
   
   def inbox(site)
     conversations.site(site).chatty.published

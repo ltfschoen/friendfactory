@@ -471,6 +471,10 @@ div.polaroid a.icon.buddy {
 	background-position: -49px -1px;
 }
 
+div.polaroid a.icon.buddied {
+	background-position: -324px -1px;
+}
+
 div.polaroid a.icon.pin {
 	background-position: -70px -1px;
 }
