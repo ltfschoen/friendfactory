@@ -106,7 +106,7 @@
 					.end()
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
-							var idx = $(this).closest('li').index();
+							var idx = $(this).closest('li').index() - 1;
 							event.preventDefault();
 
 							// Undo the rotate and manually scroll to correct pane.
