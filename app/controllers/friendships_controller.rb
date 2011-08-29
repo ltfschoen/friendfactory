@@ -6,7 +6,7 @@ class FriendshipsController < ApplicationController
 
   def index
     @@per_page = 102
-    @waves = current_user.friends.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+    @waves = current_user.friends.site(current_site).published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
     respond_to do |format|
       format.html
     end
