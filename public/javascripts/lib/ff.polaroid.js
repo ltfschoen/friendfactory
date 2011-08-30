@@ -128,7 +128,8 @@
 			// no-csstransforms3d
 			return this.each(function() {
 				var $this = $(this), // a polaroid
-					setFocus = settings['set-focus'],							
+					$frontFace = $this.find('.front.face'),
+					setFocus = settings['set-focus'],
 					scrollableSettings = {
 						items: 'items',
 						keyboard: false,
@@ -149,6 +150,12 @@
 						return false;
 					});
 				}				
+
+				$frontFace
+					.find('a.buddy')
+						.live('ajax:success', function(data, status, xhr) {
+							$(this).toggleClass('buddied', status['buddied']);
+						});
 
 				if (settings['pane'] === undefined) {
 					$this
