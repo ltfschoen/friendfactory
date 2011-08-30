@@ -16,7 +16,19 @@ class Wave::AlbumsController < ApplicationController
   end
     
   def create
-    @wave = Wave::Album.find_or_create(current_site, current_user, params)
+    @wave = nil
+    if params[:wave_id].present?
+      @wave = current_site.waves.type(Wave::Album).find_by_id(params[:wave_id])
+    end
+    unless @wave.present?
+      @wave = Wave::Album.new do |wave|
+        wave.user = current_user
+        wave.state = :unpublished
+      end
+      if @wave.save
+        current_site.waves << @wave
+      end
+    end
     if @wave.postings << new_posting_photo
       render :json => created_wave_to_json(@wave, @posting), :content_type => 'text/html'
     else
