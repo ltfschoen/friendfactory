@@ -123,12 +123,13 @@
 					setFocus = true;
 				}
 			}); // each
-			
+
 		} else {
 			// no-csstransforms3d
 			return this.each(function() {
 				var $this = $(this), // a polaroid
 					$frontFace = $this.find('.front.face'),
+					$backFace = $this.find('.back.face'),
 					setFocus = settings['set-focus'],
 					scrollableSettings = {
 						items: 'items',
@@ -142,14 +143,30 @@
 							panes.init(this, idx, setFocus);
 	   	    			}						
 					};	
-								
+
 				if (settings['close-button'] === true) {
-					$('a.close', $this).live('click', function(event) {
-						$this.fadeOut();
-						$(event.target).closest('.floating').remove();
+					$('a.close', $this).click(function(event) {
+						$(event.target).closest('.wave_profile')
+							.fadeOut(function() {
+								var $this = $(this),
+									$floating = $(this).closest('.floating'),
+									paneIdx = $backFace.find('.scrollable').scrollable().getIndex();									
+								$this.remove();
+								$floating.remove();
+								console.log(paneIdx);
+								if (paneIdx === 3) {
+									var conversationId = $backFace.find('.wave_conversation').data('id');
+									$.ajax({
+										url: '/wave/conversations/' + conversationId + '/close',
+										data: [],
+										dataType: 'script',
+										type: 'PUT'
+									});
+								}
+							});
 						return false;
 					});
-				}				
+				}
 
 				$frontFace
 					.find('a.buddy')
