@@ -15,12 +15,12 @@
         %ul.buddy-bar.primary
           -# %li= link_to 'Block', '#', :class => 'block icon'
           -# %li= link_to 'Pin', '#', :class => 'pin icon'
-          - unless current_user.id == profile.user_id
-            %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put
           %li= link_to 'Stats', 'profile', :class => 'flip mini-profile icon'
           %li= link_to 'Photos', 'photos', :class => 'flip photos icon'
           %li= link_to 'Invitations', '#invitations', :class => 'flip invitations icon'
           - if current_user.present? && (current_user.id != profile.user_id)
             %li= link_to 'Chat', profile_conversation_path(profile), :class => 'flip chat icon last'
+          - if false and current_user.id != profile.user_id
+            %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put            
         - if content_for?(:polaroid_front_face)
           = content_for(:polaroid_front_face)

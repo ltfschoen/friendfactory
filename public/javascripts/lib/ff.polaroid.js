@@ -106,7 +106,7 @@
 					.end()
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
-							var idx = $(this).closest('li').index() - 1;
+							var idx = $(this).closest('li').index();
 							event.preventDefault();
 
 							// Undo the rotate and manually scroll to correct pane.
@@ -153,7 +153,6 @@
 									paneIdx = $backFace.find('.scrollable').scrollable().getIndex();									
 								$this.remove();
 								$floating.remove();
-								console.log(paneIdx);
 								if (paneIdx === 3) {
 									var conversationId = $backFace.find('.wave_conversation').data('id');
 									$.ajax({
