@@ -16,11 +16,10 @@
 						$floating.remove();
 					} else {
 						if ((scrollable.getIndex !== undefined) && (scrollable.getIndex() === 3)) {
-							// var conversationId = $backFace.find('.wave_conversation').data('id');
 							$.ajax({
 								url: '/wave/conversations/' + conversationId + '/close',
 								data: [],
-								dataType: 'script',
+								dataType: 'json',
 								type: 'PUT'
 							});
 						}
