@@ -1,5 +1,35 @@
 (function($) {
 
+	$.fn.closeHeadshot = function() {
+		return this.click(function(event) {
+			$(event.target).closest('.wave_profile')
+				.fadeOut(function() {
+					var $this = $(this),
+						$floating = $this.closest('.floating'),
+						$backFace = $this.find('.back.face'),
+						scrollable = $backFace.find('.scrollable').scrollable(),
+						conversationId = $backFace.find('.wave_conversation').data('id');
+
+					$this.remove();
+
+					if ($floating.length > 0) {
+						$floating.remove();
+					} else {
+						if ((scrollable.getIndex !== undefined) && (scrollable.getIndex() === 3)) {
+							// var conversationId = $backFace.find('.wave_conversation').data('id');
+							$.ajax({
+								url: '/wave/conversations/' + conversationId + '/close',
+								data: [],
+								dataType: 'script',
+								type: 'PUT'
+							});
+						}
+					}
+				});
+			return false;
+		});
+	}
+
 	$.fn.polaroid = function(options) {
 		var settings = {
 				'close-button' : false,
@@ -49,27 +79,7 @@
 				}
 
 				if (settings['close-button'] === true) {
-					$('a.close', $this).click(function(event) {
-						$(event.target).closest('.wave_profile')
-							.fadeOut(function() {
-								var $this = $(this),
-									$floating = $(this).closest('.floating'),
-									paneIdx = $backFace.find('.scrollable').scrollable().getIndex();									
-								$this.remove();
-								$floating.remove();
-								
-								if (paneIdx === 3) {
-									var conversationId = $backFace.find('.wave_conversation').data('id');
-									$.ajax({
-										url: '/wave/conversations/' + conversationId + '/close',
-										data: [],
-										dataType: 'script',
-										type: 'PUT'
-									});
-								}
-							});
-						return false;
-					});
+					$('a.close', $this).closeHeadshot();
 				}
 
 				$backFace
@@ -145,26 +155,7 @@
 					};	
 
 				if (settings['close-button'] === true) {
-					$('a.close', $this).click(function(event) {
-						$(event.target).closest('.wave_profile')
-							.fadeOut(function() {
-								var $this = $(this),
-									$floating = $(this).closest('.floating'),
-									paneIdx = $backFace.find('.scrollable').scrollable().getIndex();									
-								$this.remove();
-								$floating.remove();
-								if (paneIdx === 3) {
-									var conversationId = $backFace.find('.wave_conversation').data('id');
-									$.ajax({
-										url: '/wave/conversations/' + conversationId + '/close',
-										data: [],
-										dataType: 'script',
-										type: 'PUT'
-									});
-								}
-							});
-						return false;
-					});
+					$('a.close', $this).closeHeadshot();
 				}
 
 				$frontFace
@@ -202,6 +193,10 @@
 												.scrollable(scrollableSettings)
 												.navigator();
 
+											if (settings['close-button'] === true) {
+												$('a.close', $polaroid).closeHeadshot();
+											}
+
 											var idx = $polaroid.data('scrollable-index');
 											$polaroid.find('.scrollable').scrollable().seekTo(idx, 0);
 						      			} // onEnd		
@@ -219,6 +214,10 @@
 					      			color: '#FFF',
 					      			content: $polaroid.find('.face-container:hidden'),
 									onEnd: function() {
+										if (settings['close-button'] === true) {
+											$('a.close', $polaroid).closeHeadshot();
+										}
+
 										$polaroid
 											.find('.front.face:not(:hidden) .buddy-bar a.flip')
 												.bind('click', function(event) {

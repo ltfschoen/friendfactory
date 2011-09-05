@@ -109,7 +109,7 @@ jQuery(function($) {
 					collision: 'fit'
 				})	
 				.draggable()
-				.find('.polaroid-container > .polaroid')
+				.find('div.polaroid')
 					.polaroid({ 'close-button' : true });
 			});
 	});
