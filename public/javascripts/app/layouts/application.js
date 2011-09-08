@@ -1,9 +1,15 @@
+jQuery.support.csstransforms3d = Modernizr.csstransforms3d;
+
 if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 	jQuery.browser.chrome = true;
 	jQuery.browser.safari = false;
 }
 
-if (true || jQuery.browser.chrome) {
+if (jQuery.browser.chrome || (jQuery.browser.safari && (jQuery.browser.version === '533.22.3'))) {
+	Modernizr.csstransforms3d = false;
+}
+
+if (!Modernizr.csstransforms3d) {
 	$('html').removeClass('csstransforms3d');
 }
 

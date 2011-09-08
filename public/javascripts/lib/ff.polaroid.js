@@ -64,7 +64,7 @@
 
 		$.extend(settings, options);
 
-		if (false && Modernizr.csstransforms3d && !jQuery.browser.chrome) {
+		if (Modernizr.csstransforms3d) {
 			return this.each(function() {
 				var $this = $(this), // a polaroid
 					$backFace = $this.find('.back.face'),
