@@ -33,26 +33,3 @@
 .tag-cloud a.tag2 { font-size: 0.8em; }
 .tag-cloud a.tag3 { font-size: 1.0em; }
 .tag-cloud a.tag4 { font-size: 1.2em; }
-
-
-.polaroid-container:nth-child(2) {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-}
-
-.polaroid-container:nth-child(5n) {
-    position: relative;
-    top: 5px;
-    left: 10px;
-}
-
-.polaroid-container:nth-child(7n) {
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-}
-
-.polaroid-container:nth-child(10n) {
-    position: relative;
-    top: 5px;
-    right: 10px;
-}
