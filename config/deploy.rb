@@ -5,7 +5,7 @@ set :application, 'friskyfactory'
 set :domain, 'ff01'
 
 set :scm, 'git'
-set :repository, 'git@github.com:mjbamford/friskyfactory.git'
+set :repository, 'git@github.com:mjbamford/friendfactory.git'
 set :user, 'mrcap'
 set :runner, 'mrcap'
 set :use_sudo, false
