@@ -3,7 +3,7 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 	jQuery.browser.safari = false;
 }
 
-if (jQuery.browser.chrome) {
+if (true || jQuery.browser.chrome) {
 	$('html').removeClass('csstransforms3d');
 }
 
