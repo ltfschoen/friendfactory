@@ -5,9 +5,11 @@ set :application, 'friskyfactory'
 
 set :scm, 'git'
 set :repository, 'git@github.com:mjbamford/friendfactory.git'
+set :git_shallow_clone, 1
 set :user, 'mrcap'
 set :runner, 'mrcap'
 set :use_sudo, false
+default_run_options[:pty] = true 
 
 ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
@@ -43,6 +45,23 @@ namespace :deploy do
   task :thinking_sphinx, :roles => :app do
     run "cd #{current_path} && rake thinking_sphinx:stop RAILS_ENV=#{fetch(:rails_env)}"
     run "cd #{current_path} && rake thinking_sphinx:rebuild RAILS_ENV=#{fetch(:rails_env)}"
+  end
+  
+  namespace :mysql do
+    desc "Restart mysql"
+    task :restart, :roles => :app do
+      run "#{sudo} service mysql restart"
+    end
+
+    desc "Start mysql"
+    task :start, :roles => :app do
+      run "#{sudo} service mysql start"
+    end
+
+    desc "Stop mysql"
+    task :stop, :roles => :app do
+      run "#{sudo} service mysql stop"
+    end
   end
 end
 
