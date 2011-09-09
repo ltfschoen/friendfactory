@@ -2,17 +2,12 @@ require 'bundler/capistrano'
 require "whenever/capistrano"
 
 set :application, 'friskyfactory'
-set :domain, 'ff01'
 
 set :scm, 'git'
 set :repository, 'git@github.com:mjbamford/friendfactory.git'
 set :user, 'mrcap'
 set :runner, 'mrcap'
 set :use_sudo, false
-
-role :app, domain
-role :web, domain
-role :db,  domain, :primary => true
 
 ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
@@ -53,6 +48,10 @@ end
 
 desc 'Set staging environment'
 task :staging do
+  puts "*** deploying to staging"  
+  role :app, 'ff01.friskyfactory.com'
+  role :web, 'ff01.friskyfactory.com'
+  role :db,  'ff01.friskyfactory.com', :primary => true
   set :branch do
     default_tag = ENV['release'] || 'master'
     tag = Capistrano::CLI.ui.ask "Pushed tag to deploy: [#{default_tag}] "
@@ -66,6 +65,26 @@ end
 
 desc "Set production environment"
 task :production do
+  puts "*** deploying to \033[1;5;37;41m production \033[0m"
+  role :app, 'ff01.friskyfactory.com'
+  role :web, 'ff01.friskyfactory.com'
+  role :db,  'ff01.friskyfactory.com', :primary => true  
+  set :branch do
+    default_tag = `git tag`.split("\n").last
+    tag = Capistrano::CLI.ui.ask "Pushed tag to deploy: [#{default_tag}] "
+    tag = default_tag if tag.empty?
+    tag
+  end
+  set :rails_env, 'production'
+  set :whenever_environment, 'production'
+  set :deploy_to, '/home/mrcap/friskyfactory/production'
+end
+
+task :preprod do
+  puts "*** deploying to \033[1;37;42m preprod \033[0m"
+  role :app, 'ff02.friskyfactory.com'
+  role :web, 'ff02.friskyfactory.com'
+  role :db,  'ff02.friskyfactory.com', :primary => true  
   set :branch do
     default_tag = `git tag`.split("\n").last
     tag = Capistrano::CLI.ui.ask "Pushed tag to deploy: [#{default_tag}] "
