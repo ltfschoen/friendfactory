@@ -90,6 +90,8 @@ GEM
       activesupport (= 3.0.1)
       bundler (~> 1.0.0)
       railties (= 3.0.1)
+    rails-footnotes (3.7.4)
+      rails (>= 3.0.0)
     railties (3.0.1)
       actionpack (= 3.0.1)
       activesupport (= 3.0.1)
@@ -144,6 +146,7 @@ DEPENDENCIES
   paperclip (>= 2.3.1.1)
   pusher (~> 0.8.1)
   rails (= 3.0.1)
+  rails-footnotes (>= 3.7)
   remotipart
   rspec-rails (>= 2.5.0)
   sass (>= 3.1.1)
