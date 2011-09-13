@@ -60,8 +60,8 @@ Set up iptables firewall. This will require logging in as root (you’ll need to
 13.	nano /etc/iptables.test.rules (see rules below)
 14.	iptables-restore < /etc/iptables.test.rules
 15.	iptables –L (to check) 
-16.	If everything OK: mv /etc/iptables.up.rules iptables.up.rules.bak
-17.	Iptables-save > /etc/iptables.up.rules
+16.	If everything OK: mv /etc/iptables.up.rules /etc/iptables.up.rules.bak
+17.	iptables-save > /etc/iptables.up.rules
 18.	Ensure these rules are applied at startup:
 		•	nano /etc/network/interfaces
 		•	After 'iface lo inet loopback', add the following line:
@@ -70,9 +70,12 @@ Set up iptables firewall. This will require logging in as root (you’ll need to
 *****************
 *filter
 
-#  Allows all loopback (lo0) traffic and drop all traffic to 127/8 that doesn't use lo0   
+# Initialize filter table
+-F
+
+#  Allows all loopback (lo0) traffic and drop all traffic to 127/8 that doesn't use lo0
 -A INPUT -i lo -j ACCEPT
--A INPUT -i ! lo -d 127.0.0.0/8 -j REJECT
+-A INPUT ! -i lo -d 127.0.0.0/8 -j REJECT
 
 #  Accepts all established inbound connections
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -83,23 +86,17 @@ Set up iptables firewall. This will require logging in as root (you’ll need to
 -A OUTPUT -j ACCEPT
 
 # Allows HTTP and HTTPS connections from anywhere (the normal ports for websites)
-# Note that port 3003 is open for backdoor access
-# But pound doesn't route to the mongrel on this port
 -A INPUT -p tcp --dport 80 -j ACCEPT
--A INPUT -p tcp --dport 3002 -j ACCEPT
 -A INPUT -p tcp --dport 443 -j ACCEPT
 
-# Allows SSH connections
+# Allows SSH connections on trusted net
+# -A INPUT -i eth1 -p tcp --dport 1968 -j ACCEPT
 -A INPUT -p tcp --dport 1968 -j ACCEPT
 
-# Allows svnserve
--A INPUT -p tcp --dport 3690 -j ACCEPT
+# Allow ping on trusted net
+-A INPUT -i eth1 -p icmp -m icmp --icmp-type 8 -j ACCEPT
 
-
-# Allow ping
-# -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
-
-# log iptables denied calls
+# Log iptables denied calls
 -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
 
 # Reject all other inbound - default deny unless explicitly allowed policy
