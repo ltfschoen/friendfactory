@@ -9,10 +9,11 @@ class Posting::Message < Posting::Base
   attr_accessible :subject, :body
   attr_readonly :user
 
-  validates_presence_of :user, :receiver, :site
+  validates_presence_of :user
+  validates_presence_of :receiver, :site, :on => :create
   
   has_many :notifications
-  
+
   after_create do |posting|
     if (posting.receiver.id != posting.sender_id) && (wave = posting.receiver.conversation_with(posting.sender, posting.site))
       wave.messages << posting
