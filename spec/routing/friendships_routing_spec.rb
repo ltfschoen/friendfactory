@@ -10,6 +10,14 @@ describe FriendshipsController do
       buddy_new_friendship_path(:id => '42').should == '/friendships/new/42/buddy'
     end
 
+    it 'recognizes #poke' do
+      { :post => '/friendships/new/poke?profile_id=42' }.should route_to(:controller => 'friendships', :action => 'poke')
+    end
+
+    it 'recognizes poke_new_friendship_path' do
+      poke_new_friendship_path(:profile_id => '42').should == '/friendships/new/poke?profile_id=42'
+    end    
+
     # it "recognizes and generates #index" do
     #   { :get => "/buddies" }.should route_to(:controller => "buddies", :action => "index")
     # end

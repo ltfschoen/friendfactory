@@ -23,3 +23,4 @@
       %li= link_to 'Invitations', 'invitations', :class => 'invitations icon'
       - if current_user.present? && (current_user.id != profile.user_id)
         %li= link_to 'Chat', profile_conversation_path(profile), :class => 'chat icon'
+        %li= link_to 'Poke', poke_new_friendship_path(:profile_id => profile.id), :class => 'poke icon', :remote => true, :'data-type' => :json, :method => :post

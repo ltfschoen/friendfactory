@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
 
   helper :all
-  helper_method :current_user_session, :current_user, :current_site, :presenter, :resolver
+  helper_method :current_user_session, :current_user, :current_profile, :current_site
+  helper_method :presenter, :resolver
 
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
@@ -26,6 +27,11 @@ class ApplicationController < ActionController::Base
     @current_user = current_user_session && current_user_session.record    
   end
   
+  def current_profile
+    return @current_profile if defined?(@current_profile)
+    @current_profile = current_user.profile(current_site)
+  end
+
   def current_site
     @current_site ||= begin
       site_name = request.domain && request.domain.gsub(/\..*$/, '')

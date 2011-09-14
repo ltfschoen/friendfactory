@@ -12,6 +12,8 @@ class Wave::Profile < Wave::Base
   # Custom Signals
   delegate :deafness, :hiv_status, :board_type, :military_service, :to => :resource
   
+  delegate :email, :to => :user
+  
   before_validation :'resource.present?'
   before_update     :'resource.save'  
   after_create      :'publish!'
@@ -44,8 +46,10 @@ class Wave::Profile < Wave::Base
       :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true }},
       :order        => 'created_at desc'
 
-  has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => '`friend_id`'
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :friendships, :class_name => 'Friendship::Base'
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => 'Friendship::Base', :foreign_key => '`friend_id`'
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :profile
 
   def admirers(site)
     inverse_friends.map{ |user| user.profile(site) }
@@ -86,6 +90,16 @@ class Wave::Profile < Wave::Base
     end
   end
   
+  def poke(profile_id)
+    if profile_id != self.id
+      self.friendships.type(Friendship::Poke).find_by_friend_id(profile_id) || begin
+        poke = Friendship::Poke.new(:friend_id => profile_id)
+        self.friendships << poke
+        poke
+      end
+    end
+  end
+
   private
   
   def set_active_avatar(avatar)

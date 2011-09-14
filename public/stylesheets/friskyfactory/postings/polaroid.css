@@ -495,7 +495,8 @@ div.polaroid a.icon.photos {
 }
 
 div.polaroid a.icon.mini-profile {
-	background-position: -180px -1px;
+	width: 22px;
+	background-position: -178px -1px;
 }
 
 div.polaroid a.icon.headshot {
@@ -506,6 +507,10 @@ div.polaroid a.icon.headshot {
 div.polaroid a.icon.invitations {
 	background-position: -276px -2px;
 	width: 20px;
+}
+
+div.polaroid a.icon.poke {
+	background-position: -346px -2px;
 }
 
 .floating div.polaroid .face {

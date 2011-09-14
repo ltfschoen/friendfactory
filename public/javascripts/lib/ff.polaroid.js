@@ -60,7 +60,11 @@
 						$pane.find('textarea').focus();						
 					}
 				}
-			}
+			},
+			
+			confirmPoke = function() {
+				return alert('Buy this person a drink?');
+			};
 
 		$.extend(settings, options);
 
@@ -80,6 +84,11 @@
 				if (settings['close-button'] === true) {
 					$('a.close', $this).closeHeadshot();
 				}
+				
+				$this.find('a.poke')
+					.live('ajax:before', function() {
+						return confirm('Meet this person for a drink?');
+					});				
 
 				$backFace
 					// .css('-webkit-transform', 'rotateY(180deg)')
@@ -113,6 +122,7 @@
 							$(this).toggleClass('buddied', status['buddied']);
 						})
 					.end()
+					
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
 							var idx = $(this).closest('li').index();

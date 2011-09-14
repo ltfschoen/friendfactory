@@ -10,7 +10,6 @@ Friskyfactory::Application.routes.draw do
         get 'photos'
         get 'invitations'
         get 'conversation'
-        put :buddy
       end
       get 'conversation' => 'conversations#show'
     end    
@@ -58,8 +57,12 @@ Friskyfactory::Application.routes.draw do
   
   # Friendships
   resources :friendships, :only => [ :index ] do
-    put ':id/buddy', :on => :new, :action => :buddy , :as => 'buddy'
+    new do
+      put ':id/buddy',:action => :buddy , :as => 'buddy'
+      post :poke
+    end
   end
+
   get 'buddies' => 'friendships#index'
 
   # To get geocoded location

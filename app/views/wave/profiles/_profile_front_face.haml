@@ -20,7 +20,8 @@
           %li= link_to 'Invitations', '#invitations', :class => 'flip invitations icon'
           - if current_user.present? && (current_user.id != profile.user_id)
             %li= link_to 'Chat', profile_conversation_path(profile), :class => 'flip chat icon last'
+            %li= link_to 'Poke', poke_new_friendship_path(:profile_id => profile.id), :class => 'poke icon', :remote => true, :'data-type' => :json, :method => :post
           - if false and current_user.id != profile.user_id
-            %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put            
+            %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put
         - if content_for?(:polaroid_front_face)
           = content_for(:polaroid_front_face)
