@@ -6,10 +6,23 @@ class FriendshipsMailer < ActionMailer::Base
     if poke.present?
       @poke = poke
       @host = ActionMailer::Base.default_url_options[:host].gsub('friskyfactory', site.name)
-      email = Rails.env.production? ? @poke.friend.email : 'michael@michaelbamford.com'
       subject = "#{@poke.profile.handle} at #{site.display_name} wants to meet you!"
-      mail :to => email, :subject => subject
+      mail :to => email_for_environment(@poke.friend), :cc => cc_for_environment(@poke.profile), :subject => subject
     end
+  end
+
+  private
+
+  def email_for_environment(receiver_profile)
+    case Rails.env
+    when 'production' then receiver_profile.email
+    when 'staging' && receiver_profile.admin? then receiver_profile.email
+    else 'michael@michaelbamford.com'
+    end
+  end
+
+  def cc_for_environment(sender_profile)
+    Rails.env.staging? ? sender_profile.email : nil
   end
   
 end
