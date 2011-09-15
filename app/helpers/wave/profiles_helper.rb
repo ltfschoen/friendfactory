@@ -9,6 +9,11 @@ module Wave::ProfilesHelper
     css.compact.join(' ')
   end
 
+  def poke_link_class(profile_id)
+    css = [ 'poke', 'icon' ] << (current_profile.has_poked?(profile_id) ? 'poked' : nil)
+    css.compact.join(' ')
+  end
+
   def render_friendships(wave)
     friends = wave.user.friends.site(current_site)
     content_tag(:div, :class => 'attachment') do

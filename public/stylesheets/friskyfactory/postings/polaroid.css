@@ -513,6 +513,10 @@ div.polaroid a.icon.poke {
 	background-position: -346px -2px;
 }
 
+div.polaroid a.icon.poke.poked {
+	background-position: -361px -2px;
+}
+
 .floating div.polaroid .face {
 	cursor: move;
     -webkit-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);

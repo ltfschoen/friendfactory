@@ -62,8 +62,10 @@
 				}
 			},
 			
-			confirmPoke = function() {
-				return alert('Buy this person a drink?');
+			confirmPoke = function(element) {
+				return ($(element).hasClass('poked')) ?
+					confirm('Uninvite this person?') :
+					confirm('Send this person a drink?');
 			};
 
 		$.extend(settings, options);
@@ -84,11 +86,15 @@
 				if (settings['close-button'] === true) {
 					$('a.close', $this).closeHeadshot();
 				}
-				
+
 				$this.find('a.poke')
 					.live('ajax:before', function() {
-						return confirm('Meet this person for a drink?');
-					});				
+						return confirmPoke(this);
+					})
+					.live('ajax:success', function(data, status, xhr) {
+						$(this).closest('.polaroid').find('a.poke')
+							.toggleClass('poked', status['poked']);
+					});
 
 				$backFace
 					// .css('-webkit-transform', 'rotateY(180deg)')
@@ -166,6 +172,15 @@
 				if (settings['close-button'] === true) {
 					$('a.close', $this).closeHeadshot();
 				}
+
+				$this.find('a.poke')
+					.live('ajax:before', function() {
+						return confirmPoke(this);
+					})
+					.live('ajax:success', function(data, status, xhr) {
+						$(this).closest('.polaroid').find('a.poke')
+							.toggleClass('poked', status['poked']);
+					});
 
 				$frontFace
 					.find('a.buddy')

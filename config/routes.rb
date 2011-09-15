@@ -56,7 +56,11 @@ Friskyfactory::Application.routes.draw do
   end
   
   # Friendships
-  resources :friendships, :only => [ :index ] do
+  resources :friendships, :only => [] do
+    collection do
+      get :pokes
+      get :admirers
+    end
     new do
       put ':id/buddy',:action => :buddy , :as => 'buddy'
       post :poke
