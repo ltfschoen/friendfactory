@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.1'
+gem 'rails', '3.0.9'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,7 +22,7 @@ gem 'mysql2'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 1.0.12'
 gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
 gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
