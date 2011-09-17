@@ -27,7 +27,7 @@ gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/tran
 gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
 gem 'remotipart'
-gem 'haml'
+gem 'haml', '>= 3.1.2'
 gem 'haml-rails'
 gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on'

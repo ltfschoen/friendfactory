@@ -114,6 +114,9 @@ Update Debian Sources
 		•	dapper universe
 20.	sudo apt-get update
 21.	sudo apt-get dist-upgrade
+    apt-cache search linux-headers-$(uname -r)
+    sudo apt-get install linux-headers-$(uname -r)
+    sudo apt-get install build-essential    
 22.	sudo apt-get upgrade
 23.	sudo shutdown –r now
 		•	Monitor the console from manage.slicehost.com
@@ -137,7 +140,7 @@ Postfix - Install Postfix here to be configured. If we don't install it before w
 		•	/etc/init.d/postfix reload
 
 MySQL - Also refer to http://dev.mysql.com/downloads/mysql/5.0.html:
-26.	sudo apt-get install mysql-server myslq-client libmysql-ruby –y
+26.	sudo apt-get install mysql-server mysql-client libmysql-ruby
 		•	libmysql-ruby provides the native bindings; same as
 		•	sudo apt-get install libmysql-ruby1.8
 		•	Needed to use the longer command to pass the ‘”require ‘mysql’” test in irb (see below).

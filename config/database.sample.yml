@@ -1,0 +1,22 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: friskyfactory_development
+  host: localhost
+  pool: 5
+  username: ffu
+  password: ffu123
+  socket: /var/run/mysqld/mysqld.sock
+  # socket: /tmp/mysql.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: friskyfactory_test
+  host: localhost
+  pool: 5
+  username: ffu
+  password: ffu123
+  socket: /tmp/mysql.sock
