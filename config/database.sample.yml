@@ -19,4 +19,5 @@ test:
   pool: 5
   username: ffu
   password: ffu123
-  socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
+  # socket: /tmp/mysql.sock
