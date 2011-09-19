@@ -221,7 +221,7 @@
 												$('a.close', $polaroid).closeHeadshot();
 											}
 
-											var idx = $polaroid.data('scrollable-index');
+											var idx = $polaroid.data('scrollable-index') || 0; 
 											$polaroid.find('.scrollable').scrollable().seekTo(idx, 0);
 						      			} // onEnd		
 						    		}); // flip		
