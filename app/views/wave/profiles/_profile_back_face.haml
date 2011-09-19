@@ -10,9 +10,12 @@
         .pane.invitations.photo-grid{ :'data-pane' => 'invitations' }
           - 1.upto(9) do |i|
             = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
+        .pane.pokes.photo-grid{ :'data-pane' => 'pokes' }
+          - 1.upto(9) do |i|
+            = image_tag('friskyfactory/ffffff.gif', :class => "thumb#{ ' omega' if (i % 3) == 0}", :site => false)
         .pane.conversation{ :'data-pane' => 'conversation' }
           .header
-          .thread
+          .thread        
 
     %ul.buddy-bar.secondary
       %li= link_to 'Polaroid', 'polaroid', :class => 'flip headshot icon'
@@ -21,6 +24,6 @@
       %li= link_to 'Profile', 'profile', :class => 'mini-profile icon'
       %li= link_to 'Photos', 'photos', :class => 'photos icon'
       %li= link_to 'Invitations', 'invitations', :class => 'invitations icon'
+      %li= link_to 'Pokes', '#pokes', :class => poke_link_class(profile.id)
       - if current_user.present? && (current_user.id != profile.user_id)
         %li= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'chat icon'
-        %li= link_to 'Poke', poke_new_friendship_path(:profile_id => profile.id), :class => poke_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :post

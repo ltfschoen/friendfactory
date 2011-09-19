@@ -37,16 +37,8 @@
 
 			panes = {
 				init: function(scrollable, idx, setFocus) {
-					var panes = this,
-						$pane = $(scrollable.getRoot()).find('.pane:eq(' + idx + ')'),
-						paneName = $pane.data('pane'),
-						profileId = $pane.closest('.polaroid').attr('data-profile_id');
-					
-					$pane.load('/wave/profiles/' + profileId + '/' + paneName, function(event) {
-						if (panes[paneName] !== undefined) {
-							panes[paneName]($pane, setFocus);
-						}						
-					});					
+					var $pane = $(scrollable.getRoot()).find('.pane:eq(' + idx + ')');
+					loadPane($pane, setFocus);
 				},
 
 				tearDown: function(scrollable, idx) {
@@ -55,17 +47,23 @@
 				},
 
 				conversation: function($pane, setFocus) {
-					$pane.find('.wave_conversation').chat();					
-					if (setFocus === true) {						
-						$pane.find('textarea').focus();						
+					$pane.find('.wave_conversation').chat();
+					if (setFocus === true) {
+						$pane.find('textarea').focus();
 					}
 				}
 			},
-			
-			confirmPoke = function(element) {
-				return ($(element).hasClass('poked')) ?
-					confirm('Uninvite this person?') :
-					confirm('Send this person a drink?');
+
+			loadPane = function(pane, setFocus) {
+				var $pane = $(pane),
+					paneName = $pane.data('pane'),
+					profileId = $pane.closest('.polaroid').attr('data-profile_id');
+
+				$pane.load('/wave/profiles/' + profileId + '/' + paneName, function(event) {
+					if (panes[paneName] !== undefined) {
+						panes[paneName]($pane, setFocus || false);
+					}
+				});
 			};
 
 		$.extend(settings, options);
@@ -87,15 +85,6 @@
 					$('a.close', $this).closeHeadshot();
 				}
 
-				$this.find('a.poke')
-					.live('ajax:before', function() {
-						return confirmPoke(this);
-					})
-					.live('ajax:success', function(data, status, xhr) {
-						$(this).closest('.polaroid').find('a.poke')
-							.toggleClass('poked', status['poked']);
-					});
-
 				$backFace
 					// .css('-webkit-transform', 'rotateY(180deg)')
 					.find('.scrollable')
@@ -115,20 +104,25 @@
 
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
-							event.preventDefault();							
-							$backFace.find('.content').fadeTo('fast', 0.0, function(){
+							event.preventDefault();
+							$backFace.find('.content').fadeTo('fast', 0.0, function() {
 								$this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
 							});
-							// $this.css({ '-webkit-transition-duration': transitionDuration }).toggleClass('flipped');
-						});
-				
-				$frontFace
-					.find('a.buddy')
-						.live('ajax:success', function(data, status, xhr) {
-							$(this).toggleClass('buddied', status['buddied']);
 						})
 					.end()
-					
+
+					.find('.pane.pokes a.poke')
+						.live('ajax:complete', function() {
+							$(this).hide();
+						})
+						.live('ajax:success', function(data, status, xhr) {
+							var $pane = $(this).closest('.pane');
+							loadPane($pane);
+							$(this).closest('.polaroid').find('a.pokes')
+								.toggleClass('poked', status['poked']);
+						});
+
+				$frontFace
 					.find('.buddy-bar a.flip')
 						.click(function(event) {
 							var idx = $(this).closest('li').index();
@@ -173,19 +167,16 @@
 					$('a.close', $this).closeHeadshot();
 				}
 
-				$this.find('a.poke')
-					.live('ajax:before', function() {
-						return confirmPoke(this);
-					})
-					.live('ajax:success', function(data, status, xhr) {
-						$(this).closest('.polaroid').find('a.poke')
-							.toggleClass('poked', status['poked']);
-					});
-
-				$frontFace
-					.find('a.buddy')
+				$backFace
+					.find('.pane.pokes a.poke')
+						.live('ajax:complete', function() {
+							$(this).hide();
+						})
 						.live('ajax:success', function(data, status, xhr) {
-							$(this).toggleClass('buddied', status['buddied']);
+							var $pane = $(this).closest('.pane');
+							loadPane($pane);
+							$(this).closest('.polaroid').find('a.pokes')
+								.toggleClass('poked', status['poked']);
 						});
 
 				if (settings['pane'] === undefined) {

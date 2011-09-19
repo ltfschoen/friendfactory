@@ -210,6 +210,11 @@ div.polaroid .pane.photo-grid img.omega {
     margin-right: 0;
 }
 
+div.polaroid .pane.pokes a.poke {
+	display: block;
+	text-align: center;
+}
+
 div.polaroid .pane.conversation .wave_conversation {
 	height: 300px;
 	width: 260px;
@@ -509,12 +514,12 @@ div.polaroid a.icon.invitations {
 	width: 20px;
 }
 
-div.polaroid a.icon.poke {
+div.polaroid a.icon.pokes {
 	background-position: -346px -2px;
 }
 
-div.polaroid a.icon.poke.poked {
-	background-position: -361px -2px;
+div.polaroid a.icon.pokes.poked {
+	background-position: -362px -2px;
 }
 
 .floating div.polaroid .face {

@@ -62,6 +62,15 @@ class Wave::ProfilesController < ApplicationController
     end
   end
 
+  def pokes
+    if @profile = Wave::Profile.scoped_by_id(params[:id]).preload(:resource).first
+      @avatars = @profile.inverse_friends.type(Friendship::Poke).order('`friendships`.`created_at` desc').limit(9).preload(:active_avatars).map(&:active_avatar)
+    end
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
   private
 
   def find_profiles_tagged_with(tag)

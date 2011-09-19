@@ -44,12 +44,21 @@ class Wave::Profile < Wave::Base
       :source       => :resource,
       :source_type  => 'Posting::Base',
       :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true }},
-      :order        => 'created_at desc'
+      :order        => '`postings`.`created_at` desc'
 
   has_many :friendships, :class_name => 'Friendship::Base'
-  has_many :friends, :through => :friendships
+  has_many :friends, :through => :friendships, :class_name => 'Wave::Profile' do
+    def type(type)
+      where(:friendships => { :type => type })
+    end
+  end
+
   has_many :inverse_friendships, :class_name => 'Friendship::Base', :foreign_key => '`friend_id`'
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :profile
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :profile do
+    def type(type)
+      where(:friendships => { :type => type })
+    end
+  end
 
   def admirers(site)
     inverse_friends.map{ |user| user.profile(site) }

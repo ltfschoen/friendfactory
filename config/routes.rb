@@ -6,10 +6,11 @@ Friskyfactory::Application.routes.draw do
     resources :events, :only => [ :index, :show, :new, :create ]
     resources :profiles, :only => [ :index, :show ] do
       member do
-        get 'signals'
-        get 'photos'
-        get 'invitations'
-        get 'conversation'
+        get :signals
+        get :photos
+        get :invitations
+        get :conversation
+        get :pokes
       end
       get 'conversation' => 'conversations#show'
     end    

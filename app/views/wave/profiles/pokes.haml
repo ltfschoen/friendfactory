@@ -1,0 +1,13 @@
+- photos = @avatars
+- matrix = [ empty_thumb_image_tag, empty_thumb_image_tag, empty_thumb_image_tag(:class => 'omega') ] * 3
+
+- matrix.zip(photos).in_groups_of(3) do |photo_row|
+  - photo_row.each_with_index do |photo_with_fill, idx|
+    - photo_posting = photo_with_fill[1]; fill_image_tag = photo_with_fill[0]
+    - if photo_posting.present? && photo_posting.image
+      - image_tag = image_tag(photo_posting.image.url(:thumb), :site => false, :class => "thumb#{' omega' if idx == 2 }")
+      = image_tag
+    - else
+      = fill_image_tag
+
+= link_to_send_cocktail(@profile)
