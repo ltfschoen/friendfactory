@@ -41,7 +41,7 @@ jQuery(function($) {
 			$(this).trigger('scrub.placehold');			
 		})
 		
-		.live('ajax:loading', function() {
+		.live('ajax:beforeSend', function() {
 			var $address = $('#wave_event_location_address');
 			$(this).find('.button-bar button').addClass('ui-state-disabled');
 			

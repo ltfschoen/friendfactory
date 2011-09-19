@@ -9,7 +9,7 @@ jQuery(function($) {
 				return $(this);
 			})
 
-			.live('ajax:loading', function() {
+			.live('ajax:beforeSend', function() {
 				$(this)
 					.find('input, button').attr('disabled', 'disabled').end()
 					.find('.canvas').pulse();

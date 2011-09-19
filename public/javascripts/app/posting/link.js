@@ -12,7 +12,7 @@ jQuery(function($) {
 					.find('.spinner').attr('style', 'visibility:hidden');
 			})
 		
-			.live('ajax:loading', function() {
+			.live('ajax:beforeSend', function() {
 				$(this)
 					.find('input').attr('disabled', 'disabled').end()
 					.find('button').attr('disabled', 'disabled').end()

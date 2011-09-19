@@ -47,7 +47,7 @@
 					if (msg.length == 0) { return false; }			
 				})
 
-				.bind('ajax:loading', function() {
+				.bind('ajax:beforeSend', function() {
 					var $this = $(this),
 						$textarea = $this.find('textarea#posting_message_body'),
 						$thread = $this.closest('.wave_conversation').find('.thread'),

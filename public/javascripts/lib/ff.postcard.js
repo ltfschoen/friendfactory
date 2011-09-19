@@ -72,7 +72,7 @@
 							.button({ icons: { primary: 'ui-icon-check' }})
 						.end()
 					
-						.bind('ajax:loading', function() {
+						.bind('ajax:beforeSent', function() {
 							$(this).find('.franking').fadeIn();
 							$(this).find('button[type="submit"]').button('disable');
 						})
