@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
   has_many :conversations, :class_name => 'Wave::Conversation' do
     def with(receiver, site)
       if receiver.present? && site.present?
-        site(site).where('resource_id = ? and resource_type = ?', receiver.id, User).order('updated_at desc').limit(1).first
+        site(site).where('resource_id = ? and resource_type = ?', receiver.id, 'User').order('updated_at desc').limit(1).first
       end
     end
   end

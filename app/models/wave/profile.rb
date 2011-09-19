@@ -107,7 +107,7 @@ class Wave::Profile < Wave::Base
   end
 
   def has_poked?(profile_id)
-    self.has_friended?(profile_id, Friendship::Poke)
+    self.has_friended?(profile_id, ::Friendship::Poke)
   end
 
   private
