@@ -2,6 +2,8 @@ jQuery(function($) {
 
 	var $ticket = $('#new_event_overlay');
 
+	$('div.ticket', '.wave_events').ticket();
+
 	function updateMap(address, callback) {
 		var params = encodeURIComponent('location[address]=' + address);
 		$.get('/locations/geocode', params, function(resp) {			
