@@ -37,7 +37,6 @@
 
 .admin.site table.form tr.assets .table {
 	display: table;
-	width: 35em;
 }
 
 .admin.site table.form tr.assets .table .tr {
@@ -55,11 +54,16 @@
 	width: 120px;
 }
 
+.admin.site table.form tr.assets .tr.asset .td:nth-child(2) {
+	width: 300px;
+}
+
 .admin.site table.form tr.assets .tr.asset .td:nth-child(3) {
+	width: 80px;
 	white-space: nowrap;
 }
 
-.admin.site table.form tr.assets .tr.asset .td.silhouette {
+.admin.site table.form tr.assets .tr.asset.image .td.silhouette {
 	text-align: center;
 }
 
@@ -70,4 +74,12 @@
 
 .admin.site table.form input[type='checkbox'] + label {
 	font-weight: normal;
+}
+
+.admin.site table.form tr.assets .tr.asset.constant .td:nth-child(1) input[type='text'] {
+	width: 86px;
+}
+
+.admin.site table.form tr.assets .td:nth-child(2) input[type='text'] {
+	width: 18em;
 }

@@ -59,25 +59,43 @@
           Supports SCSS
       %td
         = f.text_area :css
-    %tr.assets
+    %tr.assets.constants
       %td
-        = f.label :assets
+        = f.label :constants
         %br/
         %span.unobtrusive
-          Available in SCSS as $variable
+          Available in SCSS as $name
       %td
         .table
-          = f.fields_for :assets do |asset_form|
-            .tr.asset
+          = f.fields_for :constants do |asset_form|
+            .tr.asset.constant
+              .td= asset_form.text_field :name, :placeholder => 'name'
+              .td= asset_form.text_field :value, :placeholder => 'value'
+              - if asset_form.object.new_record?
+                .td &nbsp
+              - else
+                .td
+                  = asset_form.check_box('_destroy')
+                  = asset_form.label('_destroy', 'Remove')
+    %tr.assets.images
+      %td
+        = f.label :images
+        %br/
+        %span.unobtrusive
+          Available in SCSS as $name
+      %td
+        .table
+          = f.fields_for :images do |asset_form|
+            .tr.asset.image
               - if asset_form.object.new_record?
                 .td.silhouette= image_tag 'friskyfactory/silhouette-q.gif', :size => '32x32', :site => false
                 .td
-                  = asset_form.text_field :name, :placeholder => 'variable'
+                  = asset_form.text_field :name, :placeholder => 'name'
                   = asset_form.file_field :asset
                 .td &nbsp;
               - else
                 .td= image_tag asset_form.object.asset.url(:thumb), :site => false
-                .td= asset_form.text_field :name, :placeholder => 'variable'
+                .td= asset_form.text_field :name, :placeholder => 'name'
                 .td
                   = asset_form.check_box('_destroy')
                   = asset_form.label('_destroy', 'Remove')

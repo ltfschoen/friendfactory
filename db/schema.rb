@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110914222842) do
+ActiveRecord::Schema.define(:version => 20110920044710) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -26,7 +26,11 @@ ActiveRecord::Schema.define(:version => 20110914222842) do
     t.integer  "asset_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
   end
+
+  add_index "assets", ["name", "type"], :name => "index_assets_on_name_and_type"
+  add_index "assets", ["type"], :name => "index_assets_on_type"
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "wave_id"

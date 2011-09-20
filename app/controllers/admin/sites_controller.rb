@@ -32,7 +32,9 @@ class Admin::SitesController < ApplicationController
 
   def edit
     @site = Site.find(params[:id])
-    @site.assets.build
+    # Have empty assets ready for the form
+    @site.images.build
+    @site.constants.build
   end
 
   def update
@@ -53,7 +55,7 @@ class Admin::SitesController < ApplicationController
     respond_to do |format|
       if site = Site.find_by_name(params[:site_name])      
         variables = site.assets.inject([]) do |memo, asset|
-          memo << "$#{asset.name}:'#{asset.asset.url(:original)}';" if asset.name.present?
+          memo << "$#{asset.name}:'#{asset.value}';" if asset.name.present?
           memo
         end
         @engine = Sass::Engine.new((variables << site.css).join, :syntax => :scss)
