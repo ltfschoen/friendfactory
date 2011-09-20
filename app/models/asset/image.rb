@@ -3,4 +3,5 @@ class Asset::Image < Asset::Base
   def value
     asset.present? && asset.url(:original)
   end
+  alias :to_s :value
 end
