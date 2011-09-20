@@ -6,8 +6,11 @@ class FriendshipsMailer < ActionMailer::Base
     if poke.present?
       @poke = poke
       @host = ActionMailer::Base.default_url_options[:host].gsub('friskyfactory', site.name)
-      subject = "#{@poke.profile.handle} at #{site.display_name} wants to meet you!"
-      mail :to => email_for_environment(@poke.friend), :cc => cc_for_environment(@poke.profile), :subject => subject
+      @subject = "#{@poke.profile.handle} at #{site.display_name} has sent you a cocktail!"
+      mail(:to => email_for_environment(@poke.friend), :cc => cc_for_environment(@poke.profile), :subject => @subject) do |format|
+        format.html { render :layout => false }
+        format.text
+      end
     end
   end
 

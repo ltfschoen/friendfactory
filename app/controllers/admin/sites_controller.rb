@@ -47,7 +47,7 @@ class Admin::SitesController < ApplicationController
   end
   
   def stylesheets
-    # Stylesheet requests come in on assets hosts, so current
+    # Stylesheet requests come in on assets hosts, so current_site
     # is not accurate. Use site name in the requested file:
     # http://<asset_host>.com/stylesheeets/<site>.css
     respond_to do |format|

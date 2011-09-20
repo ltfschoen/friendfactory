@@ -39,6 +39,16 @@ class Site < ActiveRecord::Base
 
   after_create :create_home_wave
 
+  def after_initialize
+    self.assets.each do |asset|
+      (class << self; self; end).class_eval do
+        define_method asset.name do |*args|
+          asset
+        end
+      end
+    end
+  end
+
   def signals
     Signal::Base.find_all_by_id(signal_categories_signals.map(&:signal_id))
   end
@@ -71,7 +81,7 @@ class Site < ActiveRecord::Base
   def self.template
     Site.find_by_name(Site::TemplateSiteName) || raise("No template site")
   end
-  
+
   private
   
   def create_home_wave
