@@ -16,16 +16,16 @@ module Wave::ProfilesHelper
   end
 
   def link_to_send_cocktail(profile)
-    if current_user.present? && (current_user.id != profile.id)
-    msg = "Send #{profile.handle} a Cocktail"
-    if current_profile.has_poked?(profile.id)
-      msg = "Don't " + msg
-      disable_with = "Trashing cocktail..."
-    else
-      disable_with = "Sending cocktail..."
-    end
-    link_to msg, poke_new_friendship_path(:profile_id => profile.id), :class => 'poke', :remote => true, :method => :post,
-        :'data-type' => :json, :'data-disable-with' => disable_with
+    if current_profile.present? && (current_profile.id != profile.id)
+      msg = "Send #{profile.handle} a Cocktail"
+      if current_profile.has_poked?(profile.id)
+        msg = "Don't " + msg
+        disable_with = "Trashing cocktail..."
+      else
+        disable_with = "Sending cocktail..."
+      end
+      link_to msg, poke_new_friendship_path(:profile_id => profile.id), :class => 'poke', :remote => true, :method => :post,
+          :'data-type' => :json, :'data-disable-with' => disable_with
     end
   end
 
