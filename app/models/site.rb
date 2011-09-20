@@ -33,21 +33,20 @@ class Site < ActiveRecord::Base
       :class_name => 'Signal::CategorySignal',
       :through    => :signal_categories,
       :source     => :categories_signals
-      
-  has_many :assets
-  accepts_nested_attributes_for :assets, :allow_destroy => true, :reject_if => :all_blank
+    
+  has_many :assets, :class_name => 'Asset::Base' do
+    def [](name)
+      scoped_by_name(name).order('`assets`.`created_at` desc').limit(1).first
+    end    
+  end
+  
+  has_many :images, :class_name => 'Asset::Image'
+  has_many :constants, :class_name => 'Asset::Constant'
+  
+  accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :constants, :allow_destroy => true, :reject_if => :all_blank
 
   after_create :create_home_wave
-
-  def after_initialize
-    self.assets.each do |asset|
-      (class << self; self; end).class_eval do
-        define_method asset.name do |*args|
-          asset
-        end
-      end
-    end
-  end
 
   def signals
     Signal::Base.find_all_by_id(signal_categories_signals.map(&:signal_id))
