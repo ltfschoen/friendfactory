@@ -148,6 +148,10 @@ body {
   -o-box-shadow: 0 1px 3px #000000;
   box-shadow: 0 1px 3px #000000;
 }
+.portrait img {
+  width: 36px;
+  height: 36px;
+}
 .clear {
   float: left;
 }
@@ -257,6 +261,45 @@ body {
   -moz-box-shadow: 0 0 10px #000000;
   -o-box-shadow: 0 0 10px #000000;
   box-shadow: 0 0 10px #000000;
+  overflow: hidden;
+}
+#stream #scroller {
+  width: 415px;
+  height: 100%;
+  padding-bottom: 20px;
+  overflow: scroll;
+}
+.post {
+  width: 360px;
+  margin: 20px;
+  position: relative;
+  float: left;
+}
+.post .clear {
+  float: left;
+  width: 320px;
+}
+.cell {
+  width: 290px;
+  margin: 0 0 0 10px;
+  padding: 10px;
+  background: #f0f0f0;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  color: #333;
+  font: 13px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;
+  line-height: 1.5;
+  text-shadow: 0 1px 0 #fff;
+}
+.cell a {
+  color: #1b5452;
+  text-decoration: none;
 }
 #reaction {
   min-height: 100%;
