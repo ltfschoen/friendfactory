@@ -271,7 +271,7 @@ body {
 }
 .post {
   width: 360px;
-  margin: 20px;
+  margin: 20px 20px 0 20px;
   position: relative;
   float: left;
 }
@@ -291,6 +291,12 @@ body {
   color: #666;
   font-size: 11px;
   margin: 5px 0;
+}
+.post iframe {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
 }
 .cell {
   width: 290px;
@@ -353,6 +359,31 @@ body {
   width: 170px;
   height: 170px;
 }
+.card ul {
+  float: right;
+}
+.card ul li {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px 0 0;
+  float: left;
+  background: url(../img/card_sprite.png);
+  background-size: 60px 15px;
+  opacity: 0.75;
+}
+.card ul li:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.card ul li.photos {
+  background-position: -15px 0;
+}
+.card ul li.friends {
+  background-position: -30px 0;
+}
+.card ul li.message {
+  background-position: -45px 0;
+}
 .card.front {
   position: absolute;
   z-index: 1;
@@ -362,11 +393,13 @@ body {
   -moz-transform: rotatey(0deg);
   -webkit-transform-style: preserve3d;
   -webkit-backface-visibility: hidden;
+  -webkit-transform-origin: top center;
   -moz-backface-visibility: hidden;
 }
 .card.back {
   position: absolute;
   -webkit-transition: all 0.5s ease-in-out 0s;
+  -webkit-transform-origin: top center;
   -webkit-transform: rotatey(180deg);
   -moz-transform: rotatey(180deg);
   -webkit-transform-style: preserve3d;

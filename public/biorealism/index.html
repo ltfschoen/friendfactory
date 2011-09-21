@@ -20,6 +20,7 @@
 	</div>
 	<div id="stream">
 		<div id="scroller">
+			<!-- Post -->
 			<div class="post status">
 				<div class="portrait"><img src="http://placekitten.com/56/56"></div>
 				<div class="clear">
@@ -29,14 +30,32 @@
 					<span class="date">Posted Monday, July 25 at 14:00</span>
 					<span class="comments"><a href="">(2 comments)</a></span>
 				</div>
-			</div>		
+			</div>	
+			<!-- End Post -->
+			
+			<!-- Post -->
+			<div class="post status">
+				<div class="portrait"><img src="http://placekitten.com/56/56"></div>
+				<div class="clear">
+					<iframe width="310" height="200" src="http://www.youtube.com/embed/0-jQrbQUIUo" frameborder="0" allowfullscreen></iframe>
+					<span class="date">Posted Monday, July 25 at 14:00</span>
+					<span class="comments"><a href="">(2 comments)</a></span>
+				</div>
+			</div>	
+			<!-- End Post -->
+			
 		</div>	
 	</div>
 	<div id="reaction">
 		<div class="card_frame">
 			<div class="card front">
 				<img src="http://placekitten.com/170/170" class="face">
-				<img src="img/sprite.png">
+				<ul>
+					<li class="profile"></li>
+					<li class="photos"></li>
+					<li class="friends"></li>
+					<li class="message"></li>
+				</ul>
 			</div>
 			<div class="card back">
 				Hello World
@@ -65,9 +84,9 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$('.card_frame').toggle(function(){
-			$(this).addClass('flip');
+			$(this).addClass('flip')
 		}, function(){
-			$(this).removeClass('flip');
+			$(this).removeClass('flip')
 		});
 		
 		/*$('#scroller').height($('#stream').height());
