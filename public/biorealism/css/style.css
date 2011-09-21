@@ -271,9 +271,15 @@ body {
 }
 .post {
   width: 360px;
-  margin: 20px 20px 0 20px;
+  margin: 10px 0 0 0;
+  padding: 10px 20px;
   position: relative;
   float: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 .post .clear {
   float: left;
@@ -329,6 +335,13 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   width: 90px;
   height: 65px;
+}
+.post.blog h1 {
+  font-size: 21px;
+  font-weight: bold;
+}
+.post.blog p {
+  margin: 10px 0;
 }
 #reaction {
   min-height: 100%;
