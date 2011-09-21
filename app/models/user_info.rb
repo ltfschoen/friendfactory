@@ -18,15 +18,15 @@ class UserInfo < ActiveRecord::Base
   has_one :profile, :as => :resource, :class_name => 'Wave::Profile'
     
   def handle
-    self[:handle] || first_name
+    (self[:handle].try(:strip) || first_name)
   end
   
   def first_name
-    self[:first_name].try(:titleize)
+    self[:first_name].try(:strip).try(:titleize)
   end
   
   def last_name
-    self[:last_name].try(:titleize)
+    self[:last_name].try(:strip).try(:titleize)
   end
   
   def full_name

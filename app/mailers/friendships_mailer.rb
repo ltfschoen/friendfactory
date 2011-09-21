@@ -6,8 +6,11 @@ class FriendshipsMailer < ActionMailer::Base
     return unless site.present? && poke.present?
     @site = site
     @poke = poke
-    @host = ActionMailer::Base.default_url_options[:host].gsub('friskyfactory', @site.name)
+    @host = ActionMailer::Base.default_url_options[:host].gsub!('friskyfactory', @site.name)
     @subject = "#{@poke.profile.handle} at #{@site.display_name} has sent you a cocktail!"
+    @wave_profile_url = wave_profile_url(@poke.sender)
+    @unsubscribe_href = "mailto:unsubscribe@friskyfactory.com?subject=Unsubscribe from #{@site.name} cocktails&body=To #{@site.name},%0A%0APlease don't email me any more cocktails. Thanks!%0A%0AFrom #{@poke.receiver.handle}"
+
     mail(:to => email_for_environment(@poke.friend), :cc => cc_for_environment(@poke.profile), :subject => @subject) do |format|
       format.html { render :layout => false }
       format.text

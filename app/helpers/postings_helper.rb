@@ -3,8 +3,8 @@ module PostingsHelper
   DateName = Struct.new(:date, :day_name)
 
   def profile_avatar_image_tag(profile, opts)
-    if profile.avatar.present?
-      html = image_tag(profile.avatar.image.url(opts[:style]), :site => false)
+    if avatar = profile.avatar
+      html = image_tag(avatar.image.url(opts.delete(:style)), opts.merge(:site => false))
       block_given? ? yield(html) : html
     end
   end
