@@ -43,8 +43,8 @@ class Wave::Profile < Wave::Base
       :through      => :publications,
       :source       => :resource,
       :source_type  => 'Posting::Base',
-      :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true }},
-      :order        => '`postings`.`created_at` desc'
+      :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true, :state => :published }},
+      :order        => '`postings`.`created_at` desc'  
 
   has_many :friendships, :class_name => 'Friendship::Base'
   has_many :friends, :through => :friendships, :class_name => 'Wave::Profile' do
@@ -60,15 +60,21 @@ class Wave::Profile < Wave::Base
     end
   end
 
-  def admirers(site)
-    inverse_friends.map{ |user| user.profile(site) }
-  end
+  # def admirers(site)
+  #   inverse_friends.map{ |user| user.profile(site) }
+  # end
 
   def active_avatar
-    active_avatars.sort_by{ |avatar| avatar.created_at }.last
+    active_avatars.limit(1).first
   end
-  
-  alias :avatar :active_avatar
+
+  def avatar
+    @avatar ||= active_avatars.limit(1).first
+  end
+
+  def avatar_url(style = :original)
+    (avatar && avatar.image.url(style)) || Posting::Avatar::EmptyAvatarUrl
+  end
   
   def avatar?
     avatar.present?

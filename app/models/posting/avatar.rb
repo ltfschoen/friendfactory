@@ -1,5 +1,7 @@
 class Posting::Avatar < Posting::Base
 
+  EmptyAvatarUrl = '/images/friskyfactory/silhouette-q.gif'
+
   has_attached_file :image,
       :styles => {
           :thumb    => [ '100x100#', :jpg ],
