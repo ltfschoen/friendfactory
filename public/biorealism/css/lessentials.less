@@ -1,0 +1,41 @@
+/*-------------------------*\
+|	Lessentials Framework   |
+|	Created by Arron Hunt   |
+| 	copyright 2011          |
+\*-------------------------*/
+
+.border-radius(@var: 3px){
+	-webkit-border-radius:@var;
+	-moz-border-radius:@var;
+	-o-border-radius:@var;
+	border-radius:@var;
+}
+.gradient(@a: #fff, @b: #000){
+	background: @a; /* Old browsers */
+	background: -moz-linear-gradient(top, @a 0%, @b 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @a ), color-stop(100%, @b )); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, @a 0%, @b 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, @a 0%, @b 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, @a 0%, @b 100%); /* IE10+ */	
+	background: linear-gradient(top, @a 0%, @b 100%); /* W3C */
+}
+.box-shadow(@are){
+	-webkit-box-shadow:@arguments;
+	-moz-box-shadow:@arguments;
+	-o-box-shadow:@arguments;
+	box-shadow:@arguments;
+}
+.transition(@what : all, @length : 1s, @easing : ease-in-out, @delay : 0) {
+	-webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -o-transition: @arguments;
+    transition-property: @arguments;             
+}
+.transform(@a){
+	-webkit-transform: @a;
+}
+
+.size(@w, @h){
+	width: @w;
+	height: @h;
+}

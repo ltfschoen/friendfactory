@@ -1,0 +1,188 @@
+@import "lessentials.less";
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body, html {
+	min-height: 100%;
+	height: 100%;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*--------------------------------------------------------*/
+
+
+body{
+	background: url(../img/bg.png);
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.portrait{
+	padding: 2px 2px 3px 2px;
+	background: #fff;
+	.border-radius(3px);
+	float: left;
+	.box-shadow(0 1px 3px #000);
+}
+.clear{
+	float: left;
+}
+
+#sidebar{
+	width: 200px;
+	height: 100%;
+	background: #1b5452 url(../img/pattern_a.png);
+	border-right: 1px solid #061111;
+	.box-shadow(0 0 10px #000);
+	color: #fff;
+	position: fixed;
+	#head{
+		height: 75px;
+		.gradient(#216865, #0d2928);
+		border: 1px solid #061111;
+		border-left: none;
+		border-right: none;
+		line-height: 75px !important;
+		text-align: center;
+		a{
+			color: #eeedc7;
+			font:32px 'Trajan Pro', 'Times New Roman', serif;
+			text-shadow:0 1px 2px #000;
+			text-decoration: none;
+			position: relative;
+			&:active{
+				top: 1px;
+			}
+		}		
+	}
+	.block{
+		width: 180px;
+		padding: 10px;
+		overflow: hidden;
+		border-bottom: 1px solid #061111;
+		.box-shadow(0 1px 0 rgba(255,255,255,0.15));		
+	}
+	.block.adspace{
+		height: 75px;
+		img{
+			width: 180px;
+			height: 75px;
+			.border-radius(3px);
+			.box-shadow(0 1px 3px #000);
+		}
+	}
+	.block.userspace{
+		text-shadow:0 1px 2px rgba(0,0,0,0.75);
+		span.username{
+			display: block;
+			float: left;
+			font: bold 14px;
+			width: 130px;
+			margin: 5px 0 0 10px;
+		}
+		a{
+			color: #fff;
+			text-decoration: none;
+			margin: 5px 0 0 10px;
+			font-size: 12px;
+			font-style: italic;
+			&:hover{
+				margin-left: 11px;
+			}
+		}
+	}
+}
+
+#stream{
+	width: 400px;
+	height: 100%;
+	float: left;
+	display: block;
+	margin-left: 201px;
+}
+
+#reaction{
+	min-height: 100%;
+	margin-left: 600px;
+	min-width: 430px !important;
+	background: rgba(0,0,0,0.2);
+	.box-shadow(0 0 10px #000 inset);
+	.card{
+		margin: 20px 0 0 20px;
+	}
+}
+
+.card{
+	padding: 5px;
+	width: 170px;
+	float: left;
+	.border-radius(5px);
+	.box-shadow(0 1px 3px rgba(0,0,0,0.5));
+	background: #fff;
+	img{
+		vertical-align: baseline;
+		position: relative;
+		margin: 0;
+		padding: 0;
+		display: block;
+	}
+	.face{
+		margin-bottom: 5px;
+		width: 170px;
+		height: 170px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
