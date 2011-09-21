@@ -3,6 +3,7 @@
 	<head>
 		<title>{{ title }}</title>
 		<link rel="stylesheet" href="css/style.css" type="text/css">
+		<script src="http://code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 	
@@ -21,44 +22,44 @@
 				
 	</div>
 	<div id="reaction">
-		<div class="card">
-			<img src="http://placekitten.com/170/170" class="face">
-			<img src="img/sprite.png">
+		<div class="card_frame">
+			<div class="card front">
+				<img src="http://placekitten.com/170/170" class="face">
+				<img src="img/sprite.png">
+			</div>
+			<div class="card back">
+				Hello World
+			</div>
 		</div>
-		<div class="card">
-			<img src="http://placekitten.com/171/171" class="face">
-			<img src="img/sprite.png">
+		<div class="card_frame">
+			<div class="card front">
+				<img src="http://placekitten.com/170/170" class="face">
+				<img src="img/sprite.png">
+			</div>
+			<div class="card back">
+				Hello World
+			</div>
 		</div>
-		<div class="card">
-			<img src="http://placekitten.com/172/172" class="face">
-			<img src="img/sprite.png">
-		</div>
-		<div class="card">
-			<img src="http://placekitten.com/173/173" class="face">
-			<img src="img/sprite.png">
-		</div>
-		<div class="card">
-			<img src="http://placekitten.com/172/174" class="face">
-			<img src="img/sprite.png">
-		</div>
-		<div class="card">
-			<img src="http://placekitten.com/176/175" class="face">
-			<img src="img/sprite.png">
-		</div>
-		<div class="card">
-			<img src="http://placekitten.com/176/176" class="face">
-			<img src="img/sprite.png">
-		</div>
-		<div class="card">
-			<img src="http://placekitten.com/177/177" class="face">
-			<img src="img/sprite.png">
-		</div>
-		<div class="card">
-			<img src="http://placekitten.com/178/178" class="face">
-			<img src="img/sprite.png">
+		<div class="card_frame">
+			<div class="card front">
+				<img src="http://placekitten.com/170/170" class="face">
+				<img src="img/sprite.png">
+			</div>
+			<div class="card back">
+				Hello World
+			</div>
 		</div>
 	</div>
-		
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.card_frame').toggle(function(){
+			$(this).addClass('flip');
+		}, function(){
+			$(this).removeClass('flip');
+		});
+	});
+	</script>
 	
 	</body>
 </html>

@@ -54,7 +54,7 @@ table {
 
 
 body{
-	background: url(../img/bg.png);
+	background: url(../img/bg_dk.png);
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
@@ -140,22 +140,28 @@ body{
 	float: left;
 	display: block;
 	margin-left: 201px;
+	background: url(../img/bg.png);
+	.box-shadow(0 0 10px #000);
 }
 
 #reaction{
 	min-height: 100%;
 	margin-left: 600px;
-	min-width: 430px !important;
-	background: rgba(0,0,0,0.2);
-	.box-shadow(0 0 10px #000 inset);
-	.card{
-		margin: 20px 0 0 20px;
-	}
+	min-width: 620px !important;
+	/*background: rgba(0,0,0,0.2);*/
+}
+
+.card_frame{
+	width: 180px;
+	overflow: auto;
+	margin: 20px 0 0 20px;
+	float: left;
 }
 
 .card{
 	padding: 5px;
 	width: 170px;
+	height: 190px;
 	float: left;
 	.border-radius(5px);
 	.box-shadow(0 1px 3px rgba(0,0,0,0.5));
@@ -173,6 +179,30 @@ body{
 		height: 170px;
 	}
 }
+
+.card.front{
+	position: absolute;
+	z-index: 1;
+	-webkit-transition: all 0.5s ease-in-out 0s;	
+	-webkit-transform: rotateY(0deg);
+	-webkit-transform-style: preserve3d;
+	-webkit-backface-visibility: hidden;
+}
+.card.back{
+	position: absolute;
+	-webkit-transition: all 0.5s ease-in-out 0s;
+	-webkit-transform: rotateY(180deg);
+	-webkit-transform-style: preserve3d;
+}
+
+.card_frame.flip .card.front{
+	-webkit-transform: rotateY(180deg);
+}
+
+.card_frame.flip .card.back{
+	-webkit-transform: rotateY(0deg);	
+}
+
 
 
 
