@@ -2,22 +2,31 @@
   %table.form
     %tr
       %td
-        = f.label :name
+        = f.label :name, 'Name in Url'
         %br/
         %span.unobtrusive
           Name of the site in the url
       %td
-        = f.text_field :name, :placeholder => 'excellentsite'
+        = f.text_field :name, :placeholder => 'Lower case only, no spaces'
         = f.error_message_on :name
     %tr
       %td
         = f.label :display_name
         %br/
         %span.unobtrusive
-          Displayed on site's pages
+          Site's full human-readable name
       %td
-        = f.text_field :display_name, :placeholder => 'Excellent Site'
+        = f.text_field :display_name, :placeholder => 'Site Name'
         = f.error_message_on :display_name
+    %tr
+      %td
+        = f.label :mailer, 'Mailer email address'
+        %br/
+        %span.unobtrusive
+          Sender and Reply-to email address
+      %td
+        = f.text_field :mailer, :placeholder => 'mailer@friskyfactory.com'
+        = f.error_message_on :mailer
     %tr
       %td
         = f.label :analytics_domain_name

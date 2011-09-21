@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920044710) do
+ActiveRecord::Schema.define(:version => 20110921065942) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(:version => 20110920044710) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "css"
+    t.string   "mailer"
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true

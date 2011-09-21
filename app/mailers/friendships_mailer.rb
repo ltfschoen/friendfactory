@@ -12,7 +12,7 @@ class FriendshipsMailer < ActionMailer::Base
     @unsubscribe_href = "mailto:unsubscribe@friskyfactory.com?subject=Unsubscribe from #{@site.name} cocktails&body=To #{@site.name},%0A%0APlease don't email me any more cocktails. Thanks!%0A%0AFrom #{@poke.receiver.handle}"
     ActionMailer::Base.default_url_options[:host] = original_host
 
-    mail(:from => "mailer@friskyfactory.com", :to => email_for_environment(@poke.friend), :cc => cc_for_environment(@poke.profile), :subject => @subject) do |format|
+    mail(:from => @site.mailer, :to => email_for_environment(@poke.friend), :cc => cc_for_environment(@poke.profile), :subject => @subject) do |format|
       format.html { render :layout => false }
       format.text
     end

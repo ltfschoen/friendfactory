@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base  
 
   TemplateSiteName = 'friskyfactory'
+  DefaultMailer    = 'mailer@friskyfactory.com'
 
   validates_presence_of   :name, :display_name
   validates_uniqueness_of :name
@@ -65,6 +66,10 @@ class Site < ActiveRecord::Base
   end
   
   alias :intern :to_sym
+  
+  def mailer
+    self[:mailer] || DefaultMailer
+  end
 
   def home_wave
     waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).try(:first)
