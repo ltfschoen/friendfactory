@@ -161,12 +161,24 @@ body{
 	float: left;
 	.clear{
 		float: left;
-		width: 320px;
+		width: 310px;
+		margin:0 0 0 10px;
+		.date{
+			float: left;
+			color: #333;
+			font-size: 11px;
+			margin: 5px 0;
+		}
+		.comments a{
+			float: right;
+			color: #666;
+			font-size: 11px;
+			margin: 5px 0;
+		}
 	}
 }
 .cell{
 	width: 290px;
-	margin:0 0 0 10px;
 	padding: 10px;
 	background: #f0f0f0;
 	.box-shadow(0 1px 3px rgba(0,0,0,0.5));
@@ -220,24 +232,30 @@ body{
 .card.front{
 	position: absolute;
 	z-index: 1;
-	-webkit-transition: all 0.5s ease-in-out 0s;	
+	-webkit-transition: all 0.5s ease-in-out 0s;
+	-moz-transition: all 0.5s ease-in-out 0s;	
 	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
 	-webkit-transform-style: preserve3d;
 	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
 }
 .card.back{
 	position: absolute;
 	-webkit-transition: all 0.5s ease-in-out 0s;
 	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
 	-webkit-transform-style: preserve3d;
 }
 
 .card_frame.flip .card.front{
 	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
 }
 
 .card_frame.flip .card.back{
 	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
 }
 
 
