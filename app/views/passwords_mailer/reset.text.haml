@@ -1,9 +1,14 @@
-= "Hey #{@user.handle(@current_site)},"
+:plain
+  Hey #{@user.handle(@current_site)},
 
-A request was sent to #{@current_site.name} to reset your FriskyHands' password. To do so, click the following link:
+  A request was sent to #{@current_site.name} to reset your FriskyHands' password. To do so, click the following link:
 
-= edit_password_url(:id => @user.perishable_token, :host => @host)
+  #{edit_password_url(:id => @user.perishable_token, :host => @host)}
 
-(If you didn't request to reset your password, you can safely ignore this email).
+  (If you didn't request to reset your password, you can safely ignore this email).
 
-If you're still having trouble, email michael@friskyfactory.com
+  If you're still having trouble, email michael@friskyfactory.com
+
+  FriendFactory, LLC
+  151 First Ave, Suite 205
+  New York, NY 10003
