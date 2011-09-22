@@ -4,7 +4,7 @@
     - avatar = avatar_with_fill[1]; fill_image_tag = avatar_with_fill[0]
     - case
     - when avatar.present? && !avatar.silhouette?
-      = link_to(image_tag(avatar.url(:thumb), :site => false, :class => "thumb#{' omega' if idx == 2 }"), wave_profile_path(avatar.profile_id), :class => 'profile')
+      = link_to(image_tag(avatar.url(:thumb), :site => false, :class => "thumb#{' omega' if idx == 2 }"), wave_profile_path(avatar.profile(current_site)), :class => 'profile')
     - when avatar.present?
       = image_tag(avatar.url(:thumb), :site => false, :class => "thumb#{' omega' if idx == 2 }")
     - else

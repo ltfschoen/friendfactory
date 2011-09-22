@@ -1,7 +1,5 @@
 class Posting::Avatar < Posting::Base
 
-  attr_accessor :current_profile
-
   has_attached_file :image,
       :styles => {
           :thumb    => [ '100x100#', :jpg ],
@@ -22,12 +20,8 @@ class Posting::Avatar < Posting::Base
   
   scope :activated, where(:active => true)
 
-  def profile(site = nil)
-    site.nil? ? current_profile : waves.type(Wave::Profile).site(site).order('`waves`.`created_at` desc').limit(1).first
-  end
-
-  def profile_id(site = nil)
-    profile(site).try(:id)
+  def profile(site)
+    waves.type(Wave::Profile).site(site).order('`waves`.`created_at` desc').limit(1).first
   end
 
   def url(style = nil)
