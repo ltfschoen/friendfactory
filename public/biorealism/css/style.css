@@ -272,6 +272,31 @@ body {
   padding-bottom: 20px;
   overflow: scroll;
 }
+#stream ul {
+  margin: 20px 0 0 20px;
+}
+#stream ul li {
+  width: 32px;
+  height: 32px;
+  margin: 0 20px 0 0;
+  background: url(../img/icons.png) no-repeat;
+  background-size: 128px 32px;
+  float: left;
+  position: relative;
+}
+#stream ul li:hover {
+  cursor: pointer;
+  top: 1px;
+}
+#stream ul li.blog {
+  background-position: -32px 0;
+}
+#stream ul li.photo {
+  background-position: -64px 0;
+}
+#stream ul li.video {
+  background-position: -96px 0;
+}
 .post {
   width: 360px;
   margin: 10px 0 0 0;

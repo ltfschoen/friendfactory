@@ -156,6 +156,31 @@ body{
 		padding-bottom: 20px;
 		overflow: scroll;
 	}
+	ul{
+		margin: 20px 0 0 20px;
+		li{
+			width: 32px;
+			height: 32px;
+			margin: 0 20px 0 0;
+			background: url(../img/icons.png) no-repeat;
+			background-size: 128px 32px;
+			float: left;
+			position: relative;
+			&:hover{
+				cursor: pointer;
+				top: 1px;
+			}
+		}
+		li.blog{
+			background-position: -32px 0;
+		}
+		li.photo{
+			background-position: -64px 0;
+		}
+		li.video{
+			background-position: -96px 0;
+		}
+	}
 }
 .post{
 	width: 360px;
