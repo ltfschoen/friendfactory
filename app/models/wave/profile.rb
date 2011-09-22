@@ -1,4 +1,5 @@
 require 'tag_scrubber'
+require 'empty_avatar'
 
 class Wave::Profile < Wave::Base
 
@@ -44,7 +45,7 @@ class Wave::Profile < Wave::Base
       :source       => :resource,
       :source_type  => 'Posting::Base',
       :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true, :state => :published }},
-      :order        => '`postings`.`created_at` desc'  
+      :order        => '`postings`.`created_at` desc'
 
   has_many :friendships, :class_name => 'Friendship::Base'
   has_many :friends, :through => :friendships, :class_name => 'Wave::Profile' do
@@ -64,24 +65,26 @@ class Wave::Profile < Wave::Base
   #   inverse_friends.map{ |user| user.profile(site) }
   # end
 
-  def active_avatar
-    active_avatars.limit(1).first
+  # def active_avatar
+  #   active_avatars.limit(1).first
+  # end
+
+  def avatar(reload = false)
+    return @avatar if reload == false && defined?(@avatar)
+    if @avatar = active_avatars.limit(1).first
+      @avatar.current_profile = self
+      @avatar
+    else
+      @avatar = EmptyAvatar.new(self)
+    end
   end
 
-  def avatar
-    @avatar ||= active_avatars.limit(1).first
-  end
-
-  def avatar_url(style = :original)
-    (avatar && avatar.image.url(style)) || Posting::Avatar::EmptyAvatarUrl
-  end
-  
   def avatar?
-    avatar.present?
+    @avatar.present? && !@avatar.silhouette?
   end
         
   def avatar_id
-    avatar.try(:id)
+    @avatar.try(:id)
   end
 
   def resource

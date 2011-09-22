@@ -64,7 +64,9 @@ class Wave::ProfilesController < ApplicationController
 
   def pokes
     if @profile = Wave::Profile.scoped_by_id(params[:id]).preload(:resource).first
-      @avatar_urls = @profile.inverse_friends.type(Friendship::Poke).order('`friendships`.`created_at` desc').limit(9).preload(:active_avatars).map(&:avatar_url)
+      @avatars = @profile.inverse_friends.type(Friendship::Poke).order('`friendships`.`created_at` desc').limit(9).
+          preload(:active_avatars).
+          map{ |p| p.active_avatars.first || EmptyAvatar.new(self) }
     end
     respond_to do |format|
       format.html { render :layout => false }

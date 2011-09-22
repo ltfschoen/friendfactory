@@ -38,7 +38,7 @@ module PostingsHelper
         online = 'online' if (user.online? && (opts[:online_badge] == true))
         klass = (klass << online).compact * ' '
         
-        image_tag = image_tag(avatar.image.url(opts[:style].to_sym),
+        image_tag = image_tag(avatar.url(opts[:style].to_sym),
             :alt   => opts[:alt],
             :class => klass,
             :site  => opts[:site],

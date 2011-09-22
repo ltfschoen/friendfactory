@@ -51,6 +51,25 @@
 					if (setFocus === true) {
 						$pane.find('textarea').focus();
 					}
+				},
+				
+				pokes: function($pane) {
+					$pane.find('a.profile').bind('click', function(event) {
+						event.preventDefault();
+						$('<div class="floating"></div>')
+							.appendTo('.floating-container')
+							.load($(this).attr('href'), function() {	 			
+								$(this).position({
+									my: 'left center',
+									of: event,
+									offset: '30 0',
+									collision: 'fit'
+								})	
+							.draggable()
+							.find('div.polaroid')
+								.polaroid({ 'close-button' : true });
+						});
+					});
 				}
 			},
 

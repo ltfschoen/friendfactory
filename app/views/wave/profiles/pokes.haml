@@ -1,10 +1,12 @@
 - matrix = [ empty_thumb_image_tag, empty_thumb_image_tag, empty_thumb_image_tag(:class => 'omega') ] * 3
-- matrix.zip(@avatar_urls).in_groups_of(3) do |avatar_url_row|
-  - avatar_url_row.each_with_index do |avatar_url_with_fill, idx|
-    - avatar_url = avatar_url_with_fill[1]; fill_image_tag = avatar_url_with_fill[0]
-    - if avatar_url.present?
-      = image_tag(avatar_url, :site => false, :class => "thumb#{' omega' if idx == 2 }")
+- matrix.zip(@avatars).in_groups_of(3) do |avatar_row|
+  - avatar_row.each_with_index do |avatar_with_fill, idx|
+    - avatar = avatar_with_fill[1]; fill_image_tag = avatar_with_fill[0]
+    - case
+    - when avatar.present? && !avatar.silhouette?
+      = link_to(image_tag(avatar.url(:thumb), :site => false, :class => "thumb#{' omega' if idx == 2 }"), wave_profile_path(avatar.profile_id), :class => 'profile')
+    - when avatar.present?
+      = image_tag(avatar.url(:thumb), :site => false, :class => "thumb#{' omega' if idx == 2 }")
     - else
       = fill_image_tag
-
 = link_to_send_cocktail(@profile)
