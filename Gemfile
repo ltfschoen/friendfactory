@@ -53,6 +53,7 @@ group :development, :test do
   gem 'rspec-rails', '>= 2.5.0'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
   gem 'webrat', '>= 0.7.2'
+  gem 'sql-logging'
   # gem 'faker'
 end
 
