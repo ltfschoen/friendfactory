@@ -8,14 +8,14 @@
 	<body>
 	
 	<div id="sidebar">
-		<div id="head"><a href="">CLAYTON</a></div>
+		<div id="head"><a href="javascript:void();">CLAYTON</a></div>
 		<div class="block adspace">
 			<img src="img/ads/180-x-75.png">
 		</div>
 		<div class="block userspace">
 			<div class="portrait"><img src="http://placekitten.com/36/36"></div>		
 				<span class="username">John Doe</span>
-				<a href="">My Public Wave &raquo;</a>			
+				<a href="javascript:void();">My Public Wave &raquo;</a>			
 		</div>
 	</div>
 	<div id="stream">
@@ -28,7 +28,7 @@
 						<a href="" class="username">Mary Alice</a> - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 					</div>
 					<span class="date">Posted Monday, July 25 at 14:00</span>
-					<span class="comments"><a href="">(2 comments)</a></span>
+					<span class="comments"><a href="javascript:void();" id="0">(2 comments)</a></span>
 				</div>
 			</div>	
 			<!-- End Post -->
@@ -39,7 +39,7 @@
 				<div class="clear">
 					<iframe width="310" height="200" src="http://www.youtube.com/embed/0-jQrbQUIUo" frameborder="0" allowfullscreen></iframe>
 					<span class="date">Posted Monday, July 25 at 14:00</span>
-					<span class="comments"><a href="">(2 comments)</a></span>
+					<span class="comments"><a href="javascript:void();" id="1">(2 comments)</a></span>
 				</div>
 			</div>	
 			<!-- End Post -->
@@ -52,7 +52,7 @@
 						<a href="" class="username">Sam Burge</a> - Maecenas faucibus mollis interdum.
 					</div>
 					<span class="date">Posted Monday, July 25 at 14:00</span>
-					<span class="comments"><a href="">(2 comments)</a></span>
+					<span class="comments"><a href="javascript:void();" id="2">(2 comments)</a></span>
 				</div>
 			</div>	
 			<!-- End Post -->	
@@ -65,7 +65,7 @@
 					<img src="http://placekitten.com/90/65" class="photo">
 					<img src="http://placekitten.com/90/65" class="photo">
 					<span class="date">Posted Monday, July 25 at 14:00</span>
-					<span class="comments"><a href="">(2 comments)</a></span>
+					<span class="comments"><a href="javascript:void();" id="3">(2 comments)</a></span>
 				</div>
 			</div>	
 			<!-- End Post -->
@@ -82,14 +82,15 @@
 						<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 					</div>
 					<span class="date">Posted Monday, July 25 at 14:00</span>
-					<span class="comments"><a href="">(2 comments)</a></span>
+					<span class="comments"><a href="javascript:void();" id="4">(2 comments)</a></span>
 				</div>
 			</div>	
 			<!-- End Post -->
 			
 		</div>	
 	</div>
-	<div id="reaction">
+	
+	<div id="reaction" class="show_anyways">		
 		<div class="card_frame">
 			<div class="card front">
 				<img src="http://placekitten.com/170/170" class="face">
@@ -220,10 +221,23 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
+		
 		$('.card_frame').toggle(function(){
 			$(this).addClass('flip')
 		}, function(){
 			$(this).removeClass('flip')
+		});
+		
+		$('.comments a').click(function(){
+			var react = $('#reaction'),
+				id = $(this).attr('id')
+			react.addClass('rm');
+			$('.rm').before('<div id="reaction" class="hide">Showing results for ID '+id+'</div>');
+			$('.rm').hide(500, function(){
+				$(this).remove();
+			});
+			$('#reaction').show(500)
+			
 		});
 		
 	});

@@ -81,6 +81,7 @@ body{
 	.box-shadow(0 0 10px #000);
 	color: #fff;
 	position: fixed;
+	z-index: 100;
 	#head{
 		height: 75px;
 		.gradient(#216865, #0d2928);
@@ -147,6 +148,8 @@ body{
 	background: url(../img/bg.png);
 	.box-shadow(0 0 10px #000);
 	overflow: hidden;
+	position: relative;
+	z-index: 100;
 	#scroller{
 		width: 415px;
 		height: 100%;
@@ -220,9 +223,37 @@ body{
 
 #reaction{
 	min-height: 100%;
+	max-height: 100%;
 	margin-left: 600px;
-	min-width: 420px !important;
-	/*background: rgba(0,0,0,0.2);*/
+	width: 620px !important;
+	/*background: rgba(0,0,0,0.5);*/
+	display: none;
+	#slideout{
+		position: absolute;
+		display: block;
+		top: 0px;
+		left: 0px;
+		width: 800px;
+		height: 100%;
+		background: #ff0000;
+		z-index: 500;
+	}
+}
+#reaction.show_anyways{
+	display: block;
+}
+
+@-webkit-keyframes 'slideOut' {
+	0%{left: -620px;}
+	100%{left: 0px;}
+}
+
+.hide{
+	position: absolute;
+	top: 0px;	
+	color: #333;
+	-webkit-animation: slideOut 0.5s linear 0s;
+	left: 0px;
 }
 
 .card_frame{
@@ -282,8 +313,7 @@ body{
 .card.front{
 	position: absolute;
 	z-index: 1;
-	-webkit-transition: all 0.5s ease-in-out 0s;
-	-moz-transition: all 0.5s ease-in-out 0s;	
+	-webkit-transition: all 0.25s ease-in-out 0s;	
 	-webkit-transform: rotateY(0deg);
 	-moz-transform: rotateY(0deg);
 	-webkit-transform-style: preserve3d;
@@ -293,7 +323,7 @@ body{
 }
 .card.back{
 	position: absolute;
-	-webkit-transition: all 0.5s ease-in-out 0s;
+	-webkit-transition: all 0.25s ease-in-out 0s;
 	-webkit-transform-origin: top center;
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
