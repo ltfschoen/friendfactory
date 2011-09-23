@@ -635,6 +635,31 @@ body {
   margin: 20px 0 0 20px;
   float: left;
 }
+.card_frame.float {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  display: none;
+}
+.card_frame.float .close {
+  display: block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-weight: bold;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  z-index: 600;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer !important;
+}
 .card {
   padding: 5px;
   width: 170px;
