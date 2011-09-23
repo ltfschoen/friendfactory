@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+	$('.float').draggable();
+
 	$('.card_frame').toggle(function(){
 		$(this).addClass('flip')
 	}, function(){
