@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
-	$('.float').draggable();
+	$('.float').draggable({
+		start: function(){ $(this).find('.card').css('-webkit-transition', 'all 0s') },
+		stop: function(){ $(this).find('.card').css('-webkit-transition', 'all 0.50s') }
+	});
 
 	$('.card_frame').toggle(function(){
 		$(this).addClass('flip')
