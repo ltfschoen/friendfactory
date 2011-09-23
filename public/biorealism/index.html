@@ -21,11 +21,61 @@
 	<div id="stream">
 		<div id="scroller">
 			<ul>
-				<li class="status"></li>
+				<li class="status" onclick="newPost('status')"></li>
 				<li class="blog"></li>
 				<li class="photo"></li>
 				<li class="video"></li>
 			</ul>
+			
+			<!-- ADD STATUS -->
+			<div class="new_post status">
+				<form>
+				<textarea placeholder="Enter Text..."></textarea>
+					<div class="foot">					
+						<input type="submit" name="" value="Post" />
+						<input type="button" name="" value="Cancel" />
+					</div>
+				</form>
+			</div>
+			
+			<!-- ADD BLOG -->
+			<div class="new_post blog">
+				<form>
+					<div class="body">
+						<input type="text" name="" placeholder="Post Title" />
+						<textarea placeholder="Enter Text"></textarea>
+					</div>
+					<div class="foot">			
+						<input type="submit" name="" value="Post" />
+						<input type="button" name="" value="Cancel" />
+					</div>
+				</form>
+			</div>
+			
+			<!-- ADD PHOTO -->
+			<div class="new_post photo">
+				<form>
+					<div class="body">
+						<input type="file" name="" value="" />
+					</div>
+					<div class="foot">				
+						<input type="submit" name="" value="Post" />
+						<input type="button" name="" value="Cancel" />
+					</div>
+				</form>
+			</div>
+			
+			<!-- ADD VIDEO -->
+			<div class="new_post video">
+				<form>
+					<input type="text" name="" placeholder="Paste Video URL" />
+					<div class="foot">				
+						<input type="submit" name="" value="Post" />
+						<input type="button" name="" value="Cancel" />
+					</div>
+				</form>
+			</div>
+			
 			<!-- Post -->
 			<div class="post status">
 				<div class="portrait"><img src="http://placekitten.com/46/46"></div>
@@ -230,7 +280,6 @@
 		}, function(){
 			$(this).removeClass('flip')
 		});
-		
 		$('.comments a').click(function(){
 			var react = $('#reaction'),
 				id = $(this).attr('id')
@@ -239,8 +288,7 @@
 			$('.rm').hide(500, function(){
 				$(this).remove();
 			});
-			$('#reaction').show(500)
-			
+			$('#reaction').show(500)			
 		});
 		
 	});
