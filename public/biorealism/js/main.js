@@ -2,7 +2,8 @@ $(document).ready(function(){
 
 	$('.float').draggable({
 		start: function(){ $(this).find('.card').css('-webkit-transition', 'all 0s') },
-		stop: function(){ $(this).find('.card').css('-webkit-transition', 'all 0.50s') }
+		stop: function(){ $(this).find('.card').css('-webkit-transition', 'all 0.50s') },
+		containment: 'parent' 
 	});
 
 	$('.card_frame').toggle(function(){
@@ -10,6 +11,7 @@ $(document).ready(function(){
 	}, function(){
 		$(this).removeClass('flip')
 	});
+	
 	$('.comments a').click(function(){
 		var react = $('#reaction'),
 			id = $(this).attr('id')
