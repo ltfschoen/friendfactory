@@ -5,7 +5,7 @@ if (/chrome/.test(navigator.userAgent.toLowerCase())) {
 	jQuery.browser.safari = false;
 }
 
-if (jQuery.browser.chrome || (jQuery.browser.safari && (jQuery.browser.version === '533.22.3'))) {
+if (jQuery.browser.chrome || (jQuery.browser.safari && (parseInt(jQuery.browser.version.match(/^\d{3}/)) < 534))) {
 	Modernizr.csstransforms3d = false;
 }
 
