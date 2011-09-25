@@ -17,4 +17,5 @@ public/javascripts/*.cache.js
 test/fixtures/assets/**/*.jpg
 test/fixtures/assets/**/*.png
 *.esproj
+public/biorealism/*.esproj
 
