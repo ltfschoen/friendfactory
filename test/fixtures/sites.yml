@@ -18,3 +18,10 @@ friskyforces:
     display_name: FriskyForces
     launch: true
     invite_only: false
+
+friskyfreedom:
+    id: 4
+    name: friskyfreedom
+    display_name: FriskyFreedom
+    launch: false
+    invite_only: false

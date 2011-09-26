@@ -9,7 +9,8 @@ bert_friskyhands:
 charlie_friskyhands:
   user_id: 3
   site_id: 1
-  
+
+
 adam_postivelyfrisky:
   user_id: 1
   site_id: 2
@@ -17,3 +18,16 @@ adam_postivelyfrisky:
 bert_postivelyfrisky:
   user_id: 2
   site_id: 2
+
+
+adam_friskyfreedom:
+  user_id: 1
+  site_id: 4
+
+bert_friskyfreedom:
+  user_id: 2
+  site_id: 4
+  
+charlie_friskyfreedom:
+  user_id: 3
+  site_id: 4

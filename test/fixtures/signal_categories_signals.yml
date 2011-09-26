@@ -22,7 +22,8 @@ friskyhands_bi:
   signal_id: 6
   category_id: 2
   ordinal: 3
-  
+
+
 positivelyfrisky_male:
   signal_id: 1
   category_id: 3
@@ -62,3 +63,29 @@ positivelyfrisky_hivpoz:
   signal_id: 8
   category_id: 5
   ordinal: 2
+
+
+friskyfreedom_male:
+  signal_id: 1
+  category_id: 6
+  ordinal: 1
+  
+friskyfreedom_female:
+  signal_id: 2
+  category_id: 6
+  ordinal: 2
+
+friskyfreedom_smoker:
+  signal_id: 11
+  category_id: 7
+  ordinal: 1
+
+friskyfreedom_nonsmoker:
+  signal_id: 12
+  category_id: 7
+  ordinal: 2
+
+friskyfreedom_esmoker:
+  signal_id: 13
+  category_id: 7
+  ordinal: 3

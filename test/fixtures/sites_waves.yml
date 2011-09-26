@@ -22,6 +22,7 @@ friskyhands_site_unpublished_event_wave:
   site_id: 1
   wave_id: 7  
 
+
 positivelyfrisky_site_popular_wave:
   site_id: 2
   wave_id: 14
@@ -41,3 +42,28 @@ positivelyfrisky_site_adam_invitation_wave:
 positivelyfrisky_site_event_wave:
   site_id: 2
   wave_id: 8
+
+
+friskyfreedom_popular_wave:
+  site_id: 4
+  wave_id: 4
+
+friskyfreedom_adam_profile_wave:
+  site_id: 4
+  wave_id: 1
+
+friskyfreedom_bert_profile_wave:
+  site_id: 4
+  wave_id: 2
+
+friskyfreedom_charlie_profile_wave:
+  site_id: 4
+  wave_id: 3
+
+friskyfreedom_published_event_wave:
+  site_id: 4
+  wave_id: 5
+  
+friskyhands_unpublished_event_wave:
+  site_id: 4
+  wave_id: 7  

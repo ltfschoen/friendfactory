@@ -10,6 +10,7 @@ friskyhands_orientation:
   name: orientation
   display_name: Orientation
 
+
 positivelyfrisky_gender:
   id: 3
   site_id: 2
@@ -27,3 +28,16 @@ positivelyfrisky_hivstatus:
   site_id: 2
   name: orientation
   display_name: Orientation
+
+
+friskyfreedom_gender:
+  id: 6
+  site_id: 4
+  name: gender
+  display_name: Gender
+
+friskyfreedom_smoker:
+  id: 7
+  site_id: 4
+  name: gender
+  display_name: Gender
