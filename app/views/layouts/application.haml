@@ -5,10 +5,10 @@
     = stylesheet_link_tag 'style'
     - if Rails.env.development?
       = javascript_include_tag 'jquery', 'jquery-ui'
-    - else    
+    - else
       = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
       = javascript_include_tag 'http://code.jquery.com/ui/1.8.16/jquery-ui.min.js'
-    = javascript_include_tag 'main'
+    = javascript_include_tag 'modernizr', 'main'
   %body
     / Floating Card
     .card_frame.float
@@ -221,22 +221,3 @@
               %li.message
         .card.back
           Hello World
-    :javascript
-      $(document).ready(function(){
-      	$('.card_frame').toggle(function(){
-      		$(this).addClass('flip')
-      	}, function(){
-      		$(this).removeClass('flip')
-      	});
-      	$('.comments a').click(function(){
-      		var react = $('#reaction'),
-      			id = $(this).attr('id')
-      		react.addClass('rm');
-      		$('.rm').before('Showing results for ID '+id+'');
-      		$('.rm').hide(500, function(){
-      			$(this).remove();
-      		});
-      		$('#reaction').show(500)			
-      	});
-      	
-      });
