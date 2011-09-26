@@ -1,29 +1,22 @@
 # =============
 # Template Site
 
-if ENV['FORCE'] == "true"
-  puts "Forced deletion of signals"
-  Signal::Base.delete_all
-  Signal::Category.delete_all
-  Signal::CategorySignal.delete_all  
-end
-
-puts "   * #{Site::TemplateSiteName}"
-
-site = Site.template rescue nil
-unless site.present?
-  puts "   * creating template site"
-  site = Site.create(
+def site
+  @site ||= Site.template
+rescue
+  Site.create!(
     :name => Site::TemplateSiteName,
     :display_name => 'FriskyFactory',
     :analytics_account_number => '',
     :analytics_domain_name => '')  
-end
+end  
 
-## CSS
-file = File.join(Rails.root, 'db', 'seeds', "#{Site::TemplateSiteName}.css")
-if File.exists?(file)  
-  puts "   * #{site.name}/css"
+
+# =======
+# CSS
+
+file = File.join(Rails.root, 'db', 'seeds', "#{site.name}.css")
+if File.exists?(file)
   site.update_attribute(:css, IO.read(file))    
 end
 
@@ -35,26 +28,28 @@ def create_signal(*names)
   names.inject([]) do |memo, name|
     name, display_name = name.is_a?(Array) ? [ name.first, name.last ] : [ name, name.titleize ]
     unless signal = Signal::Base.find_by_name(name)
-      puts "   * #{name}"
-      signal = Signal::Nominal.create(:name => name, :display_name => display_name)
+      signal = Signal::Nominal.create!(:name => name, :display_name => display_name)
     end
     memo << signal
   end
 end
 
 def category_ordinal
-  @ordinal ||= 0; @ordinal += 1
+  unless defined?(@ordinal)
+    @ordinal = site.signal_categories.last.try(:ordinal) || 0
+  end
+  @ordinal += 1
 end
 
 def create_signal_category(site, name, display_name, signals)
   unless site.signal_categories.where(:name => name).first.present?
-    puts "   * #{site.name}/#{name}"
-    category = site.signal_categories.create(:name => name, :display_name => display_name, :ordinal => category_ordinal)
+    category = site.signal_categories.create!(:name => name, :display_name => display_name, :ordinal => category_ordinal)
     signals.each_with_index do |signal, idx|
-      category.categories_signals.create(:signal_id => signal.id, :ordinal => idx)
+      category.categories_signals.create!(:signal_id => signal.id, :ordinal => idx)
     end
   end
 end
+
 
 ## Gender
 signals = create_signal(
@@ -119,3 +114,11 @@ signals = create_signal(
     [ 'military_service_reserve', 'Reserve' ])
 
 create_signal_category(site, 'military_service', 'Service', signals)
+
+## Smoker
+signals = create_signal(
+    [ 'smoke_smoker', 'Smoker' ],
+    [ 'smoke_nonsmoker', 'Nonsmoker' ],
+    [ 'smoke_ecigarette', 'Cigarette Only' ])
+
+create_signal_category(site, 'smoke', 'Smoke', signals)
