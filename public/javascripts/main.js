@@ -6,11 +6,8 @@ $(document).ready(function(){
 		containment: 'parent' 
 	});
 
-	$('.card_frame').toggle(function(){
-		$(this).addClass('flip')
-	}, function(){
-		$(this).removeClass('flip')
-	});
+	// MJB: Moved card_frame to jQuery extension
+	$('.headshot').headshot()
 	
 	$('.comments a').click(function(){
 		var react = $('#reaction'),

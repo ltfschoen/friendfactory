@@ -8,7 +8,7 @@
     - else
       = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
       = javascript_include_tag 'http://code.jquery.com/ui/1.8.16/jquery-ui.min.js'
-    = javascript_include_tag 'modernizr', 'main'
+    = javascript_include_tag 'modernizr', 'jquery.headshot', 'main'
   %body
     / Floating Card
     .card_frame.float
@@ -136,7 +136,7 @@
               %a#4{:href => "javascript:void();"} (2 comments)
         / End Post
     #reaction.show_anyways
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/170/170"}
             %ul
@@ -146,7 +146,7 @@
               %li.message
         .card.back
           Hello World
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/171/171"}
             %ul
@@ -156,7 +156,7 @@
               %li.message
         .card.back
           Hello World
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/172/172"}
             %ul
@@ -166,7 +166,7 @@
               %li.message
         .card.back
           Hello World
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/180/180"}
             %ul
@@ -176,12 +176,12 @@
               %li.message
         .card.back
           Hello World
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img{:src => "http://placehold.it/170x190"}
         .card.back
           Advertisement
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/182/182"}
             %ul
@@ -191,7 +191,7 @@
               %li.message
         .card.back
           Hello World
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/199/188"}
             %ul
@@ -201,7 +201,7 @@
               %li.message
         .card.back
           Hello World
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/200/205"}
             %ul
@@ -211,7 +211,7 @@
               %li.message
         .card.back
           Hello World
-      .card_frame
+      .card_frame.headshot
         .card.front
           %img.face{:src => "http://placekitten.com/210/230"}
             %ul
