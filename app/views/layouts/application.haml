@@ -1,90 +1,242 @@
-!!! 5
-%html.application.no-js
+!!!
+%html
   %head
-    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-    %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
-    %title= @title || current_site.display_name
-
-    = stylesheet_links |
-      'reset', 'forms', '960', |
-      'friskyfactory/application', |
-      'friskyfactory/effects', |
-      'friskyfactory/jquery-ui', |
-      'friskyfactory/postings/', |
-      'friskyfactory/waves/', |
-      :media => 'screen', |
-      :cache => 'friskyfactory/application.cache'
-
-    - file_name = "friskyfactory/app/#{controller.request.path_parameters[:controller]}/#{controller_name}.css"
-    - if File.exists?("public/stylesheets/#{file_name}")
-      = stylesheet_link_tag file_name, :media => 'screen'
-      
-    = yield(:stylesheets)
-    = stylesheet_link_tag current_site.name, :media => 'screen'
-
-    - if page_css = yield(:pagecss).present?
-      :css
-        #{page_css}
-
-    / [if IE]
-      = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
-      
-    / [if lt IE 9]
-      = stylesheet_link_tag "friskyfactory/ie-8", :media => 'screen'
-
+    %title {% title %}
+    = stylesheet_link_tag 'style'
     - if Rails.env.development?
-      = javascript_include_tag 'jquery.js', 'jquery-ui.js', 'lib/jquery/jquery.tools.min.js', 'lib/pusher.js'
-      = javascript_include_tag 'debug.js'
-    - else
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
-      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'
-      = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
-      = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
-
-    = javascript_includes |
-        'lib/modernizr-1.6.min', |
-        'lib/jquery/jquery.topzindex.min', |
-        'lib/jquery/jquery.Storage', |
-        'lib/jquery/jquery.textareaCounter.plugin', |
-        'lib/jquery/autoresize.jquery.min.js', |
-        'lib/jquery/jquery.masonry.min.js', |
-        'lib/jquery/jquery.fileupload', |
-        'lib/jquery/jquery.fileupload-ui', |
-        'lib/jquery/jquery.flip', |
-        'lib/jquery/jquery.scrollTo-1.4.2-min', |
-        'lib/jquery/waypoints.min', |
-        'jquery_ujs', |
-        'lib/ff.buttonize', |
-        'lib/ff.effects', |
-        'lib/ff.nav', |
-        'lib/ff.chat', |
-        'lib/ff.polaroid', |
-        'lib/ff.ticket', |
-        'lib/ff.placehold', |
-        'app/layouts/application', |
-        'app/posting/', |
-        'waves/', |
-        :cache => 'application.cache'
-
-    - file_name = "app/#{controller.request.path_parameters[:controller]}/#{controller_name}.js"
-    - if File.exists?("public/javascripts/#{file_name}")
-      = javascript_include_tag file_name
-
-    = yield(:javascripts)    
-    - if page_js = yield(:pagejs).present?
-      :javascript
-        jQuery(function($){ #{page_js} });
-
-    / [if lt IE 9]
-      = javascript_include_tag 'ie-8', :media => 'screen'
-        
-    = csrf_meta_tag    
-    
-  %body{ :class => current_site, :'data-site_name' => current_site }
-    .floating-container.container_16.clearfix
-    .container.container_16.clearfix
-      = render :partial => "layouts/header" unless @popup.present?
-      = yield
-      = render :partial => "layouts/footer" unless @popup.present?
-    = render :partial => 'layouts/analytics'
-      
+      = javascript_include_tag 'jquery', 'jquery-ui'
+    - else    
+      = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+      = javascript_include_tag 'http://code.jquery.com/ui/1.8.16/jquery-ui.min.js'
+    = javascript_include_tag 'main'
+  %body
+    / Floating Card
+    .card_frame.float
+      .card.front
+        .close ×
+        %img.face{:src => "http://placekitten.com/170/170"}
+          %ul
+            %li.profile
+            %li.photos
+            %li.friends
+            %li.message
+      .card.back
+        Hello World
+    #sidebar
+      #head
+        %a{:href => "javascript:void();"} CLAYTON
+      .block.adspace
+        %img{:src => "http://placehold.it/180x75"}
+      .block.userspace
+        .portrait
+          %img{:src => "http://placekitten.com/136/136"}/
+        %span.username John Doe
+        %a{:href => "javascript:void();"} My Public Wave »
+    #stream
+      #scroller
+        %ul
+          %li.status{:onclick => "newPost('status')"}
+          %li.blog
+          %li.photo
+          %li.video
+        / ADD STATUS
+        .new_post.status
+          %form
+            %textarea{:placeholder => "Enter Text..."}
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / ADD BLOG
+        .new_post.blog
+          %form
+            .body
+              %input{:name => "", :placeholder => "Post Title", :type => "text"}/
+              %textarea{:placeholder => "Enter Text"}
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / ADD PHOTO
+        .new_post.photo
+          %form
+            .body
+              %input{:name => "", :type => "file", :value => ""}/
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / ADD VIDEO
+        .new_post.video
+          %form
+            %input{:name => "", :placeholder => "Paste Video URL", :type => "text"}/
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / Post
+        .post.status
+          .portrait
+            %img{:src => "http://placekitten.com/146/146"}/
+          .clear
+            .cell
+              %a.username{:href => ""} Mary Alice
+              \- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#0{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.status
+          .portrait
+            %img{:src => "http://placekitten.com/156/156"}/
+          .clear
+            %iframe{:allowfullscreen => "", :frameborder => "0", :height => "200", :src => "http://www.youtube.com/embed/0-jQrbQUIUo", :width => "310"}
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#1{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.status
+          .portrait
+            %img{:src => "http://placekitten.com/147/147"}/
+          .clear
+            .cell
+              %a.username{:href => ""} Sam Burge
+              \- Maecenas faucibus mollis interdum.
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#2{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.photos
+          .portrait
+            %img{:src => "http://placekitten.com/157/157"}/
+          .clear
+            %img.photo{:src => "http://placekitten.com/90/65"}
+              %img.photo{:src => "http://placekitten.com/90/65"}
+                %img.photo{:src => "http://placekitten.com/90/65"}
+                  %span.date Posted Monday, July 25 at 14:00
+                  %span.comments
+                    %a#3{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.advertisement
+          %img{:src => "http://placehold.it/360x80"}
+        / End Post
+        / Post
+        .post.blog
+          .portrait
+            %img{:src => "http://placekitten.com/146/146"}/
+          .clear
+            .cell
+              %h1 Lorem Ipsum
+              by
+              %a.username{:href => ""}
+                Mary Alice</a
+                %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#4{:href => "javascript:void();"} (2 comments)
+        / End Post
+    #reaction.show_anyways
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/170/170"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/171/171"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/172/172"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/180/180"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img{:src => "http://placehold.it/170x190"}
+        .card.back
+          Advertisement
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/182/182"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/199/188"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/200/205"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/210/230"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+    :javascript
+      $(document).ready(function(){
+      	$('.card_frame').toggle(function(){
+      		$(this).addClass('flip')
+      	}, function(){
+      		$(this).removeClass('flip')
+      	});
+      	$('.comments a').click(function(){
+      		var react = $('#reaction'),
+      			id = $(this).attr('id')
+      		react.addClass('rm');
+      		$('.rm').before('Showing results for ID '+id+'');
+      		$('.rm').hide(500, function(){
+      			$(this).remove();
+      		});
+      		$('#reaction').show(500)			
+      	});
+      	
+      });
