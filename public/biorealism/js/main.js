@@ -6,6 +6,21 @@ $(document).ready(function(){
 		containment: 'parent' 
 	});
 
+	$('.tags li').draggable({
+		start: function(){ $(this).css('-webkit-transform', 'scale(1.5)') },
+		stop: function(){ $(this).css('-webkit-transform', 'scale(1)') },
+		revert: true,
+		revertDuration: 150
+	});
+	
+	$('a.browse').toggle(function(){
+		$('#tag_drawer').slideDown(250);
+		$(this).html('&laquo; Hide All Tags');
+	}, function(){
+		$('#tag_drawer').slideUp(250);
+		$(this).html('Browse All Tags &raquo;');
+	});
+
 	$('.card_frame').toggle(function(){
 		$(this).addClass('flip')
 	}, function(){
