@@ -1,0 +1,271 @@
+!!!
+%html
+  %head
+    %title {% title %}
+    = stylesheet_link_tag 'style'
+    - if Rails.env.development?
+      = javascript_include_tag 'jquery', 'jquery-ui'
+    - else
+      = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+      = javascript_include_tag 'http://code.jquery.com/ui/1.8.16/jquery-ui.min.js'
+    = javascript_include_tag 'modernizr', 'jquery.headshot', 'main'
+  %body
+    / Floating Card
+    .card_frame.float
+      .card.front
+        .close ×
+        %img.face{:src => "http://placekitten.com/170/170"}
+          %ul
+            %li.profile
+            %li.photos
+            %li.friends
+            %li.message
+      .card.back
+        Hello World
+    #sidebar
+      #head
+        %a{:href => "javascript:void();"} CLAYTON
+      .block.adspace
+        %img{:src => "http://placehold.it/180x75"}
+      .block.userspace
+        .portrait
+          %img{:src => "http://placekitten.com/136/136"}/
+        %span.username John Doe
+        %a{:href => "javascript:void();"} My Public Wave »
+      %ul.tags
+        %li Hello
+        %li Lorem Ipsum
+        %li hello World
+        %li Big
+        %li lol
+        %li dolor si amet
+        %li consecutar
+      %a.browse{:href => "javascript:void();"} Browse All Tags »
+      %ul#tag_drawer.tags
+        %li Hello
+        %li Lorem Ipsum
+        %li hello World
+        %li Big
+        %li lol
+        %li dolor si amet
+        %li consecutar
+        %li Hello
+        %li Big
+        %li lol
+        %li Lorem Ipsum
+        %li hello World
+        %li dolor si amet
+        %li consecutar
+        %li Hello
+        %li Big
+        %li lol
+        %li dolor si amet
+        %li consecutar
+        %li Hello
+        %li Lorem Ipsum
+        %li hello World
+        %li Big
+        %li lol
+        %li dolor si amet
+        %li consecutar
+        %li Hello
+        %li Big
+        %li lol
+        %li Lorem Ipsum
+        %li hello World
+        %li dolor si amet
+        %li consecutar
+        %li Hello
+        %li Big
+        %li lol
+        %li dolor si amet
+        %li consecutar
+    #stream
+      #scroller
+        %ul
+          %li.status{:onclick => "newPost('status')"}
+          %li.blog
+          %li.photo
+          %li.video
+        / ADD STATUS
+        .new_post.status
+          %form
+            %textarea{:placeholder => "Enter Text..."}
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / ADD BLOG
+        .new_post.blog
+          %form
+            .body
+              %input{:name => "", :placeholder => "Post Title", :type => "text"}/
+              %textarea{:placeholder => "Enter Text"}
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / ADD PHOTO
+        .new_post.photo
+          %form
+            .body
+              %input{:name => "", :type => "file", :value => ""}/
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / ADD VIDEO
+        .new_post.video
+          %form
+            %input{:name => "", :placeholder => "Paste Video URL", :type => "text"}/
+            .foot
+              %input{:name => "", :type => "submit", :value => "Post"}/
+              %input{:name => "", :type => "button", :value => "Cancel"}/
+        / Post
+        .post.status
+          .portrait
+            %img{:src => "http://placekitten.com/146/146"}/
+          .clear
+            .cell
+              %a.username{:href => ""} Mary Alice
+              \- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#0{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.status
+          .portrait
+            %img{:src => "http://placekitten.com/156/156"}/
+          .clear
+            %iframe{:allowfullscreen => "", :frameborder => "0", :height => "200", :src => "http://www.youtube.com/embed/0-jQrbQUIUo", :width => "310"}
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#1{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.status
+          .portrait
+            %img{:src => "http://placekitten.com/147/147"}/
+          .clear
+            .cell
+              %a.username{:href => ""} Sam Burge
+              \- Maecenas faucibus mollis interdum.
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#2{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.photos
+          .portrait
+            %img{:src => "http://placekitten.com/157/157"}/
+          .clear
+            %img.photo{:src => "http://placekitten.com/90/65"}
+              %img.photo{:src => "http://placekitten.com/90/65"}
+                %img.photo{:src => "http://placekitten.com/90/65"}
+                  %span.date Posted Monday, July 25 at 14:00
+                  %span.comments
+                    %a#3{:href => "javascript:void();"} (2 comments)
+        / End Post
+        / Post
+        .post.advertisement
+          %img{:src => "http://placehold.it/360x80"}
+        / End Post
+        / Post
+        .post.blog
+          .portrait
+            %img{:src => "http://placekitten.com/146/146"}/
+          .clear
+            .cell
+              %h1 Lorem Ipsum
+              by
+              %a.username{:href => ""}
+                Mary Alice</a
+                %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+            %span.date Posted Monday, July 25 at 14:00
+            %span.comments
+              %a#4{:href => "javascript:void();"} (2 comments)
+        / End Post
+    #reaction.show_anyways
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/170/170"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/171/171"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/172/172"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/180/180"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img{:src => "http://placehold.it/170x190"}
+        .card.back
+          Advertisement
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/182/182"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/199/188"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/200/205"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World
+      .card_frame
+        .card.front
+          %img.face{:src => "http://placekitten.com/210/230"}
+            %ul
+              %li.profile
+              %li.photos
+              %li.friends
+              %li.message
+        .card.back
+          Hello World      
