@@ -14,4 +14,6 @@ db/dumps/*
 public/system
 public/stylesheets/**/*.cache.css
 public/javascripts/*.cache.js
+test/fixtures/assets/**/*.jpg
+test/fixtures/assets/**/*.png
 

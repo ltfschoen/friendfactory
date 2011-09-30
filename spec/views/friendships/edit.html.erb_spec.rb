@@ -4,7 +4,7 @@ describe "/friendships/edit.html.erb" do
   # include FriendshipsHelper
 
   before(:each) do
-    assigns[:friendship] = @friendship = stub_model(Friendship,
+    assigns[:friendship] = @friendship = stub_model(Friendship::Base,
       :new_record? => false,
       :user_id => 1,
       :buddy_id => 1

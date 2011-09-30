@@ -5,11 +5,11 @@ describe "/friendships/index.html.erb" do
 
   before(:each) do
     assigns[:friendships] = [
-      stub_model(Friendship,
+      stub_model(Friendship::Base,
         :user_id => 1,
         :buddy_id => 1
       ),
-      stub_model(Friendship,
+      stub_model(Friendship::Base,
         :user_id => 1,
         :buddy_id => 1
       )
