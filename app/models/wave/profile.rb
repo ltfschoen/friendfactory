@@ -13,7 +13,7 @@ class Wave::Profile < Wave::Base
   # Custom Signals
   delegate :deafness, :hiv_status, :board_type, :military_service, :to => :resource
   
-  delegate :email, :admin, :admin?, :to => :user
+  delegate :email, :emailable?, :admin, :admin?, :to => :user
   
   before_validation :'resource.present?'
   before_update     :'resource.save'  

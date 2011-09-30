@@ -41,6 +41,71 @@ describe FriendshipsController do
       assigns[:friendship].should equal(mock_friendship)
     end
   end
+  
+  describe "POST poke" do
+    before(:each) do
+      controller.stub(:current_user).and_return(stub_model(User))
+    end
+    
+    describe "receiver id" do      
+      it "does exist" do
+        poke = double.as_null_object
+        controller.stub_chain(:current_site, :waves, :type, :exists?).and_return(true)
+        controller.stub_chain(:current_profile, :toggle_poke).and_return(poke)
+        FriendshipsMailer.stub_chain(:new_poke_mail, :deliver)
+        poke.should_receive(:present?).and_return(true)
+        post :poke, :format => :json
+        response.body.should == { :poked => true }.to_json
+      end
+      
+      it "does not exist" do
+        controller.stub_chain(:current_site, :waves, :type, :exists?).and_return(false)
+        post :poke, :format => :json
+        response.body.should == { :poked => false }.to_json
+      end
+    end
+    
+    describe "email" do
+      let(:profile) { stub_model(Wave::Profile) }
+      before(:each) do
+        poke = stub_model(Friendship::Poke, :receiver => profile)        
+        controller.stub_chain(:current_site, :waves, :type, :exists?).and_return(true)
+        controller.stub_chain(:current_profile, :toggle_poke).and_return(poke)
+      end
+
+      it "is sent if receiver is emailable" do
+        profile.should_receive(:emailable?).and_return(true)
+        FriendshipsMailer.should_receive(:new_poke_mail).and_return(double.as_null_object)
+        post :poke
+      end
+
+      it "isn't sent if receiver isn't emailable" do
+        profile.should_receive(:emailable?).and_return(false)
+        FriendshipsMailer.should_not_receive(:new_poke_mailer)
+        post :poke
+      end
+    end
+    
+    describe "render JSON" do
+      before(:each) do
+        controller.stub_chain(:current_site, :waves, :type, :exists?).and_return(true)        
+      end
+      it "sends false if not poked" do
+        controller.stub_chain(:current_profile, :toggle_poke).and_return(nil)
+        post :poke, :format => :json
+        response.body.should == { :poked => false }.to_json
+      end
+      
+      it "sends true if poked" do
+        poke = double.as_null_object
+        controller.stub_chain(:current_profile, :toggle_poke).and_return(poke)
+        FriendshipsMailer.stub_chain(:new_poke_mail, :deliver)
+        poke.should_receive(:present?).and_return(true)
+        post :poke, :format => :json
+        response.body.should == { :poked => true }.to_json
+      end
+    end
+  end
 
   describe "POST create" do
 
