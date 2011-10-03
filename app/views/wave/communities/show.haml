@@ -1,8 +1,244 @@
-.wave.clearfix[@wave]
-  .grid_6.push_5
-    = render :partial => 'nav'
-  .grid_16
-    = render :partial => 'tab_content'
-  .grid_16#postings-container
-    = render_postings @postings
-  = will_paginate @postings, :class => 'grid_16 pagination append-top'
+=# render :partial => 'nav'
+=# render :partial => 'tab_content'
+=# will_paginate @postings, :class => 'grid_16 pagination append-top'
+
+
+#scroller[@wave]
+  %ul#button-bar
+    %li.status{:onclick => "newPost('status')"}
+    %li.blog
+    %li.photo
+    %li.video
+  / ADD STATUS
+  .new_post.status
+    %form
+      %textarea{:placeholder => "Enter Text..."}
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  / ADD BLOG
+  .new_post.blog
+    %form
+      .body
+        %input{:name => "", :placeholder => "Post Title", :type => "text"}/
+        %textarea{:placeholder => "Enter Text"}
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  / ADD PHOTO
+  .new_post.photo
+    %form
+      .body
+        %input{:name => "", :type => "file", :value => ""}/
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  / ADD VIDEO
+  .new_post.video
+    %form
+      %input{:name => "", :placeholder => "Paste Video URL", :type => "text"}/
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+
+  %ul#postings
+    - @postings.each do |posting|
+      %li= render_posting(posting)
+
+  / Post
+  .post.multiple.photos
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/157/157"}/
+    .clear
+      .photo
+        %img{:src => "http://placekitten.com/300/220"}/
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#3{:href => "javascript:void();"} (2 comments)
+  / End Post
+  
+  / Post
+  .post.map
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/146/146"}/
+    .clear
+      .cell
+        .overlay
+        %img.map{:src => "/images/map_placeholder.png"}
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#4{:href => "javascript:void();"} (2 comments)
+  / End Post
+  
+  / Post
+  .post.signal
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/122/122"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Jane McNeil
+        is now a member
+      %span.date Monday, July 29 at 14:00
+      %span.comments
+        %a#0{:href => "javascript:void();"} (2 comments)
+  / End Post
+
+  / Post
+  .post.status
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/146/146"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Mary Alice
+        \- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#0{:href => "javascript:void();"} (2 comments)
+  / End Post
+  
+  / Post
+  .post.tweet
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/122/122"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Marty McFly:
+        Lorem ipsum dolar si...
+      %span.date Monday, July 29 at 14:00
+      %span.comments
+        %a#0{:href => "javascript:void();"} (2 comments)
+  / End Post
+  / Post
+  .post
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/156/156"}/
+    .clear
+      %iframe{:allowfullscreen => "", :frameborder => "0", :height => "200", :src => "http://www.youtube.com/embed/0-jQrbQUIUo", :width => "310"}
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#1{:href => "javascript:void();"} (2 comments)
+  / End Post
+  / Post
+  .post.photos
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/157/157"}/
+    .clear
+      .photo
+        %img{:src => "http://placekitten.com/301/221"}/
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#3{:href => "javascript:void();"} (2 comments)
+  / End Post
+  / Post
+  .post.status
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/147/147"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Sam Burge
+        \- Maecenas faucibus mollis interdum.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#2{:href => "javascript:void();"} (2 comments)
+  / End Post
+  
+  / Post
+  .post.advertisement
+    %img{:src => "http://placehold.it/360x80"}
+  / End Post
+  
+  / Post
+  .post.blog
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "http://placekitten.com/146/146"}/
+    .clear
+      .cell
+        %h1 Lorem Ipsum
+        by
+        %a.username{:href => ""} Mary Alice
+        %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit...
+        %p{:style => "text-align: center;"}
+          %a{:href => ""} View Full Post »
+      .torn
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#4{:href => "javascript:void();"} (2 comments)
+  / End Post
+        
+  / Post
+  .post.status
+    .portrait
+      %img{:src => "http://placekitten.com/146/146"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Mary Alice
+        \- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#0{:href => "javascript:void();"} (2 comments)
+  / End Post
+  
+  / Post
+  .post.status
+    .portrait
+      %img{:src => "http://placekitten.com/156/156"}/
+    .clear
+      %iframe{:allowfullscreen => "", :frameborder => "0", :height => "200", :src => "http://www.youtube.com/embed/0-jQrbQUIUo", :width => "310"}
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#1{:href => "javascript:void();"} (2 comments)
+  / End Post
+  
+  / Post
+  .post.status
+    .portrait
+      %img{:src => "http://placekitten.com/147/147"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Sam Burge
+        \- Maecenas faucibus mollis interdum.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#2{:href => "javascript:void();"} (2 comments)
+  / End Post
+  
+  / Post
+  .post.multi-photos
+    .portrait
+      %img{:src => "http://placekitten.com/157/157"}/
+    .clear
+      %img.photo{:src => "http://placekitten.com/90/65"}
+      %img.photo{:src => "http://placekitten.com/90/65"}
+      %img.photo{:src => "http://placekitten.com/90/65"}
+        %span.date Posted Monday, July 25 at 14:00
+        %span.comments
+          %a#3{:href => "javascript:void();"} (2 comments)
+  / End Post
+  / Post
+  .post.advertisement
+    %img{:src => "http://placehold.it/360x80"}
+  / End Post
+  / Post
+  .post.blog
+    .portrait
+      %img{:src => "http://placekitten.com/146/146"}/
+    .clear
+      .cell
+        %h1 Lorem Ipsum
+        by
+        %a.username{:href => ""}
+          Mary Alice</a
+          %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#4{:href => "javascript:void();"} (2 comments)
+  / End Post

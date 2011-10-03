@@ -1,0 +1,41 @@
+#sidebar .tags li {
+  height: 12px;
+  padding: 4px 10px;
+  margin: 10px 0px 0px 20px;
+  font: 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  background: url(/images/tag.png);
+  float: left;
+  position: relative;
+  border-right: 1px solid #772015;
+  cursor: pointer;
+  -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+#sidebar .tags li:before {
+  content: " ";
+  display: block;
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: -14px;
+  background: url(/images/point.png);
+}
+#sidebar #tag_drawer {
+  overflow: auto;
+  width: 200px;
+  max-height: 250px;
+  padding: 0 0 10px 0;
+  background: url(/images/dark.png);
+  display: none;
+  border: 1px solid #051111;
+  border-left: none;
+  border-right: none;
+  -webkit-box-shadow: 0 0 10px #000000 inset;
+  -moz-box-shadow: 0 0 10px #000000 inset;
+  -o-box-shadow: 0 0 10px #000000 inset;
+  box-shadow: 0 0 10px #000000 inset;
+}

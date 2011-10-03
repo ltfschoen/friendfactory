@@ -1,5 +1,12 @@
-.posting[post_it]
-  .post_it.canvas
-    .content
-      = avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info(current_site).gender)
-      %p.subject= post_it.subject
+.posting.post.status[post_it]
+  .remove{:title => "Remove this post"} ×
+  .portrait
+    %img{:src => "http://placekitten.com/146/146"}/
+    =# avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info(current_site).gender)
+  .clear
+    .cell
+      %a.username{:href => ""} Mary Alice
+      \- #{post_it.subject}
+    %span.date Posted Monday, July 25 at 14:00
+    %span.comments
+      %a#0{:href => "javascript:void();"} (2 comments)

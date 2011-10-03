@@ -1,0 +1,24 @@
+/*----------------------------------------*\
+|	Built with the Lessentials Framework   |
+|	       Created by Arron Hunt           |
+| 	          copyright 2011               |
+\*----------------------------------------*/
+.new_post.video input[type="text"] {
+  width: 340px;
+  height: 30px;
+  padding: 10px;
+  margin: 0 20px;
+  resize: none;
+  border: none;
+  background: #fff;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}

@@ -1,0 +1,11 @@
+.post.multi-photos .photo {
+  border: 2px solid #fff;
+  margin: 0 6px 0 0;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  width: 90px;
+  height: 65px;
+}

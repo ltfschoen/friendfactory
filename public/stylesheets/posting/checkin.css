@@ -1,0 +1,42 @@
+.post.map .cell {
+  width: 310px;
+  height: 230px;
+  background: #fff;
+  /*box-shadow: 0px 1px 3px #444;*/
+
+}
+.post.map .cell .map {
+  margin: 5px;
+}
+.post.map .cell:before {
+  width: 250px;
+  height: 100px;
+  display: block;
+  position: absolute;
+  top: 135px;
+  left: 80px;
+  box-shadow: 0px 0px 10px 2px #444;
+  content: " ";
+  -webkit-transform: rotate(-2deg);
+  z-index: -5;
+}
+.post.map .cell:after {
+  width: 250px;
+  height: 100px;
+  display: block;
+  position: absolute;
+  top: 135px;
+  left: 120px;
+  box-shadow: 0px 0px 10px 2px #444;
+  content: " ";
+  -webkit-transform: rotate(2deg);
+  z-index: -5;
+}
+.post.map .cell .overlay {
+  width: 310px;
+  height: 230px;
+  position: absolute;
+  top: 10px;
+  left: 70px;
+  background: url(/images/overlay.png);
+}

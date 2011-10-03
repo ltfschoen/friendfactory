@@ -1,0 +1,78 @@
+/*----------------------------------------*\
+|	Built with the Lessentials Framework   |
+|	       Created by Arron Hunt           |
+| 	          copyright 2011               |
+\*----------------------------------------*/
+.new_post.photo .body {
+  width: 360px;
+  padding: 20px 0;
+  margin: 0 20px;
+  text-align: center;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  position: relative;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+}
+.post.photos .photo {
+  background: #fff;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  width: 310px;
+  height: 230px;
+  float: left;
+}
+.post.photos .photo img {
+  width: 300px;
+  height: 220px;
+  margin: 5px;
+}
+.multiple .photo:before {
+  width: 310px;
+  height: 230px;
+  background: #fff;
+  content: " ";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: rotate(-2deg);
+  top: 10px;
+  left: 75px;
+  z-index: -5;
+}
+.multiple .photo:after {
+  width: 310px;
+  height: 230px;
+  background: #fff;
+  content: " ";
+  display: block;
+  position: relative;
+  z-index: 10;
+  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: rotate(2deg);
+  top: -235px;
+  left: 0px;
+  z-index: -5;
+}
+.multiple .photo:hover:before {
+  -webkit-transform: rotate(-3deg);
+}
+.multiple .photo:hover:after {
+  -webkit-transform: rotate(3deg);
+}

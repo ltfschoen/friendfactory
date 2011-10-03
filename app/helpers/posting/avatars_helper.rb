@@ -1,5 +1,9 @@
 module Posting::AvatarsHelper
   
+  def thumb_avatar_image_tag(avatar, opts)
+    image_tag avatar.url(:thumb), wave_profile_path(avatar.profile(current_site)), :size => '32x32'
+  end
+  
   def placeholder_image_tag(opts = {})
     css_class = [ 'placeholder', opts.delete(:class) ].compact * ' '
     image_tag 'friskyfactory/silhouette-q.gif', opts.merge(:site => false, :class => css_class)

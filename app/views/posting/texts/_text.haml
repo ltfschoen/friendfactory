@@ -1,6 +1,16 @@
-.posting[text]
-  .text.canvas
-    .content
+.posting.post.blog[text]
+  .portrait
+    %img{:src => "http://placekitten.com/146/146"}/
+  .clear
+    .cell
       - if text.subject.present?
         %h1= text.subject
-      = text.body || '&nbsp'.html_safe
+      by
+      = link_to text.user.handle(current_site), wave_profile_path(text.user.profile(current_site)), :class => 'username'
+      %p= text.body || '&nbsp'.html_safe
+      %p{:style => "text-align: center;"}
+        %a{:href => ""} View Full Post »
+    .torn
+    %span.date Posted Monday, July 25 at 14:00
+    %span.comments
+      %a#4{:href => "javascript:void();"} (2 comments)

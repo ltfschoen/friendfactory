@@ -1,7 +1,16 @@
-popular_wave_text_posting:
+# Community Wave
+
+community_wave_text_posting:
   wave_id: 4
   resource_id: 1
   resource_type: Posting::Base
+
+community_wave_post_it_posting:
+  wave_id: 4
+  resource_id: 2
+  resource_type: Posting::Base
+
+# Community Wave
 
 adam_invitation_wave_invitation_posting_1:
   wave_id: 6

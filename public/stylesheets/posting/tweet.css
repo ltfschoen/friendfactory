@@ -1,0 +1,13 @@
+.post.tweet .cell {
+  background: url(/images/ribbon_blue.png);
+  width: 275px;
+  height: 28px;
+  padding: 14px 0 0 35px;
+  color: #fff;
+  font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  text-shadow: 0 1px 1px #000;
+  box-shadow: -2px 1px 3px rgba(0, 0, 0, 0.25);
+}
+.post.tweet .cell a {
+  color: #fff;
+}

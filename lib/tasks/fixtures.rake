@@ -2,7 +2,7 @@ namespace :ff do
   namespace :fixtures do
     
     desc "Load friskyfactory fixtures"
-    task :load => [ :'load:models', :'load:taggables', :'load:avatars', :'load:photos', :'load:assets', :'ff:db:seed' ] # ts:rebuild
+    task :load => [ :'ff:db:seed', :'load:models', :'load:taggables', :'load:avatars', :'load:photos', :'load:assets' ] # ts:rebuild
     
     namespace :load do
       task :models do
@@ -54,7 +54,7 @@ namespace :ff do
 
         require 'active_record/fixtures'
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)        
-        if wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)          
+        if false && wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)          
           files_grouped_by_first_name.each do |files_by_first_name|
             if user = UserInfo.find_by_first_name(files_by_first_name.first).try(:user)
               wave.postings << new_album_with_photos(user, files_by_first_name.last)
@@ -74,9 +74,7 @@ namespace :ff do
         
         def site_css(site_name)
           file = File.join(site_asset_dir, site_name, "#{site_name}.css")
-          if File.exists?(file)
-            File.read(file)
-          end
+          File.read(file) if File.exists?(file)
         end
 
         def site_asset_paths(site_name)
