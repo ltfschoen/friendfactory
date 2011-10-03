@@ -330,6 +330,7 @@ a:hover {
   float: left;
   display: block;
   margin-left: 201px;
+  padding-top: 10px;
   background: url(/images/bg.png);
   -webkit-box-shadow: 0 0 10px #000000;
   -moz-box-shadow: 0 0 10px #000000;

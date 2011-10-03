@@ -3,7 +3,9 @@
   %head
     %title {% title %}
     = stylesheet_link_tag |
+        'application', |
         'layouts/community', |
+        'layouts/community-nav', |
         'layouts/tags', |
         'posting/ads', |
         'posting/blog', |
@@ -16,11 +18,17 @@
         'posting/video'
 
     - if Rails.env.development?
-      = javascript_include_tag 'jquery', 'jquery-ui'
+      = javascript_include_tag 'jquery'
     - else
       = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
-      = javascript_include_tag 'http://code.jquery.com/ui/1.8.16/jquery-ui.min.js'
-    = javascript_include_tag 'modernizr', 'jquery.headshot', 'main'
+      
+    = javascript_include_tag |
+        'modernizr', |
+        'jquery.headshot', |
+        'jquery.effects', |
+        'application', |
+        'main', |
+        'community'
     
   %body
     / Floating Card
@@ -40,12 +48,14 @@
         %a{:href => "javascript:void();"} CLAYTON
       .block.adspace
         %img{:src => "http://placehold.it/180x75"}
-      .block.userspace
-        .portrait
-          %img{:src => "http://placekitten.com/136/136"}/
-        %span.username John Doe
-        %a{:href => "javascript:void();"} My Public Wave »
-
+      
+      - if false
+        .block.userspace
+          .portrait
+            %img{:src => "http://placekitten.com/136/136"}/
+          %span.username John Doe
+          %a{:href => "javascript:void();"} My Public Wave »
+      
       .block.userspace
         .portrait
           %img{:src => "http://placekitten.com/136/136"}/
@@ -59,139 +69,142 @@
           %li.buddies
       %input{:name => "search", :placeholder => "Search...", :type => "text"}/
         
-      %ul.tags
-        %li Hello
-        %li Lorem Ipsum
-        %li hello World
-        %li Big
-        %li lol
-        %li dolor si amet
-        %li consecutar
-      %a.browse{:href => "javascript:void();"} Browse All Tags »
-      %ul#tag_drawer.tags
-        %li Hello
-        %li Lorem Ipsum
-        %li hello World
-        %li Big
-        %li lol
-        %li dolor si amet
-        %li consecutar
-        %li Hello
-        %li Big
-        %li lol
-        %li Lorem Ipsum
-        %li hello World
-        %li dolor si amet
-        %li consecutar
-        %li Hello
-        %li Big
-        %li lol
-        %li dolor si amet
-        %li consecutar
-        %li Hello
-        %li Lorem Ipsum
-        %li hello World
-        %li Big
-        %li lol
-        %li dolor si amet
-        %li consecutar
-        %li Hello
-        %li Big
-        %li lol
-        %li Lorem Ipsum
-        %li hello World
-        %li dolor si amet
-        %li consecutar
-        %li Hello
-        %li Big
-        %li lol
-        %li dolor si amet
-        %li consecutar
+      - if false
+        %ul.tags
+          %li Hello
+          %li Lorem Ipsum
+          %li hello World
+          %li Big
+          %li lol
+          %li dolor si amet
+          %li consecutar
+        %a.browse{:href => "javascript:void();"} Browse All Tags »
+        %ul#tag_drawer.tags
+          %li Hello
+          %li Lorem Ipsum
+          %li hello World
+          %li Big
+          %li lol
+          %li dolor si amet
+          %li consecutar
+          %li Hello
+          %li Big
+          %li lol
+          %li Lorem Ipsum
+          %li hello World
+          %li dolor si amet
+          %li consecutar
+          %li Hello
+          %li Big
+          %li lol
+          %li dolor si amet
+          %li consecutar
+          %li Hello
+          %li Lorem Ipsum
+          %li hello World
+          %li Big
+          %li lol
+          %li dolor si amet
+          %li consecutar
+          %li Hello
+          %li Big
+          %li lol
+          %li Lorem Ipsum
+          %li hello World
+          %li dolor si amet
+          %li consecutar
+          %li Hello
+          %li Big
+          %li lol
+          %li dolor si amet
+          %li consecutar
+          
     #stream
       = yield
     #reaction.show_anyways
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/170/170"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/171/171"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/172/172"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/180/180"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World
-      .card_frame
-        .card.front
-          %img{:src => "http://placehold.it/170x190"}
-        .card.back
-          Advertisement
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/182/182"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/199/188"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/200/205"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World
-      .card_frame
-        .card.front
-          %img.face{:src => "http://placekitten.com/210/230"}
-            %ul
-              %li.profile
-              %li.photos
-              %li.friends
-              %li.message
-        .card.back
-          Hello World      
+      - if false
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/170/170"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/171/171"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/172/172"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/180/180"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World
+        .card_frame
+          .card.front
+            %img{:src => "http://placehold.it/170x190"}
+          .card.back
+            Advertisement
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/182/182"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/199/188"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/200/205"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World
+        .card_frame
+          .card.front
+            %img.face{:src => "http://placekitten.com/210/230"}
+              %ul
+                %li.profile
+                %li.photos
+                %li.friends
+                %li.message
+          .card.back
+            Hello World

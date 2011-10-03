@@ -1,12 +1,13 @@
+- user = text.user
 .posting.post.blog[text]
   .portrait
-    %img{:src => "http://placekitten.com/146/146"}/
+    = thimble_link_to_profile(user)
   .clear
     .cell
       - if text.subject.present?
         %h1= text.subject
       by
-      = link_to text.user.handle(current_site), wave_profile_path(text.user.profile(current_site)), :class => 'username'
+      = link_to_profile(user)
       %p= text.body || '&nbsp'.html_safe
       %p{:style => "text-align: center;"}
         %a{:href => ""} View Full Post »

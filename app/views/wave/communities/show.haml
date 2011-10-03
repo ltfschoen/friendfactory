@@ -1,14 +1,16 @@
-=# render :partial => 'nav'
-=# render :partial => 'tab_content'
 =# will_paginate @postings, :class => 'grid_16 pagination append-top'
 
 
 #scroller[@wave]
+  = render :partial => 'nav'
+  = render :partial => 'tab_content'
+  
   %ul#button-bar
     %li.status{:onclick => "newPost('status')"}
     %li.blog
     %li.photo
     %li.video
+    
   / ADD STATUS
   .new_post.status
     %form

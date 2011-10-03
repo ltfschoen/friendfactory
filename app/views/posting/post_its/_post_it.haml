@@ -1,12 +1,12 @@
+- user = post_it.user
 .posting.post.status[post_it]
   .remove{:title => "Remove this post"} ×
-  .portrait
-    %img{:src => "http://placekitten.com/146/146"}/
-    =# avatar_image_tag(post_it.user, :style => :thumb, :align => 'left', :anonymous => false, :gender => post_it.user.user_info(current_site).gender)
+  .portrait  
+    = thimble_link_to_profile(user)
   .clear
     .cell
-      %a.username{:href => ""} Mary Alice
+      = link_to_profile(user)
       \- #{post_it.subject}
     %span.date Posted Monday, July 25 at 14:00
     %span.comments
-      %a#0{:href => "javascript:void();"} (2 comments)
+      %a#0{:href => "#"} (2 comments)
