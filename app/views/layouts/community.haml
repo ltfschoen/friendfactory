@@ -121,6 +121,8 @@
           
     #stream
       = yield
+      - if Rails.env.development?
+        #footnotes_holder{ :style => 'display:none' }
     #reaction.show_anyways
       - if false
         .card_frame

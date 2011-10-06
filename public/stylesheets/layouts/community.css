@@ -326,7 +326,7 @@ a:hover {
 }
 #stream {
   width: 400px;
-/*  height: 100%;*/
+  height: 100%;
   float: left;
   display: block;
   margin-left: 201px;
@@ -339,10 +339,11 @@ a:hover {
   overflow: hidden;
   position: relative;
   z-index: 100;
+  overflow: scroll;
 }
 #stream #scroller {
   width: 415px;
-/*  height: 100%;*/
+  height: 100%;
   padding-bottom: 20px;
   overflow: scroll;
 }
