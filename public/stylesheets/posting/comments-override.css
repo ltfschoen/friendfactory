@@ -1,0 +1,14 @@
+.comment_box .comment {
+  min-height: 24px;
+}
+
+.comment_box .comment p {
+  margin-bottom: 0px;
+}
+
+.comment_box .reply a {
+  float: right;
+  color: #666;
+  font-size: 11px;
+  margin: 5px;
+}

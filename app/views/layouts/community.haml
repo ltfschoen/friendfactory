@@ -3,8 +3,10 @@
   %head
     %title {% title %}
     = stylesheet_link_tag |
+        'application', |
         'layouts/reset', |
         'layouts/community/base', |
+        'layouts/community/base-override', |
         'layouts/community/sidebar', |
         'layouts/community/reaction', |
         'layouts/community/post_reaction', |
@@ -12,6 +14,7 @@
         'posting/blog', |
         'posting/checkin', |
         'posting/comments', |
+        'posting/comments-override', |
         'posting/itinerary', |
         'posting/multi-photos', |
         'posting/new_post', |
@@ -19,6 +22,7 @@
         'posting/portrait', |
         'posting/portrait-override', |
         'posting/post', |
+        'posting/post-override', |
         'posting/signal', |
         'posting/status', |
         'posting/status-override', |
@@ -26,9 +30,10 @@
         'posting/tweet', |
         'posting/video', |
       :media => 'screen', |
-      :cache => 'layouts/community/cache' if true
+      :cache => 'layouts/community/cache'
 
     - if Rails.env.development?
+      = stylesheet_link_tag 'development'
       = javascript_include_tag 'jquery'
     - else
       = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'

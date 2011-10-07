@@ -32,6 +32,26 @@ comment_posting_1:
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
+comment_posting_1a:
+  id: 111
+  type: Posting::Comment
+  parent_id: 11
+  user_id: 2
+  body: Comment No. 1a
+  state: published
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
+comment_posting_1b:
+  id: 112
+  type: Posting::Comment
+  parent_id: 11
+  user_id: 2
+  body: Comment No. 1b
+  state: published
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
 comment_posting_2:
   id: 12
   type: Posting::Comment

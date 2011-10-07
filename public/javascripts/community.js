@@ -1,5 +1,11 @@
 jQuery(function($) {
 
+	var removeCurrentReaction = function() {
+		$('.post_frame.active')
+			.removeClass('active')
+			.find('.reaction').fadeOut('fast', function() { $(this).html(''); });
+	};
+	
 	$.each($('.post_frame'), function() {
 		var post = $(this).find('.post').height();
 		$(this).height(post+20);
@@ -22,16 +28,37 @@ jQuery(function($) {
 	// 	});
 	// });
 	
-	$('.comments a').live('ajax:success', function(xhr, data) {
-		var $this = $(this);
+	$('.comments a')
+		.live('ajax:beforeSend', function() {
+			if ($(this).closest('.post_frame').hasClass('active')) return false;			
+		})
 		
-		$('.post_frame.active')
-			.removeClass('active')
-			.find('.reaction').html('');
-			
-		$this.closest('.post_frame')
-			.addClass('active')
-			.find('.reaction').html(data);
+		.live('ajax:success', function(xhr, data) {
+			var $this = $(this);
+			removeCurrentReaction();		
+			$this.closest('.post_frame').addClass('active')
+				.find('.reaction').html(data)
+					.fadeIn('fast', function() {
+						$(this).find('.comment_box:first textarea').focus();
+					});				
+	});
+
+	$('.comment_box .reply a').live('ajax:success', function(xhr, data) {
+		$(this).closest('.comment_box')
+			.after(data)
+			.next('.comment_box.nested').find('textarea').focus();
+	});
+
+	$('.reaction').live('click', function(event) {
+		if (event.target.value === 'Cancel') {
+			removeCurrentReaction();
+			return false;
+		}
+	});
+	
+	$('.comment_box.nested input.cancel').live('click', function() {
+		$(this).closest('.comment_box').remove();
+		return false;
 	});
 	
 	// $('.nav-container')

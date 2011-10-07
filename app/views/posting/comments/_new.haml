@@ -1,11 +1,11 @@
 - if current_user
-  .posting.posting_comment.form
-    = form_for Posting::Comment.new, :url => posting_comments_path(posting), :html => { :id => "posting_#{posting.id}_new_comment" }, :remote => true do |f|
-      .body
-        = f.text_area :body, :maxlength => 130
-        .button-bar
-          = f.submit 'OK'
-          = f.button 'Cancel', :class => 'cancel'
-      .footer
-        &nbsp;
-    = link_to_new_comment(posting)
+  - nested = posting[:parent_id].present?
+  %div{ :class => [ 'comment_box', nested && 'nested' ]}
+    .portrait= thimble_link_to_profile(posting.user)
+    = form_for Posting::Comment.new, :url => posting_comments_path(posting), :html => { :id => "#{dom_id(posting)}_new_comment" }, :remote => true do |f|
+      = f.text_area :body, :placeholder => "Write a comment..."
+      .foot
+        - if nested
+          %span.reply_to In response to #{posting.user.handle(current_site)}
+        = f.submit 'OK'
+        = f.cancel 'Cancel'

@@ -8,4 +8,4 @@
       = image_tag(album.photos.limit(1).first.image.url(:h4x6))
     %span.date Posted #{distance_of_time_in_words_to_now(proxy.created_at)} ago
     = link_to_comments(album.postings.published.count, posting_comments_path(proxy))
-.reaction
+.reaction.hidden

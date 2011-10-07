@@ -1,32 +1,12 @@
 - if @comment.present? && @comment.valid?
   :plain
     var
-      $posting = $("##{dom_id(@comment.parent)}"),
-      $container = $posting.closest('.posting-container'),
-      $comments = $container.find('.posting_comments'),
+      $form = $("form##{dom_id(@comment.parent)}_new_comment"),
+      $preceding = $form.closest('.comment_box'),
       $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
 
-    $container
-      .find('.posting_comment form')
-        .css({ opacity: 0.0 })
-        .trigger('reset')
-        .slideUp(function() {       
-          $container.find('a.new_posting_comment')
-            .delay(600)
-            .fadeTo('fast', 1.0);
-        });
-
-    $comment
-      .css({ opacity: 0.0 })
-      .appendTo($comments)
-      .wrap('<li/>');
-    
-    $comments.masonry({ appendedContent: $comment.closest('li') }, function() {
-        $comment.delay(300).fadeTo('fast', 1.0);
-      });
-
-    $.waypoints('refresh');
-        
+    $preceding.after($comment);
+    $form[0].reset();
 - else
   :plain
     $('.flash')

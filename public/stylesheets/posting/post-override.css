@@ -1,0 +1,17 @@
+.post .clear .comments a,
+.post .clear .date {
+	padding: 3px 6px;
+}
+
+.post_frame.active .post .clear .comments a {
+	background-color: #666;
+	color: #FFF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;	
+}
+
+.post_frame.active .post .clear .comments a {
+	text-decoration: none;
+}
