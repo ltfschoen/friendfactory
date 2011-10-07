@@ -10,7 +10,17 @@ community_wave_post_it_posting:
   resource_id: 2
   resource_type: Posting::Base
 
-# Community Wave
+community_wave_signal_posting:
+  wave_id: 4
+  resource_id: 7
+  resource_type: Posting::Base
+
+community_wave_tweet_posting:
+  wave_id: 4
+  resource_id: 8
+  resource_type: Posting::Base
+
+# Invitiation Wave
 
 adam_invitation_wave_invitation_posting_1:
   wave_id: 6

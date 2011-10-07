@@ -1,3 +1,5 @@
+# Text
+
 text_posting:
   id: 1
   type: Posting::Text
@@ -50,6 +52,8 @@ comment_posting_3:
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
+# Post_it
+
 post_it_posting:
   id: 2
   type: Posting::PostIt
@@ -59,7 +63,7 @@ post_it_posting:
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
 
-# Invitations
+# Invitation
 
 invitation_posting_for_bert:
   id: 3
@@ -105,5 +109,27 @@ invitation_posting_for_anonymous:
   state: offered
   resource_id: 2
   resource_type: Site
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+  
+# Signal
+
+signal_posting:
+  id: 7
+  user_id: 1
+  type: Posting::Signal
+  state: published
+  subject: This is a signal
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>
+
+# Tweet
+
+tweet_posting:
+  id: 8
+  user_id: 1
+  type: Posting::Tweet
+  state: published
+  subject: This is a tweet
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
