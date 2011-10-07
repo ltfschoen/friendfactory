@@ -8,6 +8,5 @@
       = link_to_profile(user)
       \- #{post_it.subject}
     %span.date Posted #{distance_of_time_in_words_to_now(post_it.created_at)} ago
-    %span.comments
-      = link_to (pluralize(post_it.children.published.count, 'comment') + '&nbsp;&rarr;').html_safe, posting_comments_path(post_it), :remote => true
+    = link_to_comments(post_it.children.published.count, posting_comments_path(post_it))
 .reaction

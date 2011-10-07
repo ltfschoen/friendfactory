@@ -7,8 +7,16 @@ module Posting::CommentsHelper
     end
   end
 
+  def link_to_comments(comment_count, url)
+    content_tag(:span, :class => 'comments') do
+      msg = comment_count > 0 ? pluralize(comment_count, 'comment') : 'Write a comment'
+      msg << '&nbsp;&rarr;'
+      link_to msg.html_safe, url, :remote => true
+    end
+  end
+
   private
-  
+
   def render_comments_list(posting)
     content_tag(:ul, :class => 'posting_comments') do
       String.new.html_safe.tap do |html|
@@ -24,9 +32,9 @@ module Posting::CommentsHelper
   def render_new_comment_form(posting)
     render(:partial => 'posting/comments/new', :locals => { :posting => posting })
   end
-    
+
   def link_to_new_comment(posting)
     link_to('New comment', new_posting_comment_path(posting), :class => 'new_posting_comment')
   end
-    
+
 end

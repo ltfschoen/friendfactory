@@ -7,6 +7,5 @@
     .photo
       = image_tag(album.photos.limit(1).first.image.url(:h4x6))
     %span.date Posted #{distance_of_time_in_words_to_now(proxy.created_at)} ago
-    %span.comments
-      = link_to (pluralize(album.postings.published.count, 'comment') + '&nbsp;&rarr;').html_safe, posting_comments_path(proxy), :remote => true
+    = link_to_comments(album.postings.published.count, posting_comments_path(proxy))
 .reaction

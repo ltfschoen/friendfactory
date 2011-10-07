@@ -14,6 +14,5 @@
         %a{:href => ""} View Full Post »
     .torn
     %span.date Posted #{distance_of_time_in_words_to_now(text.created_at)} ago
-    %span.comments
-      = link_to (pluralize(text.children.published.count, 'comment') + '&nbsp;&rarr;').html_safe, posting_comments_path(text), :remote => true
+    = link_to_comments(text.children.published.count, posting_comments_path(text))
 .reaction
