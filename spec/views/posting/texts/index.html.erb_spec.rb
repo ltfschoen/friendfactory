@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/postings/index.html.erb" do
-  include PostingsHelper
+  include Posting::PostingsHelper
 
   before(:each) do
     assigns[:postings] = [

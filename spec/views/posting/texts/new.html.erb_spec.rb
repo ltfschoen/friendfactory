@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/posting/texts/new.html.erb" do
-  include PostingsHelper
+  include Posting::PostingsHelper
 
   before(:each) do
     assigns[:posting] = stub_model(Posting::Base,

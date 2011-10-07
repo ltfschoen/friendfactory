@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "/waves/show.haml" do
   
   include Authlogic::TestCase
-  include WavesHelper
+  include Wave::WavesHelper
   
   before(:each) do
     activate_authlogic    

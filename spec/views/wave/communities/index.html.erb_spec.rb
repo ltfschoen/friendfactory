@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/waves/index.html.erb" do
-  include WavesHelper
+  include Wave::WavesHelper
 
   before(:each) do
     assigns[:waves] = [

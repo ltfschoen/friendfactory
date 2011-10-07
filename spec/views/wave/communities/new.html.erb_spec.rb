@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "/waves/new.html.erb" do
-  include WavesHelper
+  include Wave::WavesHelper
 
   before(:each) do
     assigns[:wave] = stub_model(Wave::Base,
