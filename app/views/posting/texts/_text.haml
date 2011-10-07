@@ -1,5 +1,6 @@
 - user = text.user
 .posting.post.blog[text]
+  .remove{:title => "Remove this post"} ×
   .portrait
     = thimble_link_to_profile(user)
   .clear
@@ -8,10 +9,11 @@
         %h1= text.subject
       by
       = link_to_profile(user)
-      %p= text.body || '&nbsp'.html_safe
+      %p= text.body || '&nbsp;'.html_sage
       %p{:style => "text-align: center;"}
         %a{:href => ""} View Full Post »
     .torn
-    %span.date Posted Monday, July 25 at 14:00
+    %span.date Posted #{distance_of_time_in_words_to_now(text.created_at)} ago
     %span.comments
-      %a#4{:href => "javascript:void();"} (2 comments)
+      = link_to (pluralize(text.children.published.count, 'comment') + '&nbsp;&rarr;').html_safe, posting_comments_path(text), :remote => true
+.reaction

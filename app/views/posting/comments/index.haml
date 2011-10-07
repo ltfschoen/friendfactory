@@ -1,0 +1,41 @@
+/ Leave A Comment
+.comment_box
+  .portrait
+    %img{:src => "/images/users/x.png"}/
+  %form
+    %textarea{:placeholder => "Enter Text..."}
+    .foot
+      %input{:name => "", :type => "submit", :value => "Post"}/
+      %input{:name => "", :type => "button", :value => "Cancel"}/
+/ Comment
+.comment_box
+  .portrait
+    %img{:src => "/images/users/a.png"}/
+  .comment
+    %p
+      %a{:href => ""} Shea Jones
+      \- Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis ornare vel eu leo.
+  %span.date Posted Monday, July 25 at 14:00
+  %span.comments
+    %a#4{:href => "javascript:void();"} Reply
+/ Comment
+.comment_box.nested
+  .portrait
+    %img{:src => "/images/users/g.png"}/
+  .comment
+    %p
+      %a{:href => ""} John Henry
+      \- Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod.
+  %span.date Posted Monday, July 25 at 14:00
+  %span.comments
+    %a#4{:href => "javascript:void();"} Reply
+/ Leave A Comment
+.comment_box.nested
+  .portrait
+    %img{:src => "/images/users/x.png"}/
+  %form
+    %textarea{:placeholder => "Enter Text..."}
+    .foot
+      %span.reply_to In response to John Henry
+      %input{:name => "", :type => "submit", :value => "Post"}/
+      %input{:name => "", :type => "button", :value => "Cancel"}/

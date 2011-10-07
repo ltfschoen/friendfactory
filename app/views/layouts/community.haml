@@ -17,9 +17,11 @@
         'posting/new_post', |
         'posting/photos', |
         'posting/portrait', |
+        'posting/portrait-override', |
         'posting/post', |
         'posting/signal', |
         'posting/status', |
+        'posting/status-override', |
         'posting/temp', |
         'posting/tweet', |
         'posting/video', |
@@ -33,10 +35,12 @@
       
     = javascript_include_tag |
         'modernizr', |
+        'jquery_ujs', |
         'jquery.headshot', |
         'jquery.effects', |
         'application', |
-        'community'
+        'community', |
+      :cache => 'community.cache'
 
   %body
     #sidebar

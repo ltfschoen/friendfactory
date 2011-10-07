@@ -2,12 +2,11 @@ class Wave::CommunitiesController < ApplicationController
 
   DefaultWaveSlug = 'popular'
   
-  before_filter :require_user
+  before_filter :require_user  
+  layout 'community'
 
   cattr_reader :per_page
   @@per_page = 50
-  
-  layout 'community'
   
   def show
     @wave = current_site.home_wave

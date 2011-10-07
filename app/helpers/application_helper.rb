@@ -59,19 +59,7 @@ module ApplicationHelper
     # TODO link_to(name, profile_path(user.profile), :class => 'profile') if user.profile
     content_tag(:span, label, :class => 'bio')
   end
-    
-  def distance_of_time_in_words_to_now(date, opts = {})
-    suffix = opts[:suffix] || 'ago'
-    prefix = opts[:prefix]
-    content_tag(:span, :class => 'distance_of_time') do
-      String.new.tap do |html|
-        html << "#{prefix}&nbsp;" if prefix.present?
-        html << super(date)
-        html << "&nbsp;#{suffix}" if suffix.present?
-      end
-    end
-  end
-  
+
   def link_to_facebook
     link_to('', 'http://www.facebook.com/pages/Frisky-Hands/297300376633', :target => 'blank', :class => 'web_logos facebook', :target => '_blank')
   end

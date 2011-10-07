@@ -1,27 +1,39 @@
 jQuery(function($) {
 
-	$.each($('.post_frame'), function(){
+	$.each($('.post_frame'), function() {
 		var post = $(this).find('.post').height();
 		$(this).height(post+20);
 	});
 
-	$('.comments a').click(function() {
-		var $this = $(this),
-			react = $('#reaction'),
-			id = $.getId($this.closest('.posting'));
-			
-		react.addClass('rm');
-		$('.rm').before('<div id="reaction" class="hide"><p>Showing results for ID '+id+'</p></div>');
-		$('.rm').hide(500, function() {
-			$(this).remove();
-		});
+	// $('.comments a').click(function() {
+	// 	return;
+	// 	var $this = $(this),
+	// 		react = $('#reaction'),
+	// 		id = $.getId($this.closest('.posting'));
+	// 				
+	// 	react.addClass('rm');
+	// 	$('.rm').before('<div id="reaction" class="hide"><p>Showing results for ID '+id+'</p></div>');
+	// 	$('.rm').hide(500, function() {
+	// 		$(this).remove();
+	// 	});
+	// 	
+	// 	$('#reaction').show(500, function() {
+	// 		$.get('/wave/' + id)
+	// 	});
+	// });
+	
+	$('.comments a').live('ajax:success', function(xhr, data) {
+		var $this = $(this);
 		
-		$('#reaction').show(500, function() {
-			$.get('/wave/' + id)
-		});
+		$('.post_frame.active')
+			.removeClass('active')
+			.find('.reaction').html('');
+			
+		$this.closest('.post_frame')
+			.addClass('active')
+			.find('.reaction').html(data);
 	});
-
-
+	
 	// $('.nav-container')
 	// 	.insertAfter('ul.posting_post_its:first')
 	// 	.find('form')

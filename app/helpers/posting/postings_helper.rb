@@ -1,4 +1,4 @@
-module PostingsHelper
+module Posting::PostingsHelper
 
   DateName = Struct.new(:date, :day_name)
 

@@ -30,17 +30,8 @@ class Posting::Base < ActiveRecord::Base
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
   scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
   
-  has_many :children,
-      :class_name  => 'Posting::Base',
-      :foreign_key => 'parent_id' do
-    def postings
-      find :all, :conditions => [ "type <> 'Posting::Comment'" ], :order => 'created_at desc'
-    end    
-    def comments
-      where(:type => Posting::Comment, :state => :published).order('updated_at asc')
-    end
-  end
-    
+  has_many :children, :class_name  => 'Posting::Base', :foreign_key => 'parent_id'
+
   belongs_to :user
   # belongs_to :resource, :polymorphic => true  
   
