@@ -1,0 +1,212 @@
+/*----------------------------------------*\
+|	Built with the Lessentials Framework   |
+|	       Created by Arron Hunt           |
+| 	          copyright 2011               |
+\*----------------------------------------*/
+.comment_box {
+  margin: 10px 10px 0 10px;
+  padding: 10px 5px 0 10px;
+  width: 500px;
+  overflow: hidden;
+  float: left;
+}
+.comment_box .comment {
+  float: left;
+  width: 430px;
+  margin: 0 0 5px 10px;
+  padding: 10px;
+  min-height: 35px;
+  background: #f0f0f0;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  color: #333;
+  font: 13px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;
+  line-height: 1.3;
+  text-shadow: 0 1px 0 #fff;
+}
+.comment_box .comment p {
+  margin-bottom: 10px;
+  text-align: justify;
+}
+.comment_box .comment a {
+  color: #1b5452;
+  text-decoration: none;
+}
+.comment_box .date {
+  float: left;
+  color: #333;
+  font-size: 11px;
+  margin: 5px 0 5px 50px;
+}
+.comment_box .comments a {
+  float: right;
+  color: #666;
+  font-size: 11px;
+  margin: 5px;
+}
+.comment_box form {
+  float: left;
+  width: 450px;
+  background: #f0f0f0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  margin: 0 0 5px 10px;
+}
+.comment_box form textarea {
+  width: 430px;
+  height: 30px;
+  margin: 0;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #999;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  resize: vertical;
+}
+.comment_box form .foot {
+  width: 440px;
+}
+.comment_box form .foot input[type="submit"], .comment_box form .foot input[type="button"] {
+  width: 60px;
+  height: 25px;
+  margin: 5px;
+  color: #fff;
+  float: right;
+  position: relative;
+  text-shadow: 0 1px 3px #000;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #0e2d2c;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 0px rgba(255, 255, 255, 0.2) inset;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+.comment_box form .foot input[type="submit"]:hover, .comment_box form .foot input[type="button"]:hover {
+  opacity: 0.95;
+}
+.comment_box form .foot input[type="submit"] {
+  background: #1b5452;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #1b5452 0%, #14403f 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1b5452), color-stop(100%, #14403f));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #1b5452 0%, #14403f 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #1b5452 0%, #14403f 100%);
+  /* Opera11.10+ */
+
+  background: -ms-linear-gradient(top, #1b5452 0%, #14403f 100%);
+  /* IE10+ */
+  background: linear-gradient(top, #1b5452 0%, #14403f 100%);
+  /* W3C */
+
+}
+.comment_box form .foot input[type="submit"]:active {
+  top: 1px;
+  opacity: 1;
+  background: #14403f;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #14403f), color-stop(100%, #1b5452));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* Opera11.10+ */
+
+  background: -ms-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* IE10+ */
+  background: linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* W3C */
+
+}
+.comment_box form .foot input[type="button"] {
+  background: #3f4e58;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3f4e58), color-stop(100%, #2f3a42));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
+  /* Opera11.10+ */
+
+  background: -ms-linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
+  /* IE10+ */
+  background: linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
+  /* W3C */
+
+}
+.comment_box form .foot input[type="button"]:active {
+  top: 1px;
+  opacity: 1;
+  background: #2f3a42;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #2f3a42 0%, #3f4e58 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2f3a42), color-stop(100%, #3f4e58));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #2f3a42 0%, #3f4e58 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #2f3a42 0%, #3f4e58 100%);
+  /* Opera11.10+ */
+
+  background: -ms-linear-gradient(top, #2f3a42 0%, #3f4e58 100%);
+  /* IE10+ */
+  background: linear-gradient(top, #2f3a42 0%, #3f4e58 100%);
+  /* W3C */
+
+}
+.comment_box form .foot .reply_to {
+  margin: 10px;
+  float: left;
+  color: #666;
+  font: italic 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+.comment_box.nested {
+  width: 440px;
+  margin-left: 70px;
+  border-left: 1px dotted #666;
+}
+.comment_box.nested .comment, .comment_box.nested textarea {
+  width: 370px;
+}
+.comment_box.nested form, .comment_box.nested .foot {
+  width: 390px;
+}

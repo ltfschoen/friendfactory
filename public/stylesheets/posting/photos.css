@@ -76,3 +76,29 @@
 .multiple .photo:hover:after {
   -webkit-transform: rotate(3deg);
 }
+#post_reaction .photo {
+  margin: 10px 20px 0 0;
+  float: left;
+  width: 150px;
+  height: 150px;
+  background: #fff;
+}
+#post_reaction .photo img {
+  margin: 5px;
+}
+#post_reaction .photo img:before {
+  width: 130px;
+  height: 100px;
+  content: " ";
+  background: #ff0;
+  display: block;
+  position: absolute;
+  top: 50px;
+  -webkit-box-shadow: 0 0 10px #000000;
+  -moz-box-shadow: 0 0 10px #000000;
+  -o-box-shadow: 0 0 10px #000000;
+  box-shadow: 0 0 10px #000000;
+}
+#post_reaction .photo:nth-child(3n) {
+  margin: 10px 0 0 0;
+}

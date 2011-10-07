@@ -1,0 +1,61 @@
+/*----------------------------------------*\
+|	Built with the Lessentials Framework   |
+|	       Created by Arron Hunt           |
+| 	          copyright 2011               |
+\*----------------------------------------*/
+.post {
+  width: 360px;
+  margin: 10px 0 0 0;
+  padding: 10px 20px;
+  position: relative;
+  float: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.post .remove {
+  width: 20px;
+  height: 20px;
+  line-height: 15px;
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  color: #fff;
+  text-align: center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  display: none;
+}
+.post:hover .remove {
+  display: block;
+}
+.post .clear {
+  float: left;
+  width: 310px;
+  margin: 0 0 0 10px;
+}
+.post .clear .date {
+  float: left;
+  color: #333;
+  font-size: 11px;
+  margin: 5px 0;
+}
+.post .clear .comments a {
+  float: right;
+  color: #666;
+  font-size: 11px;
+  margin: 5px 0;
+}
+.post iframe {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}

@@ -1,3 +1,27 @@
+/*----------------------------------------*\
+|	Built with the Lessentials Framework   |
+|	       Created by Arron Hunt           |
+| 	          copyright 2011               |
+\*----------------------------------------*/
+.new_post.checkin .body {
+  width: 360px;
+  margin: 0 20px;
+  position: relative;
+  background: #fff;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #ccc;
+}
+.new_post.checkin .body img {
+  display: block;
+}
+.new_post.checkin .body input[type="text"], .new_post.checkin .body textarea {
+  font-size: 14px;
+  margin: 10px;
+  outline: none;
+  width: 330px;
+  border: none;
+}
 .post.map .cell {
   width: 310px;
   height: 230px;
@@ -39,4 +63,37 @@
   top: 10px;
   left: 70px;
   background: url(/images/overlay.png);
+}
+.tooltip {
+  max-width: 200px;
+  background: rgba(0, 0, 0, 0.9);
+  float: left;
+  padding: 8px;
+  color: #fff;
+  position: absolute;
+  top: 70px;
+  left: 120px;
+  font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  z-index: 50;
+}
+.tooltip a {
+  color: #fff;
+  text-decoration: underline;
+}
+.tooltip:after {
+  width: 0;
+  height: 0;
+  bottom: -20px;
+  left: 50%;
+  margin-left: -10px;
+  position: absolute;
+  display: block;
+  content: " ";
+  border-width: 10px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
 }

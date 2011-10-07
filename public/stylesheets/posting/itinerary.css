@@ -1,0 +1,104 @@
+.new_post.itinerary .body {
+  width: 360px;
+  margin: 0 20px;
+  position: relative;
+  background: #fff;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
+.new_post.itinerary .body label {
+  display: block;
+  width: 125px;
+  padding: 8px 20px 5px 10px;
+  float: left;
+  font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+.new_post.itinerary .body input[type="text"], .new_post.itinerary .body textarea {
+  float: left;
+  height: 26px;
+  margin: 0;
+  border: none;
+  padding: none;
+  width: 200px;
+  outline: none;
+}
+.new_post.itinerary .body textarea {
+  height: 75px;
+  resize: vertical;
+  padding-top: 8px;
+}
+.new_post.itinerary .body .box {
+  float: left;
+  width: 200px;
+  padding: 3px 0 0 0;
+  height: 25px;
+}
+.new_post.itinerary .body hr {
+  width: 100%;
+  background: none;
+  margin: 10px 0;
+  border: none;
+  float: left;
+  border-bottom: 1px solid #ccc;
+}
+.post.itinerary .cell {
+  width: 310px;
+  height: 185px;
+  padding-top: 35px;
+  position: relative;
+  background: url(/images/itinerary.png);
+}
+.post.itinerary .cell .frame {
+  width: 300px;
+  height: 170px;
+  margin: 0 5px;
+  overflow: hidden;
+}
+.post.itinerary .cell span {
+  display: block;
+  font: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+.post.itinerary .cell .flight {
+  width: 280px;
+  padding: 10px 0 5px 10px;
+  font-size: 14px;
+}
+.post.itinerary .cell .loc_a, .post.itinerary .cell .depart {
+  float: left;
+  width: 129px;
+  font-size: 16px;
+  padding: 5px 10px;
+  border: 1px solid #741f14;
+  border-top: none;
+  border-left: none;
+}
+.post.itinerary .cell .loc_b, .post.itinerary .cell .return {
+  float: left;
+  width: 129px;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #741f14;
+  text-align: right;
+}
+.post.itinerary .cell .return {
+  text-align: left;
+}
+.post.itinerary .cell .label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.post.itinerary .cell .itin_date {
+  font-size: 24px;
+}
+.post.itinerary .cell .summary {
+  padding: 5px 10px;
+  width: 280px;
+  float: left;
+}
+.post.itinerary .cell .summary p {
+  font: 13px "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}

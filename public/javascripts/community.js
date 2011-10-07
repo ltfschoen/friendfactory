@@ -1,5 +1,10 @@
 jQuery(function($) {
-	
+
+	$.each($('.post_frame'), function(){
+		var post = $(this).find('.post').height();
+		$(this).height(post+20);
+	});
+
 	$('.comments a').click(function() {
 		var $this = $(this),
 			react = $('#reaction'),

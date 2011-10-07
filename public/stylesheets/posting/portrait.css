@@ -1,0 +1,17 @@
+.portrait {
+  padding: 2px 2px 3px 2px;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  float: left;
+  -webkit-box-shadow: 0 1px 3px #000000;
+  -moz-box-shadow: 0 1px 3px #000000;
+  -o-box-shadow: 0 1px 3px #000000;
+  box-shadow: 0 1px 3px #000000;
+}
+.portrait img {
+  width: 36px;
+  height: 36px;
+}
