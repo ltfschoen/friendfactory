@@ -30,7 +30,7 @@
           = f.label :email, 'Password', :class => 'placeholder'
           = f.password_field :password, :class => 'password', :placeholder => 'password'
           .button-bar
-            = f.submit 'Login'
+            = f.submit 'Login', :button => true
             = f.button 'Sign Up', :class => 'toggle'
         
       .panel.signup.hidden
@@ -46,7 +46,7 @@
           = f.password_field :password, :class => 'password ui-widget', :placeholder => 'password'          
           = f.new_user_password_confirmation_field :password_confirmation, 'Retype your password', :current_site => current_site, :class => 'password ui-widget', :placeholder => 'password_confirmation'          
           .button-bar
-            = f.submit 'Register'
+            = f.submit 'Register', :button => true
             - unless @user.invitation_code.present?
               = link_to 'Back', root_path, :class => 'button'
     .grid_1.omega<

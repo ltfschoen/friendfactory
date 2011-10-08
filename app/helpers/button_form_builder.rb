@@ -4,13 +4,13 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
 
   DateName = Struct.new(:date, :day_name)
   
-  # def submit(label, opts = {})
-  #   if opts.delete(:as_button) == false
-  #     @template.submit_tag(label, opts)
-  #   else
-  #     @template.content_tag(:button, label, opts.merge(:type => 'submit'))
-  #   end
-  # end
+  def submit(label, opts = {})
+    if opts.delete(:button) == true
+      @template.content_tag(:button, label, opts.merge(:type => 'submit'))
+    else
+      @template.submit_tag(label, opts)
+    end
+  end
     
   def button(label, *args)
     opts = args.extract_options!
