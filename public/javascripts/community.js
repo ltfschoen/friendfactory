@@ -28,6 +28,7 @@ jQuery(function($) {
 	// 	});
 	// });
 	
+	// Comments
 	$('.comments a')
 		.live('ajax:beforeSend', function() {
 			if ($(this).closest('.post_frame').hasClass('active')) return false;			
@@ -43,21 +44,35 @@ jQuery(function($) {
 					});				
 	});
 
-	$('.comment_box .reply a').live('ajax:success', function(xhr, data) {
-		$(this).closest('.comment_box')
-			.after(data)
-			.next('.comment_box.nested').find('textarea').focus();
-	});
-
 	$('.reaction').live('click', function(event) {
 		if (event.target.value === 'Cancel') {
 			removeCurrentReaction();
 			return false;
 		}
 	});
+
+	// Nested Comments
+	$('.comment_box .reply a')
+		.live('ajax:success', function(xhr, form) {
+			var $form = $(form);
+			$(this).hide();
+			$form.hide().css({ opacity: 0.0 }).insertAfter($(this).closest('.comment_box'))
+				.slideDown('fast', function() {
+					$form.fadeTo('fast', 1.0, function() {
+						$form.find('textarea').focus();
+					});
+				});
+		});
 	
 	$('.comment_box.nested input.cancel').live('click', function() {
-		$(this).closest('.comment_box').remove();
+		var $commentBox = $(this).closest('.comment_box'),
+			$prevCommentBox = $commentBox.prev('.comment_box');
+		$commentBox.fadeTo('fast', 0.0, function() {
+			$(this).slideUp('fast', function() {
+				$(this).remove();
+				$prevCommentBox.find('.reply a').show();
+			});
+		});
 		return false;
 	});
 	

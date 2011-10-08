@@ -5,7 +5,10 @@
       $preceding = $form.closest('.comment_box'),
       $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
 
-    $preceding.after($comment);
+    $comment.hide().css({ opacity: 0.0 }).insertAfter($preceding)
+      .slideDown('fast', function() {
+        $comment.fadeTo('fast', 1.0);
+      });
     $form[0].reset();
 - else
   :plain

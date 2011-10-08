@@ -41,6 +41,7 @@
     = javascript_include_tag |
         'modernizr', |
         'jquery_ujs', |
+        'jquery.easing.1.3', |
         'jquery.headshot', |
         'jquery.effects', |
         'application', |
@@ -51,8 +52,9 @@
     #sidebar
       #head
         %a{:href => "javascript:void();"} CLAYTON
-      .block.adspace
-        %img{:src => "http://placehold.it/180x75"}
+      - if false
+        .block.adspace
+          %img{:src => "http://placehold.it/180x75"}
       .block.userspace
         .portrait
           %img{:src => "/images/users/x.png"}/
