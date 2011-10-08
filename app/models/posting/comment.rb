@@ -1,10 +1,6 @@
 class Posting::Comment < Posting::Base
-  
+  attr_accessible :body  
   validates_presence_of :parent_id
-  
-  belongs_to :posting,
-      :class_name => 'Posting::Base',
-      :foreign_key => 'parent_id',
-      :touch => true
-
+  validates_presence_of :body  
+  belongs_to :posting, :class_name => 'Posting::Base', :foreign_key => 'parent_id', :touch => true
 end

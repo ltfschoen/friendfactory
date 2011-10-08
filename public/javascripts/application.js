@@ -6,6 +6,11 @@
 		$.browser.safari = false;
 	}
 
+	if (jQuery.browser.chrome) {
+		Modernizr.csstransforms3d = false;
+		$('html').removeClass('csstransforms3d');
+	}
+
 	$.getId = function(element) {
 		var id = $(element).attr('id'),
 			match;

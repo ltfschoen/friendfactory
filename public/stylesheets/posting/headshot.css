@@ -1,0 +1,546 @@
+@font-face {
+    font-family: 'Chalkduster';
+    src: url('/fonts/chalkduster-webfont.eot');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chalkduster';
+    src: url(//:) format('no4904'),
+         url('/fonts/chalkduster-webfont.woff') format('woff'),
+         url('/fonts/chalkduster-webfont.ttf') format('truetype'),
+         url('/fonts/chalkduster-webfont.svg#webfonthKGIcWf9') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.polaroid-container {
+	height: 356px;
+	width: 320px;
+    position: relative; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);	
+	-webkit-perspective: 1200;
+}
+
+.csstransforms3d .polaroid-container > div.polaroid {
+	position: absolute;	
+	-webkit-transform-style: preserve-3d;	
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;        
+}
+
+.csstransforms3d .polaroid-container > div.polaroid.flipped {
+    -webkit-transform: rotateY(180deg);
+}
+
+.csstransforms3d .polaroid-container > div.polaroid .face {
+	-webkit-backface-visibility: hidden;    
+}
+
+.csstransforms3d .polaroid-container > div.polaroid .front.face {
+	-webkit-transform: rotateY(180deg);
+}
+
+div.polaroid {
+	height: 350px;
+	width: 290px; 
+}
+
+div.polaroid .content {
+	width: 260px;
+	height: 300px;
+	margin-bottom: 5px;
+}
+
+div.polaroid .content.scrollable {
+	position: relative;
+	overflow: hidden;
+}
+
+div.polaroid .content.scrollable .items {
+	width: 1600px;
+	position: absolute;
+}
+
+div.polaroid .content.scrollable .items .pane {
+	float: left;
+	width: 260px;
+}
+
+div.polaroid .content.scrollable .items .pane.signals {
+	height: 300px;
+}
+
+div.polaroid .face {
+	position: absolute;
+	height: 320px;
+	width: 260px;
+	background: url(/images/headshot.jpg) #FFF;
+	padding: 15px;
+    -webkit-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+	
+/*	background-color: #FFF;
+	zoom: 2;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=135, Strength=3);*/
+}
+
+div.polaroid .face a.close {
+	display: none;
+	float: right;
+	margin-top: -15px;
+	margin-right: -15px;
+	width: 15px;
+	height: 15px;
+	background: url(/images/friskyfactory/buddy-bar.png) -244px -3px no-repeat;
+	text-indent: -1000em;
+}
+
+div.polaroid .pane.avatar table.header {
+	font-size: 18px;
+	font-family: Chalkduster;
+	color: rgb(0, 0, 0);
+	margin-top: 5px;
+	width: 260px;
+	height: 38px;
+}
+
+div.polaroid .pane.avatar table.header td.username {
+	text-align: left;
+	vertical-align: top;
+	font-size: 18px;
+}
+
+div.polaroid .pane.avatar table.header td.status {
+	vertical-align: top;
+	padding-top: 6px;
+	text-align: right;
+	font-family: Gill Sans, Trebuchet MS, Verdana, Arial;
+	font-size: 12px;
+	color: #666;
+}
+
+div.polaroid.edit .pane.avatar table.detail {
+    margin-top: 6px;
+	float: left;
+	top: 0;
+}
+
+div.polaroid.edit .pane.avatar table.detail td {
+    height: 28px;
+    vertical-align: middle;
+}
+
+div.polaroid .pane.avatar img.avatar.polaroid {
+    width: 258px;
+    height: 258px;
+    border: 1px solid lightgray;
+}
+
+div.polaroid .face img.thumb {
+    border: 1px solid lightgray;
+}
+
+div.polaroid .pane.signals table.header {
+	color: rgb(34,65,108);
+    width: 254px;
+    margin-bottom: 8px;
+	font-size: 18px;
+	font-family: Chalkduster;
+}
+
+div.polaroid .pane.signals table.header td.avatar {
+    width: 74px;
+}
+
+div.polaroid .pane.signals table.header td.username {
+	text-align: left;
+	vertical-align: middle;
+}
+
+div.polaroid .pane.signals table.header td.age {
+    text-align: right;
+    vertical-align: middle;
+}
+
+div.polaroid .pane.signals table.header td.age input {
+    width: 2em;
+	text-align: center;
+}
+
+div.polaroid .pane.signals table.detail {
+	color: gray;
+	width: 260px;
+}
+
+div.polaroid .pane.signals table.detail td {
+    height: 28px;
+    vertical-align: middle;
+}
+
+div.polaroid .pane.signals table.detail td.label {
+    width: 96px;
+    color: #999;
+}
+
+div.polaroid.edit .pane.signals input#user_info_location {
+	width: 12em;
+}
+
+div.polaroid .pane.signals table.detail td.detail {
+    color: #666;
+    border-bottom: 1px dotted lightgray;
+}
+
+div.polaroid .pane.photo-grid img.thumb {
+    display: block;
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 0 6px 10px 0;
+    background-color: #fff;
+}
+
+div.polaroid .pane.photo-grid img.omega {
+    margin-right: 0;
+}
+
+div.polaroid .pane.pokes a.poke {
+	display: block;
+	text-align: center;
+}
+
+div.polaroid .pane.conversation .wave_conversation {
+	height: 300px;
+	width: 260px;
+}
+
+div.polaroid .pane.conversation .header {
+	height: 38px;
+	width: 260px;
+	border-bottom: 1px solid #CCC;
+	margin-bottom: 4px;
+}
+
+div.polaroid .pane.conversation .header img.avatar.thimble {
+	float: right;
+	width: 30px;
+	height: 30px;
+	border: 1px solid lightgray;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;	
+}
+
+div.polaroid .pane.conversation .header img.avatar.thimble.recipient {
+	float: left;
+	margin-right: 6px;
+}
+
+div.polaroid .pane.conversation .header div.recipient {
+	float: left;
+	margin-top: 8px;
+	font-size: small;
+}
+
+div.polaroid .pane.conversation .thread {
+    height: 184px;
+	color: gray;
+	font-size: 12px;
+	overflow: auto;
+	clear: both;
+}
+
+div.polaroid .pane.conversation .thread .time-ago {
+	text-align: right;
+	margin: 2px 6px;
+	font-size: 11px;
+	color: gray;
+}
+
+div.polaroid .pane.conversation .thread ul.messages {
+	list-style: none;
+}
+
+div.polaroid .pane.conversation .posting_message {
+	margin: 4px 5px;
+	min-width: 10px;
+	padding: 3px 5px; 
+	background: none;
+	font-size: 11px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+}
+
+div.polaroid .pane.conversation .posting_message.received {
+	clear: both;
+	float: left;
+	text-align: left;
+	border: 2px solid #DE8080;
+}
+
+/*div.polaroid .pane.conversation .posting_message.received:before {
+	content: "";
+	position: absolute;
+	bottom: -7px; 
+	left: 4px; 
+	width:10px; 
+	height: 5px;
+	border-style: solid; 
+	border-width: 0 2px 2px 0; 
+	border-color: rgba(139, 0, 0, 0.5); 
+	background: transparent;
+	background-color: #f9f9f9;
+	-webkit-border-bottom-right-radius: 18px 10px;
+	-moz-border-radius-bottomright: 18px 10px;
+	border-bottom-right-radius: 18px 10px;
+}*/
+
+/*div.polaroid .pane.conversation .posting_message.received:after {
+	content: ""; 
+	position: absolute;
+	bottom: -7px;
+	left: 0px; 
+	width: 4px; 
+	height: 5px; 
+	border-style: solid; 
+	border-width: 0 2px 2px 0; 
+	border-color: rgba(139, 0, 0, 0.5); 
+	background: transparent;
+	-webkit-border-bottom-right-radius: 10px 20px; 
+	-moz-border-radius-bottomright: 10px 20px; 
+	border-bottom-right-radius: 10px 20px; 
+}*/
+
+div.polaroid .pane.conversation .posting_message.sent {
+	clear: both;
+	float: right;
+	text-align: right;
+	border: 2px solid #99CC66;
+}
+
+/*div.polaroid .pane.conversation .posting_message.sent:before {
+	content: ""; 
+	position: absolute;
+	bottom: -7px; 
+	right: 4px;
+	width: 10px; 
+	height: 5px;
+	border-style: solid; 
+	border-width: 0 0 2px 2px; 
+	border-color: rgba(90, 143, 0, 0.5);
+	background: transparent;
+	background-color: #f9f9f9;
+	-webkit-border-bottom-left-radius: 18px 10px;
+	-moz-border-radius-bottomleft: 18px 10px;
+	border-bottom-left-radius: 18px 10px;
+}*/
+
+/*div.polaroid .pane.conversation .posting_message.sent:after {
+	content: ""; 
+	position: absolute;
+	bottom: -7px; 
+	right: 0px; 
+	width: 4px; 
+	height: 5px; 
+	border-style: solid;
+	border-width: 0 0 2px 2px;
+	border-color: rgba(90, 143, 0, 0.5); 
+	background: transparent;
+	-webkit-border-bottom-left-radius: 10px 20px;
+	-moz-border-radius-bottomleft: 10px 20px; 
+	border-bottom-left-radius: 10px 20px; 
+}*/
+
+div.polaroid .pane.conversation .message-input {
+	position: relative;
+	height: 40px;
+	width: 232px;
+	margin-top: 12px;
+}
+
+div.polaroid .pane.conversation textarea {
+	width: 240px;
+    height: 36px;
+	background: none;
+	margin: 0;
+	overflow: hidden;
+	resize: none;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	outline: none;
+	-moz-outline: none;	
+	border-radius: 5px;
+	border: 2px solid #99CC66;
+}
+
+div.polaroid .pane.conversation .message-input:before {
+	content: ' '; 
+	position: absolute;
+	bottom: -9px; 
+	right: 10px;
+	width: 10px; 
+	height: 5px;
+	border-style: solid; 
+	border-width: 0 0 2px 2px; 
+	border-color: #99CC66;
+	background-color: #fff;
+	-webkit-border-bottom-left-radius: 18px 10px;
+	-moz-border-radius-bottomleft: 18px 10px;
+	border-bottom-left-radius: 18px 10px;
+}
+
+div.polaroid .pane.conversation .message-input:after {
+	content: ' '; 
+	position: absolute;
+	bottom: -9px; 
+	right: 6px; 
+	width: 4px; 
+	height: 5px; 
+	border-style: solid;
+	border-width: 0 0 2px 2px;	
+	border-color: #99CC66;
+	-webkit-border-bottom-left-radius: 10px 20px;
+	-moz-border-radius-bottomleft: 10px 20px; 
+	border-bottom-left-radius: 10px 20px; 
+}
+
+div.polaroid .pane.conversation .thread, 
+div.polaroid .pane.conversation textarea,
+div.polaroid .pane.conversation button {
+	cursor: default;
+}
+
+div.polaroid .button-bar {
+    float: right;
+    position: relative;
+    top: -15px;
+}
+ 
+div.polaroid ul.buddy-bar {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+div.polaroid.edit ul.buddy-bar {
+    display: none;
+}
+
+div.polaroid ul.buddy-bar.primary {
+	float: right;
+}
+
+div.polaroid ul.buddy-bar.secondary {
+	float: left;
+}
+
+div.polaroid ul.buddy-bar li {
+	float: left;
+}
+
+div.polaroid ul.buddy-bar li.comment-count {	
+	font-family: Gill Sans, Trebuchet MS, Verdana, Arial;
+	font-size: 12px;
+	color: #666;
+	padding-top: 4px;
+}
+
+div.polaroid .navi a,
+div.polaroid a.icon {
+	display: block;
+	text-decoration: none;
+	text-indent: -5000px;
+	margin-left: 6px;
+	width: 18px;
+	height: 20px;
+	background: url(/images/friskyfactory/buddy-bar.png) top left no-repeat;	
+}
+
+div.polaroid ul.buddy-bar.secondary a.icon {
+	margin-left: 0px;
+	margin-right: 6px;
+}
+
+div.polaroid a.icon.profile {
+	width: 22px;
+	background-position: -300px -1px;
+}
+
+div.polaroid a.icon.comment {
+	width: 18px;
+	background-position: 0 -3px;
+}
+
+div.polaroid a.icon.block {
+	background-position: -24px -1px;
+}
+
+div.polaroid a.icon.buddy {
+	background-position: -49px -1px;
+}
+
+div.polaroid a.icon.buddied {
+	background-position: -324px -1px;
+}
+
+div.polaroid a.icon.pin {
+	background-position: -70px -1px;
+}
+
+div.polaroid a.icon.chat {
+	width: 24px;
+	background-position: -92px -1px;
+}
+
+div.polaroid a.icon.conversation {
+	width: 26px;
+	background-position: -120px -1px;
+}
+
+div.polaroid a.icon.photos {
+	width: 24px;
+	background-position: -150px -1px;
+}
+
+div.polaroid a.icon.mini-profile {
+	width: 22px;
+	background-position: -178px -1px;
+}
+
+div.polaroid a.icon.headshot {
+	width: 22px;
+	background-position: -200px -1px;
+}
+
+div.polaroid a.icon.invitations {
+	background-position: -276px -2px;
+	width: 20px;
+}
+
+div.polaroid a.icon.pokes {
+	background-position: -346px -2px;
+}
+
+div.polaroid a.icon.pokes.poked {
+	background-position: -362px -2px;
+}
+
+.floating div.polaroid .face {
+	cursor: move;
+    -webkit-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 6px 6px 16px 4px rgba(0, 0, 0, 0.3);
+}
+
+.floating div.polaroid .face a.close,
+.wave_inbox div.polaroid .face a.close {
+	display: block;
+}

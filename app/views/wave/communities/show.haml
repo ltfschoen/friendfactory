@@ -1,6 +1,9 @@
 =# will_paginate @postings, :class => 'grid_16 pagination append-top'
 =# render :partial => 'nav'
 =# render :partial => 'tab_content'
+
+= render :partial => 'rollcall', :locals => { :profiles => @profiles }
+
 - if false
   %ul#button-bar
     %li.status{:onclick => "newPost('status')"}

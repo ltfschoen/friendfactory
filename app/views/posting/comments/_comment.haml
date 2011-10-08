@@ -7,8 +7,8 @@
       = link_to_profile(user)
       \- #{comment.body || comment.subject}
   %span.date Posted #{distance_of_time_in_words_to_now(comment.created_at)} ago
-  %span.reply
-    = link_to 'Reply', new_posting_comment_path(comment), :remote => true
+  - unless nested
+    %span.reply= link_to 'Reply', new_posting_comment_path(comment), :remote => true
     
 - comment_children = comment.children.type(Posting::Comment).published.order('updated_at asc')
 - comment_children.each do |comment|

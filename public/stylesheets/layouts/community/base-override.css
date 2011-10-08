@@ -1,3 +1,14 @@
+#frame {
+	position: relative;
+}
+
 #frame .post_frame, #frame .new_post_frame {
   clear: both;
+}
+
+#rollcall {
+	position: absolute;
+	top: 0;
+	left: 400px;
+	width: 740px;
 }

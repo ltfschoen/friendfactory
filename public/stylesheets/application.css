@@ -13,3 +13,7 @@ a:focus {
 	outline: none;
 	-moz-outline: none;
 }
+
+.error {
+	color: darkred !important;
+}

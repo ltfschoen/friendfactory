@@ -4,7 +4,8 @@
     %title {% title %}
     = stylesheet_link_tag |
         'application', |
-        'layouts/reset', |
+        'effects', |        
+        'layouts/reset', |  
         'layouts/community/base', |
         'layouts/community/base-override', |
         'layouts/community/sidebar', |
@@ -15,6 +16,7 @@
         'posting/checkin', |
         'posting/comments', |
         'posting/comments-override', |
+        'posting/headshot', |
         'posting/itinerary', |
         'posting/multi-photos', |
         'posting/new_post', |
@@ -34,14 +36,19 @@
 
     - if Rails.env.development?
       = stylesheet_link_tag 'development'
-      = javascript_include_tag 'jquery'
+      = javascript_include_tag 'jquery', 'jquery.tools.min.js', 'pusher.js'
     - else
       = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+      = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
+      = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
       
     = javascript_include_tag |
         'modernizr', |
         'jquery_ujs', |
         'jquery.easing.1.3', |
+        'jquery.flip', |
+        'jquery.scrollTo-1.4.2-min', |
+        'jquery.chat', |
         'jquery.headshot', |
         'jquery.effects', |
         'application', |

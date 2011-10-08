@@ -1,10 +1,11 @@
+:plain
+  var
+    $form = $("form##{dom_id(@comment.parent)}_new_comment"),
+    $preceding = $form.closest('.comment_box');
+    
 - if @comment.present? && @comment.valid?
   :plain
-    var
-      $form = $("form##{dom_id(@comment.parent)}_new_comment"),
-      $preceding = $form.closest('.comment_box'),
-      $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
-
+    var $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
     $comment.hide().css({ opacity: 0.0 }).insertAfter($preceding)
       .slideDown('fast', function() {
         $comment.fadeTo('fast', 1.0);
@@ -12,5 +13,5 @@
     $form[0].reset();
 - else
   :plain
-    $('.flash')
-      .text("Couldn't save your comment: #{@comment.errors.full_messages.to_sentence}")
+    $form.find('.reply_to').addClass('error').html('Ouch! #{escape_javascript(@comment.errors.full_messages.to_sentence)}');
+    $preceding.trigger('shake');

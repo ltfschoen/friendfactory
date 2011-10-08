@@ -3,3 +3,30 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      posting:
+        comment:
+          body: "Comment"
+
+
+        
+# en:
+#   activerecord:
+#     attributes:
+#       user:
+#         email: "E-mail address"
+
+# en:  
+#   activerecord:
+#     models: 
+#       user: "Customer"
+#     attributes:
+#       user:
+#         email: "Email address"
+#     errors:
+#       models:
+#         user:
+#           attributes:
+#             email:
+#               blank: "cannot be empty"

@@ -5,7 +5,8 @@
     = form_for Posting::Comment.new, :url => posting_comments_path(posting), :html => { :id => "#{dom_id(posting)}_new_comment" }, :remote => true do |f|
       = f.text_area :body, :placeholder => "Write a comment..."
       .foot
-        - if nested
-          %span.reply_to In response to #{posting.user.handle(current_site)}
+        %span.reply_to
+          - if nested
+            In response to #{posting.user.handle(current_site)}
         = f.submit 'OK'
         = f.cancel 'Cancel'
