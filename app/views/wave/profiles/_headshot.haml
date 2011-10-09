@@ -1,0 +1,42 @@
+.headshot-container
+  .headshot[profile]
+    .face-container
+      .front.face
+        = headshot_image_tag(profile)
+        %ul.buddy-bar.secondary
+          %li= link_to 'Profile', wave_profile_path(profile), :class => 'icon profile'
+        %ul.buddy-bar.primary
+          %li= link_to 'Biometrics', signals_wave_profile_path(profile), :class => 'flip icon mini-profile'
+          %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'flip icon photos'
+          %li= link_to 'Invitations', invitations_wave_profile_path(profile), :class => 'flip icon invitations'
+          %li= link_to 'Pokes', pokes_wave_profile_path(profile), :class => poke_link_class(profile.id, 'icon flip')
+          - if current_user.present? && (current_user.id != profile.user_id)
+            - if false
+              %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put
+            %li= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'flip icon chat last'
+
+    .face-container
+      .back.face.flipped
+        %h1 BACK FACE
+        %ul.buddy-bar.secondary
+          %li= link_to 'Headshot', wave_profile_path(profile), :class => 'flip icon headshot'
+        %ul.buddy-bar.primary
+          %li= link_to 'Biometrics', signals_wave_profile_path(profile), :class => 'icon mini-profile'
+          %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'icon photos'
+          %li= link_to 'Invitations', invitations_wave_profile_path(profile), :class => 'icon invitations'
+          %li= link_to 'Pokes', pokes_wave_profile_path(profile), :class => poke_link_class(profile.id)
+          - if current_user.present? && (current_user.id != profile.user_id)
+            %li= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'icon chat'
+
+- if false
+  .card_frame
+    .card.front
+      %img.face{:src => "http://placekitten.com/170/170"}
+        %ul
+          %li.profile
+          %li.photos
+          %li.friends
+          %li.message
+    .card.back
+      Hello World
+    

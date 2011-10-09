@@ -1,5 +1,44 @@
 #rollcall
-  - @profiles.in_groups_of(3) do |group|
+  - profiles.in_groups_of(3) do |group|
     - group.each_with_index do |profile, idx|
       - unless profile.nil?
-        = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
+        = render :partial => 'wave/profiles/headshot', :locals => { :profile => profile }
+
+  - if false
+    - profiles.in_groups_of(3) do |group|
+      - group.each_with_index do |profile, idx|
+        - unless profile.nil?
+          = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
+
+    %div{ :style => 'clear:both' }
+
+    .card_frame
+      .card.front
+        %img.face{:src => "http://placekitten.com/170/170"}
+          %ul
+            %li.profile
+            %li.photos
+            %li.friends
+            %li.message
+      .card.back
+        Hello World
+    .card_frame
+      .card.front
+        %img.face{:src => "http://placekitten.com/171/171"}
+          %ul
+            %li.profile
+            %li.photos
+            %li.friends
+            %li.message
+      .card.back
+        Hello World
+    .card_frame
+      .card.front
+        %img.face{:src => "http://placekitten.com/172/172"}
+          %ul
+            %li.profile
+            %li.photos
+            %li.friends
+            %li.message
+      .card.back
+        Hello World

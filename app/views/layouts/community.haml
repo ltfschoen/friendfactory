@@ -11,6 +11,7 @@
         'layouts/community/sidebar', |
         'layouts/community/reaction', |
         'layouts/community/post_reaction', |
+        'layouts/community/rollcall', |
         'posting/ads', |
         'posting/blog', |
         'posting/checkin', |
@@ -41,16 +42,17 @@
       = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
       = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
       = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
-      
+
+    -# jquery-ui-1.8.16.custom.min for jquery.flip and advanced easing functions
     = javascript_include_tag |
         'modernizr', |
-        'jquery_ujs', |
-        'jquery.easing.1.3', |
+        'jquery-ui-1.8.16.custom.min', |
         'jquery.flip', |
         'jquery.scrollTo-1.4.2-min', |
         'jquery.chat', |
         'jquery.headshot', |
         'jquery.effects', |
+        'jquery_ujs', |
         'application', |
         'community', |
       :cache => 'community.cache'

@@ -24,7 +24,7 @@ jQuery(function($) {
 	});
 
 	// Rollcall
-	$('div.polaroid').headshot();
+	$('.headshot').headshot();
 
 	// Comments
 	$('.comments a')

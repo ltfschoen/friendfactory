@@ -1,0 +1,111 @@
+.card_frame {
+  width: 180px;
+  height: 200px;
+  margin: 20px 0 0 20px;
+  float: left;
+}
+.card_frame.float {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  z-index: 500;
+}
+.card_frame.float .close {
+  display: block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-weight: bold;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  z-index: 600;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer !important;
+}
+.card {
+  /* TEMP */
+
+  padding: 5px;
+  width: 170px;
+  height: 190px;
+  float: left;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  background: #fff;
+}
+.card img {
+  vertical-align: baseline;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.card .face {
+  margin-bottom: 5px;
+  width: 170px;
+  height: 170px;
+}
+.card ul {
+  float: right;
+}
+.card ul li {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px 0 0;
+  float: left;
+  background: url(/images/card_sprite.png);
+  background-size: 60px 15px;
+  opacity: 0.75;
+}
+.card ul li:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.card ul li.photos {
+  background-position: -15px 0;
+}
+.card ul li.friends {
+  background-position: -30px 0;
+}
+.card ul li.message {
+  background-position: -45px 0;
+}
+.card.front {
+  position: absolute;
+  z-index: 1;
+  -webkit-transition: all 0.25s ease-in-out 0s;
+  -webkit-transform: rotatey(0deg);
+  -moz-transform: rotatey(0deg);
+  -webkit-transform-style: preserve3d;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-origin: top center;
+  -moz-backface-visibility: hidden;
+}
+.card.back {
+  position: absolute;
+  -webkit-transition: all 0.25s ease-in-out 0s;
+  -webkit-transform-origin: top center;
+  -webkit-transform: rotatey(180deg);
+  -moz-transform: rotatey(180deg);
+  -webkit-transform-style: preserve3d;
+}
+.card_frame.flip .card.front {
+  -webkit-transform: rotatey(180deg);
+  -moz-transform: rotatey(180deg);
+}
+.card_frame.flip .card.back {
+  -webkit-transform: rotatey(0deg);
+  -moz-transform: rotatey(0deg);
+}

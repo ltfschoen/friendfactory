@@ -1,0 +1,16 @@
+#rollcall {
+	position: absolute;
+	top: 0;
+	left: 400px;
+	width: 740px;
+}
+
+#rollcall .polaroid-container {
+	float: left;
+	margin: 20px 0 0 20px;
+}
+
+#rollcall .headshot-container {
+	float: left;
+	margin: 20px 0 0 20px;
+}
