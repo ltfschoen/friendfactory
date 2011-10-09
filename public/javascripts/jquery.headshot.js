@@ -1,7 +1,7 @@
 (function($) {
 	var
 		panes = {
-			init: function($headshot, paneName, url, setFocus) {
+			init: function ($headshot, paneName, url, setFocus) {
 				var $content = $headshot.find('.content'),
 					$pane = $content.find('.pane');
 				
@@ -18,36 +18,34 @@
 				});
 			},
 			
-			// pokes: function($headshot, url) {
-			// 	$headshot.find('.pane.pokes').load(url);
-			// 	// $headshot.find('.pane.pokes').html('pokes');
-			// 	
-			// 	// $pane.find('a.profile').bind('click', function(event) {
-			// 	// 	event.preventDefault();
-			// 	// 	$('<div class="floating"></div>')
-			// 	// 		.appendTo('.floating-container')
-			// 	// 		.load($(this).attr('href'), function() {
-			// 	// 			$(this).position({
-			// 	// 				my: 'left center',
-			// 	// 				of: event,
-			// 	// 				offset: '30 0',
-			// 	// 				collision: 'fit'
-			// 	// 			})	
-			// 	// 		.draggable()
-			// 	// 		.find('div.polaroid')
-			// 	// 			.polaroid({ 'close-button' : true });
-			// 	// 	});
-			// 	// });
+			// pokes: function($pane, setFocus) {
+			// 	$pane.find('a.profile').bind('click', function(event) {
+			// 		event.preventDefault();
+			// 		$('<div class="floating"></div>')
+			// 			.appendTo('.floating-container')
+			// 			.load($(this).attr('href'), function() {
+			// 				$(this).position({
+			// 					my: 'left center',
+			// 					of: event,
+			// 					offset: '30 0',
+			// 					collision: 'fit'
+			// 				})	
+			// 			.draggable()
+			// 			.find('div.polaroid')
+			// 				.polaroid({ 'close-button' : true });
+			// 		});
+			// 	});
 			// },
 
 			conversation: function($pane, setFocus) {
 				$pane.find('.wave_conversation').chat();
 				if (setFocus === true) $pane.find('textarea').focus();
 			}
-		},
-
-		flipTransforms3d = function(headshot) {
-			var $headshot = $(headshot),
+		};
+		
+	$.fn.flipTransforms3d  = function () {			
+		return this.each(function() {
+			var $headshot = $(this),
 				$frontFace = $headshot.find('.front.face'),
 				$backFace = $headshot.find('.back.face'),
 				$content = $backFace.find('.content');
@@ -72,7 +70,10 @@
 							url = $this.attr('href');
 
 						if (jQuery.browser.chrome === true) $content.hide();
-						$content.find('.pane').css({ 'visibility': 'hidden' });
+
+						$content.find('.pane')
+							.css({ 'visibility': 'hidden' });
+
 						$headshot
 							.data('pane-name', paneName)
 							.data('url', url)
@@ -82,67 +83,95 @@
 
 			$backFace
 				.find('a.flip')
-					.click(function() {			
-						if (jQuery.browser.chrome === true) $content.hide();						
+					.click(function() {
+						if (jQuery.browser.chrome === true) $content.hide();
 						$headshot.toggleClass('flipped');
 						return false;
 					})
 				.end()
 
 				.find('a.swipe')
-					.click(function(event) {
+					.click(function() {
 						var paneName = $(this).data('pane-name'),
 							url = $(this).attr('href');
 
-						event.preventDefault();
 						panes['init']($headshot, paneName, url);
+						return false;
 					});
-		},
+		});
+	};
 
-		flipNoTransforms3d = function(headshot) {
-			var $headshot = $(headshot);
-			$headshot
-				.find('.face-container:eq(1)').hide().end()				
-				.find('.face-container:eq(0) a.flip')				
-					.click(function(event) {
-						var paneName = $(this).text(),
-							url = $(this).attr('href');
-						// alert('once');
-						
+	$.fn.flipNoTransforms3d = function () {
+		return this.each(function() {
+			var $headshot = $(this),
+				$frontFace = $headshot.find('.front.face'),
+				$backFace = $headshot.find('.back.face'),
+				$content = $backFace.find('.content'),
+			
+				initBackFace = function (paneName, url) {
+					panes['init']($headshot, paneName, url);
+				},
+			
+				initFrontFace = function () {},
+							
+				flipper = function () {
+					if ($headshot.hasClass('flipped')) {
+						initBackFace(paneName, url);
+					} else {
+						initFrontFace();	
+					}
+				},
+							
+				flipSettings = {
+					speed: 300,
+			      	direction: 'rl',
+			      	color: '#FFF',
+					onEnd: flipper
+				};
+
+			$headshot.find('.face-container:eq(1)').hide();
+
+			$frontFace
+				.find('a.flip')				
+					.live('click', function(event) {
+						var	$this = $(this)
+							paneName = $this.data('pane-name'),
+							url = $this.attr('href'),
+							$content = $headshot.find('.face-container:hidden');					
+
 						$headshot
-							.flip({
-								speed: 300,
-				      			direction: 'rl',
-				      			color: '#FFF',
-				      			content: $headshot.find('.face-container:hidden'),
-								onEnd: function () {
-									alert('onEnd');
-									// if ($headshot.find('.back.face').length == 1) {
-									// 	panes['init']($headshot, paneName, url);
-									// }
-									// alert(paneName)
-									if (panes[paneName] !== undefined ) panes[paneName](url);
-									
-									$headshot.find('a.flip')
-										.click(function(event) {
-											// alert('twice');
-											paneName = $(this).text();
-											url = $(this).attr('href');												
-											$headshot.revertFlip();
-											return false;
-										});
-								}
-							});
+							.addClass('flipped')
+							.flip($.extend(flipSettings, { content: $content }));
 						return false;							
 					});
-		};
 
-	$.fn.headshot = function(options) {
+			$backFace
+				.find('a.flip')
+					.live('click', function() {
+						$headshot
+							.removeClass('flipped')
+							.revertFlip();
+						return false;
+					})
+				.end()
+			
+				.find('a.swipe')
+					.live('click', function() {
+						var paneName = $(this).data('pane-name'),
+							url = $(this).attr('href');
+			
+						panes['init']($headshot, paneName, url);								
+						return false;								
+					});
+		});
+	};
+
+	$.fn.headshot = function() {
 		return this.each(function() {
 			if (Modernizr.csstransforms3d) {
-				flipTransforms3d(this);
+				$(this).flipTransforms3d();
 			} else {
-				flipNoTransforms3d(this);
+				$(this).flipNoTransforms3d();
 			}
 		});
 	};

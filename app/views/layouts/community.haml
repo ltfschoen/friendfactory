@@ -60,6 +60,9 @@
         'community', |
       :cache => 'community.cache'
 
+    - if Rails.env.development?
+      = javascript_include_tag 'development'
+
   %body
     #sidebar
       #head

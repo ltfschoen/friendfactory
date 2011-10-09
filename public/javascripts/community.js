@@ -24,7 +24,7 @@ jQuery(function($) {
 	});
 
 	// Rollcall
-	$('.headshot').headshot();
+	$('div.headshot').headshot();
 
 	// Comments
 	$('.comments a')
