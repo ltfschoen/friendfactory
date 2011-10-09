@@ -35,6 +35,9 @@
       :media => 'screen', |
       :cache => 'layouts/community/cache'
 
+    / [if IE]
+      = stylesheet_link_tag 'layouts/community/rollcall-ie', :media => 'screen'
+
     - if Rails.env.development?
       = stylesheet_link_tag 'development'
       = javascript_include_tag 'jquery', 'jquery.tools.min.js', 'pusher.js'
