@@ -78,7 +78,7 @@
 					paneName = $pane.data('pane'),
 					profileId = $pane.closest('.polaroid').attr('data-profile_id');
 
-				$pane.load('/wave/profiles/' + profileId + '/' + paneName, function(event) {
+				$pane.load('/wave/profiles/' + profileId + '/' + paneName + '?legacy=true', function(event) {
 					if (panes[paneName] !== undefined) {
 						panes[paneName]($pane, setFocus || false);
 					}

@@ -61,6 +61,7 @@ class Wave::ProfilesController < ApplicationController
   end
   
   def conversation
+    @legacy = params[:legacy]
     if receiver = Wave::Profile.find_by_id(params[:id]).try(:user)
       @wave = current_user.conversation_with(receiver, current_site).read
     end

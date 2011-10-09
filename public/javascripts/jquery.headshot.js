@@ -5,14 +5,18 @@
 				var $content = $headshot.find('.content'),
 					$pane = $content.find('.pane');
 				
-				$pane.css({ 'visibility': 'visible', 'opacity': 0.0 });
+				$pane
+					.css({ 'visibility': 'visible', 'opacity': 0.0 })
+					.removeClass()
+					.addClass('pane ' + paneName);
+
 				$pane.load(url, function() {
 					if (panes[paneName] !== undefined) {
 						panes[paneName]($pane, setFocus);
 					}
 					$pane.fadeTo('fast', 1.0);
 				});
-			}
+			},
 			
 			// pokes: function($headshot, url) {
 			// 	$headshot.find('.pane.pokes').load(url);
@@ -22,7 +26,7 @@
 			// 	// 	event.preventDefault();
 			// 	// 	$('<div class="floating"></div>')
 			// 	// 		.appendTo('.floating-container')
-			// 	// 		.load($(this).attr('href'), function() {	 			
+			// 	// 		.load($(this).attr('href'), function() {
 			// 	// 			$(this).position({
 			// 	// 				my: 'left center',
 			// 	// 				of: event,
@@ -36,15 +40,10 @@
 			// 	// });
 			// },
 
-			// conversation: function($headshot, url, setFocus) {
-			// 	var $pane = $headshot.find('.pane.conversation');
-			// 	$pane.load(url, function(text, status) {
-			// 		if (status === 'success') {
-			// 			$pane.find('.wave_conversation').chat();
-			// 			if (setFocus === true) $pane.find('textarea').focus();
-			// 		}
-			// 	});
-			// }
+			conversation: function($pane, setFocus) {
+				$pane.find('.wave_conversation').chat();
+				if (setFocus === true) $pane.find('textarea').focus();
+			}
 		},
 
 		flipTransforms3d = function(headshot) {
@@ -61,7 +60,7 @@
 						url = $headshot.data('url');
 
 					if (jQuery.browser.chrome === true) $content.show();
-					panes['init']($headshot, paneName, url);					
+					panes['init']($headshot, paneName, url, true);
 				}
 			});
 
@@ -77,7 +76,7 @@
 						$headshot
 							.data('pane-name', paneName)
 							.data('url', url)
-							.toggleClass('flipped');							
+							.toggleClass('flipped');
 						return false;
 					});
 
