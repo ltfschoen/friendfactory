@@ -1,110 +1,142 @@
 (function($) {
 	var
 		panes = {
-			init: function(paneName, setFocus) {
-				// var $pane = $(scrollable.getRoot()).find('.pane:eq(' + idx + ')');
-				// loadPane($pane, setFocus);
-				var $pane = $(paneName, '.face')
-				alert($pane);
-			},
-
-			tearDown: function(paneName) {
-				// var $pane = $(scrollable.getRoot()).find('.pane.conversation');
-				// $pane.find('.message-input').hide();
-			},
-
-			conversation: function(pane, setFocus) {
-				// $(pane).find('.wave_conversation').chat();
-				// if (setFocus === true) {
-				// 	$pane.find('textarea').focus();
-				// }
-			},
-		
-			pokes: function($pane) {
-				// $pane.find('a.profile').bind('click', function(event) {
-				// 	event.preventDefault();
-				// 	$('<div class="floating"></div>')
-				// 		.appendTo('.floating-container')
-				// 		.load($(this).attr('href'), function() {	 			
-				// 			$(this).position({
-				// 				my: 'left center',
-				// 				of: event,
-				// 				offset: '30 0',
-				// 				collision: 'fit'
-				// 			})	
-				// 		.draggable()
-				// 		.find('div.polaroid')
-				// 			.polaroid({ 'close-button' : true });
-				// 	});
-				// });
+			init: function($headshot, paneName, url, setFocus) {
+				var $content = $headshot.find('.content'),
+					$pane = $content.find('.pane');
+				
+				$pane.css({ 'visibility': 'visible', 'opacity': 0.0 });
+				$pane.load(url, function() {
+					if (panes[paneName] !== undefined) {
+						panes[paneName]($pane, setFocus);
+					}
+					$pane.fadeTo('fast', 1.0);
+				});
 			}
+			
+			// pokes: function($headshot, url) {
+			// 	$headshot.find('.pane.pokes').load(url);
+			// 	// $headshot.find('.pane.pokes').html('pokes');
+			// 	
+			// 	// $pane.find('a.profile').bind('click', function(event) {
+			// 	// 	event.preventDefault();
+			// 	// 	$('<div class="floating"></div>')
+			// 	// 		.appendTo('.floating-container')
+			// 	// 		.load($(this).attr('href'), function() {	 			
+			// 	// 			$(this).position({
+			// 	// 				my: 'left center',
+			// 	// 				of: event,
+			// 	// 				offset: '30 0',
+			// 	// 				collision: 'fit'
+			// 	// 			})	
+			// 	// 		.draggable()
+			// 	// 		.find('div.polaroid')
+			// 	// 			.polaroid({ 'close-button' : true });
+			// 	// 	});
+			// 	// });
+			// },
+
+			// conversation: function($headshot, url, setFocus) {
+			// 	var $pane = $headshot.find('.pane.conversation');
+			// 	$pane.load(url, function(text, status) {
+			// 		if (status === 'success') {
+			// 			$pane.find('.wave_conversation').chat();
+			// 			if (setFocus === true) $pane.find('textarea').focus();
+			// 		}
+			// 	});
+			// }
 		},
 
-		loadPane = function(pane, setFocus) {
-			var $pane = $(pane),
-				paneName = $pane.data('pane'),
-				profileId = $pane.closest('.polaroid').attr('data-profile_id');
+		flipTransforms3d = function(headshot) {
+			var $headshot = $(headshot),
+				$frontFace = $headshot.find('.front.face'),
+				$backFace = $headshot.find('.back.face'),
+				$content = $backFace.find('.content');
 
-			$pane.load('/wave/profiles/' + profileId + '/' + paneName, function(event) {
-				if (panes[paneName] !== undefined) {
-					panes[paneName]($pane, setFocus || false);
+			if (jQuery.browser.chrome === true) $content.hide();
+
+			$headshot.bind('webkitTransitionEnd', function() {
+				if ($headshot.hasClass('flipped')) {
+					var paneName = $headshot.data('pane-name'),
+						url = $headshot.data('url');
+
+					if (jQuery.browser.chrome === true) $content.show();
+					panes['init']($headshot, paneName, url);					
 				}
 			});
-		},
-		
-		seekTo = function(paneName) {
-			
-		},
-		
-		flipTransforms3d = function(headshot) {
-			var $this = $(headshot),
-				$frontFace = $this.find('.front.face'),
-				$backFace = $this.find('.back.face');
-		
-			$frontFace.click(function() {
-				$this.toggleClass('flipped');
-				return false;
-			});
 
-			$backFace.click(function() {
-				$this.toggleClass('flipped');
-				return false;
-			});			
+			$frontFace
+				.find('a.flip')
+					.click(function() {
+						var $this = $(this),
+							paneName = $this.data('pane-name'),
+							url = $this.attr('href');
+
+						if (jQuery.browser.chrome === true) $content.hide();
+						$content.find('.pane').css({ 'visibility': 'hidden' });
+						$headshot
+							.data('pane-name', paneName)
+							.data('url', url)
+							.toggleClass('flipped');							
+						return false;
+					});
+
+			$backFace
+				.find('a.flip')
+					.click(function() {			
+						if (jQuery.browser.chrome === true) $content.hide();						
+						$headshot.toggleClass('flipped');
+						return false;
+					})
+				.end()
+
+				.find('a.swipe')
+					.click(function(event) {
+						var paneName = $(this).data('pane-name'),
+							url = $(this).attr('href');
+
+						event.preventDefault();
+						panes['init']($headshot, paneName, url);
+					});
 		},
-		
+
 		flipNoTransforms3d = function(headshot) {
 			var $headshot = $(headshot);
 			$headshot
-				.find('.face-container:eq(1)').hide().end()
-				.find('.face-container:eq(0) a.flip')
+				.find('.face-container:eq(1)').hide().end()				
+				.find('.face-container:eq(0) a.flip')				
 					.click(function(event) {
-						event.preventDefault();
+						var paneName = $(this).text(),
+							url = $(this).attr('href');
+						// alert('once');
+						
 						$headshot
-							.data('seek-to', $(this).text())
 							.flip({
 								speed: 300,
 				      			direction: 'rl',
 				      			color: '#FFF',
 				      			content: $headshot.find('.face-container:hidden'),
 								onEnd: function () {
-									if ($headshot.find('.back.face').length == 1) {
-										var panelName = $headshot.data('seek-to');
-										// alert(panelName);
-										panes['init'](panelName);
-									}															
+									alert('onEnd');
+									// if ($headshot.find('.back.face').length == 1) {
+									// 	panes['init']($headshot, paneName, url);
+									// }
+									// alert(paneName)
+									if (panes[paneName] !== undefined ) panes[paneName](url);
+									
 									$headshot.find('a.flip')
 										.click(function(event) {
-											// alert($(this).text());
-											$headshot
-												.data('seek-to', $(this).text())
-												.revertFlip();
+											// alert('twice');
+											paneName = $(this).text();
+											url = $(this).attr('href');												
+											$headshot.revertFlip();
 											return false;
 										});
 								}
 							});
+						return false;							
 					});
 		};
-	
 
 	$.fn.headshot = function(options) {
 		return this.each(function() {

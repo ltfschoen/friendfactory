@@ -1,5 +1,4 @@
 jQuery(function($) {
-
 	var
 		hideCurrentReaction = function(callback) {
 			$('.post_frame.active')
@@ -18,6 +17,7 @@ jQuery(function($) {
 			$('#rollcall').fadeTo('slow', 0.0);
 		};
 
+	// Initialize postings' height
 	$.each($('.post_frame'), function() {
 		var post = $(this).find('.post').height();
 		$(this).height(post+20);

@@ -20,7 +20,7 @@ module Posting::AvatarsHelper
 
   def empty_image_tag(opts = {})
     css_class = [ 'empty', opts.delete(:class) ].compact * ' '
-    image_tag 'friskyfactory/ffffff.gif', opts.merge(:site => false, :class => css_class)
+    image_tag 'ffffff.gif', opts.merge(:site => false, :class => css_class)
   end
 
   def empty_thumb_image_tag(opts = {})

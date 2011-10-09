@@ -1,6 +1,6 @@
 .headshot-container {
 	width: 200px;
-	height: 220px;	
+	height: 240px;	
     position: relative; 
 	-webkit-tap-highlight-color: rgba(0,0,0,0);	
 	-webkit-perspective: 1200;
@@ -10,7 +10,7 @@
 	position: absolute;	
 	-webkit-transform-style: preserve-3d;	
     -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 0.5s;        
+    -webkit-transition-duration: 0.8s;        
 }
 
 .csstransforms3d .headshot.flipped {
@@ -27,13 +27,13 @@
 
 .headshot {
 	width: 200px;
-	height: 220px;
+	height: 240px;
 }
 
 .headshot .face {
 	position: absolute;
 	width: 190px;
-	height: 220px;
+	height: 240px;
 	background-color: #FFF;
 	padding: 5px 5px 0 5px;
     -webkit-box-shadow: 4px 4px 6px 2px rgba(0, 0, 0, 0.3), inset 0 0 20px 10px rgba(0, 0, 0, 0.1);
@@ -46,13 +46,14 @@
 	border-radius: 5px;	
 }
 
-.headshot img {
+.headshot .front.face img {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
 	width: 190px;
 	height: 190px;
+	margin-bottom: 20px;
 }
 
 .headshot ul.buddy-bar {
@@ -147,4 +148,137 @@
 
 .headshot a.pokes.poked {
 	background-position: -362px -2px;
+}
+
+/* Pane */
+
+.headshot .pane {
+	width: 190px;
+	height: 213px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.headshot .caption {
+	font-size: 12px;
+	color: #666;
+	display: inline-block;
+	margin-top: 6px;
+}
+
+/* Biometrics Pane */
+
+.headshot table.biometrics {
+	color: gray;
+	width: 180px;
+	margin: 0 auto;
+	font-size: 12px;
+	color: #000;
+}
+
+.headshot table.biometrics td {
+    vertical-align: middle;
+	line-height: 2.0em;
+	text-align: left;
+}
+
+.headshot table.biometrics td.label {
+    width: 70px;
+    color: #999;
+  	text-shadow: 0 1px 0 #fff;
+}
+
+.headshot table.biometrics td.detail {
+    color: #666;
+    border-bottom: 1px dotted #333;
+  	text-shadow: 0 1px 0 #fff;
+}
+
+/* Photos */
+
+.headshot table.grid {
+	width: 100%;
+	margin-top: 2px;
+}
+
+.headshot table.grid td {
+	text-align: center;
+}
+
+.headshot table.grid img {
+    width: 52px;
+    height: 52px;
+	margin: 2px;
+    background-color: #fff;
+    border: 1px solid #CCC;
+}
+
+/* Pokes */
+
+.headshot .pane a.poke:hover {
+  opacity: 0.95;
+}
+
+.headshot .pane a.poke {
+	margin-top: 3px;
+	display: inline-block;
+	color: #fff;
+	position: relative;
+	text-shadow: 0 1px 3px #000;
+	font-weight: bold;
+	cursor: pointer;
+	border: 1px solid #0e2d2c;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 0px rgba(255, 255, 255, 0.2) inset;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	text-decoration: none;
+	font-size: 11px;
+	color: #FFF;
+	padding: 3px 8px 4px 8px;
+	
+	background: #1b5452;
+	/* Old browsers */
+
+	background: -moz-linear-gradient(top, #1b5452 0%, #14403f 100%);
+	/* FF3.6+ */
+
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1b5452), color-stop(100%, #14403f));
+	/* Chrome,Safari4+ */
+
+	background: -webkit-linear-gradient(top, #1b5452 0%, #14403f 100%);
+	/* Chrome10+,Safari5.1+ */
+
+	background: -o-linear-gradient(top, #1b5452 0%, #14403f 100%);
+	/* Opera11.10+ */
+
+	background: -ms-linear-gradient(top, #1b5452 0%, #14403f 100%);
+	/* IE10+ */
+	background: linear-gradient(top, #1b5452 0%, #14403f 100%);
+	/* W3C */
+}
+
+.headshot .pane a.poke:active {
+  top: 1px;
+  opacity: 1;
+  background: #14403f;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #14403f), color-stop(100%, #1b5452));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* Opera11.10+ */
+
+  background: -ms-linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* IE10+ */
+  background: linear-gradient(top, #14403f 0%, #1b5452 100%);
+  /* W3C */
 }

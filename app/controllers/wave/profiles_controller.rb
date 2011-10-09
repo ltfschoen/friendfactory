@@ -36,6 +36,13 @@ class Wave::ProfilesController < ApplicationController
       format.html { render :layout => false }
     end
   end
+  
+  def biometrics
+    @profile = Wave::Profile.find_by_id(params[:id])
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
 
   def photos    
     @wave = Wave::Profile.find_by_id(params[:id])
@@ -45,8 +52,8 @@ class Wave::ProfilesController < ApplicationController
   end
   
   def invitations
-    if wave = Wave::Profile.find_by_id(params[:id])
-      @invitations = wave.postings.type(Posting::Invitation).order('created_at asc').limit(Wave::InvitationsHelper::MaximumDefaultImages)
+    if @wave = Wave::Profile.find_by_id(params[:id])
+      @invitations = @wave.postings.type(Posting::Invitation).order('created_at asc').limit(Wave::InvitationsHelper::MaximumDefaultImages)
     end
     respond_to do |format|
       format.html { render :layout => false }

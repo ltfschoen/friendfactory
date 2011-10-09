@@ -7,6 +7,7 @@ Friskyfactory::Application.routes.draw do
     resources :profiles, :only => [ :index, :show ] do
       member do
         get :signals
+        get :biometrics        
         get :photos
         get :invitations
         get :conversation
