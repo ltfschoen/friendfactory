@@ -1,5 +1,5 @@
 .headshot-container
-  .headshot[profile]
+  .headshot[profile]{ :class => poke_class(profile.id) }
     .face-container
       .front.face
         = headshot_image_tag(profile)
@@ -10,7 +10,7 @@
           %li= link_to 'Biometrics', biometrics_wave_profile_path(profile), :class => 'flip icon mini-profile', :'data-pane-name' => 'biometrics'
           %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'flip icon photos', :'data-pane-name' => 'photos'
           %li= link_to 'Invitations', invitations_wave_profile_path(profile), :class => 'flip icon invitations', :'data-pane-name' => 'invitations'
-          %li= link_to 'Pokes', pokes_wave_profile_path(profile), :class => poke_link_class(profile.id, 'flip'), :'data-pane-name' => 'pokes'
+          %li= link_to 'Pokes', pokes_wave_profile_path(profile), :class => 'flip icon pokes', :'data-pane-name' => 'pokes'
           - if current_user.present? && (current_user.id != profile.user_id)
             - if false
               %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put, :'data-pane-name' => 'buddies'
@@ -26,7 +26,7 @@
             %li= link_to 'Biometrics', biometrics_wave_profile_path(profile), :class => 'swipe icon mini-profile', :'data-pane-name' => 'biometrics'
             %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'swipe icon photos', :'data-pane-name' => 'photos'
             %li= link_to 'Invitations', invitations_wave_profile_path(profile), :class => 'swipe icon invitations', :'data-pane-name' => 'invitations'
-            %li= link_to 'Pokes', pokes_wave_profile_path(profile), :class => poke_link_class(profile.id, 'swipe'), :'data-pane-name' => 'pokes'
+            %li= link_to 'Pokes', pokes_wave_profile_path(profile), :class => 'swipe icon pokes', :'data-pane-name' => 'pokes'
             - if current_user.present? && (current_user.id != profile.user_id)
               %li= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'swipe icon chat', :'data-pane-name' => 'conversation'
 

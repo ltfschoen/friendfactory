@@ -15,6 +15,10 @@ module Wave::ProfilesHelper
     css.compact.join(' ')
   end
 
+  def poke_class(profile_id)
+    (current_profile.id != profile_id) && current_profile.has_poked?(profile_id) && 'poked'
+  end
+
   def link_to_send_cocktail(profile)
     if current_profile.present? && (current_profile.id != profile.id)
       msg = "Send #{profile.handle} a Cocktail"

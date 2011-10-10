@@ -32,15 +32,15 @@
 		pokeable = function (data, status) {
 			var $this = $(this),
 				$pane = $this.closest('.pane'),
-				$pokesA = $pane.closest('.headshot').find('a.pokes'),
-				url = $pokesA.attr('href');
+				$headshot = $pane.closest('.headshot'),
+				url = $headshot.find('a.pokes').attr('href');
 
 			$this.hide();
 			$pane.load(url, function() {
-				$pokesA.toggleClass('poked', status['poked']);
+				$headshot.toggleClass('poked', status['poked']);
 			});
 		},
-		
+
 		swipeable = function () {
 			var $this = $(this),
 				$headshot = $this.closest('.headshot'),
@@ -69,6 +69,7 @@
 
 			$headshot.bind('webkitTransitionEnd', function() {
 				if ($headshot.hasClass('flipped')) {
+					// Back face init
 					var paneName = $headshot.data('pane-name'),
 						url = $headshot.data('url');
 
@@ -130,9 +131,9 @@
 				initBackFace = function (paneName, url) {
 					panes['init']($headshot, paneName, url, true);
 				},
-			
+
 				initFrontFace = function () {},
-							
+
 				flipper = function () {
 					if ($headshot.hasClass('flipped')) {
 						initBackFace(paneName, url);
