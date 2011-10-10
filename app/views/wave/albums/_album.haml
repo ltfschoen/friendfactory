@@ -1,11 +1,13 @@
 - user = album.user
-.post.photos[album]
-  .remove{:title => "Remove this post"} ×
-  .portrait
-    = thimble_link_to_profile(user)
-  .clear
-    .photo
-      = image_tag(album.photos.limit(1).first.image.url(:h4x6))
-    %span.date Posted #{distance_of_time_in_words_to_now(proxy.created_at)} ago
-    = link_to_comments(album.postings.published.count, posting_comments_path(proxy))
-.reaction.hidden
+- photo = album.photos.limit(1).first
+- if photo.present?
+  .post.photos[album]
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      = thimble_link_to_profile(user)
+    .clear
+      .photo
+        = image_tag(photo.image.url(:h4x6))
+      %span.date Posted #{distance_of_time_in_words_to_now(proxy.created_at)} ago
+      = link_to_comments(album.postings.published.count, posting_comments_path(proxy))
+  .reaction.hidden

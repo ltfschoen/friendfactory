@@ -1,2 +1,14 @@
-.posting[avatar]
-  = render :partial => 'wave/profiles/profile', :object => avatar.profile(current_site)
+- if false
+  .posting[avatar]= render :partial => 'wave/profiles/profile', :object => avatar.profile(current_site)
+
+- profile = avatar.profile(current_site)
+.posting.post.signal[avatar]
+  .remove{:title => "Remove this post"} ×
+  .portrait= thimble_link_to_profile(profile)
+  .clear
+    .cell
+      = link_to_profile(profile)
+      posted a new profile photo! Say Hi!
+    %span.date Uploaded #{distance_of_time_in_words_to_now(avatar.created_at)} ago
+    = link_to_comments(avatar.children.published.count, posting_comments_path(avatar))
+.reaction

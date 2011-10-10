@@ -13,4 +13,4 @@
       %td.detail= @profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe
     %tr
       %td.label Location
-      %td.detail= @profile.location
+      %td.detail= truncate(@profile.location, :length => 20)
