@@ -12,6 +12,7 @@
 	text-align: left;
 	padding: 10px 10px 20px 10px;
 	font: 13px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;
+	overflow-x: hidden;
 }
 
 .post.link .cell p {

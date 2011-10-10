@@ -7,8 +7,9 @@
     .cell
       By #{link_to_profile(user)}    
       - unless link.embeds.primary.present?
-        - link.photos.each do |photo|
-          = image_tag(photo.image.url(:thumb), :site => false)
+        %p
+          - link.photos.each do |photo|
+            = image_tag(photo.image.url(:thumb), :site => false, :size => '50x50')
       %p
         = link_to truncate(link.title, :length => 80), link.url
         %br/
@@ -17,7 +18,7 @@
       - if link.embeds.present?
         - link.embeds.each do |embed|
           .embed.prepend-top{ :class => embed.type }
-            = render_embed(embed)
+            =# render_embed(embed)
     %span.date Posted #{distance_of_time_in_words_to_now(link.created_at)} ago
     = link_to_comments(link.children.published.count, posting_comments_path(link))
 .reaction
