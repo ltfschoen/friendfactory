@@ -1,0 +1,24 @@
+#sidebar .block.userspace {
+	margin-top: 10px;
+}
+
+#sidebar .block.userspace a {
+	margin: 0;
+}
+
+#sidebar .portrait {
+	margin-left: 10px;
+}
+
+#sidebar .block.userspace p.username {
+	display: block;
+	float: left;
+	font: bold 14px;
+	width: 100px;
+	margin: 0 0 0 10px;
+}
+
+#sidebar .block.userspace ul {
+	clear:both;
+	margin: 20px 0 0 8px;
+}

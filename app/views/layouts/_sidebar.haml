@@ -1,0 +1,18 @@
+#head
+  %a{:href => "javascript:void();"} CLAYTON
+- if false
+  .block.adspace
+    %img{:src => "http://placehold.it/180x75"}
+.block.userspace
+  .portrait= thimble_link_to_profile(current_profile)
+  %p.username= link_to_profile(current_profile)
+  %p.username= link_to '261 friends &rarr;'.html_safe, '#'
+  %ul
+    %li.home
+    %li.messages
+      %span 5
+    %li.personal
+    %li.invites
+    %li.buddies
+- if false
+  %input{:name => "search", :placeholder => "Search...", :type => "text"}/

@@ -47,10 +47,11 @@ module ApplicationHelper
     image_tag('friskyfactory/ajax-loader.gif', :size => size, :class => css_class, :id => opts[:id], :site => false)
   end
   
-  def link_to_profile(user, opts = {})
-    if profile = user.profile(current_site)
-      name = opts[:label] || user.handle(current_site)
-      link_to(name, wave_profile_path(profile, :class => 'profile username'))
+  def link_to_profile(profile, opts = {})
+    profile = profile.profile(current_site) if profile.is_a?(User)
+    if profile.present?
+      name = opts[:label] || profile.handle
+      link_to(name, wave_profile_path(profile), :class => 'profile username')
     end
   end
 

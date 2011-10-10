@@ -12,6 +12,7 @@
         'layouts/community/base', |
         'layouts/community/base-override', |
         'layouts/community/sidebar', |
+        'layouts/community/sidebar-override', |
         'layouts/community/reaction', |
         'layouts/community/post_reaction', |
         'layouts/community/rollcall', |
@@ -69,23 +70,7 @@
     = csrf_meta_tag
   %body
     #sidebar
-      #head
-        %a{:href => "javascript:void();"} CLAYTON
-      - if false
-        .block.adspace
-          %img{:src => "http://placehold.it/180x75"}
-      .block.userspace
-        .portrait
-          %img{:src => "/images/users/x.png"}/
-        %span.username John Doe
-        %ul
-          %li.home
-          %li.messages
-            %span 5
-          %li.personal
-          %li.invites
-          %li.buddies
-      %input{:name => "search", :placeholder => "Search...", :type => "text"}/
+      = render :partial => 'layouts/sidebar'
     #frame
       = yield
       - if Rails.env.development?
