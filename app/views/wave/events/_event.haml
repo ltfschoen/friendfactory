@@ -1,46 +1,46 @@
-.posting.posting_event[event]<
-  .ticket-container<
-    .ticket
-      .face-container
-        .front.face        
-          .grid_10.alpha<
-            .header.grid_10.alpha.omega<
-              .grid_3.alpha
-                &nbsp;
-              .grid_4.start_date
-                - if event.start_date.present?
-                  = event.start_date.to_s(:event_date)
-              .grid_3.omega
-                &nbsp;              
+- if false
+  .posting.posting_event[event]<
+    .ticket-container<
+      .ticket
+        .face-container
+          .front.face        
+            .grid_10.alpha<
+              .header.grid_10.alpha.omega<
+                .grid_3.alpha
+                  &nbsp;
+                .grid_4.start_date
+                  - if event.start_date.present?
+                    = event.start_date.to_s(:event_date)
+                .grid_3.omega
+                  &nbsp;              
           
-            .grid_2.alpha
-              &nbsp;                      
-            .body.grid_6
-              .promoter_name= event.promoter_name
-              .presents Presents
-              .description= event.description
-            .grid_2.omega
-              &nbsp;              
-          .stub.grid_2.omega
-            %ul.navi
-              %li= link_to 'Show', wave_event_path(event), :class => 'flip'
+              .grid_2.alpha
+                &nbsp;                      
+              .body.grid_6
+                .promoter_name= event.promoter_name
+                .presents Presents
+                .description= event.description
+              .grid_2.omega
+                &nbsp;              
+            .stub.grid_2.omega
+              %ul.navi
+                %li= link_to 'Show', wave_event_path(event), :class => 'flip'
             
-      .face-container
-        .back.face
-          .stub.grid_2.alpha
-            %ul.navi
-              %li= link_to 'Show', wave_event_path(event), :class => 'flip'
-          .map.grid_4
-            - location = event.location
-            - if location.present? && location.lat? && location.lng?
-              %img{ :src => "http://maps.google.com/maps/api/staticmap?zoom=15&size=210x210&markers=color:red|size:mid|#{location.lat},#{location.lng}&sensor=false" }
+        .face-container
+          .back.face
+            .stub.grid_2.alpha
+              %ul.navi
+                %li= link_to 'Show', wave_event_path(event), :class => 'flip'
+            .map.grid_4
+              - location = event.location
+              - if location.present? && location.lat? && location.lng?
+                %img{ :src => "http://maps.google.com/maps/api/staticmap?zoom=15&size=210x210&markers=color:red|size:mid|#{location.lat},#{location.lng}&sensor=false" }
             
-          .info-pane.grid_5.omega
-            - if event.location.present?
-              %p.location.name
-                = event.location.name
-              %p.location.address
-                = event.location.address
-            %p.body
-              = event.body
-
+            .info-pane.grid_5.omega
+              - if event.location.present?
+                %p.location.name
+                  = event.location.name
+                %p.location.address
+                  = event.location.address
+              %p.body
+                = event.body
