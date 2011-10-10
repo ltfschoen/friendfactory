@@ -169,6 +169,7 @@
 					.live('click', function() {
 						$headshot
 							.removeClass('flipped')
+							.find('.face').hide().end()
 							.revertFlip();
 						return false;
 					})
