@@ -4,12 +4,14 @@
 			init: function ($headshot, paneName, url, setFocus, options) {
 				var $content = $headshot.find('.content'),
 					$pane = $content.find('.pane'),
-					options = options || {};
+					settings = {
+						onBefore: function () {},
+						onEnd: function () {}
+					};
+
+				$.extend(settings, options);
 				
-				console.dir(options);
-				
-				if (options['onBefore'] !== undefined) options['onBefore']($pane);
-				
+				settings['onBefore']($pane);
 				$pane
 					.removeClass()
 					.addClass('pane ' + paneName)
@@ -17,10 +19,10 @@
 						if (panes[paneName] !== undefined) {
 							panes[paneName]($pane, setFocus);
 						}
-						if (options['onEnd'] !== undefined) options['onEnd']($pane);
+						settings['onEnd']($pane);
 					});
 			},
-			
+
 			// pokes: function($pane, setFocus) {
 			// 	$pane.find('a.profile').bind('click', function(event) {
 			// 		event.preventDefault();
@@ -46,7 +48,7 @@
 			}
 		};
 		
-	$.fn.flipTransforms3d  = function () {			
+	$.fn.flipTransforms3d  = function () {
 		return this.each(function() {
 			var $headshot = $(this),
 				$frontFace = $headshot.find('.front.face'),
@@ -68,7 +70,7 @@
 						onEnd: function ($pane) {
 							$pane.fadeTo('fast', 1.0);
 						}
-					});				
+					});
 				}
 			});
 
@@ -128,10 +130,10 @@
 					if ($headshot.hasClass('flipped')) {
 						initBackFace(paneName, url);
 					} else {
-						initFrontFace();	
+						initFrontFace();
 					}
 				},
-							
+
 				flipSettings = {
 					speed: 300,
 			      	direction: 'lr',
@@ -142,17 +144,17 @@
 			$headshot.find('.face-container:eq(1)').hide();
 
 			$frontFace
-				.find('a.flip')				
+				.find('a.flip')
 					.live('click', function(event) {
 						var	$this = $(this)
 							paneName = $this.data('pane-name'),
 							url = $this.attr('href'),
-							$content = $headshot.find('.face-container:hidden');					
+							$content = $headshot.find('.face-container:hidden');
 
 						$headshot
 							.addClass('flipped')
 							.flip($.extend(flipSettings, { content: $content }));
-						return false;							
+						return false;
 					});
 
 			$backFace
@@ -164,14 +166,14 @@
 						return false;
 					})
 				.end()
-			
+
 				.find('a.swipe')
 					.live('click', function() {
 						var paneName = $(this).data('pane-name'),
 							url = $(this).attr('href');
-			
+
 						panes['init']($headshot, paneName, url, false);
-						return false;								
+						return false;
 					});
 		});
 	};
@@ -185,5 +187,5 @@
 			}
 		});
 	};
-	
+
 })(jQuery);
