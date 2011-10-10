@@ -1,21 +1,24 @@
 (function($) {
 	var
 		panes = {
-			init: function ($headshot, paneName, url, setFocus) {
+			init: function ($headshot, paneName, url, setFocus, options) {
 				var $content = $headshot.find('.content'),
-					$pane = $content.find('.pane');
+					$pane = $content.find('.pane'),
+					options = options || {};
+				
+				console.dir(options);
+				
+				if (options['onBefore'] !== undefined) options['onBefore']($pane);
 				
 				$pane
-					.css({ 'visibility': 'visible', 'opacity': 0.0 })
 					.removeClass()
-					.addClass('pane ' + paneName);
-
-				$pane.load(url, function() {
-					if (panes[paneName] !== undefined) {
-						panes[paneName]($pane, setFocus);
-					}
-					$pane.fadeTo('fast', 1.0);
-				});
+					.addClass('pane ' + paneName)
+					.load(url, function() {
+						if (panes[paneName] !== undefined) {
+							panes[paneName]($pane, setFocus);
+						}
+						if (options['onEnd'] !== undefined) options['onEnd']($pane);
+					});
 			},
 			
 			// pokes: function($pane, setFocus) {
@@ -57,8 +60,15 @@
 					var paneName = $headshot.data('pane-name'),
 						url = $headshot.data('url');
 
-					if (jQuery.browser.chrome === true) $content.show();
-					panes['init']($headshot, paneName, url, true);
+					panes['init']($headshot, paneName, url, true, {
+						onBefore: function ($pane) {
+							if (jQuery.browser.chrome === true) $content.show();
+							$pane.css({ 'visibility': 'visible', 'opacity': 0.0 })
+						},
+						onEnd: function ($pane) {
+							$pane.fadeTo('fast', 1.0);
+						}
+					});				
 				}
 			});
 
@@ -95,7 +105,7 @@
 						var paneName = $(this).data('pane-name'),
 							url = $(this).attr('href');
 
-						panes['init']($headshot, paneName, url);
+						panes['init']($headshot, paneName, url, false);
 						return false;
 					});
 		});
@@ -109,7 +119,7 @@
 				$content = $backFace.find('.content'),
 			
 				initBackFace = function (paneName, url) {
-					panes['init']($headshot, paneName, url);
+					panes['init']($headshot, paneName, url, true);
 				},
 			
 				initFrontFace = function () {},
@@ -124,7 +134,7 @@
 							
 				flipSettings = {
 					speed: 300,
-			      	direction: 'rl',
+			      	direction: 'lr',
 			      	color: '#FFF',
 					onEnd: flipper
 				};
@@ -160,7 +170,7 @@
 						var paneName = $(this).data('pane-name'),
 							url = $(this).attr('href');
 			
-						panes['init']($headshot, paneName, url);								
+						panes['init']($headshot, paneName, url, false);
 						return false;								
 					});
 		});

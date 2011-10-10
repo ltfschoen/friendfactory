@@ -1,5 +1,5 @@
 - fill_with_matrix = [ empty_thumb_image_tag, empty_thumb_image_tag, empty_thumb_image_tag ] * 3
-%table.grid
+%table.grid{ :cellspacing => '0' }
   - fill_with_matrix.zip(@invitations).in_groups_of(3) do |fill_with_photo_row|
     %tr
       - fill_with_photo_row.each do |invitation_with_fill|

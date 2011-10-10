@@ -220,7 +220,6 @@
 }
 
 .headshot .pane a.poke {
-	margin-top: 3px;
 	display: inline-block;
 	color: #fff;
 	position: relative;
@@ -236,7 +235,7 @@
 	text-decoration: none;
 	font-size: 11px;
 	color: #FFF;
-	padding: 3px 8px 4px 8px;
+	padding: 2px 8px 3px 8px;
 	
 	background: #1b5452;
 	/* Old browsers */

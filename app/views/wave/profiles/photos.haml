@@ -1,6 +1,6 @@
 - photos = @wave.photos
 - matrix = [ empty_thumb_image_tag, empty_thumb_image_tag, empty_thumb_image_tag ] * 3
-%table.grid
+%table.grid{ :cellspacing => '0' }
   - matrix.zip(photos).in_groups_of(3) do |photo_row|
     %tr
       - photo_row.each do |photo_with_fill|
