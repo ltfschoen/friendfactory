@@ -21,7 +21,9 @@ module Wave::ProfilesHelper
 
   def link_to_send_cocktail(profile)
     if current_profile.present? && (current_profile.id != profile.id)
-      msg = "Send #{profile.handle} a Cocktail"
+      handle = profile.handle
+      handle = (handle.length > 7) ? nil : "#{handle} "
+      msg = "Send #{handle}a Cocktail"
       if current_profile.has_poked?(profile.id)
         msg = "Don't " + msg
         disable_with = "Trashing cocktail..."
