@@ -65,7 +65,7 @@
 					panes['init']($headshot, paneName, url, true, {
 						onBefore: function ($pane) {
 							if (jQuery.browser.chrome === true) $content.show();
-							$pane.css({ 'visibility': 'visible', 'opacity': 0.0 })
+							$pane.css({ visibility: 'visible', opacity: 0.0 })
 						},
 						onEnd: function ($pane) {
 							$pane.fadeTo('fast', 1.0);
@@ -107,7 +107,14 @@
 						var paneName = $(this).data('pane-name'),
 							url = $(this).attr('href');
 
-						panes['init']($headshot, paneName, url, false);
+						panes['init']($headshot, paneName, url, false, {
+							onBefore: function ($pane) {
+								$pane.css({ visibility: 'hidden' });
+							},
+							onEnd: function ($pane) {
+								$pane.css({ visibility: 'visible' });
+							}							
+						});
 						return false;
 					});
 		});
@@ -172,7 +179,14 @@
 						var paneName = $(this).data('pane-name'),
 							url = $(this).attr('href');
 
-						panes['init']($headshot, paneName, url, false);
+						panes['init']($headshot, paneName, url, false, {
+							onBefore: function ($pane) {
+								$pane.css({ visibility: 'hidden' });
+							},
+							onEnd: function ($pane) {
+								$pane.css({ visibility: 'visible' });
+							}
+						});
 						return false;
 					});
 		});
