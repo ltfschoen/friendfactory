@@ -24,8 +24,12 @@ module Wave::ProfilesHelper
       else
         disable_with = "Sending cocktail..."
       end
-      link_to msg, poke_new_friendship_path(:profile_id => profile.id), :class => 'poke', :remote => true, :method => :post,
-          :'data-type' => :json, :'data-disable-with' => disable_with
+      link_to(msg, poke_new_friendship_path(:profile_id => profile.id),
+          :class => 'poke',
+          :remote => true,
+          :method => :post,
+          :'data-type' => :json,
+          :'data-disable-with' => disable_with)
     end
   end
 

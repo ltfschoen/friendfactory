@@ -10,8 +10,8 @@
 					};
 
 				$.extend(settings, options);
-				
 				settings['onBefore']($pane);
+
 				$pane
 					.removeClass()
 					.addClass('pane ' + paneName)
@@ -23,31 +23,41 @@
 					});
 			},
 
-			// pokes: function($pane, setFocus) {
-			// 	$pane.find('a.profile').bind('click', function(event) {
-			// 		event.preventDefault();
-			// 		$('<div class="floating"></div>')
-			// 			.appendTo('.floating-container')
-			// 			.load($(this).attr('href'), function() {
-			// 				$(this).position({
-			// 					my: 'left center',
-			// 					of: event,
-			// 					offset: '30 0',
-			// 					collision: 'fit'
-			// 				})	
-			// 			.draggable()
-			// 			.find('div.polaroid')
-			// 				.polaroid({ 'close-button' : true });
-			// 		});
-			// 	});
-			// },
-
 			conversation: function($pane, setFocus) {
 				$pane.find('.wave_conversation').chat();
 				if (setFocus === true) $pane.find('textarea').focus();
 			}
-		};
+		},
+
+		pokeable = function (data, status) {
+			var $this = $(this),
+				$pane = $this.closest('.pane'),
+				$pokesA = $pane.closest('.headshot').find('a.pokes'),
+				url = $pokesA.attr('href');
+
+			$this.hide();
+			$pane.load(url, function() {
+				$pokesA.toggleClass('poked', status['poked']);
+			});
+		},
 		
+		swipeable = function () {
+			var $this = $(this),
+				$headshot = $this.closest('.headshot'),
+				paneName = $this.data('pane-name'),
+				url = $this.attr('href');
+
+			panes['init']($headshot, paneName, url, false, {
+				onBefore: function ($pane) {
+					$pane.css({ visibility: 'hidden' });
+				},
+				onEnd: function ($pane) {
+					$pane.css({ visibility: 'visible' });
+				}
+			});
+			return false;
+		};
+
 	$.fn.flipTransforms3d  = function () {
 		return this.each(function() {
 			var $headshot = $(this),
@@ -102,21 +112,11 @@
 					})
 				.end()
 
-				.find('a.swipe')
-					.click(function() {
-						var paneName = $(this).data('pane-name'),
-							url = $(this).attr('href');
+				.find('a.poke')
+					.live('ajax:success', pokeable)
+				.end()
 
-						panes['init']($headshot, paneName, url, false, {
-							onBefore: function ($pane) {
-								$pane.css({ visibility: 'hidden' });
-							},
-							onEnd: function ($pane) {
-								$pane.css({ visibility: 'visible' });
-							}							
-						});
-						return false;
-					});
+				.find('a.swipe').click(swipeable);
 		});
 	};
 
@@ -174,21 +174,11 @@
 					})
 				.end()
 
-				.find('a.swipe')
-					.live('click', function() {
-						var paneName = $(this).data('pane-name'),
-							url = $(this).attr('href');
+				.find('a.poke')
+					.live('ajax:success', pokeable)
+				.end()
 
-						panes['init']($headshot, paneName, url, false, {
-							onBefore: function ($pane) {
-								$pane.css({ visibility: 'hidden' });
-							},
-							onEnd: function ($pane) {
-								$pane.css({ visibility: 'visible' });
-							}
-						});
-						return false;
-					});
+				.find('a.swipe').live('click', swipeable);
 		});
 	};
 

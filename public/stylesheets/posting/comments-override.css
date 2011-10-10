@@ -12,3 +12,8 @@
   font-size: 11px;
   margin: 5px;
 }
+
+.comment_box form .foot input[type="submit"], .comment_box form .foot input[type="button"] {
+	height: inherit;
+	padding: 3px 8px 4px 8px;
+}

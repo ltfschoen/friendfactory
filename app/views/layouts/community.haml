@@ -1,7 +1,10 @@
 !!!
 %html
   %head
-    %title {% title %}
+    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
+    %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }  
+    %title #{current_site.display_name}
+
     = stylesheet_link_tag |
         'application', |
         'effects', |        
@@ -63,6 +66,7 @@
     - if Rails.env.development?
       = javascript_include_tag 'development'
 
+    = csrf_meta_tag
   %body
     #sidebar
       #head
