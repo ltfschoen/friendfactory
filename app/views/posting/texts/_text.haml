@@ -11,7 +11,10 @@
       = link_to_profile(user)
       %p= text.body || '&nbsp;'.html_sage
       %p{:style => "text-align: center;"}
-        %a{:href => ""} View Full Post »
+        - if false
+          %a{:href => ""} View Full Post &rarr;
+        - else
+          View Full Post &rarr;
     .torn
     %span.date Posted #{distance_of_time_in_words_to_now(text.created_at)} ago
     = link_to_comments(text.children.published.count, posting_comments_path(text))

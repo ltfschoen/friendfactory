@@ -1,13 +1,20 @@
+.comment_box {
+	position: relative;
+}
+
 .comment_box .comment {
-  min-height: 20px;
+	min-height: 20px;
 }
 
 .comment_box .comment p {
   margin-bottom: 0px;
 }
 
+.comment_box .reply,
+.comment_box .remove {
+  float: right;	
+}
 .comment_box .reply a {
-  float: right;
   color: #666;
   font-size: 11px;
   margin: 5px;
@@ -16,4 +23,31 @@
 .comment_box form .foot input[type="submit"], .comment_box form .foot input[type="button"] {
 	height: inherit;
 	padding: 3px 8px 4px 8px;
+}
+
+.comment_box .remove {
+  width: 20px;
+  height: 20px;
+  line-height: 15px;
+  position: absolute;
+  right: 4px;
+  top: 8px;
+  color: #333;
+  text-align: center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  background: transparent;
+  cursor: pointer;
+  display: none;
+}
+
+.ie .comment_box .remove {
+	top: 12px;
+}
+
+.comment_box:hover .remove {
+  display: inline-block;
 }

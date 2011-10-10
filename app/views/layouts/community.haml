@@ -1,77 +1,79 @@
-!!!
-%html
-  %head
-    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-    %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }  
-    %title #{current_site.display_name}
+!!! 5
+:plain
+  <!--[if IE 8]><html lang="en-us" class="no-js ie ie8"><![endif]-->
+  <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
+  <!--[if !IE]>--><html class="no-js"><!--<![endif]-->
+%head
+  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
+  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %title #{current_site.display_name}
 
-    = stylesheet_link_tag |
-        'application', |
-        'effects', |        
-        'layouts/reset', |  
-        'layouts/community/base', |
-        'layouts/community/base-override', |
-        'layouts/community/sidebar', |
-        'layouts/community/sidebar-override', |
-        'layouts/community/reaction', |
-        'layouts/community/post_reaction', |
-        'layouts/community/rollcall', |
-        'posting/ads', |
-        'posting/blog', |
-        'posting/checkin', |
-        'posting/comments', |
-        'posting/comments-override', |
-        'posting/headshot', |
-        'posting/itinerary', |
-        'posting/multi-photos', |
-        'posting/new_post', |
-        'posting/photos', |
-        'posting/portrait', |
-        'posting/portrait-override', |
-        'posting/post', |
-        'posting/post-override', |
-        'posting/signal', |
-        'posting/status', |
-        'posting/status-override', |
-        'posting/temp', |
-        'posting/tweet', |
-        'posting/video', |
-      :media => 'screen', |
-      :cache => 'layouts/community/cache'
+  = stylesheet_link_tag |
+      'application', |
+      'effects', |
+      'layouts/reset', |
+      'layouts/community/base', |
+      'layouts/community/base-override', |
+      'layouts/community/sidebar', |
+      'layouts/community/sidebar-override', |
+      'layouts/community/reaction', |
+      'layouts/community/post_reaction', |
+      'layouts/community/rollcall', |
+      'posting/ads', |
+      'posting/blog', |
+      'posting/checkin', |
+      'posting/comments', |
+      'posting/comments-override', |
+      'posting/headshot', |
+      'posting/itinerary', |
+      'posting/multi-photos', |
+      'posting/new_post', |
+      'posting/photos', |
+      'posting/portrait', |
+      'posting/portrait-override', |
+      'posting/post', |
+      'posting/post-override', |
+      'posting/signal', |
+      'posting/status', |
+      'posting/status-override', |
+      'posting/temp', |
+      'posting/tweet', |
+      'posting/video', |
+    :media => 'screen', |
+    :cache => 'layouts/community/cache'
 
-    / [if IE]
-      = stylesheet_link_tag 'layouts/community/rollcall-ie', :media => 'screen'
+  - if Rails.env.development?
+    = stylesheet_link_tag 'development'
+    = javascript_include_tag 'jquery', 'jquery.tools.min.js', 'pusher.js'
+  - else
+    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
+    = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
 
+  -# jquery-ui-1.8.16.custom.min for jquery.flip and advanced easing functions
+  = javascript_include_tag |
+      'modernizr', |
+      'jquery-ui-1.8.16.custom.min', |
+      'jquery.flip', |
+      'jquery.scrollTo-1.4.2-min', |
+      'jquery.chat', |
+      'jquery.headshot', |
+      'jquery.effects', |
+      'jquery_ujs', |
+      'application', |
+      'community', |
+    :cache => 'community.cache'
+
+  - if Rails.env.development?
+    = javascript_include_tag 'development'
+
+  = csrf_meta_tag
+%body
+  #sidebar
+    = render :partial => 'layouts/sidebar'
+  #frame
+    = yield
     - if Rails.env.development?
-      = stylesheet_link_tag 'development'
-      = javascript_include_tag 'jquery', 'jquery.tools.min.js', 'pusher.js'
-    - else
-      = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
-      = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
-      = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
-
-    -# jquery-ui-1.8.16.custom.min for jquery.flip and advanced easing functions
-    = javascript_include_tag |
-        'modernizr', |
-        'jquery-ui-1.8.16.custom.min', |
-        'jquery.flip', |
-        'jquery.scrollTo-1.4.2-min', |
-        'jquery.chat', |
-        'jquery.headshot', |
-        'jquery.effects', |
-        'jquery_ujs', |
-        'application', |
-        'community', |
-      :cache => 'community.cache'
-
-    - if Rails.env.development?
-      = javascript_include_tag 'development'
-
-    = csrf_meta_tag
-  %body
-    #sidebar
-      = render :partial => 'layouts/sidebar'
-    #frame
-      = yield
-      - if Rails.env.development?
-        #footnotes_holder{ :style => 'display:block' }
+      #footnotes_holder{ :style => 'display:block' }
+:plain
+  </html>

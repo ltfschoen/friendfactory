@@ -1,3 +1,10 @@
+.post .remove {
+  right: 0px;
+  top: -6px;
+  color: #333;
+  background: transparent;
+}
+
 .post .clear .comments a,
 .post .clear .date {
 	padding: 3px 6px;
