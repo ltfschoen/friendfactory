@@ -82,6 +82,12 @@ jQuery(function($) {
 		return false;
 	});
 
+	// Videos
+	$('<script>')
+		.attr('src', 'http://www.youtube.com/player_api')
+		.attr('type', 'text/javascript')
+		.insertBefore('script:first');
+
 	// $('.nav-container')
 	// 	.insertAfter('ul.posting_post_its:first')
 	// 	.find('form')

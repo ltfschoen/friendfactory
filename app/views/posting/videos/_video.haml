@@ -1,3 +1,14 @@
-.posting[video]
-  .video_player.youtube_video_player{ :'data-vid' => video.body }
+- if false
+  .posting[video]
+    .video_player.youtube_video_player{ :'data-vid' => video.body }
+      = link_to_youtube_video_image(video)
+
+- user = video.user
+.post.posting.video[video]
+  .remove{:title => "Remove this post"} ×
+  .portrait= thimble_link_to_profile(user)
+  .clear.video_player.youtube_video_player{ :'data-vid' => video.body }
     = link_to_youtube_video_image(video)
+    %span.date Posted #{distance_of_time_in_words_to_now(video.created_at)} ago
+    = link_to_comments(video.children.published.count, posting_comments_path(video))
+.reaction.hidden

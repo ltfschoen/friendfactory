@@ -121,13 +121,14 @@
     .reaction
   / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- @wave.postings.each do |posting|
+- @postings.each do |posting|
   .post_frame
     = render_posting(posting)
     
 .post_frame
   .post
-    %h1 FOLLOWING POSTINGS ARE PLACEHOLDERS
+    %h1{ :style =>'font-weight:bold' }
+      FOLLOWING POSTINGS ARE PLACEHOLDERS
 
 / *************************************
 .post_frame
@@ -147,7 +148,7 @@
   .reaction
 / *************************************
 / *************************************
-.post_frame.active
+.post_frame
   / Post
   .post.status
     .remove{:title => "Remove this post"} ×
@@ -161,7 +162,7 @@
       %span.comments
         %a#0{:href => "javascript:void();"} (2 comments)
   / End Post
-  .reaction
+  .reaction.hidden
     / Leave A Comment
     .comment_box
       .portrait

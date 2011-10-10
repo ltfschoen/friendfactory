@@ -1,0 +1,18 @@
+.post.video .video_player {
+	position: relative;
+}
+
+.post.video .video_player img {
+	width: 310px;
+	height: 220px;
+}
+
+img.video-play {
+	position: absolute;
+	width: 100px !important;
+	height: 100px !important;
+	opacity: 0.5;
+	top: 60px;
+	left: 105px;
+}
+
