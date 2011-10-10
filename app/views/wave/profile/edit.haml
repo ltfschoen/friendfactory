@@ -1,4 +1,4 @@
-- javascript 'lib/jquery/jquery.form', 'lib/jquery/jquery.remotipart'
+-# javascript 'lib/jquery/jquery.form', 'lib/jquery/jquery.remotipart'
 
 .current_user.edit.wave[@wave]
   .grid_2
@@ -15,7 +15,7 @@
                   %tr
                     %td= f.file_field :image
                   %tr
-                    %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo', :as_button => false
+                    %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo'
   .grid_6
     = form_for @wave.resource, :url => profile_path do |f|
       .polaroid.edit
@@ -81,7 +81,7 @@
                         %td.label Location
                         %td.detail= f.text_field :location, :placeholder => 'town or city, state', :maxlength => 20, :class => 'ui-widget'
             .button-bar
-              = f.submit 'OK'
+              = f.submit 'OK', :button => true
               = f.button 'Cancel', :class => 'cancel button'
               
 :javascript
