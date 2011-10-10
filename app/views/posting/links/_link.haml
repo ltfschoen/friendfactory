@@ -1,13 +1,23 @@
-.posting[link]
-  .link.blank.canvas
-    - unless link.embeds.primary.present?
-      - link.photos.each do |photo|
-        = image_tag(photo.image.url(:thumb), :site => false)
-    .description
-      %h1= link_to truncate(link.title, :length => 80), link.url
-      %p.unobtrusive= link_to link.provider_display, link.provider_url
+- user = link.user
+.posting.post.link[link]
+  .remove{:title => "Remove this post"} ×
+  .portrait
+    = thimble_link_to_profile(user)
+  .clear
+    .cell
+      By #{link_to_profile(user)}    
+      - unless link.embeds.primary.present?
+        - link.photos.each do |photo|
+          = image_tag(photo.image.url(:thumb), :site => false)
+      %p
+        = link_to truncate(link.title, :length => 80), link.url
+        %br/
+        = link_to link.provider_display, link.provider_url
       %p= link.description
-    - if link.embeds.present?
-      - link.embeds.each do |embed|
-        .embed.prepend-top{ :class => embed.type }
-          = render_embed(embed)
+      - if link.embeds.present?
+        - link.embeds.each do |embed|
+          .embed.prepend-top{ :class => embed.type }
+            = render_embed(embed)
+    %span.date Posted #{distance_of_time_in_words_to_now(link.created_at)} ago
+    = link_to_comments(link.children.published.count, posting_comments_path(link))
+.reaction

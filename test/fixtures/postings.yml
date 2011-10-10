@@ -153,3 +153,13 @@ tweet_posting:
   subject: This is a tweet
   created_at: <%= now += 1.second %>
   updated_at: <%= now %>
+
+link_posting:
+  id: 9
+  user_id: 1
+  type: Posting::Link
+  state: published
+  resource_id: 1
+  resource_type: Resource::Link
+  created_at: <%= now += 1.second %>
+  updated_at: <%= now %>

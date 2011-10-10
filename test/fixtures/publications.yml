@@ -20,6 +20,11 @@ community_wave_tweet_posting:
   resource_id: 8
   resource_type: Posting::Base
 
+community_wave_link_posting:
+  wave_id: 4
+  resource_id: 9
+  resource_type: Posting::Base
+
 # Invitiation Wave
 
 adam_invitation_wave_invitation_posting_1:

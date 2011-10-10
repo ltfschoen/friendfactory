@@ -1,0 +1,20 @@
+link_resource_1:
+  id: 1
+  posting_id: NULL
+  original_url: http://smh.com.au
+  url: http://smh.com.au/
+  type: html
+  cache_age: 86395
+  safe: 1
+  safe_type: NULL
+  safe_message: NULL
+  provider_name: Smh
+  provider_url: http://smh.com.au/
+  provider_display: smh.com.au
+  favicon_url: http://www.smh.com.au/favicon.ico
+  title: Sydney Morning Herald - Business & World News Australia | smh.com.au
+  description: We thought you might be interested in Brisbane news. Not your state? You can change this at any time. I'll admit, up until a few years ago, I didn't know a lot about sake. Three dudes working at the tyre yard amuse themselves by clowning. Fashion blogger Francesca Gutterres on Friday's runway show.
+  author_name: NULL
+  author_url: NULL
+  content: NULL
+  location_id: NULL
