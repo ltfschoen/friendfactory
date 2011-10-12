@@ -1,3 +1,9 @@
+form.new_site .instruction,
+form.edit_site .instruction {
+	color: gray;
+	font-size: small;
+}
+
 .admin.site table.index th.launch,
 .admin.site table.index td.launch,
 .admin.site table.index th.invite_only,
@@ -35,15 +41,15 @@
 	vertical-align: top;
 }
 
-.admin.site table.form tr.assets .table {
+.admin.site .table {
 	display: table;
 }
 
-.admin.site table.form tr.assets .table .tr {
+.admin.site .table .tr {
 	display: table-row;
 }
 
-.admin.site table.form tr.assets .table .td {
+.admin.site .table .td {
 	display: table-cell;
 	padding: 10px 0;	
 	vertical-align: middle;
@@ -67,7 +73,9 @@
 	text-align: center;
 }
 
-.admin.site table.form textarea[name='site[css]'] {
+form.new_site textarea.stylesheet_css,
+form.edit_site textarea.stylesheet_css {
+	display: block;
 	height: 16em;
 	width: 40em;
 }

@@ -11,9 +11,9 @@ class Site < ActiveRecord::Base
       where(:subject => code, :body => nil).order('created_at desc').limit(1).try(:first)
     end
   end
-  
+
   has_and_belongs_to_many :users
-  
+
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
@@ -29,21 +29,31 @@ class Site < ActiveRecord::Base
       (category_names.empty? ? all : where('`signal_categories`.`name` in (?)', category_names.map(&:to_s))).map(&:clone)
     end
   end
-  
+
   has_many :signal_categories_signals,
       :class_name => 'Signal::CategorySignal',
       :through    => :signal_categories,
       :source     => :categories_signals
-    
+
   has_many :assets, :class_name => 'Asset::Base' do
     def [](name)
       scoped_by_name(name).order('`assets`.`created_at` desc').limit(1).first
     end    
   end
-  
+
+  has_many :stylesheets, :order => '`controller_name` asc'
   has_many :images, :class_name => 'Asset::Image'
   has_many :constants, :class_name => 'Asset::Constant'
-  
+
+  def stylesheet(controller_name = nil)
+    stylesheets = self.stylesheets
+    if controller_name.present?
+      stylesheets = stylesheets.where('(`controller_name` is null) or (`controller_name` = ?)', controller_name)
+    end
+    stylesheets.map(&:css).compact.join('\n')
+  end
+
+  accepts_nested_attributes_for :stylesheets, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :constants, :allow_destroy => true, :reject_if => :all_blank
 
@@ -52,21 +62,21 @@ class Site < ActiveRecord::Base
   def signals
     Signal::Base.find_all_by_id(signal_categories_signals.map(&:signal_id))
   end
-  
+
   def to_s
     name
   end
-  
+
   def layout
     name
   end
-  
+
   def to_sym
     name.to_sym
   end
-  
+
   alias :intern :to_sym
-  
+
   def mailer
     self[:mailer] || DefaultMailer
   end
@@ -74,7 +84,7 @@ class Site < ActiveRecord::Base
   def home_wave
     waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).try(:first)
   end
-    
+
   def clone
     super.tap do |clone|
       clone.name, clone.display_name = nil, nil
@@ -87,7 +97,7 @@ class Site < ActiveRecord::Base
   end
 
   private
-  
+
   def create_home_wave
     unless waves.type(Wave::Community).find_by_slug(Wave::CommunitiesController::DefaultWaveSlug).present?
       wave = Wave::Community.new(:slug => Wave::CommunitiesController::DefaultWaveSlug)
@@ -96,9 +106,9 @@ class Site < ActiveRecord::Base
       wave
     end
   end
-  
+
   def raise_exception_if_signal_already_applied(signal)
     raise "Signal already exists for site" if signals.where(:id => signal.id)
   end
-  
+
 end

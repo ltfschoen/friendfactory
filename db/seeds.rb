@@ -17,7 +17,8 @@ end
 
 file = File.join(Rails.root, 'db', 'seeds', "#{site.name}.css")
 if File.exists?(file)
-  site.update_attribute(:css, IO.read(file))    
+  site.stylesheets.clear
+  site.stylesheets.create(:css => IO.read(file))
 end
 
 

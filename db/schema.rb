@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921065942) do
+ActiveRecord::Schema.define(:version => 20111012141253) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -255,7 +255,6 @@ ActiveRecord::Schema.define(:version => 20110921065942) do
     t.string   "analytics_account_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "css"
     t.string   "mailer"
   end
 
@@ -276,6 +275,16 @@ ActiveRecord::Schema.define(:version => 20110921065942) do
 
   add_index "sites_waves", ["site_id", "wave_id"], :name => "index_sites_waves_on_site_id_and_wave_id"
   add_index "sites_waves", ["wave_id"], :name => "index_sites_waves_on_wave_id"
+
+  create_table "stylesheets", :force => true do |t|
+    t.integer  "site_id",         :null => false
+    t.string   "controller_name"
+    t.text     "css"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stylesheets", ["site_id", "controller_name"], :name => "index_stylesheets_on_site_id_and_controller_name"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

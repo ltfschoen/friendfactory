@@ -40,6 +40,24 @@
 		});
 	};
 	
+	$.fn.shake = function () {
+		return this.each(function() {
+			var $this = $(this);
+			if (Modernizr.cssanimations) {
+				$this.bind('webkitAnimationEnd', function(event) {
+					$this.removeClass('shake');
+				})
+				.addClass('shake');
+				
+			} else {
+				$this
+					.animate({ left: -3 }, 50)
+					.animate({ left: 3 }, 50)
+					.animate({ left: 0 }, 50);
+			}		
+		});		
+	};
+	
 	$.fn.pulse = function () {
 		var $this = $(this),
 			worker;

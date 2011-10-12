@@ -85,7 +85,8 @@ namespace :ff do
         ActiveRecord::Base.establish_connection(Rails.env.to_sym)
         site_names.each do |site_name|
           if site = Site.find_by_name(site_name)
-            site.update_attribute(:css, site_css(site_name))
+            site.stylesheets.clear
+            site.stylesheets.create(:css => site_css(site_name))
             site.assets.clear
             site_asset_paths(site_name).each do |site_asset_path|              
               asset = Asset::Image.new do |image|

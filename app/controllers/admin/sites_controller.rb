@@ -13,7 +13,7 @@ class Admin::SitesController < ApplicationController
 
   def new
     @site = Site.new
-    @site.assets.build
+    empty_assets_and_stylesheet
     respond_to do |format|
       format.html
     end
@@ -32,9 +32,8 @@ class Admin::SitesController < ApplicationController
 
   def edit
     @site = Site.find(params[:id])
+    empty_assets_and_stylesheet
     # Have empty assets ready for the form
-    @site.images.build
-    @site.constants.build
   end
 
   def update
@@ -47,23 +46,33 @@ class Admin::SitesController < ApplicationController
       end
     end
   end
-  
+
   def stylesheets
     # Stylesheet requests come in on assets hosts, so current_site
     # is not accurate. Use site name in the requested file:
     # http://<asset_host>.com/stylesheeets/<site>.css
     respond_to do |format|
-      if site = Site.find_by_name(params[:site_name])      
+      if site = Site.find_by_name(params[:site_name])
         variables = site.assets.inject([]) do |memo, asset|
           memo << "$#{asset.name}:'#{asset.value}';" if asset.name.present?
           memo
         end
-        @engine = Sass::Engine.new((variables << site.css).join, :syntax => :scss)
+
+        css = site.stylesheet(params[:controller_name])
+        @engine = Sass::Engine.new((variables << css).join, :syntax => :scss)
         format.css { render :text => @engine.render }
       else
         format.css { render :nothing => true }
       end
     end
+  end
+  
+  private
+  
+  def empty_assets_and_stylesheet
+    @site.images.build
+    @site.constants.build    
+    @site.stylesheets.build if @site.stylesheets.length == 0
   end
 
 end
