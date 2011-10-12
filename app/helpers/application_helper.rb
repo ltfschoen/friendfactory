@@ -23,8 +23,8 @@ module ApplicationHelper
   end
     
   def image_tag(source, opts = {})    
-    if (opts.delete(:site) == true) && (asset = current_site.assets.find_by_name(File.basename(source, '.*')))
-      source = asset.asset.url(:original)
+    if (opts.delete(:site) == true) && (asset = current_site.assets.type(Asset::Image).find_by_name(File.basename(source, '.*')))
+      source = asset.url(:original)
     end
     super(source, opts)
   end

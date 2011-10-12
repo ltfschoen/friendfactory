@@ -20,7 +20,7 @@
       = stylesheet_link_tag file_name, :media => 'screen'
       
     = yield(:stylesheets)
-    = stylesheet_link_tag current_site.name, :media => 'screen'
+    = stylesheet_link_tag "#{current_site.name}/#{controller_name}", :media => 'screen'
 
     - if page_css = yield(:pagecss).present?
       :css

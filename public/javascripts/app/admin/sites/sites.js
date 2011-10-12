@@ -38,12 +38,31 @@ jQuery(function($) {
 			.click(function(event) {
 				var $this = $(this),
 					$fields = $this.prev('.fields:last'),
-					$css = $fields.find('textarea.stylesheet_css');
-				
+					idx = $this.prevAll('.fields').length,
+					$css = $fields.find('textarea.stylesheet_css'),
+										
+					nextIdx = function ($that, attr) {
+						var $this = $that,
+							value = $this.attr(attr),
+							nextValue;
+							
+						if (value !== undefined) {
+							nextValue = value.replace(/(\[|_)\d{1,}(\]|_)/, "$1" + idx + "$2");
+							$this.attr(attr, nextValue);
+						}
+						return $this;					
+					};
+
 				event.preventDefault();
 				if ($css.val().length > 0) {
 					$fields.clone()
-						.find('input, textarea').val('').end()
+						.find('input, textarea')
+							.val('')
+							.each(function() { nextIdx(nextIdx($(this), 'id'), 'name'); })
+						.end()
+						.find('label')
+							.each(function() { nextIdx($(this), 'for'); })
+						.end()
 						.insertAfter('.fields:last');
 				} else {
 					$css.shake();
