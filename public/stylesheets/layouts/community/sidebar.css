@@ -3,11 +3,27 @@
 |	       Created by Arron Hunt           |
 | 	          copyright 2011               |
 \*----------------------------------------*/
+/* FRISKY FREEDOM BRANDING */
+/*
+@logo: '../../images/brands/friskyfreedom/logo.png';
+@body_background: '../../images/brands/friskyfreedom/tile.png';
+@column_background: '../../images/brands/friskyfreedom/column_background.png';
+@color_main: #1b5452;
+*/
+/* FRISKY HANDS BRANDING */
+/* POSITIVELY FRISKY BRANDING */
+/*
+@logo: '../../images/brands/positivelyfrisky/logo.png';
+@body_background: '../../images/brands/positivelyfrisky/tile.png';
+@column_background: '../../images/brands/positivelyfrisky/column_background.png';
+@color_main: #8337cb;
+*/
+/* UNIVERSAL VARIABLES */
 #sidebar {
   width: 200px;
   height: 100%;
   float: left;
-  background: #333;
+  background: #333 url(/images/pattern_a.png);
   border-right: 1px solid #590000;
   -webkit-box-shadow: 0 0 10px #000000;
   -moz-box-shadow: 0 0 10px #000000;

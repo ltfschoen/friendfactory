@@ -1,0 +1,82 @@
+/*----------------------------------------*\
+|	Built with the Lessentials Framework   |
+|	       Created by Arron Hunt           |
+| 	          copyright 2011               |
+\*----------------------------------------*/
+/* FRISKY FREEDOM BRANDING */
+/*
+@logo: '../../images/brands/friskyfreedom/logo.png';
+@body_background: '../../images/brands/friskyfreedom/tile.png';
+@column_background: '../../images/brands/friskyfreedom/column_background.png';
+@color_main: #1b5452;
+*/
+/* FRISKY HANDS BRANDING */
+/*
+@logo: '../../images/brands/friskyhands/logo.png';
+@body_background: '../../images/brands/friskyhands/tile.png';
+@column_background: '../../images/brands/friskyhands/column_background.png';
+@color_main: #b94f42;
+*/
+/* POSITIVELY FRISKY BRANDING */
+/*
+@logo: '../../images/brands/positivelyfrisky/logo.png';
+@body_background: '../../images/brands/positivelyfrisky/tile.png';
+@column_background: '../../images/brands/positivelyfrisky/column_background.png';
+@color_main: #8337cb;
+*/
+/* DIZM BRANDING */
+/* UNIVERSAL VARIABLES */
+.mini_comment {
+  margin: 0px 10px 0 10px;
+  padding: 5px 5px 0 10px;
+  width: 500px;
+  overflow: hidden;
+  float: left;
+}
+.mini_comment .comment {
+  float: left;
+  width: 430px;
+  height: 45px;
+  overflow: hidden;
+  margin: 0 0 5px 10px;
+  background: #dedede;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  color: #333;
+  font: 13px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;
+  text-shadow: 0 1px 0 #fff;
+}
+.mini_comment .comment p {
+  padding: 6px;
+  background: #f0f0f0;
+}
+.mini_comment .comment a {
+  color: #09334d;
+  text-decoration: none;
+}
+.mini_comment .comment span {
+  margin: 2px 8px;
+  font-size: 10px;
+}
+.mini_comment .comment span.date {
+  float: left;
+}
+.mini_comment .comment span.comments {
+  float: right;
+}
+.mini_comment.nested {
+  width: 420px;
+  margin-left: 70px;
+  padding-left: 10px;
+  margin-top: 10px;
+  border-left: 1px dotted #333;
+}
+.mini_comment.nested .comment {
+  width: 370px;
+}
