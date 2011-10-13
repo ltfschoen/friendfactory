@@ -1,0 +1,41 @@
+.post.photos.multiple .photo {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
+	float: none;
+	position: relative;
+	margin-bottom: 6px;
+}
+.post.photos.multiple .photo img {
+	width: 300px;
+	height: 220px;
+	margin: 0;
+	background: #fff;
+	padding: 5px;
+	position: absolute;
+	z-index: 3;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.post.photos.multiple .photo:before {
+	position: absolute;
+	top: 2px;
+	left: 0;
+	z-index: 2;
+	-webkit-transition: all 2s linear;	
+}
+.multiple .photo:after {
+	position: absolute;
+	top: 2px;
+	left: 0;
+	z-index: 1;
+}
+.multiple .photo:hover:before {
+  -webkit-transform: rotate(-2deg);
+}
+.multiple .photo:hover:after {
+  -webkit-transform: rotate(2deg);
+}
