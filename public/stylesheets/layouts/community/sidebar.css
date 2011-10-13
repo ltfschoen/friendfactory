@@ -7,46 +7,42 @@
   width: 200px;
   height: 100%;
   float: left;
-  background: #1b5452 url(/images/pattern_a.png);
-  border-right: 1px solid #061111;
+  background: #333;
+  border-right: 1px solid #590000;
   -webkit-box-shadow: 0 0 10px #000000;
   -moz-box-shadow: 0 0 10px #000000;
   -o-box-shadow: 0 0 10px #000000;
   box-shadow: 0 0 10px #000000;
   color: #fff;
   position: fixed;
+  top: 0;
   z-index: 100;
 }
 #sidebar #head {
   height: 75px;
-  background: #216865;
-  background: -moz-linear-gradient(top, #216865 0%, #0d2928 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #216865), color-stop(100%, #0d2928));
-  background: -webkit-linear-gradient(top, #216865 0%, #0d2928 100%);
-  background: -o-linear-gradient(top, #216865 0%, #0d2928 100%);
-  background: -ms-linear-gradient(top, #216865 0%, #0d2928 100%);
-  background: linear-gradient(top, #216865 0%, #0d2928 100%);
-  border: 1px solid #061111;
+  background: #b94f42;
+  background: -moz-linear-gradient(top, #b94f42 0%, #972d20 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b94f42), color-stop(100%, #972d20));
+  background: -webkit-linear-gradient(top, #b94f42 0%, #972d20 100%);
+  background: -o-linear-gradient(top, #b94f42 0%, #972d20 100%);
+  background: -ms-linear-gradient(top, #b94f42 0%, #972d20 100%);
+  background: linear-gradient(top, #b94f42 0%, #972d20 100%);
+  border: 1px solid #590000;
   border-left: none;
   border-right: none;
   line-height: 75px !important;
   text-align: center;
 }
-#sidebar #head a {
-  color: #eeedc7;
-  font: 32px 'Trajan Pro', 'Times New Roman', serif;
-  text-shadow: 0 1px 2px #000;
-  text-decoration: none;
-  position: relative;
-}
-#sidebar #head a:active {
-  top: 1px;
+#sidebar #head #logo {
+  background: url('../../images/brands/friskyhands/logo.png');
+  width: 200px;
+  height: 75px;
 }
 #sidebar .block {
   width: 180px;
   padding: 10px;
   overflow: hidden;
-  border-bottom: 1px solid #061111;
+  border-bottom: 1px solid #590000;
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
   -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -95,7 +91,7 @@
   width: 26px;
   height: 27px;
   float: left;
-  background: url(/images/user_buttons_transparent.png);
+  background: url(../../images/user_buttons_transparent.png);
   cursor: pointer;
   position: relative;
 }
@@ -123,7 +119,7 @@
   left: 12px;
   text-align: center;
   font-size: 11px;
-  background: url(/images/badge.png);
+  background: url(../../images/badge.png);
 }
 #sidebar .block.userspace ul .personal {
   background-position-x: -53px;
@@ -147,7 +143,7 @@
   height: 30px;
   padding: 0 20px;
   margin: 10px 8px;
-  border: 1px solid #0a201f;
+  border: 1px solid #590000;
   outline: none;
   font-size: 12px;
 }
