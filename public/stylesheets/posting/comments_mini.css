@@ -1,31 +1,3 @@
-/*----------------------------------------*\
-|	Built with the Lessentials Framework   |
-|	       Created by Arron Hunt           |
-| 	          copyright 2011               |
-\*----------------------------------------*/
-/* FRISKY FREEDOM BRANDING */
-/*
-@logo: '../../images/brands/friskyfreedom/logo.png';
-@body_background: '../../images/brands/friskyfreedom/tile.png';
-@column_background: '../../images/brands/friskyfreedom/column_background.png';
-@color_main: #1b5452;
-*/
-/* FRISKY HANDS BRANDING */
-/*
-@logo: '../../images/brands/friskyhands/logo.png';
-@body_background: '../../images/brands/friskyhands/tile.png';
-@column_background: '../../images/brands/friskyhands/column_background.png';
-@color_main: #b94f42;
-*/
-/* POSITIVELY FRISKY BRANDING */
-/*
-@logo: '../../images/brands/positivelyfrisky/logo.png';
-@body_background: '../../images/brands/positivelyfrisky/tile.png';
-@column_background: '../../images/brands/positivelyfrisky/column_background.png';
-@color_main: #8337cb;
-*/
-/* DIZM BRANDING */
-/* UNIVERSAL VARIABLES */
 .mini_comment {
   margin: 0px 10px 0 10px;
   padding: 5px 5px 0 10px;

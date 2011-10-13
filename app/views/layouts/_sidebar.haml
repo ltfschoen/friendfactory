@@ -1,7 +1,8 @@
 #sidebar
   #head
-    = link_to image_tag('logo.png'), current_site.home_wave
-    / %a{:href => "javascript:void();"} CLAYTON
+    - if false
+      #logo
+    = link_to image_tag('logo.png', :site => true), current_site.home_wave
   - if false
     .block.adspace
       %img{:src => "http://placehold.it/180x75"}
