@@ -50,7 +50,7 @@ class Site < ActiveRecord::Base
     if controller_name.present?
       stylesheets = stylesheets.where('(`controller_name` is null) or (`controller_name` = ?)', controller_name)
     end
-    stylesheets.map(&:css).compact.join('\n')
+    stylesheets.map(&:css).compact.join("\n")
   end
 
   accepts_nested_attributes_for :stylesheets, :allow_destroy => true, :reject_if => :all_blank

@@ -53,11 +53,7 @@ class Admin::SitesController < ApplicationController
     # http://<asset_host>.com/stylesheeets/<site>.css
     respond_to do |format|
       if site = Site.find_by_name(params[:site_name])
-        variables = site.assets.inject([]) do |memo, asset|
-          memo << "$#{asset.name}:'#{asset.value}';" if asset.name.present?
-          memo
-        end
-
+        variables = site.assets.map(&:to_s)
         css = site.stylesheet(params[:controller_name])
         @engine = Sass::Engine.new((variables << css).join, :syntax => :scss)
         format.css { render :text => @engine.render }
