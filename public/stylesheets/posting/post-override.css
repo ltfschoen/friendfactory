@@ -1,15 +1,22 @@
 .post .remove {
-  right: 0px;
-  top: -6px;
-  color: #333;
-  background: transparent;
+	right: 0px;
+	top: -6px;
+	color: #333;
+	background: transparent;
+	opacity: 0;
+	display: block;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
 }
-
+.post:hover .remove {
+	opacity: 1;
+}
 .post .clear .comments a,
 .post .clear .date {
 	padding: 3px 6px;
 }
-
 .post_frame.active .post .clear .comments a {
 	background-color: #666;
 	color: #FFF;
@@ -18,7 +25,6 @@
 	-o-border-radius: 5px;
 	border-radius: 5px;	
 }
-
 .post_frame.active .post .clear .comments a {
 	text-decoration: none;
 }
