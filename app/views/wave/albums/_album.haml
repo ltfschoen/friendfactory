@@ -1,7 +1,7 @@
 - user = album.user
 - photo = album.photos.limit(1).first
 - if photo.present?
-  .post.photos[album]{uid(album[:user_id])}
+  .post.photos[proxy]{uid(album[:user_id]), :class => 'wave_album' }
     = link_to_remove(proxy)
     .portrait= thimble_link_to_profile(user)
     .clear

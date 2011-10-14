@@ -100,6 +100,6 @@ module ApplicationHelper
   end
 
   def link_to_remove(posting)
-    link_to "×", unpublish_posting_path(posting), :title => 'Remove', :class => 'remove', :method => :delete
+    link_to "×", unpublish_posting_path(posting), :title => 'Remove', :class => 'remove', :method => :delete, :remote => true
   end
 end
