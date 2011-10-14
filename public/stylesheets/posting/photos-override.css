@@ -25,13 +25,24 @@
 	top: 2px;
 	left: 0;
 	z-index: 2;
-	-webkit-transition: all 2s linear;	
 }
 .multiple .photo:after {
 	position: absolute;
 	top: 2px;
 	left: 0;
 	z-index: 1;
+}
+.multiple .photo:before {
+  -webkit-transform: rotate(-2deg);
+  -moz-transform: rotate(-2deg);
+  -o-transform: rotate(-2deg);
+  transform: rotate(-2deg);
+}
+.multiple .photo:after {
+  -webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  transform: rotate(2deg);
 }
 .multiple .photo:hover:before {
   -webkit-transform: rotate(-2deg);
