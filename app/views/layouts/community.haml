@@ -50,10 +50,10 @@
 
   - if Rails.env.development?
     = stylesheet_link_tag 'development'
-    = javascript_include_tag 'jquery', 'jquery.tools-1.2.6.all.min.js', 'pusher.js'
+    = javascript_include_tag 'jquery', 'jquery.tools-1.2.6.tiny.min.js', 'pusher.js'
   - else
     = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
-    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/all/jquery.tools.min.js'
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
     = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
 
   -# jquery-ui-1.8.16.custom.min for jquery.flip and advanced easing functions
