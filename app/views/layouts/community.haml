@@ -12,7 +12,8 @@
       'application', |
       'effects', |
       'layouts/reset', |
-      'layouts/overlay', |
+      'layouts/shared/overlay', |
+      'layouts/shared/nav', |
       'layouts/community/base', |
       'layouts/community/base-override', |
       'layouts/community/sidebar', |
@@ -80,6 +81,6 @@
     = yield
     - if Rails.env.development?
       #footnotes_holder{ :style => 'display:block' }
-  = render :partial => 'layouts/unpublish'
+  = render :partial => 'layouts/shared/unpublish_overlay'
 :plain
   </html>

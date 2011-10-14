@@ -39,7 +39,7 @@
 .overlay button {
 	width: 60px;
 	margin: 5px;
-	padding: 4px 6px;
+	padding: 4px 6px 5px 4px;
 	color: #fff;
 	float: right;
 	position: relative;
