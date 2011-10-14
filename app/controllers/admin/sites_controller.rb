@@ -55,7 +55,7 @@ class Admin::SitesController < ApplicationController
       if site = Site.find_by_name(params[:site_name])
         variables = site.assets.map(&:to_s)
         css = site.stylesheet(params[:controller_name])
-        @engine = Sass::Engine.new((variables << css).join, :syntax => :scss)
+        @engine = Sass::Engine.new((variables << css << uid_css).compact.join, :syntax => :scss)
         format.css { render :text => @engine.render }
       else
         format.css { render :nothing => true }
@@ -69,6 +69,12 @@ class Admin::SitesController < ApplicationController
     @site.images.build
     @site.constants.build    
     @site.stylesheets.build if @site.stylesheets.length == 0
+  end
+
+  def uid_css
+    if current_user
+      "body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { opacity: 1; }"
+    end
   end
 
 end

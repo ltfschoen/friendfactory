@@ -269,9 +269,21 @@ class User < ActiveRecord::Base
   def disable_email!
     update_attribute(:emailable, false)
   end
-  
+
+  # ===
+
+  def uid
+    "u#{self.id}"
+  end
+
+  def roles
+    "admin" if self.admin?
+  end
+
+  # ===
+
   private
-  
+
   def perform_enrollment
     if enrollment_site.present?
       if (sites << enrollment_site) && (enrollment_profile.sites << enrollment_site)

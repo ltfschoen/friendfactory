@@ -73,7 +73,7 @@
     = javascript_include_tag 'development'
 
   = csrf_meta_tag
-%body
+%body{uid, gid}
   = render :partial => 'layouts/sidebar'
   #frame
     = yield

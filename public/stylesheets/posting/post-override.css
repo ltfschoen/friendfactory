@@ -9,8 +9,12 @@
 	-moz-transition: all 0.2s linear;
 	-o-transition: all 0.2s linear;
 	transition: all 0.2s linear;
+	text-decoration: none;
 }
 .post:hover .remove {
+	opacity: 0;
+}
+body.admin .post:hover .remove {
 	opacity: 1;
 }
 .post .clear .comments a,

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ApplicationHelper
   
   def form_for(record_or_name_or_array, *args, &proc)
@@ -86,5 +88,18 @@ module ApplicationHelper
     unless [ inbox_path, wave_conversations_path ].detect{ |path| current_page?(path) }.present?
       link_to_unread_messages
     end
+  end
+
+  def uid(id = nil)
+    id = current_user.id if id.nil? && current_user.present?
+    { :class => "u#{id}" } unless id.nil?
+  end
+
+  def gid(id = nil)
+    { :class => current_user.roles } if current_user.present?
+  end
+
+  def link_to_remove(posting)
+    link_to "×", unpublish_posting_path(posting), :title => 'Remove', :class => 'remove', :method => :delete
   end
 end

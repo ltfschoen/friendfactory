@@ -2,8 +2,8 @@
   .posting[avatar]= render :partial => 'wave/profiles/profile', :object => avatar.profile(current_site)
 
 - profile = avatar.profile(current_site)
-.posting.post.signal[avatar]
-  .remove{:title => "Remove this post"} ×
+.posting.post.signal[avatar]{uid(avatar[:user_id])}
+  = link_to_remove(avatar)
   .portrait= thimble_link_to_profile(profile)
   .clear
     .cell

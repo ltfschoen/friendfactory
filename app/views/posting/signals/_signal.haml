@@ -1,6 +1,6 @@
 - user = signal.user
-.posting.post.signal[signal]
-  .remove{:title => "Remove this post"} ×
+.posting.post.signal[signal]{uid(signal[:user_id])}
+  = link_to_remove(signal)
   .portrait= thimble_link_to_profile(user)
   .clear
     .cell

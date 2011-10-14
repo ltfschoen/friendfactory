@@ -1,6 +1,6 @@
 - user = link.user
-.posting.post.link[link]
-  .remove{:title => "Remove this post"} ×
+.posting.post.link[link]{uid(link[:user_id])}
+  = link_to_remove(link)
   .portrait
     = thimble_link_to_profile(user)
   .clear

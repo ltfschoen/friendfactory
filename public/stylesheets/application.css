@@ -4,16 +4,16 @@ body {
 	-webkit-user-select: auto;
 	user-select: auto;	
 }
-
 .hidden {
 	display: none;
 }
-
 a:focus {
 	outline: none;
 	-moz-outline: none;
 }
-
 .error {
 	color: darkred !important;
+}
+.admin .post:hover .remove {
+	opacity: 1;
 }
