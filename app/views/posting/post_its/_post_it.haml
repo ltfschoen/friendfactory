@@ -1,6 +1,6 @@
 - user = post_it.user
 .posting.post.status[post_it]{uid(post_it[:user_id])}
-  = link_to_remove(post_it)
+  = link_to_unpublish(post_it)
   .portrait= thimble_link_to_profile(user)
   .clear
     .cell

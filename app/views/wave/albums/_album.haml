@@ -2,7 +2,7 @@
 - photo = album.photos.limit(1).first
 - if photo.present?
   .post.photos[proxy]{uid(album[:user_id]), :class => 'wave_album' }
-    = link_to_remove(proxy)
+    = link_to_unpublish(proxy)
     .portrait= thimble_link_to_profile(user)
     .clear
       .photo= image_tag(photo.image.url(:h4x6))

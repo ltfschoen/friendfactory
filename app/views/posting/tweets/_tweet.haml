@@ -1,6 +1,6 @@
 - user = tweet.user
 .posting.post.tweet[tweet]{uid(tweet[:user_id])}
-  = link_to_remove(tweet)
+  = link_to_unpublish(tweet)
   .portrait= thimble_link_to_profile(user)
   .clear
     .cell

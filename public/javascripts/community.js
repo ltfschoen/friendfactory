@@ -88,6 +88,27 @@ jQuery(function($) {
 		.attr('type', 'text/javascript')
 		.insertBefore('script:first');
 
+	// Unpublish Overlay		
+	$('a.remove[rel="#unpublish_overlay"]').overlay({
+		top: '35%',
+		left: 'center',
+		closeOnClick: true,
+		closeOnEsc: true,
+		load: false,
+		onClose: function (event) {
+			var url = this.getTrigger().attr('href'),
+				originalTarget = (event.originalTarget || event.srcElement || event.originalEvent.target),
+				ok = (originalTarget && $(originalTarget).hasClass('ok')) || false;
+
+			// alert(ok);
+			// alert(url);
+			// alert(originalTarget);
+			// // console.dir(originalTarget);
+			// console.log(event.originalEvent.target)
+			if (ok) $.ajax({ type: 'delete', url: url, dataType: 'script' });
+		}
+	});
+	
 	// $('.nav-container')
 	// 	.insertAfter('ul.posting_post_its:first')
 	// 	.find('form')

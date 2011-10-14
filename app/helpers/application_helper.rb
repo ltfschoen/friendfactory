@@ -99,7 +99,7 @@ module ApplicationHelper
     { :class => current_user.roles } if current_user.present?
   end
 
-  def link_to_remove(posting)
-    link_to "×", unpublish_posting_path(posting), :title => 'Remove', :class => 'remove', :method => :delete, :remote => true
+  def link_to_unpublish(posting)
+    link_to "×", unpublish_posting_path(posting), :title => 'Remove', :class => 'remove', :rel => '#unpublish_overlay'
   end
 end

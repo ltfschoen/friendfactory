@@ -1,7 +1,7 @@
 - user = comment.user
 - nested = comment.parent[:parent_id].present?
 %div{ uid(comment[:user_id]),:class => [ 'posting', 'comment_box', nested && 'nested' ]}[comment]
-  = link_to_remove(comment)
+  = link_to_unpublish(comment)
   .portrait= thimble_link_to_profile(user)
   .comment
     %p

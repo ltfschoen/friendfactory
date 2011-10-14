@@ -3,7 +3,7 @@
 
 - profile = avatar.profile(current_site)
 .posting.post.signal[avatar]{uid(avatar[:user_id])}
-  = link_to_remove(avatar)
+  = link_to_unpublish(avatar)
   .portrait= thimble_link_to_profile(profile)
   .clear
     .cell
