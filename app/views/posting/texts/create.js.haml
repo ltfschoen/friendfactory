@@ -1,12 +1,12 @@
 - if @posting.present? && @posting.valid?
   :plain
     var
-      $posting = $("#{escape_javascript(self.send(('render_' + resolver + '_posting').to_sym, @posting))}"),      
-      $nav = $('li.current', 'ul.nav'),      
-      $form = $($('a', $nav).attr('rel')),      
+      $posting = $("#{escape_javascript(self.send(('render_' + resolver + '_posting').to_sym, @posting))}"),
+      $nav = $('li.current', 'ul.nav'),
+      $form = $($('a', $nav).attr('rel')),
       $firstPosting = $('.post_frame').filter(':first');
-    
-    $nav.removeClass('current');    
+
+    $nav.removeClass('current');
     $form.hide()[0].reset();
     $firstPosting.before($posting);
 - else
