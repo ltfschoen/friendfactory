@@ -23,6 +23,7 @@
       'layouts/community/rollcall', |
       'posting/ads', |
       'posting/blog', |
+      'posting/blog-override', |
       'posting/checkin', |
       'posting/comments', |
       'posting/comments-override', |
@@ -31,6 +32,7 @@
       'posting/link-override', |
       'posting/multi-photos', |
       'posting/new_post', |
+      'posting/new_post-override', |
       'posting/photos', |
       'posting/photos-override', |
       'posting/portrait', |
@@ -66,9 +68,10 @@
       'jquery.chat', |
       'jquery.headshot', |
       'jquery.effects', |
+      'jquery.nav', |
       'jquery_ujs', |
       'application', |
-      'community', |
+      'layouts/community', |
     :cache => 'community.cache'
 
   - if Rails.env.development?
@@ -76,11 +79,10 @@
 
   = csrf_meta_tag
 %body{uid, gid}
-  = render :partial => 'layouts/sidebar'
+  = render :partial => 'layouts/shared/sidebar'
   #frame
     = yield
-    - if Rails.env.development?
-      #footnotes_holder{ :style => 'display:block' }
-  = render :partial => 'layouts/shared/unpublish_overlay'
+  - if Rails.env.development?
+    #footnotes_holder{ :style => 'display:block' }
 :plain
   </html>

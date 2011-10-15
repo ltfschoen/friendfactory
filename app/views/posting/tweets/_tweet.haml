@@ -1,11 +1,12 @@
 - user = tweet.user
-.posting.post.tweet[tweet]{uid(tweet[:user_id])}
-  = link_to_unpublish(tweet)
-  .portrait= thimble_link_to_profile(user)
-  .clear
-    .cell
-      = link_to_profile(user)
-      #{tweet.subject}
-    %span.date Posted #{distance_of_time_in_words_to_now(tweet.created_at)} ago
-    = link_to_comments(tweet.children.published.count, posting_comments_path(tweet))
-.reaction
+.post_frame
+  .posting.post.tweet[tweet]{uid(tweet[:user_id])}
+    = link_to_unpublish(tweet)
+    .portrait= thimble_link_to_profile(user)
+    .clear
+      .cell
+        = link_to_profile(user)
+        #{tweet.subject}
+      %span.date Posted #{distance_of_time_in_words_to_now(tweet.created_at)} ago
+      = link_to_comments(tweet.children.published.count, posting_comments_path(tweet))
+  .reaction.hidden

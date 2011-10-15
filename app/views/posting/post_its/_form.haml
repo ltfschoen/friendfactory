@@ -1,8 +1,0 @@
-.posting.posting_post_it.form
-  = form_for Posting::PostIt.new, :url => wave_posting_post_its_path(@wave), :remote => true do |f|
-    .post_it.canvas<
-      .content
-        = f.text_area :subject, :maxlength => 130
-    .button-bar
-      = f.submit :OK, :disable_with => 'OK'
-      = f.button :Cancel, :class => 'cancel'

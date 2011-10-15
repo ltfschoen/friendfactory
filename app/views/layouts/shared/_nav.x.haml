@@ -1,0 +1,108 @@
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.new_post_frame
+  .new_post.status
+    %form
+      %textarea{:placeholder => "Enter Text..."}
+      .foot
+        %span.counter 160 characters left
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  .reaction
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.new_post_frame
+  .new_post.blog
+    %form
+      .body
+        %input{:name => "", :placeholder => "Blog Title", :type => "text"}/
+        %textarea{:placeholder => "Enter Text"}
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  .reaction
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.new_post_frame
+  .new_post.photo
+    %form
+      .body
+        %input{:name => "", :type => "file", :value => ""}/
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  .reaction
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.new_post_frame
+  .new_post.video
+    %form
+      %input{:name => "", :placeholder => "Paste Video URL", :type => "text"}/
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  .reaction
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.new_post_frame
+  .new_post.checkin
+    %form
+      .body
+        %input{:name => "", :placeholder => "Where are you?", :type => "text"}/
+        %img{:src => "/images/map_placeholder_02.png"}
+      .foot
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  .reaction
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.new_post_frame
+  .new_post.itinerary
+    %form
+      .body
+        %label Traveling From:
+        %input{:name => "", :placeholder => "Ex: Los Angeles, CA", :type => "text"}/
+        %label Traveling To:
+        %input{:name => "", :placeholder => "Ex: Manhattan, NY", :type => "text"}/
+        %hr/
+        %label Departure Date:
+        .box
+          %select
+            %option Month
+            :javascript
+              for(var i=1; i <=12; i++){
+                document.write(''+i+'');
+              }
+          %select
+            %option Day
+            :javascript
+              for(var i=1; i <=31; i++){
+                document.write(''+i+'');
+              }
+        %label Return Date:
+        .box
+          %select
+            %option Month
+            :javascript
+              for(var i=1; i <=12; i++){
+                document.write(''+i+'');
+              }
+          %select
+            %option Day
+            :javascript
+              for(var i=1; i <=31; i++){
+              	document.write(''+i+'');
+              }
+        %label Public Event:
+        .box
+          %select
+            %option Yes
+            %option No
+        %hr/
+        %label Trip Summary
+        %textarea{:placeholder => "I my trip, I plan to..."}
+      .foot
+        %span.counter 160 characters left
+        %input{:name => "", :type => "submit", :value => "Post"}/
+        %input{:name => "", :type => "button", :value => "Cancel"}/
+  .reaction
+/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

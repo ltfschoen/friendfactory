@@ -1,14 +1,15 @@
-.wave_community ul.nav {
+ul.nav {
+	width: 400px;
 	height: 50px;
     text-align: center;
-	margin-bottom: 30px;
+	margin-top: 20px;
 }
 
-.wave_community ul.nav li {
+ul.nav li {
 	display: inline-block;
 }
 
-.wave_community ul.nav li a {
+ul.nav li a {
 	display: block;
 	background: url('/images/posting-icons.png') top left no-repeat;
 	text-indent: -1000em;
@@ -16,7 +17,7 @@
 	height: 50px;
 }
 
-.wave_community ul.nav li {
+ul.nav li {
 	width: 50px;
 }
 
@@ -25,7 +26,7 @@
 	height: 50px;
 }*/
 
-.wave_community ul.nav li {
+ul.nav li {
 	position: relative;
 	height: 50px;
 }
@@ -34,36 +35,28 @@
 	position: absolute;
 }*/
 
-.wave_community ul.nav li a {
+ul.nav li a {
 	position: absolute;
 }
 
-.wave_community .tab_content {
-	margin-bottom: 30px;
-}
-
-.wave_community ul.nav li:nth-child(1) a {
+ul.nav li.posting_text a {
 	background-position: 0 0;
 }
 
-.wave_community ul.nav li:nth-child(2) a {
+ul.nav li.posting_post_it a {
 	background-position: -50px 0;
 }
 
-.wave_community ul.nav li:nth-child(3) a {
+ul.nav li.wave_album a {
 	background-position: -100px 0;
 }
 
-.wave_community ul.nav li:nth-child(4) {
-	width: 55px;	
-}
-
-.wave_community ul.nav li:nth-child(4) a {
+ul.nav li.posting_video a {
 	background-position: -220px 0;
 	width: 55px;
 }
 
-.wave_community ul.nav li:nth-child(5) a {
+ul.nav li.posting_link a {
 	background-position: -326px 0;
 	width: 55px;
 }

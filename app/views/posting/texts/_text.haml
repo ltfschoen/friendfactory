@@ -1,21 +1,20 @@
 - user = text.user
-.posting.post.blog[text]{uid(text[:user_id])}
-  = link_to_unpublish(text)
-  .portrait
-    = thimble_link_to_profile(user)
-  .clear
-    .cell
-      - if text.subject.present?
-        %h1= text.subject
-      by
-      = link_to_profile(user)
-      %p= text.body || '&nbsp;'.html_sage
-      %p{:style => "text-align: center;"}
+.post_frame
+  .posting.post.blog[text]{uid(text[:user_id])}
+    = link_to_unpublish(text)
+    .portrait
+      = thimble_link_to_profile(user)
+    .clear
+      .cell
+        - if text.subject.present?
+          %h1= text.subject
+        by
+        = link_to_profile(user)
+        %p= text.body || '&nbsp;'.html_sage
         - if false
-          %a{:href => ""} View Full Post &rarr;
-        - else
-          View Full Post &rarr;
-    .torn
-    %span.date Posted #{distance_of_time_in_words_to_now(text.created_at)} ago
-    = link_to_comments(text.children.published.count, posting_comments_path(text))
-.reaction.hidden
+          %p{:style => "text-align: center;"}
+            %a{:href => ""} View Full Post &rarr;
+      .torn
+      %span.date Posted #{distance_of_time_in_words_to_now(text.created_at)} ago
+      = link_to_comments(text.children.published.count, posting_comments_path(text))
+  .reaction.hidden

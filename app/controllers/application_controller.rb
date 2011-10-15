@@ -105,7 +105,6 @@ class ApplicationController < ActionController::Base
   end
   
   def resolver
-    @resolver ||= controller_name
+    params[:resolver] || controller_name.singularize
   end
-
 end

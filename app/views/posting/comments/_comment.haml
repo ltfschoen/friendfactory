@@ -1,6 +1,6 @@
 - user = comment.user
 - nested = comment.parent[:parent_id].present?
-%div{ uid(comment[:user_id]),:class => [ 'posting', 'comment_box', nested && 'nested' ]}[comment]
+%div{ uid(comment[:user_id]), :class => [ 'posting', 'comment_box', nested && 'nested' ]}[comment]
   = link_to_unpublish(comment)
   .portrait= thimble_link_to_profile(user)
   .comment
@@ -11,12 +11,11 @@
   - unless nested
     %span.reply= link_to 'Reply', new_posting_comment_path(comment), :remote => true
 
-    
 - comment_children = comment.children.type(Posting::Comment).published.order('updated_at asc')
 - comment_children.each do |comment|
   - user = comment.user
   .posting.comment_box.nested[comment]
-    .remove{:title => "Remove this comment"} ×
+    = link_to_unpublish(comment)
     .portrait= thimble_link_to_profile(user)
     .comment
       %p

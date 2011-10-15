@@ -1,5 +1,5 @@
 = form_for new_posting_video, :url => wave_posting_videos_path(@wave), :html => { :class => 'new_posting new_posting_video' }, :remote => true do |f|
-  = hidden_field_tag :resolver, controller_name
+  = f.resolve resolver  
   #posting_video_upload_well.video_player
   .button-bar
     = f.text_field :url, :placeholder => 'http://www.youtu.be/...'

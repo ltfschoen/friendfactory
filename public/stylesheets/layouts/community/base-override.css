@@ -1,7 +1,9 @@
 #frame {
 	position: relative;
 }
-
 #frame .post_frame, #frame .new_post_frame {
-  clear: both;
+	clear: both;
+}
+#frame .new_post_frame {
+	padding-bottom: 0px;
 }

@@ -23,7 +23,7 @@ jQuery(function($) {
 		$(this).height(post+20);
 	});
 
-	// Rollcall
+	// Initialize Rollcall Headshots
 	$('div.headshot').headshot();
 
 	// Comments
@@ -99,49 +99,42 @@ jQuery(function($) {
 			var url = this.getTrigger().attr('href'),
 				originalTarget = (event.originalTarget || event.srcElement || event.originalEvent.target),
 				ok = (originalTarget && $(originalTarget).hasClass('ok')) || false;
-
-			// alert(ok);
-			// alert(url);
-			// alert(originalTarget);
-			// // console.dir(originalTarget);
-			// console.log(event.originalEvent.target)
 			if (ok) $.ajax({ type: 'delete', url: url, dataType: 'script' });
 		}
 	});
 	
-	// $('.nav-container')
-	// 	.insertAfter('ul.posting_post_its:first')
-	// 	.find('form')
-	// 	.trigger('reset');
+	// Nav
+	$('.new_post_frame')
+		.hide()
+		.find('input.cancel').navCancel();
 
-	$('a', 'ul.wave.community.nav')
+	$('a[rel]', 'ul.nav')
 		.bounceable()
-		.shakeable();
+		.shakeable()
+		.click(function(event) {
+			var $this = $(this),
+				$newForm = $($this.attr('rel'));
+				
+			event.preventDefault();	
+			if (!$this.closest('li').siblings('li').andSelf().hasClass('current')) {
+				$this.trigger('bounce')
+					.closest('li')
+					.addClass('current');
+			
+				$newForm
+					.css({ opacity: 0.0, visibility: 'hidden' })
+					.delay(1200)
+					.slideDown(function() {
+						$newForm
+							.css({ visibility: 'visible' })
+							.fadeTo('fast', 1.0);
+					});
+			} else {
+				$this.trigger('shake');
+			}	
+		});
 
-	// $('a[rel]:not([rel="#posting_post_it"])', 'ul.wave.community.nav')
-	// 	.click(function(event) {
-	// 		var $this = $(this),
-	// 			$tab_content = $($this.attr('rel'));
-	// 			
-	// 		event.preventDefault();					
-	// 		if (!$this.closest('li').hasClass('current')) {
-	// 			$this.trigger('bounce')
-	// 				.closest('li')
-	// 				.addClass('current');
-	// 			
-	// 			$tab_content
-	// 				.css({ opacity: 0.0, visibility: 'hidden' })
-	// 				.prependTo('.tab_contents')
-	// 				.delay(1200)
-	// 				.slideDown(function() {
-	// 					$tab_content
-	// 						.css({ visibility: 'visible' })
-	// 						.fadeTo('fast', 1.0);
-	// 				});					
-	// 		} else {
-	// 			$this.trigger('shake');
-	// 		}	
-	// 	});
+
 
 
 	function insertPostItsContainer() {
@@ -204,8 +197,6 @@ jQuery(function($) {
 			
 	// $('.posting, form.new_posting').trigger('init');
 	
-	// $('.remove', '.posting-container').button({ icons: { primary: 'ui-icon-close' }, text: false });
-
 	// $('a[href^="/wave/profiles"].profile', '.attachment').live('click', function(event) {
 	// 	event.preventDefault();
 	// 	$('<div class="floating"></div>')

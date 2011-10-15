@@ -1,0 +1,232 @@
+.post_frame
+  .post
+    %h1{ :style =>'font-weight:bold' }
+      FOLLOWING POSTINGS ARE PLACEHOLDERS
+/ *************************************
+.post_frame
+  / Post
+  .post.signal
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/f.png"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Jane McNeil
+        is now a member
+      %span.date Monday, July 29 at 14:00
+      %span.comments
+        %a#0{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.status
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/d.png"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Mary Alice
+        \-  Hello world! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#0{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction.hidden
+    / Leave A Comment
+    .comment_box
+      .portrait
+        %img{:src => "/images/users/x.png"}/
+      %form
+        %textarea{:placeholder => "Enter Text..."}
+        .foot
+          %input{:name => "", :type => "submit", :value => "Post"}/
+          %input{:name => "", :type => "button", :value => "Cancel"}/
+    / Comment
+    .comment_box
+      .portrait
+        %img{:src => "/images/users/a.png"}/
+      .comment
+        %p
+          %a{:href => ""} Shea Jones
+          \- Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis ornare vel eu leo.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#4{:href => "javascript:void();"} Reply
+    / Comment
+    .comment_box.nested
+      .portrait
+        %img{:src => "/images/users/g.png"}/
+      .comment
+        %p
+          %a{:href => ""} John Henry
+          \- Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod.
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#4{:href => "javascript:void();"} Reply
+    / Leave A Comment
+    .comment_box.nested
+      .portrait
+        %img{:src => "/images/users/x.png"}/
+      %form
+        %textarea{:placeholder => "Enter Text..."}
+        .foot
+          %span.reply_to In response to John Henry
+          %input{:name => "", :type => "submit", :value => "Post"}/
+          %input{:name => "", :type => "button", :value => "Cancel"}/
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.blog
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/b.png"}/
+    .clear
+      .cell
+        %h1 Lorem Ipsum
+        by
+        %a.username{:href => ""} Carl Carlson
+        %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit...
+        %p{:style => "text-align: center;"}
+          %a{:href => ""} View Full Post »
+      .torn
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#4{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.tweet
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/c.png"}/
+    .clear
+      .cell
+        %a.username{:href => ""} Marty McFly:
+        Lorem ipsum dolar si...
+      %span.date Monday, July 29 at 14:00
+      %span.comments
+        %a#0{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.photos
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/d.png"}/
+    .clear
+      .photo
+        %img{:src => "http://placekitten.com/301/221"}/
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#3{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/e.png"}/
+    .clear
+      %iframe{:allowfullscreen => "", :frameborder => "0", :height => "200", :src => "http://www.youtube.com/embed/0-jQrbQUIUo", :width => "310"}
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#1{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.map
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/i.png"}/
+    .clear
+      .cell
+        .tooltip
+          %a{:href => ""} Shannon McNeil
+          checked in at
+          %a{:href => ""} El Pollo Loco
+          in
+          %a{:href => ""} Anaheim, CA
+        .overlay
+        %img.map{:src => "/images/map_placeholder.png"}
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#4{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.multiple.photos
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/h.png"}/
+    .clear
+      .photo
+        %img{:src => "http://placekitten.com/300/220"}/
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#3{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.itinerary
+    .remove{:title => "Remove this post"} ×
+    .portrait
+      %img{:src => "/images/users/j.png"}/
+    .clear
+      .cell
+        .frame
+          %span.flight
+            %a{:href => ""} FLIGHT 00035
+            / {% itinerary_id %}
+          %span.loc_a Los Angeles, CA
+          %span.loc_b Salt Lake City, UT
+          .depart
+            %span.label Departure Date
+            %span.itin_date 11.23.11
+          .return
+            %span.label Return Date
+            %span.itin_date 11.28.11
+          .summary
+            %span.label Trip Summary
+            %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur...
+      %span.date Posted Monday, July 25 at 14:00
+      %span.comments
+        %a#3{:href => "javascript:void();"} (2 comments)
+  / End Post
+  .reaction
+/ *************************************
+/ *************************************
+.post_frame
+  / Post
+  .post.multi-photos
+    .remove{:title => "Remove this post"} ×  
+    .portrait
+      %img{:src => "/images/users/j.png"}/
+    .clear
+      %img.photo{:src => "http://placekitten.com/90/65"}
+      %img.photo{:src => "http://placekitten.com/90/65"}
+      %img.photo{:src => "http://placekitten.com/90/65"}
+        %span.date Posted Monday, July 25 at 14:00
+        %span.comments
+          %a#3{:href => "javascript:void();"} (2 comments)
