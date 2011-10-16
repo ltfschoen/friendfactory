@@ -1,0 +1,69 @@
+.new_wave_album ul.posting_photos li {
+	float: left;
+}
+
+.new_wave_album img.photo {
+  border: 2px solid #fff;
+  margin: 15px 0 0 19px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.new_wave_album img.photo.h4x6 {
+  width: 90px;
+  height: 65px;
+}
+
+.new_wave_album img.photo.v4x6 {
+  height: 65px;
+}
+
+.file_upload {
+	position: relative;
+	overflow: hidden;
+	direction: ltr;
+	cursor: pointer;
+}
+
+.file_upload input[type='file'] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	border-left: 60px solid red;
+	border-right: 60px solid red;
+	border-top: 40px solid black;
+	border-bottom: 40px solid black;
+	opacity: 0;
+	-ms-filter: 'alpha(opacity=0)';
+	filter: alpha(opacity=0);
+	/* -o-transform: translate(-300px, -300px) scale(10); */
+	/* -moz-transform: translate(-800px, 0) scale(10); */
+	cursor: pointer;
+}
+
+.file_upload iframe,
+.file_upload button {
+	 display: none;
+}
+
+.new_wave_album td {
+	vertical-align: top;
+}
+
+.new_wave_album .dropzone {
+	text-align: left;	
+	width: 360px;
+	clear: both;
+	cursor: pointer;
+}
+
+.new_wave_album .instructions {
+	margin: 80px auto 10px;
+	color: #666;
+	font: italic 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
+}

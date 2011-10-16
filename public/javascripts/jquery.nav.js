@@ -7,8 +7,9 @@
 				event.preventDefault();
 				$('li.current', 'ul.nav').removeClass('current');
 				$form.fadeTo('fast', 0.0, function() {
-					$form.slideUp(900, 'easeOutBounce');
-					$form[0].reset();
+					$form.slideUp(900, 'easeOutBounce', function() {
+						$form[0].reset();
+					});
 				});
 			});
 		});

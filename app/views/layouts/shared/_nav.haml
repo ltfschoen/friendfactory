@@ -10,19 +10,9 @@
 
   = render :partial => 'posting/texts/new', :locals => { :wave => @wave }
   = render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
+  = render :partial => 'wave/albums/new', :locals => { :wave => @wave }
   =# render :partial => 'layouts/shared/nav.x'
     
-  #new_wave_album.new_post_frame
-    =# render :partial => 'wave/albums/new'
-    .new_post.photo
-      %form
-        .body
-          %input{:name => "", :type => "file", :value => ""}/
-        .foot
-          %input{:name => "", :type => "submit", :value => "Post"}/
-          %input{:name => "", :type => "button", :value => "Cancel"}/
-    .reaction
-
   #new_posting_video.new_post_frame
     =# render :partial => 'posting/videos/form'
     .new_post.video

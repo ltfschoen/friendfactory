@@ -22,6 +22,7 @@
       'layouts/community/post_reaction', |
       'layouts/community/rollcall', |
       'posting/ads', |
+      'posting/album', |
       'posting/blog', |
       'posting/blog-override', |
       'posting/checkin', |
@@ -59,12 +60,13 @@
     = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
     = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
 
-  -# jquery-ui-1.8.16.custom.min for jquery.flip and advanced easing functions
   = javascript_include_tag |
       'modernizr', |
       'jquery-ui-1.8.16.custom.min', |
       'jquery.flip', |
       'jquery.scrollTo-1.4.2-min', |
+      'jquery.fileupload', |
+      'jquery.fileupload-ui', |
       'jquery.chat', |
       'jquery.headshot', |
       'jquery.effects', |
@@ -72,6 +74,7 @@
       'jquery_ujs', |
       'application', |
       'layouts/community', |
+      'layouts/shared/album', |
     :cache => 'community.cache'
 
   - if Rails.env.development?

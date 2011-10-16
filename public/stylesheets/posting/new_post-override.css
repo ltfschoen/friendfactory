@@ -1,3 +1,7 @@
 .new_post {
-  margin: 0;
+	margin: 0;
+}
+.new_post .foot input[type="submit"], .new_post .foot input[type="button"] {
+	height: inherit;
+	padding: 3px 8px 4px 8px;
 }
