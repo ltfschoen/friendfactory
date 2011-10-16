@@ -3,11 +3,11 @@
 - photo = photos.first
 - if photo.present?
   .post_frame
-    .post.photos[proxy]{uid(album[:user_id]), :class => 'wave_album' }
+    .post.photos[proxy]{uid(album[:user_id]), :class => [ 'wave_album', (photos.length > 1) ? 'multiple' : nil ] }
       = link_to_unpublish(proxy)
       .portrait= thimble_link_to_profile(user)
       .clear
-        .photo
+        .photo{ :class => photo.horizontal? ? nil : 'vertical' }
           = photo.horizontal? ? image_tag(photo.image.url(:h4x6), :class => 'h4x6') : image_tag(photo.image.url(:v4x6), :class => 'v4x6')
         %span.date Posted #{distance_of_time_in_words_to_now(proxy.created_at)} ago
         = link_to_comments(album.postings.published.count, posting_comments_path(proxy))

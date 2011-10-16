@@ -2,11 +2,9 @@
 	padding: 0 10px;
 	width: 340px;
 }
-.post.photos .photo {
-	height: auto;
-}
+.post.photos .photo,
 .post.photos .photo img.v4x6 {
-	height: auto;
+	width: auto;
 }
 .post.photos.multiple .photo {
 	-webkit-box-shadow: none;
@@ -30,33 +28,41 @@
 	-o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
+.post.photos.multiple .photo img.v4x6 {
+	width: auto;
+}
 .post.photos.multiple .photo:before {
 	position: absolute;
 	top: 2px;
 	left: 0;
 	z-index: 2;
 }
-.multiple .photo:after {
+.post.photos.multiple .photo:after {
 	position: absolute;
 	top: 2px;
 	left: 0;
 	z-index: 1;
 }
-.multiple .photo:before {
+.post.photos.multiple .photo.vertical,
+.post.photos.multiple .photo.vertical:before,
+.post.photos.multiple .photo.vertical:after {
+	width: 160px;
+}
+.post.photos.multiple .photo:before {
   -webkit-transform: rotate(-2deg);
   -moz-transform: rotate(-2deg);
   -o-transform: rotate(-2deg);
   transform: rotate(-2deg);
 }
-.multiple .photo:after {
+.post.photos.multiple .photo:after {
   -webkit-transform: rotate(2deg);
   -moz-transform: rotate(2deg);
   -o-transform: rotate(2deg);
   transform: rotate(2deg);
 }
-.multiple .photo:hover:before {
+.post.photos.multiple .photo:hover:before {
   -webkit-transform: rotate(-2deg);
 }
-.multiple .photo:hover:after {
+.post.photos.multiple .photo:hover:after {
   -webkit-transform: rotate(2deg);
 }

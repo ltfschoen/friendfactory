@@ -13,6 +13,7 @@
 	-moz-box-shadow: 0 0 90px #000;
 	-o-box-shadow: 0 0 90px #000;
 	box-shadow: 0 0 90px #000;
+	z-index: 1000;
 }
 .ie8 .overlay {
 	background:transparent;
