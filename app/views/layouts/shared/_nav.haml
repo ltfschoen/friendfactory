@@ -3,10 +3,12 @@
     %li.posting_post_it= link_to 'Status', new_wave_posting_post_it_path(@wave), :rel => '#new_posting_post_it'
     %li.posting_text= link_to 'Blog', new_wave_posting_text_path(@wave), :rel => '#new_posting_text'
     %li.wave_album= link_to 'Album', new_wave_album_path, :rel => '#new_wave_album'
-    %li.posting_video= link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#new_posting_video'
+    - if false
+      %li.posting_video= link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#new_posting_video'
     - if false
       %li.wave_event= link_to 'Event', new_wave_event_path, :rel => '#new_event_overlay'
-    %li.posting_link= link_to 'Link', new_wave_posting_video_path(@wave), :rel => '#new_posting_link'
+    - if false
+      %li.posting_link= link_to 'Link', new_wave_posting_video_path(@wave), :rel => '#new_posting_link'
 
   = render :partial => 'posting/texts/new', :locals => { :wave => @wave }
   = render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
