@@ -16,7 +16,9 @@
               .insertBefore($firstPosting)
               .delay(600)
               .slideDown(function() {
-                $posting.fadeTo('fast', 1.0);
+                $posting
+                  .fadeTo('fast', 1.0)
+                  .find('a.remove[rel]').unpublishOverlay();
               });
         $form.trigger('reset');
       });
