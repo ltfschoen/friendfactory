@@ -1,5 +1,6 @@
 .new_post.photo .body {
-	padding: 0;
+	padding: 0 10px;
+	width: 340px;
 }
 .post.photos.multiple .photo {
 	-webkit-box-shadow: none;

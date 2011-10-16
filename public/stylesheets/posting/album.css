@@ -4,7 +4,7 @@
 
 .new_wave_album img.photo {
   border: 2px solid #fff;
-  margin: 15px 0 0 19px;
+  margin: 10px 10px 0 0;
   cursor: pointer;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -30,18 +30,18 @@
 
 .file_upload input[type='file'] {
 	position: absolute;
-	top: 0;
-	right: 0;
+	bottom: 0;
+	left: 0;
 	margin: 0;
-	border-left: 60px solid red;
-	border-right: 60px solid red;
-	border-top: 40px solid black;
-	border-bottom: 40px solid black;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-top: 200px solid transparent;
+	border-bottom: 200px solid transparent;
 	opacity: 0;
 	-ms-filter: 'alpha(opacity=0)';
 	filter: alpha(opacity=0);
-	/* -o-transform: translate(-300px, -300px) scale(10); */
-	/* -moz-transform: translate(-800px, 0) scale(10); */
+	 -o-transform: translate(-300px, -300px) scale(10); 
+	 -moz-transform: translate(-800px, 0) scale(10); 
 	cursor: pointer;
 }
 
@@ -57,12 +57,15 @@
 .new_wave_album .dropzone {
 	text-align: left;	
 	width: 360px;
+	min-height: 100px;	
 	clear: both;
 	cursor: pointer;
 }
 
 .new_wave_album .instructions {
-	margin: 80px auto 10px;
+	clear: both;
+	margin: 100px auto 10px;
+	padding-top: 10px;
 	color: #666;
 	font: italic 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	text-align: center;

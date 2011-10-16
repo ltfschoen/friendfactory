@@ -1,11 +1,28 @@
-- if @posting.present?
+- if @posting.present? && @posting.valid?
   :plain
-    var $posting = $("#{escape_javascript(render(:partial => 'wave_proxy', :object => @posting))}");    
-    $posting
-      .prependTo('ul.postings:first')
-      .wrap('<li>');
+    var
+      $posting = $("#{escape_javascript(render(:partial => 'wave_proxy', :object => @posting))}"),
+      $nav = $('li.current', 'ul.nav'),
+      $form = $($('a', $nav).attr('rel')),
+      $firstPosting = $('.post_frame').filter(':first');
 
-    var $currentNav = $('li.current', '.wave ul.nav').removeClass('current');      
-    $($('a', $currentNav).attr('rel'))
-      .hide()
-      .trigger('reset');  
+    $nav.removeClass('current');
+
+    $form.fadeTo('fast', 0.0, function() {
+      $form.slideUp('fast', 'linear', function() {
+            $posting
+              .css({ opacity: 0.0 })
+              .hide()
+              .insertBefore($firstPosting)
+              .delay(900)
+              .slideDown(function() {
+                $posting.fadeTo('fast', 1.0);
+              });
+        // $firstPosting.before($posting);
+        $form.trigger('reset');
+      });
+    });
+
+- else
+  :plain
+    alert(@posting.errors.full_messages.to_sentence);

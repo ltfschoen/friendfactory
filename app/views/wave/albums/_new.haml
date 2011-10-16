@@ -4,63 +4,13 @@
   = hidden_field_tag :wave_id
   .new_post.photo
     .body
-      %table
-        %tr
-          %td
-            %ul.posting_photos
-            .photo.canvas.dropzone
-              =# image_tag 'ffffff.gif', :class => 'photo h4x6 small', :site => false
-              %p.instructions
-                Choose or drag photos here
-              = fields_for :posting_photo do |photo|
-                = photo.file_field :image
+      .photo.canvas.dropzone
+        %ul.posting_photos
+        = fields_for :posting_photo do |photo|
+          = photo.file_field :image
+        %p.instructions
+          Choose or drag photos here
     .foot
       =# f.sticky_until if current_user.admin?
       = f.submit 'Post'
       = f.cancel 'Cancel'
-
-
-- if false
-  = form_for Posting::Text.new, :url => wave_posting_texts_path(wave), :remote => true, :html => { :class => 'new_posting_text new_post_frame' } do |f|
-    = f.resolve resolver  
-    .new_post.blog
-      .body
-        = f.text_field :subject, :placeholder => 'Blog Title'
-        = f.text_area :body, :placeholder => "What's on your mind?"
-      .foot
-        = f.sticky_until if current_user.admin?
-        = f.submit 'Post'
-        = f.cancel 'Cancel'
-
-
-- if false
-  #new_wave_album.new_post_frame
-    .new_post.photo
-      %form
-        .body
-          %input{:name => "", :type => "file", :value => ""}/
-        .foot
-          %input{:name => "", :type => "submit", :value => "Post"}/
-          %input{:name => "", :type => "button", :value => "Cancel"}/
-    .reaction
-
-
-- if false
-  .posting.posting_album.form
-    = form_for Wave::Album.new, :html => { :multipart => true } do |f|
-      = hidden_field_tag :publish_id, @wave.id
-      = hidden_field_tag :wave_id
-      %table
-        %tr
-          %td
-            %ul.posting_photos
-            .photo.canvas.dropzone
-              = image_tag 'friskyfactory/ffffff.gif', :class => 'photo h4x6 small', :site => false
-              %p.unobtrusive<
-                Choose or drag photos here
-              = fields_for :posting_photo do |photo|
-                = photo.file_field :image
-            .button-bar.blank.canvas
-              = sticky_until_tag if current_user.admin?
-              = f.submit :OK, :class => 'submit'
-              = f.button 'Cancel', :class => 'cancel'
