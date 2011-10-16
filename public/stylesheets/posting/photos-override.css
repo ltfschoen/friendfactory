@@ -2,6 +2,12 @@
 	padding: 0 10px;
 	width: 340px;
 }
+.post.photos .photo {
+	height: auto;
+}
+.post.photos .photo img.v4x6 {
+	height: auto;
+}
 .post.photos.multiple .photo {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;

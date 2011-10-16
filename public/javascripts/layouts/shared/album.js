@@ -20,11 +20,9 @@ jQuery(function($) {
 					albumId = $form.find('#wave_id').val();
 
 				event.preventDefault();
-
 				if (albumId !== '') {
 					var url = '/waves/' + publishId + '/posting/wave_proxies',
 						stickyUntil = $form.find('#sticky_until').val();
-
 					$.post(url, { resource_id: albumId, sticky_until: stickyUntil }, function() {}, 'script');
 				}
 			})

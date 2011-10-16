@@ -14,11 +14,10 @@
               .css({ opacity: 0.0 })
               .hide()
               .insertBefore($firstPosting)
-              .delay(900)
+              .delay(600)
               .slideDown(function() {
                 $posting.fadeTo('fast', 1.0);
               });
-        // $firstPosting.before($posting);
         $form.trigger('reset');
       });
     });

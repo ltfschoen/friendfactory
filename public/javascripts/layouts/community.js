@@ -18,10 +18,7 @@ jQuery(function($) {
 		};
 
 	// Initialize postings' height
-	$.each($('.post_frame'), function() {
-		var post = $(this).find('.post').height();
-		$(this).height(post+20);
-	});
+	$('#frame').css({ visibility: 'hidden' });
 
 	// Initialize Rollcall Headshots
 	$('div.headshot').headshot();
@@ -217,5 +214,10 @@ jQuery(function($) {
 
 
 $(window).load(function() {
+	$.each($('.post_frame'), function() {
+		var post = $(this).find('.post').height();
+		$(this).height(post + 20);
+	});
 	// $.waypoints('refresh');
+	$('#frame').css({ visibility: 'visible' });
 });
