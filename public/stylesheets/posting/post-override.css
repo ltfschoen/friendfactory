@@ -1,3 +1,6 @@
+.post .clear .date {
+	clear: both;
+}
 .post .remove {
 	right: 0px;
 	top: -6px;
