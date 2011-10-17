@@ -1,4 +1,5 @@
 jQuery(function($) {
+
 	var
 		hideCurrentReaction = function(callback) {
 			$('.post_frame.active')
@@ -17,11 +18,14 @@ jQuery(function($) {
 			$('#rollcall').fadeTo('slow', 0.0);
 		};
 
+
 	// Initialize postings' height
 	$('#frame').css({ visibility: 'hidden' });
 
+
 	// Initialize Rollcall Headshots
 	$('div.headshot').headshot();
+
 
 	// Comments
 	$('.comments a')
@@ -53,6 +57,7 @@ jQuery(function($) {
 		}
 	});
 
+
 	// Nested Comments
 	$('.comment_box .reply a')
 		.live('ajax:success', function(xhr, form) {
@@ -79,15 +84,18 @@ jQuery(function($) {
 		return false;
 	});
 
+
 	// Videos
 	$('<script>')
 		.attr('src', 'http://www.youtube.com/player_api')
 		.attr('type', 'text/javascript')
 		.insertBefore('script:first');
 
-	// Unpublish Overlay		
+
+	// Unpublish Overlay
 	$('a.remove[rel="#unpublish_overlay"]').unpublishOverlay();
-	
+
+
 	// Nav
 	$('.new_post_frame')
 		.hide()
@@ -118,75 +126,12 @@ jQuery(function($) {
 				$this.trigger('shake');
 			}	
 		});
-
-
-
-
-	function insertPostItsContainer() {
-		$('<ul class="posting_post_its clearfix"></ul>')
-			.hide()
-			.insertBefore('ul.postings:first')
-			.delay(1200)
-			.slideDown(function() {
-			});
-	}
-	
-	
-	function insertPostIt(postIt) {
-		return $(postIt).clone()
-			.css({ width: 0, opacity: 0.0 })
-			.prependTo('ul.posting_post_its:first')
-			.wrap('<li>');
-	}
-	
-	
-	function revealFirstPostIt(postIt) {
-		insertPostIt(postIt);		
-		$('form', 'ul.posting_post_its:first li:first')
-			.animate({ width: 187 }, 'slow', function() {
-				$(this).fadeTo('fast', 1.0)
-					.find('textarea').focus();
-			});
-	}
-
-
-	function dropLastPostIt() {
-		$('.canvas', 'ul.posting_post_its:first li:eq(4)')
-			.hide('drop', { direction: 'down' }, 900);
-	}
-
-
-	// $('a[rel="#posting_post_it"]', 'ul.wave.nav')
-	// 	.click(function(event) {
-	// 		var $this = $(this);
-	// 		
-	// 		event.preventDefault();			
-	// 		if (true || !$this.closest('li').hasClass('current')) {
-	// 			$this.trigger('bounce')
-	// 				.closest('li').addClass('current');
-	// 			
-	// 			if ($('ul.posting_post_its').length === 0) {
-	// 				insertPostItsContainer();
-	// 			}			
-	// 			
-	// 			setTimeout(dropLastPostIt, 1100);
-	// 
-	// 			var postItForm = $($this.attr('rel')).find('form'),
-	// 				delay = ($('li', 'ul.posting_post_its:eq(0)').length) < 5 ? 900 : 2000;
-	// 			setTimeout(function() { revealFirstPostIt(postItForm) }, delay);
-	// 			
-	// 		} else {
-	// 			$this.trigger('shake');
-	// 		}			
-	// 	});
 			
-	// $('.posting, form.new_posting').trigger('init');
-	
 	// $('a[href^="/wave/profiles"].profile', '.attachment').live('click', function(event) {
 	// 	event.preventDefault();
 	// 	$('<div class="floating"></div>')
 	// 		.appendTo('.floating-container')
-	// 		.load($(this).attr('href'), function() {	 			
+	// 		.load($(this).attr('href'), function() {
 	// 			$(this).position({
 	// 				my: 'left center',
 	// 				of: event,
@@ -201,7 +146,7 @@ jQuery(function($) {
 });
 
 
-$(window).load(function() {
+jQuery(window).load(function() {
 	$.each($('.post_frame'), function() {
 		var post = $(this).find('.post').height();
 		$(this).height(post + 20);
