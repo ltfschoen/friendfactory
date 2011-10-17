@@ -1,8 +1,6 @@
+html,
 body {
 background: url($body_background);
-}
-#frame {
-background: url($column_background) repeat-y;
 }
 #sidebar {
 background: url(/images/pattern_a.png) $color_main;

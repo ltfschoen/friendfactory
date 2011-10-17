@@ -1,6 +1,8 @@
 class Wave::ConversationsController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_user, :set_page_title
+
+  layout 'conversation'
 
   cattr_reader :per_page
   @@per_page = 12
@@ -22,7 +24,7 @@ class Wave::ConversationsController < ApplicationController
       format.html { render :layout => false }
     end
   end
-  
+
   def popup
     @popup = true
     @title = current_site.name
@@ -34,8 +36,8 @@ class Wave::ConversationsController < ApplicationController
       format.html { render :action => 'show' }
     end
   end
-  
-  def close    
+
+  def close
     if @wave = current_user.inbox(current_site).find_by_id(params[:id])
       @wave.unpublish!
       @wave.read
@@ -44,5 +46,11 @@ class Wave::ConversationsController < ApplicationController
       format.json { render :json => { :closed => true }}
     end
   end
-    
+
+  private
+
+  def set_page_title
+    @page_title = "#{current_site.display_name} - #{current_profile.handle}'s Inbox"
+  end
+
 end

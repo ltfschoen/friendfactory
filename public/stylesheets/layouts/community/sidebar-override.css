@@ -10,6 +10,7 @@
 }
 #sidebar .portrait {
 	margin-left: 10px;
+	float: left;
 }
 #sidebar p.username {
 	display: block;

@@ -1,0 +1,81 @@
+!!! 5
+:plain
+  <!--[if IE 8]><html lang="en-us" class="no-js ie ie8"><![endif]-->
+  <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
+  <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
+%head
+  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
+  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %title= @page_title
+
+  = stylesheet_link_tag |
+      'layouts/reset', |
+      'application', |
+      'effects', |
+      'layouts/community/base', |
+      'layouts/community/sidebar', |
+      'layouts/community/sidebar-override', |      
+    :media => 'screen', |
+    :cache => 'layouts/conversation/cache'
+
+  = stylesheet_links |
+      'forms', |
+      '960', |
+      'friskyfactory/application', |
+      'friskyfactory/jquery-ui', |
+      'friskyfactory/postings/', |
+      'friskyfactory/waves/', |
+    :media => 'screen', |
+    :cache => 'friskyfactory/conversation.cache'
+
+  = stylesheet_link_tag "#{current_site.name}/conversation", :media => 'screen'
+
+  / [if IE]
+    = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
+    
+  / [if lt IE 9]
+    = stylesheet_link_tag "friskyfactory/ie-8", :media => 'screen'
+
+  - if Rails.env.development?
+    = stylesheet_link_tag 'development'  
+    = javascript_include_tag 'jquery.js'
+    = javascript_include_tag 'lib/jquery/jquery-ui.js'
+    = javascript_include_tag 'lib/jquery/jquery.tools.min.js'
+    = javascript_include_tag 'pusher.js'
+  - else
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
+    = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
+
+  = javascript_include_tag |
+      'modernizr', |
+      'lib/jquery/jquery.flip', |
+      'lib/jquery/jquery.scrollTo-1.4.2-min', |
+      'jquery_ujs', |
+      'lib/ff.buttonize', |
+      'lib/ff.effects', |
+      'lib/ff.chat', |
+      'lib/ff.polaroid', |
+      'lib/ff.placehold', |
+      'app/layouts/application', |
+      'layouts/conversation', |
+    :cache => 'conversation.cache'
+
+  / [if lt IE 9]
+    = javascript_include_tag 'ie-8', :media => 'screen'
+
+  - if Rails.env.development?
+    = javascript_include_tag 'development'
+      
+  = csrf_meta_tag
+%body{ :class => current_site, :'data-site_name' => current_site }
+  = render :partial => 'layouts/shared/sidebar'
+  #frame.container.container_16.clearfix
+    = yield
+    = render :partial => "layouts/footer"
+    - if Rails.env.development?
+      #footnotes_holder{ :style => 'display:block' }
+  = render :partial => 'layouts/analytics'
+:plain
+  </html>

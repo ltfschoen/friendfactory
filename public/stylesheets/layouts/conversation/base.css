@@ -1,0 +1,9 @@
+.wave_inbox .blank.canvas {
+	padding: 6px 6px;
+}
+#frame {
+  min-width: 960px;
+  min-height: 100%;
+  overflow: hidden;
+  margin-left: 201px;
+}
