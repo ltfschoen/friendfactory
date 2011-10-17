@@ -3,6 +3,7 @@ class Wave::ProfileController < ApplicationController
   RepublishWindow = 6.hours
 
   before_filter :require_user, :set_page_title
+
   layout 'profile'
 
   def show

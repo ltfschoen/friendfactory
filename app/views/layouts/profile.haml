@@ -14,18 +14,19 @@
       'friskyfactory/jquery-ui', |
       'friskyfactory/postings/', |
       'friskyfactory/waves/', |
-    :media => 'screen'
+    :media => 'screen',
+    :cache => 'friskyfactory/profile.cache'
     
   = stylesheet_link_tag |
       'layouts/reset', |
       'forms', |
       '960', |
       'application', |
-      'layouts/profile/base', |      
+      'layouts/profile/base', |
       'layouts/community/sidebar', |
       'layouts/community/sidebar-override', |
       'posting/portrait', |
-      'posting/portrait-override', |      
+      'posting/portrait-override', |
     :media => 'screen', |
     :cache => 'layouts/profile/cache'
 
@@ -67,7 +68,7 @@
       'waves/', |
       'lib/jquery/jquery.form', |
       'lib/jquery/jquery.remotipart', |
-    :cache => 'application.cache'
+    :cache => 'profile.cache'
 
   - if Rails.env.development?
     = javascript_include_tag 'development'
@@ -79,7 +80,6 @@
 %body{ :class => current_site, :'data-site_name' => current_site }
   = render :partial => 'layouts/shared/sidebar'
   .container.container_16.clearfix
-    =# render :partial => "layouts/header"
     = yield
     = render :partial => "layouts/footer"
   = render :partial => 'layouts/analytics'

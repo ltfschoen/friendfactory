@@ -88,7 +88,7 @@
   = render :partial => 'layouts/shared/sidebar'
   #frame
     = yield
-  - if Rails.env.development?
-    #footnotes_holder{ :style => 'display:block' }
+    - if Rails.env.development?
+      #footnotes_holder{ :style => 'display:block' }
 :plain
   </html>
