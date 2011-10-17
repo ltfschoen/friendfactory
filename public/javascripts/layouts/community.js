@@ -207,5 +207,6 @@ $(window).load(function() {
 		$(this).height(post + 20);
 	});
 	// $.waypoints('refresh');
-	$('#frame').css({ visibility: 'visible' });
+	$('#frame, #sidebar .block.userspace')
+		.css({ visibility: 'visible' });
 });

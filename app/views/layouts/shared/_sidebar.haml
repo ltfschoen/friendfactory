@@ -1,21 +1,24 @@
 #sidebar
   #head
-    - if false
-      #logo
-    = link_to image_tag('logo.png', :site => true), current_site.home_wave
+    = link_to image_tag('logo.png', :site => true), root_path
   - if false
     .block.adspace
       %img{:src => "http://placehold.it/180x75"}
   .block.userspace
     .portrait= thimble_link_to_profile(current_profile)
-    %p.username= link_to_profile(current_profile)
-    %p.username= link_to '261 friends &rarr;'.html_safe, '#'
+    %p.username
+      = link_to current_profile.handle, edit_profile_path
+      =# link_to_profile(current_profile)
     %ul
       %li.home
+        = link_to 'Community Wave', root_path
       %li.messages
-        %span 5
-      %li.personal
-      %li.invites
-      %li.buddies
+        =# link_to_unread_messages_unless_inbox
+        = link_to 'Inbox', inbox_path
+        / %span 5
+      - if false
+        %li.personal
+        %li.invites
+        %li.buddies
   - if false
-    %input{:name => "search", :placeholder => "Search...", :type => "text"}/
+    %input{:name => "search", :placeholder => "Search...", :type => "text"}/  
