@@ -152,6 +152,5 @@ jQuery(window).load(function() {
 		$(this).height(post + 20);
 	});
 	// $.waypoints('refresh');
-	$('#frame, #sidebar .block.userspace')
-		.css({ visibility: 'visible' });
+	$('#frame').css({ visibility: 'visible' });
 });

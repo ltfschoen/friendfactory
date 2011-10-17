@@ -17,3 +17,17 @@ a:focus {
 .admin .post:hover .remove {
 	opacity: 1;
 }
+
+body {
+  font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+a {
+  color: #861c0f;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.clear {
+  float: left;
+}

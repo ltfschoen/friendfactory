@@ -9,9 +9,9 @@
   %title #{current_site.display_name}
 
   = stylesheet_link_tag |
+      'layouts/reset', |
       'application', |
       'effects', |
-      'layouts/reset', |
       'layouts/shared/unpublish-overlay', |
       'layouts/shared/nav', |
       'layouts/community/base', |
@@ -54,7 +54,9 @@
 
   - if Rails.env.development?
     = stylesheet_link_tag 'development'
-    = javascript_include_tag 'jquery', 'jquery.tools-1.2.6.tiny.min.js', 'pusher.js'
+    = javascript_include_tag 'jquery'
+    = javascript_include_tag 'jquery.tools-1.2.6.tiny.min'
+    = javascript_include_tag 'pusher'
   - else
     = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
     = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'

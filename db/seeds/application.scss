@@ -1,0 +1,67 @@
+body {
+background: url($body_background);
+}
+#frame {
+background: url($column_background) repeat-y;
+}
+#sidebar {
+background: url(/images/pattern_a.png) $color_main;
+border-right: 1px solid $color_accent;
+}
+#sidebar #head {
+border: 1px solid $color_accent;
+}
+#sidebar #logo {
+background: url($logo);
+}
+#sidebar .block {
+border-bottom: 1px solid $color_accent;
+}
+#sidebar input[type="text"] {
+border: 1px solid $color_accent;
+}
+#sidebar #head,
+.comment_box form .foot input[type="submit"],
+.new_post .foot input[type="button"],
+.overlay button.ok {
+background: $color_main;
+background: -moz-linear-gradient(top, $color_main 0%, $color_main_2 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $color_main), color-stop(100%, $color_main_2));
+background: -webkit-linear-gradient(top, $color_main 0%, $color_main_2 100%);
+background: -o-linear-gradient(top, $color_main 0%, $color_main_2 100%);
+background: -ms-linear-gradient(top, $color_main 0%, $color_main_2 100%);
+background: linear-gradient(top, $color_main 0%, $color_main_2 100%);
+}
+.comment_box form .foot input[type="submit"]:active,
+.new_post .foot input[type="button"]:active,
+.overlay button.ok:active {
+top: 1px;
+opacity: 1;
+background: $color_main_2;
+background: -moz-linear-gradient(top, $color_main_2 0%, $color_main 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $color_main_2), color-stop(100%, $color_main));
+background: -webkit-linear-gradient(top, $color_main_2 0%, $color_main 100%);
+background: -o-linear-gradient(top, $color_main_2 0%, $color_main 100%);
+background: -ms-linear-gradient(top, $color_main_2 0%, $color_main 100%);
+background: linear-gradient(top, $color_main_2 0%, $color_main 100%);
+}
+a {
+color: $color_hyperlink;
+}
+.comment_box .comment a {
+color: $color_hyperlink;
+}
+.mini_comment .comment a {
+color: $color_hyperlink;
+}
+.comment_box form .foot input[type="submit"],
+.comment_box form .foot input[type="button"] {
+border: 1px solid $color_accent;
+}
+.new_post .foot input[type="submit"],
+.new_post .foot input[type="button"] {
+border: 1px solid $color_accent;
+}
+.sticky .cell a {
+color: $color_accent;
+}

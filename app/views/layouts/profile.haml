@@ -2,83 +2,86 @@
 :plain
   <!--[if IE 8]><html lang="en-us" class="no-js ie ie8 application"><![endif]-->
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9 application"><![endif]-->
-  <!--[if !IE]>--><html class="no-js application"><!--<![endif]-->
+  <!--[if !IE]>--><html lang="en-us" class="no-js application"><!--<![endif]-->
 %head
   %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
   %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
   %title #{current_site.display_name}#{@page_title}
 
   = stylesheet_links |
-      'reset', |
-      'forms', |
-      '960', |
       'friskyfactory/application', |
       'friskyfactory/effects', |
       'friskyfactory/jquery-ui', |
       'friskyfactory/postings/', |
       'friskyfactory/waves/', |
+    :media => 'screen'
+    
+  = stylesheet_link_tag |
+      'layouts/reset', |
+      'forms', |
+      '960', |
+      'application', |
+      'layouts/profile/base', |      
+      'layouts/community/sidebar', |
+      'layouts/community/sidebar-override', |
+      'posting/portrait', |
+      'posting/portrait-override', |      
     :media => 'screen', |
     :cache => 'layouts/profile/cache'
 
-  = yield(:stylesheets)
-  = stylesheet_link_tag current_site.name, :media => 'screen'
-
-  - if page_css = yield(:pagecss).present?
-    :css
-      #{page_css}
+  = stylesheet_link_tag "#{current_site.name}/profile", :media => 'screen'
 
   / [if IE]
     = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
-    
+
   / [if lt IE 9]
     = stylesheet_link_tag "friskyfactory/ie-8", :media => 'screen'
 
   - if Rails.env.development?
-    = javascript_include_tag 'jquery.js', 'lib/jquery/jquery-ui.js', 'lib/jquery/jquery.tools.min.js', 'lib/pusher.js'
-    = javascript_include_tag 'debug.js'
+    = stylesheet_link_tag 'development'
+    = javascript_include_tag 'jquery'
+    = javascript_include_tag 'lib/jquery/jquery-ui.js'
+    = javascript_include_tag 'jquery.tools-1.2.6.tiny.min'
+    = javascript_include_tag 'pusher'
   - else
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'
-    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
     = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
 
   = javascript_includes |
-        'lib/modernizr-1.6.min', |
-        'lib/jquery/jquery.topzindex.min', |
-        'lib/jquery/jquery.Storage', |
-        'lib/jquery/jquery.textareaCounter.plugin', |
-        'lib/jquery/autoresize.jquery.min.js', |
-        'lib/jquery/jquery.masonry.min.js', |
-        'lib/jquery/jquery.fileupload', |
-        'lib/jquery/jquery.fileupload-ui', |
-        'lib/jquery/jquery.flip', |
-        'lib/jquery/jquery.scrollTo-1.4.2-min', |
-        'lib/jquery/waypoints.min', |
-        'jquery_ujs', |
-        'lib/ff.buttonize', |
-        'lib/ff.effects', |
-        'lib/ff.nav', |
-        'lib/ff.chat', |
-        'lib/ff.polaroid', |
-        'lib/ff.ticket', |
-        'lib/ff.placehold', |
-        'app/layouts/application', |
-        'app/posting/', |
-        'waves/', |
-      :cache => 'application.cache'
+      'modernizr', |
+      'lib/jquery/jquery.fileupload', |
+      'lib/jquery/jquery.fileupload-ui', |
+      'lib/jquery/jquery.scrollTo-1.4.2-min', |
+      'jquery_ujs', |
+      'lib/ff.buttonize', |
+      'lib/ff.effects', |
+      'lib/ff.nav', |
+      'lib/ff.chat', |
+      'lib/ff.polaroid', |
+      'lib/ff.ticket', |
+      'lib/ff.placehold', |
+      'app/layouts/application', |
+      'app/posting/', |
+      'waves/', |
+      'lib/jquery/jquery.form', |
+      'lib/jquery/jquery.remotipart', |
+    :cache => 'application.cache'
 
-  = javascript_include_tag 'lib/jquery/jquery.form', 'lib/jquery/jquery.remotipart'
+  - if Rails.env.development?
+    = javascript_include_tag 'development'
 
   / [if lt IE 9]
     = javascript_include_tag 'ie-8', :media => 'screen'
       
   = csrf_meta_tag 
 %body{ :class => current_site, :'data-site_name' => current_site }
-  .floating-container.container_16.clearfix
+  = render :partial => 'layouts/shared/sidebar'
   .container.container_16.clearfix
-    = render :partial => "layouts/header" unless @popup.present?
+    =# render :partial => "layouts/header"
     = yield
-    = render :partial => "layouts/footer" unless @popup.present?
+    = render :partial => "layouts/footer"
   = render :partial => 'layouts/analytics'
 :plain
   </html>

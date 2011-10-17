@@ -2,7 +2,8 @@ class Wave::ProfileController < ApplicationController
 
   RepublishWindow = 6.hours
 
-  before_filter :require_user
+  before_filter :require_user, :set_page_title
+  layout 'profile'
 
   def show
     @profile = current_user.profile(current_site)
@@ -51,6 +52,10 @@ class Wave::ProfileController < ApplicationController
       avatar.active = true
       avatar.state = :published
     end
+  end
+
+  def set_page_title
+    @page_title = " - #{current_profile.handle}'s Profile"
   end
 
 end

@@ -1,11 +1,9 @@
 #sidebar .block.userspace {
-	visibility: hidden;
-/*	text-shadow: none;*/
+	text-shadow: none;
 }
 #sidebar .block.userspace a {
 	margin: 0;
 	font-style: normal;
-	font-size: 11px;
 }
 #sidebar .block.userspace a:hover {
 	margin-left: 0;
