@@ -19,3 +19,6 @@
 #sidebar .block.userspace a:hover {
 	left: 0;
 }
+#sidebar .block.userspace .portrait a {
+	margin: 0;
+}

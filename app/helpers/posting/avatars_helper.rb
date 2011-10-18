@@ -1,9 +1,10 @@
 module Posting::AvatarsHelper
 
-  def thimble_link_to_profile(profile, opts = {})
+  def thimble_link_to_profile(profile, path = nil)
     profile = profile.profile(current_site) if profile.is_a?(User)
     if profile.present?
-      link_to(thimble_image_tag(profile), wave_profile_path(profile))
+      path = wave_profile_path(profile) if path.nil?
+      link_to(thimble_image_tag(profile), path)
     end
   end
   

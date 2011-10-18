@@ -31,11 +31,10 @@
     .block.adspace
       %img{:src => "http://placehold.it/180x75"}
   .block.userspace
-    .portrait
-      = thimble_image_tag(current_profile)
-      =# thimble_link_to_profile(current_profile)
+    .portrait      
+      = thimble_link_to_profile(current_profile, profile_path)
     %span.greeting Welcome,
-    %span.username= link_to current_profile.handle, edit_profile_path
+    %span.username= link_to current_profile.handle, profile_path
   .block.navspace
     %ul
       %li.home
