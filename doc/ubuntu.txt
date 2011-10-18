@@ -241,5 +241,19 @@ Create a Test Application
 		•	require ‘RMagick’
 		•	require ‘mysql’
 		
+52. Mount production system directory on staging:
+http://www.howtogeek.com/howto/ubuntu/how-to-mount-a-remote-folder-using-ssh-on-ubuntu/
+sudo apt-get install sshfs
+sudo modprobe fuse
+sudo adduser <username> fuse
+sudo chown root:fuse /dev/fuse
+sudo chmod +x /dev/fusermount
+mkdir ~/remoteserv
+sshfs <username>@<ipaddress>:/remotepath ~/remoteserv -p 1968
+
+
+
+
+
 		
 		
