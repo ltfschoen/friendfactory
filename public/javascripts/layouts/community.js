@@ -20,7 +20,7 @@ jQuery(function($) {
 
 
 	// Initialize postings' height
-	$('#frame').css({ visibility: 'hidden' });
+	$('body').css({ visibility: 'hidden' });
 
 
 	// Initialize Rollcall Headshots
@@ -152,5 +152,5 @@ jQuery(window).load(function() {
 		$(this).height(post + 20);
 	});
 	// $.waypoints('refresh');
-	$('#frame').css({ visibility: 'visible' });
+	$('body').css({ visibility: 'visible' });
 });
