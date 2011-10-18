@@ -32,7 +32,7 @@ gem 'haml-rails'
 gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on'
 gem 'pusher', '~> 0.8.1'
-gem 'will_paginate', '~> 3.0.pre2'
+gem 'will_paginate', '~> 3.0.2'
 gem 'whenever', :require => false
 gem 'embedly'
 

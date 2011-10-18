@@ -47,12 +47,17 @@ a:hover {
 	display: inline-block;
 	color: #666;
 	padding: 2px 6px;
-	border-radius: 4px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+	text-decoration: none;
 }
 .pagination a:hover {
 	color: #CCC;
 	background-color: #333;
-	text-decoration: none;
+	text-shadow: none;
 }
 .pagination span.disabled {
 	display: none;
@@ -61,9 +66,12 @@ a:hover {
 	padding: 2px 6px;
 	color: #666;
 	border: 1px solid #999;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-	-o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 2px 1px rgba(255, 255, 255, 1);
+	-moz-box-shadow: 0 2px 1px rgba(255, 255, 255, 1);
+	-o-box-shadow: 0 2px 1px rgba(255, 255, 255, 1);
+	box-shadow: 0 2px 1px rgba(255, 255, 255, 1);
 }
