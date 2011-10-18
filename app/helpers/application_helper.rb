@@ -80,7 +80,9 @@ module ApplicationHelper
   def link_to_unread_messages
     if current_user
       unread_conversations_count = current_user.conversations.site(current_site).chatty.unread.count
-      link_to(unread_conversations_count, inbox_path, :class => 'unread') if unread_conversations_count > 0
+      if unread_conversations_count > 0
+        content_tag(:span) { link_to(unread_conversations_count, inbox_path) }
+      end
     end
   end
   

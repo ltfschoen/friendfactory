@@ -39,13 +39,13 @@
     %ul
       %li.home
         = link_to 'Community Wave', root_path
-        %ul
-          %li 28 users
-          %li 528 posts
-          %li Last activity: Yesterday
+        - if false
+          %ul
+            %li 28 users
+            %li 528 posts
+            %li Last activity: Yesterday
       %li.messages
-        =# link_to_unread_messages_unless_inbox
-        %span 25
+        = link_to_unread_messages_unless_inbox
         = link_to 'Inbox', inbox_path
       - if false
         <li class="personal"></li>
