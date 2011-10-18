@@ -1,45 +1,21 @@
-#sidebar .block.userspace {
-	text-shadow: none;
+#sidebar a {
+	text-decoration: none;
+	color: white;
 }
-#sidebar .block.userspace a {
+#sidebar a:hover {
 	margin: 0;
-	font-style: normal;
+}
+#sidebar .block.userspace span.username a {
+	margin: 0;
+	font-size: inherit;
+	font-style: inherit;
+}
+#sidebar .block.navspace ul .messages:before {
+  background-position: -25px 0;
+}
+#sidebar .block.navspace ul li:hover {
+	left: 0;
 }
 #sidebar .block.userspace a:hover {
-	margin-left: 0;
-}
-#sidebar .portrait {
-	margin-left: 10px;
-	float: left;
-}
-#sidebar p.username {
-	display: block;
-	float: left;
-	font: bold 14px;
-	width: 100px;
-	margin: 0 0 0 10px;
-}
-#sidebar .block.userspace ul {
-	clear: both;
-	margin: 10px 0 0 8px;
-}
-#sidebar .block.userspace ul li {
-	width: auto !important;
-	height: auto;
-	background: none;
-	clear: both;
-}
-#sidebar .block.userspace ul li:hover {
-	top: inherit;
-}
-#sidebar .block.userspace ul a:before {
-	content: "";
-	background: url(/images/user_buttons_transparent.png);
-	float: left;
-	width: 20px;
-	height: 20px;
-	margin: 0 8px 0 0;
-}
-#sidebar .block.userspace ul li.messages a:before {
-	background-position: -27px 0;	
+	left: 0;
 }

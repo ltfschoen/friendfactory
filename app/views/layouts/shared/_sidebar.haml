@@ -1,3 +1,29 @@
+- if false
+  #sidebar
+    #head
+      = link_to image_tag('logo.png', :site => true), root_path
+    - if false
+      .block.adspace
+        %img{:src => "http://placehold.it/180x75"}
+    .block.userspace
+      .portrait= thimble_link_to_profile(current_profile)
+      %p.username
+        = link_to current_profile.handle, edit_profile_path
+        =# link_to_profile(current_profile)
+      %ul
+        %li.home
+          = link_to 'Community Wave', root_path
+        %li.messages
+          =# link_to_unread_messages_unless_inbox
+          = link_to 'Inbox', inbox_path
+          / %span 5
+        - if false
+          %li.personal
+          %li.invites
+          %li.buddies
+    - if false
+      %input{:name => "search", :placeholder => "Search...", :type => "text"}/  
+
 #sidebar
   #head
     = link_to image_tag('logo.png', :site => true), root_path
@@ -5,20 +31,26 @@
     .block.adspace
       %img{:src => "http://placehold.it/180x75"}
   .block.userspace
-    .portrait= thimble_link_to_profile(current_profile)
-    %p.username
-      = link_to current_profile.handle, edit_profile_path
-      =# link_to_profile(current_profile)
+    .portrait
+      = thimble_image_tag(current_profile)
+      =# thimble_link_to_profile(current_profile)
+    %span.greeting Welcome,
+    %span.username= link_to current_profile.handle, edit_profile_path
+  .block.navspace
     %ul
       %li.home
         = link_to 'Community Wave', root_path
+        %ul
+          %li 28 users
+          %li 528 posts
+          %li Last activity: Yesterday
       %li.messages
         =# link_to_unread_messages_unless_inbox
+        %span 25
         = link_to 'Inbox', inbox_path
-        / %span 5
       - if false
-        %li.personal
-        %li.invites
-        %li.buddies
+        <li class="personal"></li>
+        <li class="invites"></li>
+        <li class="buddies"></li>
   - if false
-    %input{:name => "search", :placeholder => "Search...", :type => "text"}/  
+    %input{:name => "search", :placeholder => "Search...", :type => "text"}/

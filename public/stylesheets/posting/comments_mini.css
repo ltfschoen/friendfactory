@@ -1,6 +1,34 @@
+/*----------------------------------------*\
+|	Built with the Lessentials Framework   |
+|	       Created by Arron Hunt           |
+| 	          copyright 2011               |
+\*----------------------------------------*/
+/* FRISKY FREEDOM BRANDING */
+/*
+@logo: '../../images/brands/friskyfreedom/logo.png';
+@body_background: '../../images/brands/friskyfreedom/tile.png';
+@column_background: '../../images/brands/friskyfreedom/column_background.png';
+@color_main: #1b5452;
+*/
+/* FRISKY HANDS BRANDING */
+/* POSITIVELY FRISKY BRANDING */
+/*
+@logo: '../../images/brands/positivelyfrisky/logo.png';
+@body_background: '../../images/brands/positivelyfrisky/tile.png';
+@column_background: '../../images/brands/positivelyfrisky/column_background.png';
+@color_main: #8337cb;
+*/
+/* DIZM BRANDING */
+/*
+@logo: '../../images/brands/dizm/logo.png';
+@body_background: '../../images/brands/dizm/tile.png';
+@column_background: '../../images/brands/dizm/column_background.jpg';
+@color_main: #3c6680;
+*/
+/* UNIVERSAL VARIABLES */
 .mini_comment {
   margin: 0px 10px 0 10px;
-  padding: 5px 5px 0 10px;
+  padding: 10px 5px 5px 10px;
   width: 500px;
   overflow: hidden;
   float: left;
@@ -29,7 +57,7 @@
   background: #f0f0f0;
 }
 .mini_comment .comment a {
-  color: #09334d;
+  color: #861c0f;
   text-decoration: none;
 }
 .mini_comment .comment span {

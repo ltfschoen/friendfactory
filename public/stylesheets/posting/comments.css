@@ -124,7 +124,7 @@
   background: -o-linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
   background: -ms-linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
   background: linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
-  border: 1px solid #333;
+  border: 1px solid #333 !important;
 }
 .comment_box form .foot input[type="button"]:active {
   top: 1px;

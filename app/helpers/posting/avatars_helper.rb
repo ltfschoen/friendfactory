@@ -3,9 +3,13 @@ module Posting::AvatarsHelper
   def thimble_link_to_profile(profile, opts = {})
     profile = profile.profile(current_site) if profile.is_a?(User)
     if profile.present?
-      handle = profile.handle
-      link_to(image_tag(profile.avatar.url(:thumb), :size => '32x32', :alt => handle, :title => handle), wave_profile_path(profile))
+      link_to(thimble_image_tag(profile), wave_profile_path(profile))
     end
+  end
+  
+  def thimble_image_tag(profile, opts = {})
+    handle = profile.handle
+    image_tag(profile.avatar.url(:thumb), :size => '32x32', :alt => handle, :title => handle)
   end
 
   # def thumb_avatar_image_tag(avatar, opts = {})

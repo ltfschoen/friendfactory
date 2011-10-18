@@ -1,7 +1,5 @@
 .portrait {
-	padding: 2px;
 	background: rgba(0, 0, 0, 0.8);
-	height: 36px;
 	overflow: hidden;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -11,11 +9,4 @@
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	-o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.portrait img {
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-o-border-radius: 3px;
-	border-radius: 3px;
 }

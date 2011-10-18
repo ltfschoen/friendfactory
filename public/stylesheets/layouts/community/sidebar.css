@@ -2,7 +2,7 @@
   width: 200px;
   height: 100%;
   float: left;
-  background: url(/images/pattern_a.png) #333;
+  background: #b94f42 url(/images/pattern_a.png);
   border-right: 1px solid #590000;
   -webkit-box-shadow: 0 0 10px #000000;
   -moz-box-shadow: 0 0 10px #000000;
@@ -29,7 +29,7 @@
   text-align: center;
 }
 #sidebar #head #logo {
-  /*background: url('../../images/brands/friskyhands/logo.png');*/
+/*  background: url('../../images/brands/friskyhands/logo.png');*/
   width: 200px;
   height: 75px;
 }
@@ -61,6 +61,12 @@
 #sidebar .block.userspace {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
 }
+#sidebar .block.userspace span.greeting {
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin: 0 0 0 10px;
+}
 #sidebar .block.userspace span.username {
   display: block;
   float: left;
@@ -78,51 +84,81 @@
 #sidebar .block.userspace a:hover {
   margin-left: 11px;
 }
-#sidebar .block.userspace ul {
+#sidebar .block.navspace ul {
   float: left;
-  margin: 5px 0 0 8px;
 }
-#sidebar .block.userspace ul li {
-  width: 26px;
-  height: 27px;
+#sidebar .block.navspace ul li {
+  width: 180px;
   float: left;
-  background: url(/images/user_buttons_transparent.png);
+  /* background: url(../../images/user_buttons_transparent.png) no-repeat; */
+
   cursor: pointer;
   position: relative;
+  line-height: 28px;
+  /* text */
+
+  text-shadow: 0 1px 1px #000;
+  font-size: 13px;
+  -webkit-transition: all 0.1s;
 }
-#sidebar .block.userspace ul li:hover {
-  background-position-y: -27px;
-  top: -1px;
+#sidebar .block.navspace ul li:hover {
+  left: 10px;
+  cursor: pointer;
 }
-#sidebar .block.userspace ul li:active {
-  background-position-y: -54px;
-  top: 1px;
-}
-#sidebar .block.userspace ul li:first-child {
-  width: 27px;
-}
-#sidebar .block.userspace ul .messages {
-  background-position-x: -27px;
-}
-#sidebar .block.userspace ul .messages span {
+#sidebar .block.navspace ul li:before {
+  content: " ";
   display: block;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  position: relative;
+  float: left;
+  margin-right: 5px;
+  width: 25px;
+  height: 25px;
+  background: url(/images/user_buttons_transparent.png);
+}
+#sidebar .block.navspace ul li ul {
+  margin-left: 30px;
+}
+#sidebar .block.navspace ul li ul li:hover {
+  left: 0;
+}
+#sidebar .block.navspace ul li ul li:before {
+  display: none;
+}
+#sidebar .block.navspace ul .messages:before {
+  background-position-y: -25px;
+}
+#sidebar .block.navspace ul .messages span {
+  display: block;
+  float: left;
+  min-width: 18px;
+  height: 18px;
+  background: #ff0;
+  border-radius: 20px;
+  border: 1px solid #7b2011;
+  line-height: 18px;
+  position: absolute;
   top: -5px;
   left: 12px;
   text-align: center;
   font-size: 11px;
-  background: url(/images/badge.png);
+  z-index: 10;
+  background: #c44d3b;
+  background: -moz-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c44d3b), color-stop(100%, #ba311a));
+  background: -webkit-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+  background: -o-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+  background: -ms-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+  background: linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 3px rgba(0, 0, 0, 0.25);
+  /* background: url(../../images/badge.png); */
+
 }
-#sidebar .block.userspace ul .personal {
+#sidebar .block.navspace ul .personal {
   background-position-x: -53px;
 }
-#sidebar .block.userspace ul .invites {
+#sidebar .block.navspace ul .invites {
   background-position-x: -79px;
 }
-#sidebar .block.userspace ul .buddies {
+#sidebar .block.navspace ul .buddies {
   background-position-x: -105px;
 }
 #sidebar input[type="text"] {

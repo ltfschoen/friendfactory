@@ -1,5 +1,5 @@
 body {
-  /*background: url('../../images/brands/friskyhands/tile.png');*/
+/*  background: url('../../images/brands/friskyhands/tile.png');*/
   font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 a {
@@ -23,16 +23,22 @@ a:hover {
   min-height: 100%;
   overflow: hidden;
   margin-left: 201px;
-  /*background: url('../../images/brands/friskyhands/column_background.png') repeat-y;*/
+/*  background: url('../../images/brands/friskyhands/column_background.png') repeat-y;*/
 }
 #frame .post_frame, #frame .new_post_frame {
   float: left;
-  padding-bottom: 10px;
-}
-#frame .new_post_frame {
-  padding-bottom: none;
+  margin: 5px 0;
 }
 #frame .post_frame.active {
   background: url(/images/selected.png) no-repeat;
   background-position: 400px 30px;
 }
+.collapsed {
+  border-bottom: 1px solid #333;
+}
+.collapsed .post {
+  border: none;
+}
+/*.collapsed - .post_frame {
+  background: #ff0000;
+}*/
