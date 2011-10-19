@@ -3,6 +3,7 @@
 }
 #frame .post_frame, #frame .new_post_frame {
 	clear: both;
+	margin: 2px 0;
 }
 #frame .new_post_frame {
 	padding-bottom: 0px;

@@ -88,7 +88,7 @@ jQuery(function($) {
 
 
 	// Comments
-	$('.comments a')
+	$('.comments a, a.comments')
 		.live('ajax:beforeSend', function() {
 			var $frame = $(this).closest('.post_frame');
 

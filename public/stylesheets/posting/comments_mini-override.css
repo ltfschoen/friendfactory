@@ -1,8 +1,11 @@
 .mini_comment {
-  padding: 2px 5px 2px 10px;
+	padding: 2px 5px 2px 10px;
 }
 .mini_comment .comment p {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+.mini_comment .comment a.comments {
+	color: #333;
 }
