@@ -18,16 +18,14 @@ class Posting::BaseController < ApplicationController
     fetchables.map! do |posting_id, limit|
       if posting = Posting::Base.find_by_id(posting_id)
         comments = posting.children.type(Posting::Comment).published.order('updated_at desc').limit(limit)
-        comments.sort_by!{ |comment| comment.updated_at }.map! do |comment|
+        comments.map! do |comment|
           profile = comment.user.profile(current_site)
-          {
-            :id         => comment.id,
+          { :id         => comment.id,
             :posting_id => posting_id,
             :image_path => profile.avatar.url(:thumb),
             :handle     => profile.handle,
             :body       => tag_helper.truncate(comment.body, :length => 60),
-            :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at)
-          }
+            :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }
         end
         { :id => posting_id, :comments => comments }
       end
