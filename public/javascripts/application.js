@@ -18,5 +18,5 @@
 		return $.getId(this);
 	};
 
-})(jQuery)
+})(jQuery);
 
