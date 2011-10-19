@@ -7,10 +7,13 @@ module Posting::AvatarsHelper
       link_to(thimble_image_tag(profile), path)
     end
   end
-  
+
   def thimble_image_tag(profile, opts = {})
-    handle = profile.handle
-    image_tag(profile.avatar.url(:thumb), :size => '32x32', :alt => handle, :title => handle)
+    profile = profile.profile(current_site) if profile.is_a?(User)
+    if profile.present?
+      handle = profile.handle
+      image_tag(profile.avatar.url(:thumb), :size => '32x32', :alt => handle, :title => handle)
+    end
   end
 
   # def thumb_avatar_image_tag(avatar, opts = {})

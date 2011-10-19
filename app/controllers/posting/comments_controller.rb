@@ -1,5 +1,5 @@
 class Posting::CommentsController < ApplicationController
-  
+
   before_filter :require_user
 
   def index
@@ -18,7 +18,7 @@ class Posting::CommentsController < ApplicationController
       format.html { render :layout => false }
     end
   end
-  
+
   def create
     @comment = nil
     if posting = Posting::Base.find_by_id(params[:posting_id])
@@ -31,5 +31,5 @@ class Posting::CommentsController < ApplicationController
       format.js { render :layout => false }
     end
   end
-  
+
 end

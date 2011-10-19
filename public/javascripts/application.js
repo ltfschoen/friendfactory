@@ -14,4 +14,8 @@
 		return match;
 	};
 
+	$.fn.getId = function() {
+		return $.getId(this);
+	};
+
 })(jQuery)

@@ -9,4 +9,4 @@
         #{signal.subject}
       %span.date Posted #{distance_of_time_in_words_to_now(signal.created_at)} ago
       = link_to_comments(signal.children.published.count, posting_comments_path(signal))
-  .reaction.hidden
+  .reaction

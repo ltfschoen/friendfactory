@@ -22,4 +22,4 @@
               =# render_embed(embed)
       %span.date Posted #{distance_of_time_in_words_to_now(link.created_at)} ago
       = link_to_comments(link.children.published.count, posting_comments_path(link))
-  .reaction.hidden
+  .reaction

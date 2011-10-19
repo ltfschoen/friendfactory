@@ -9,4 +9,4 @@
         #{tweet.subject}
       %span.date Posted #{distance_of_time_in_words_to_now(tweet.created_at)} ago
       = link_to_comments(tweet.children.published.count, posting_comments_path(tweet))
-  .reaction.hidden
+  .reaction

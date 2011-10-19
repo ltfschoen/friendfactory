@@ -35,3 +35,17 @@ body.admin .post:hover .remove {
 .post_frame.active .post .clear .comments a {
 	text-decoration: none;
 }
+.post {
+	border-bottom: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
+}
+.post.narrow-border {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	-o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}
