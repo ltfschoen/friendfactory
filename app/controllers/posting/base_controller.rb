@@ -25,27 +25,28 @@ class Posting::BaseController < ApplicationController
             :posting_id => posting_id,
             :image_path => profile.avatar.url(:thumb),
             :handle     => profile.handle,
-            :body       => comment.body,
-            :updated_at => comment.updated_at
+            :body       => tag_helper.truncate(comment.body, :length => 60),
+            :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at)
           }
         end
         { :id => posting_id, :comments => comments }
       end
     end
-    # Rails.logger.info fetchables.inspect
     respond_to do |format|
       format.json { render :json => fetchables }
     end
   end
 
-  def self.tag_helper
+  private
+
+  def tag_helper
     TagHelper.instance
   end
 
   class TagHelper
     include Singleton
-    # include ActionView::Helpers::TagHelper
-    # include ActionView::Helpers::AssetTagHelper
+    include ActionView::Helpers::TextHelper
+    include ActionView::Helpers::DateHelper
   end
 
 end
