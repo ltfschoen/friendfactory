@@ -39,6 +39,11 @@ a:hover {
 	clear: both;
 	text-align: center;
 	font-size: 12px;
+}
+.pagination.header {
+	margin: 10px 0 0 0;
+}
+.pagination.footer {
 	margin: 10px 0;
 }
 .pagination a,

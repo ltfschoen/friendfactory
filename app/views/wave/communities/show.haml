@@ -1,8 +1,9 @@
 = render :partial => 'reaction-template'
 = render :partial => 'rollcall', :locals => { :profiles => @profiles }
 = render :partial => 'layouts/shared/nav'
+= will_paginate @postings, :class => 'pagination header', :inner_window => 1, :outer_window => 1
 - @postings.each do |posting|
   = render_community_posting(posting)
 =# render :partial => 'placeholders.x'
-= will_paginate @postings, :class => 'pagination', :inner_window => 1, :outer_window => 1
+= will_paginate @postings, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
 = render :partial => 'layouts/shared/unpublish_overlay'
