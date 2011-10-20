@@ -7,11 +7,11 @@ class Wave::AlbumsController < ApplicationController
   end
     
   def show
-    if @wave = Wave::Base.find_by_id(params[:album_id])
-      @start_slide = start_slide(params[:id])
-    end
+    @wave = current_site.waves.find_by_id(params[:id])
+    @start_slide = start_slide(params[:photo_id])
     respond_to do |format|
       format.html { render :layout => 'album' }
+      format.js   { render :layout => false }
     end
   end
     

@@ -7,7 +7,8 @@ module Wave::AlbumHelper
   end
   
   def link_to_album_photo(album, photo, opts = {})
-    link_to(render_photo(photo, :class => opts[:class]), wave_album_photo_path(album, photo), :target => '_blank')
+    # link_to(render_photo(photo, :class => opts[:class]), wave_album_photo_path(album, photo), :target => '_blank')
+    link_to(render_photo(photo, :class => opts[:class]), wave_album_path(album, :photo_id => photo), :target => '_blank')
   end
 
 end
