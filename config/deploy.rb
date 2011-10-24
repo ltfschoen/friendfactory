@@ -116,22 +116,6 @@ task :production do
   set :deploy_to, '/home/mrcap/friskyfactory/production'
 end
 
-# task :preprod do
-#   puts "*** deploying to \033[1;37;42m preprod \033[0m"
-#   role :app, 'ff02.friskyfactory.com'
-#   role :web, 'ff02.friskyfactory.com'
-#   role :db,  'ff02.friskyfactory.com', :primary => true  
-#   set :branch do
-#     default_tag = `git tag`.split("\n").last
-#     tag = Capistrano::CLI.ui.ask "Pushed tag to deploy: [#{default_tag}] "
-#     tag = default_tag if tag.empty?
-#     tag
-#   end
-#   set :rails_env, 'production'
-#   set :whenever_environment, 'production'
-#   set :deploy_to, '/home/mrcap/friskyfactory/production'
-# end
-
 namespace :ff do
   namespace :db do
     namespace :refresh do
