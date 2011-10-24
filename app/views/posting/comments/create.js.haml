@@ -2,14 +2,23 @@
   var
     $form = $("form##{dom_id(@comment.parent)}_new_comment"),
     $preceding = $form.closest('.comment_box');
-    
 - if @comment.present? && @comment.valid?
   :plain
-    var $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}");
-    $comment.hide().css({ opacity: 0.0 }).insertAfter($preceding)
+    var
+      $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}"),
+      $commentLink = $("#{escape_javascript(link_to_comments(@posting.children.type(Posting::Comment).published.count, posting_comments_path(@posting)))}"),
+      $frame = $form.closest('.post_frame');
+
+    $comment
+      .hide()
+      .css({ opacity: 0.0 })
+      .insertAfter($preceding)
       .slideDown('fast', function() {
         $comment.fadeTo('fast', 1.0);
       });
+
+    $frame.find('.comments').html($commentLink);
+
     $form[0].reset();
 - else
   :plain

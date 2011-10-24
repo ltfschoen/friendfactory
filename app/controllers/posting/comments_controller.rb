@@ -21,9 +21,9 @@ class Posting::CommentsController < ApplicationController
 
   def create
     @comment = nil
-    if posting = Posting::Base.find_by_id(params[:posting_id])
+    if @posting = Posting::Base.find_by_id(params[:posting_id])
       @comment = Posting::Comment.new(params[:posting_comment]) { |p| p.user = current_user }
-      if posting.children << @comment
+      if @posting.children << @comment
         @comment.publish!
       end
     end
