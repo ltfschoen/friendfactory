@@ -1,8 +1,0 @@
-= form_for Posting::Link.new, :url => wave_posting_links_path(@wave), :remote => true, :html => { :class => 'new_posting new_posting_link' } do |f|
-  = hidden_field_tag :resolver, controller_name
-  .button-bar.canvas.blank
-    = f.text_field :url, :placeholder => 'http:// to something to share on this wave'
-    = f.sticky_until if current_user.admin?
-    = f.submit 'OK'
-    = f.button 'Cancel', :class => 'cancel'
-    = image_tag('friskyfactory/ajax-loader-small.gif', :site => false, :class => 'spinner', :style => 'visibility:hidden')

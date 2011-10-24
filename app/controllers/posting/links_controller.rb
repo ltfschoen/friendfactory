@@ -11,8 +11,7 @@ class Posting::LinksController < Posting::BaseController
         link.embedify
         link.build_photos
       end      
-      if @posting.save
-        wave.postings << @posting
+      if wave.postings << @posting
         current_user.profile(current_site).postings << @posting
         @posting.publish!
         @posting.children(true)
