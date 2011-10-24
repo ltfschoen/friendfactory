@@ -1,8 +1,3 @@
-- if false
-  .posting[video]
-    .video_player.youtube_video_player{ :'data-vid' => video.body }
-      = link_to_youtube_video_image(video)
-
 - user = video.user
 .post_frame
   .post.posting.video[video]{uid(video[:user_id])}

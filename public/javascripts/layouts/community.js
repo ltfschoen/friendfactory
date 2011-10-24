@@ -194,13 +194,6 @@ jQuery(function($) {
 	});
 
 
-	// Videos
-	$('<script>')
-		.attr('src', 'http://www.youtube.com/player_api')
-		.attr('type', 'text/javascript')
-		.insertBefore('script:first');
-
-
 	// Nav
 	$('.new_post_frame')
 		.hide()
