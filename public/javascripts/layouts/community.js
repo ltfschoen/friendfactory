@@ -111,7 +111,6 @@ jQuery(function($) {
 	// Initialize rollcall headshots
 	$('div.headshot').headshot();
 
-
 	// Comments
 	$('.comments a, a.comments')
 		.live('ajax:beforeSend', function() {

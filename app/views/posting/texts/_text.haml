@@ -18,5 +18,5 @@
               %a{:href => ""} View Full Post &rarr;
         .torn
         %span.date Posted #{distance_of_time_in_words_to_now(text.created_at)} ago
-        = link_to_comments(text.children.published.count, posting_comments_path(text))
+        = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text))
     .reaction
