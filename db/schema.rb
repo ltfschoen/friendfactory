@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20111012141253) do
     t.string   "analytics_account_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "css"
     t.string   "mailer"
   end
 

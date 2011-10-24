@@ -7,13 +7,13 @@ class CreateStylesheets < ActiveRecord::Migration
       t.timestamps
     end
     Site.all.each { |site| site.stylesheets.create(:css => site.css) }
-    remove_column :sites, :css
+    # remove_column :sites, :css
     add_index :stylesheets, [ :site_id, :controller_name ]
   end
 
   def self.down
-    add_column :sites, :css, :text
-    Site.all.each { |site| site.update_attribute(:css, site.stylesheets.map(&:css).join) }
+    # add_column :sites, :css, :text
+    # Site.all.each { |site| site.update_attribute(:css, site.stylesheets.map(&:css).join) }
     drop_table :stylesheets
   end
 end
