@@ -270,6 +270,14 @@ class User < ActiveRecord::Base
     update_attribute(:emailable, false)
   end
 
+  def subscribe!
+    update_attribute(:emailable, true)
+  end
+
+  def unsubscribe!
+    update_attribute(:emailable, false)
+  end
+
   # ===
 
   def uid
