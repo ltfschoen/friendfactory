@@ -37,26 +37,40 @@
 		});
 	};
 
+
+	$.unsetActiveFrame = function (callback) {
+		var $currentFrame = $('.post_frame.active');
+
+		$currentFrame
+			.removeClass('active')
+			.find('.reaction').hide();
+		$.getMiniComments($currentFrame, callback);
+	};
+
+
+	$.hideAllReactions = function (frame, html, callback) {
+		var $frame = $(frame),
+			$reaction = $frame.find('.reaction');
+
+		$('.post_frame').not(frame)
+			.find('.reaction').hide();
+
+		$.unsetActiveFrame();
+		$frame.addClass('active');
+		$reaction
+			.css({ opacity: 0.0 })
+			.html(html)
+			.fadeTo('slow', 1.0, function() {
+				$('a.remove[rel="#unpublish_overlay"]', $reaction).unpublishOverlay();
+				if (callback !== undefined) callback();
+			});
+	};
+
 })(jQuery);
 
 
 jQuery(function($) {
 	var
-		hideAllReactions = function (frame, callback) {
-			$('.post_frame').not(frame)
-				.find('.reaction').hide();
-			if (callback !== undefined) callback();
-		}
-
-		unsetActiveFrame = function (callback) {
-			var $currentFrame = $('.post_frame.active');
-
-			$currentFrame
-				.removeClass('active')
-				.find('.reaction').hide();
-			$.getMiniComments($currentFrame, callback);
-		},
-
 		showAllReactions = function () {
 			$('.reaction').show();
 		},
@@ -93,7 +107,7 @@ jQuery(function($) {
 			var $frame = $(this).closest('.post_frame');
 
 			if ($frame.hasClass('active')) {
-				unsetActiveFrame(function() {
+				$.unsetActiveFrame(function() {
 					setWideFrameBorders();
 					showAllReactions();
 				});
@@ -103,31 +117,43 @@ jQuery(function($) {
 			return true;
 		})
 
-		.live('ajax:success', function(xhr, form) {
+		.live('ajax:success', function(xhr, html) {
 			var $this = $(this),
-				$form = $(form),
-				$frame = $this.closest('.post_frame'),
-				$reaction = $frame.find('.reaction');
+				$html = $(html),
+				$frame = $this.closest('.post_frame');
 
-			$form.shakeable();
-			
-			hideAllReactions($frame, function() {
-				unsetActiveFrame();
-				$frame.addClass('active');
-				$reaction
-					.css({ opacity: 0.0 })
-					.html($form)
-					.fadeTo('slow', 1.0, function() {
-						$('a.remove[rel="#unpublish_overlay"]', $reaction).unpublishOverlay();
-						// $(this).find('.comment_box:first textarea').focus();
-					});
+			$html
+				.filter('.comment_box:first')
+				.shakeable();
+
+			$.hideAllReactions($frame, $html, function() {
+				// $(this).find('.comment_box:first textarea').focus();
 			});
-	});
+		});
 
+
+	// Albums
+	$('.photo a')
+		.live('ajax:beforeSend', function() {
+			var $frame = $(this).closest('.post_frame');
+
+			if ($frame.hasClass('active')) {
+				$.unsetActiveFrame(function() {
+					setWideFrameBorders();
+					showAllReactions();
+				});
+				return false;
+			}
+			setNarrowFrameBorders();
+			return true;
+		});
+
+
+	// Reaction cancel
 	$('.reaction').live('click', function(event) {
 		if (event.target.value === 'Cancel') {
 			var $frame = $(this).closest('.post_frame');
-			unsetActiveFrame(function() {
+			$.unsetActiveFrame(function() {
 				setWideFrameBorders();
 				showAllReactions();
 			});
