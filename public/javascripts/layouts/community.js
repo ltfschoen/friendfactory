@@ -111,9 +111,6 @@ jQuery(function($) {
 	// Initialize rollcall headshots
 	$('div.headshot').headshot();
 
-	// Initialize unpublish overlay
-	$('a.remove[rel="#unpublish_overlay"]').unpublishOverlay();
-
 
 	// Comments
 	$('.comments a, a.comments')
