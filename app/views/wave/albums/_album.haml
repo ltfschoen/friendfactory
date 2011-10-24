@@ -10,5 +10,5 @@
         .photo{ :class => photo.horizontal? ? nil : 'vertical' }
           = link_to render_photo(photo), wave_album_path(album), :remote => true
         %span.date Posted #{distance_of_time_in_words_to_now(proxy.created_at)} ago
-        = link_to_comments(album.postings.published.count, posting_comments_path(proxy))
+        = link_to_comments(album.postings.type(Posting::Comment).published.count, posting_comments_path(proxy))
     .reaction
