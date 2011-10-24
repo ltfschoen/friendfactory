@@ -3,8 +3,7 @@
     %li.posting_post_it= link_to 'Status', new_wave_posting_post_it_path(@wave), :rel => '#new_posting_post_it'
     %li.posting_text= link_to 'Blog', new_wave_posting_text_path(@wave), :rel => '#new_posting_text'
     %li.wave_album= link_to 'Album', new_wave_album_path, :rel => '#new_wave_album'
-    - if false
-      %li.posting_video= link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#new_posting_video'
+    %li.posting_video= link_to 'Video', new_wave_posting_video_path(@wave), :rel => '#new_posting_video'
     - if false
       %li.wave_event= link_to 'Event', new_wave_event_path, :rel => '#new_event_overlay'
     %li.posting_link= link_to 'Link', new_wave_posting_video_path(@wave), :rel => '#new_posting_link'
@@ -13,19 +12,8 @@
   = render :partial => 'posting/post_its/new', :locals => { :wave => @wave }
   = render :partial => 'wave/albums/new', :locals => { :wave => @wave }
   = render :partial => 'posting/links/new', :locals => { :wave => @wave }
+  = render :partial => 'posting/videos/new', :locals => { :wave => @wave }
   =# render :partial => 'layouts/shared/nav.x'
-
-  - if false
-    #new_posting_video.new_post_frame
-      =# render :partial => 'posting/videos/form'
-      .new_post.video
-        %form
-          %input{:name => "", :placeholder => "Paste Video URL", :type => "text"}/
-          .foot
-            %input{:name => "", :type => "submit", :value => "Post"}/
-            %input{:name => "", :type => "button", :value => "Cancel"}/
-      .reaction
-
   - if false  
     #new_event_overlay.new_post_frame
       = render :partial => 'wave/events/new'

@@ -1,9 +1,16 @@
-- if @posting.valid?
+- if @posting.present? && @posting.valid?
   :plain
-    var $posting = $("#{escape_javascript(render(:partial => 'video', :object => @posting))}");
-    $posting.prependTo('ul.postings:first').wrap('<li>');    
-    var $currentTab = $('ul.wave.nav li.current').removeClass('current');
-    $($('a', $currentTab).attr('rel')).hide().trigger('reset');  
-    $('.flash').text('');
+    var
+      $posting = $("#{escape_javascript(self.send(('render_' + resolver + '_posting').to_sym, @posting))}"),
+      $nav = $('li.current', 'ul.nav'),
+      $form = $($('a', $nav).attr('rel')),
+      $firstPosting = $('.post_frame').filter(':first');
+
+    $nav.removeClass('current');
+    $form.hide()[0].reset();
+    $firstPosting.before($posting);
+    $posting.find('a.remove[rel]').unpublishOverlay();
+    
 - else
-  $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")
+  :plain
+    alert(@posting.errors.full_messages.to_sentence);
