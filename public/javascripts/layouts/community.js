@@ -1,5 +1,19 @@
 (function($) {
 
+	$.initPost = function(frame) {
+		var $this = $(frame),
+			$post = $this.find('.post'),
+			height = $post.height() + 20,
+			limit = Math.floor(height/50);
+
+		$this
+			.height(height)
+			.css({ visibility: 'visible' })
+			.data('limit', limit)
+			.find('a.remove[rel="#unpublish_overlay"]')
+				.unpublishOverlay();
+	};
+
 	$.getMiniComments = function (frames, callback) {
 		var url = '/postings/fetch.json',
 			idMap = {},
@@ -224,7 +238,6 @@ jQuery(function($) {
 				$this.trigger('shake');
 			}	
 		});
-
 });
 
 
@@ -233,15 +246,7 @@ jQuery(window).load(function() {
 	var $frames = $('.post_frame');
 
 	$frames.each(function() {
-		var $this = $(this),
-			$post = $this.find('.post'),
-			height = $post.height() + 20,
-			limit = Math.floor(height/50);
-
-		$this
-			.height(height)
-			.css({ visibility: 'visible' })
-			.data('limit', limit);
+		$.initPost(this);
 	});
 
 	$.getMiniComments($frames, function() {

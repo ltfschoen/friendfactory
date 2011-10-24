@@ -9,7 +9,7 @@
     $nav.removeClass('current');
     $form.hide()[0].reset();
     $firstPosting.before($posting);
-    $posting.find('a.remove[rel]').unpublishOverlay();
+    $.initPost($posting);
 
 - else
   :plain
