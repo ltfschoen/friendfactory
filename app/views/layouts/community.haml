@@ -21,6 +21,7 @@
       'layouts/community/reaction', |
       'layouts/community/post_reaction', |
       'layouts/community/rollcall', |
+      'layouts/community/floating', |
       'posting/ads', |
       'posting/album', |
       'posting/blog', |
@@ -90,6 +91,7 @@
   = csrf_meta_tag
 %body{uid, gid}
   = render :partial => 'layouts/shared/sidebar'
+  #floating
   #frame
     = yield
     - if Rails.env.development?

@@ -18,7 +18,7 @@ class Wave::ProfilesController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          render(:partial => 'profile', :object => @wave)
+          render(:partial => 'headshot', :locals => { :profile => @wave })
         else
           @@per_page = 50
           @postings = @wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
