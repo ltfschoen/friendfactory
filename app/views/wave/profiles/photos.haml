@@ -9,7 +9,7 @@
           - photo_posting = photo_with_fill[1]
           - if photo_posting.present? && photo_posting.image
             - image_tag = image_tag(photo_posting.image.url(:thumb), :site => false, :class => 'thumb')
-            = link_to(image_tag, wave_album_photo_path(@wave, photo_posting), :target => '_blank')
+            = link_to(image_tag, wave_album_path(@wave, :photo_id => photo_posting), :target => '_blank')
           - else
             = fill_image_tag
 .caption
