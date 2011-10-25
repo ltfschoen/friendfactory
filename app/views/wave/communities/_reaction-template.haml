@@ -1,7 +1,8 @@
 %script#reaction-template{:type => "text/x-jquery-tmpl"}
   .mini_comment
     .portrait
-      %img{ :src => '${ image_path }', :width => '32', :height => '32', :title => '${ handle }' }/
+      %a{ :href => '/wave/profiles/${ profile_id }' }
+        %img{ :src => '${ image_path }', :width => '32', :height => '32', :title => '${ handle }' }/
     .comment
       %p
         %a{:href => ""} ${ handle }

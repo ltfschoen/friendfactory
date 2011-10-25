@@ -22,6 +22,7 @@ class Posting::BaseController < ApplicationController
           profile = comment.user.profile(current_site)
           { :id         => comment.id,
             :posting_id => posting_id,
+            :profile_id => profile.id,
             :image_path => profile.avatar.url(:thumb),
             :handle     => profile.handle,
             :body       => tag_helper.truncate(comment.body, :length => 60),
