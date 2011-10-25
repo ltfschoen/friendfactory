@@ -12,9 +12,9 @@
             - link.photos.each do |photo|
               = image_tag(photo.image.url(:thumb), :site => false, :size => '50x50')
         %p
-          = link_to truncate(link.title, :length => 80), link.url
+          = link_to truncate(link.title, :length => 80), link.url, :target => '_blank'
           %br/
-          = link_to link.provider_display, link.provider_url
+          = link_to link.provider_display, link.provider_url, :target => '_blank'
         %p= link.description
         - if link.embeds.present?
           - link.embeds.each do |embed|
