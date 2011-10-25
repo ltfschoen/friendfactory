@@ -5,11 +5,27 @@
 	-webkit-perspective: 1200;
 }
 
+.headshot-container .close {
+	display: none;
+}
+
+.headshot-container.floating .close {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	border-radius: 1em;
+	color: #000;
+	background-color: #FFF;
+	width: 1em;
+	height: 1em;
+}
+
 .csstransforms3d .headshot {
 	position: absolute;	
-	-webkit-transform-style: preserve-3d;	
-    -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 0.8s;        
+	-webkit-transform-style: preserve-3d;
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 0.8s;
 }
 
 .csstransforms3d .headshot.flipped {
@@ -17,7 +33,7 @@
 }
 
 .csstransforms3d .headshot .face {
-	-webkit-backface-visibility: hidden;    
+	-webkit-backface-visibility: hidden;
 }
 
 .csstransforms3d .headshot .back.face {

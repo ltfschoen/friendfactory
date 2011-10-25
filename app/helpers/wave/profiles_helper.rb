@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Wave::ProfilesHelper
 
   def render_profile_wave_posting(posting)
@@ -44,6 +46,10 @@ module Wave::ProfilesHelper
     content_tag(:div, :class => 'attachment') do
       friends.map { |friend| profile_avatar_image_tag(friend, :style => :thumb, :anonymous => true) }.join.html_safe
     end
+  end
+
+  def link_to_close
+    link_to "×", '#', :title => 'Close', :class => 'close'
   end
 
 end

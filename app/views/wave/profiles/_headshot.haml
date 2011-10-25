@@ -2,6 +2,7 @@
   .headshot[profile]{ :class => poke_class(profile.id) }
     .face-container
       .front.face
+        =# link_to_close
         = headshot_image_tag(profile)
         - if false
           %ul.buddy-bar.secondary
@@ -19,6 +20,7 @@
     .face-container
       .back.face
         .content
+          =# link_to_close
           .pane
           %ul.buddy-bar.secondary
             %li= link_to 'Headshot', wave_profile_path(profile), :class => 'flip icon headshot'
