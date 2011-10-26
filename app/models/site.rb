@@ -46,7 +46,7 @@ class Site < ActiveRecord::Base
   has_many :constants, :class_name => 'Asset::Constant'
 
   def stylesheet(controller_name = nil)
-    stylesheets = self.stylesheets
+    stylesheets = self.stylesheets.scoped
     if controller_name.present?
       stylesheets = stylesheets.where('(`controller_name` is null) or (`controller_name` = ?)', controller_name)
     end
