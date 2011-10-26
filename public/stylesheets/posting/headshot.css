@@ -11,14 +11,32 @@
 
 .headshot-container.floating .close {
 	display: block;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	border-radius: 1em;
 	color: #000;
-	background-color: #FFF;
-	width: 1em;
-	height: 1em;
+	width: 20px;
+	height: 20px;
+	margin-left: 176px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+.headshot-container.floating .front.face:hover .close {
+	color: #FFF;
+}
+
+.headshot-container.floating .front.face img,
+.headshot-container.floating .back.face .pane {
+	cursor: move;
+}
+
+.headshot-container.floating .front.face .close {
+	margin-top: -194px;
+}
+
+.headshot-container.floating .back.face .pane {
+	margin-top: -20px;
 }
 
 .csstransforms3d .headshot {
@@ -68,14 +86,20 @@
 	border-radius: 5px;
 	width: 190px;
 	height: 190px;
-	margin-bottom: 20px;
 }
 
 .headshot ul.buddy-bar {
 	list-style: none;
-	margin: 3px 0 0 0;
 	padding: 0;
 	float: right;
+}
+
+.headshot .front.face ul.buddy-bar {
+	margin: 194px 0 0 0;
+}
+
+.headshot .back.face ul.buddy-bar {
+	margin: 0;
 }
 
 .headshot ul.buddy-bar.secondary {

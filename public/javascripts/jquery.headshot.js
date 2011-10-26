@@ -56,6 +56,11 @@
 				}
 			});
 			return false;
+		},
+
+		closeable = function () {
+			$(this).closest('.floating').remove();
+			return false;
 		};
 
 	$.fn.flipTransforms3d  = function () {
@@ -84,6 +89,10 @@
 					});
 				}
 			});
+
+			$headshot
+				.find('a.close')
+					.click(closeable);
 
 			$frontFace
 				.find('a.flip')
@@ -149,7 +158,12 @@
 					onEnd: flipper
 				};
 
-			$headshot.find('.face-container:eq(1)').hide();
+			$headshot
+				.find('.face-container:eq(1)')
+					.hide()
+				.end()
+				.find('a.close')
+					.live('click', closeable);
 
 			$frontFace
 				.find('a.flip')
