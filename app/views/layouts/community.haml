@@ -89,12 +89,10 @@
     = javascript_include_tag 'development'
 
   = csrf_meta_tag
-%body{uid, gid}
+%body{uid, gid, :class => controller.action_name}
   = render :partial => 'layouts/shared/sidebar'
-  #floating
-  #frame
-    = yield
-    - if Rails.env.development?
-      #footnotes_holder{ :style => 'display:block' }
+  = yield
+  - if Rails.env.development?
+    #footnotes_holder{ :style => 'display:block' }
 :plain
   </html>

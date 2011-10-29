@@ -39,6 +39,18 @@
 	margin-top: -20px;
 }
 
+/*.headshot .face ul.buddy-bar {
+	margin: 20px 0 0 0;
+}*/
+
+.headshot.floating .front.face ul.buddy-bar {
+	margin: 194px 0 0 0;
+}
+
+.headshot.floating .back.face ul.buddy-bar {
+	margin: 0;
+}
+
 .csstransforms3d .headshot {
 	position: absolute;	
 	-webkit-transform-style: preserve-3d;
@@ -92,14 +104,6 @@
 	list-style: none;
 	padding: 0;
 	float: right;
-}
-
-.headshot .front.face ul.buddy-bar {
-	margin: 194px 0 0 0;
-}
-
-.headshot .back.face ul.buddy-bar {
-	margin: 0;
 }
 
 .headshot ul.buddy-bar.secondary {
