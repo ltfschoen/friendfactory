@@ -2,10 +2,12 @@
 	padding: 0 10px;
 	width: 340px;
 }
+
 .post.photos .photo,
 .post.photos .photo img.v4x6 {
 	width: auto;
 }
+
 .post.photos.multiple .photo {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
@@ -15,6 +17,7 @@
 	position: relative;
 	margin-bottom: 6px;
 }
+
 .post.photos.multiple .photo img {
 	width: 300px;
 	height: 220px;
@@ -28,41 +31,81 @@
 	-o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
+
 .post.photos.multiple .photo img.v4x6 {
 	width: auto;
 }
+
 .post.photos.multiple .photo:before {
 	position: absolute;
 	top: 2px;
 	left: 0;
 	z-index: 2;
 }
+
 .post.photos.multiple .photo:after {
 	position: absolute;
 	top: 2px;
 	left: 0;
 	z-index: 1;
 }
+
 .post.photos.multiple .photo.vertical,
 .post.photos.multiple .photo.vertical:before,
 .post.photos.multiple .photo.vertical:after {
 	width: 160px;
 }
+
 .post.photos.multiple .photo:before {
   -webkit-transform: rotate(-2deg);
   -moz-transform: rotate(-2deg);
   -o-transform: rotate(-2deg);
   transform: rotate(-2deg);
 }
+
 .post.photos.multiple .photo:after {
   -webkit-transform: rotate(2deg);
   -moz-transform: rotate(2deg);
   -o-transform: rotate(2deg);
   transform: rotate(2deg);
 }
+
 .post.photos.multiple .photo:hover:before {
   -webkit-transform: rotate(-2deg);
 }
+
 .post.photos.multiple .photo:hover:after {
   -webkit-transform: rotate(2deg);
 }
+
+
+/*.reaction {
+	width: 550px;
+	padding-left: 10px;
+}*/
+
+.reaction .photo {
+  background: #fff;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  width: 310px;
+  height: 230px;
+  float: left;
+margin: 10px 0 0 10px;
+}
+
+.reaction .photo img {
+  width: 300px;
+  height: 220px;
+  margin: 5px;
+}
+
+.reaction .photo,
+.reaction .photo img.v4x6 {
+	width: auto;
+}
+
+

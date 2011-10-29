@@ -10,6 +10,16 @@ class Posting::WaveProxiesController < ApplicationController
       format.js { render :layout => false }
     end
   end
+
+  def album
+    @photos = []
+    if @proxy = Posting::Base.find_by_id(params[:id])
+      @photos = @proxy.resource.photos
+    end
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
   
   private
   

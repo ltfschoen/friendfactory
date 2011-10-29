@@ -62,7 +62,7 @@
 	};
 
 
-	$.hideAllReactions = function (frame, html, callback) {
+	$.hideAllReactionsExcept = function (frame, html, callback) {
 		var $frame = $(frame),
 			$reaction = $frame.find('.reaction');
 
@@ -136,14 +136,14 @@ jQuery(function($) {
 				.filter('.comment_box:first')
 				.shakeable();
 
-			$.hideAllReactions($frame, $html, function() {
+			$.hideAllReactionsExcept($frame, $html, function() {
 				// $(this).find('.comment_box:first textarea').focus();
 			});
 		});
 
 
 	// Albums
-	$('.photo a')
+	$('a.album')
 		.live('ajax:beforeSend', function() {
 			var $frame = $(this).closest('.post_frame');
 
@@ -156,6 +156,13 @@ jQuery(function($) {
 			}
 			setNarrowFrameBorders();
 			return true;
+		})
+
+		.live('ajax:success', function(xhr, html) {
+			var $html = $(html),
+				$frame = $(this).closest('.post_frame');
+
+			$.hideAllReactionsExcept($frame, $html);
 		});
 
 

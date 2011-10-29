@@ -11,7 +11,6 @@ class Wave::AlbumsController < ApplicationController
     @start_slide = start_slide(params[:photo_id])
     respond_to do |format|
       format.html { render :layout => 'album' }
-      format.js   { render :layout => false }
     end
   end
     

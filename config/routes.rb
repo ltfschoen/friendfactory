@@ -2,7 +2,11 @@ Friskyfactory::Application.routes.draw do
 
   # To show waves
   namespace :wave do
-    resources :communities, :only => [ :show ]
+    resources :communities, :only => [ :show ] do
+      member do
+        get :rollcall
+      end
+    end
     resources :events, :only => [ :index, :show, :new, :create ]
     resources :profiles, :only => [ :index, :show ] do
       member do
@@ -49,15 +53,17 @@ Friskyfactory::Application.routes.draw do
     end
   end
 
-  # To add a comment to a posting
+  # To manage a posting
   scope :module => :posting do
     resources :postings, :only => [] do |posting|
       member do
         delete :unpublish, :controller => 'base'
+        get :photos, :to => 'wave_proxies#album'
       end
       collection do
         get :fetch, :controller => 'base'
       end
+      # To manage children of a posting
       resources :comments, :only => [ :index, :new, :create ]
     end
   end

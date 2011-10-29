@@ -1,0 +1,4 @@
+%div{ :style => 'margin-left: 10px' }
+  - @photos.each do |photo|  
+    .photo{ :class => photo.horizontal? ? nil : 'vertical' }
+      = render_photo(photo)
