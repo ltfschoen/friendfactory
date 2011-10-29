@@ -14,7 +14,7 @@
       %li.home
         = link_to 'Community', root_path        
       %li.rollcall
-        = link_to 'Roll Call', rollcall_wave_community_path(wave, :page => params[:page])
+        = link_to 'Roll Call', rollcall_wave_community_path(current_site.home_wave, :page => params[:page])
         - if false
           %ul
             %li 28 users
