@@ -37,7 +37,12 @@ class Wave::ProfileController < ApplicationController
     if @posting.valid?
       current_user.profile(current_site).postings << @posting
       home_wave = current_site.home_wave
-      home_wave.postings.type(Posting::Avatar).user(@posting.user).published.where(:created_at => (Time.now - RepublishWindow)...Time.now).map(&:unpublish!)
+      home_wave.postings.
+          type(Posting::Avatar).
+          published.
+          where(:created_at => (Time.now - RepublishWindow)...Time.now).
+          where(:user_id => @posting.user[:id]).
+          map(&:unpublish!)
       home_wave.postings << @posting
     end
     respond_to do |format|

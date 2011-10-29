@@ -24,7 +24,6 @@ class Posting::Base < ActiveRecord::Base
   end
   
   scope :type, lambda { |*types| types.length == 1 ? where(:type => types.first.to_s) : where(:type => types.map(&:to_s)) }    
-  scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
   scope :unpublished, where(:state => :unpublished)
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
