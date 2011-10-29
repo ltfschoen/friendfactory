@@ -2,30 +2,43 @@
 	text-decoration: none;
 	color: white;
 }
+
 #sidebar a:hover {
 	margin: 0;
 }
+
 #sidebar .block.userspace span.username a {
 	margin: 0;
 	font-size: inherit;
 	font-style: inherit;
 }
+
 #sidebar .block.navspace ul li.messages:before {
 	background-position: 0 -25px;
 }
+
 #sidebar .block.userspace a:hover {
   margin-left: 0;
 }
+
 #sidebar .block.navspace ul li:hover span {
   left: 12px;
 }
+
 #sidebar .block.navspace ul li:hover:before {
   margin-left: 0;
 }
+
 #sidebar .block.userspace .portrait a {
 	margin: 0;
 }
+
 #sidebar .block.navspace ul .messages span {
 	border-radius: 1em;
 	padding: 0 2px;
+}
+
+
+#sidebar .block.navspace ul li.rollcall:before {
+	background-position: -25px -0;
 }
