@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/thoughtbot/factory_girl.git
-  revision: 4f5f5df39a1b565160ad7138a1f7d7a7c836664d
+  revision: cddfa927bcc83b5225e41f321f03dd885d986ebf
   specs:
-    factory_girl (2.0.0.beta2)
+    factory_girl (2.2.0)
+      activesupport
 
 GEM
   remote: http://rubygems.org/
   specs:
-    aaronh-chronic (0.3.9)
     abstract (1.0.0)
     actionmailer (3.0.9)
       actionpack (= 3.0.9)
@@ -35,15 +35,21 @@ GEM
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
     activesupport (3.0.9)
-    acts-as-taggable-on (2.0.6)
+    acts-as-taggable-on (2.1.1)
+      rails
     arel (2.0.10)
-    authlogic (2.1.6)
-      activesupport
+    authlogic (3.1.0)
+      activerecord (>= 3.0.7)
+      activerecord (>= 3.0.7)
     builder (2.1.2)
+    chronic (0.6.4)
+    cocaine (0.2.0)
     crack (0.1.8)
     diff-lcs (1.1.3)
-    embedly (1.0.0)
+    embedly (1.3.0)
+      oauth
       querystring
+      typhoeus
     erubis (2.6.6)
       abstract (>= 1.0.0)
     haml (3.1.3)
@@ -53,24 +59,28 @@ GEM
       haml (~> 3.0)
       railties (~> 3.0)
     i18n (0.5.0)
-    jquery-rails (1.0.14)
+    jquery-rails (1.0.16)
       railties (~> 3.0)
       thor (~> 0.14)
+    json (1.6.1)
     mail (2.2.19)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     memcache-client (1.8.5)
-    mime-types (1.16)
+    mime-types (1.17.2)
     multi_json (1.0.3)
-    mysql2 (0.2.6)
-    nokogiri (1.4.4)
-    paperclip (2.3.8)
-      activerecord
-      activesupport
+    mysql2 (0.2.13)
+    nokogiri (1.4.7)
+    oauth (0.4.5)
+    paperclip (2.4.5)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
+      cocaine (>= 0.0.2)
+      mime-types
     polyglot (0.3.2)
-    pusher (0.8.1)
+    pusher (0.8.4)
       crack (~> 0.1.0)
       multi_json (~> 1.0)
       ruby-hmac (~> 0.4.0)
@@ -89,49 +99,50 @@ GEM
       activesupport (= 3.0.9)
       bundler (~> 1.0)
       railties (= 3.0.9)
-    rails-footnotes (3.7.4)
-      rails (>= 3.0.0)
     railties (3.0.9)
       actionpack (= 3.0.9)
       activesupport (= 3.0.9)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (~> 0.14.4)
-    rake (0.9.2)
-    rdoc (3.9.4)
-    remotipart (0.2.1)
-    rspec (2.6.0)
-      rspec-core (~> 2.6.0)
-      rspec-expectations (~> 2.6.0)
-      rspec-mocks (~> 2.6.0)
-    rspec-core (2.6.4)
-    rspec-expectations (2.6.0)
+    rake (0.9.2.2)
+    rdoc (3.11)
+      json (~> 1.4)
+    remotipart (1.0)
+    rspec (2.7.0)
+      rspec-core (~> 2.7.0)
+      rspec-expectations (~> 2.7.0)
+      rspec-mocks (~> 2.7.0)
+    rspec-core (2.7.1)
+    rspec-expectations (2.7.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.6.0)
-    rspec-rails (2.6.1)
+    rspec-mocks (2.7.0)
+    rspec-rails (2.7.0)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
       railties (~> 3.0)
-      rspec (~> 2.6.0)
+      rspec (~> 2.7.0)
     ruby-hmac (0.4.0)
-    sass (3.1.1)
+    sass (3.1.10)
     signature (0.1.2)
       ruby-hmac
-    sql-logging (3.0.3)
-      rails (~> 3.0.0)
+    sql-logging (3.0.5)
+      rails (> 3.0.0)
     thor (0.14.6)
-    transitions (0.0.10)
+    transitions (0.0.11)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    typhoeus (0.3.2)
+      mime-types
     tzinfo (0.3.30)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
-    whenever (0.6.7)
-      aaronh-chronic (>= 0.3.9)
+    whenever (0.7.0)
       activesupport (>= 2.3.4)
+      chronic (~> 0.6.3)
     will_paginate (3.0.2)
 
 PLATFORMS
@@ -139,18 +150,18 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  authlogic
+  authlogic (>= 3.1)
   embedly
   factory_girl!
   haml (>= 3.1.2)
   haml-rails
   jquery-rails (>= 1.0.12)
   memcache-client
-  mysql2
+  mysql2 (~> 0.2.6)
+  nokogiri (~> 1.4.4)
   paperclip (>= 2.3.1.1)
   pusher (~> 0.8.1)
   rails (= 3.0.9)
-  rails-footnotes (>= 3.7)
   remotipart
   rspec-rails
   sass (>= 3.1.1)
