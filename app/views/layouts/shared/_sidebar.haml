@@ -39,8 +39,9 @@
     %ul
       %li.home
         = link_to 'Community', root_path
-        - if false
-          %ul
+        %ul
+          %li=# link_to 'Roll Call', rollcall_wave_community_path(wave, :page => params[:page])
+          - if false
             %li 28 users
             %li 528 posts
             %li Last activity: Yesterday

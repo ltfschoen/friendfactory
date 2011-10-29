@@ -29,7 +29,7 @@
   text-align: center;
 }
 #sidebar #head #logo {
-/*  background: url('../../images/brands/friskyhands/logo.png');*/
+/*  background: url('/images/brands/friskyhands/logo.png');*/
   width: 200px;
   height: 75px;
 }
@@ -90,7 +90,7 @@
 #sidebar .block.navspace ul li {
   width: 180px;
   float: left;
-  /* background: url(../../images/user_buttons_transparent.png) no-repeat; */
+  /* background: url(/images/user_buttons_transparent.png) no-repeat; */
 
   cursor: pointer;
   position: relative;
@@ -99,11 +99,6 @@
 
   text-shadow: 0 1px 1px #000;
   font-size: 13px;
-  -webkit-transition: all 0.1s;
-}
-#sidebar .block.navspace ul li:hover {
-  left: 10px;
-  cursor: pointer;
 }
 #sidebar .block.navspace ul li:before {
   content: " ";
@@ -112,16 +107,41 @@
   margin-right: 5px;
   width: 25px;
   height: 25px;
+  -webkit-transition: all 0.1s;
   background: url(/images/user_buttons_transparent.png);
 }
+#sidebar .block.navspace ul li:hover span {
+  left: 22px;
+}
+#sidebar .block.navspace ul li:hover:before {
+  margin-left: 10px;
+}
 #sidebar .block.navspace ul li ul {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 #sidebar .block.navspace ul li ul li:hover {
+  cursor: pointer;
   left: 0;
 }
 #sidebar .block.navspace ul li ul li:before {
-  display: none;
+  content: " ";
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: url(/images/user_buttons_transparent.png);
+  background-position-x: -25px;
+}
+#sidebar .block.navspace ul li ul li.signals:before {
+  background-position-y: -25px;
+}
+#sidebar .block.navspace ul li ul li.status:before {
+  background-position-y: -50px;
+}
+#sidebar .block.navspace ul li ul li.photos:before {
+  background-position-y: -75px;
+}
+#sidebar .block.navspace ul li ul li.videos:before {
+  background-position-y: -100px;
 }
 #sidebar .block.navspace ul .messages:before {
   background-position-y: -25px;
@@ -149,7 +169,7 @@
   background: -ms-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
   background: linear-gradient(top, #c44d3b 0%, #ba311a 100%);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 3px rgba(0, 0, 0, 0.25);
-  /* background: url(../../images/badge.png); */
+  /* background: url(/images/badge.png); */
 
 }
 #sidebar .block.navspace ul .personal {
