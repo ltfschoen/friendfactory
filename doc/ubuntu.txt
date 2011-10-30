@@ -73,7 +73,7 @@ Set up iptables firewall. This will require logging in as root (you’ll need to
 # Initialize filter table
 -F
 
-#  Allows all loopback (lo0) traffic and drop all traffic to 127/8 that doesn't use lo0
+#  Allows all loopback (lo0) traffic and drop all traffic to 127/8 that doesn't use lo0   
 -A INPUT -i lo -j ACCEPT
 -A INPUT ! -i lo -d 127.0.0.0/8 -j REJECT
 
@@ -96,6 +96,9 @@ Set up iptables firewall. This will require logging in as root (you’ll need to
 # Allow ping on trusted net
 -A INPUT -i eth1 -p icmp -m icmp --icmp-type 8 -j ACCEPT
 
+# Allow mysql port 3306 on eth1 from staging
+-A INPUT -i eth1 -s 10.180.69.66 -p tcp --destination-port 3306 -j ACCEPT
+
 # Log iptables denied calls
 -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
 
@@ -105,6 +108,7 @@ Set up iptables firewall. This will require logging in as root (you’ll need to
 
 COMMIT
 *****************
+
 
 Remember to remove root access in the ssh configuration file and reload ssh.
 
