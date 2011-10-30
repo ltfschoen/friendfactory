@@ -1,6 +1,8 @@
 class Wave::ConversationsController < ApplicationController
 
-  before_filter :require_user, :set_page_title
+  before_filter :require_user
+
+  helper_method :page_title
 
   layout 'conversation'
 
@@ -49,8 +51,8 @@ class Wave::ConversationsController < ApplicationController
 
   private
 
-  def set_page_title
-    @page_title = "#{current_site.display_name} - #{current_profile.handle}'s Inbox"
+  def page_title
+    "#{current_site.display_name} - #{current_profile.handle}'s Inbox"
   end
 
 end

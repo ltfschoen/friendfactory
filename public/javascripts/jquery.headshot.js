@@ -198,12 +198,21 @@
 		});
 	};
 
-	$.fn.headshot = function() {
+	$.fn.headshot = function(options) {
+		var settings = {};
+		$.extend(settings, options);
+
 		return this.each(function() {
+			var $this = $(this);
 			if (Modernizr.csstransforms3d) {
-				$(this).flipTransforms3d();
+				$this.flipTransforms3d();
 			} else {
-				$(this).flipNoTransforms3d();
+				$this.flipNoTransforms3d();
+			}
+
+			if (settings['pane'] !== undefined) {
+				$this.find('.front.face a[data-pane-name="' + settings['pane'] + '"]')
+					.trigger('click');
 			}
 		});
 	};

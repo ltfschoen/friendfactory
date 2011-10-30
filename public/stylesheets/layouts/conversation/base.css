@@ -1,9 +1,9 @@
-.wave_inbox .blank.canvas {
-	padding: 6px 6px;
+.headshot-container {
+	float: left;
+	margin: 20px 0 0 20px;
 }
-#frame {
-  min-width: 960px;
-  min-height: 100%;
-  overflow: hidden;
-  margin-left: 201px;
+
+.ie .headshot-container {
+	float: left;
+	margin: 20px 0 0 16px;
 }
