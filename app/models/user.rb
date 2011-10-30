@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   attr_reader   :enrollment_profile
   attr_accessor :invitation_override
 
+  attr_accessible :emailable
+
   validates_presence_of :enrollment_site, :on => :create
 
   validate do |user|

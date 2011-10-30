@@ -408,11 +408,24 @@ div.polaroid .pane.conversation button {
 }
 
 div.polaroid .button-bar {
-    float: right;
     position: relative;
     top: -15px;
+	width: 260px;
 }
- 
+
+div.polaroid .button-bar td {
+	vertical-align: middle;
+}
+
+div.polaroid .button-bar label {
+	font-weight: normal;
+}
+
+div.polaroid .button-bar a.edit {
+	float: right;
+	vertical-align: center;
+}
+
 div.polaroid ul.buddy-bar {
 	list-style: none;
 	margin: 0;

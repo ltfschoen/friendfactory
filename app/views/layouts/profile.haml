@@ -28,7 +28,7 @@
       'posting/portrait', |
       'posting/portrait-override', |
     :media => 'screen', |
-    :cache => 'layouts/profile/cache'
+    :cache => 'tmp/cache/profile'
 
   = stylesheet_link_tag "#{current_site.name}/profile", :media => 'screen'
 
@@ -68,7 +68,8 @@
       'waves/', |
       'lib/jquery/jquery.form', |
       'lib/jquery/jquery.remotipart', |
-    :cache => 'profile.cache'
+      'layouts/profile', |
+    :cache => 'tmp/cache/profile'
 
   - if Rails.env.development?
     = javascript_include_tag 'development'

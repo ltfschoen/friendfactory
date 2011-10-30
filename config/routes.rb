@@ -34,7 +34,8 @@ Friskyfactory::Application.routes.draw do
   scope :module => :wave do
     resource :profile, :only => [ :show, :edit, :update ], :controller => 'profile' do
       member do
-        post 'avatar'
+        post :avatar
+        put :unsubscribe
       end
     end
   end

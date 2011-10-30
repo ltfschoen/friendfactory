@@ -31,11 +31,16 @@
                   %tr
                     %td.label Location
                     %td.detail= @profile.location
-          .button-bar
-            #{link_to 'Edit', edit_profile_path, :class => 'edit button'}      
+          %table.button-bar
+            %tr
+              %td
+                = check_box_tag 'user[emailable]', 1, current_user.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-url' => unsubscribe_profile_path
+                = label_tag :user_emailable, 'Subscribe to emails'
+              %td
+                = link_to 'Edit', edit_profile_path, :class => 'edit button'
   .grid_2
     &nbsp;
 
 :javascript
-  $('div.button-bar a.button.edit')
+  $('a.button.edit')
     .button({ icons: { primary: 'ui-icon-pencil' }, text: false });

@@ -49,7 +49,14 @@ class Wave::ProfileController < ApplicationController
       format.html { redirect_to profile_path }
     end
   end
-  
+
+  def unsubscribe
+    current_user.update_attributes(params[:user])
+    respond_to do |format|
+      format.js { head :ok }
+    end
+  end
+
   private
 
   def new_posting_avatar
