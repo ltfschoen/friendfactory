@@ -5,7 +5,7 @@ gem 'rails', '3.0.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '~> 0.2.6'
+gem 'mysql2'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -18,13 +18,13 @@ gem 'mysql2', '~> 0.2.6'
 
 # Bundle the extra gems:
 # gem 'bj'
-gem 'nokogiri', '~> 1.4.4'
+# gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
 gem 'jquery-rails', '>= 1.0.12'
 gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
-gem 'authlogic', '>= 3.1'
+gem 'authlogic'
 gem 'paperclip', '>= 2.3.1.1'
 gem 'remotipart'
 gem 'haml', '>= 3.1.2'
@@ -47,7 +47,7 @@ gem 'embedly'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 
-# gem 'rails-footnotes', '>= 3.7', :group => :development
+gem 'rails-footnotes', '>= 3.7', :group => :development
 
 group :development, :test do
   gem 'rspec-rails'
