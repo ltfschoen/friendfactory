@@ -1,35 +1,44 @@
 body {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	-moz-user-select: auto;
 	-khtml-user-select: auto;
 	-webkit-user-select: auto;
-	user-select: auto;	
+	user-select: auto;
 }
+
+input[type='text'], input[type='password'], textarea {
+  background-color: #FFF;
+  border: 1px solid #BBB;
+}
+
 .hidden {
 	display: none;
 }
+
+a {
+	color: #861c0f;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
 a:focus {
 	outline: none;
 	-moz-outline: none;
 }
+
 .error {
 	color: darkred !important;
 }
+
 .admin .post:hover .remove {
 	opacity: 1;
 }
 
-body {
-  font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-}
-a {
-  color: #861c0f;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
 .clear {
-  float: left;
+	float: left;
 }
 
 .pagination {
@@ -40,12 +49,15 @@ a:hover {
 	text-align: center;
 	font-size: 12px;
 }
+
 .pagination.header {
 	margin: 10px 0 0 0;
 }
+
 .pagination.footer {
 	margin: 10px 0;
 }
+
 .pagination a,
 .pagination a:visited,
 .pagination a:link {
@@ -59,14 +71,17 @@ a:hover {
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
 	text-decoration: none;
 }
+
 .pagination a:hover {
 	color: #CCC;
 	background-color: #333;
 	text-shadow: none;
 }
+
 .pagination span.disabled {
 	display: none;
 }
+
 .pagination em {
 	padding: 2px 6px;
 	color: #666;
@@ -80,3 +95,17 @@ a:hover {
 	-o-box-shadow: 0 2px 1px rgba(255, 255, 255, 1);
 	box-shadow: 0 2px 1px rgba(255, 255, 255, 1);
 }
+
+.page.footer {
+	clear: both;
+	text-align: center;
+	font-size: small;
+	color: #664;
+	padding-top: 20px;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.page.footer span {
+	margin: 0 5px;
+}
+

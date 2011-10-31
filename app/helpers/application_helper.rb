@@ -92,6 +92,10 @@ module ApplicationHelper
     end
   end
 
+  def sid
+    { :class => current_site.name } if current_site.present?
+  end
+
   def uid(id = nil)
     id = current_user.id if id.nil? && current_user.present?
     { :class => "u#{id}" } unless id.nil?

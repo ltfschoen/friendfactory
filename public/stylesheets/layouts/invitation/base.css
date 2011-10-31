@@ -1,3 +1,17 @@
+input#posting_invitation_body {
+	padding: 4px;
+	font-size: 12px;
+}
+
+p {
+	color: gray;
+	font-size: 12px;
+}
+
+.wave_invitation {
+	margin-top: 30px;
+}
+
 .wave_invitation .polaroid.edit p.unobtrusive {
 	margin-top: 274px;
 	text-align: center;
@@ -53,3 +67,5 @@
 .wave_invitation .polaroid.edit img.placeholder.thumb:hover {
 	opacity: 0.6;
 }
+
+

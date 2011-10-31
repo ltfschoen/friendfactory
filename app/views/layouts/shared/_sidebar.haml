@@ -23,9 +23,10 @@
       %li.messages
         = link_to_unread_messages_unless_inbox
         = link_to 'Inbox', inbox_path
+      %li.invites
+        = link_to 'Invitations', invitations_path
       - if false
         %li.personal
-        %li.invites
         %li.buddies
   - if false
     %input{:name => "search", :placeholder => "Search...", :type => "text"}/

@@ -113,7 +113,7 @@ Friskyfactory::Application.routes.draw do
     get 'wave'            => 'communities#show'
     get 'rollcall(/:tag)' => 'profiles#index', :as => 'roll_call'
     get 'events(/:tag)'   => 'events#index', :as => 'events'
-    get 'invite'          => 'invitations#index', :as => 'invitations'
+    get 'invitations'     => 'invitations#index'
     get 'inbox'           => 'conversations#index'
     get ':slug',      :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
     root              :to => 'communities#show', :via => :get

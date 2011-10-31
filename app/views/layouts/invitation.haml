@@ -1,0 +1,66 @@
+!!! 5
+:plain
+  <!--[if IE 8]><html lang="en-us" class="no-js ie ie8 application"><![endif]-->
+  <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9 application"><![endif]-->
+  <!--[if !IE]>--><html lang="en-us" class="no-js application"><!--<![endif]-->
+%head
+  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
+  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %title #{page_title}
+    
+  = stylesheet_link_tag |
+      '960', |
+      'friskyfactory/postings/polaroid', |
+      'layouts/reset', |
+      'application', |
+      'layouts/base', |
+      'layouts/invitation/base', |
+      'layouts/community/sidebar', |
+      'layouts/community/sidebar-override', |
+      'posting/portrait', |
+      'posting/portrait-override', |
+    :media => 'screen', |
+    :cache => 'tmp/cache/invitation'
+
+  = stylesheet_link_tag "#{current_site.name}/invitation", :media => 'screen'
+
+  / [if IE]
+    = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
+
+  / [if lt IE 9]
+    = stylesheet_link_tag "friskyfactory/ie-8", :media => 'screen'
+
+  - if Rails.env.development?
+    = stylesheet_link_tag 'development'
+    = javascript_include_tag 'jquery'
+    = javascript_include_tag 'lib/jquery/jquery-ui.js'
+    = javascript_include_tag 'jquery.tools-1.2.6.tiny.min'
+    = javascript_include_tag 'pusher'
+  - else
+    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
+    = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
+
+  = javascript_includes |
+      'modernizr', |
+      'jquery_ujs', |
+      'application', |
+      'layouts/invitation', |
+    :cache => 'tmp/cache/invitation'
+
+  - if Rails.env.development?
+    = javascript_include_tag 'development'
+
+  / [if lt IE 9]
+    = javascript_include_tag 'ie-8', :media => 'screen'
+      
+  = csrf_meta_tag 
+%body{ sid, uid, gid, :'data-site_name' => current_site }
+  = render :partial => 'layouts/shared/sidebar'
+  .container.container_16.clearfix
+    = yield
+    = render :partial => "layouts/footer"
+  = render :partial => 'layouts/analytics'
+:plain
+  </html>
