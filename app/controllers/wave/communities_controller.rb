@@ -12,17 +12,21 @@ class Wave::CommunitiesController < ApplicationController
   helper_method :wave, :postings, :profiles
 
   def show
-    respond_to { |format| format.html }
   end
 
   def rollcall
-    respond_to { |format| format.html }
   end
 
   private
 
   def wave
-    @wave ||= current_site.home_wave
+    @wave ||= begin
+      if params[:id]
+        current_site.waves.published.find_by_id(params[:id])
+      else
+        current_site.home_wave
+      end
+    end
   end
 
   def postings

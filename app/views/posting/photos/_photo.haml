@@ -1,4 +1,12 @@
-- unless photo.nil?
-  .posting[photo]
-    .photo.canvas
-      = render_photo(photo)
+- user = photo.user
+.post_frame
+  .post.photos[photo]{ uid(photo[:user_id]) }
+    = link_to_unpublish(photo)
+    .portrait
+      = thimble_link_to_profile(user)
+    .clear
+      .photo{ :class => photo.horizontal? ? nil : 'vertical' }
+        = render_photo(photo)
+      %span.date Posted #{distance_of_time_in_words_to_now(photo.created_at)} ago
+      = link_to_comments(photo.comments.published.count, posting_comments_path(photo))
+  .reaction

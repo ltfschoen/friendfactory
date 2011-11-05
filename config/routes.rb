@@ -59,7 +59,6 @@ Friskyfactory::Application.routes.draw do
     resources :postings, :only => [] do |posting|
       member do
         delete :unpublish, :controller => 'base'
-        get :photos, :to => 'wave_proxies#album'
       end
       collection do
         get :fetch, :controller => 'base'

@@ -9,7 +9,7 @@
         = thimble_link_to_profile(user)
       .clear
         .photo{ :class => photo.horizontal? ? nil : 'vertical' }
-          = link_to render_photo(photo), photos_posting_path(proxy), :class => 'album', :remote => true
+          = link_to render_photo(photo), wave_community_path(album)
         %span.date Posted #{distance_of_time_in_words_to_now(proxy.created_at)} ago
         = link_to_comments(proxy.comments.published.count, posting_comments_path(photo))
     .reaction

@@ -142,30 +142,6 @@ jQuery(function($) {
 		});
 
 
-	// Albums
-	$('a.album')
-		.live('ajax:beforeSend', function() {
-			var $frame = $(this).closest('.post_frame');
-
-			if ($frame.hasClass('active')) {
-				$.unsetActiveFrame(function() {
-					setWideFrameBorders();
-					showAllReactions();
-				});
-				return false;
-			}
-			setNarrowFrameBorders();
-			return true;
-		})
-
-		.live('ajax:success', function(xhr, html) {
-			var $html = $(html),
-				$frame = $(this).closest('.post_frame');
-
-			$.hideAllReactionsExcept($frame, $html);
-		});
-
-
 	// Reaction cancel
 	$('.reaction').live('click', function(event) {
 		if (event.target.value === 'Cancel') {
