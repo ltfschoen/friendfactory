@@ -17,7 +17,7 @@ class Posting::BaseController < ApplicationController
     fetchables = params[:id].to_a
     fetchables.map! do |posting_id, limit|
       if posting = Posting::Base.find_by_id(posting_id)
-        comments = posting.children.type(Posting::Comment).published.order('updated_at desc').limit(limit)
+        comments = posting.comments.published.order('updated_at desc').limit(limit)
         comments.map! do |comment|
           profile = comment.user.profile(current_site)
           { :id         => comment.id,

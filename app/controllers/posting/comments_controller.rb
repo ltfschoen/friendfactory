@@ -5,7 +5,7 @@ class Posting::CommentsController < ApplicationController
   def index
     @comments = []
     if @posting = Posting::Base.find_by_id(params[:posting_id])
-      @comments = @posting.children.type(Posting::Comment).published.order('updated_at desc')
+      @comments = @posting.comments.published.order('updated_at desc')
     end
     respond_to do |format|
       format.html { render :layout => false }

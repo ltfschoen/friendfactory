@@ -28,12 +28,12 @@ class Posting::Base < ActiveRecord::Base
   scope :unpublished, where(:state => :unpublished)
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
   scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
-  
+
   has_many :children, :class_name  => 'Posting::Base', :foreign_key => 'parent_id'
 
   belongs_to :user
   # belongs_to :resource, :polymorphic => true  
-  
+
   has_many :publications, :as => :resource
   has_many :waves, :through => :publications, :order => 'updated_at desc'
 
@@ -45,6 +45,10 @@ class Posting::Base < ActiveRecord::Base
     sanitize_for_mass_assignment(attrs).each do |k, v|
       send("#{k}=", v)
     end
+  end
+
+  def comments
+    self.children.type(Posting::Comment).scoped
   end
 
   def sticky_until=(sticky_until = nil)
