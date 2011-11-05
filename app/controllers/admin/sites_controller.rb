@@ -50,7 +50,7 @@ class Admin::SitesController < ApplicationController
   def stylesheets
     # Stylesheet requests come in on assets hosts, so current_site
     # is not accurate. Use site name in the requested file:
-    # http://<asset_host>.com/stylesheeets/<site>.css
+    # http://<asset_host>.com/stylesheeets/<site>/<controller>.css
     respond_to do |format|
       if site = Site.find_by_name(params[:site_name])
         variables = site.assets.map(&:to_s)
