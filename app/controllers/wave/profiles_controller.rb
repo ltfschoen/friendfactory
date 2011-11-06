@@ -1,6 +1,7 @@
 class Wave::ProfilesController < ApplicationController
 
   before_filter :require_user
+  helper_method :wave, :postings
 
   cattr_reader :per_page
 
@@ -12,22 +13,20 @@ class Wave::ProfilesController < ApplicationController
       format.html
     end
   end
-  
+
   def show
-    @wave = current_site.waves.type(Wave::Profile).find_by_id(params[:id])
+    @@per_page = 50
     respond_to do |format|
       format.html do
         if request.xhr?
-          render(:partial => 'headshot', :locals => { :profile => @wave })
+          render :partial => 'headshot', :locals => { :profile => wave }
         else
-          @@per_page = 50
-          @postings = @wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
-          render
+          render :layout => 'community'
         end
       end
     end
   end
-  
+
   # === Panes ===
 
   def signals
@@ -90,20 +89,28 @@ class Wave::ProfilesController < ApplicationController
         order('updated_at desc').
         paginate(:page => params[:page], :per_page => @@per_page)
   end
-  
+
   def find_all_profiles
     current_site.waves.type(Wave::Profile).
         where(:state => :published).
         order('updated_at desc').
-        paginate(:page => params[:page], :per_page => @@per_page)    
+        paginate(:page => params[:page], :per_page => @@per_page)
   end
-  
+
   def tag_counts_for_current_site
     Wave::Profile.tag_counts_on(current_site).order('name asc')
   end
-  
+
   def scrubbed_tag(tag)
     tag.downcase.gsub(/-/, ' ')
   end
-  
+
+  def wave
+    @wave ||= current_site.waves.find_by_id(params[:id])
+  end
+
+  def postings
+    @postings ||= wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+  end
+
 end
