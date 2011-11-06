@@ -87,4 +87,9 @@ module Posting::PostingsHelper
   def sticky_until_tag
     "Sticky&nbsp;until&nbsp;#{select_tag(:sticky_until, options_from_collection_for_select(day_names_from_today, :date, :day_name), :include_blank => true)}".html_safe
   end
+
+  def spinner_tag
+    image_tag('spinner-vertical.gif', :style => 'visibility:hidden', :class => 'spinner', :alt => 'Working...')
+  end
+
 end

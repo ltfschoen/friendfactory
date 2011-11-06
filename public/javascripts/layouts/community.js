@@ -213,7 +213,18 @@ jQuery(function($) {
 	// Nav
 	$('.new_post_frame')
 		.hide()
-		.find('input.cancel').navCancel();
+		.find('input.cancel')
+			.navCancel()
+		.end()
+		.bind('ajax:before', function() {
+			$(this).find('.spinner').css({ visibility: 'visible' });
+			return true;
+		})
+		.bind('ajax:complete', function() {
+			$(this).find('.spinner').css({ visibility: 'hidden' });
+			return true;
+		});
+
 
 	$('a[rel]', 'ul.nav')
 		.bounceable()
