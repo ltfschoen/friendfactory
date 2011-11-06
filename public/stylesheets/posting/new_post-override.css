@@ -1,7 +1,17 @@
 .new_post {
 	margin: 0;
 }
-.new_post .foot input[type="submit"], .new_post .foot input[type="button"] {
+
+.new_post .foot input[type="submit"],
+.new_post .foot input[type="button"] {
 	height: inherit;
 	padding: 3px 8px 4px 8px;
 }
+
+.new_post .foot input[type="submit"]:disabled,
+.new_post .foot input[type="submit"]:disabled:active {
+	background: gray !important;
+	opacity: 0.6;
+	top: 0;
+}
+

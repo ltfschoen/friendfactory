@@ -6,5 +6,5 @@
       = f.text_area :body, :placeholder => "What's on your mind?"
     .foot
       = f.sticky_until if current_user.admin?
-      = f.submit 'Post'
+      = f.submit 'Post', :'data-disable-with' => 'Post'
       = f.cancel 'Cancel'

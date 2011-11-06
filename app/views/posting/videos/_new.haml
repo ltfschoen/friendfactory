@@ -5,6 +5,5 @@
       = f.text_field :url, :placeholder => 'http://www.youtu.be/...'
     .foot
       = f.sticky_until if current_user.admin?
-      = f.submit 'Post'
+      = f.submit 'Post', :'data-disable-with' => 'Post'
       = f.cancel 'Cancel'
-      =# image_tag('friskyfactory/ajax-loader-small.gif', :site => false, :class => 'spinner', :style => 'visibility:hidden')

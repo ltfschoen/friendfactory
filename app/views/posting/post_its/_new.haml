@@ -4,5 +4,5 @@
     = f.text_area :subject, :placeholder => "What's up?", :maxlength => 130
     .foot
       %span.counter 130 characters left
-      = f.submit 'Post'
+      = f.submit 'Post', :'data-disable-with' => 'Post'
       = f.cancel 'Cancel'
