@@ -211,8 +211,10 @@
 			}
 
 			if (settings['pane'] !== undefined) {
-				$this.find('.front.face a[data-pane-name="' + settings['pane'] + '"]')
-					.trigger('click');
+				setTimeout(function() {
+					$this.find('.front.face a[data-pane-name="' + settings['pane'] + '"]')
+						.trigger('click');
+				}, 900);
 			}
 		});
 	};
