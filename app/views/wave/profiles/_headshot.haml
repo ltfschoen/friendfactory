@@ -4,9 +4,8 @@
       .front.face
         = headshot_image_tag(profile)
         = link_to_close
-        - if false
-          %ul.buddy-bar.secondary
-            %li= link_to 'Profile', wave_profile_path(profile), :class => 'icon profile'
+        %ul.buddy-bar.secondary
+          %li= link_to 'Profile', wave_profile_path(profile), :class => 'icon profile'
         %ul.buddy-bar.primary
           %li= link_to 'Biometrics', biometrics_wave_profile_path(profile), :class => 'flip icon mini-profile', :'data-pane-name' => 'biometrics'
           %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'flip icon photos', :'data-pane-name' => 'photos'
@@ -43,4 +42,3 @@
           %li.message
     .card.back
       Hello World
-    
