@@ -133,6 +133,7 @@ jQuery(function($) {
 				$frame = $this.closest('.post_frame');
 
 			$html
+				.find('.headshot').headshot().end()
 				.filter('.comment_box:first')
 				.shakeable();
 

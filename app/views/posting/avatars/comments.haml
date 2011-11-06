@@ -1,0 +1,3 @@
+= render :partial => 'wave/profiles/headshot', :locals => { :profile => @profile }
+= render :partial => 'posting/comments/new', :locals => { :posting => @posting }
+= render :partial => 'posting/comments/comment', :collection => @comments, :locals => { :posting => @posting }
