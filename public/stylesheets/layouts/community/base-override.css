@@ -23,3 +23,10 @@
 	-o-box-shadow: 0 1px 0 transparent;
 	box-shadow: 0 1px 0 transparent;
 }
+
+#frame .pagination {
+	display: block;
+	width: 400px;
+	float: left;
+	clear: both;
+}

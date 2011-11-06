@@ -1,20 +1,23 @@
 #sidebar
   #head
     = link_to image_tag('logo.png', :site => true), root_path
+
   - if false
     .block.adspace
       %img{:src => "http://placehold.it/180x75"}
+
   .block.userspace
     .portrait      
       = thimble_link_to_profile(current_profile, profile_path)
     %span.greeting Welcome,
     %span.username= link_to current_profile.handle, profile_path
+
   .block.navspace
     %ul
       %li.home
         = link_to 'Community', root_path        
       %li.rollcall
-        = link_to 'Roll Call', rollcall_wave_community_path(current_site.home_wave, :page => params[:page])
+        = link_to 'Roll Call', wave_rollcall_path(current_site.home_wave, :page => params[:page])
         - if false
           %ul
             %li 28 users
@@ -30,3 +33,7 @@
         %li.buddies
   - if false
     %input{:name => "search", :placeholder => "Search...", :type => "text"}/
+
+  - if content_for? :tag_cloud
+    .block.tag_cloud
+      = content_for :tag_cloud

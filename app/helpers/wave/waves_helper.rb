@@ -8,9 +8,6 @@ module Wave::WavesHelper
       else 'Public'
     end
   end
-  
-  # Roll Calls Controller
-  include ActsAsTaggableOn::TagsHelper
 
   # Chat Controller
   def chat_channel(sender, receiver)

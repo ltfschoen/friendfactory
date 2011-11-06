@@ -1,0 +1,26 @@
+.tag_cloud {
+	line-height: 100%;
+}
+
+.tag_cloud a:hover,
+.tag_cloud a.current,
+.tag_cloud a.current:hover {
+	color: yellow !important;
+}
+
+.tag_cloud a.tag1 {
+	font-size: 11px;
+	vertical-align: 3px;
+}
+
+.tag_cloud a.tag2 {
+	font-size: 16px;
+}
+
+.tag_cloud a.tag3 {
+	font-size: 20px;
+}
+
+.tag_cloud a.tag4 {
+	font-size: 24px;
+}

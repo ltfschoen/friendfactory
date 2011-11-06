@@ -42,10 +42,6 @@ a:focus {
 }
 
 .pagination {
-	display: block;
-	width: 400px;
-	float: left;
-	clear: both;
 	text-align: center;
 	font-size: 12px;
 }

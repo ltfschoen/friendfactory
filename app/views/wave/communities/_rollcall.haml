@@ -1,5 +1,20 @@
+- content_for :tag_cloud do
+  - tag_cloud(tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
+    - css_class = 'tag4' if tag.name.downcase == 'deaf' && current_site.name == 'friskyhands' # TODO !!!
+    - tag_as_param = tag.name.gsub(/\s/, '-').downcase
+    - current = false
+    - if tag_as_param == params[:tag]
+      - current = true
+      - css_class += " current"
+      - tag_as_param = nil
+    = link_to tag.name, wave_rollcall_path(params[:id], :tag => tag_as_param), :class => css_class
+    - if current
+      = link_to "(untag)", wave_rollcall_path(params[:id]), :class => 'tag1'
+
 #rollcall
+  = will_paginate profiles, :class => 'pagination header', :inner_window => 1, :outer_window => 1
   - profiles.in_groups_of(4) do |group|
     - group.each_with_index do |profile, idx|
       - unless profile.nil?
         = render :partial => 'wave/profiles/headshot', :locals => { :profile => profile }
+  = will_paginate profiles, :class => 'pagination footer', :inner_window => 1, :outer_window => 1

@@ -1,7 +1,6 @@
 #rollcall {
-	position: absolute;
-	top: 0;
-	left: 201px;
+	min-width: 960px;
+	margin-left: 201px;
 }
 
 #rollcall .polaroid-container {
@@ -17,4 +16,10 @@
 .ie #rollcall .headshot-container {
 	float: left;
 	margin: 20px 0 0 16px;
+}
+
+#rollcall .pagination {
+	display: block;
+	width: 100%;
+	clear: both;
 }
