@@ -2,7 +2,7 @@ Friskyfactory::Application.routes.draw do
 
   # To show waves
   namespace :wave do
-    get ':id/rollcall' => 'communities#rollcall', :as => 'rollcall'
+    get ':id/rollcall(/:tag)' => 'communities#rollcall', :as => 'rollcall'
     resources :communities, :only => [ :show ] do
       member do
         get :rollcall
@@ -112,7 +112,6 @@ Friskyfactory::Application.routes.draw do
 
   scope :module => 'wave' do
     get 'wave'            => 'communities#show'
-    # get 'rollcall(/:tag)' => 'profiles#index', :as => 'roll_call'
     get 'events(/:tag)'   => 'events#index', :as => 'events'
     get 'invitations'     => 'invitations#index'
     get 'inbox'           => 'conversations#index'
