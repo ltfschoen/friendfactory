@@ -1,6 +1,8 @@
 #rollcall {
 	min-width: 960px;
 	margin-left: 201px;
+	overflow: hidden;
+	position: relative;
 }
 
 #rollcall .polaroid-container {
