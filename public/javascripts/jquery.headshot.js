@@ -143,19 +143,10 @@
 
 				initFrontFace = function () {},
 
-				flipper = function () {
-					if ($headshot.hasClass('flipped')) {
-						initBackFace(paneName, url);
-					} else {
-						initFrontFace();
-					}
-				},
-
 				flipSettings = {
 					speed: 300,
-			      	direction: 'lr',
-			      	color: '#FFF',
-					onEnd: flipper
+					direction: 'lr',
+					color: '#FFF'
 				};
 
 			$headshot
@@ -168,14 +159,22 @@
 			$frontFace
 				.find('a.flip')
 					.live('click', function(event) {
-						var	$this = $(this)
+						var	$this = $(this),
 							paneName = $this.data('pane-name'),
 							url = $this.attr('href'),
-							$content = $headshot.find('.face-container:hidden');
+							$content = $headshot.find('.face-container:hidden'),
+
+							flipper = function () {
+								if ($headshot.hasClass('flipped')) {
+									initBackFace(paneName, url);
+								} else {
+									initFrontFace();
+								}
+							};
 
 						$headshot
 							.addClass('flipped')
-							.flip($.extend(flipSettings, { content: $content }));
+							.flip($.extend(flipSettings, { content: $content, onEnd: flipper }));
 						return false;
 					});
 
