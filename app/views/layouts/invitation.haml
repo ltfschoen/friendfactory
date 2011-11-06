@@ -20,7 +20,7 @@
       'posting/portrait', |
       'posting/portrait-override', |
     :media => 'screen', |
-    :cache => 'tmp/cache/invitation'
+    :cache => 'cache/invitation'
 
   = stylesheet_link_tag "#{current_site.name}/invitation", :media => 'screen'
 
@@ -47,7 +47,7 @@
       'jquery_ujs', |
       'application', |
       'layouts/invitation', |
-    :cache => 'tmp/cache/invitation'
+    :cache => 'cache/invitation'
 
   - if Rails.env.development?
     = javascript_include_tag 'development'

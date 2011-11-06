@@ -21,7 +21,7 @@
       'posting/portrait', |
       'posting/portrait-override', |
     :media => 'screen', |
-    :cache => 'tmp/cache/conversation'
+    :cache => 'cache/conversation'
 
   = stylesheet_link_tag "#{current_site.name}/conversation", :media => 'screen'
 
@@ -46,7 +46,7 @@
       'jquery_ujs', |
       'application', |
       'layouts/conversation', |
-    :cache => 'tmp/cache/conversation'
+    :cache => 'cache/conversation'
 
   - if Rails.env.development?
     = javascript_include_tag 'development'
