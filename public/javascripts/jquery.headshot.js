@@ -88,6 +88,8 @@
 						}
 					});
 				}
+				
+				if (this.onFlip !== undefined) this.onFlip(this);
 			});
 
 			$headshot
@@ -170,6 +172,10 @@
 								} else {
 									initFrontFace();
 								}
+								
+								if ($headshot[0].onFlip !== undefined) {
+									$headshot[0].onFlip($headshot[0]);
+								}
 							};
 
 						$headshot
@@ -198,11 +204,17 @@
 	};
 
 	$.fn.headshot = function(options) {
-		var settings = {};
+		var settings = {
+			onFlip: function() {}
+		};
+
 		$.extend(settings, options);
 
 		return this.each(function() {
 			var $this = $(this);
+
+			this.onFlip = settings['onFlip'];
+
 			if (Modernizr.csstransforms3d) {
 				$this.flipTransforms3d();
 			} else {
