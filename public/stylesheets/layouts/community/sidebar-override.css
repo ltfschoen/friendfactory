@@ -72,7 +72,7 @@
 	margin-right: 0px;
 }
 
-#sidebar .block.rollcall a {
+#sidebar .block.rollcall a.more {
 	font-size: 13px;
 	display: block;
 	float: right;
