@@ -47,7 +47,7 @@ gem 'embedly'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 
-gem 'rails-footnotes', '>= 3.7', :group => :development
+# gem 'rails-footnotes', '>= 3.7', :group => :development
 
 group :development, :test do
   gem 'rspec-rails'
