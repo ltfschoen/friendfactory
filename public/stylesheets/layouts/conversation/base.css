@@ -1,9 +1,22 @@
-.headshot-container {
+#inbox {
+	min-width: 960px;
+	margin-left: 221px;
+	overflow: hidden;
+	position: relative;
+}
+
+#inbox .headshot-container {
 	float: left;
 	margin: 20px 0 0 20px;
 }
 
-.ie .headshot-container {
+.ie #inbox .headshot-container {
 	float: left;
 	margin: 20px 0 0 16px;
+}
+
+#inbox .pagination {
+	display: block;
+	width: 100%;
+	clear: both;
 }
