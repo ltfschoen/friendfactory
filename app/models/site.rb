@@ -82,7 +82,7 @@ class Site < ActiveRecord::Base
   end
 
   def home_wave
-    waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).first
+    @home_wave ||= waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).first
   end
 
   def clone
