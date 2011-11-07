@@ -81,10 +81,7 @@
     = csrf_meta_tag    
     
   %body{ :class => current_site, :'data-site_name' => current_site }
-    .floating-container.container_16.clearfix
     .container.container_16.clearfix
-      = render :partial => "layouts/header" unless @popup.present?
       = yield
-      = render :partial => "layouts/footer" unless @popup.present?
     = render :partial => 'layouts/analytics'
       
