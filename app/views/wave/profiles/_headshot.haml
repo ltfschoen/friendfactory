@@ -4,6 +4,8 @@
       .front.face
         = headshot_image_tag(profile)
         = link_to_close
+        %span.handle
+          = profile.handle
         %ul.buddy-bar.secondary
           %li= link_to 'Profile', wave_profile_path(profile), :class => 'icon profile'
         %ul.buddy-bar.primary

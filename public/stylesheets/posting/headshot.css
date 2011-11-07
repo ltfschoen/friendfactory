@@ -39,12 +39,20 @@
 	margin-top: -20px;
 }
 
-.headshot .front.face ul.buddy-bar {
-	margin: 20px 0 0 0;
+.headshot .front.face .handle {
+	font-size: 11px;
+	display: block;
+	text-align: center;
+	width: 100%;
+	color: #999;
 }
 
-.headshot-container.floating .front.face ul.buddy-bar {
-	margin: 194px 0 0 0;
+.headshot .front.face ul.buddy-bar {
+	margin: 10px 0 0 0;
+}
+
+.headshot-container.floating .front.face .handle {
+	margin-top: 175px;
 }
 
 .csstransforms3d .headshot {
