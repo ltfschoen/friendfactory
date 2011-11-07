@@ -1,7 +1,7 @@
 class Wave::ProfilesController < ApplicationController
 
   before_filter :require_user
-  helper_method :wave, :postings
+  helper_method :wave, :postings, :profile
 
   cattr_reader :per_page
 
@@ -21,7 +21,7 @@ class Wave::ProfilesController < ApplicationController
         if request.xhr?
           render :partial => 'headshot', :locals => { :profile => wave }
         else
-          render :layout => 'community'
+          render :layout => 'profiles'
         end
       end
     end
@@ -106,8 +106,10 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def wave
-    @wave ||= current_site.waves.find_by_id(params[:id])
+    @wave ||= current_site.waves.type(Wave::Profile).find_by_id(params[:id])
   end
+
+  alias :profile :wave
 
   def postings
     @postings ||= wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)

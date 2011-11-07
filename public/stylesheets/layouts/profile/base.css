@@ -1,3 +1,7 @@
 .wave_profile.current_user {
 	margin-top: 60px;
 }
+
+#frame .headshot-container {
+	margin: 20px 0 0 65px;
+}
