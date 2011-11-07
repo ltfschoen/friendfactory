@@ -9,7 +9,7 @@
       - tag_as_param = nil
     = link_to tag.name, wave_rollcall_path(params[:id], :tag => tag_as_param), :class => css_class
     - if current
-      = link_to "(untag)", wave_rollcall_path(params[:id]), :class => 'tag1'
+      = link_to "(untag)", wave_rollcall_path(params[:id]), :class => 'tag1 current'
 
 #rollcall
   = will_paginate profiles, :class => 'pagination header', :inner_window => 1, :outer_window => 1
