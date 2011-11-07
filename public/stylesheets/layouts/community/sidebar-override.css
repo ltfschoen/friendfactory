@@ -35,7 +35,7 @@
 }
 
 #sidebar .block.navspace ul li:hover:before {
-  margin-left: 0;
+	margin-left: 0;
 }
 
 #sidebar .block.userspace .portrait a {
@@ -61,6 +61,10 @@
 }
 
 #sidebar .block.navspace ul li.account:before {
+	background: none;
+}
+
+#sidebar .block.navspace ul li.logout:before {
 	background: none;
 }
 
