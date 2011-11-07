@@ -12,7 +12,6 @@
       = link_to "(untag)", wave_rollcall_path(params[:id]), :class => 'tag1 current'
 
 #rollcall
-  = will_paginate profiles, :class => 'pagination header', :inner_window => 1, :outer_window => 1
   %div.clearfix
     - profiles.in_groups_of(4) do |group|
       - group.each_with_index do |profile, idx|
