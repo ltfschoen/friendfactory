@@ -70,7 +70,8 @@
 #sidebar .block.userspace span.username {
   display: block;
   float: left;
-  font: bold 14px;
+  /*font: bold 14px;*/
+  font-size: 14px;
   width: 130px;
   margin: 0 0 0 10px;
 }

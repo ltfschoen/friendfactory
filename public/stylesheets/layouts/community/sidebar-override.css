@@ -64,3 +64,17 @@
 	background: none;
 }
 
+#sidebar .block.rollcall .portrait {
+	margin: 0 5px 5px 0;
+}
+
+#sidebar .block.rollcall .portrait.omega {
+	margin-right: 0px;
+}
+
+#sidebar .block.rollcall a {
+	font-size: 13px;
+	display: block;
+	float: right;
+	font-style: italic;
+}

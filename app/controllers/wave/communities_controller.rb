@@ -3,7 +3,7 @@ class Wave::CommunitiesController < ApplicationController
   DefaultWaveSlug = 'popular'
 
   before_filter :require_user
-  helper_method :wave, :postings, :profiles, :tags
+  helper_method :wave, :postings, :profiles, :profiles_on_wave, :tags
   layout 'community'
 
   cattr_reader :per_page
@@ -35,7 +35,7 @@ class Wave::CommunitiesController < ApplicationController
   end
 
   def profiles
-    @profiles ||= profiles_on_wave.paginate(:page => params[:page], :per_page => @@per_page)
+    @profiles ||= profiles_with_tag.paginate(:page => params[:page], :per_page => @@per_page)
   end
 
   def tags
@@ -45,9 +45,15 @@ class Wave::CommunitiesController < ApplicationController
   def profiles_on_wave
     @profiles_on_wave ||= begin
       user_ids = wave.postings.published.map(&:user_id).uniq
-      profiles = current_site.waves.type(Wave::Profile).where(:user_id => user_ids).scoped
+      current_site.waves.type(Wave::Profile).where(:user_id => user_ids).scoped
+    end
+  end
+
+  def profiles_with_tag
+    @profiles_with_tag ||= begin
+      profiles = profiles_on_wave
       profiles = profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site) if params[:tag].present?
-      profiles
+      profiles.scoped
     end
   end
 
