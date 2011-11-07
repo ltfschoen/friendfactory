@@ -1,5 +1,6 @@
 - content_for :rollcall do
-  - profiles_on_wave.limit(30).each_with_index do |profile, idx|
+  - profiles = profiles_on_wave.limit(40).reject{ |p| p.avatar.silhouette? }
+  - profiles[0..29].each_with_index do |profile, idx|
     - css_class = (idx + 1) % 5 == 0 ? 'omega' : nil
     .portrait{ :class => css_class }= thimble_link_to_profile(profile)
   - count = profiles_on_wave.count - 30

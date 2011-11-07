@@ -71,11 +71,7 @@ class Wave::Profile < Wave::Base
 
   def avatar(reload = false)
     return @avatar if reload == false && defined?(@avatar)
-    if @avatar = active_avatars.limit(1).first
-      @avatar
-    else
-      @avatar = EmptyAvatar.new(self)
-    end
+    @avatar = active_avatars.limit(1).first || EmptyAvatar.new(self)
   end
 
   def avatar?

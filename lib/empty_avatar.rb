@@ -1,5 +1,7 @@
 class EmptyAvatar
+
   EmptyAvatarUrl = '/images/friskyfactory/silhouette-q.gif'
+
   attr_accessor :profile
 
   def initialize(profile)
@@ -9,7 +11,7 @@ class EmptyAvatar
   def profile_id
     @profile.id
   end
-  
+
   def user
     @profile.user
   end
@@ -17,7 +19,7 @@ class EmptyAvatar
   def url(style = nil)
     EmptyAvatarUrl
   end
-  
+
   def silhouette?
     true
   end
