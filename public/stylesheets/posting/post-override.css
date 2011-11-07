@@ -8,10 +8,10 @@
 	background: transparent;
 	opacity: 0;
 	display: block;
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	transition: all 0.2s linear;
+/*	-webkit-transition: opacity 0.2s linear;
+	-moz-transition: opacity 0.2s linear;
+	-o-transition: opacity 0.2s linear;
+	transition: opacity 0.2s linear;*/
 	text-decoration: none;
 }
 .post:hover .remove {
