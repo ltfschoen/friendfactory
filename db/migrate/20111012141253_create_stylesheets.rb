@@ -6,13 +6,12 @@ class CreateStylesheets < ActiveRecord::Migration
       t.text    :css
       t.timestamps
     end
-    # Site.all.each { |site| site.stylesheets.create(:css => site.css) }
     # remove_column :sites, :css
     add_index :stylesheets, [ :site_id, :controller_name ]
   end
 
   def self.down
-    # add_column :sites, :css, :text
-    drop_table :stylesheets
+    add_column :sites, :css, :text rescue nil
+    drop_table :stylesheets rescue nil
   end
 end
