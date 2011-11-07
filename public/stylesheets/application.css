@@ -105,3 +105,14 @@ a:focus {
 	margin: 0 5px;
 }
 
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
