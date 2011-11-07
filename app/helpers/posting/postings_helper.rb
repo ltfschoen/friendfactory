@@ -92,4 +92,11 @@ module Posting::PostingsHelper
     image_tag('spinner-vertical.gif', :style => 'visibility:hidden', :class => 'spinner', :alt => 'Working...')
   end
 
+  def posted_distance_of_time(posting)
+    content_tag(:span, :class => 'date') do
+      prefix = posting.updated_at == posting.created_at ? 'Posted' : 'Updated'
+      "#{prefix} #{distance_of_time_in_words_to_now(posting.updated_at)} ago"
+    end
+  end
+
 end

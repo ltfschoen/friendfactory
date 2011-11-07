@@ -7,6 +7,6 @@
       .cell
         = link_to_profile(profile)
         = link_to 'posted a new profile', avatar_comments_posting_path(avatar), :class => 'comments', :remote => true
-      %span.date Uploaded #{distance_of_time_in_words_to_now(avatar.created_at)} ago
+      %span.date Uploaded #{distance_of_time_in_words_to_now(avatar.updated_at)} ago
       = link_to_comments(avatar.comments.published.count, avatar_comments_posting_path(avatar))
   .reaction

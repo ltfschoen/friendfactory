@@ -7,6 +7,6 @@
       .cell
         = link_to_profile(user)
         #{signal.subject}
-      %span.date Posted #{distance_of_time_in_words_to_now(signal.created_at)} ago
+      = posted_distance_of_time(signal)
       = link_to_comments(signal.children.type(Posting::Comment).published.count, posting_comments_path(signal))
   .reaction

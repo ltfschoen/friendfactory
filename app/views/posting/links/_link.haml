@@ -20,6 +20,6 @@
           - link.embeds.each do |embed|
             .embed{ :class => embed.type }
               =# render_embed(embed)
-      %span.date Posted #{distance_of_time_in_words_to_now(link.created_at)} ago
+      = posted_distance_of_time(link)
       = link_to_comments(link.children.type(Posting::Comment).published.count, posting_comments_path(link))
   .reaction

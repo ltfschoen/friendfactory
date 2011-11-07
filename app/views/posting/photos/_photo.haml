@@ -7,6 +7,6 @@
     .clear
       .photo{ :class => photo.horizontal? ? nil : 'vertical' }
         = render_photo(photo)
-      %span.date Posted #{distance_of_time_in_words_to_now(photo.created_at)} ago
+      = posted_distance_of_time(photo)
       = link_to_comments(photo.comments.published.count, posting_comments_path(photo))
   .reaction

@@ -7,6 +7,6 @@
       .cell
         = link_to_profile(user)
         #{tweet.subject}
-      %span.date Posted #{distance_of_time_in_words_to_now(tweet.created_at)} ago
+      = posted_distance_of_time(tweet)
       = link_to_comments(tweet.children.type(Posting::Comment).published.count, posting_comments_path(tweet))
   .reaction
