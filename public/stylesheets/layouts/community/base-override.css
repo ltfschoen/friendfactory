@@ -1,13 +1,18 @@
 #frame {
 	position: relative;
+	margin-left: 221px;
 }
-#frame .post_frame, #frame .new_post_frame {
+
+#frame .post_frame,
+#frame .new_post_frame {
 	clear: both;
 	margin: 4px 0;
 }
+
 #frame .new_post_frame {
 	padding-bottom: 0px;
 }
+
 #frame .post_frame {
 	width: 100%;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
@@ -16,6 +21,7 @@
 	-o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 }
+
 #frame .post_frame.narrow-border {
 	border-bottom: 1px solid transparent;
 	-webkit-box-shadow: 0 1px 0 transparent;

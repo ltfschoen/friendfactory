@@ -14,8 +14,11 @@
 
   .block.navspace
     %ul
+      - if current_user.present?
+        %li.personal
+          = link_to "#{current_profile.handle}'s Wave", wave_profile_path(current_profile)
       %li.home
-        = link_to 'Community', root_path        
+        = link_to 'Community Wave', root_path
       %li.rollcall
         = link_to 'Roll Call', wave_rollcall_path(params[:id] || current_site.home_wave, :page => params[:page])
         - if false
@@ -28,11 +31,18 @@
         = link_to 'Inbox', inbox_path
       %li.invites
         = link_to 'Invitations', invitations_path
+      %li.account
+        = link_to 'Account', profile_path
+
       - if false
         %li.personal
         %li.buddies
   - if false
     %input{:name => "search", :placeholder => "Search...", :type => "text"}/
+
+  - if content_for? :headshot
+    .block
+      = content_for :headshot
 
   - if content_for? :tag_cloud
     .block.tag_cloud

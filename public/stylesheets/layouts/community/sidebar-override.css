@@ -1,9 +1,18 @@
+#sidebar {
+  width: 220px;
+}
+
+#sidebar .block {
+  width: 200px;
+}
+
 #sidebar a {
 	text-decoration: none;
 	color: white;
 }
 
-#sidebar a:hover {
+#sidebar .block.userspace a:hover,
+#sidebar .block.navspace a:hover {
 	margin: 0;
 }
 
@@ -18,11 +27,11 @@
 }
 
 #sidebar .block.userspace a:hover {
-  margin-left: 0;
+	margin-left: 0;
 }
 
 #sidebar .block.navspace ul li:hover span {
-  left: 12px;
+	left: 12px;
 }
 
 #sidebar .block.navspace ul li:hover:before {
@@ -45,5 +54,13 @@
 
 #sidebar .block.navspace ul li.invites:before {
 	background-position: 0 -75px;
+}
+
+#sidebar .block.navspace ul li.personal:before {
+	background-position: 0 -50px;
+}
+
+#sidebar .block.navspace ul li.account:before {
+	background: none;
 }
 
