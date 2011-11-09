@@ -53,8 +53,7 @@
       'posting/video', |
       'posting/video-override', |
     :media  => 'screen', |
-    :cache  => 'cache/community', |
-    :concat => true
+    :cache  => 'cache/community' #, :concat => true
 
   = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
 
@@ -87,6 +86,9 @@
       'layouts/shared/video', |
       'layouts/community', |
     :cache => 'cache/community'
+
+  / [if lt IE 9]
+    = javascript_include_tag 'ie8', :media => 'screen'
 
   - if Rails.env.development?
     = javascript_include_tag 'development'

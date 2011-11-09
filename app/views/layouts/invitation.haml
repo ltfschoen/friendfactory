@@ -53,7 +53,7 @@
     = javascript_include_tag 'development'
 
   / [if lt IE 9]
-    = javascript_include_tag 'ie-8', :media => 'screen'
+    = javascript_include_tag 'ie8', :media => 'screen'
       
   = csrf_meta_tag 
 %body{ sid, uid, gid, :'data-site_name' => current_site }
