@@ -46,9 +46,17 @@
 	overflow-x: hidden;
 }
 
+.ie8 .post.link .cell {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
 .post.link .cell p {
 	margin: 10px 0 0 0;
 	color: #333;
 	line-height: 1.5;
 	text-shadow: 0 1px 0 #fff;
+}
+
+.ie8 .new_post.link .body {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
 }

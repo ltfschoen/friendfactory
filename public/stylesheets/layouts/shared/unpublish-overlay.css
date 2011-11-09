@@ -15,11 +15,7 @@
 	box-shadow: 0 0 90px #000;
 	z-index: 1000;
 }
-.ie8 .overlay {
-	background:transparent;
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#333333,endColorstr=#333333);
-	zoom: 1;
-}
+
 .overlay h1 {
 	margin: -11px;
 	margin-bottom: 0;
@@ -30,6 +26,7 @@
 	font-size: 20px;
 	font: 20px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;
 }
+
 .overlay p {
 	color: #333;
 	line-height: 1.5;
@@ -37,6 +34,7 @@
 	font: 13px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;	
 	margin: 10px 0;
 }
+
 .overlay button {
 	width: 60px;
 	margin: 5px;
@@ -62,6 +60,7 @@
 	background: linear-gradient(top, #3f4e58 0%, #2f3a42 100%);
 	border: 1px solid #333;
 }
+
 .overlay button.ok {
 	background: #b94f42;
 	background: -moz-linear-gradient(top, #b94f42 0%, #972d20 100%);
@@ -71,6 +70,7 @@
 	background: -ms-linear-gradient(top, #b94f42 0%, #972d20 100%);
 	background: linear-gradient(top, #b94f42 0%, #972d20 100%);	
 }
+
 .overlay button.ok:active {
 	top: 1px;
 	opacity: 1;
@@ -82,6 +82,7 @@
 	background: -ms-linear-gradient(top, #972d20 0%, #b94f42 100%);
 	background: linear-gradient(top, #972d20 0%, #b94f42 100%);
 }
+
 .overlay button.cancel:active {
 	top: 1px;
 	opacity: 1;
@@ -93,6 +94,7 @@
 	background: -ms-linear-gradient(top, #2f3a42 0%, #3f4e58 100%);
 	background: linear-gradient(top, #2f3a42 0%, #3f4e58 100%);
 }
+
 .overlay button:hover {
 	opacity: 0.95;
 }

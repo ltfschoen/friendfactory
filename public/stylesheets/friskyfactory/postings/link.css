@@ -30,9 +30,9 @@ form#new_posting_link .button-bar {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 form#new_posting_link input#posting_link_url {

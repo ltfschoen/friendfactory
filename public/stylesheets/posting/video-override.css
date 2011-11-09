@@ -1,6 +1,7 @@
 .post.video {
 	height: 290px;
 }
+
 .video_player {
 	position: relative;
 	background: #000;
@@ -15,6 +16,11 @@
 	width: 310px;
 	height: 260px;
 }
+
+.ie8 .video_player {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
 .video_player a.play {
 	display: block;
 	position: absolute;
@@ -23,15 +29,18 @@
 	width: 310px;
 	height: 260px;
 }
+
 .video_player img {
 	width: 310px;
 	height: 260px;
 }
+
 .video_player iframe {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 }
+
 .video_player img.play {
 	position: absolute;
 	width: 100px !important;
@@ -40,6 +49,7 @@
 	top: 80px;
 	left: 105px;
 }
+
 .post .clear.video_player .date,
 .post .clear.video_player .comments a {
 	display: inline-block;

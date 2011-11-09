@@ -2,25 +2,35 @@
 	position: relative;
 	margin-top: 0;
 }
+
 .comment_box .comment {
 	min-height: 20px;
 }
+
+.ie8 .comment_box .comment {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
 .comment_box .comment p {
   margin-bottom: 0px;
 }
+
 .comment_box .reply,
 .comment_box .remove {
   float: right;	
 }
+
 .comment_box .reply a {
   color: #666;
   font-size: 11px;
   margin: 5px;
 }
+
 .comment_box form .foot input[type="submit"], .comment_box form .foot input[type="button"] {
 	height: inherit;
 	padding: 3px 8px 4px 8px;
 }
+
 .comment_box .remove {
 	width: 20px;
 	height: 20px;
@@ -40,9 +50,15 @@
 	display: none;
 	text-decoration: none;
 }
+
 .ie .comment_box .remove {
 	top: 12px;
 }
+
 .comment_box:hover .remove {
   display: inline-block;
+}
+
+.ie8 .comment_box form {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
 }

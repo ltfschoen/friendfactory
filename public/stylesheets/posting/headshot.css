@@ -96,6 +96,14 @@
 	border-radius: 5px;	
 }
 
+.ie8 .headshot .face {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
+.ie8 .headshot-container.floating .face {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=6);
+}
+
 .headshot .front.face img {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -442,4 +450,12 @@
 .headshot .pane.conversation textarea,
 .headshot .pane.conversation button {
 	cursor: default;
+}
+
+.ie8 .headshot .pane.conversation .message-input:before {
+	border-color: transparent;
+}
+
+.ie8 .headshot .pane.conversation .message-input:after {
+	border-color: transparent;
 }

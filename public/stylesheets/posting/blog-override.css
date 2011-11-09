@@ -8,3 +8,7 @@
   color: #666;
   font: italic 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
+
+.ie8 .new_post.blog .body {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}

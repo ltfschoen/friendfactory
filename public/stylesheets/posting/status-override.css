@@ -1,3 +1,11 @@
 .status .cell {
   background: #FCFF9F;
 }
+
+.ie8 .status .cell {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
+.ie8 .new_post.status textarea {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}

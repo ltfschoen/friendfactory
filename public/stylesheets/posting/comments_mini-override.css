@@ -3,11 +3,17 @@
 	overflow: visible;
 	float: none;
 }
+
+.mini_comment .comment {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
 .mini_comment .comment p {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
 .mini_comment .comment a.comments {
 	color: #333;
 }

@@ -4,3 +4,7 @@
 	-o-border-radius: 5px;
 	border-radius: 5px;
 }
+
+.ie .portrait {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}

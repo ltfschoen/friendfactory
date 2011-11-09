@@ -85,3 +85,7 @@
 	float: right;
 	font-style: italic;
 }
+
+.ie #sidebar .portrait {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#333333', Direction=155, Strength=3);
+}
