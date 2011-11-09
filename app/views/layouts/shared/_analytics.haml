@@ -1,4 +1,4 @@
-- if Rails.env.production?
+- if Rails.env.production? && current_site.analytics_domain_name.present? && current_site.analytics_account_number.present?
   :javascript
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', "#{current_site.analytics_account_number}"]);
