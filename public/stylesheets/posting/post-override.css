@@ -1,29 +1,46 @@
 .post .clear .date {
 	clear: both;
 }
+
 .post .remove {
 	right: 0px;
 	top: -6px;
 	color: #333;
 	background: transparent;
-	opacity: 0;
+	text-decoration: none;
 	display: block;
+	opacity: 0;
 /*	-webkit-transition: opacity 0.2s linear;
 	-moz-transition: opacity 0.2s linear;
 	-o-transition: opacity 0.2s linear;
 	transition: opacity 0.2s linear;*/
-	text-decoration: none;
 }
+
+.ie8 .post .remove {
+	visibility: hidden;
+}
+
 .post:hover .remove {
 	opacity: 0;
 }
+
+.ie8 .post:hover .remove {
+	visibility: hidden;
+}
+
 body.admin .post:hover .remove {
 	opacity: 1;
 }
+
+.ie8 body.admin .post:hover .remove {
+	visibility: visible;
+}
+
 .post .clear .comments a,
 .post .clear .date {
 	padding: 3px 6px;
 }
+
 .post_frame.active .post .clear .comments a {
 	background-color: #666;
 	color: #FFF;
@@ -32,9 +49,11 @@ body.admin .post:hover .remove {
 	-o-border-radius: 5px;
 	border-radius: 5px;	
 }
+
 .post_frame.active .post .clear .comments a {
 	text-decoration: none;
 }
+
 .post {
 	border-bottom: none;
 	-webkit-box-shadow: none;
@@ -42,6 +61,7 @@ body.admin .post:hover .remove {
 	-o-box-shadow: none;
 	box-shadow: none;
 }
+
 .post.narrow-border {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);

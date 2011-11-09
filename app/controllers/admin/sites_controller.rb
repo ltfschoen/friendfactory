@@ -73,7 +73,10 @@ class Admin::SitesController < ApplicationController
 
   def uid_css
     if current_user
-      "body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { opacity: 1; }"
+      <<-EOF
+        body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { opacity: 1; }
+        .ie8 body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { visibility: visible; }
+      EOF
     end
   end
 
