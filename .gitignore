@@ -20,4 +20,5 @@ test/fixtures/assets/**/*.png
 public/biorealism/*.esproj
 .footnotes
 public/images/users/*
+public/stylesheets/all.css
 
