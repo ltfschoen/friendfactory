@@ -47,6 +47,13 @@
 	padding: 0 2px;
 }
 
+#sidebar .block.navspace ul li.personal:before {
+	background-position: 0 -50px;
+}
+
+#sidebar .block.navspace ul li.home:before {
+	background-position: 0 -50px;
+}
 
 #sidebar .block.navspace ul li.rollcall:before {
 	background-position: -25px 0;
@@ -54,10 +61,6 @@
 
 #sidebar .block.navspace ul li.invites:before {
 	background-position: 0 -75px;
-}
-
-#sidebar .block.navspace ul li.personal:before {
-	background-position: 0 -50px;
 }
 
 #sidebar .block.navspace ul li.account:before {
