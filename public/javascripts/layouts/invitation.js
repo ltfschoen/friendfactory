@@ -41,4 +41,10 @@ jQuery(function($) {
 				})
 			.end()
 		.end()
+
+		// .find("input[type='text']")
+		// 	.placehold()
+		// .end()
+
+		.find('.button-bar').buttonize();
 });

@@ -9,7 +9,9 @@
   %title #{page_title}
     
   = stylesheet_link_tag |
+      'forms', |
       '960', |
+      'friskyfactory/jquery-ui', |
       'friskyfactory/postings/polaroid', |
       'layouts/reset', |
       'application', |
@@ -45,6 +47,7 @@
   = javascript_includes |
       'modernizr', |
       'jquery_ujs', |
+      'lib/ff.buttonize', |
       'application', |
       'layouts/invitation', |
     :cache => 'cache/invitation'
