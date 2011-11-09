@@ -37,6 +37,10 @@ a:focus {
 	opacity: 1;
 }
 
+.ie8 .admin .post:hover .remove {
+	visibility: visible;
+}
+
 .clear {
 	float: left;
 }
