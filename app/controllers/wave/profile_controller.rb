@@ -35,15 +35,19 @@ class Wave::ProfileController < ApplicationController
   def avatar
     @posting = new_posting_avatar
     if @posting.valid?
-      current_user.profile(current_site).postings << @posting
-      home_wave = current_site.home_wave
-      home_wave.postings.
-          type(Posting::Avatar).
-          published.
-          where(:created_at => (Time.now - RepublishWindow)...Time.now).
-          where(:user_id => @posting.user[:id]).
-          map(&:unpublish!)
-      home_wave.postings << @posting
+      if profile = current_user.profile(current_site)
+        profile.postings << @posting
+        @posting.publish!
+        profile.set_active_avatar(@posting)
+        home_wave = current_site.home_wave
+        home_wave.postings.
+            type(Posting::Avatar).
+            published.
+            where(:created_at => (Time.now - RepublishWindow)...Time.now).
+            where(:user_id => @posting.user[:id]).
+            map(&:unpublish!)
+        home_wave.postings << @posting
+      end
     end
     respond_to do |format|
       format.html { redirect_to profile_path }

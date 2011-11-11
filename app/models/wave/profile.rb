@@ -17,18 +17,11 @@ class Wave::Profile < Wave::Base
   
   before_validation :'resource.present?'
   before_update     :'resource.save'  
-  after_create      :'publish!'
 
   validates_presence_of :handle, :unless => :first_name
   
   alias :user_info :resource
 
-  def after_add_posting_to_wave(posting)
-    set_active_avatar(posting)
-    touch(posting)
-    super
-  end
-  
   # Use an association to provide eager loading.
   has_many :avatars,
       :through      => :publications,
@@ -77,9 +70,16 @@ class Wave::Profile < Wave::Base
   def avatar?
     @avatar.present? && !@avatar.silhouette?
   end
-        
+
   def avatar_id
     @avatar.try(:id)
+  end
+
+  def set_active_avatar(avatar)
+    if avatar.active?
+      avatar_ids = avatars.map(&:id)
+      Posting::Avatar.update_all([ 'active = ?', false], [ 'id in (?)', (avatar_ids - [ avatar.id ]) ])
+    end
   end
 
   def resource
@@ -124,13 +124,6 @@ class Wave::Profile < Wave::Base
   end
 
   private
-  
-  def set_active_avatar(avatar)
-    if avatar.active?
-      avatar_ids = avatars.map(&:id)
-      Posting::Avatar.update_all([ 'active = ?', false], [ 'id in (?)', (avatar_ids - [ avatar.id ]) ])
-    end
-  end
 
   def touch(avatar = nil)
     super()
