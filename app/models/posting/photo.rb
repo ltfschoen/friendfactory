@@ -18,15 +18,6 @@ class Posting::Photo < Posting::Base
 
   before_create :set_dimensions
   before_create :randomize_file_name
-  
-  def distribute(sites)
-    sites.each do |site|
-      if profile = user.profile(site)
-        profile.postings << self
-      end
-    end
-    super
-  end
 
   private
   
