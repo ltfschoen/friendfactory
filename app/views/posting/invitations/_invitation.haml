@@ -1,0 +1,12 @@
+- profile = invitation.user(current_site)
+.post_frame
+  .posting.post.signal[invitation]{ uid(invitation[:user_id]) }
+    = link_to_unpublish(invitation)
+    .portrait= thimble_link_to_profile(profile)
+    .clear
+      .cell
+        = link_to_profile(profile)
+        = "invited a friend to #{current_site.display_name}"
+      %span.date Uploaded #{distance_of_time_in_words_to_now(invitation.updated_at)} ago
+      = link_to_comments(invitation.comments.published.count, posting_comments_path(invitation))
+  .reaction
