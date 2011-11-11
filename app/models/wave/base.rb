@@ -42,7 +42,6 @@ class Wave::Base < ActiveRecord::Base
       :source      => :resource,
       :source_type => 'Posting::Base',
       :conditions  => 'parent_id is null',
-      :before_add  => :before_add_posting_to_wave,
       :after_add   => :after_add_posting_to_wave do
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
@@ -68,10 +67,6 @@ class Wave::Base < ActiveRecord::Base
   def set_tag_list_on!(site)
     set_tag_list_on(site)
     save!
-  end
-
-  def before_add_posting_to_wave(posting)
-    # Override in inherited classes.
   end
 
   def after_add_posting_to_wave(posting)
