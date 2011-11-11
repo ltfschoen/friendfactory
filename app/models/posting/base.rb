@@ -6,7 +6,8 @@ class Posting::Base < ActiveRecord::Base
 
   # TODO: attr_readonly :user_id
 
-  attr_accessor :ignore_distribute_callback
+  attr_accessor :site
+  # attr_accessor :ignore_distribute_callback
 
   acts_as_tree :order => 'created_at asc'
   
@@ -57,11 +58,11 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
-  def distribute(sites)
-    # Override in inherited classes. Make sure
-    # to call super after finishing distribution.
-    self.ignore_distribute_callback = false
-  end
+  # def distribute(sites)
+  #   # Override in inherited classes. Make sure
+  #   # to call super after finishing distribution.
+  #   self.ignore_distribute_callback = false
+  # end
   
   # Thinking-Sphinx
   # define_index do

@@ -10,6 +10,7 @@ class Posting::TextsController < Posting::BaseController
     @posting = nil
     if wave = current_site.waves.find_by_id(params[:wave_id])
       @posting = Posting::Text.new(params[:posting_text]) do |text|
+        text.site = current_site
         text.user = current_user
         text.sticky_until = params[:posting_text][:sticky_until] if current_user.admin?
       end

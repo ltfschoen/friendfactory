@@ -42,7 +42,7 @@ class Wave::Base < ActiveRecord::Base
       :source      => :resource,
       :source_type => 'Posting::Base',
       :conditions  => 'parent_id is null',
-      :after_add   => :after_add_posting_to_wave do
+      :after_add   => :add_posting_to_other_waves do
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
     end
@@ -71,14 +71,18 @@ class Wave::Base < ActiveRecord::Base
 
   def after_add_posting_to_wave(posting)
     # Override in inherited classes then call super.
-    distribute_posting(posting)
+    # distribute_posting(posting)
   end
 
-  def distribute_posting(posting)
-    unless posting.ignore_distribute_callback
-      posting.ignore_distribute_callback = true
-      posting.distribute(sites)
-    end
+  # def distribute_posting(posting)
+  #   unless posting.ignore_distribute_callback
+  #     posting.ignore_distribute_callback = true
+  #     posting.distribute(sites)
+  #   end
+  # end
+
+  def add_posting_to_other_waves(posting)
+    # Override in inherited classes
   end
 
   def new_proxy
@@ -87,5 +91,16 @@ class Wave::Base < ActiveRecord::Base
       proxy.resource = self
       proxy.state = :published
     end
-  end  
+  end
+
+  private
+
+  def add_posting_to_personal_wave(posting)
+    if posting.present? && posting.site.present?
+      if profile = posting.site.waves.type(Wave::Profile).find_by_id(posting.id)
+        profile.postings << posting
+      end
+    end
+  end
+
 end
