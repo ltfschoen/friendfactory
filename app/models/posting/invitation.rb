@@ -1,5 +1,5 @@
 class Posting::Invitation < Posting::Base
-  
+
   FIRST_REMINDER_AGE  = 1.day
   SECOND_REMINDER_AGE = 7.days
   EXPIRATION_AGE      = 10.days
@@ -12,19 +12,10 @@ class Posting::Invitation < Posting::Base
   alias_attribute :sponsor, :user
 
   validates_presence_of :site, :sponsor
-  
-  after_create do |invitation|    
+
+  after_create do |invitation|
     invitation.code ||= invitation.id
     invitation.save!
-  end
-  
-  def distribute(sites)
-    sites.each do |site|
-      if profile = user.profile(site)
-        profile.postings << self
-      end
-    end
-    super
   end
 
   state_machine do
@@ -48,7 +39,7 @@ class Posting::Invitation < Posting::Base
       transitions :to => :unpublished, :from => [ :offered, :expired ]
     end
   end
-  
+
   scope :offered, where(:state => :offered)
   scope :personal, where('`postings`.`body` IS NOT NULL')
   scope :universal, where(:body => nil)

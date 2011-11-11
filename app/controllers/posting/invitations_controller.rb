@@ -1,7 +1,7 @@
 class Posting::InvitationsController < ApplicationController
 
   before_filter :require_user
-  
+
   def create
     @li_eq = params[:li_eq]
     @posting = new_posting_invitation
@@ -27,7 +27,7 @@ class Posting::InvitationsController < ApplicationController
       format.js { render :action => 'create', :layout => false }
     end
   end
-    
+
   private
 
   def new_posting_invitation

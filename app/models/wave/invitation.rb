@@ -7,7 +7,13 @@ class Wave::Invitation < Wave::Base
     group('`publications`.`wave_id`').
     having("count(*) >= #{min_offered.to_i}").
     order('count(*) desc').
-    all    
+    all
   end
-  
+
+  def add_posting_to_other_waves(posting)
+    add_posting_to_personal_wave(posting)
+    add_posting_to_home_wave(posting)
+    super
+  end
+
 end

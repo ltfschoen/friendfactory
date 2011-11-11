@@ -7,7 +7,6 @@ class Posting::Base < ActiveRecord::Base
   # TODO: attr_readonly :user_id
 
   attr_accessor :site
-  # attr_accessor :ignore_distribute_callback
 
   acts_as_tree :order => 'created_at asc'
   
@@ -25,7 +24,7 @@ class Posting::Base < ActiveRecord::Base
   end
   
   scope :type, lambda { |*types| types.length == 1 ? where(:type => types.first.to_s) : where(:type => types.map(&:to_s)) }    
-  scope :published, where(:state => :published)
+  scope :published, where(:state => [ :published, :offered ])
   scope :unpublished, where(:state => :unpublished)
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
   scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
@@ -58,12 +57,6 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
-  # def distribute(sites)
-  #   # Override in inherited classes. Make sure
-  #   # to call super after finishing distribution.
-  #   self.ignore_distribute_callback = false
-  # end
-  
   # Thinking-Sphinx
   # define_index do
   #   indexes body
@@ -78,13 +71,13 @@ class Posting::Base < ActiveRecord::Base
   #   has [ :user_id, :receiver_id ], :as => :recipient_ids
   #   has :private, :type => :boolean
   # end
-    
+
   def to_s
     self[:type].to_s + ':' + self[:id].to_s
   end
-  
+
   def existing_record?
     !new_record?
   end
-  
+
 end
