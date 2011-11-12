@@ -32,14 +32,10 @@ class Posting::Base < ActiveRecord::Base
   has_many :children, :class_name  => 'Posting::Base', :foreign_key => 'parent_id'
 
   belongs_to :user
-  # belongs_to :resource, :polymorphic => true  
+  # belongs_to :resource, :polymorphic => true
 
   has_many :publications, :as => :resource
   has_many :waves, :through => :publications, :order => 'updated_at desc'
-
-  def self.publish_to(destination, &block)
-    after_create Publisher.new(destination, &block)
-  end
 
   def attributes=(attrs)
     sanitize_for_mass_assignment(attrs).each do |k, v|

@@ -49,9 +49,9 @@ class Wave::Base < ActiveRecord::Base
       where('type not in (?)', types.map(&:to_s))
     end
 
-    def <<(posting)      
+    def <<(posting)
       super(posting.is_a?(Wave::Base) ? posting.new_proxy : posting)
-    end    
+    end
   end
 
   has_many :bookmarks, :foreign_key => 'wave_id'
