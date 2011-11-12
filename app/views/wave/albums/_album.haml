@@ -9,7 +9,8 @@
         = thimble_link_to_profile(user)
       .clear
         .photo{ :class => photo.horizontal? ? nil : 'vertical' }
-          = link_to render_photo(photo), wave_community_path(album)
+          =# link_to render_photo(photo), wave_community_path(album)          
+          = link_to_album_photo(album, photo)
         = posted_distance_of_time(proxy)
         = link_to_comments(proxy.comments.published.count, posting_comments_path(photo))
     .reaction
