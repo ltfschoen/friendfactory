@@ -13,7 +13,6 @@ class Posting::LinksController < Posting::BaseController
         link.build_photos
       end
       if wave.postings << @posting
-        current_user.profile(current_site).postings << @posting
         @posting.publish!
         @posting.children(true)
       end
