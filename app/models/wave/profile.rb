@@ -123,11 +123,6 @@ class Wave::Profile < Wave::Base
     self.has_friended?(profile_id, ::Friendship::Poke)
   end
 
-  def add_posting_to_other_waves(posting)
-    add_posting_to_home_wave(posting)
-    super
-  end
-
   private
 
   def touch(avatar = nil)
