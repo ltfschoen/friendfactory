@@ -48,10 +48,6 @@ class Wave::Base < ActiveRecord::Base
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
     end
-
-    def <<(posting)
-      super(posting.is_a?(Wave::Base) ? posting.new_proxy : posting)
-    end
   end
 
   has_many :bookmarks, :foreign_key => 'wave_id'
@@ -73,14 +69,6 @@ class Wave::Base < ActiveRecord::Base
 
   def add_posting_to_other_waves(posting)
     # Override in inherited classes
-  end
-
-  def new_proxy
-    Posting::WaveProxy.new do |proxy|
-      proxy.user = self.user
-      proxy.resource = self
-      proxy.state = :published
-    end
   end
 
   private
