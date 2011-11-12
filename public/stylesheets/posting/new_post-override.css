@@ -20,6 +20,13 @@
 	margin-top: 10px;
 }
 
+.new_post input[type='text'],
+.new_post textarea {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+}
+
 .ie .new_post .foot {
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
 }

@@ -45,6 +45,9 @@ a:focus {
 	float: left;
 }
 
+.placeholder {
+	color: #AAA;
+}
 .pagination {
 	text-align: center;
 	font-size: 12px;

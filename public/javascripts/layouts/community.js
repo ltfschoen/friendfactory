@@ -111,6 +111,9 @@ jQuery(function($) {
 	// Initialize rollcall headshots
 	$('div.headshot').headshot();
 
+	// Initialize forms
+	$('input[type="text"], textarea', 'form').placeholder();
+
 	// Comments
 	$('.comments a, a.comments')
 		.live('ajax:beforeSend', function() {
