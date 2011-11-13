@@ -1,0 +1,31 @@
+@-webkit-keyframes fall {
+        0% {
+        	top: -335px;
+      		-webkit-transform: rotate(20deg);
+        }
+        20%{
+        	top: -30px;
+        	-webkit-transform: rotate(-20deg);
+        }
+        40%{
+        	top: -30px;
+        	-webkit-transform: rotate(10deg);
+        }
+        60%{
+        	top: -30px;
+        	-webkit-transform: rotate(-10deg);
+        }
+        80%{
+        	top: -30px;
+        	-webkit-transform: rotate(5deg);
+        }
+        100% {
+             top: -30px;
+             -webkit-transform: rotate(0deg);
+        }
+}
+
+.animation{
+	top: -30px !important;
+	-webkit-animation: fall 1.5s ease-in-out;
+}

@@ -1,0 +1,42 @@
+!!! 5
+%html.welcome.no-js
+  %head
+    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
+    %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+    %title= current_site.display_name
+    
+    = stylesheet_links |
+      'reset', 'forms', '960', |
+      'friskyfactory/application', |
+      'friskyfactory/welcome', |
+      'friskyfactory/jquery-ui', |
+      :media => 'screen', |
+      :cache => 'friskyfactory/welcome.cache'
+
+    = stylesheet_link_tag "#{current_site.name}/#{controller_name}", :media => 'screen'
+
+    / [if IE]
+      = stylesheet_link_tag 'friskyfactory/ie', :media => 'screen'
+
+    - if Rails.env.development?
+      = javascript_include_tag 'jquery.js', 'lib/jquery/jquery-ui.js'
+      = javascript_include_tag 'debug.js'
+    - else
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'
+      
+    = javascript_includes |
+      'lib/modernizr-1.6.min', |    
+      'jquery_ujs', |
+      'lib/ff.placehold', |
+      'app/layouts/welcome', |
+      :cache => 'welcome.cache'
+
+  %body{ :class => current_site, :'data-site'=> current_site }
+    .container.container_16.clearfix
+      = yield
+    .page.footer
+      %p
+        %span
+          &copy;&nbsp;#{Date.today.year} Frisky Factory LLC, New York, NY
+    = render :partial => 'layouts/shared/analytics'
