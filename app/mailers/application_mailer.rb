@@ -11,10 +11,7 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def host_for_site(site)
-    host = ActionMailer::Base.default_url_options[:host].gsub('friskyfactory', site.name)
-    port = ActionMailer::Base.default_url_options[:port]
-    host += ":#{port}" if port != "80"
-    host
+    ActionMailer::Base.default_url_options[:host].gsub('friskyfactory', site.name)
   end
 
 end

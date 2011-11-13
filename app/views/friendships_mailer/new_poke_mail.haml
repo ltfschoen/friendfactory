@@ -8,6 +8,8 @@
   %p
     #{@wave_profile_url}
   %p
+    = link_to nil, wave_profile_url(@poke.sender, :host => @host)
+  %p
     You received this email since you subscribed to message notifications at #{@site.display_name}.
     Send an email to #{link_to 'unsubscribe', @unsubscribe_href, :style => 'text-decoration:underline', :target => '_blank'}
     and we'll remove you right away.

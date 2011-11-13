@@ -6,6 +6,7 @@
   Don't know who #{@poke.sender.handle} is and want to find out more? Click below to check out their bio:
 
   #{@wave_profile_url}
+  #{wave_profile_url(@poke.sender, :host => @host)}
 
   You received this email since you subscribed to message notifications at #{@site.display_name}.
   Send an email to unsubscribe@friskyfactory.com, and we'll remove you right away.
