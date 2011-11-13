@@ -1,13 +1,10 @@
-class PasswordsMailer < ActionMailer::Base
-
-  default :from => "mailer@friskyfactory.com"
+class PasswordsMailer < ApplicationMailer
 
   def reset(user, current_site)
     @user, @current_site = user, current_site
-    @host = ActionMailer::Base.default_url_options[:host].gsub('friskyfactory', current_site.name)
-    email = Rails.env.production? ? @user.email : 'michael@michaelbamford.com'    
+    @host = host_for_site(@current_site)
     subject = "Reset #{current_site.display_name} Password"
-    mail :to => email, :subject => subject
+    mail :from => @site.mailer, :to => email_for_environment(@user.email), :subject => subject
   end
 
 end
