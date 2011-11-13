@@ -78,7 +78,7 @@ class Site < ActiveRecord::Base
   alias :intern :to_sym
 
   def mailer
-    self[:mailer] || DefaultMailer
+    self[:mailer].present? ? self[:mailer] : DefaultMailer
   end
 
   def home_wave

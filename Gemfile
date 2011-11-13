@@ -37,24 +37,21 @@ gem 'whenever', :require => false
 gem 'embedly'
 
 # gem 'responsalizr'
-# gem 'postageapp'
 # gem 'exifr'
 # gem 'sanitize'
-
 # gem 'thinking-sphinx', '>= 1.3.16', :require => 'thinking_sphinx'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 
-# gem 'rails-footnotes', '>= 3.7', :group => :development
+gem 'letter_opener', :group => :development
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
   gem 'webrat', '>= 0.7.2'
   gem 'sql-logging'
-  # gem 'faker'
 end
 
 group :production do

@@ -1,6 +1,6 @@
 class EmptyAvatar
 
-  EmptyAvatarUrl = '/images/friskyfactory/silhouette-q.gif'
+  EmptyAvatarUrl = '/images/silhouette-q.gif'
 
   attr_accessor :profile
 

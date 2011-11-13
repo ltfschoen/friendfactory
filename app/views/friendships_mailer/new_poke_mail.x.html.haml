@@ -3,14 +3,14 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title= @subject
-  %body{:style => "background-color:#{@site.assets[:background_color]}; background-image:url('http://#{@host}#{@site.assets[:fibers]}');margin:0; padding:0"}
-    %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "background-color:#{@site.assets[:background_color]}; background-image:url('http://#{@host}#{@site.assets[:fibers]}');", :width => "100%"}
+  %body{:style => "background-color:#{@site.assets[:background_color]}; background-image:url('http://#{@host}#{@site.assets[:body_background].url}');margin:0; padding:0"}
+    %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "background-color:#{@site.assets[:background_color]}; background-image:url('http://#{@host}#{@site.assets[:body_background]}');", :width => "100%"}
       %tr
         %td{:valign => "top"}
           %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "background-color:#ffffff; border-left:1px solid #aa3a21;  border-right:1px solid #aa3a21; margin-top:2em", :width => "524"}
             %tr
               %td{:align => "center", :colspan => "3", :valign => "top"}
-                %img{:alt => @site.display_name, :src => "http://#{@host}#{@site.assets[:badge]}", :style => "display:block; margin-top:10px", :width => "260"}/
+                %img{:alt => @site.display_name, :src => "http://#{@host}#{@site.assets[:logo].url}", :style => "display:block; margin-top:10px", :width => "260"}/
             %tr
               %td{:width => "24"}
               %td{:valign => "top", :width => "477"}
@@ -25,17 +25,17 @@
                       %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "107"}
                         %tr
                           %td{:colspan => "3", :valign => "top"}
-                            %img{:alt => "", :height => "14", :src => "http://#{@host}/images/friskyfactory/lg_p_top.jpg", :style => "display:block", :width => "107"}/
+                            %img{:alt => "", :height => "14", :src => "http://#{@host}/images/lg_p_top.jpg", :style => "display:block", :width => "107"}/
                         %tr
                           %td{:valign => "top"}
-                            %img{:alt => "", :height => "82", :src => "http://#{@host}/images/friskyfactory/lg_p_left.jpg", :style => "display:block", :width => "12"}/
+                            %img{:alt => "", :height => "82", :src => "http://#{@host}/images/lg_p_left.jpg", :style => "display:block", :width => "12"}/
                           %td{:valign => "top"}
                             %img{:alt => @poke.sender.handle, :height => "82", :src => "http://#{@host}#{@poke.sender.avatar.url(:thumb)}", :style => "display:block", :width => "82"}/
                           %td{:valign => "top"}
-                            %img{:alt => "", :height => "82", :src => "http://#{@host}/images/friskyfactory/lg_p_right.jpg", :style => "display:block", :width => "13"}/
+                            %img{:alt => "", :height => "82", :src => "http://#{@host}/images/lg_p_right.jpg", :style => "display:block", :width => "13"}/
                         %tr
                           %td{:colspan => "3", :valign => "top"}
-                            %img{:alt => "", :height => "24", :src => "http://#{@host}/images/friskyfactory/lg_p_bottom.jpg", :style => "display:block", :width => "107"}/
+                            %img{:alt => "", :height => "24", :src => "http://#{@host}/images/lg_p_bottom.jpg", :style => "display:block", :width => "107"}/
                     %td{:valign => "top"}
                       / Message
                       %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "353"}
