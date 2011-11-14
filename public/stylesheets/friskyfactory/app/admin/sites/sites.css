@@ -84,7 +84,8 @@ form.edit_site textarea.stylesheet_css {
 	font-weight: normal;
 }
 
-.admin.site table.form tr.assets .tr.asset.constant .td:nth-child(1) input[type='text'] {
+.admin.site table.form tr.assets .tr.asset.constant .td:nth-child(1) input[type='text'],
+.admin.site table.form tr.assets .tr.asset.text .td:nth-child(1) input[type='text'] {
 	width: 86px;
 }
 

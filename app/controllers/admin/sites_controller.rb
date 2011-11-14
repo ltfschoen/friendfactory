@@ -53,7 +53,7 @@ class Admin::SitesController < ApplicationController
     # http://<asset_host>.com/stylesheeets/<site>/<controller>.css
     respond_to do |format|
       if site = Site.find_by_name(params[:site_name])
-        variables = site.assets.map(&:to_s)
+        variables = site.assets.type(Asset::Constant, Asset::Image).map(&:to_s)
         css = site.stylesheet(params[:controller_name])
         @engine = Sass::Engine.new((variables << css << uid_css).compact.join, :syntax => :scss)
         format.css { render :text => @engine.render }
@@ -67,7 +67,8 @@ class Admin::SitesController < ApplicationController
   
   def empty_assets_and_stylesheet
     @site.images.build
-    @site.constants.build    
+    @site.constants.build
+    @site.texts.build
     @site.stylesheets.build if @site.stylesheets.length == 0
   end
 

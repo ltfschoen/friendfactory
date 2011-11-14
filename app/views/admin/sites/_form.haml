@@ -80,14 +80,37 @@
         .table
           = f.fields_for :constants do |asset_form|
             .tr.asset.constant
-              .td= asset_form.text_field :name, :placeholder => 'name'
-              .td= asset_form.text_field :value, :placeholder => 'value'
+              .td
+                = asset_form.text_field :name, :placeholder => 'name'
+              .td
+                = asset_form.text_field :value, :placeholder => 'value'
               - if asset_form.object.new_record?
-                .td &nbsp
+                .td
+                  = button_tag 'Add', :class => 'add'
               - else
                 .td
                   = asset_form.check_box('_destroy')
                   = asset_form.label('_destroy', 'Remove')
+
+    %tr.assets.texts
+      %td
+        = f.label :text
+      %td
+        .table
+          = f.fields_for :texts do |asset_form|
+            .tr.asset.text
+              .td
+                = asset_form.text_field :name, :placeholder => 'name'
+              .td
+                = asset_form.text_field :value, :placeholder => 'value'
+              - if asset_form.object.new_record?
+                .td
+                  = button_tag 'Add', :class => 'add'
+              - else
+                .td
+                  = asset_form.check_box('_destroy')
+                  = asset_form.label('_destroy', 'Remove')
+
     %tr.assets.images
       %td
         = f.label :images

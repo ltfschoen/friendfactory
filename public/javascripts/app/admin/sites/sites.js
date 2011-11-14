@@ -1,13 +1,12 @@
 jQuery(function($) {
 
 	function newFileField(seq) {
-		return $(
-'<div class="tr asset image"><div class="td silhouette"><img alt="Silhouette-q" height="32" src="/images/friskyfactory/silhouette-q.gif" width="32"></div><div class="td"><input id="site_images_attributes_'+ seq + '_name" name="site[images_attributes][' + seq + '][name]" placeholder="name" type="text"><input id="site_images_attributes_' + seq + '_asset" name="site[images_attributes][' + seq + '][asset]" type="file"></div><div class="td">&nbsp;</div></div>');
-	}
+		return $('<div class="tr asset image"><div class="td silhouette"><img alt="Silhouette-q" height="32" src="/images/friskyfactory/silhouette-q.gif" width="32"></div><div class="td"><input id="site_images_attributes_'+ seq + '_name" name="site[images_attributes][' + seq + '][name]" placeholder="name" type="text"><input id="site_images_attributes_' + seq + '_asset" name="site[images_attributes][' + seq + '][asset]" type="file"></div><div class="td">&nbsp;</div></div>');
+	};
 
-	function newConstantField(seq) {
-		return $('<div class="tr asset constant"><div class="td"><input id="site_constants_attributes_'+ seq + '_name" name="site[constants_attributes][' + seq + '][name]" placeholder="name" type="text"></div><div class="td"><input id="site_constants_attributes_'+ seq + '_value" name="site[constants_attributes][' + seq + '][value]" placeholder="value" type="text"></div><div class="td">&nbsp;</div></div>');
-	}
+	function newField(type, seq) {
+		return $('<div class="tr asset ' + type + '"><div class="td"><input id="site_' + type + 's_attributes_' + seq + '_name" name="site['+ type + 's_attributes][' + seq + '][name]" placeholder="name" type="text"></div><div class="td"><input id="site_' + type + 's_attributes_'+ seq + '_value" name="site[' + type + 's_attributes][' + seq + '][value]" placeholder="value" type="text"></div><div class="td"><button class="add">Add</button></div></div>');
+	};
 
 	$('.admin.site')
 		.buttonize({ text: true })
@@ -21,16 +20,20 @@ jQuery(function($) {
 			})
 		.end()
 
-		.find('.tr.asset.constant input[type="text"]')
-			.live('change', function() {
+		.find('button.add')
+			.live('click', function(event) {
 				var $this = $(this),
-					$other = $this.closest('.td').siblings().find('input[type="text"]'),
 					$tr = $this.closest('.tr.asset'),
-					seq = $tr.prevAll('.tr.asset').andSelf().length;
+					seq = $tr.siblings('.tr.asset').andSelf().length,
+					type;
 
-				if ($this.val().length > 0 && $other.val().length > 0) {
-					$tr.after(newConstantField(seq));
-				}
+				event.preventDefault();
+				type = $.grep($tr.attr('class').split(/\s+/), function(className) {
+					return (className === 'constant') || (className === 'text');
+				}).toString();
+
+				$tr.after(newField(type, seq));
+				$this.remove();
 			})
 		.end()
 

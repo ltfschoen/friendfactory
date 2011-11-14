@@ -44,6 +44,7 @@ class Site < ActiveRecord::Base
   has_many :stylesheets, :order => '`controller_name` asc'
   has_many :images, :class_name => 'Asset::Image'
   has_many :constants, :class_name => 'Asset::Constant'
+  has_many :texts, :class_name => 'Asset::Text'
 
   def stylesheet(controller_name = nil)
     stylesheets = self.stylesheets.scoped
@@ -56,6 +57,7 @@ class Site < ActiveRecord::Base
   accepts_nested_attributes_for :stylesheets, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :constants, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :texts, :allow_destroy => true, :reject_if => :all_blank
 
   after_create :create_home_wave
 
