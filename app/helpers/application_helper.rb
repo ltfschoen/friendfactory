@@ -31,13 +31,13 @@ module ApplicationHelper
     super(source, opts)
   end
   
-  # def button_tag(text = nil, opts = {})
-  #   content_tag(:button, text, opts)
-  # end
+  def button_tag(text = nil, opts = {})
+    content_tag(:button, text, opts)
+  end
   
-  # def button_tag_if(boolean, text = nil, opts = {})
-  #   button_tag(text, opts) if boolean
-  # end
+  def button_tag_if(boolean, text = nil, opts = {})
+    button_tag(text, opts) if boolean
+  end
   
   def spinner(opts = {})    
     size = case opts[:size]
