@@ -1,0 +1,12 @@
+.cells .headshot-container {
+	margin: 50px 50px 25px 0;
+	float: left;
+}
+
+.cells .headshot-container:last-child {
+	margin-right: 0 !important;
+}
+
+input:-webkit-autofill {
+	background-color: #FFF !important;
+}

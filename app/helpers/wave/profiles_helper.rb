@@ -22,7 +22,9 @@ module Wave::ProfilesHelper
   end
 
   def poke_class(profile_id)
-    (current_profile.id != profile_id) && current_profile.has_poked?(profile_id) && 'poked'
+    if current_profile && current_profile.id != profile_id
+      current_profile.has_poked?(profile_id) && 'poked'
+    end
   end
 
   def link_to_send_cocktail(profile)
@@ -54,6 +56,12 @@ module Wave::ProfilesHelper
 
   def link_to_close
     link_to "×", '#', :title => 'Close', :class => 'close'
+  end
+
+  def headshot_tag(profile)
+    if profile.present?
+      render :partial => 'wave/profiles/headshot', :locals => { :profile => profile }
+    end
   end
 
 end
