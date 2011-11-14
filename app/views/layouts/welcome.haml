@@ -183,7 +183,6 @@
     .footer © copyright 2011 Frisky Factory LLC, New York, NY
   :javascript
     $(document).ready(function(){
-    	$('#badge').addClass('animation');
     	setInterval(function(){
     		var obj = $('#stream .portrait').first()
     		obj.clone().appendTo('#container');
@@ -192,5 +191,11 @@
     		});
     	}, 2500);
     })
+    
+    $(window).load(function(){
+      setInterval(function(){
+        $('#badge').addClass('animation');
+      }, 900);    
+    });
 :plain
   </html>
