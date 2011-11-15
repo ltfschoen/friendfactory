@@ -1,5 +1,10 @@
 jQuery(function($) {
 
+	// Initialize forms
+	$('input[type="text"], textarea', 'form').placeholder();
+
+
+	// Ticker
 	// setInterval(function(){
 	// 	var obj = $('#stream .portrait').first()
 	// 	obj.clone().appendTo('#container');
@@ -8,12 +13,9 @@ jQuery(function($) {
 	// 	});
 	// }, 2500);
 
-	// Initialize forms
-	$('input[type="text"], textarea', 'form').placeholder();
-
 
 	// Headshots
-	// $('div.headshot').headshot({ panes: { conversation: function(){} }});
+	$('div.headshot').headshot({ panes: { conversation: function(){} }});
 
 	$('a.flip.icon[title]')
 		.tooltip()
@@ -21,6 +23,7 @@ jQuery(function($) {
 			return false;
 			$(this).data('tooltip').getTip().hide();
 		});
+
 
 	// Badge
 	$("#reuse_password").hide();
@@ -38,7 +41,7 @@ jQuery(function($) {
 	});
 
 
-	// Forgotten email
+	// Forgotten password
 	$('a.forgotten').click(function(event) {
 		event.preventDefault();
 		$('.dialog')
@@ -74,6 +77,7 @@ jQuery(function($) {
 			}
 		});
 });
+
 
 jQuery(window).load(function() {
 	setInterval(function(){
