@@ -1,21 +1,28 @@
 jQuery(function($) {
 
-  	// setInterval(function(){
-  	// 	var obj = $('#stream .portrait').first()
-  	// 	obj.clone().appendTo('#container');
-  	// 	obj.animate({marginLeft: -35}, 500, function(){
-  	// 		obj.remove();
-  	// 	});
-  	// }, 2500);
+	// setInterval(function(){
+	// 	var obj = $('#stream .portrait').first()
+	// 	obj.clone().appendTo('#container');
+	// 	obj.animate({marginLeft: -35}, 500, function(){
+	// 		obj.remove();
+	// 	});
+	// }, 2500);
 
-	$('div.headshot').headshot({ panes: { conversation: function(){} }});
+	// Initialize forms
+	$('input[type="text"], textarea', 'form').placeholder();
+
+
+	// Headshots
+	// $('div.headshot').headshot({ panes: { conversation: function(){} }});
 
 	$('a.flip.icon[title]')
 		.tooltip()
-		.click(function() {
+		.click(function(event) {
+			return false;
 			$(this).data('tooltip').getTip().hide();
 		});
 
+	// Badge
 	$("#reuse_password").hide();
 
 	$('input#user_email').change(function(event) {
@@ -31,7 +38,7 @@ jQuery(function($) {
 	});
 
 
-	// Forgotten email dialog
+	// Forgotten email
 	$('a.forgotten').click(function(event) {
 		event.preventDefault();
 		$('.dialog')

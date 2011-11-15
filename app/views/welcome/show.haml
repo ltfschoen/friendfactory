@@ -87,7 +87,7 @@
     = render :partial => 'welcome/headshot', :locals => { :profile => profiles[0] }
     = render :partial => 'welcome/headshot', :locals => { :profile => profiles[1] }
     = render :partial => 'welcome/headshot', :locals => { :profile => profiles[2] }
-    = render :partial => 'welcome/headshot', :locals => { :profile => profiles[3] }
+    = render :partial => 'welcome/headshot', :locals => { :profile => profiles[3], :css_class => 'omega' }
 
   - unless current_site.name == 'dizmdayz'
     %hr/
