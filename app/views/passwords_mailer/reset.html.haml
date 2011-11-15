@@ -5,9 +5,9 @@
       h1 { font-size: 1em; }
   %body
     %p
-      = "Hey #{@user.handle(@current_site)},"
+      = "Hey #{@user.handle(@site)},"
     %p
-      A request was sent to #{@current_site.name} to reset your FriskyHands' password. To do so, click the following link:
+      A request was made to reset your #{@site.display_name} password. To do so, click the following link:
     %p
       = edit_password_url(:id => @user.perishable_token, :host => @host)
     %p

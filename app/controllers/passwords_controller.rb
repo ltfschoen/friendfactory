@@ -2,28 +2,30 @@ class PasswordsController < ApplicationController
 
   before_filter :require_no_user
   before_filter :find_user_by_perishable_token, :only => [ :edit, :update ]
-  
+
   def new
     render :layout => 'welcome'
   end
-  
+
   def create
-    if @user = User.find_by_email(params[:email])
-      @user.reset_password!
-      PasswordsMailer.reset(@user, current_site).deliver
-      flash[:notice] = "Thanks! Instructions to reset your password have been emailed to #{@user.email}"
-      redirect_to welcome_path
-    else
-      flash[:notice] = 'Sorry, but that email is not being used at FriskyHands.'
-      redirect_to new_password_path
+    respond_to do |format|
+      if user = User.find_by_email(params[:email])
+        user.reset_password!
+        PasswordsMailer.reset(user, current_site).deliver
+        message = "Thanks! Instructions to reset your password have been emailed to #{user.email}"
+        format.json { render :json => { :success => true, :message =>  message }}
+      else
+        message = "Drat! We can't find that email on #{current_site.display_name}"
+        format.json { render :json => { :success => false, :message => message }}
+      end
     end
   end
-  
+
   # PasswordsMailer email link
   def edit
     render :layout => 'welcome'
   end
-  
+
   def update
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
@@ -34,9 +36,9 @@ class PasswordsController < ApplicationController
       render :action => 'edit', :layout => 'welcome'
     end
   end
-  
+
   private
-  
+
   def find_user_by_perishable_token
     @user = User.find_using_perishable_token(params[:id])
     unless @user

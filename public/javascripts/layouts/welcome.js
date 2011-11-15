@@ -30,6 +30,22 @@ jQuery(function($) {
 		});
 	});
 
+
+	// Forgotten email dialog
+	$('a.forgotten').click(function(event) {
+		event.preventDefault();
+		$('.dialog')
+			.find('input#cancel').attr('value', 'Cancel').end()
+			.find('p:eq(0), input[type="submit"], input[name="email"]').show().end()
+			.find('p:eq(1)').hide().end()
+			.css({display: 'block'})
+			.animate({
+				marginTop: -100,
+				opacity: 100
+			}, 250);
+		$('#mask').show();
+	});
+
 	$('.dialog #cancel').click(function() {
 		$('.dialog').animate({
 			opacity: 0,
@@ -38,15 +54,18 @@ jQuery(function($) {
 		$('#mask').hide();
 	});
 
-	$('a.forgotten').click(function(event) {
-		event.preventDefault();
-		$('.dialog').css({display: 'block'}).animate({
-			marginTop: -100,
-			opacity: 100
-		}, 250)
-		$('#mask').show();
-	});
+	$('form#user_password_reset')
+		.bind('ajax:success', function(data, status) {
+			var $this = $(this);
 
+			$this.find('p:eq(1)').text(status['message']).show();
+
+			if (status['success']) {
+				$this
+					.find('input#cancel').attr('value', 'Close').end()
+					.find('p:eq(0), input[type="submit"], input[name="email"]').hide();
+			}
+		});
 });
 
 jQuery(window).load(function() {
