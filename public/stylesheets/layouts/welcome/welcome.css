@@ -287,7 +287,8 @@ hr {
   line-height: 1.5;
 }
 .cells .cell:last-child {
-  margin: 50px 0 25px 0 !important;
+/*  margin: 50px 0 25px 0 !important;*/
+	margin-right: 0;
 }
 .quotes {
   width: 960px;

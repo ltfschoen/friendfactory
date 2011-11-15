@@ -1,5 +1,9 @@
+.cells {
+	overflow: hidden;
+}
+
 .cells .headshot-container {
-	margin: 50px 50px 25px 0;
+	margin: 0 50px 0 0;
 	float: left;
 }
 
@@ -12,11 +16,23 @@ input:-webkit-autofill {
 }
 
 .tooltip {
-	display:none;
-	background:transparent url(/images/black_arrow.png);
-	font-size:12px;
-	height:70px;
-	width:160px;
-	padding:25px;
-	color:#fff;	
+	display: none;
+	background: transparent url(/images/black_arrow.png);
+	font-size: 12px;
+	height: 70px;
+	width: 160px;
+	padding: 25px;
+	color: #FFF;
+}
+
+hr {
+	margin: 30px 0;
+}
+
+.cells .cell {
+	margin: 0 40px 0 0;
+}
+
+.cells .cell:last-child {
+	margin-right: 0;
 }
