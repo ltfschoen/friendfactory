@@ -20,16 +20,31 @@ jQuery(function($) {
 
 	$('input#user_email').change(function(event) {
 		$.getJSON('/users/member', { email: $(event.target).val() }, function(data) {
-			console.log(data['member']);
 			if (data['member'] !== false) {
 				$("input#user_password_confirmation").hide();
 				$("#reuse_password").find('span').text(data['member']).end().show();
-				// $("#reuse_password").show();
 			} else {
 				$('input#user_password_confirmation').show();
 				$("#reuse_password").hide();
 			}
 		});
+	});
+
+	$('.dialog #cancel').click(function() {
+		$('.dialog').animate({
+			opacity: 0,
+			marginTop: 0
+		}, 250);
+		$('#mask').hide();
+	});
+
+	$('a.forgotten').click(function(event) {
+		event.preventDefault();
+		$('.dialog').css({display: 'block'}).animate({
+			marginTop: -100,
+			opacity: 100
+		}, 250)
+		$('#mask').show();
 	});
 
 });
