@@ -1,0 +1,64 @@
+.headshot-container
+  .headshot
+    .face-container
+      .front.face
+        = headshot_image_tag(profile)
+        %span.handle
+          = profile.handle
+        %ul.buddy-bar.primary
+          %li= link_to 'Biometrics', welcome_headshot_path(:pane => 'biometrics'), |
+            :class => 'flip icon mini-profile', |
+            :'data-pane-name' => 'biometrics', |
+            :title => "Click on the Biometrics button to see everyone's important details!"
+
+          %li= link_to 'Photos', welcome_headshot_path(:pane => 'photos'), |
+            :class => 'flip icon photos', |
+            :'data-pane-name' => 'photos', |
+            :title => "Click to see this person's most recent photos!"
+
+          %li= link_to 'Invitations', welcome_headshot_path(:pane => 'invitations'), |
+            :class => 'flip icon invitations', |
+            :'data-pane-name' => 'invitations', |
+            :title => "Click on invite your new buddies!"
+            
+          %li= link_to 'Pokes', welcome_headshot_path(:pane => 'pokes'), |
+            :class => 'flip icon pokes', |
+            :'data-pane-name' => 'pokes', |
+            :title => "Click on send a cocktail to your new buddy!"
+            
+          %li= link_to 'Chat', welcome_headshot_path(:pane => 'conversation'), |
+            :class => 'flip icon chat last', |
+            :'data-pane-name' => 'conversation', |
+            :title => "Click to Chat real-time!"
+            
+    .face-container
+      .back.face
+        .content
+          .pane
+          %ul.buddy-bar.secondary
+            %li= link_to 'Headshot', '#', :class => 'flip icon headshot'
+          %ul.buddy-bar.primary
+            %li= link_to 'Biometrics', welcome_headshot_path(:pane => 'biometrics'), |
+              :class => 'swipe icon mini-profile', |
+              :'data-pane-name' => 'biometrics', |
+              :title => "Click on the Biometrics button to see everyone's important details!"
+
+            %li= link_to 'Photos', welcome_headshot_path(:pane => 'photos'), |
+              :class => 'swipe icon photos', |
+              :'data-pane-name' => 'photos', |
+              :title => "Click to see this person's most recent photos!"
+
+            %li= link_to 'Invitations', welcome_headshot_path(:pane => 'invitations'), |
+              :class => 'swipe icon invitations', |
+              :'data-pane-name' => 'invitations', |
+              :title => "Click on invite your new buddies!"
+            
+            %li= link_to 'Pokes', welcome_headshot_path(:pane => 'pokes'), |
+              :class => 'swipe icon pokes', |
+              :'data-pane-name' => 'pokes', |
+              :title => "Click on send a cocktail to your new buddy!"
+            
+            %li= link_to 'Chat', welcome_headshot_path(:pane => 'conversation'), |
+              :class => 'swipe icon chat last', |
+              :'data-pane-name' => 'conversation', |
+              :title => "Click to Chat real-time!"

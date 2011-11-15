@@ -205,10 +205,12 @@
 
 	$.fn.headshot = function(options) {
 		var settings = {
-			onFlip: function() {}
+			onFlip: function() {},
+			panes: panes
 		};
 
 		$.extend(settings, options);
+		$.extend(panes, settings['panes']);
 
 		return this.each(function() {
 			var $this = $(this);

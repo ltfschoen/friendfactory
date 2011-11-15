@@ -1,1 +1,161 @@
-= render :partial => File.join('welcome', current_site.name, 'show')
+#header
+  .frame
+    = asset_image_tag :logo_transparent, :id => 'logo'
+
+    - if false
+      %form
+        %input{:name => "email", :placeholder => "email address", :type => "text"}/
+        %input{:name => "password", :placeholder => "password", :type => "password"}/
+        %label.checkbox
+          %input{:name => "remember", :type => "checkbox", :value => "remember"}/
+        %input{:name => "signin", :type => "submit", :value => "Sign In"}/
+    
+    = form_for UserSession.new, :url => user_sessions_path do |f|
+      = f.text_field :email, :placeholder => 'email address'
+      = f.password_field :password, :placeholder => 'password'
+      %label.checkbox
+        %input{:name => "remember", :type => "checkbox", :value => "remember"}/
+      = f.submit 'Sign In'
+
+.frame
+  .col.left
+    - if text = current_site.assets[:headline]
+      %h1= text
+    - if text = current_site.assets[:byline]
+      %p= text
+    %p
+      Your privacy and safety are our number-one concerns. No search
+      engine nor any other web site can access your #{current_site.display_name}
+      secured profile.
+  #badge
+    - if false
+      %form
+        %h2 Sign up now to start socializing!
+        %input{:name => "name", :placeholder => "First Name", :type => "text"}/
+        %input{:name => "email", :placeholder => "Email Address", :type => "text"}/
+        %input{:name => "password", :placeholder => "Password", :type => "password"}/
+        %input{:name => "password_again", :placeholder => "Retype Password", :type => "password"}/
+        %input{:name => "age", :placeholder => "Age", :type => "text"}/
+        %input{:name => "location", :placeholder => "Location", :type => "text"}/
+        %input{:name => "Signup", :type => "submit", :value => "Sign Up"}/
+
+    - else
+      = form_for @user do |f|
+        %h2 Sign up to meet others just like you!
+        =# f.hidden_field :invitation_code
+        = f.text_field :handle, :placeholder => 'First Name'
+        = f.text_field :email, :placeholder => 'Email Address'
+        = f.password_field :password, :placeholder => 'Password'
+        = f.password_field :password_confirmation, :placeholder => 'Retype Password'
+        %input{:name => "age", :placeholder => "Age", :type => "text"}/
+        %input{:name => "location", :placeholder => "Location", :type => "text"}/
+        =# f.existing_user_password_label :password, 'Use your friskyfactory password', :current_site => current_site          
+        =# f.new_user_password_confirmation_field :password_confirmation, 'Retype your password', :current_site => current_site, :class => 'password ui-widget', :placeholder => 'password_confirmation'          
+        = f.submit 'Signup'
+
+  #stream
+    #container
+      .portrait
+        %img{:src => "/images/labs/users/a.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/b.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/c.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/d.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/e.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/f.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/g.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/h.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/i.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/j.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/k.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/a.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/b.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/c.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/d.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/e.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/f.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/g.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/h.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/i.png"}/
+      .portrait
+        %img{:src => "/images/labs/users/j.png"}/
+
+  .cells
+    - profiles = current_site.waves.type(Wave::Profile).limit(4)
+    = render :partial => 'headshot', :locals => { :profile => profiles[0] }
+    = render :partial => 'headshot', :locals => { :profile => profiles[1] }
+    = render :partial => 'headshot', :locals => { :profile => profiles[2] }
+    = render :partial => 'headshot', :locals => { :profile => profiles[3] }
+
+  .cells
+    - if true
+      .cell
+        .thumb.a
+          %img{:src => "/images/labs/brands/friskyhands/screenshots/preview_a.png"}/
+        %p The FriskyHands information stream shows you who FriskyHands members are and what they enjoy doing.
+      .cell
+        .thumb.a
+          %img{:src => "/images/labs/brands/friskyhands/screenshots/preview_b.png"}/
+        %p Chat with and make new friends every day. Get to know others who share your likes and interests.
+      .cell
+        .thumb.a
+          %img{:src => "/images/labs/brands/friskyhands/screenshots/preview_c.png"}/
+        %p Share your thoughts, places, photos, videos, vacations, and so much more with Frisky Hands.
+      
+  .quotes
+    .quote
+      .portrait
+        %img{:src => "/images/labs/users/a.png"}/
+      .note
+        %p #{current_site.display_name} is magical and amazing! I met so many amazing people!
+    .quote
+      .portrait
+        %img{:src => "/images/labs/users/b.png"}/
+      .note
+        %p My name is Todd, and I am not a paid actor. #{current_site.display_name} is super, great, amazing, awesome, and...uh...super. I love using #{current_site.display_name} every day of the week.
+    .quote
+      .portrait
+        %img{:src => "/images/labs/users/c.png"}/
+      .note
+        %p #{current_site.display_name} is the most friskiest of all the friskies. Friskier then a freaking frisker. Frisky McFriskerton. I'm feeling fairly frisky this Friday.
+    .quote
+      .portrait
+        %img{:src => "/images/labs/users/d.png"}/
+      .note
+        %p Can everyone on the internet see this review? Really? Everyone? HI MOM!
+  %hr/
+  .footer © copyright 2011 Frisky Factory LLC, New York, NY
+:javascript
+  $(document).ready(function(){
+  	setInterval(function(){
+  		var obj = $('#stream .portrait').first()
+  		obj.clone().appendTo('#container');
+  		obj.animate({marginLeft: -35}, 500, function(){
+  			obj.remove();
+  		});
+  	}, 2500);
+  })
+  
+  $(window).load(function(){
+    setInterval(function(){
+      $('#badge').addClass('animation');
+    }, 900);    
+  });

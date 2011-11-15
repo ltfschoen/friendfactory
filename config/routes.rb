@@ -12,20 +12,20 @@ Friskyfactory::Application.routes.draw do
     resources :profiles, :only => [ :index, :show ] do
       member do
         get :signals
-        get :biometrics        
+        get :biometrics
         get :photos
         get :invitations
         get :conversation
         get :pokes
       end
       get 'conversation' => 'conversations#show'
-    end    
+    end
     resources :conversations, :only => [ :index, :show ] do
       member do
         put :close
         get :popup
       end
-    end    
+    end
     resources :albums, :only => [ :index, :show, :new, :create ] # do
       # resources :photos, :only => [ :show ], :controller => 'albums'
     # end
@@ -69,7 +69,7 @@ Friskyfactory::Application.routes.draw do
       resources :comments, :only => [ :index, :new, :create ]
     end
   end
-  
+
   # Friendships
   resources :friendships, :only => [] do
     collection do
@@ -90,24 +90,28 @@ Friskyfactory::Application.routes.draw do
   end
 
   # To reset passwords
-  resources :passwords, :only => [ :new, :create, :edit, :update ]  
+  resources :passwords, :only => [ :new, :create, :edit, :update ]
 
   # User and User Sessions
   resources :users, :only => [ :create, :update ] do
     get 'member', :on => :collection
   end
-  
+
   resources :user_sessions, :only => [ :new, :create, :destroy ] do
     get 'lurk', :on => :new
   end
-  
+
   # Menu bar equivalents
-  get   'login'   => 'user_sessions#create'  
+  get   'login'   => 'user_sessions#create'
   match 'logout'  => 'user_sessions#destroy', :via => [ :get, :delete ]
-  
-  # Welcome  
-  # resource 'welcome', :only => [ :show ], :controller => 'welcome'
-  get  'welcome(/:invite)' => 'welcome#show', :as => 'welcome'
+
+  # Welcome
+  # get  'welcome(/:invite)' => 'welcome#show', :as => 'welcome'
+  namespace :welcome do
+    get 'headshot/:pane', :action => 'headshot', :as => 'headshot'
+    get '(/:invite)', :action => 'show'
+  end
+
   post 'launch' => 'welcome#launch'
 
   scope :module => 'wave' do
@@ -123,8 +127,8 @@ Friskyfactory::Application.routes.draw do
   if [ 'development', 'staging' ].include?(Rails.env)
     get 'labs/:action' => 'labs'
   end
-  
-  # Admin  
+
+  # Admin
   namespace :admin do
     resources :tags, :except => [ :show ] do
       collection { get 'commit' }
@@ -135,7 +139,7 @@ Friskyfactory::Application.routes.draw do
     end
     resources :sites, :only => [ :index, :new, :create, :edit, :update ]
   end
-  
+
   get 'stylesheets/:site_name(/:controller_name).:format' => 'admin/sites#stylesheets'
     
   # The priority is based upon order of creation:

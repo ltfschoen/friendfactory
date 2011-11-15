@@ -25,6 +25,10 @@ class WelcomeController < ApplicationController
     end
   end
   
+  def headshot
+    render :text => params[:pane]
+  end
+  
   private
       
   def new_launch_user
