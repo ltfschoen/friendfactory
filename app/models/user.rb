@@ -29,29 +29,29 @@ class User < ActiveRecord::Base
   def validate_invitation_code
     return if invitation_override || enrollment_site.blank?
     return if !enrollment_site.invite_only? || invitation_for_site(enrollment_site).present?
-    errors.add(:base, "That email does not have an invite to this site with that invitation code")
+    errors.add(:base, "Your invite code doesn't seem to be valid")
   end
   
   def validate_invitation_code_state
     return if invitation_override || enrollment_site.blank?
     invitation = invitation_for_site(enrollment_site)    
     return if invitation.nil? || invitation.offered?
-    errors.add(:base, "That invitation code has already been previously #{invitation_for_site(enrollment_site).current_state}")
+    errors.add(:base, "That invite code has already been previously #{invitation_for_site(enrollment_site).current_state}")
   end
 
   def validate_associated_records_for_profiles
     return if enrollment_profile.present? && enrollment_profile.handle.present?
-    errors.add(:handle, "can't be blank")
+    errors.add_to_base("First name can't be blank")
   end
-  
+
   validates_uniqueness_of :email
-  
+
   after_save :perform_enrollment
-  
+
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
   end
-  
+
   state_machine do
     state :enabled
     state :disabled

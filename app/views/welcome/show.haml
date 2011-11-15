@@ -27,6 +27,10 @@
       Your privacy and safety are our number-one concerns. No search
       engine nor any other web site can access your #{current_site.display_name}
       secured profile.
+    - if flash[:errors].present?
+      %p Oh no! Can you fix these errors?
+      %ul#errors        
+        = flash[:errors].map{ |e| "<li>#{e}</li>" }.join.html_safe
   #badge
     - if false
       %form
@@ -42,15 +46,21 @@
     - else
       = form_for @user do |f|
         %h2 Sign up to meet others just like you!
-        = f.hidden_field :invitation_code
+        =# f.hidden_field :invitation_code
         = f.text_field :handle, :placeholder => 'First Name'
         = f.text_field :email, :placeholder => 'Email Address'
         = f.password_field :password, :placeholder => 'Password'
+        #reuse_password
+          Use your
+          %span FriskyFactory
+          password
         = f.password_field :password_confirmation, :placeholder => 'Retype Password'
         =# f.existing_user_password_label :password, 'Use your friskyfactory password', :current_site => current_site          
-        =# f.new_user_password_confirmation_field :password_confirmation, 'Retype your password', :current_site => current_site, :class => 'password ui-widget', :placeholder => 'password_confirmation'          
+        =# f.new_user_password_confirmation_field :password_confirmation, :current_site => current_site, :placeholder => 'Retype Password'
         %input{:name => "age", :placeholder => "Age", :type => "text"}/
-        %input{:name => "location", :placeholder => "Location", :type => "text"}/
+        %input{:name => "location", :placeholder => "Location", :type => "text"}/        
+        - if current_site.invite_only? || true
+          = f.text_field :invitation_code, :placeholder => 'Invite Code'
         = f.submit 'Signup'
 
   - if false
@@ -58,10 +68,10 @@
 
   .cells
     - profiles = current_site.waves.type(Wave::Profile).limit(4)
-    = render :partial => 'headshot', :locals => { :profile => profiles[0] }
-    = render :partial => 'headshot', :locals => { :profile => profiles[1] }
-    = render :partial => 'headshot', :locals => { :profile => profiles[2] }
-    = render :partial => 'headshot', :locals => { :profile => profiles[3] }
+    = render :partial => 'welcome/headshot', :locals => { :profile => profiles[0] }
+    = render :partial => 'welcome/headshot', :locals => { :profile => profiles[1] }
+    = render :partial => 'welcome/headshot', :locals => { :profile => profiles[2] }
+    = render :partial => 'welcome/headshot', :locals => { :profile => profiles[3] }
 
   - unless current_site.name == 'dizmdayz'
     %hr/

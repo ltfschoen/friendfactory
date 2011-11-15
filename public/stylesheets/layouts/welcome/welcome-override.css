@@ -36,3 +36,31 @@ hr {
 .cells .cell:last-child {
 	margin-right: 0;
 }
+
+#badge form input#user_invitation_code {
+	width: 80px;
+}
+
+input#user_invitation_code + input[type="submit"] {
+	width: 120px;
+}
+
+#reuse_password {
+	display: inline-block;
+	color: #FFF;
+	margin: 10px 0 0 10px;
+	width: 215px;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+.field_with_errors {
+	display: inline;
+}
+
+ul#errors li {
+	list-style: disc;
+	color: #333;
+	font: 14px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	line-height: 1.5em;
+}

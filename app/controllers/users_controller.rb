@@ -18,15 +18,20 @@ class UsersController < ApplicationController
         flash.now[:errors] += user_session.errors.full_messages if user_session
         format.html { render :template => 'welcome/show', :layout => 'welcome' }
       end
-    end    
+    end
   end
   
   alias :update :create
 
   def member
-    user = User.find_by_email(params[:email])
+    site = false
+    if user = User.find_by_email(params[:email])
+      if site = user.sites.limit(1).first
+        site = site.display_name
+      end
+    end
     respond_to do |format|
-      format.json { render :json => { :member => user.present? } }
+      format.json { render :json => { :member => site } }
     end
   end
   
