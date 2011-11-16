@@ -145,3 +145,10 @@ body.passwords #badge form input {
 	display: block;
 	margin: 10px auto;
 }
+
+body.passwords #badge form input[type="submit"]:disabled {
+	border: 1px solid #333;
+	background: gray !important;
+	opacity: 0.6;
+	top: 0;
+}
