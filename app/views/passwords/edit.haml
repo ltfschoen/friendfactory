@@ -1,18 +1,28 @@
-- submit_message ||= "Update Password & Login"
-= render :partial => File.join('welcome', current_site.name, 'badge')
-.grid_4.push_6.prepend-top
-  = form_for @user, :url => password_path, :method => :put do |f|
-    %table
-      %tr
-        %td
-          %h3 Change Password
-      %tr
-        %td= f.password_field :password, :class => 'password', :placeholder => 'password'
-      %tr
-        %td= f.password_field :password_confirmation, :class => 'password', :placeholder => 'password confirmation'
-      %tr.button-bar
-        %td= f.submit submit_message
-      - unless @user.errors.empty?
-        %tr
-          %td.formError
-            %p= @user.errors.full_messages.first
+#header
+  .frame
+    = asset_image_tag :logo_transparent, :id => 'logo'
+
+.frame
+  .col.left
+    - if text = current_site.assets[:headline]
+      %hgroup
+        %h1= text
+        - if text = current_site.assets[:byline]
+          %h2= text
+    - if text = current_site.assets[:description]
+      %p= text
+    - if text = current_site.assets[:privacy]
+      %p= text
+
+    - if @user.errors.present?
+      %p Oh no! Can you fix these errors?
+      %ul#errors
+        = @user.errors.full_messages.map{ |e| "<li>#{e}</li>" }.join.html_safe
+
+  #badge
+    = form_for @user, :url => password_path, :method => :put do |f|
+      %h2 Provide a New Password
+      %div
+        = f.password_field :password, :class => 'password', :placeholder => 'password'
+        = f.password_field :password_confirmation, :class => 'password', :placeholder => 'password confirmation'
+        = f.submit 'Update and Login'

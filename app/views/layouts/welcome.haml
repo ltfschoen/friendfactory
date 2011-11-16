@@ -41,7 +41,7 @@
       'layouts/welcome', |
     :cache => 'cache/welcome'
 
-%body
+%body{ :class => page_class }
   = yield
 :plain
   </html>

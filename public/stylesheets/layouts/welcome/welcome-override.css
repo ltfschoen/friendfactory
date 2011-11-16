@@ -6,12 +6,12 @@
 	width: 442px;
 }
 
-.ie8 #header input[name='remember'] {
+.ie #header input[name='remember'] {
 	margin-top: -3px;
 }
 
-.ie8 #header input[name='remember'],
-.ie8 #header label {
+.ie #header input[name='remember'],
+.ie #header label {
 	vertical-align: middle;
 }
 
@@ -121,4 +121,14 @@ ul#errors li {
 	color: #333;
 	font: 14px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	line-height: 1.5em;
+}
+
+body.passwords #badge form div {
+	float: left;
+	width: 100%;
+}
+
+body.passwords #badge form input {
+	display: block;
+	margin: 10px auto;
 }
