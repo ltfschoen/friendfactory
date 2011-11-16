@@ -198,12 +198,12 @@ body {
 #header form input[type="submit"]:active {
   opacity: 1;
   background: #206d7d;
-  background: -moz-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #206d7d), color-stop(100%, #428f9f));
-  background: -webkit-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: -o-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: -ms-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: linear-gradient(top, #206d7d 0%, #428f9f 100%);
+  background: -moz-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #972d20), color-stop(100%, #b94f42));
+  background: -webkit-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: -o-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: -ms-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: linear-gradient(top, #972d20 0%, #b94f42 100%);
 }
 #header form p {
   float: left;
@@ -368,12 +368,12 @@ body {
 #badge form input[type="submit"]:active {
   opacity: 1;
   background: #206d7d;
-  background: -moz-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #206d7d), color-stop(100%, #428f9f));
-  background: -webkit-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: -o-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: -ms-linear-gradient(top, #206d7d 0%, #428f9f 100%);
-  background: linear-gradient(top, #206d7d 0%, #428f9f 100%);
+  background: -moz-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #972d20), color-stop(100%, #b94f42));
+  background: -webkit-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: -o-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: -ms-linear-gradient(top, #972d20 0%, #b94f42 100%);
+  background: linear-gradient(top, #972d20 0%, #b94f42 100%);
 }
 #stream {
   width: 960px;
