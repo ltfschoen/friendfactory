@@ -64,7 +64,7 @@
   text-shadow: 0 1px 3px #000;
   font-weight: bold;
   cursor: pointer;
-  border: 1px solid #750b00 !important;
+  border: 1px solid #750b00;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 0px rgba(255, 255, 255, 0.2) inset;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -367,7 +367,7 @@ body {
 }
 #badge form input[type="submit"]:active {
   opacity: 1;
-  background: #206d7d;
+  background: #972d20;
   background: -moz-linear-gradient(top, #972d20 0%, #b94f42 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #972d20), color-stop(100%, #b94f42));
   background: -webkit-linear-gradient(top, #972d20 0%, #b94f42 100%);
