@@ -36,13 +36,15 @@
 .frame
   .col.left
     - if text = current_site.assets[:headline]
-      %h1= text
-    - if text = current_site.assets[:byline]
+      %hgroup
+        %h1= text
+        - if text = current_site.assets[:byline]
+          %h2= text
+    - if text = current_site.assets[:description]
       %p= text
-    %p
-      Your privacy and safety are our number-one concerns. No search
-      engine nor any other web site can access your #{current_site.display_name}
-      secured profile.
+    - if text = current_site.assets[:privacy]
+      %p= text
+
     - if flash[:errors].present?
       %p Oh no! Can you fix these errors?
       %ul#errors        
