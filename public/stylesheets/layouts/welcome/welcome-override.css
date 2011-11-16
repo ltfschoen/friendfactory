@@ -6,6 +6,15 @@
 	width: 442px;
 }
 
+.ie8 #header input[name='remember'] {
+	margin-top: -3px;
+}
+
+.ie8 #header input[name='remember'],
+.ie8 #header label {
+	vertical-align: middle;
+}
+
 .col h1 {
 	font-size: 3em;
 }
@@ -28,7 +37,11 @@
 }
 
 .cells .headshot-container:last-child {
-	margin-right: 0 !important;
+	margin-right: 0;
+}
+
+.ie8 .cells .headshot-container.omega {
+	margin-right: 0;
 }
 
 input:-webkit-autofill {
@@ -57,6 +70,14 @@ hr {
 	margin-right: 0;
 }
 
+.ie8 .cells .cell.omega {
+	margin-right: 0;
+}
+
+.ie8 .cells .cell {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=160, Strength=5);
+}
+
 #badge form input#user_invitation_code {
 	width: 80px;
 }
@@ -83,8 +104,4 @@ ul#errors li {
 	color: #333;
 	font: 14px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	line-height: 1.5em;
-}
-
-.omega {
-	margin-right: 0;
 }

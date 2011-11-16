@@ -1,7 +1,7 @@
 jQuery(function($) {
 
 	// Initialize forms
-	$('input[type="text"], textarea', 'form').placeholder();
+	$('input, textarea').placeholder();
 
 
 	// Ticker
