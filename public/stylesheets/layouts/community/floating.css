@@ -1,4 +1,6 @@
 #floating {
 	position: fixed;
 	z-index: 10000;
+	width: 1px;
+	height: 1px;
 }
