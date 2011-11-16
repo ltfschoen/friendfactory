@@ -22,8 +22,11 @@ class PasswordsController < ApplicationController
 
   # PasswordsMailer email link
   def edit
-    @user = User.find_using_perishable_token(params[:id])
-    render :layout => 'welcome'
+    if @user = User.find_using_perishable_token(params[:id])
+      render :layout => 'welcome'
+    else
+      redirect_to welcome_url
+    end
   end
 
   def update
