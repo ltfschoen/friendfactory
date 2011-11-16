@@ -3,7 +3,6 @@ jQuery(function($) {
 	// Initialize forms
 	$('input, textarea').placeholder();
 
-
 	// Ticker
 	// setInterval(function(){
 	// 	var obj = $('#stream .portrait').first()
@@ -80,7 +79,10 @@ jQuery(function($) {
 
 
 jQuery(window).load(function() {
-	setInterval(function(){
-	  $('#badge').addClass('animation');
+	setInterval(function() {
+		$('.cssanimations #badge').addClass('animation');
+		$('.no-cssanimations #badge').animate({
+			marginTop: 310
+		}, 1200, 'easeOutElastic');
 	}, 900);
 });
