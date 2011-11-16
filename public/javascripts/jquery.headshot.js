@@ -99,20 +99,24 @@
 			$frontFace
 				.find('a.flip')
 					.click(function() {
-						var $this = $(this),
-							paneName = $this.data('pane-name'),
-							url = $this.attr('href');
+						if ($headshot[0].beforeFlip()) {
+							var $this = $(this),
+								paneName = $this.data('pane-name'),
+								url = $this.attr('href');
 
-						if (jQuery.browser.chrome === true) $content.hide();
+							if (jQuery.browser.chrome === true) $content.hide();
 
-						$content.find('.pane')
-							.css({ 'visibility': 'hidden' });
+							$content.find('.pane')
+								.css({ 'visibility': 'hidden' });
 
-						$headshot
-							.data('pane-name', paneName)
-							.data('url', url)
-							.toggleClass('flipped');
-						return false;
+							$headshot
+								.data('pane-name', paneName)
+								.data('url', url)
+								.toggleClass('flipped');
+							return false;
+						} else {
+							return false;
+						}
 					});
 
 			$backFace
@@ -161,27 +165,31 @@
 			$frontFace
 				.find('a.flip')
 					.live('click', function(event) {
-						var	$this = $(this),
-							paneName = $this.data('pane-name'),
-							url = $this.attr('href'),
-							$content = $headshot.find('.face-container:hidden'),
+						if ($headshot[0].beforeFlip()) {
+							var	$this = $(this),
+								paneName = $this.data('pane-name'),
+								url = $this.attr('href'),
+								$content = $headshot.find('.face-container:hidden'),
 
-							flipper = function () {
-								if ($headshot.hasClass('flipped')) {
-									initBackFace(paneName, url);
-								} else {
-									initFrontFace();
-								}
+								flipper = function () {
+									if ($headshot.hasClass('flipped')) {
+										initBackFace(paneName, url);
+									} else {
+										initFrontFace();
+									}
 								
-								if ($headshot[0].onFlip !== undefined) {
-									$headshot[0].onFlip($headshot[0]);
-								}
-							};
+									if ($headshot[0].onFlip !== undefined) {
+										$headshot[0].onFlip($headshot[0]);
+									}
+								};
 
-						$headshot
-							.addClass('flipped')
-							.flip($.extend(flipSettings, { content: $content, onEnd: flipper }));
-						return false;
+							$headshot
+								.addClass('flipped')
+								.flip($.extend(flipSettings, { content: $content, onEnd: flipper }));
+							return false;
+						} else {
+							return false;
+						}
 					});
 
 			$backFace
@@ -205,6 +213,7 @@
 
 	$.fn.headshot = function(options) {
 		var settings = {
+			beforeFlip: function() { return true; },
 			onFlip: function() {},
 			panes: panes
 		};
@@ -215,6 +224,7 @@
 		return this.each(function() {
 			var $this = $(this);
 
+			this.beforeFlip = settings['beforeFlip'];
 			this.onFlip = settings['onFlip'];
 
 			if (Modernizr.csstransforms3d) {

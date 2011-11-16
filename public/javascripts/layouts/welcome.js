@@ -14,13 +14,15 @@ jQuery(function($) {
 
 
 	// Headshots
-	$('div.headshot').headshot({ panes: { conversation: function(){} }});
+	$('div.headshot').headshot({
+		beforeFlip: function(){ return false; },
+		panes: { conversation: function() {} }
+	});
 
 	$('a.flip.icon[title]')
 		.tooltip()
 		.click(function(event) {
-			return false;
-			$(this).data('tooltip').getTip().hide();
+			// $(this).data('tooltip').getTip().hide();
 		});
 
 
