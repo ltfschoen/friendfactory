@@ -44,6 +44,7 @@ jQuery(function($) {
 	$('a.forgotten').click(function(event) {
 		event.preventDefault();
 		$('.dialog')
+			.find('.spinner').css({ visibility: 'hidden' }).end()
 			.find('input#cancel').attr('value', 'Cancel').end()
 			.find('p:eq(0), input[type="submit"], input[name="email"]').show().end()
 			.find('p:eq(1)').hide().end()
@@ -64,6 +65,12 @@ jQuery(function($) {
 	});
 
 	$('form#user_password_reset')
+		.bind('ajax:beforeSend', function() {
+			$(this).find('.spinner').css({ visibility: 'visible' });
+		})
+		.bind('ajax:complete', function(){
+			$(this).find('.spinner').css({ visibility: 'hidden' });
+		})
 		.bind('ajax:success', function(data, status) {
 			var $this = $(this);
 

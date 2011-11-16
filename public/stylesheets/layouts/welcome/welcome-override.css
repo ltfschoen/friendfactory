@@ -6,6 +6,11 @@
 	top: 0;
 }
 
+.dialog .spinner {
+	float: right;
+	margin-top: 10px;
+}
+
 #header #logo {
 	max-height: 75px;
 	margin: 0;
