@@ -197,7 +197,7 @@ body {
 }
 #header form input[type="submit"]:active {
   opacity: 1;
-  background: #206d7d;
+  background: #b94f42;
   background: -moz-linear-gradient(top, #972d20 0%, #b94f42 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #972d20), color-stop(100%, #b94f42));
   background: -webkit-linear-gradient(top, #972d20 0%, #b94f42 100%);

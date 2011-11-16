@@ -1,5 +1,21 @@
+#header logo {
+	max-height: 75px;
+}
+
 #header form {
 	width: 442px;
+}
+
+.col h1 {
+	font-size: 3em;
+}
+
+.col h2 {
+	font-size: 1.6em;
+}
+
+.col p {
+	margin: 20px 0;
 }
 
 .cells {
