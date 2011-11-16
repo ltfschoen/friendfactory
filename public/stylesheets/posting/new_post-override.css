@@ -10,6 +10,7 @@
 
 .new_post .foot input[type="submit"]:disabled,
 .new_post .foot input[type="submit"]:disabled:active {
+	border: 1px solid #333;
 	background: gray !important;
 	opacity: 0.6;
 	top: 0;

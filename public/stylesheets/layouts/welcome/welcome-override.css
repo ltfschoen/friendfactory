@@ -1,3 +1,11 @@
+.dialog .body .foot input[type="submit"]:disabled,
+.dialog .body .foot input[type="submit"]:disabled:active {
+	border: 1px solid #333;
+	background: gray !important;
+	opacity: 0.6;
+	top: 0;
+}
+
 #header #logo {
 	max-height: 75px;
 	margin: 0;
