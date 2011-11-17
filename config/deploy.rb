@@ -201,8 +201,8 @@ namespace :ff do
       desc "Download dumped production db and images to local. DUMP_DATE=yyyymmdd"
       task :default do
         sql
-        images
         assets
+        images
       end
       
       task :sql do
