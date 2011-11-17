@@ -81,8 +81,9 @@ class User < ActiveRecord::Base
 
   has_many :profiles, :class_name => 'Wave::Profile'
 
-  has_many :inboxes, :class_name => 'Wave::Inbox'
-  
+
+  ### Conversation Waves
+
   has_many :conversations, :class_name => 'Wave::Conversation' do
     def with(receiver, site)
       if receiver.present? && site.present?
@@ -91,19 +92,37 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Syntatic sugar:
-  # <user1>.conversation.with.<user2>
-  alias :conversation :conversations
+  alias :conversation :conversations # Syntatic sugar <user1>.conversation.with.<user2>
 
   has_many :bookmarks
-  
+
+  def conversation_with(receiver, current_site)
+    conversation.with(receiver, current_site) || create_conversation_with(receiver, current_site)
+  end
+
+  def create_conversation_with(receiver, site)
+    if receiver.present? && site.present?
+      wave = conversations.build
+      wave.resource = receiver
+      site.waves << wave
+      wave.publish!
+      wave
+    end
+  end
+
+
+  ### Postings
+
   has_many :postings, :class_name => 'Posting::Base'
+
   has_many :invitations, :foreign_key => 'body', :primary_key => 'email', :class_name => 'Posting::Invitation' do
     def site(site)
       where(:resource_id => site.id)
     end
   end
-      
+
+  ### Social Graph
+
   # has_many :friendships, :class_name => 'Friendship::Base'
   # has_many :friends, :through => :friendships
 
@@ -203,28 +222,6 @@ class User < ActiveRecord::Base
     profile(site).resource
   end
 
-
-  # === Conversations ===
-
-  def conversation_with(receiver, current_site)
-    conversation.with(receiver, current_site) || create_conversation_with(receiver, current_site)
-  end
-
-  def create_conversation_with(receiver, site)
-    if receiver.present? && site.present?
-      wave = conversations.build
-      wave.resource = receiver
-      site.waves << wave
-      wave.publish!
-      wave
-    end
-  end
-
-  def unread_messages_count(site)
-    conversations.site(site).inject(0) do |count, conversation|
-      count += conversation.unread_messages_count
-    end
-  end
 
   # == Invitations
 

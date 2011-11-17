@@ -67,10 +67,6 @@ class Wave::Base < ActiveRecord::Base
     save!
   end
 
-  def add_posting_to_other_waves(posting)
-    # Override in inherited classes
-  end
-
   private
 
   def after_add_posting(posting)
@@ -79,6 +75,10 @@ class Wave::Base < ActiveRecord::Base
       add_posting_to_other_waves(posting)
       @@ignore_after_add_posting_callback = false
     end
+  end
+
+  def add_posting_to_other_waves(posting)
+    # Override in inherited classes
   end
 
   def add_posting_to_personal_wave(posting)

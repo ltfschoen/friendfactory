@@ -1,7 +1,7 @@
 class Posting::Message < Posting::Base
 
-  attr_accessor :receiver
   attr_accessor :site
+  attr_writer   :receiver
 
   alias_attribute :sender, :user
   alias_attribute :sender_id, :user_id
@@ -11,17 +11,13 @@ class Posting::Message < Posting::Base
 
   validates_presence_of :user
   validates_presence_of :receiver, :site, :on => :create
-  
-  has_many :notifications
-
-  after_create do |posting|
-    if (posting.receiver.id != posting.sender_id) && (wave = posting.receiver.conversation_with(posting.sender, posting.site))
-      wave.messages << posting
-    end
-  end
 
   def receiver
-    @receiver || waves.where('`waves`.`user_id` <> ?', user_id).limit(1).first.try(:user)
+    @receiver ||= waves.where('`waves`.`user_id` <> ?', user_id).limit(1).first.try(:user)
+  end
+
+  def receiver_id
+    @receiver.id
   end
 
 end

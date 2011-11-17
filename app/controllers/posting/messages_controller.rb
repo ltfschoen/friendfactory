@@ -3,7 +3,8 @@ class Posting::MessagesController < ApplicationController
   before_filter :require_user
 
   def show
-    if wave = current_user.conversations.find_by_id(params[:wave_id]).try(:read)
+    if wave = current_user.conversations.find_by_id(params[:wave_id])
+      wave.read!
       @last_read_at = wave.read_at
       @posting = wave.postings.find_by_id(params[:id])
     end
@@ -21,7 +22,7 @@ class Posting::MessagesController < ApplicationController
       end
       if @posting.save
         @posting.publish!
-        @wave.messages << @posting
+        @wave.postings << @posting
         broadcast_posting(@posting, (@posting.waves - [ @wave ]))
       end
     end
