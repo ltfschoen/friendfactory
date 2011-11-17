@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
   # end
   
   def inbox(site)
-    conversations.site(site).chatty.published.order('`waves`.`updated_at` DESC')
+    conversations.site(site).chatty.published
   end
   
   def self.find_by_invitation_code(invitation_code)

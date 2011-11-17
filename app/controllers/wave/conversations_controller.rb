@@ -10,9 +10,10 @@ class Wave::ConversationsController < ApplicationController
   @@per_page = 12
 
   def index
-    @conversations = current_user.inbox(current_site).paginate(:page => params[:page], :per_page => @@per_page)
+    @conversations = current_user.inbox(current_site).order('`waves`.`updated_at` DESC').paginate(:page => params[:page], :per_page => @@per_page)
     recipient_user_ids = @conversations.map(&:resource_id)
-    @profiles = Wave::Profile.site(current_site).where(:user_id => recipient_user_ids)
+    @profiles = current_site.waves.type(Wave::Profile).where(:user_id => recipient_user_ids)
+    @profiles = Hash[ *@profiles.map { |profile| [ profile.user_id, profile ]}.flatten ]
     respond_to do |format|
       format.html
     end
