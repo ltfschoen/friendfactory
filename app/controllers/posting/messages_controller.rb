@@ -23,7 +23,7 @@ class Posting::MessagesController < ApplicationController
       if @posting.save
         @posting.publish!
         @wave.postings << @posting
-        broadcast_posting(@posting, (@posting.waves - [ @wave ]))
+        broadcast_posting(@posting, (@posting.waves(true) - [ @wave ]))
       end
     end
     respond_to do |format|
