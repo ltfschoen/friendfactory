@@ -12,13 +12,38 @@
             = render :partial => 'wave/profiles/profile', :locals => { :profile => profile }
       = will_paginate @conversation, :class => 'grid_16 pagination append-top'
 
+- if false
+  #inbox
+    - @conversations_by_date.each do |date, conversations|
+      %div.datecell.clearfix
+        %p.date
+          Received
+          = inbox_distance_of_time_in_words_to_now(date)
+        - conversations.in_groups_of(4) do |group|
+          - group.each_with_index do |conversation, idx|
+            - unless conversation.nil?
+              - profile = @profiles[conversation.resource_id]
+              = render :partial => 'wave/profiles/headshot', :locals => { :profile => profile }
+    = will_paginate @conversations, :class => 'pagination footer'
+
 #inbox
-  %div.clearfix
-    - @conversations.in_groups_of(4) do |group|
-      - group.each_with_index do |conversation, idx|
-        - unless conversation.nil?
-          - profile = @profiles[conversation.resource_id]
-          -# raise conversation.resource_id.inspect if profile.nil?
-          - raise @profiles.inspect if profile.nil?
-          = render :partial => 'wave/profiles/headshot', :locals => { :profile => @profiles[conversation.resource_id] }
-  = will_paginate @conversations, :class => 'pagination footer'
+  - if @most_recent_date.present?
+    %div.datecell.clearfix
+      %p.date
+        Received
+        = inbox_distance_of_time_in_words_to_now(@most_recent_date.updated_at)
+        (#{@most_recent_date.count})
+
+      - @most_recent_conversations.in_groups_of(4) do |group|
+        - group.each_with_index do |conversation, idx|
+          - unless conversation.nil?
+            - if profile = @profiles_by_user_id[conversation.resource_id]
+              = render :partial => 'wave/profiles/headshot', :locals => { :profile => profile }
+
+  - @conversation_dates.each do |conversation_date|
+    %div.datecell.clearfix
+      %p.date
+        Received
+        = inbox_distance_of_time_in_words_to_now(conversation_date.updated_at)
+        (#{conversation_date.count})
+    

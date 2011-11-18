@@ -4,10 +4,7 @@ class Wave::Conversation < Wave::Base
       joins('LEFT OUTER JOIN bookmarks ON `waves`.`id` = `bookmarks`.`wave_id` AND `waves`.`user_id` = `bookmarks`.`user_id`').
       where('(`waves`.`updated_at` > `bookmarks`.`read_at`) OR (`bookmarks`.`read_at` IS NULL)')
 
-  scope :chatty,
-      select('DISTINCT `waves`.*').
-      joins('LEFT OUTER JOIN `publications` on `waves`.`id` = `publications`.`wave_id`').
-      where('`publications`.`resource_id` IS NOT NULL')
+  scope :chatty, where('`waves`.`postings_count` > 0')
 
   alias :recipient :resource
 
