@@ -78,7 +78,7 @@
 					var paneName = $headshot.data('pane-name'),
 						url = $headshot.data('url');
 
-					panes['init']($headshot, paneName, url, true, {
+					panes['init']($headshot, paneName, url, $headshot[0].settings['setFocus'], {
 						onBefore: function ($pane) {
 							if (jQuery.browser.chrome === true) $content.show();
 							$pane.css({ visibility: 'visible', opacity: 0.0 })
@@ -144,7 +144,7 @@
 				$content = $backFace.find('.content'),
 			
 				initBackFace = function (paneName, url) {
-					panes['init']($headshot, paneName, url, true);
+					panes['init']($headshot, paneName, url, $headshot[0].settings['setFocus']);
 				},
 
 				initFrontFace = function () {},
@@ -215,7 +215,8 @@
 		var settings = {
 			beforeFlip: function() { return true; },
 			onFlip: function() {},
-			panes: panes
+			panes: panes,
+			setFocus: true
 		};
 
 		$.extend(settings, options);
@@ -226,6 +227,7 @@
 
 			this.beforeFlip = settings['beforeFlip'];
 			this.onFlip = settings['onFlip'];
+			this.settings = { setFocus: settings['setFocus'] }
 
 			if (Modernizr.csstransforms3d) {
 				$this.flipTransforms3d();
