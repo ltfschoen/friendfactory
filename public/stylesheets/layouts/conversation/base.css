@@ -24,7 +24,10 @@
 #inbox .datecell {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
+	-moz-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	-ms-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	-o-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 	padding: 20px 0;
 }
 
