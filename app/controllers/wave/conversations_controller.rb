@@ -6,26 +6,37 @@ class Wave::ConversationsController < ApplicationController
 
   layout 'conversation'
 
-  cattr_reader :per_page
-  @@per_page = 12
-
   def index
-    @most_recent_conversations = []
-    @conversation_dates = current_user.inbox(current_site).
-        select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count').
-        group('date(`waves`.`updated_at`)').
-        order('date(`waves`.`updated_at`) DESC')
+    @@recipient_ids = []
+    @conversation_dates = []
 
-    if @most_recent_date = @conversation_dates.shift
-      @most_recent_conversations = current_user.inbox(current_site).
-          where('date(`waves`.`updated_at`) = ?', @most_recent_date.updated_at).
-          order('`waves`.`updated_at` DESC')
+    if @most_recent_date = params[:date]
+      @most_recent_date = @most_recent_date.to_date rescue nil
+    else
+      @conversation_dates = current_user.inbox(current_site).
+          select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count').
+          group('date(`waves`.`updated_at`)').
+          order('date(`waves`.`updated_at`) DESC')
 
-      recipient_user_ids = @most_recent_conversations.map(&:resource_id)
-      @profiles_by_user_id = current_site.waves.type(Wave::Profile).where(:user_id => recipient_user_ids).index_by(&:user_id)
+      @most_recent_date = @conversation_dates.shift.updated_at
     end
+
     respond_to do |format|
-      format.html
+      if @most_recent_date.present? &&
+          @recipient_ids = current_user.inbox(current_site).
+              select('resource_id').
+              where('date(`waves`.`updated_at`) = ?', @most_recent_date).
+              order('`waves`.`updated_at` DESC').
+              map(&:resource_id)
+
+        @profiles_by_user_id = current_site.waves.type(Wave::Profile).
+            where(:user_id => @recipient_ids).
+            index_by(&:user_id)
+
+        request.xhr? ? format.html { render :partial => 'conversations' } : format.html
+      else
+        render :nothing => true
+      end
     end
   end
 
