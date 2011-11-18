@@ -113,6 +113,23 @@
 	height: 190px;
 }
 
+.headshot .back.face .portrait {
+	margin: -1px 0 0 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.headshot .back.face .portrait img {
+	width: 20px;
+	height: 20px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-o-border-radius: 0;
+	border-radius: 0;
+}
+
 .headshot ul.buddy-bar {
 	list-style: none;
 	padding: 0;
@@ -216,7 +233,7 @@
 }
 
 .headshot .caption {
-	font-size: 12px;
+	font-size: 11px;
 	color: #666;
 	display: inline-block;
 	margin-top: 6px;

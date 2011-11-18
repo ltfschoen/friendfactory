@@ -17,14 +17,12 @@
             - if false
               %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put, :'data-pane-name' => 'buddies'
             %li= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'flip icon chat last', :'data-pane-name' => 'conversation'
-
     .face-container
       .back.face
         .content
           = link_to_close
           .pane
-          %ul.buddy-bar.secondary
-            %li= link_to 'Headshot', wave_profile_path(profile), :class => 'flip icon headshot'
+          .portrait= link_to thimble_image_tag(profile, :size => '18x18'), wave_profile_path(profile), :class => 'flip'
           %ul.buddy-bar.primary
             %li= link_to 'Biometrics', biometrics_wave_profile_path(profile), :class => 'swipe icon mini-profile', :'data-pane-name' => 'biometrics'
             %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'swipe icon photos', :'data-pane-name' => 'photos'
@@ -32,15 +30,3 @@
             %li= link_to 'Pokes', pokes_wave_profile_path(profile), :class => 'swipe icon pokes', :'data-pane-name' => 'pokes'
             - if current_user.present? && (current_user.id != profile.user_id)
               %li= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'swipe icon chat', :'data-pane-name' => 'conversation'
-
-- if false
-  .card_frame
-    .card.front
-      %img.face{:src => "http://placekitten.com/170/170"}
-        %ul
-          %li.profile
-          %li.photos
-          %li.friends
-          %li.message
-    .card.back
-      Hello World
