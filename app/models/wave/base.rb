@@ -40,11 +40,11 @@ class Wave::Base < ActiveRecord::Base
   has_many :publications, :foreign_key => 'wave_id'
 
   has_many :postings,
-      :through     => :publications,
-      :source      => :resource,
-      :source_type => 'Posting::Base',
-      :conditions  => 'parent_id is null',
-      :after_add   => :after_add_posting do
+      :through       => :publications,
+      :source        => :resource,
+      :source_type   => 'Posting::Base',
+      :conditions    => 'parent_id is null',
+      :after_add     => :after_add_posting do
     def exclude(*types)
       where('type not in (?)', types.map(&:to_s))
     end
@@ -70,6 +70,7 @@ class Wave::Base < ActiveRecord::Base
   private
 
   def after_add_posting(posting)
+    increment!(:postings_count) if posting.published?
     unless @@ignore_after_add_posting_callback
       @@ignore_after_add_posting_callback = true
       add_posting_to_other_waves(posting)

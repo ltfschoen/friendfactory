@@ -1,7 +1,7 @@
 class Posting::Base < ActiveRecord::Base
 
   include ActiveRecord::Transitions
-  
+
   set_table_name :postings
 
   # TODO: attr_readonly :user_id
@@ -9,31 +9,29 @@ class Posting::Base < ActiveRecord::Base
   attr_accessor :site
 
   acts_as_tree :order => 'created_at asc'
-  
+
   state_machine do
     state :unpublished
-    state :published
-    
+    state :published, :exit => :decrement_postings_counter
+
     event :publish do
-      transitions :to => :published, :from => [ :unpublished, :published ]
+      transitions :to => :published, :from => [ :unpublished ], :on_transition => :increment_postings_counter
     end
-    
+
     event :unpublish do
-      transitions :to => :unpublished, :from => [ :unpublished, :published ]
+      transitions :to => :unpublished, :from => [ :published ]
     end
   end
-  
+
   scope :type, lambda { |*types| types.length == 1 ? where(:type => types.first.to_s) : where(:type => types.map(&:to_s)) }    
   scope :published, where(:state => [ :published, :offered ])
   scope :unpublished, where(:state => :unpublished)
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
   scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
 
-  has_many :children, :class_name  => 'Posting::Base', :foreign_key => 'parent_id'
-
   belongs_to :user
-  # belongs_to :resource, :polymorphic => true
 
+  has_many :children, :class_name  => 'Posting::Base', :foreign_key => 'parent_id'
   has_many :publications, :as => :resource
   has_many :waves, :through => :publications, :order => 'updated_at desc'
 
@@ -74,6 +72,16 @@ class Posting::Base < ActiveRecord::Base
 
   def existing_record?
     !new_record?
+  end
+
+  private
+
+  def increment_postings_counter
+    waves.map{|wave| wave.increment!(:postings_count) }
+  end
+
+  def decrement_postings_counter
+    waves.map{|wave| wave.decrement!(:postings_count) }
   end
 
 end

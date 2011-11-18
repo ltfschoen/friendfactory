@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012141253) do
+ActiveRecord::Schema.define(:version => 20111117220256) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -435,6 +435,7 @@ ActiveRecord::Schema.define(:version => 20111012141253) do
     t.integer  "resource_id"
     t.string   "resource_type"
     t.string   "state"
+    t.integer  "postings_count", :default => 0
   end
 
   add_index "waves", ["resource_id", "resource_type"], :name => "index_waves_on_resource_id_and_resource_type"
