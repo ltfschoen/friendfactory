@@ -14,10 +14,9 @@ class Wave::ConversationsController < ApplicationController
       @most_recent_date = @most_recent_date.to_date rescue nil
     else
       @conversation_dates = current_user.inbox(current_site).
-          select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count').
+          select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS user_ids').
           group('date(`waves`.`updated_at`)').
           order('date(`waves`.`updated_at`) DESC')
-
       @most_recent_date = @conversation_dates.shift.updated_at
     end
 
