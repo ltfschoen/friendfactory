@@ -1,41 +1,25 @@
 class Wave::ConversationsController < ApplicationController
 
   before_filter :require_user
-
   helper_method :page_title
 
   layout 'conversation'
 
-  def index
-    @@recipient_ids = []
-    @conversation_dates = []
+  cattr_reader :per_page
+  @@per_page = 12
 
-    if @most_recent_date = params[:date]
-      @most_recent_date = @most_recent_date.to_date rescue nil
-    else
-      @conversation_dates = current_user.inbox(current_site).
-          select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS user_ids').
-          group('date(`waves`.`updated_at`)').
-          order('date(`waves`.`updated_at`) DESC')
-      @most_recent_date = @conversation_dates.shift.updated_at
-    end
+  def index
+    @conversations = current_user.inbox(current_site).
+        select('`resource_id` AS recipient_id, `updated_at`').
+        order('`updated_at` DESC').
+        paginate(:page => params[:page], :per_page => @@per_page)
+
+    @profiles_by_user_id = current_site.waves.type(Wave::Profile).
+        where(:user_id => @conversations.map(&:recipient_id)).
+        index_by(&:user_id)
 
     respond_to do |format|
-      if @most_recent_date.present? &&
-          @recipient_ids = current_user.inbox(current_site).
-              select('resource_id').
-              where('date(`waves`.`updated_at`) = ?', @most_recent_date).
-              order('`waves`.`updated_at` DESC').
-              map(&:resource_id)
-
-        @profiles_by_user_id = current_site.waves.type(Wave::Profile).
-            where(:user_id => @recipient_ids).
-            index_by(&:user_id)
-
-        request.xhr? ? format.html { render :partial => 'conversations' } : format.html
-      else
-        render :nothing => true
-      end
+      format.html
     end
   end
 
@@ -76,4 +60,10 @@ class Wave::ConversationsController < ApplicationController
     "#{current_site.display_name} - #{current_profile.handle}'s Inbox"
   end
 
+  def conversation_dates
+    @conversation_dates ||= current_user.inbox(current_site).
+        select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS user_ids').
+        group('date(`waves`.`updated_at`)').
+        order('date(`waves`.`updated_at`) DESC')
+  end
 end

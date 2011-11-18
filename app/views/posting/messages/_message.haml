@@ -1,4 +1,4 @@
-- if message.body.present?
-  - last_read_at ||= @last_read_at
+- last_read_at ||= @last_read_at
+- if message && message.body.present?
   .message[message]{ uid(message[:user_id]), :class => message_css_class(message, last_read_at) }
     = message.body

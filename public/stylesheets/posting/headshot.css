@@ -370,9 +370,12 @@
 	clear: both;
 }
 
-.headshot .pane.conversation .thread .time-ago {
-	margin-bottom: 2px;
-	font-size: 10px;
+.headshot .pane.conversation .thread .timestamp {
+	display: block;
+	clear: both;
+	margin: 2px auto;
+	font-size: 9px;
+	font-color: gray;
 }
 
 .headshot .pane.conversation .thread ul.messages {

@@ -19,10 +19,14 @@
 - else
   .wave[@wave]{ :'data-id' => @wave.id }
     .thread
-      .caption.time-ago= "Started #{time_ago_in_words(@wave.created_at)} ago"
       %ul.messages
-        - @wave.messages.published.each do |posting|
-          %li= render :partial => 'posting/messages/message', :object => posting, :locals => { :last_read_at => @wave.last_read_at }
+        - timestamp, previous_timestamp = nil, nil
+        - @wave.messages.published.each_with_index do |posting, idx|
+          %li
+            - timestamp = render :partial => 'timestamp', :object => posting.updated_at
+            = timestamp if (timestamp != previous_timestamp) || (idx % 5 == 0)
+            - previous_timestamp = timestamp
+            = render :partial => 'posting/messages/message', :object => posting, :locals => { :last_read_at => @wave.last_read_at }
     = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => @wave.id), :remote => true do |f|
       .message-input
         = f.text_area :body
