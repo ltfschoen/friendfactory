@@ -6,6 +6,7 @@ class AddPostingsCountToWaves < ActiveRecord::Migration
     Wave::Base.delete_all(:type => 'Wave::Inbox')
 
     Wave::Base.reset_column_information
+    ActiveRecord::Base.record_timestamps = false
     Wave::Base.all.each do |wave|
       wave.update_attribute(:postings_count, wave.postings.published.count)
     end
