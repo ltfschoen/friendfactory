@@ -70,7 +70,9 @@
 				$backFace = $headshot.find('.back.face'),
 				$content = $backFace.find('.content');
 
-			if (jQuery.browser.chrome === true) $content.hide();
+			if (jQuery.browser.chrome === true) {
+				$content.hide();
+			}
 
 			$headshot.bind('webkitTransitionEnd', function() {
 				if ($headshot.hasClass('flipped')) {
@@ -227,7 +229,7 @@
 
 			this.beforeFlip = settings['beforeFlip'];
 			this.onFlip = settings['onFlip'];
-			this.settings = { setFocus: settings['setFocus'] }
+			this.settings = { setFocus: settings['setFocus'] };
 
 			if (Modernizr.csstransforms3d) {
 				$this.flipTransforms3d();
@@ -239,7 +241,7 @@
 				setTimeout(function() {
 					$this.find('.front.face a[data-pane-name="' + settings['pane'] + '"]')
 						.trigger('click');
-				}, 900);
+				}, 1200);
 			}
 		});
 	};
