@@ -1,7 +1,7 @@
 class Wave::ConversationsController < ApplicationController
 
   before_filter :require_user
-  helper_method :page_title, :recipient_ids, :profiles_by_user_id, :tags
+  helper_method :page_title, :recipient_ids, :profiles, :profiles_by_user_id, :tags
 
   layout 'conversation'
 
@@ -9,7 +9,6 @@ class Wave::ConversationsController < ApplicationController
   @@per_page = 12
 
   def index
-    @conversations = recipient_ids
     respond_to do |format|
       format.html
     end
@@ -60,18 +59,29 @@ class Wave::ConversationsController < ApplicationController
   end
 
   def recipient_ids
-    @recipient_ids ||=
-      current_user.inbox(current_site).
-          select('`resource_id`').
-          order('`updated_at` DESC').
-          paginate(:page => params[:page], :per_page => @@per_page)
+    @recipient_ids ||= begin
+      recipient_ids = current_user.inbox(current_site).select('`resource_id`').order('`updated_at` DESC')
+      if params[:tag].present?
+        recipient_ids.all
+      else
+        recipient_ids.paginate(:page => params[:page], :per_page => @@per_page)
+      end
+    end
+  end
+
+  def profiles
+    @profiles ||= begin
+      profiles = current_site.waves.type(Wave::Profile).where(:user_id => recipient_ids.map(&:resource_id)).scoped
+      if params[:tag].present?
+        profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).paginate(:page => params[:page], :per_page => @@per_page)
+      else
+        profiles.all
+      end
+    end
   end
 
   def profiles_by_user_id
-    @profiles_by_user_id ||=
-      current_site.waves.type(Wave::Profile).
-          where(:user_id => recipient_ids.map(&:resource_id)).
-          index_by(&:user_id)
+    @profiles_by_user_id ||= profiles.index_by(&:user_id)
   end
 
   def tags
@@ -80,6 +90,10 @@ class Wave::ConversationsController < ApplicationController
       profiles = current_site.waves.type(Wave::Profile).where(:user_id => user_ids)
       profiles.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
     end
+  end
+
+  def scrub_tag(tag)
+    tag.downcase.gsub(/-/, ' ')
   end
 
 end
