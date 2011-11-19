@@ -39,7 +39,7 @@ class Wave::CommunitiesController < ApplicationController
   end
 
   def tags
-    @tags ||= profiles_on_wave.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 2 }
+    @tags ||= profiles_on_wave.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
   end
 
   def profiles_on_wave

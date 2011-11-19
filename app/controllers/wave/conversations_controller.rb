@@ -1,7 +1,7 @@
 class Wave::ConversationsController < ApplicationController
 
   before_filter :require_user
-  helper_method :page_title
+  helper_method :page_title, :recipient_ids, :profiles_by_user_id, :tags
 
   layout 'conversation'
 
@@ -9,15 +9,7 @@ class Wave::ConversationsController < ApplicationController
   @@per_page = 12
 
   def index
-    @conversations = current_user.inbox(current_site).
-        select('`resource_id` AS recipient_id, `updated_at`').
-        order('`updated_at` DESC').
-        paginate(:page => params[:page], :per_page => @@per_page)
-
-    @profiles_by_user_id = current_site.waves.type(Wave::Profile).
-        where(:user_id => @conversations.map(&:recipient_id)).
-        index_by(&:user_id)
-
+    @conversations = recipient_ids
     respond_to do |format|
       format.html
     end
@@ -46,8 +38,7 @@ class Wave::ConversationsController < ApplicationController
 
   def close
     if @wave = current_user.inbox(current_site).find_by_id(params[:id])
-      @wave.unpublish!
-      @wave.read
+      @wave.read && @wave.unpublish!
     end
     respond_to do |format|
       format.json { render :json => { :closed => true }}
@@ -61,9 +52,34 @@ class Wave::ConversationsController < ApplicationController
   end
 
   def conversation_dates
-    @conversation_dates ||= current_user.inbox(current_site).
-        select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS user_ids').
-        group('date(`waves`.`updated_at`)').
-        order('date(`waves`.`updated_at`) DESC')
+    @conversation_dates ||=
+      current_user.inbox(current_site).
+          select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS user_ids').
+          group('date(`waves`.`updated_at`)').
+          order('date(`waves`.`updated_at`) DESC')
   end
+
+  def recipient_ids
+    @recipient_ids ||=
+      current_user.inbox(current_site).
+          select('`resource_id`').
+          order('`updated_at` DESC').
+          paginate(:page => params[:page], :per_page => @@per_page)
+  end
+
+  def profiles_by_user_id
+    @profiles_by_user_id ||=
+      current_site.waves.type(Wave::Profile).
+          where(:user_id => recipient_ids.map(&:resource_id)).
+          index_by(&:user_id)
+  end
+
+  def tags
+    @tags ||= begin
+      user_ids = current_user.inbox(current_site).select('`resource_id`').map(&:resource_id)
+      profiles = current_site.waves.type(Wave::Profile).where(:user_id => user_ids)
+      profiles.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
+    end
+  end
+
 end
