@@ -9,34 +9,52 @@
 	display: none;
 }
 
-.headshot-container.floating .close {
+.headshot-container.floating .close,
+#inbox .headshot-container .close {
 	display: block;
 	color: #000;
 	width: 20px;
 	height: 20px;
-	margin-left: 176px;
+	margin-left: 172px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
 	text-decoration: none;
+	text-align: center;
+	font-size: 16px;
 }
 
-.headshot-container.floating .front.face:hover .close {
+.headshot-container.floating .front.face .close,
+#inbox .headshot-container .front.face .close {
+	margin-top: -194px;
+}
+
+.headshot-container.floating .front.face:hover .close,
+#inbox .headshot-container .front.face:hover .close {
 	color: #FFF;
+}
+
+.headshot-container.floating .back.face .close,
+#inbox .headshot-container .back.face .close {
+	margin-top: -6px;
+	margin-left: 174px;
+}
+
+.headshot-container.floating .back.face .pane,
+#inbox .headshot-container .back.face .pane {
+	margin-top: -14px;
+}
+
+.headshot-container.floating .back.face .pane.conversation,
+#inbox .headshot-container .back.face .pane.conversation {
+/*	margin-top: -4px;*/
+/*	height: px;*/
 }
 
 .headshot-container.floating .front.face img,
 .headshot-container.floating .back.face .pane {
 	cursor: move;
-}
-
-.headshot-container.floating .front.face .close {
-	margin-top: -194px;
-}
-
-.headshot-container.floating .back.face .pane {
-	margin-top: -20px;
 }
 
 .headshot .front.face .handle {
@@ -52,7 +70,8 @@
 	margin: 10px 0 0 0;
 }
 
-.headshot-container.floating .front.face .handle {
+.headshot-container.floating .front.face .handle,
+#inbox .headshot-container .front.face .handle {
 	margin-top: 175px;
 }
 
@@ -78,6 +97,7 @@
 .headshot {
 	width: 200px;
 	height: 240px;
+	background-color: transparent;
 }
 
 .headshot .face {
@@ -363,7 +383,7 @@
 }
 
 .headshot .pane.conversation .thread {
-    height: 140px;
+    height: 152px;
 	color: gray;
 	font-size: 11px;
 	overflow: auto;
@@ -416,7 +436,7 @@
 	position: relative;
 	height: 40px;
 	width: 166px;
-	margin-top: 12px;
+	margin-top: 0;
 	text-align: center;
 }
 

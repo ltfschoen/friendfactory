@@ -58,9 +58,13 @@
 			return false;
 		},
 
-		closeable = function () {
-			$(this).closest('.floating').remove();
-			return false;
+		closeable = function (event) {
+			var $this = $(this),
+				$headshot = $this.closest('.headshot'),
+				beforeClose = $headshot[0].settings['beforeClose'];
+
+			event.preventDefault();
+			return beforeClose($headshot);
 		};
 
 	$.fn.flipTransforms3d  = function () {
@@ -90,13 +94,13 @@
 						}
 					});
 				}
-				
-				if (this.onFlip !== undefined) this.onFlip(this);
+
+				if (this.onFlip !== undefined) {
+					this.onFlip(this);
+				}
 			});
 
-			$headshot
-				.find('a.close')
-					.click(closeable);
+			$headshot.find('a.close').bind('ajax:beforeSend', closeable);
 
 			$frontFace
 				.find('a.flip')
@@ -154,15 +158,12 @@
 				flipSettings = {
 					speed: 300,
 					direction: 'lr',
-					color: '#FFF'
+					color: 'transparent'
 				};
 
 			$headshot
-				.find('.face-container:eq(1)')
-					.hide()
-				.end()
-				.find('a.close')
-					.live('click', closeable);
+				.find('.face-container:eq(1)').hide().end()
+				.find('a.close').live('ajax:beforeSend', closeable);
 
 			$frontFace
 				.find('a.flip')
@@ -215,8 +216,17 @@
 
 	$.fn.headshot = function(options) {
 		var settings = {
-			beforeFlip: function() { return true; },
-			onFlip: function() {},
+			beforeFlip: function () { return true; },
+
+			beforeClose: function ($headshot) {
+				var $container = $headshot.closest('.headshot-container');
+				$container.fadeTo('slow', 0.0, function () {
+					$container.remove();
+					return false;
+				});
+			},
+
+			onFlip: function () {},
 			panes: panes,
 			setFocus: true
 		};
@@ -229,7 +239,11 @@
 
 			this.beforeFlip = settings['beforeFlip'];
 			this.onFlip = settings['onFlip'];
-			this.settings = { setFocus: settings['setFocus'] };
+
+			this.settings = {
+				setFocus: settings['setFocus'],
+				beforeClose: settings['beforeClose']
+			};
 
 			if (Modernizr.csstransforms3d) {
 				$this.flipTransforms3d();

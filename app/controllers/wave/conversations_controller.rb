@@ -1,7 +1,7 @@
 class Wave::ConversationsController < ApplicationController
 
   before_filter :require_user
-  helper_method :page_title, :recipient_ids, :profiles, :profiles_by_user_id, :tags
+  helper_method :page_title, :conversations, :profiles, :profiles_by_user_id, :tags
 
   layout 'conversation'
 
@@ -58,20 +58,23 @@ class Wave::ConversationsController < ApplicationController
           order('date(`waves`.`updated_at`) DESC')
   end
 
-  def recipient_ids
-    @recipient_ids ||= begin
-      recipient_ids = current_user.inbox(current_site).select('`resource_id`').order('`updated_at` DESC')
+  def conversations
+    @conversations ||= begin
+      conversations = current_user.inbox(current_site)
+          .select('`waves`.`id`, `waves`.`resource_id` AS recipient_id')
+          .order('`waves`.`updated_at` DESC')
+
       if params[:tag].present?
-        recipient_ids.all
+        conversations.all
       else
-        recipient_ids.paginate(:page => params[:page], :per_page => @@per_page)
+        conversations.paginate(:page => params[:page], :per_page => @@per_page)
       end
     end
   end
 
   def profiles
     @profiles ||= begin
-      profiles = current_site.waves.type(Wave::Profile).where(:user_id => recipient_ids.map(&:resource_id)).scoped
+      profiles = current_site.waves.type(Wave::Profile).where(:user_id => conversations.map(&:recipient_id)).scoped
       if params[:tag].present?
         profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).paginate(:page => params[:page], :per_page => @@per_page)
       else

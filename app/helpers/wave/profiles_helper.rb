@@ -54,8 +54,8 @@ module Wave::ProfilesHelper
     end
   end
 
-  def link_to_close
-    link_to "×", '#', :title => 'Close', :class => 'close'
+  def link_to_close(id)
+    link_to "×", unpublish_wave_path(id), :title => 'Close', :class => 'close', :remote => true, :method => :put, :'data-type' => :json
   end
 
   def headshot_tag(profile)
