@@ -23,9 +23,28 @@
 					});
 			},
 
-			conversation: function($pane, setFocus) {
+			biometrics: function ($pane) {
+				showCloseLink($pane);
+			},
+
+			photos: function ($pane) {
+				hideCloseLink($pane);
+			},
+
+			invitations: function ($pane) {
+				hideCloseLink($pane);
+			},
+
+			pokes: function ($pane) {
+				hideCloseLink($pane);
+			},
+
+			conversation: function ($pane, setFocus) {
+				showCloseLink($pane);
 				$pane.find('.wave_conversation').chat();
-				if (setFocus === true) $pane.find('textarea').focus();
+				if (setFocus === true) {
+					$pane.find('textarea').focus();
+				};
 			}
 		},
 
@@ -65,6 +84,14 @@
 
 			event.preventDefault();
 			return beforeClose($headshot);
+		},
+
+		showCloseLink = function ($pane) {
+			$pane.prev('a.close').css({ visibility: 'visible'});
+		},
+
+		hideCloseLink = function ($pane) {
+			$pane.prev('a.close').css({ visibility: 'hidden'});
 		};
 
 	$.fn.flipTransforms3d  = function () {

@@ -15,7 +15,7 @@ class Wave::Conversation < Wave::Base
   def add_posting_to_other_waves(posting)
     if (posting.receiver_id != posting.sender_id) && (wave = posting.receiver.conversation_with(posting.sender, posting.site))
       wave.postings << posting
-      wave.touch
+      wave.touch_and_publish!
     end
   end
 
@@ -38,8 +38,8 @@ class Wave::Conversation < Wave::Base
     last_read_at.nil? || (last_read_at < updated_at)
   end
 
-  def touch
-    published? ? super : publish!
+  def touch_and_publish!
+    published? ? touch : publish!
   end
 
   private
