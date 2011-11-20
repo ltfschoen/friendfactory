@@ -14,15 +14,15 @@ class Posting::MessagesController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      success = false
-      if @wave = current_user.conversations.find_by_id(params[:wave_id])
-        @posting = Posting::Message.new(params[:posting_message]) { |posting| initialize_message(posting, @wave.recipient) }
-        if success = @posting.save && add_message_to_conversation(@posting, @wave)
-          conversations = @posting.waves(true).except(@wave)
-          broadcast_posting(@posting, conversations)
-        end
+    success = false
+    if @wave = current_user.conversations.find_by_id(params[:wave_id])
+      @posting = Posting::Message.new(params[:posting_message]) { |posting| initialize_message(posting, @wave.recipient) }
+      if success = @posting.save && add_message_to_conversation(@posting, @wave)
+        conversations = @posting.waves(true).except(@wave)
+        broadcast_posting(@posting, conversations)
       end
+    end
+    respond_to do |format|
       format.json { render :json => { :success => success }}
     end
   end
