@@ -46,12 +46,6 @@
 	margin-top: -14px;
 }
 
-.headshot-container.floating .back.face .pane.conversation,
-#inbox .headshot-container .back.face .pane.conversation {
-/*	margin-top: -4px;*/
-/*	height: px;*/
-}
-
 .headshot-container.floating .front.face img,
 .headshot-container.floating .back.face .pane {
 	cursor: move;
@@ -376,11 +370,6 @@
 }
 
 /* Conversation */
-
-.headshot .pane.conversation {
-	border-top: 1px dotted #CCC;
-	height: 212px;
-}
 
 .headshot .pane.conversation .thread {
     height: 152px;
