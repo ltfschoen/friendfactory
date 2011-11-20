@@ -27,7 +27,7 @@
             = timestamp if (timestamp != previous_timestamp) || (idx % 5 == 0)
             - previous_timestamp = timestamp
             = render :partial => 'posting/messages/message', :object => posting, :locals => { :last_read_at => @wave.last_read_at }
-    = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => @wave.id), :remote => true do |f|
+    = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => @wave.id), :remote => true, :html => { :'data-type' => :json } do |f|
       .message-input
         = f.text_area :body
       .button-bar
