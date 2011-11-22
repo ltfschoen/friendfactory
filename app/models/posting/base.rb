@@ -15,11 +15,11 @@ class Posting::Base < ActiveRecord::Base
     state :published, :exit => :decrement_postings_counter
 
     event :publish do
-      transitions :to => :published, :from => [ :unpublished ], :on_transition => :increment_postings_counter
+      transitions :to => :published, :from => [ :unpublished, :publish ], :on_transition => :increment_postings_counter
     end
 
     event :unpublish do
-      transitions :to => :unpublished, :from => [ :published ]
+      transitions :to => :unpublished, :from => [ :published, :unpublished ]
     end
   end
 
