@@ -23,11 +23,13 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
-  scope :type, lambda { |*types| types.length == 1 ? where(:type => types.first.to_s) : where(:type => types.map(&:to_s)) }    
+  scope :type, lambda { |*types| where(:type => types.map(&:to_s)) }
+  scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
+
   scope :published, where(:state => [ :published, :offered ])
   scope :unpublished, where(:state => :unpublished)
+
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
-  scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
 
   belongs_to :user
 
@@ -53,6 +55,10 @@ class Posting::Base < ActiveRecord::Base
     if sticky_until.present?
       write_attribute(:sticky_until, (Time.zone.parse(sticky_until).utc.tomorrow - 1.second rescue nil))
     end
+  end
+
+  def published?
+    [ :published, :offered ].include?(current_state)
   end
 
   # Thinking-Sphinx
