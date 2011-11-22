@@ -19,15 +19,19 @@ class Posting::BaseController < ApplicationController
       if posting = Posting::Base.find_by_id(posting_id)
         comments = posting.comments.published.order('updated_at desc').limit(limit)
         comments.map! do |comment|
-          profile = comment.user.profile(current_site)
-          { :id         => comment.id,
-            :posting_id => posting_id,
-            :profile_id => profile.id,
-            :image_path => profile.avatar.url(:thumb),
-            :handle     => profile.handle,
-            :body       => tag_helper.truncate(comment.body, :length => 60),
-            :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }
-        end
+          if profile = comment.user.profile(current_site)
+            { :id         => comment.id,
+              :posting_id => posting_id,
+              :profile_id => profile.id,
+              :image_path => profile.avatar.url(:thumb),
+              :handle     => profile.handle,
+              :body       => tag_helper.truncate(comment.body, :length => 60),
+              :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }
+          else
+            Rails.logger.warn("Posting without profile: id #{comment.id}")
+            nil
+          end
+        end.compact!
         { :id => posting_id, :comments => comments }
       end
     end
