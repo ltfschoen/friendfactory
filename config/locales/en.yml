@@ -8,9 +8,9 @@ en:
       posting:
         comment:
           body: "Comment"
+      user:
+        handle: "First name"
 
-
-        
 # en:
 #   activerecord:
 #     attributes:

@@ -32,15 +32,18 @@
         %h1= text
         - if text = current_site.assets[:byline]
           %h2= text
-    - if text = current_site.assets[:description]
-      %p= text
-    - if text = current_site.assets[:privacy]
-      %p= text
 
-    - if flash[:errors].present?
+    - if @user.errors.present?
       %p Oh no! Can you fix these errors?
-      %ul#errors        
-        = flash[:errors].map{ |e| "<li>#{e}</li>" }.join.html_safe
+      %ul#errors
+        - @user.errors.full_messages.each do |error|
+          %li= error
+    - else
+      - if text = current_site.assets[:description]
+        %p= text
+      - if text = current_site.assets[:privacy]
+        %p= text
+
   #badge
     = form_for @user do |f|
       %h2 Sign up to meet others just like you!
@@ -53,7 +56,9 @@
       = f.text_field :location, :placeholder => 'Location'
       - if current_site.invite_only?
         = f.text_field :invitation_code, :placeholder => 'Invite Code'
-      = f.submit 'Signup'
+        = f.submit 'Signup', :class => 'narrow'
+      - else
+        = f.submit 'Signup'
 
   - if false
     = render :partial => 'ticker'

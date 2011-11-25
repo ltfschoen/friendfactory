@@ -117,7 +117,7 @@ hr {
 	left: 400px;
 }
 
-input#user_invitation_code + input[type="submit"] {
+#badge form input[type="submit"].narrow {
 	width: 120px;
 }
 
@@ -132,6 +132,14 @@ input#user_invitation_code + input[type="submit"] {
 
 .field_with_errors {
 	display: inline;
+}
+
+.field_with_errors input::-webkit-input-placeholder {
+	color: #A00;
+}
+
+.field_with_errors input:-moz-placeholder {
+	color: #A00;
 }
 
 ul#errors li {

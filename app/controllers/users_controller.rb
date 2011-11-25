@@ -14,8 +14,6 @@ class UsersController < ApplicationController
         flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.handle(current_site)}!"
         format.html { redirect_to root_path }
       else
-        flash.now[:errors] = @user.errors.full_messages
-        flash.now[:errors] += user_session.errors.full_messages if user_session
         format.html { render :template => 'welcome/show', :layout => 'welcome' }
       end
     end

@@ -17,18 +17,18 @@ class WelcomeController < ApplicationController
       end
     end
   end
-    
+
   def launch
     respond_to do |format|
       flash[:launch_user] = new_launch_user.save
       format.html { redirect_to welcome_path }
     end
   end
-  
+
   def headshot
     render :text => params[:pane]
   end
-  
+
   private
       
   def new_launch_user
@@ -36,9 +36,9 @@ class WelcomeController < ApplicationController
       user.site = current_site.name
     end
   end
-  
+
   def require_launch_site
     redirect_to welcome_path unless current_site.launch?
   end
-    
+
 end

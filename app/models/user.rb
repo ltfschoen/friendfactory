@@ -17,42 +17,40 @@ class User < ActiveRecord::Base
       :emailable,
       :invitation_code
 
+  validates_uniqueness_of :email
   validates_presence_of :enrollment_site, :on => :create
+  validates_presence_of :handle, :if => :enrollment_site_present?
+  validates_presence_of :age, :location, :if => :enrollment_site_present?
 
   validate do |user|
     if user.new_record? || enrollment_site.present?
       user.validate_enrollment_site
       user.validate_invitation_code
       user.validate_invitation_code_state
-      user.validate_associated_records_for_profiles
     end
   end
-  
+
+  def enrollment_site_present?
+    new_record? || enrollment_site.present?
+  end
+
   def validate_enrollment_site
     return if enrollment_site.blank? || sites.where(:id => enrollment_site.id).empty?
     errors.add(:base, 'Already a member of this site')
   end
-    
+
   def validate_invitation_code
     return if invitation_override || enrollment_site.blank?
     return if !enrollment_site.invite_only? || invitation_for_site(enrollment_site).present?
-    errors.add(:base, "Your invite code doesn't seem to be valid")
+    errors.add(:invitation_code, 'is not valid')
   end
-  
+
   def validate_invitation_code_state
     return if invitation_override || enrollment_site.blank?
-    invitation = invitation_for_site(enrollment_site)    
+    invitation = invitation_for_site(enrollment_site)
     return if invitation.nil? || invitation.offered?
-    errors.add(:base, "That invite code has already been previously #{invitation_for_site(enrollment_site).current_state}")
+    errors.add(:invitation_code, "has already been #{invitation_for_site(enrollment_site).current_state}")
   end
-
-  def validate_associated_records_for_profiles
-    errors.add_to_base("First name can't be blank") unless enrollment_profile.handle.present?
-    errors.add_to_base("Location can't be blank") unless enrollment_profile.location.present?
-    errors.add_to_base("Age can't be blank") unless enrollment_profile.age.present?
-  end
-
-  validates_uniqueness_of :email
 
   after_save :perform_enrollment
 
