@@ -27,9 +27,7 @@ jQuery(function($) {
 
 
 	// Badge
-	$("#reuse_password").hide();
-
-	$('input#user_email').change(function(event) {
+	$('input#user_email').blur(function(event) {
 		$.getJSON('/users/member', { email: $(event.target).val() }, function(data) {
 			if (data['member'] !== false) {
 				$("input#user_password_confirmation").hide();

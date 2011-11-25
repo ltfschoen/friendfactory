@@ -4,9 +4,18 @@ require 'empty_avatar'
 class Wave::Profile < Wave::Base
 
   include TagScrubber
-  
-  delegate :handle, :handle=, :first_name, :last_name, :age, :dob, :location, :to => :resource
-  
+
+  delegate :handle,
+      :handle=,
+      :age,
+      :age=,
+      :location,
+      :location=,
+      :first_name,
+      :last_name,
+      :dob,
+    :to => :resource
+
   # Default Signals
   delegate :gender, :orientation, :relationship, :to => :resource
   

@@ -15,15 +15,6 @@
 #header
   .frame
     = asset_image_tag :logo_transparent, :id => 'logo'
-
-    - if false
-      %form
-        %input{:name => "email", :placeholder => "email address", :type => "text"}/
-        %input{:name => "password", :placeholder => "password", :type => "password"}/
-        %label.checkbox
-          %input{:name => "remember", :type => "checkbox", :value => "remember"}/
-        %input{:name => "signin", :type => "submit", :value => "Sign In"}/
-
     = form_for UserSession.new, :url => user_sessions_path do |f|
       = f.text_field :email, :placeholder => 'email address'
       = f.password_field :password, :placeholder => 'password'
@@ -51,36 +42,18 @@
       %ul#errors        
         = flash[:errors].map{ |e| "<li>#{e}</li>" }.join.html_safe
   #badge
-    - if false
-      %form
-        %h2 Sign up now to start socializing!
-        %input{:name => "name", :placeholder => "First Name", :type => "text"}/
-        %input{:name => "email", :placeholder => "Email Address", :type => "text"}/
-        %input{:name => "password", :placeholder => "Password", :type => "password"}/
-        %input{:name => "password_again", :placeholder => "Retype Password", :type => "password"}/
-        %input{:name => "age", :placeholder => "Age", :type => "text"}/
-        %input{:name => "location", :placeholder => "Location", :type => "text"}/
-        %input{:name => "Signup", :type => "submit", :value => "Sign Up"}/
-
-    - else
-      = form_for @user do |f|
-        %h2 Sign up to meet others just like you!
-        =# f.hidden_field :invitation_code
-        = f.text_field :handle, :placeholder => 'First Name'
-        = f.text_field :email, :placeholder => 'Email Address'
-        = f.password_field :password, :placeholder => 'Password'
-        #reuse_password
-          Use your
-          %span FriskyFactory
-          password
-        = f.password_field :password_confirmation, :placeholder => 'Retype Password'
-        =# f.existing_user_password_label :password, 'Use your friskyfactory password', :current_site => current_site          
-        =# f.new_user_password_confirmation_field :password_confirmation, :current_site => current_site, :placeholder => 'Retype Password'
-        %input{:name => "age", :placeholder => "Age", :type => "text"}/
-        %input{:name => "location", :placeholder => "Location", :type => "text"}/        
-        - if current_site.invite_only?
-          = f.text_field :invitation_code, :placeholder => 'Invite Code'
-        = f.submit 'Signup'
+    = form_for @user do |f|
+      %h2 Sign up to meet others just like you!
+      = f.text_field :handle, :placeholder => 'First Name'
+      = f.text_field :email, :placeholder => 'Email Address'
+      = f.password_field :password, :placeholder => 'Password'
+      = f.existing_user_password_confirmation_field :password, :current_site => current_site
+      = f.new_user_password_confirmation_field :password_confirmation, :current_site => current_site, :placeholder => 'Retype Password'
+      = f.text_field :age, :placeholder => 'Age'
+      = f.text_field :location, :placeholder => 'Location'
+      - if current_site.invite_only?
+        = f.text_field :invitation_code, :placeholder => 'Invite Code'
+      = f.submit 'Signup'
 
   - if false
     = render :partial => 'ticker'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117220256) do
+ActiveRecord::Schema.define(:version => 20111124235307) do
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -349,10 +349,6 @@ ActiveRecord::Schema.define(:version => 20111117220256) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :null => false
-    t.string   "handle"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "slug"
     t.date     "dob"
     t.string   "state"
     t.datetime "created_at"
@@ -373,9 +369,6 @@ ActiveRecord::Schema.define(:version => 20111117220256) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["first_name"], :name => "index_users_on_first_name"
-  add_index "users", ["handle"], :name => "index_users_on_handle"
-  add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
 

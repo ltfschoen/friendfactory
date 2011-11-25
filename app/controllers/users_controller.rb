@@ -1,11 +1,11 @@
-require 'user_enrollment'
+require 'user_login'
 
 class UsersController < ApplicationController
 
-  include UserEnrollment
+  include UserLogin
 
   before_filter :require_no_user
-  
+
   def create
     @user = new_user_enrollment(params[:user])
     respond_to do |format|
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   alias :update :create
 
   def member
@@ -34,9 +34,17 @@ class UsersController < ApplicationController
       format.json { render :json => { :member => site } }
     end
   end
-  
+
   private
-    
+
+  def new_user_enrollment(attrs)
+    if user = User.find_by_email(attrs[:email])
+      user.enroll(current_site, attrs)
+    else
+      User.new_user_with_enrollment(current_site, attrs)
+    end
+  end
+
   def correct_credentials?(user)
     (user.existing_record? && login(user_email_and_password, :skip_enrollment_validation => true)) || @user.new_record?
   end

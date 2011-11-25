@@ -1,15 +1,15 @@
-require 'user_enrollment'
+require 'user_login'
 
 class UserSessionsController < ApplicationController
 
-  include UserEnrollment
+  include UserLogin
 
   before_filter :require_lurker, :only => :new
-    
-  def new    
+
+  def new
     @user_session = UserSession.new
-  end  
-  
+  end
+
   def create
     respond_to do |format|
       if login(params[:user_session], :skip_enrollment_validation => false)
@@ -21,7 +21,7 @@ class UserSessionsController < ApplicationController
       end
     end
   end
-  
+
   def lurk
     store_lurker
     respond_to do |format|
@@ -35,9 +35,9 @@ class UserSessionsController < ApplicationController
       format.html { redirect_to root_path }
     end
   end
-  
+
   private
-    
+
   def destroy_session
     clear_lurker
     if current_user
@@ -45,5 +45,5 @@ class UserSessionsController < ApplicationController
       current_user_session.destroy
     end
   end
-    
+
 end

@@ -25,16 +25,6 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
     @template.content_tag(:input, nil, :type => 'button', :value => label, :class => 'cancel')
   end
 
-  # def text_field(label, opts = {})
-  #   opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
-  #   super(label, opts)
-  # end
-
-  # def password_field(label, opts = {})    
-  #   opts.merge!(:placeholder => placeholder(opts[:placeholder], label))
-  #   super(label, opts)
-  # end
-
   def sticky_until
     @template.content_tag(:span, :class => 'sticky_until') do |html|
       html = "Sticky&nbsp;until&nbsp;".html_safe
@@ -46,39 +36,26 @@ class ButtonFormBuilder < ActionView::Helpers::FormBuilder
     @template.hidden_field_tag :resolver, resolver, :id => nil
   end
 
-  def existing_user_password_label(attribute, label, *args)
+  def existing_user_password_confirmation_field(attribute, *args)
     opts = args.extract_options!
-    css_class = opts[:class] || ''
-    if @object.new_record? || (@object.existing_record? && @object.site_ids.include?(opts[:current_site].id))
-      css_class = [ css_class, 'hidden' ].compact * ' '
+    current_site = opts.delete(:current_site)
+    if @object.new_record? || (@object.existing_record? && @object.site_ids.include?(current_site.id))
+      style = 'display:none'
     end
-    label(attribute, label, opts.merge(:class => css_class))
+    opts.merge!({ :style => style, :id => 'reuse_password' })
+    @template.content_tag(:div, "Use your #{@template.content_tag(:span, 'FriskyFactory')} password".html_safe, opts)
   end
 
-  def new_user_password_confirmation_field(attribute, label, *args)
+  def new_user_password_confirmation_field(attribute, *args)
     opts = args.extract_options!
-    label_css_class = 'placeholder'
-    password_field_css_class = opts[:class] || ''
-    if @object.existing_record? && !@object.site_ids.include?(opts[:current_site].id)
-      label_css_class = [ label_css_class, 'hidden' ] * ' '
-      password_field_css_class = [ password_field_css_class, 'hidden' ].compact * ' '
+    current_site = opts.delete(:current_site)
+    if @object.existing_record? && !@object.site_ids.include?(current_site.id)
+      style = 'display:none'
     end
-    label(attribute, label, :class => label_css_class) +
-    password_field(attribute, opts.merge(:class => password_field_css_class))
+    password_field(attribute, opts.merge({ :style => style }))
   end
 
   private
-
-  def placeholder(placeholder, label)
-    case placeholder
-    when false  # No placeholder
-      nil
-    when nil    # Lookup
-      placeholder_for(label.to_sym)
-    when String # Explicitly set
-      placeholder
-    end
-  end
 
   def day_names_from_today
     today = Date.today

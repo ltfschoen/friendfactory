@@ -5,10 +5,17 @@ class User < ActiveRecord::Base
 
   attr_accessor :invitation_code
   attr_accessor :enrollment_site
-  attr_reader   :enrollment_profile
   attr_accessor :invitation_override
 
-  attr_accessible :email, :handle, :password, :password_confirmation, :enrollment_site, :emailable, :invitation_code
+  attr_accessible :email,
+      :handle,
+      :age,
+      :location,
+      :password,
+      :password_confirmation,
+      :enrollment_site,
+      :emailable,
+      :invitation_code
 
   validates_presence_of :enrollment_site, :on => :create
 
@@ -40,8 +47,9 @@ class User < ActiveRecord::Base
   end
 
   def validate_associated_records_for_profiles
-    return if enrollment_profile.present? && enrollment_profile.handle.present?
-    errors.add_to_base("First name can't be blank")
+    errors.add_to_base("First name can't be blank") unless enrollment_profile.handle.present?
+    errors.add_to_base("Location can't be blank") unless enrollment_profile.location.present?
+    errors.add_to_base("Age can't be blank") unless enrollment_profile.age.present?
   end
 
   validates_uniqueness_of :email
@@ -154,32 +162,41 @@ class User < ActiveRecord::Base
     end
   end
 
-  def enroll(site, handle, invitation_code = nil, invitation_override = false)
-    self.tap do |user|
-      user.enrollment_site = site
-      user.handle = handle
-      user.invitation_code = invitation_code
-      user.invitation_override = invitation_override
-    end
+  def enroll(site, attrs)
+    self.enrollment_site = site
+    self.handle = attrs[:handle]
+    self.age = attrs[:age]
+    self.location = attrs[:location]
+    self.invitation_code = attrs[:invitation_code]
+    self.invitation_override = attrs[:invitation_override]
+    self
   end
-  
+
   def enroll!(*args)
     enroll(*args) && save!
   end
-  
 
-  # ===  Build assocations ===
-    
+
+  ### Enrollment Profile
+
   def handle=(handle)
-    build_profile(:handle => handle)
+    enrollment_profile.handle = handle
   end
 
-  def build_profile(attrs = {})
-    @enrollment_profile = profiles.build(attrs)
+  def age=(age)
+    enrollment_profile.age = age
   end
-  
 
-  # === Profile ===
+  def location=(location)
+    enrollment_profile.location = location
+  end
+
+  def enrollment_profile
+    @enrollment_profile ||= profiles.build
+  end
+
+
+  ### Profile
 
   def profile(site = enrollment_site)
     raise "No site provided" if site.nil?
@@ -192,9 +209,17 @@ class User < ActiveRecord::Base
   end
 
   def handle(site = enrollment_site)
-    profile(site).try(:handle)
+    (enrollment_profile || profile(site)).handle
   end
-  
+
+  def age(site = enrollment_site)
+    (enrollment_profile || profile(site)).age
+  end
+
+  def location(site = enrollment_site)
+    (enrollment_profile || profile(site)).location
+  end
+
   def avatar(site)
     @avatar ||= profile(site).avatar
   end
