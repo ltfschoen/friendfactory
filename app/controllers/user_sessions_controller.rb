@@ -11,13 +11,14 @@ class UserSessionsController < ApplicationController
   end
 
   def create
+    @user_session = current_site.user_sessions.new(params[:user_session])
     respond_to do |format|
-      if login(params[:user_session], :skip_enrollment_validation => false)
-        flash[:notice] = "Welcome back, #{user_session.record.handle(current_site)}!"
-        format.html { redirect_back_or_default(root_path) }          
+      if @user_session.save
+        flash[:notice] = "Welcome back, #{@user_session.record.handle(current_site)}!"
+        format.html { redirect_back_or_default(root_path) }
       else
-        flash[:notice] = "Sorry, but that #{user_session.errors.full_messages.first.downcase}."
-        format.html { redirect_to welcome_path }          
+        flash[:notice] = "Sorry, but that #{@user_session.errors.full_messages.first.downcase}."
+        format.html { redirect_to welcome_path }
       end
     end
   end

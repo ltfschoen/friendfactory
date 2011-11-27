@@ -10,7 +10,9 @@
     .portrait      
       = thimble_link_to_profile(current_profile, profile_path)
     %span.greeting Welcome,
-    %span.username= link_to current_profile.handle, profile_path
+    %span.username
+      = link_to current_profile.handle, profile_path
+      = "(#{current_user.id}/#{current_profile.id})" if Rails.env.development?
 
   .block.navspace
     %ul

@@ -10,9 +10,8 @@ class WelcomeController < ApplicationController
         @launch_user = LaunchUser.new
         format.html { render :action => 'launch' }
       else
-        params[:invite].strip! if params[:invite].present?
         @user = User.find_by_invitation_code(params[:invite]) || User.new
-        @user.enrollment_site = current_site
+        @user.build_profile
         format.html
       end
     end

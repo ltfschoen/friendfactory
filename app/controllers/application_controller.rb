@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  filter_parameter_logging(:password, :password_confirmation) if Rails.env.production?
+  filter_parameter_logging(:password, :password_confirmation) unless Rails.env.development?
 
   helper_method :current_user_session, :current_user, :current_profile, :current_site
   helper_method :presenter, :resolver
@@ -13,17 +13,17 @@ class ApplicationController < ActionController::Base
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
   end
-  
+
   private
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
+    @current_user_session = current_site.user_sessions.find
   end
 
   def current_user
     return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.record    
+    @current_user = current_user_session && current_user_session.record
   end
 
   def current_profile
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       Site.find_by_name(site_name)
     end
   end
-  
+
   def require_user
     unless current_user
       store_location

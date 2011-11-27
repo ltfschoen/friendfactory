@@ -5,11 +5,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :handle
       t.string    :first_name
       t.string    :last_name
-      t.string    :slug      
+      t.string    :slug
       t.date      :dob
       t.string    :status
       t.timestamps 
-      
+
       # Authlogic columns
       t.string    :crypted_password
       t.string    :password_salt
@@ -22,7 +22,7 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime  :last_login_at
       t.string    :current_login_ip
       t.string    :last_login_ip
-    end    
+    end
     add_index :users, :handle
     add_index :users, :first_name
     add_index :users, :last_name

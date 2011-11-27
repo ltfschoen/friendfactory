@@ -10,7 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124235307) do
+ActiveRecord::Schema.define(:version => 20111126042105) do
+
+  create_table "accounts", :force => true do |t|
+    t.date   "dob"
+    t.string "state"
+  end
 
   create_table "admin_tags", :force => true do |t|
     t.string "taggable_type", :null => false
@@ -94,6 +99,31 @@ ActiveRecord::Schema.define(:version => 20111124235307) do
 
   add_index "notifications", ["posting_id"], :name => "index_notifications_on_posting_id"
   add_index "notifications", ["user_id", "posting_id"], :name => "index_notifications_on_user_id_and_posting_id"
+
+  create_table "nusers", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "site_id"
+    t.string   "state"
+    t.boolean  "emailable"
+    t.boolean  "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.string   "perishable_token"
+    t.integer  "login_count",        :default => 0, :null => false
+    t.integer  "failed_login_count", :default => 0, :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+  end
+
+  add_index "nusers", ["last_request_at"], :name => "index_nusers_on_last_request_at"
+  add_index "nusers", ["persistence_token"], :name => "index_nusers_on_persistence_token"
+  add_index "nusers", ["site_id"], :name => "index_nusers_on_site_id"
 
   create_table "posting_chats", :force => true do |t|
     t.integer "receiver_id"
@@ -349,7 +379,6 @@ ActiveRecord::Schema.define(:version => 20111124235307) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :null => false
-    t.date     "dob"
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -366,11 +395,14 @@ ActiveRecord::Schema.define(:version => 20111124235307) do
     t.string   "last_login_ip"
     t.boolean  "emailable",          :default => true
     t.boolean  "admin",              :default => false
+    t.integer  "site_id"
+    t.integer  "account_id"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["site_id", "email"], :name => "index_users_on_site_id_and_email", :unique => true
 
   create_table "users_deleted", :id => false, :force => true do |t|
     t.integer  "id",                 :default => 0, :null => false

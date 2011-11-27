@@ -21,9 +21,8 @@
       = f.submit 'Sign In'
       %p
         = link_to 'Forgot email or password?', '#', :class => 'forgotten'
-        %label
-          %input{:name => "remember", :type => "checkbox", :value => "remember"}>/
-          Remember Me
+        = f.check_box :remember_me
+        = f.label :remember_me, 'Remember Me'
 
 .frame
   .col.left
@@ -47,13 +46,15 @@
   #badge
     = form_for @user do |f|
       %h2 Sign up to meet others just like you!
-      = f.text_field :handle, :placeholder => 'First Name'
+      = f.fields_for :profile do |profile|
+        = profile.text_field :handle, :placeholder => 'First Name'
       = f.text_field :email, :placeholder => 'Email Address'
       = f.password_field :password, :placeholder => 'Password'
       = f.existing_user_password_confirmation_field :password, :current_site => current_site
       = f.new_user_password_confirmation_field :password_confirmation, :current_site => current_site, :placeholder => 'Retype Password'
-      = f.text_field :age, :placeholder => 'Age'
-      = f.text_field :location, :placeholder => 'Location'
+      = f.fields_for :profile do |profile|
+        = profile.text_field :age, :placeholder => 'Age'
+        = profile.text_field :location, :placeholder => 'Location'
       - if current_site.invite_only?
         = f.text_field :invitation_code, :placeholder => 'Invite Code'
         = f.submit 'Signup', :class => 'narrow'

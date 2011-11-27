@@ -20,11 +20,19 @@
 	width: 442px;
 }
 
-.ie #header input[name='remember'] {
+#header form p label {
+  margin-left: 0;
+}
+
+#header form input#user_session_remember_me {
+  margin-left: 10px;
+}
+
+.ie #header input#user_session_remember_me {
 	margin-top: -3px;
 }
 
-.ie #header input[name='remember'],
+.ie #header input#user_session_remember_me,
 .ie #header label {
 	vertical-align: middle;
 }
@@ -149,11 +157,11 @@ ul#errors li {
 	line-height: 1.5em;
 }
 
-#badge form input#user_age {
+#badge form input#user_profile_attributes_age {
   width: 50px !important;
 }
 
-#badge form input#user_location {
+#badge form input#user_profile_attributes_location {
   width: 130px !important;
 }
 

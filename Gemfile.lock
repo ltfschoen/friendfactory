@@ -38,8 +38,9 @@ GEM
     acts-as-taggable-on (2.0.6)
     addressable (2.2.6)
     arel (2.0.10)
-    authlogic (2.1.6)
-      activesupport
+    authlogic (3.1.0)
+      activerecord (>= 3.0.7)
+      activerecord (>= 3.0.7)
     builder (2.1.2)
     crack (0.1.8)
     diff-lcs (1.1.2)
@@ -142,7 +143,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  authlogic
+  authlogic (~> 3.1.0)
   embedly
   factory_girl!
   haml (>= 3.1.2)

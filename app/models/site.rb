@@ -3,7 +3,7 @@ class Site < ActiveRecord::Base
   TemplateSiteName = 'friskyfactory'
   DefaultMailer    = 'mailer@friskyfactory.com'
 
-  validates_presence_of   :name, :display_name
+  validates_presence_of :name, :display_name
   validates_uniqueness_of :name
 
   has_many :invitations, :as => :resource, :class_name => 'Posting::Invitation' do
@@ -12,7 +12,9 @@ class Site < ActiveRecord::Base
     end
   end
 
-  has_and_belongs_to_many :users
+  has_many :users
+
+  authenticates_many :user_sessions
 
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
