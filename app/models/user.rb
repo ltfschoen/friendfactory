@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
       :emailable,
       :invitation_code
 
-  delegate :handle, :age, :location, :to => :profile
+  # TODO: delegate :handle, :age, :location, :to => :profile
 
   validates_presence_of :site
 
@@ -191,7 +191,7 @@ class User < ActiveRecord::Base
     raise profile_attributes.inspect
   end
 
-  ### Profile
+  ### Delegate to Profile
 
   # def profile(site = enrollment_site)
   #   raise "No site provided" if site.nil?
@@ -203,37 +203,49 @@ class User < ActiveRecord::Base
   #   end
   # end
 
-  # def handle(site = enrollment_site)
-  #   (enrollment_profile || profile(site)).handle
-  # end
+  def handle(site = nil)
+    delegate_to_profile_warning('handle') unless site.nil?
+    profile.handle
+  end
 
-  # def age(site = enrollment_site)
-  #   (enrollment_profile || profile(site)).age
-  # end
+  def age(site = nil)
+    delegate_to_profile_warning('age') unless site.nil?
+    profile.age
+  end
 
-  # def location(site = enrollment_site)
-  #   (enrollment_profile || profile(site)).location
-  # end
+  def location(site = nil)
+    delegate_to_profile_warning('location') unless site.nil?
+    profile.location
+  end
 
-  # def avatar(site)
-  #   @avatar ||= profile(site).avatar
-  # end
-        
-  # def first_name(site)
-  #   profile(site).first_name
-  # end
+  def avatar(site)
+    delegate_to_profile_warning('avatar') unless site.nil?
+    profile.avatar
+  end
+
+  def first_name(site)
+    delegate_to_profile_warning('first_name') unless site.nil?
+    profile.first_name
+  end
+
+  def last_name(site)
+    delegate_to_profile_warning('last_name') unless site.nil?
+    profile.last_name
+  end
+
+  def full_name(site)
+    delegate_to_profile_warning('full_name') unless site.nil?
+    profile.full_name
+  end
   
-  # def last_name(site)
-  #   profile(site).last_name
-  # end
+  def gender(site)
+    delegate_to_profile_warning('gender') unless site.nil?
+    profile.gender
+  end
   
-  # def full_name(site)
-  #   profile(site).full_name
-  # end
-  
-  # def gender(site)
-  #   profile(site).gender
-  # end
+  def delegate_to_profile_warning(attribute)
+    Rails.logger.warn("User##{attribute} called with site")
+  end
   
   # TODO Delete this. Should not expose the resource relationship.. who cares
   # about a profile's resource?? The profile should expose the interesting
