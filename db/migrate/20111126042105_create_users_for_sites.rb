@@ -15,6 +15,7 @@ class CreateUsersForSites < ActiveRecord::Migration
     create_table :accounts, :force => true do |t|
       t.date :dob
       t.string :state
+      t.timestamps
     end
 
     add_column :users, :site_id, :integer rescue nil
@@ -26,6 +27,8 @@ class CreateUsersForSites < ActiveRecord::Migration
 
     XUser.reset_column_information
     NUser.reset_column_information
+
+    ActiveRecord::Base.record_timestamps = false
 
     Account.transaction do
       XUser.all.each do |xuser|
