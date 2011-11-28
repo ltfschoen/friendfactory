@@ -1,4 +1,4 @@
-class CreateUsersForSites < ActiveRecord::Migration
+class CreateAccounts < ActiveRecord::Migration
   
   class XUser < ActiveRecord::Base
     set_table_name :users
@@ -28,8 +28,9 @@ class CreateUsersForSites < ActiveRecord::Migration
     XUser.reset_column_information
     NUser.reset_column_information
 
-    ActiveRecord::Base.record_timestamps = false
+    say 'migrating users from multi-site to sole-site'
 
+    ActiveRecord::Base.record_timestamps = false
     Account.transaction do
       XUser.all.each do |xuser|
         create_user_for_each_site(xuser, create_account(xuser))
@@ -49,7 +50,7 @@ class CreateUsersForSites < ActiveRecord::Migration
   private
 
   def self.create_account(xuser)
-    account = Account.create!
+    account = Account.create!(:created_at => Time.now, :updated_at => Time.now)
     xuser.update_attribute(:account_id, account.id)
     account
   end
@@ -91,7 +92,7 @@ class CreateUsersForSites < ActiveRecord::Migration
   end
 
   def self.update_bookmarks(xuser, nuser, site)
-    xuser.bookmarks.where(:wave_id => site.wave_ids).update_all([ 'user_id = ?', nuser.id ])
+    xuser.bookmarks.where(:wave_id => site.wave_ids).update_all(:user_id => nuser.id)
   end
 
 end

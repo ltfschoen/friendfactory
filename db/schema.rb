@@ -13,8 +13,10 @@
 ActiveRecord::Schema.define(:version => 20111126042105) do
 
   create_table "accounts", :force => true do |t|
-    t.date   "dob"
-    t.string "state"
+    t.date     "dob"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "admin_tags", :force => true do |t|
