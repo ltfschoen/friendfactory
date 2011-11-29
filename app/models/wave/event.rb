@@ -4,9 +4,7 @@ class Wave::Event < Wave::Base
 
   extend Forwardable
   include TagScrubber
-  
-  attr_readonly :user_id
-  
+
   attr_accessible :promoter_name,
       :description,
       :start_date, :start_time,

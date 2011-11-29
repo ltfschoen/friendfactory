@@ -15,6 +15,7 @@ class CreateAccounts < ActiveRecord::Migration
     create_table :accounts, :force => true do |t|
       t.date :dob
       t.string :state
+      t.integer :parent_id
       t.timestamps
     end
 
@@ -37,6 +38,15 @@ class CreateAccounts < ActiveRecord::Migration
       end
     end
 
+    Person.transaction do
+      Wave::Profile.all.each do |profile|
+        person = profile.user_info
+        if person[:user_id].nil?
+          person.update_attribute(:user_id, profile.user_id)
+        end
+      end
+    end
+
     # TODO: drop_table :sites_users
   end
 
@@ -50,7 +60,8 @@ class CreateAccounts < ActiveRecord::Migration
   private
 
   def self.create_account(xuser)
-    account = Account.create!(:created_at => Time.now, :updated_at => Time.now)
+    time_now = Time.now
+    account = Account.create!(:created_at => time_now, :updated_at => time_now)
     xuser.update_attribute(:account_id, account.id)
     account
   end

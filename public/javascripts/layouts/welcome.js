@@ -25,21 +25,6 @@ jQuery(function($) {
 			// $(this).data('tooltip').getTip().hide();
 		});
 
-
-	// Badge
-	$('input#user_email').blur(function(event) {
-		$.getJSON('/users/member', { email: $(event.target).val() }, function(data) {
-			if (data['member'] !== false) {
-				$("input#user_password_confirmation").hide();
-				$("#reuse_password").find('span').text(data['member']).end().show();
-			} else {
-				$('input#user_password_confirmation').show();
-				$("#reuse_password").hide();
-			}
-		});
-	});
-
-
 	// Forgotten password
 	$('a.forgotten').click(function(event) {
 		event.preventDefault();

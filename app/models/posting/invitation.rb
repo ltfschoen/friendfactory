@@ -44,7 +44,6 @@ class Posting::Invitation < Posting::Base
   scope :personal, where('`postings`.`body` IS NOT NULL')
   scope :universal, where(:body => nil)
   scope :code, lambda { |code| where(:subject => code) }
-  scope :site, lambda { |site| where(:resource_id => site.id) }
 
   scope :age, lambda { |*days_old|
     where_clause = days_old.inject([[]]) do |memo, age|
@@ -54,7 +53,7 @@ class Posting::Invitation < Posting::Base
     end
     where(*[ where_clause.shift.join(' OR '), where_clause ].flatten)
   }
-  
+
   scope :not_redundant, lambda {
     joins('LEFT OUTER JOIN `users` ON `postings`.`body` = `users`.`email`').
     where('`users`.`id` IS NULL') }
@@ -62,7 +61,7 @@ class Posting::Invitation < Posting::Base
   scope :redundant, lambda {
     joins('LEFT OUTER JOIN `users` ON `postings`.`body` = `users`.`email`').
     where('`users`.`id` IS NOT NULL') }
-  
+
   scope :aging, lambda {
     age(FIRST_REMINDER_AGE, SECOND_REMINDER_AGE).
     order('`postings`.`created_at` ASC') }
@@ -71,8 +70,8 @@ class Posting::Invitation < Posting::Base
     age(EXPIRATION_AGE).
     order('`postings`.`created_at` ASC') }
 
-  def self.find_all_by_code(code)
-    find_all_by_subject(code)
+  def self.find_by_code(code)
+    order('`postings`.`created_at` DESC').find_by_subject(code)
   end
 
   def email=(new_email)
@@ -81,20 +80,20 @@ class Posting::Invitation < Posting::Base
       set_email_changed unless new_record?
     end
   end
-  
+
   alias :body= :email=
 
   def email_changed?
     @email_changed
   end
-  
+
   def anonymous?
     email.blank?
   end
-    
+
   private
 
-  def set_email_changed    
+  def set_email_changed
     @email_changed = true
   end    
 end

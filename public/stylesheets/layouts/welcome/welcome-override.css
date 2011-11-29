@@ -157,11 +157,11 @@ ul#errors li {
 	line-height: 1.5em;
 }
 
-#badge form input#user_profile_attributes_age {
+#badge form input#user_person_attributes_age {
   width: 50px !important;
 }
 
-#badge form input#user_profile_attributes_location {
+#badge form input#user_person_attributes_location {
   width: 130px !important;
 }
 

@@ -1,8 +1,7 @@
 class Posting::Link < Posting::Base
-  
+
   attr_writer :url
-  
-  attr_readonly :user_id
+
   attr_accessible :url, :subject, :body
 
   validates_presence_of :user, :resource

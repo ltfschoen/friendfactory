@@ -7,7 +7,6 @@ class Posting::Message < Posting::Base
   alias_attribute :sender_id, :user_id
 
   attr_accessible :subject, :body
-  attr_readonly :user
 
   validates_presence_of :user
   validates_presence_of :receiver, :site, :on => :create

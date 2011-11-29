@@ -30,6 +30,7 @@ class Posting::Base < ActiveRecord::Base
   scope :unpublished, where(:state => :unpublished)
 
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
+  scope :order_by_updated_at_desc, order('`postings`.`updated_at` DESC')
 
   belongs_to :user
 

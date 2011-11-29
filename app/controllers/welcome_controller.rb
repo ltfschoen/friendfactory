@@ -10,9 +10,36 @@ class WelcomeController < ApplicationController
         @launch_user = LaunchUser.new
         format.html { render :action => 'launch' }
       else
-        @user = User.find_by_invitation_code(params[:invite]) || User.new
-        @user.build_profile
+        @user = User.new({ :invitation_code => params[:invitation_code] })
         format.html
+      end
+    end
+  end
+
+  def signup
+    account = Account.find_or_create_by_email(params[:user][:email])
+    @user = account.users.build(params[:user]) { |user| user.site = current_site }
+    user_session = current_site.user_sessions.new(params[:user])
+    respond_to do |format|
+      if account.save && user_session.save
+        flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.handle}!"
+        format.html { redirect_to root_path }
+      else
+        format.html { render :action => 'show' }
+      end
+    end
+  end
+
+  def login
+    user_session = current_site.user_sessions.new(params[:user_session])
+    respond_to do |format|
+      if user_session.save
+        flash[:notice] = "Welcome back, #{user_session.record.handle(current_site)}!"
+        format.html { redirect_back_or_default(root_path) }
+      else
+        @user = User.new({ :invitation_code => params[:invitation_code] })
+        flash.now[:login] = user_session.errors.full_messages
+        format.html { render :action => 'show' }
       end
     end
   end

@@ -17,10 +17,10 @@ class Account < ActiveRecord::Base
   end
 
   def self.find_or_create_by_email(email)
-    if user = User.where(:email => email).order('updated_at desc').limit(1).first
+    if user = User.where(:email => email.strip).order('`updated_at` desc').limit(1).first
       user.account
     else
-      Account.new(email)
+      Account.new
     end
   end
 

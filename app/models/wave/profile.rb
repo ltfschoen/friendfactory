@@ -5,31 +5,24 @@ class Wave::Profile < Wave::Base
 
   include TagScrubber
 
-  delegate :handle,
-      :handle=,
-      :age,
-      :age=,
-      :location,
-      :location=,
-      :first_name,
-      :last_name,
-      :dob,
-    :to => :resource
+  delegate :handle, :age, :location, :first_name, :last_name, :to => :person
+  delegate :email, :admin, :admin?, :to => :user
 
   # Default Signals
-  delegate :gender, :orientation, :relationship, :to => :resource
-  
-  # Custom Signals
-  delegate :deafness, :hiv_status, :board_type, :military_service, :to => :resource
-  
-  delegate :email, :emailable?, :admin, :admin?, :to => :user
-  
-  before_validation :'resource.present?'
-  before_update     :'resource.save'  
+  delegate :gender, :orientation, :relationship, :to => :person
 
-  validates_presence_of :handle, :unless => :first_name
+  # Custom Signals
+  delegate :deafness, :hiv_status, :board_type, :military_service, :to => :person
   
+  # delegate :email, :emailable?, :admin, :admin?, :to => :user
+  
+  # before_validation :'resource.present?'
+  # before_update     :'resource.save'  
+
   alias :user_info :resource
+
+  belongs_to :person, :class_name => 'Person', :foreign_key => 'resource_id'
+  alias_attribute :person_id, :resource_id
 
   # Use an association to provide eager loading.
   has_many :avatars,
@@ -91,10 +84,6 @@ class Wave::Profile < Wave::Base
     end
   end
 
-  def resource
-    super || self.resource = UserInfo.new.tap { |user_info| user_info.user = user }
-  end
-  
   def tag_list
     current_site.present? ? tag_list_on(current_site) : []  
   end

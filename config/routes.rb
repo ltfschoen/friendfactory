@@ -90,38 +90,31 @@ Friskyfactory::Application.routes.draw do
     get 'geocode', :on => :collection
   end
 
-  # To reset passwords
-  resources :passwords, :only => [ :new, :create, :edit, :update ]
-
-  # User and User Sessions
-  resources :users, :only => [ :create, :update ] do
-    get 'member', :on => :collection
-  end
-
-  resources :user_sessions, :only => [ :new, :create, :destroy ] do
-    get 'lurk', :on => :new
-  end
-
-  # Menu bar equivalents
-  get   'login'   => 'user_sessions#create'
-  match 'logout'  => 'user_sessions#destroy', :via => [ :get, :delete ]
-
   # Welcome
-  # get  'welcome(/:invite)' => 'welcome#show', :as => 'welcome'
   namespace :welcome do
     get 'headshot/:pane', :action => 'headshot', :as => 'headshot'
-    get '(/:invite)', :action => 'show'
+    get '(/:invitation_code)', :action => 'show'
+    post 'signup'
+    post 'login'
   end
 
   post 'launch' => 'welcome#launch'
+  match 'logout' => 'user_sessions#destroy', :via => [ :get, :delete ]
+
+  # Reset passwords
+  resources :passwords, :only => [ :new, :create, :edit, :update ]
+
+  resources :user_sessions, :only => [ :destroy ] do
+    get 'lurk', :on => :new
+  end
 
   scope :module => 'wave' do
-    get 'wave'            => 'communities#show'
-    get 'events(/:tag)'   => 'events#index', :as => 'events'
-    get 'invitations'     => 'invitations#index'
-    get 'inbox'           => 'conversations#index'
-    get ':slug',      :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
-    root              :to => 'communities#show', :via => :get
+    get 'wave' => 'communities#show' # TODO Remove
+    get 'events(/:tag)' => 'events#index', :as => 'events' # TODO Remove
+    get 'invitations' => 'invitations#index'
+    get 'inbox' => 'conversations#index'
+    get ':slug', :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
+    root :to => 'communities#show', :via => :get
   end
 
   # Labs

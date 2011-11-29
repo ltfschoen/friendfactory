@@ -2,18 +2,16 @@ class Posting::Video < Posting::Base
 
   VALID_URLS = [
     /^(http:\/\/)?(www\.)?youtube\.com\/watch[\\?&]v=([^&#]{11})$/, # youtube.com
-    /^(http:\/\/)?(www\.)?youtu\.be\/([^&#]{11})$/                  # youtu.be
+    /^(http:\/\/)?(www\.)?youtu\.be\/([^&#]{11})$/ # youtu.be
   ]
 
   alias_attribute :url, :body
-   
+
   attr_accessible :subject, :url
-  
+
   validates_presence_of :url
   validates_presence_of :user
-  
-  attr_readonly :user_id
-  
+
   validate do |posting|
     if posting.url.present? && posting.vid.blank?
       posting.errors.add(:url, 'not recognized')
@@ -28,5 +26,5 @@ class Posting::Video < Posting::Base
     end
     nil
   end
-    
+
 end

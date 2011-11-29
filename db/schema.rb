@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20111126042105) do
   create_table "accounts", :force => true do |t|
     t.date     "dob"
     t.string   "state"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

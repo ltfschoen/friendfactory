@@ -6,14 +6,7 @@ class Site < ActiveRecord::Base
   validates_presence_of :name, :display_name
   validates_uniqueness_of :name
 
-  has_many :invitations, :as => :resource, :class_name => 'Posting::Invitation' do
-    def anonymous(code)
-      where(:subject => code, :body => nil).order('created_at desc').limit(1).try(:first)
-    end
-  end
-
   has_many :users
-
   authenticates_many :user_sessions
 
   has_and_belongs_to_many :waves,
@@ -21,6 +14,8 @@ class Site < ActiveRecord::Base
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
+
+  has_many :invitations, :as => :resource, :class_name => 'Posting::Invitation'
 
   has_many :signal_categories,
       :class_name  => 'Signal::Category',
@@ -56,10 +51,12 @@ class Site < ActiveRecord::Base
     stylesheets.map(&:css).compact.join("\n")
   end
 
-  accepts_nested_attributes_for :stylesheets, :allow_destroy => true, :reject_if => :all_blank
-  accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
-  accepts_nested_attributes_for :constants, :allow_destroy => true, :reject_if => :all_blank
-  accepts_nested_attributes_for :texts, :allow_destroy => true, :reject_if => :all_blank
+  with_options :allow_destroy => true, :reject_if => :all_blank do
+    accepts_nested_attributes_for :stylesheets
+    accepts_nested_attributes_for :images
+    accepts_nested_attributes_for :constants
+    accepts_nested_attributes_for :texts
+  end
 
   after_create :create_home_wave
 
