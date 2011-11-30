@@ -3,7 +3,7 @@ class Admin::Invitation::UniversalsController < ApplicationController
   before_filter :require_admin
   
   def index
-    @postings = Posting::Invitation.universal.site(current_site).where([ 'state <> ?', 'unpublished' ]).order('created_at desc')
+    @postings = current_site.invitations.universal.published.order_by_updated_at_desc
     respond_to do |format|
       format.html
     end
