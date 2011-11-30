@@ -11,7 +11,7 @@ class Wave::Base < ActiveRecord::Base
 
   state_machine do
     state :published
-    state :unpublished
+    state :unpublished, :enter => lambda { |wave| Rails.logger.warn "Unpublish #{wave[:type]}:#{wave.id}"; raise rescue $!.backtrace.each {|line| Rails.logger.warn line }; true }
     
     event :publish do
       transitions :to => :published, :from => [ :unpublished, :published ]
