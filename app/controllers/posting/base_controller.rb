@@ -28,7 +28,7 @@ class Posting::BaseController < ApplicationController
               :body       => tag_helper.truncate(comment.body, :length => 60),
               :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }
           else
-            Rails.logger.warn("Posting without profile: id #{comment.id}")
+            Rails.logger.warn("#{current_site.name}/Posting:#{comment.id} has no profile")
             nil
           end
         end.compact!
