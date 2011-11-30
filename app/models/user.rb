@@ -33,12 +33,13 @@ class User < ActiveRecord::Base
 
   after_initialize :build_empty_profile
   after_initialize :set_email_address_from_invitation
+  before_create :attach_to_account
+
+  private
 
   def build_empty_profile
     build_person if new_record? && person.nil?
   end
-
-  private :build_empty_profile
 
   def set_email_address_from_invitation
     if new_record?
@@ -50,7 +51,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  private :set_email_address_from_invitation
+  def attach_to_account
+    self.account = Account.find_or_create_for_user(self) if account.nil?
+  end
+
+  public
 
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout

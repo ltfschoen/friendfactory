@@ -17,11 +17,9 @@ class WelcomeController < ApplicationController
   end
 
   def signup
-    account = Account.find_or_create_by_email(params[:user][:email])
-    @user = account.users.build(params[:user]) { |user| user.site = current_site }
-    user_session = current_site.user_sessions.new(params[:user])
+    @user = User.new(params[:user]) { |user| user.site = current_site }
     respond_to do |format|
-      if account.save && user_session.save
+      if @user.save && current_site.user_sessions.create(params[:user])
         flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.handle}!"
         format.html { redirect_to root_path }
       else
