@@ -1,4 +1,5 @@
 class UserSession < Authlogic::Session::Base
+  extend ActiveModel::Naming
 
   InactivityTimeout = 7.minutes
   remember_me_for 4.weeks

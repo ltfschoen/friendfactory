@@ -2,21 +2,27 @@ require 'spec_helper'
 
 describe WelcomeController do
 
+  let(:current_user) { mock_model(User) }
+  let(:current_session) { mock_model(UserSession) }
   let(:current_site) { mock_model(Site, :launch? => false).as_null_object }
 
   before(:each) do
     controller.stub(:current_site).and_return(current_site)
     controller.stub(:current_user_session).and_return(nil)
   end
-
-  it "uses WelcomeController" do
-    controller.should be_an_instance_of(WelcomeController)
+  
+  def login_as_user
+    controller.stub(:current_user).and_return(current_user)
+    controller.stub(:current_user_session).and_return(current_session)
   end
 
-  describe "before filter" do
-    it "doesn't allow a logged-in user" do
-      controller.stub(:current_user).and_return(mock_model(User))
+  describe "when the user is already logged in" do
+    before(:each) do
+      login_as_user
       get :show
+    end
+    
+    it "redirects to logout url" do
       response.should redirect_to(logout_url)
     end
   end
