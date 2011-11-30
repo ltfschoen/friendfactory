@@ -13,7 +13,6 @@ class CreateAccounts < ActiveRecord::Migration
 
   def self.up
     create_table :accounts, :force => true do |t|
-      t.date :dob
       t.string :state
       t.integer :parent_id
       t.timestamps

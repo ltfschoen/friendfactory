@@ -10,10 +10,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111126042105) do
+ActiveRecord::Schema.define(:version => 20111130081740) do
 
   create_table "accounts", :force => true do |t|
-    t.date     "dob"
     t.string   "state"
     t.integer  "parent_id"
     t.datetime "created_at"

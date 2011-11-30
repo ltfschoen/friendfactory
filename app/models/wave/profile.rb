@@ -5,8 +5,8 @@ class Wave::Profile < Wave::Base
 
   include TagScrubber
 
-  delegate :handle, :age, :location, :first_name, :last_name, :to => :person
   delegate :email, :admin, :admin?, :to => :user
+  delegate :handle, :age, :dob, :location, :first_name, :last_name, :to => :person
 
   # Default Signals
   delegate :gender, :orientation, :relationship, :to => :person
