@@ -4,54 +4,81 @@ describe User do
 
   include Authlogic::TestCase
 
+  let(:attrs) do
+    { :email => 'zed@test.com',
+      :person_attributes => {
+        :handle => 'zed',
+        :age => '42',
+        :location => 'Sydney' },
+      :password => 'test',
+      :password_confirmation => 'test' }
+  end
+
   before(:each) do
     activate_authlogic
     UserSession.stub!(:find).and_return(mock(UserSession, :record => mock_model(User)))
   end
 
   describe 'attributes' do
-    let(:attrs) do
-      { :email => 'zed@test.com',
-        :handle => 'zed',
-        :age => '42',
-        :location => 'Sydney',
-        :password => 'test',
-        :password_confirmation => 'test',
-        :enrollment_site => mock_model(Site).as_null_object }
+    describe 'at open site' do
+      let(:current_site) { mock_model(Site, :invite_only? => false) }
+
+      it 'is valid with valid attributes' do
+        User.new(attrs) { |user| user.site = current_site }.should be_valid
+      end
+
+      it 'requires a site' do
+        user = User.new(attrs)
+        user.valid?
+        user.errors.on(:site).should_not be_empty
+      end
+
+      it 'requires an email' do
+        user = User.new(attrs.except(:email))
+        user.valid?
+        user.errors.on(:'email').should_not be_empty
+      end
+
+      it 'requires a handle' do
+        person_attributes = attrs.delete(:person_attributes).except(:handle)
+        user = User.new(attrs.merge({ :person_attributes => person_attributes }))
+        user.valid?
+        user.errors.on(:'person.handle').should_not be_empty
+      end
+
+      it 'requires an age' do
+        person_attributes = attrs.delete(:person_attributes).except(:age)
+        user = User.new(attrs.merge({ :person_attributes => person_attributes }))
+        user.valid?
+        user.errors.on(:'person.age').should_not be_empty
+      end
+
+      it 'requires a location' do
+        person_attributes = attrs.delete(:person_attributes).except(:location)
+        user = User.new(attrs.merge({ :person_attributes => person_attributes }))
+        user.valid?
+        user.errors.on(:'person.location').should_not be_empty
+      end
     end
 
-    it 'is valid with valid attributes' do
-      User.new(attrs).should be_valid
-    end
+    describe 'invite-only site' do
+      let(:current_site) do
+        site = mock_model(Site, :invite_only? => true)
+        site.stub_chain(:invitations, :offered, :find_by_code).and_return('666')
+        site.stub_chain(:invitations, :offered, :personal, :find_by_code)
+        site
+      end
 
-    it 'requires an enrollment site' do
-      user = User.new(attrs)
-      user.enrollment_site = nil
-      user.should_not be_valid
-    end
+      it 'is valid with valid attributes' do
+        user = User.new(attrs.merge(:invitation_code => "666")) { |user| user.site = current_site }
+        user.should be_valid
+      end
 
-    it 'requires a handle' do
-      user = User.new(attrs)
-      user.handle = nil
-      user.should_not be_valid
-    end
-
-    it 'requires a age' do
-      user = User.new(attrs)
-      user.age = nil
-      user.should_not be_valid
-    end
-
-    it 'requires a location' do
-      user = User.new(attrs)
-      user.location = nil
-      user.should_not be_valid
-    end
-
-    it 'requires an email' do
-      user = User.new(attrs)
-      user.email = nil
-      user.should_not be_valid
+      it 'requires an invitation code' do
+        user = User.new { |user| user.site = current_site }
+        user.valid?
+        user.errors.on(:invitation_code).should_not be_empty
+      end
     end
 
     it 'requires something that looks like an email' do
@@ -59,11 +86,11 @@ describe User do
       user.email = 'crap'
       user.should_not be_valid
     end
-  
+
     it 'emailable by default' do
       User.new(attrs).should be_emailable
     end
-  
+
     it 'is not emailable' do
       user = User.new(attrs)
       user.emailable = false
@@ -72,6 +99,13 @@ describe User do
 
     it 'is not an admin by default' do
       User.new(attrs).should_not be_an_admin
+    end
+
+    it 'requires password confirmation to match password' do
+      user = User.new(attrs)
+      user.password_confirmation = 'crap'
+      user.valid?
+      user.errors.on(:password).should_not be_empty
     end
   end
 
@@ -85,144 +119,173 @@ describe User do
     end
   end
 
-  describe 'enrollment' do    
-    fixtures :sites, :users, :postings
-    set_fixture_class :waves => 'Wave::Base', :postings => 'Posting::Base'
+  describe 'enrollment' do
+    fixtures :sites, :users
+    set_fixture_class :waves => 'Wave::Base'
+
+    let(:invitation_only_site) { :positivelyfrisky }
+
+    def new_user(site, additional_attrs = {})
+      User.new(attrs.merge(additional_attrs)) { |user| user.site = sites(site) }
+    end
+
+    def new_invitation(options = {})
+      attrs = { :sponsor => users(:adam), :site => sites(invitation_only_site), :code => '666' }
+      Posting::Invitation.create!(attrs.merge(options))
+    end
+
+    it 'is valid in different sites with same email address' do
+      user = new_user(:friskyhands)
+      user.save!
+      user = new_user(:positivelyfrisky, :invitation_code => 'e5')
+      user.should be_valid
+    end
 
     describe "already enrolled" do
-      let(:enrollment_attrs) {{ :age => '24', :location => 'Sydney' }}
-
       it "is invalid at an open site" do
-        user = users(:adam)
-        user.enroll(sites(:friskyhands), enrollment_attrs.merge({ :handle => 'adam' }))
-        user.should_not be_valid
+        new_user(:friskyhands).save!
+        user = new_user(:friskyhands)
+        user.valid?
+        user.errors.on(:email).should_not be_empty
       end
 
-      it "is invalid at an invite-only site" do
-        user = users(:bert)
-        user.enroll(sites(:positivelyfrisky), enrollment_attrs.merge({ :handle => 'bert', :enrollment_code => 'b2' }))
-        user.should_not be_valid
+      it "is invalid at an invite-only site with a valid invitation code" do
+        new_user(:positivelyfrisky, :invitation_code => 'e5').save!
+        user = new_user(:positivelyfrisky, :invitation_code => 'e5')
+        user.valid?
+        user.errors.on(:email).should_not be_empty
       end
     end
 
     describe "invite-only sites" do
-      let(:duncan) do
-        User.new(:email => 'duncan@test.com', :password => 'test', :password_confirmation => 'test')      
-      end
-
-      let(:ernie) do
-        User.new(:email => 'ernie@test.com', :password => 'test', :password_confirmation => 'test')
-      end
-
-      let(:enrollment_attrs) {{ :age => '24', :location => 'Sydney' }}
-
       describe "with a personal invitation" do
-        it "is valid for an existing user" do
-          user = users(:charlie)
-          user.enroll(sites(:positivelyfrisky), enrollment_attrs.merge({ :handle => 'charlie', :invitation_code => 'c3' }))
+        it "is valid for valid invitation code" do
+          user = new_user(invitation_only_site, :invitation_code => 'e5')
           user.should be_valid
         end
 
-        it "is valid for a new user" do
-          duncan.enroll(sites(:positivelyfrisky), enrollment_attrs.merge({ :handle => 'duncan', :invitation_code => 'd4' }))
-          duncan.should be_valid
+        it "is invalid without an invitation code" do
+          user = new_user(invitation_only_site)
+          user.valid?
+          user.errors.on(:invitation_code).should_not be_empty
+        end
+
+        it "is invalid with an invalid invitation code" do
+          user = new_user(invitation_only_site, :invitation_code => '666')
+          user.valid?
+          user.errors.on(:invitation_code).should_not be_empty
+        end
+
+        it "is valid if invitation in offered state" do
+          user = new_user(invitation_only_site, :invitation_code => '666')
+          new_invitation(:email => user.email).offer!
+          user.should be_valid
         end
 
         it "is invalid if invitation exists but not in offered state" do
-          site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :email => ernie.email, :state => 'accepted')
-          ernie.enroll(site, enrollment_attrs.merge({ :handle => 'ernie', :invitation_code => '666' }))
-          ernie.should_not be_valid
-          ernie.errors.full_messages.join.should match(/has already been previously accepted/)
+          user = new_user(invitation_only_site, :invitation_code => '666')
+          invitation = new_invitation(:email => user.email)
+          invitation.offer!
+          invitation.accept!
+          user.valid?
+          user.errors.on(:invitation_code).should_not be_empty
         end
 
         it "should be in accepted state after accepted" do
-          site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :email => ernie.email)
+          user = new_user(invitation_only_site, :invitation_code => '666')
+          invitation = new_invitation(:email => user.email)
           invitation.offer!
-          ernie.enroll!(site, enrollment_attrs.merge({ :handle => 'ernie', :invitation_code => '666' }))
-          invitation.reload
-          invitation.state.should == 'accepted'
+          user.save!
+          invitation.reload.state.should == 'accepted'
+        end
+
+        it "sets user's email from the invitation if it's empty" do
+          new_invitation({ :email => 'blah@blah.com' }).offer!
+          user = User.new(attrs.merge({ :invitation_code => '666' }).except(:email)) { |user| user.site = sites(invitation_only_site) }
+          user.email.should == 'blah@blah.com'
+        end
+
+        it "doesn't set user's email from the invitation if email already exists" do
+          new_invitation({ :email => 'blah@blah.com' }).offer!
+          user = new_user(invitation_only_site, :invitation_code => '666')
+          user.email.should == attrs[:email]
         end
       end
 
       describe "with an anonymous invitation" do
         it "is valid for an existing user" do
-          handle = { :handle => 'ernie' }
-          ernie.enroll!(sites(:friskyhands), enrollment_attrs.merge(handle))
-          ernie.enroll(sites(:positivelyfrisky), enrollment_attrs.merge(handle).merge({ :invitation_code => 'e5' }))
-          ernie.should be_valid
+          new_invitation.offer!
+          new_user(:friskyhands).save!
+          new_user(invitation_only_site, :invitation_code => '666').should be_valid
         end
 
         it "is valid for a new user" do
-          ernie.enroll(sites(:positivelyfrisky), enrollment_attrs.merge({ :handle => 'ernie', :invitation_code => 'e5' }))
-          ernie.should be_valid
+          new_invitation.offer!
+          new_user(invitation_only_site, :invitation_code => '666').should be_valid
+        end
+
+        it "is valid if invitation in offered state" do
+          new_invitation.offer!
+          new_user(invitation_only_site, :invitation_code => '666').should be_valid
         end
 
         it "is invalid if invitation in accepted state" do
-          site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :state => 'accepted')
-          ernie.enroll(site, enrollment_attrs.merge({ :handle => 'ernie', :invitation_code => '666' }))
-          ernie.should_not be_valid
+          new_invitation(:state => 'accepted')
+          user = new_user(invitation_only_site, :invitation_code => '666')
+          user.valid?
+          user.errors.on(:invitation_code).should_not be_empty
         end
 
         it "is invalid if invitation in expired state" do
-          site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.create!(:sponsor => users(:adam), :site => site, :code => '666', :state => 'offered')
-          invitation.expire!
-          ernie.enroll(site, enrollment_attrs.merge({ :handle => 'ernie', :invitation_code => '666' }))
-          ernie.should_not be_valid
+          new_invitation(:state => 'expired')
+          user = new_user(invitation_only_site, :invitation_code => '666')
+          user.valid?
+          user.errors.on(:invitation_code).should_not be_empty
         end
 
         it "should remain in offered state after being accepted" do
-          site = sites(:positivelyfrisky)
-          invitation = Posting::Invitation.new(:sponsor => users(:adam), :code => '666')
-          site.invitations << invitation
+          invitation = new_invitation
           invitation.offer!
-          ernie.enroll!(site, enrollment_attrs.merge({ :handle => 'ernie', :invitation_code => '666' }))
-          invitation.reload
-          invitation.state.should == 'offered'
+          new_user(invitation_only_site, :invitation_code => '666').should be_valid
+          invitation.reload.state.should == 'offered'
+        end
+
+        it "doesn't set the user's email from the invitation when first initializing" do
+          new_invitation(:email => 'blah@blah.com').offer!
+          user = User.new(attrs.merge(:invitation_code => '666').except(:email))
+          user.email.should be_blank
         end
       end
 
       describe "without an invitation" do
-        let(:attrs) { enrollment_attrs.merge({ :handle => 'ernie', :invitation_code => '666' })}
-
         it "is invalid for an existing user" do
-          ernie.enroll!(sites(:friskyhands), attrs)
-          ernie.enroll(sites(:positivelyfrisky), attrs)
-          ernie.should_not be_valid
+          new_invitation.offer!
+          new_user(:friskyhands).save!
+          new_user(invitation_only_site).should_not be_valid
         end
 
         it "is invalid for a new user" do
-          ernie.enroll(sites(:positivelyfrisky), attrs)
-          ernie.should_not be_valid
-        end
-
-        it "is valid with invitation override" do
-          ernie.enroll(sites(:positivelyfrisky), attrs.merge({ :invitation_override => true }))
-          ernie.should be_valid
+          new_user(invitation_only_site).should_not be_valid
         end
       end
     end
 
     describe "open sites" do
       describe "without an invitation" do
-        let(:duncan) do
-          User.new(:email => 'duncan@test.com', :password => 'test', :password_confirmation => 'test')
-        end
-
-        let(:enrollment_attrs) {{ :handle => 'duncan', :age => '24', :location => 'Sydney' }}
+        let(:invitation_only_site) { :positivelyfrisky }
 
         it "is valid for an existing user" do
-          duncan.enroll!(sites(:positivelyfrisky), enrollment_attrs.merge({ :invitation_code => 'd4' }))
-          duncan.enroll(sites(:friskyhands), enrollment_attrs)
-          duncan.should be_valid
+          new_invitation.offer!
+          new_user(invitation_only_site, :invitation_code => '666').save!
+          new_user(:friskyhands).should be_valid
         end
 
         it "is valid for a new user" do
-          duncan.enroll(sites(:friskyhands), enrollment_attrs)
-          duncan.should be_valid
+          new_user(:friskyhands).should be_valid
+        end
+
+        it "ignores invitation code if provided" do
+          new_user(:friskyhands, :invitation_code => '666').should be_valid
         end
       end
     end

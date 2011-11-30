@@ -3,7 +3,7 @@ class Posting::Invitation < Posting::Base
   FIRST_REMINDER_AGE  = 1.day
   SECOND_REMINDER_AGE = 7.days
   EXPIRATION_AGE      = 10.days
-  
+
   belongs_to :site, :foreign_key => 'resource_id'
   belongs_to :invitee, :foreign_key => 'body', :primary_key => 'email', :class_name => 'User'
 
@@ -19,22 +19,23 @@ class Posting::Invitation < Posting::Base
   end
 
   state_machine do
+    state :unpublished
     state :offered
     state :accepted
     state :expired
-    
+
     event :offer do
       transitions :to => :offered, :from => [ :unpublished ]
     end
-    
+
     event :accept do
-      transitions :to => :accepted, :from => [ :offered, :accepted ]
-    end    
-    
+      transitions :to => :accepted, :from => [ :offered ], :guard => lambda { |invitation| invitation.personal? }
+    end
+
     event :expire do
       transitions :to => :expired, :from => [ :offered ]
     end
-    
+
     event :unpublish do
       transitions :to => :unpublished, :from => [ :offered, :expired ]
     end
@@ -71,7 +72,7 @@ class Posting::Invitation < Posting::Base
     order('`postings`.`created_at` ASC') }
 
   def self.find_by_code(code)
-    order('`postings`.`created_at` DESC').find_by_subject(code)
+    order('`postings`.`created_at` DESC').find_by_subject(code.strip) if code
   end
 
   def email=(new_email)
@@ -85,6 +86,10 @@ class Posting::Invitation < Posting::Base
 
   def email_changed?
     @email_changed
+  end
+
+  def personal?
+    email.present?
   end
 
   def anonymous?

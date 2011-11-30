@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   validate :invitation_code_offered?,
       :on => :create,
-      :if => lambda { site.present? && invitation_code.present? }
+      :if => lambda { site.present? && site.invite_only? && invitation_code.present? }
 
   def invitation_code_offered?
     unless site.invitations.offered.find_by_code(invitation_code)
@@ -31,17 +31,26 @@ class User < ActiveRecord::Base
 
   private :invitation_code_offered?
 
-  after_initialize :build_empty_profile_and_set_invitation_code
+  after_initialize :build_empty_profile
+  after_initialize :set_email_address_from_invitation
 
-  def build_empty_profile_and_set_invitation_code
+  def build_empty_profile
+    build_person if new_record? && person.nil?
+  end
+
+  private :build_empty_profile
+
+  def set_email_address_from_invitation
     if new_record?
-      build_person if person.nil?
-      invitation_code.strip! if invitation_code
-      self.email = site.invitations.offered.personal.find_by_code(invitation_code) if site
+      if site && site.invite_only?
+        if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
+          self.email ||= invitation.email
+        end
+      end
     end
   end
 
-  private :build_empty_profile_and_set_invitation_code
+  private :set_email_address_from_invitation
 
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
@@ -81,6 +90,16 @@ class User < ActiveRecord::Base
       where(:sites_waves => { :site_id => site.id })
     end
   end
+
+  after_create :invitation_code_accept!
+
+  def invitation_code_accept!
+    if site.invite_only? && invitation = site.invitations.offered.find_by_code(invitation_code)
+      invitation.accept!
+    end
+  end
+
+  private :invitation_code_accept!
 
   ### Conversations
 

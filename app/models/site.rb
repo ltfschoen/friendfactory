@@ -15,7 +15,7 @@ class Site < ActiveRecord::Base
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
 
-  has_many :invitations, :as => :resource, :class_name => 'Posting::Invitation'
+  has_many :invitations, :foreign_key => 'resource_id', :class_name => 'Posting::Invitation'
 
   has_many :signal_categories,
       :class_name  => 'Signal::Category',
