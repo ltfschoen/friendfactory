@@ -249,8 +249,8 @@
 				var $container = $headshot.closest('.headshot-container');
 				$container.fadeTo('slow', 0.0, function () {
 					$container.remove();
-					return false;
 				});
+				return false
 			},
 
 			onFlip: function () {},
