@@ -250,7 +250,7 @@
 				$container.fadeTo('slow', 0.0, function () {
 					$container.remove();
 				});
-				return false
+				return false;
 			},
 
 			onFlip: function () {},
