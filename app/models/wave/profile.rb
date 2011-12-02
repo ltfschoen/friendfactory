@@ -5,7 +5,7 @@ class Wave::Profile < Wave::Base
 
   include TagScrubber
 
-  delegate :email, :admin, :admin?, :to => :user
+  delegate :email, :emailable?, :admin, :admin?, :to => :user
   delegate :handle, :age, :dob, :location, :first_name, :last_name, :to => :person
 
   # Default Signals
@@ -14,11 +14,6 @@ class Wave::Profile < Wave::Base
   # Custom Signals
   delegate :deafness, :hiv_status, :board_type, :military_service, :to => :person
   
-  # delegate :email, :emailable?, :admin, :admin?, :to => :user
-  
-  # before_validation :'resource.present?'
-  # before_update     :'resource.save'  
-
   alias :user_info :resource
 
   belongs_to :person, :class_name => 'Person', :foreign_key => 'resource_id'
