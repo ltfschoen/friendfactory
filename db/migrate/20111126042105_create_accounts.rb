@@ -18,12 +18,11 @@ class CreateAccounts < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_column :users, :site_id, :integer rescue nil
-    add_column :users, :account_id, :integer rescue nil
+    add_column :users, :site_id, :integer
+    add_column :users, :account_id, :integer
 
-    remove_index :users, :column => :email rescue nil
-    add_index :users, [ :site_id, :email ], :unique => true rescue nil
-    add_index :users, :account_id rescue nil
+    remove_index :users, :column => :email
+    add_index :users, [ :site_id, :email ], :unique => true
 
     XUser.reset_column_information
     NUser.reset_column_information
@@ -45,6 +44,10 @@ class CreateAccounts < ActiveRecord::Migration
         end
       end
     end
+
+    change_column :users, :site_id, :null => false
+    change_column :users, :account_id, :null => false
+    add_index :users, :account_id
 
     # TODO: drop_table :sites_users
   end
