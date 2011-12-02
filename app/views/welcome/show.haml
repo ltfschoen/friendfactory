@@ -66,7 +66,7 @@
   .cells
     - profiles = current_site.waves.type(Wave::Profile).limit(4)
     - profiles.each do |profile|
-      = render :partial => 'welcome/headshot', :locals => { :profile => profiles }
+      = render :partial => 'welcome/headshot', :locals => { :profile => profile }
 
   - unless current_site.name == 'dizmdayz'
     %hr/
