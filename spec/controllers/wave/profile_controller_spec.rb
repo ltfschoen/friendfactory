@@ -5,6 +5,7 @@ describe Wave::ProfileController do
   fixtures :users, :waves
   
   describe 'not logged in' do
+    before(:each) { not_logged_in }
     describe "GET show" do
       it "should redirect to welcome controller" do
         get 'show'
