@@ -45,8 +45,8 @@ class CreateAccounts < ActiveRecord::Migration
       end
     end
 
-    change_column :users, :site_id, :null => false
-    change_column :users, :account_id, :null => false
+    change_column :users, :site_id, :integer, :null => false
+    change_column :users, :account_id, :integer, :null => false
     add_index :users, :account_id
 
     # TODO: drop_table :sites_users

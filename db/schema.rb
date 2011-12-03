@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130081740) do
+ActiveRecord::Schema.define(:version => 20111126042105) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -397,8 +397,8 @@ ActiveRecord::Schema.define(:version => 20111130081740) do
     t.string   "last_login_ip"
     t.boolean  "emailable",          :default => true
     t.boolean  "admin",              :default => false
-    t.integer  "site_id"
-    t.integer  "account_id"
+    t.integer  "site_id",                               :null => false
+    t.integer  "account_id",                            :null => false
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"
