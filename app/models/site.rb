@@ -51,11 +51,11 @@ class Site < ActiveRecord::Base
     stylesheets.map(&:css).compact.join("\n")
   end
 
-  with_options :allow_destroy => true, :reject_if => :all_blank do
-    accepts_nested_attributes_for :stylesheets
-    accepts_nested_attributes_for :images
-    accepts_nested_attributes_for :constants
-    accepts_nested_attributes_for :texts
+  with_options :allow_destroy => true, :reject_if => :all_blank do |opts|
+    opts.accepts_nested_attributes_for :stylesheets
+    opts.accepts_nested_attributes_for :images
+    opts.accepts_nested_attributes_for :constants
+    opts.accepts_nested_attributes_for :texts
   end
 
   after_create :create_home_wave
