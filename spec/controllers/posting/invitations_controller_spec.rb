@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe Posting::InvitationsController do
-  
+
   context 'user not logged in' do
+    before(:each) { not_logged_in }
+
     describe "POST 'create'" do
       it 'should redirect to welcome page' do
         post :create, { :wave_id => '42' }
