@@ -59,6 +59,20 @@ def login(site, user)
   user_record
 end
 
+
+def not_logged_in
+  controller.stub!(:current_user).and_return(nil)
+end
+
+def login_as_user
+  controller.stub!(:current_user).and_return(mock_model(User, :admin? => false))
+end
+
+def login_as_admin
+  controller.stub!(:current_user).and_return(mock_model(User, :admin? => true))
+end
+
+
 # http://wincent.com/knowledge-base/Fixtures_considered_harmful%3F
 # http://jasonsrailsblog.blogspot.com/2008/09/rspec-helper-extention.html
 class Hash
