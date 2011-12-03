@@ -3,7 +3,7 @@ require 'controllers/shared_examples_for_admin'
 
 describe Admin::Invitation::PersonalsController, 'GET index' do
 
-  it_should_behave_like "administrator-only for actions", :index
+  it_should_behave_like 'administrator-only', :index
 
   context 'when logged in as an administrator' do
     let(:wave) do

@@ -4,11 +4,12 @@ require 'controllers/shared_examples_for_admin'
 describe Admin::Invitation::UniversalsController do
   let(:current_site) { mock_model(Site) }
 
-  before(:each) do login_as_admin
+  before(:each) do
+    login_as_admin
     controller.stub(:current_site).and_return(current_site)
   end
 
-  it_should_behave_like "administrator-only", :index, :new, :create, :edit, :update, :destroy, :id => '42'
+  it_should_behave_like 'administrator-only', :index, :new, :create, :edit, :update, :destroy, :id => '42'
 
   context 'when logged in as administrator' do
     describe "GET index" do
@@ -22,7 +23,7 @@ describe Admin::Invitation::UniversalsController do
         get :index
         assigns(:postings).should == [ invitation ]
       end
-      
+
       it "renders index" do
         get :index
         response.should render_template('index')
@@ -40,12 +41,12 @@ describe Admin::Invitation::UniversalsController do
         get :edit, :id => '42'
         assigns(:posting).should == invitation
       end
-      
+
       it 'renders edit' do
         get :edit, :id => '42'
         response.should render_template('edit')
       end
     end
   end
-  
+
 end
