@@ -45,20 +45,7 @@ describe Posting::Video do
       video.user.should be_nil
     end
   end
-  
-  describe "read only" do
-    fixtures :users
-    it 'user' do
-      adam = users(:adam)
-      video.user = adam
-      video.save!
-      video.user = users(:bert)
-      video.save!
-      video.reload
-      video.user.should == adam
-    end
-  end
-  
+
   describe "vid" do
     it "youtube url" do
       video.vid.should == 'lzRKEv6cHuk'      
