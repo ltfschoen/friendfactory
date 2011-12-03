@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111126042105) do
+ActiveRecord::Schema.define(:version => 20111203202538) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -399,6 +399,7 @@ ActiveRecord::Schema.define(:version => 20111126042105) do
     t.boolean  "admin",              :default => false
     t.integer  "site_id",                               :null => false
     t.integer  "account_id",                            :null => false
+    t.integer  "score",              :default => 0
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"

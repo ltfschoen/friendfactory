@@ -77,6 +77,8 @@ class User < ActiveRecord::Base
   scope :online, lambda { { :conditions =>
       [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] } }
 
+  scope :featured, where('`users`.`score` > 0')
+
   belongs_to :account
   belongs_to :site
 

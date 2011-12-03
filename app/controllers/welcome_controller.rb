@@ -4,6 +4,8 @@ class WelcomeController < ApplicationController
   before_filter :require_launch_site, :only => [ :launch ]
   before_filter :clear_lurker
 
+  helper_method :featured_profiles
+
   def show
     respond_to do |format|
       if current_site.launch?
@@ -54,7 +56,7 @@ class WelcomeController < ApplicationController
   end
 
   private
-      
+
   def new_launch_user
     LaunchUser.new(params[:launch_user]).tap do |user|
       user.site = current_site.name
@@ -63,6 +65,10 @@ class WelcomeController < ApplicationController
 
   def require_launch_site
     redirect_to welcome_path unless current_site.launch?
+  end
+
+  def featured_profiles
+    current_site.users.featured.includes(:profile).limit(4).order('rand()').map(&:profile)
   end
 
 end
