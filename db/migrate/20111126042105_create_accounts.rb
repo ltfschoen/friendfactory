@@ -23,6 +23,7 @@ class CreateAccounts < ActiveRecord::Migration
 
     remove_index :users, :column => :email
     add_index :users, [ :site_id, :email ], :unique => true
+    add_index :users, :email
 
     XUser.reset_column_information
     NUser.reset_column_information
