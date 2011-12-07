@@ -13,7 +13,6 @@ class Admin::SitesController < ApplicationController
 
   def new
     @site = Site.new
-    empty_assets_and_stylesheet
     respond_to do |format|
       format.html
     end
@@ -32,8 +31,6 @@ class Admin::SitesController < ApplicationController
 
   def edit
     @site = Site.find(params[:id])
-    empty_assets_and_stylesheet
-    # Have empty assets ready for the form
   end
 
   def update
@@ -62,15 +59,8 @@ class Admin::SitesController < ApplicationController
       end
     end
   end
-  
+
   private
-  
-  def empty_assets_and_stylesheet
-    @site.images.build
-    @site.constants.build
-    @site.texts.build
-    @site.stylesheets.build if @site.stylesheets.length == 0
-  end
 
   def uid_css
     if current_user

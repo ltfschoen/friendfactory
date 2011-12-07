@@ -1,4 +1,4 @@
-= form_for([ :admin, @site ], :html => { :multipart => true }) do |f|  
+= form_for([ :admin, site_with_empty_assets_and_stylesheet(@site) ], :html => { :multipart => true }) do |f|
   %table.form
     %tr
       %td
@@ -69,7 +69,7 @@
             = stylesheet_form.label('_destroy', 'Remove')
             = stylesheet_form.text_area :css, :placeholder => 'css or scss', :class => 'stylesheet_css'
           = stylesheet_form.button 'Add Another Stylesheet', :id => 'new_stylesheet' # , :class => 'hidden'
-          
+
     %tr.assets.constants
       %td
         = f.label :constants
@@ -143,7 +143,7 @@
       %td
         = f.check_box :invite_only
         = f.label :invite_only, 'Requires an invitation to join'
-    
+
   .button-bar.footer
     = f.submit 'Save', :button => true
     = link_to 'Cancel', admin_sites_path, :class => 'button cancel'
