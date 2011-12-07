@@ -181,3 +181,14 @@ body.passwords #badge form input[type="submit"]:disabled {
 	opacity: 0.6;
 	top: 0;
 }
+
+.user_session_errors {
+	float: right;
+	width: 300px;
+	margin-top: 24px;
+	color: #fff;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	font: 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: right;
+	margin-right: 10px;
+}

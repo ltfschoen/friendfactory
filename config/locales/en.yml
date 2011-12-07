@@ -10,6 +10,9 @@ en:
           body: "Comment"
       user:
         handle: "First name"
+  authlogic:
+    error_messages:
+      no_authentication_details: Login and Password required
 
 # en:
 #   activerecord:

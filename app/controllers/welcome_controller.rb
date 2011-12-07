@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   before_filter :require_launch_site, :only => [ :launch ]
   before_filter :clear_lurker
 
-  helper_method :featured_profiles
+  helper_method :featured_profiles, :user_session
 
   def show
     respond_to do |format|
@@ -31,14 +31,12 @@ class WelcomeController < ApplicationController
   end
 
   def login
-    user_session = current_site.user_sessions.new(params[:user_session])
     respond_to do |format|
       if user_session.save
         flash[:notice] = "Welcome back, #{user_session.record.handle(current_site)}!"
         format.html { redirect_back_or_default(root_path) }
       else
         @user = User.new({ :invitation_code => params[:invitation_code] })
-        flash.now[:login] = user_session.errors.full_messages
         format.html { render :action => 'show' }
       end
     end
@@ -68,7 +66,11 @@ class WelcomeController < ApplicationController
   end
 
   def featured_profiles
-    current_site.users.featured.includes(:profile).limit(4).order('rand()').map(&:profile)
+    @featured_profiles ||= current_site.users.featured.includes(:profile).limit(4).order('rand()').map(&:profile)
+  end
+
+  def user_session
+    @user_session ||= current_site.user_sessions.new(params[:user_session])
   end
 
 end
