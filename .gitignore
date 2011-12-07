@@ -21,4 +21,5 @@ public/biorealism/*.esproj
 .footnotes
 public/images/users/*
 public/stylesheets/all.css
+config/environments/development.rb
 
