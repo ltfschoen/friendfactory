@@ -5,7 +5,7 @@ jQuery(function($) {
 
 		document.cookie = "ackNoBrowser=true";
 		$noscript.fadeTo('fast', 0.0, function () {
-			$noscript.slideUp('slow', function () {
+			$noscript.slideUp('fast', function () {
 				$noscript.remove();
 			});
 		});
