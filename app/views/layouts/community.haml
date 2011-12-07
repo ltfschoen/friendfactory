@@ -15,6 +15,7 @@
       'layouts/shared/unpublish-overlay', |
       'layouts/shared/nav', |
       'layouts/shared/tag_cloud', |
+      'layouts/shared/compatibility', |
       'layouts/community/base', |
       'layouts/community/base-override', |
       'layouts/community/sidebar', |
@@ -53,7 +54,7 @@
       'posting/video', |
       'posting/video-override', |
     :media => 'screen', |
-    :cache => 'cache/community' #, :concat => true
+    :cache => 'community.cache', :concat => true
 
   = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
 
@@ -85,6 +86,7 @@
       'application', |
       'layouts/shared/album', |
       'layouts/shared/video', |
+      'layouts/shared/compatibility', |
       'layouts/community', |
     :cache => 'cache/community'
 
@@ -97,6 +99,7 @@
   = csrf_meta_tag
 %body{uid, gid, :class => controller.action_name}
   = render :partial => 'layouts/shared/sidebar'
+  = compatibility_tag
   = yield
   - if Rails.env.development?
     #footnotes_holder{ :style => 'display:block' }

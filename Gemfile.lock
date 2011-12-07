@@ -129,6 +129,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.29)
+    user_agent (1.1.1)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -160,6 +161,7 @@ DEPENDENCIES
   sass (>= 3.1.1)
   sql-logging
   transitions (>= 0.0.10)
+  user_agent
   webrat (>= 0.7.2)
   whenever
   will_paginate (~> 3.0.2)

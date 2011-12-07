@@ -1,0 +1,6 @@
+- unless cookies[:ackNoBrowser].present?
+  .noscript
+    = link_to "×", '#', :title => 'Close', :class => 'close', :rel => 'nofollow'
+    %hgroup
+      %h1 Yikes! Upgrade Your Browser!
+      %p You're using #{browser.display_name} version #{user_agent.version}. #{current_site.display_name} uses technology not supported by this old browser. Consider upgrading to the last version.

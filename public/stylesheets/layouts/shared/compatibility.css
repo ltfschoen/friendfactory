@@ -1,0 +1,30 @@
+.noscript {
+	position: relative;
+	background-color: #FFF2AA;
+	margin-left: 221px;
+	padding: 10px 20px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	-o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	box-shadow: 0 1px 0 ;
+	font-size: 12px;
+}
+
+.noscript h1 {
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+.noscript a.close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.ie8 .noscript {
+	border-bottom: 1px solid #CCC;
+}
