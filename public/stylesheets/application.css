@@ -33,11 +33,11 @@ a:focus {
 	color: darkred !important;
 }
 
-.admin .post:hover .remove {
+body.gid-admin .post:hover .remove {
 	opacity: 1;
 }
 
-.ie8 .admin .post:hover .remove {
+.ie8 body.gid-admin .post:hover .remove {
 	visibility: visible;
 }
 

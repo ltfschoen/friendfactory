@@ -252,11 +252,11 @@ class User < ActiveRecord::Base
   # ===
 
   def uid
-    "u#{self.id}"
+    "uid-#{self.id}"
   end
 
   def roles
-    "admin" if self.admin?
+    "gid-admin" if self.admin?
   end
 
 end
