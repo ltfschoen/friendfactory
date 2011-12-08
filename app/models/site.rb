@@ -32,6 +32,11 @@ class Site < ActiveRecord::Base
       :through    => :signal_categories,
       :source     => :categories_signals
 
+  has_many :biometric_domains,
+      :class_name  => 'Biometric::Domain',
+      :foreign_key => 'site_id',
+      :order       => 'ordinal asc'
+
   has_many :assets, :class_name => 'Asset::Base' do
     def [](name)
       scoped_by_name(name).order('`assets`.`created_at` desc').limit(1).first
