@@ -2,6 +2,7 @@ class Wave::ProfilesController < ApplicationController
 
   before_filter :require_user
   helper_method :wave, :postings, :profile
+  layout 'wave/profile'
 
   cattr_reader :per_page
 
@@ -21,7 +22,7 @@ class Wave::ProfilesController < ApplicationController
         if request.xhr?
           render :partial => 'headshot', :locals => { :profile => wave }
         else
-          render :layout => 'profiles'
+          render
         end
       end
     end

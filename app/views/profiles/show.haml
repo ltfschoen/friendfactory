@@ -23,8 +23,8 @@
                     %td.username= @profile.handle
                     %td.age= @profile.age.present? ? @profile.age : '&nbsp;'.html_safe
                 %table.detail
-                  - current_site.signal_categories.each do |signal_category|
-                    = render :partial => 'wave/profiles/signal_category', :object => signal_category
+                  - current_site.biometric_domains.each do |biometric_domain|
+                    = render :partial => 'domain', :object => biometric_domain
                   %tr
                     %td.label Birthday
                     %td.detail= @profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe

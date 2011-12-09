@@ -1,9 +1,8 @@
-class Wave::ProfileController < ApplicationController
+class ProfilesController < ApplicationController
 
   RepublishWindow = 6.hours
 
   before_filter :require_user, :set_page_title
-
   layout 'profile'
 
   def show
@@ -19,7 +18,7 @@ class Wave::ProfileController < ApplicationController
       format.html
     end
   end
-  
+
   def update
     profile = current_user.profile(current_site)
     # TODO: All updates should go through the profile itself,
@@ -31,7 +30,7 @@ class Wave::ProfileController < ApplicationController
       format.html { redirect_to profile_path }
     end
   end
-  
+
   def avatar
     @posting = new_posting_avatar
     if @posting.valid? && profile = current_user.profile(current_site)
@@ -69,7 +68,7 @@ class Wave::ProfileController < ApplicationController
   end
 
   def set_page_title
-    @page_title = " - #{current_profile.handle}'s Profile"
+    @page_title ||= " - #{current_profile.handle}'s Account"
   end
 
 end

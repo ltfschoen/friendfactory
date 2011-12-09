@@ -31,14 +31,14 @@ Friskyfactory::Application.routes.draw do
     # end
   end
 
-  # To manage a user's profile
   scope :module => :wave do
     put 'waves/:id/unpublish' => 'waves#unpublish', :as => 'unpublish_wave'
-    resource :profile, :only => [ :show, :edit, :update ], :controller => 'profile' do
-      member do
-        post :avatar
-        put :unsubscribe
-      end
+  end
+  
+  resource :profile, :only => [ :show, :edit, :update ] do
+    member do
+      post :avatar
+      put :unsubscribe
     end
   end
 
