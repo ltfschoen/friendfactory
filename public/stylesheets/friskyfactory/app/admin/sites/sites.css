@@ -35,7 +35,7 @@ form.edit_site .instruction {
 	padding-right: 20px;
 }
 
-.admin.site table.form tr.signals td,
+.admin.site table.form tr.biometrics td,
 .admin.site table.form tr.stylesheet td,
 .admin.site table.form tr.assets td {
 	vertical-align: top;
@@ -91,4 +91,8 @@ form.edit_site textarea.stylesheet_css {
 
 .admin.site table.form tr.assets .td:nth-child(2) input[type='text'] {
 	width: 18em;
+}
+
+.biometric_domain {
+	border-bottom: 1px solid #CCC;
 }

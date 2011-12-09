@@ -13,4 +13,14 @@ class Biometric::DomainValue < ActiveRecord::Base
   alias_attribute :domain_id, :category_id
   alias_attribute :value_id, :signal_id
 
+  before_create :initialize_ordinal
+
+  def initialize_ordinal
+    if domain.present? && ordinal.blank?
+      self.ordinal = domain.domain_values.count
+    end
+  end
+
+  private :initialize_ordinal
+
 end

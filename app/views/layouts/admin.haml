@@ -1,0 +1,83 @@
+!!! 5
+%html.application.no-js
+  %head
+    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
+    %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+    %title Administer
+
+    = stylesheet_links |
+      'reset', 'forms', '960', |
+      'friskyfactory/application', |
+      'friskyfactory/effects', |
+      'friskyfactory/jquery-ui', |
+      'friskyfactory/postings/', |
+      'friskyfactory/waves/', |
+      :media => 'screen', |
+      :cache => 'friskyfactory/application.cache'
+
+    - file_name = "friskyfactory/app/#{controller.request.path_parameters[:controller]}/#{controller_name}.css"
+    - if File.exists?("public/stylesheets/#{file_name}")
+      = stylesheet_link_tag file_name, :media => 'screen'
+      
+    = yield(:stylesheets)
+    = stylesheet_link_tag "#{current_site.name}/#{controller_name}", :media => 'screen'
+
+    - if page_css = yield(:pagecss).present?
+      :css
+        #{page_css}
+
+    / [if IE]
+      = stylesheet_link_tag "friskyfactory/ie", :media => 'screen'
+      
+    / [if lt IE 9]
+      = stylesheet_link_tag "friskyfactory/ie-8", :media => 'screen'
+
+    - if Rails.env.development?
+      = javascript_include_tag 'jquery.js', 'lib/jquery/jquery-ui.js', 'lib/jquery/jquery.tools.min.js', 'lib/pusher.js'
+      = javascript_include_tag 'debug.js'
+    - else
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+      = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'
+      = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js'
+      = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
+
+    = javascript_includes |
+        'lib/modernizr-1.6.min', |
+        'lib/jquery/jquery.fileupload', |
+        'lib/jquery/jquery.fileupload-ui', |
+        'lib/jquery/jquery.flip', |
+        'lib/jquery/jquery.scrollTo-1.4.2-min', |
+        'lib/jquery/waypoints.min', |
+        'jquery.tmpl.min', |
+        'jquery_ujs', |
+        'lib/ff.buttonize', |
+        'lib/ff.effects', |
+        'lib/ff.nav', |
+        'lib/ff.chat', |
+        'lib/ff.polaroid', |
+        'lib/ff.ticket', |
+        'lib/ff.placehold', |
+        'app/layouts/application', |
+        'app/posting/', |
+        'waves/', |
+        :cache => 'application.cache'
+
+    - file_name = "app/#{controller.request.path_parameters[:controller]}/#{controller_name}.js"
+    - if File.exists?("public/javascripts/#{file_name}")
+      = javascript_include_tag file_name
+
+    = yield(:javascripts)    
+    - if page_js = yield(:pagejs).present?
+      :javascript
+        jQuery(function($){ #{page_js} });
+
+    / [if lt IE 9]
+      = javascript_include_tag 'ie8', :media => 'screen'
+        
+    = csrf_meta_tag    
+    
+  %body{ :class => current_site, :'data-site_name' => current_site }
+    .container.container_16.clearfix
+      = yield
+    = render :partial => 'layouts/shared/analytics'
+      

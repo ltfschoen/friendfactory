@@ -1,4 +1,19 @@
-= form_for([ :admin, site_with_empty_assets_and_stylesheet(@site) ], :html => { :multipart => true }) do |f|
+%script#biometric_domain-template{:type => "text/x-jquery-tmpl"}
+  .biometric_domain
+    <input id="site_biometric_domains_attributes_${ domainSeq }_display_name" name="site[biometric_domains_attributes][${ domainSeq }][display_name]" placeholder="name" size="30" type="text" value="">
+    .domain_value
+      <select id="site_biometric_domains_attributes_${ domainSeq }_domain_values_attributes_signal_id" name="site[biometric_domains_attributes][${ domainSeq }][domain_values_attributes][signal_id][]">
+      = options_for_select([[ '', nil ]] + Biometric::Value.all.collect {|v| [ v.name, v.id ] })
+      </select>
+    <button class="add" id="new_domain_value">Add Value</button>
+
+%script#domain_value-template{:type => "text/x-jquery-tmpl"}
+  .domain_value
+    <select id="site_biometric_domains_attributes_${ domainSeq }_domain_values_attributes_signal_id" name="site[biometric_domains_attributes][${ domainSeq }][domain_values_attributes][signal_id][]">
+    = options_for_select([[ '', nil ]] + Biometric::Value.all.collect {|v| [ v.name, v.id ] })
+    </select>
+
+= form_for([ :admin, site_with_empty_fields(@site) ], :html => { :multipart => true }) do |f|
   %table.form
     %tr
       %td
@@ -45,19 +60,23 @@
       %td
         = f.text_field :analytics_account_number, :placeholder => 'UA-xxxxxxxx-x'
         = f.error_message_on :analytics_account_number
-    %tr.signals
+    %tr.biometrics
       %td
-        %label Signals
+        %label Biometrics
       %td
-        %table
-          - @site.signal_categories.each do |signal_category|
-            %tr
-              %td
-                %em= signal_category.display_name
-              %td
-                - signal_category.signals.each do |signal|
-                  = signal.display_name
-                  %br/
+        - @site.biometric_domains.each_with_index do |domain, idx|
+          = f.fields_for :biometric_domains, domain do |biometric_form|
+            .biometric_domain
+              = biometric_form.text_field :display_name, :placeholder => 'name'
+              - unless biometric_form.object.new_record?
+                = biometric_form.check_box('_destroy')
+                = biometric_form.label('_destroy', 'Remove')
+              - biometric_form.object.domain_values.each do |domain_value|
+                .domain_value
+                  = select_tag "site[biometric_domains_attributes][#{idx}][domain_values_attributes][signal_id][]", options_for_select([[ '', nil ]] + Biometric::Value.all.collect {|v| [ v.name, v.id ] }, domain_value.value_id)
+              = button_tag 'Add Value', :id => 'new_domain_value', :class => 'add'
+        = button_tag 'Add Another Biometric', :id => 'new_domain', :class => 'add'
+
     %tr.stylesheet
       %td
         =f.label :css, 'Stylesheet'
@@ -86,7 +105,7 @@
                 = asset_form.text_field :value, :placeholder => 'value'
               - if asset_form.object.new_record?
                 .td
-                  = button_tag 'Add', :class => 'add'
+                  = button_tag 'Add', :class => 'add asset'
               - else
                 .td
                   = asset_form.check_box('_destroy')
@@ -105,7 +124,7 @@
                 = asset_form.text_field :value, :placeholder => 'value'
               - if asset_form.object.new_record?
                 .td
-                  = button_tag 'Add', :class => 'add'
+                  = button_tag 'Add', :class => 'add asset'
               - else
                 .td
                   = asset_form.check_box('_destroy')

@@ -27,20 +27,25 @@ class Site < ActiveRecord::Base
     end
   end
 
-  has_many :signal_categories_signals,
-      :class_name => 'Signal::CategorySignal',
-      :through    => :signal_categories,
-      :source     => :categories_signals
+  # has_many :signal_categories_signals,
+  #     :class_name => 'Signal::CategorySignal',
+  #     :through    => :signal_categories,
+  #     :source     => :categories_signals
 
   has_many :biometric_domains,
       :class_name  => 'Biometric::Domain',
       :foreign_key => 'site_id',
-      :order       => 'ordinal asc'
+      :order       => '`ordinal` ASC'
+
+  accepts_nested_attributes_for :biometric_domains, :reject_if => :all_blank, :allow_destroy => true
+
+  alias :biometrics :biometric_domains
+  alias :domains :biometric_domains
 
   has_many :assets, :class_name => 'Asset::Base' do
     def [](name)
       scoped_by_name(name).order('`assets`.`created_at` desc').limit(1).first
-    end    
+    end
   end
 
   has_many :stylesheets, :order => '`controller_name` asc'
@@ -48,19 +53,19 @@ class Site < ActiveRecord::Base
   has_many :constants, :class_name => 'Asset::Constant'
   has_many :texts, :class_name => 'Asset::Text'
 
+  with_options :allow_destroy => true, :reject_if => :all_blank do |opts|
+    opts.accepts_nested_attributes_for :stylesheets
+    opts.accepts_nested_attributes_for :images
+    opts.accepts_nested_attributes_for :constants
+    opts.accepts_nested_attributes_for :texts
+  end
+
   def stylesheet(controller_name = nil)
     stylesheets = self.stylesheets.scoped
     if controller_name.present?
       stylesheets = stylesheets.where('(`controller_name` is null) or (`controller_name` = ?)', controller_name)
     end
     stylesheets.map(&:css).compact.join("\n")
-  end
-
-  with_options :allow_destroy => true, :reject_if => :all_blank do |opts|
-    opts.accepts_nested_attributes_for :stylesheets
-    opts.accepts_nested_attributes_for :images
-    opts.accepts_nested_attributes_for :constants
-    opts.accepts_nested_attributes_for :texts
   end
 
   after_create :create_home_wave

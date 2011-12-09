@@ -20,8 +20,8 @@ jQuery(function($) {
 			})
 		.end()
 
-		.find('button.add')
-			.live('click', function(event) {
+		.find('button.add.asset')
+			.live('click', function (event) {
 				var $this = $(this),
 					$tr = $this.closest('.tr.asset'),
 					seq = $tr.siblings('.tr.asset').andSelf().length,
@@ -37,8 +37,32 @@ jQuery(function($) {
 			})
 		.end()
 
+		.find('button#new_domain')
+			.live('click', function (event) {
+				var $this = $(this),
+					domainSeq = $this.prevAll('.biometric_domain').length,
+					$html;
+
+				event.preventDefault();
+				$html = $('#biometric_domain-template').tmpl({ domainSeq: domainSeq });
+				$html.insertBefore($this);
+			})
+		.end()
+
+		.find('button#new_domain_value')
+			.live('click', function (event) {
+				var $this = $(this),
+					domainSeq = $this.closest('.biometric_domain').prevAll('.biometric_domain').length,
+					$html;
+
+				event.preventDefault();
+				$html = $('#domain_value-template').tmpl({ domainSeq: domainSeq });
+				$html.insertBefore($this);
+			})
+		.end()
+
 		.find('button#new_stylesheet')
-			.click(function(event) {
+			.click(function (event) {
 				var $this = $(this),
 					$fields = $this.prev('.fields:last'),
 					idx = $this.prevAll('.fields').length,
@@ -48,7 +72,7 @@ jQuery(function($) {
 						var $this = $that,
 							value = $this.attr(attr),
 							nextValue;
-							
+
 						if (value !== undefined) {
 							nextValue = value.replace(/(\[|_)\d{1,}(\]|_)/, "$1" + idx + "$2");
 							$this.attr(attr, nextValue);
