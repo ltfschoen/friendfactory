@@ -37,16 +37,19 @@ class ProfilesController < ApplicationController
       @posting.publish!
       profile.set_active_avatar(@posting)
       home_wave = current_site.home_wave
-      home_wave.postings.
-          type(Posting::Avatar).
-          published.
-          where(:created_at => (Time.now - RepublishWindow)...Time.now).
-          where(:user_id => @posting.user[:id]).
-          map(&:unpublish!)
+      # TODO: Following will unpublish the avatar.
+      # It should just unpublish the flag.
+      # home_wave.postings.
+      #     type(Posting::Avatar).
+      #     published.
+      #     where(:created_at => (Time.now - RepublishWindow)...Time.now).
+      #     where(:user_id => @posting.user[:id]).
+      #     map(&:unpublish!)
       home_wave.postings << @posting
     end
     respond_to do |format|
       format.html { redirect_to profile_path }
+      format.js   { render :json => { :url => @posting.url(:polaroid), :title => current_profile.handle }}
     end
   end
 

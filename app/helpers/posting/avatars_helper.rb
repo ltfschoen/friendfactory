@@ -22,7 +22,8 @@ module Posting::AvatarsHelper
   # end
 
   def headshot_image_tag(profile, opts = {})
-    image_tag(profile.avatar.url(:polaroid), :size => '190x190', :alt => profile.handle, :title => profile.handle)
+    opts.merge!(:size => '190x190', :alt => profile.handle, :title => profile.handle)
+    image_tag(profile.avatar.url(:polaroid), opts)
   end
 
   def placeholder_image_tag(opts = {})

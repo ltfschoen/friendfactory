@@ -1,5 +1,4 @@
 #frame {
-	position: relative;
 	min-width: 960px;
 	min-height: 100%;
 	overflow: hidden;
@@ -7,7 +6,41 @@
 }
 
 .headshot-container {
+	position: relative;
 	margin-top: 20px;
 	margin-left: 20px;
 	float: left;
+}
+
+.file_upload {
+	cursor: pointer;
+}
+
+.file_upload input[type='file'] {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-top: 200px solid transparent;
+	border-bottom: 200px solid transparent;
+	opacity: 0;
+	-ms-filter: 'alpha(opacity=0)';
+	filter: alpha(opacity=0);
+	 -o-transform: translate(-300px, -300px) scale(10);
+	 -moz-transform: translate(-800px, 0) scale(10);
+	cursor: pointer;
+}
+
+.file_upload iframe {
+	 display: none;
+}
+
+.instructions {
+	clear: both;
+	padding-top: 10px;
+	color: #666;
+	font: italic 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
 }

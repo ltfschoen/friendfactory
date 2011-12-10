@@ -47,12 +47,16 @@
       .button({ icons: { primary: 'ui-icon-pencil' }, text: false });
 
 #frame
-  .headshot-container
-    .headshot
-      .front.face
-        = headshot_image_tag(profile)
-        .button-bar
-          = link_to 'Edit', edit_profile_path
+  = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true } do |f|
+    .headshot-container
+      .headshot
+        .front.face.dropzone
+          %ul#upload_posting_avatar
+            %li= headshot_image_tag(profile)
+          = f.file_field :image
+          = f.submit 'Upload', :id => 'avatar_upload_submit', :disable_with => 'Upload'
+          %p.instructions
+            Choose or drag avatar here
 
   .headshot-container
     .headshot
@@ -73,7 +77,8 @@
           - current_site.biometric_domains.each do |biometric_domain|
             = render :partial => 'domain', :object => biometric_domain
         .button-bar
-          = link_to 'Edit', edit_profile_path
+          = button_tag 'Edit'
+          =# link_to 'Edit', edit_profile_path
 
   .headshot-container
     .headshot
