@@ -31,13 +31,13 @@ class User < ActiveRecord::Base
 
   private :invitation_code_offered?
 
-  after_initialize :build_empty_profile
+  after_initialize :build_empty_person
   after_initialize :set_email_address_from_invitation
   before_create :attach_to_account
 
   private
 
-  def build_empty_profile
+  def build_empty_person
     build_person if new_record? && person.nil?
   end
 
