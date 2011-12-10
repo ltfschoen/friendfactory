@@ -54,7 +54,7 @@
       'posting/video', |
       'posting/video-override', |
     :media => 'screen', |
-    :cache => 'community.cache', :concat => true
+    :cache => 'layouts/wave/community/cached' #, :concat => true
 
   = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
 
@@ -88,7 +88,7 @@
       'layouts/shared/video', |
       'layouts/shared/compatibility', |
       'layouts/community', |
-    :cache => 'cache/community'
+    :cache => 'layouts/wave/community.cached'
 
   / [if lt IE 9]
     = javascript_include_tag 'ie8', :media => 'screen'

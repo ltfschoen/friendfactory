@@ -2,4 +2,4 @@
   %td.label
     = domain.display_name
   %td.detail
-    = domain.values.where(:id => @profile.send(domain.name.to_sym)).first.try(:display_name)
+    = domain.values.where(:id => profile.send(domain.name.to_sym)).first.try(:display_name)

@@ -1,7 +1,13 @@
-.wave_profile.current_user {
-	margin-top: 60px;
+#frame {
+	position: relative;
+	min-width: 960px;
+	min-height: 100%;
+	overflow: hidden;
+	margin-left: 221px;
 }
 
-#frame .headshot-container {
-	margin: 20px 0 0 65px;
+.headshot-container {
+	margin-top: 20px;
+	margin-left: 20px;
+	float: left;
 }

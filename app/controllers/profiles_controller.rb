@@ -2,18 +2,17 @@ class ProfilesController < ApplicationController
 
   RepublishWindow = 6.hours
 
-  before_filter :require_user, :set_page_title
+  before_filter :require_user
+  helper_method :page_title, :profile, :person
   layout 'profile'
 
   def show
-    @profile = current_user.profile(current_site)
     respond_to do |format|
       format.html
     end
   end
 
   def edit
-    @wave = current_user.profile(current_site)
     respond_to do |format|
       format.html
     end
@@ -67,8 +66,16 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def set_page_title
-    @page_title ||= " - #{current_profile.handle}'s Account"
+  def page_title
+    "#{current_site.display_name} - #{current_profile.handle}'s Profile"
+  end
+
+  def profile
+    current_profile
+  end
+
+  def person
+    @person ||= current_user.person
   end
 
 end
