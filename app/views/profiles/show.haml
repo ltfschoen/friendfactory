@@ -47,47 +47,6 @@
       .button({ icons: { primary: 'ui-icon-pencil' }, text: false });
 
 #frame
-  = form_for Posting::Avatar.new, :url => avatar_profile_path(:format => :json), :html => { :multipart => true } do |f|
-    .headshot-container
-      .headshot
-        .front.face.dropzone
-          %ul#upload_posting_avatar
-            %li= headshot_image_tag(profile)
-          %p.instructions
-            %span.no-dragdrop.hidden Click here to choose
-            %span.dragdrop Choose or drag
-            avatar
-            %span.dragdrop here
-          = f.file_field :image
-          = f.submit 'Upload', :id => 'avatar_upload_submit', :disable_with => 'Upload'
-
-  .headshot-container
-    .headshot
-      .front.face
-        %table.biometrics
-          %tr
-            %td.label First Name
-            %td.detail= profile.handle
-          %tr
-            %td.label Age
-            %td.detail= profile.age.present? ? profile.age : '&nbsp;'.html_safe
-          %tr
-            %td.label Birthday
-            %td.detail= profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe
-          %tr
-            %td.label Location
-            %td.detail= profile.location
-          - current_site.biometric_domains.each do |biometric_domain|
-            = render :partial => 'domain', :object => biometric_domain
-        .button-bar
-          = link_to button_tag('Edit'), edit_profile_path
-
-  .headshot-container
-    .headshot
-      .front.face
-        Preferences
-        %table.button-bar
-          %tr
-            %td
-              = check_box_tag 'user[emailable]', 1, current_user.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-url' => unsubscribe_profile_path
-              = label_tag :user_emailable, 'Subscribe to emails'
+  = render :partial => 'avatar'
+  = render :partial => 'biometrics'
+  = render :partial => 'preferences'

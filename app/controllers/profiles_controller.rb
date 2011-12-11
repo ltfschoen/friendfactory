@@ -3,8 +3,10 @@ class ProfilesController < ApplicationController
   RepublishWindow = 6.hours
 
   before_filter :require_user
-  helper_method :page_title, :profile, :person
+
   layout 'profile'
+
+  helper_method :page_title, :profile, :person
 
   def show
     respond_to do |format|
@@ -19,12 +21,8 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    profile = current_user.profile(current_site)
-    # TODO: All updates should go through the profile itself,
-    # not the resource so as to get the before_save call back,
-    # thereby avoid the need to manually call set_tag_list_on.
-    profile.resource.update_attributes(params[:user_info])
-    profile.set_tag_list_on!(current_site)
+    current_user.person.update_attributes(params[:person])
+    current_profile.set_tag_list_on!(current_site)
     respond_to do |format|
       format.html { redirect_to profile_path }
     end

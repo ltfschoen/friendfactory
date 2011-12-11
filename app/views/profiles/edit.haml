@@ -1,111 +1,64 @@
 -# javascript 'lib/jquery/jquery.form', 'lib/jquery/jquery.remotipart'
 
-- if false
-  .current_user.edit.wave[@wave]
-    .grid_2
-      &nbsp;
-    .grid_6
-      = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true } do |f|
-        .polaroid.edit
-          .face-container
-            .front.face
-              .content
-                .pane.avatar
-                  = avatar_image_tag(@wave.avatar, :class => 'headshot', :style => 'polaroid', :anonymous => true, :gender => @wave.gender)
-                  %table.detail.button-bar
-                    %tr
-                      %td= f.file_field :image
-                    %tr
-                      %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo'
-    .grid_6
-      = form_for @wave.resource, :url => profile_path do |f|
-        .polaroid.edit
-          .face-container
-            .back.face
-              .content.scrollable
-                .items
-                  .pane.signals
-                    %div
-                      %table.header
-                        %tr
-                          %td.avatar= avatar_image_tag(@wave.avatar, :style => :thumb, :gender => @wave.gender)
-                          %td.username= @wave.handle
-                          %td.age= f.text_field :age, :placeholder => 'age', :maxlength => 2, :class => 'ui-widget'
-                        
-                      %table.detail
-                        - current_site.biometric_domains.each do |domain|
-                          %tr
-                            %td.label= domain.display_name
-                            %td.detail= f.collection_select(domain.name.to_sym, domain.values, :id, :display_name, { :include_blank => true })
-
-                        - if false
-                          - current_site.signal_categories.each do |category|
-                            %tr
-                              %td.label= category.display_name
-                              %td.detail= f.collection_select(category.name.to_sym, category.signals, :id, :display_name, { :include_blank => true })
-
-                        %tr
-                          %td.label Birthday
-                          %td.detail= f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date' }
-
-                        %tr
-                          %td.label Location
-                          %td.detail= f.text_field :location, :placeholder => 'town or city, state', :maxlength => 20, :class => 'ui-widget'
-              .button-bar
-                = f.submit 'OK', :button => true
-                = f.button 'Cancel', :class => 'cancel button'
-              
-  :javascript
-    $('.button-bar', '.wave_profile.edit').buttonize();
-
 #frame
-  = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true } do |f|
-    .headshot-container
-      .headshot
-        .front.face
-          %ul#upload_posting_avatar
-            %li= headshot_image_tag(profile, :id => 'upload_posting_avatar')
-          %p.instructions
-            %span.no-dragdrop Click here to choose
-            %span.dragdrop Choose or drag
-            avatar
-            %span.dragdrop here
-          = f.file_field :image
-          = f.submit 'Upload', :id => 'avatar_upload_submit', :disable_with => 'Upload'
+  - if false
+    .current_user.edit.wave[@wave]
+      .grid_2
+        &nbsp;
+      .grid_6
+        = form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true } do |f|
+          .polaroid.edit
+            .face-container
+              .front.face
+                .content
+                  .pane.avatar
+                    = avatar_image_tag(profile.avatar, :class => 'headshot', :style => 'polaroid', :anonymous => true, :gender => profile.gender)
+                    %table.detail.button-bar
+                      %tr
+                        %td= f.file_field :image
+                      %tr
+                        %td= f.submit 'Upload Photo', :id => 'avatar_upload_submit', :disable_with => 'Upload Photo'
+      .grid_6
+        = form_for person, :url => profile_path do |f|
+          .polaroid.edit
+            .face-container
+              .back.face
+                .content.scrollable
+                  .items
+                    .pane.signals
+                      %div
+                        %table.header
+                          %tr
+                            %td.avatar= avatar_image_tag(profile.avatar, :style => :thumb, :gender => profile.gender)
+                            %td.username= profile.handle
+                            %td.age= f.text_field :age, :placeholder => 'age', :maxlength => 2, :class => 'ui-widget'
+                        
+                        %table.detail
+                          - current_site.biometric_domains.each do |domain|
+                            %tr
+                              %td.label= domain.display_name
+                              %td.detail= f.collection_select(domain.name.to_sym, domain.values, :id, :display_name, { :include_blank => true })
 
-  .headshot-container
-    .headshot
-      .front.face
-        %table.biometrics
-          %tr
-            %td.label First Name
-            %td.detail= profile.handle
-          %tr
-            %td.label Age
-            %td.detail= profile.age.present? ? profile.age : '&nbsp;'.html_safe
-          %tr
-            %td.label Birthday
-            %td.detail= profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe
-          %tr
-            %td.label Location
-            %td.detail= profile.location
-          - current_site.biometric_domains.each do |biometric_domain|
-            = render :partial => 'domain', :object => biometric_domain
-        .button-bar
-          = link_to 'Edit', edit_profile_path
+                          - if false
+                            - current_site.signal_categories.each do |category|
+                              %tr
+                                %td.label= category.display_name
+                                %td.detail= f.collection_select(category.name.to_sym, category.signals, :id, :display_name, { :include_blank => true })
 
-  .headshot-container
-    .headshot
-      .front.face
-        Preferences
-        %table.button-bar
-          %tr
-            %td
-              = check_box_tag 'user[emailable]', 1, current_user.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-url' => unsubscribe_profile_path
-              = label_tag :user_emailable, 'Subscribe to emails'
-            %td
-              = link_to 'Edit', edit_profile_path, :class => 'edit button'
+                          %tr
+                            %td.label Birthday
+                            %td.detail= f.date_select :dob, { :order => [ :month, :day ], :discard_year => true },  { :class => 'date' }
 
-  .headshot-container
-    .headshot
-      .front.face
+                          %tr
+                            %td.label Location
+                            %td.detail= f.text_field :location, :placeholder => 'town or city, state', :maxlength => 20, :class => 'ui-widget'
+                .button-bar
+                  = f.submit 'OK'
+                  = f.button 'Cancel', :class => 'cancel button'
+              
+    :javascript
+      $('.button-bar', '.wave_profile.edit').buttonize();
+
+  = render :partial => 'avatar'
+  = render :partial => 'edit_biometrics'
+  = render :partial => 'preferences'

@@ -1,0 +1,21 @@
+.headshot-container
+  .headshot
+    .face
+      .pane
+        %table.biometrics
+          %tr
+            %td.label First Name
+            %td.detail= profile.handle
+          %tr
+            %td.label Age
+            %td.detail= profile.age.present? ? profile.age : '&nbsp;'.html_safe
+          %tr
+            %td.label Birthday
+            %td.detail= profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe
+          %tr
+            %td.label Location
+            %td.detail= profile.location
+          - current_site.biometric_domains.each do |biometric_domain|
+            = render :partial => 'domain', :object => biometric_domain
+      .button-bar
+        = link_to button_tag('Edit', :type => 'button'), edit_profile_path, :class => 'button'
