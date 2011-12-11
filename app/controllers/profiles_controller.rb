@@ -49,7 +49,7 @@ class ProfilesController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to profile_path }
-      format.js   { render :json => { :url => @posting.url(:polaroid), :title => current_profile.handle }}
+      format.json { render :json => { :url => @posting.url(:polaroid), :title => current_profile.handle }, :content_type => 'text/html' }
     end
   end
 

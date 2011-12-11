@@ -13,6 +13,21 @@ jQuery(function($) {
 		uploadTable: $('ul#upload_posting_avatar'),
 		downloadTable: $('ul#upload_posting_avatar'),
 
+		beforeSend: function (event, files, index, xhr, handler, callBack) {
+			var pulseCycle = function() {
+				$('ul#upload_posting_avatar img')
+					.animate({ opacity: 0.6 }, 300)
+					.animate({ opacity: 1.0 }, 300);
+			};
+
+			handler.pulseCycleId = setInterval(pulseCycle, 600);
+			callBack();
+		},
+
+		onComplete: function (event, files, index, xhr, handler) {
+			clearInterval(handler.pulseCycleId);
+		},
+
         buildUploadRow: function (files, index, handler) {
 			return;
         },

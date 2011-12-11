@@ -63,11 +63,15 @@
     .headshot-container
       .headshot
         .front.face
-          = headshot_image_tag(profile, :id => 'upload_posting_avatar')
+          %ul#upload_posting_avatar
+            %li= headshot_image_tag(profile, :id => 'upload_posting_avatar')
+          %p.instructions
+            %span.no-dragdrop Click here to choose
+            %span.dragdrop Choose or drag
+            avatar
+            %span.dragdrop here
           = f.file_field :image
           = f.submit 'Upload', :id => 'avatar_upload_submit', :disable_with => 'Upload'
-          %p.instructions
-            Choose or drag avatar here
 
   .headshot-container
     .headshot
