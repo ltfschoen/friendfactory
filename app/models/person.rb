@@ -13,23 +13,40 @@ class Person < ActiveRecord::Base
   alias_attribute :board_type_id,       :deafness
   alias_attribute :military_service_id, :deafness
 
-  attr_accessible :handle, :age, :location
+  attr_accessible :handle, :first_name, :age, :location, :dob, :biometric_values_attributes
 
   validates_presence_of :handle, :age, :location
 
   belongs_to :user
+
   has_one :profile, :class_name => 'Wave::Profile', :foreign_key => 'resource_id'
+
+  has_many :biometric_person_values,
+      :class_name  => 'Biometric::PersonValue',
+      :foreign_key => 'person_id',
+      :autosave    => true
+
+  alias :biometric_values :biometric_person_values
 
   after_create :create_profile_wave
 
-  def create_profile_wave
-    profile = build_profile
-    profile.person_id = self.id
-    profile.user_id = self.user_id
-    profile.save && profile
+  def biometric_values_attributes=(attributes)
+    attributes.each do |domain_id, value_id|
+      if domain_id.present? && value_id.present?
+        if person_value = biometric_values.find_by_domain_id(domain_id)
+          person_value.update_attribute(:value_id, value_id)
+        else
+          biometric_values.build(:domain_id => domain_id, :value_id => value_id)
+        end
+      end
+    end
   end
 
-  private :create_profile_wave
+  def biometric_value_id(domain)
+    if person_value = biometric_person_values.domain(domain).first
+      person_value.value_id
+    end
+  end
 
   def handle
     (self[:handle].try(:strip) || first_name)
@@ -45,6 +62,15 @@ class Person < ActiveRecord::Base
 
   def full_name
     [ first_name, last_name ].compact.join(' ')
+  end
+
+  private
+
+  def create_profile_wave
+    profile = build_profile
+    profile.person_id = self.id
+    profile.user_id = self.user_id
+    profile.save && profile
   end
 
 end

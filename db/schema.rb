@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111203202538) do
+ActiveRecord::Schema.define(:version => 20111211080912) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(:version => 20111203202538) do
 
   add_index "assets", ["name", "type"], :name => "index_assets_on_name_and_type"
   add_index "assets", ["type"], :name => "index_assets_on_type"
+
+  create_table "biometric_people_values", :force => true do |t|
+    t.integer "person_id", :null => false
+    t.integer "domain_id", :null => false
+    t.integer "value_id"
+    t.string  "value"
+  end
+
+  add_index "biometric_people_values", ["person_id", "domain_id"], :name => "index_biometric_people_values_on_person_id_and_domain_id"
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "wave_id"

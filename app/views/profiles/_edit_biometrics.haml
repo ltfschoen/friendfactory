@@ -16,13 +16,14 @@
             %tr
               %td.label Location
               %td.detail= f.text_field :location, :placeholder => 'town or city, state', :maxlength => 20
-            - current_site.biometric_domains.each do |domain|
+            - current_site.biometric_domains.each_with_index do |domain, idx|
               %tr{ :class => domain.name }
                 %td.label
                   = domain.display_name
                 %td.detail
-                  = f.collection_select(domain.name.to_sym, domain.values, :id, :display_name, { :include_blank => true })
+                  = select_tag "person[biometric_values_attributes][#{domain.id}]", |
+                    options_for_select([[ '', nil ]] + domain.values.collect {|v| [ v.display_name, v.id ] }, person.biometric_value_id(domain))
         .button-bar
-          = link_to button_tag('Cancel', :type => 'button'), :back, :class => 'button'
+          = link_to 'Cancel', profile_path, :class => 'button'
           = f.submit 'OK', :button => true
           

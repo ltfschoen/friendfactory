@@ -12,7 +12,7 @@
     %span.greeting Welcome,
     %span.username
       = link_to current_profile.handle, profile_path
-      = "(#{current_user.id}/#{current_profile.id})" if Rails.env.development?
+      = "(#{current_user.id}:#{current_user.person.id}:#{current_profile.id})" if Rails.env.development?
 
   .block.navspace
     %ul
@@ -34,7 +34,7 @@
       %li.invites
         = link_to 'Invitations', invitations_path
       %li.account
-        = link_to 'Account', profile_path
+        = link_to 'Profile', profile_path
       %li.logout
         = link_to 'Logout', logout_path, :method => :delete
 

@@ -68,6 +68,8 @@
 
 a.button {
 	text-decoration: none;
+	color: #666;
+	font-size: 12px;
 }
 
 form.edit_person .headshot table.biometrics td.detail {
@@ -90,14 +92,11 @@ form.edit_person .headshot select {
 
 form.edit_person .headshot select#person_dob_2i,
 form.edit_person .headshot select#person_dob_3i {
-	width: 60px;
-}
-
-form.edit_person .headshot select#person_dob_3i {
-	width: 40px;
+	width: 50px;
 }
 
 .headshot .button-bar {
 	vertical-align: middle;
 	float: right;
+	padding-right: 8px;
 }
