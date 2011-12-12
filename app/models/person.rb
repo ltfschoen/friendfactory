@@ -49,15 +49,15 @@ class Person < ActiveRecord::Base
   end
 
   def handle
-    (self[:handle].try(:strip) || first_name)
+    self[:handle].strip if self[:handle].present?
   end
 
   def first_name
-    self[:first_name].try(:strip).try(:titleize)
+    self[:first_name].present? ? self[:first_name].strip.titleize : handle
   end
 
   def last_name
-    self[:last_name].try(:strip).try(:titleize)
+    self[:last_name].strip.titleize if self[:last_name].present?
   end
 
   def full_name

@@ -6,17 +6,19 @@ class Wave::Profile < Wave::Base
   include TagScrubber
 
   delegate :email, :emailable?, :admin, :admin?, :to => :user
+
   delegate :handle, :age, :dob, :location, :first_name, :last_name, :to => :person
 
   # Default Signals
-  delegate :gender, :orientation, :relationship, :to => :person
+  # delegate :gender, :orientation, :relationship, :to => :person
 
   # Custom Signals
-  delegate :deafness, :hiv_status, :board_type, :military_service, :to => :person
+  # delegate :deafness, :hiv_status, :board_type, :military_service, :to => :person
   
   alias :user_info :resource
 
   belongs_to :person, :class_name => 'Person', :foreign_key => 'resource_id'
+
   alias_attribute :person_id, :resource_id
 
   # Use an association to provide eager loading.
@@ -88,12 +90,13 @@ class Wave::Profile < Wave::Base
   end
     
   def set_tag_list_on(site)
-    if resource.present?
-      signal_ids = site.signal_categories.map { |category| resource.send(:"#{category.name}_id") }.compact
-      signal_display_names = Signal::Base.find_all_by_id(signal_ids).map(&:display_name)          
-      tag_list = [ signal_display_names, scrub_tag(resource.location) ].flatten.compact.join(',')
-      super(site, tag_list)
-    end
+    # TODO
+    # if resource.present?
+    #   signal_ids = site.signal_categories.map { |category| resource.send(:"#{category.name}_id") }.compact
+    #   signal_display_names = Signal::Base.find_all_by_id(signal_ids).map(&:display_name)
+    #   tag_list = [ signal_display_names, scrub_tag(resource.location) ].flatten.compact.join(',')
+    #   super(site, tag_list)
+    # end
   end
   
   def toggle_poke(profile_id)

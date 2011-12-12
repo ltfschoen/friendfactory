@@ -21,8 +21,9 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    current_user.person.update_attributes(params[:person])
-    current_profile.set_tag_list_on!(current_site)
+    if current_user.person.update_attributes(params[:person])
+      current_profile.set_tag_list_on!(current_site)
+    end
     respond_to do |format|
       format.html { redirect_to profile_path }
     end

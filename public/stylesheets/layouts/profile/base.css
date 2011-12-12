@@ -72,9 +72,12 @@ a.button {
 	font-size: 12px;
 }
 
+form.edit_person .headshot table.biometrics td {
+	height: 24px;
+}
+
 form.edit_person .headshot table.biometrics td.detail {
 	border-bottom: 1px solid transparent;
-	height: 26px;
 }
 
 form.edit_person .headshot input[type='text'] {

@@ -40,10 +40,12 @@ ActiveRecord::Schema.define(:version => 20111211080912) do
   add_index "assets", ["type"], :name => "index_assets_on_type"
 
   create_table "biometric_people_values", :force => true do |t|
-    t.integer "person_id", :null => false
-    t.integer "domain_id", :null => false
-    t.integer "value_id"
-    t.string  "value"
+    t.integer  "person_id",  :null => false
+    t.integer  "domain_id",  :null => false
+    t.integer  "value_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "biometric_people_values", ["person_id", "domain_id"], :name => "index_biometric_people_values_on_person_id_and_domain_id"
@@ -412,6 +414,7 @@ ActiveRecord::Schema.define(:version => 20111211080912) do
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"
+  add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
   add_index "users", ["site_id", "email"], :name => "index_users_on_site_id_and_email", :unique => true

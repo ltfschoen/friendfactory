@@ -28,20 +28,25 @@ class CreateAccounts < ActiveRecord::Migration
     XUser.reset_column_information
     NUser.reset_column_information
 
-    say 'migrating users from multi-site to sole-site'
-
-    ActiveRecord::Base.record_timestamps = false
-    Account.transaction do
-      XUser.all.each do |xuser|
-        create_user_for_each_site(xuser, create_account(xuser))
+    say_with_time 'migrating users from multi-site to uni-site model' do
+      ActiveRecord::Base.record_timestamps = false
+      Account.transaction do
+        XUser.all.each do |xuser|
+          create_user_for_each_site(xuser, create_account(xuser))
+        end
       end
     end
 
-    Person.transaction do
-      Wave::Profile.all.each do |profile|
-        person = profile.user_info
-        if person[:user_id].nil?
-          person.update_attribute(:user_id, profile.user_id)
+    say_with_time 'fixing Person#user_id and handle' do
+      Person.transaction do
+        Wave::Profile.all.each do |profile|
+          person = profile.user_info
+          if person[:user_id].nil?
+            person.update_attribute(:user_id, profile[:user_id])
+          end
+          if person[:handle].nil?
+            person.update_attribute(:handle, person[:first_name])
+          end
         end
       end
     end

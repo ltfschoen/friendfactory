@@ -266,13 +266,14 @@
 .headshot table.biometrics td {
 	vertical-align: middle;
 	text-align: left;
-	height: 26px;
+	height: 24px;
 }
 
 .headshot table.biometrics td.label {
 	width: 70px;
 	color: #999;
 	text-shadow: 0 1px 0 #fff;
+	padding-right: 2px;
 }
 
 .headshot table.biometrics td.detail {

@@ -17,6 +17,7 @@ class Site < ActiveRecord::Base
 
   has_many :invitations, :foreign_key => 'resource_id', :class_name => 'Posting::Invitation'
 
+  # TODO Remove
   has_many :signal_categories,
       :class_name  => 'Signal::Category',
       :foreign_key => 'site_id',
@@ -27,10 +28,11 @@ class Site < ActiveRecord::Base
     end
   end
 
-  # has_many :signal_categories_signals,
-  #     :class_name => 'Signal::CategorySignal',
-  #     :through    => :signal_categories,
-  #     :source     => :categories_signals
+  # TODO Remove
+  has_many :signal_categories_signals,
+      :class_name => 'Signal::CategorySignal',
+      :through    => :signal_categories,
+      :source     => :categories_signals
 
   has_many :biometric_domains,
       :class_name  => 'Biometric::Domain',
@@ -38,9 +40,6 @@ class Site < ActiveRecord::Base
       :order       => '`ordinal` ASC'
 
   accepts_nested_attributes_for :biometric_domains, :reject_if => :all_blank, :allow_destroy => true
-
-  alias :biometrics :biometric_domains
-  alias :domains :biometric_domains
 
   has_many :assets, :class_name => 'Asset::Base' do
     def [](name)
