@@ -1,7 +1,9 @@
 class Wave::ProfilesController < ApplicationController
 
   before_filter :require_user
-  helper_method :wave, :postings, :profile
+
+  helper_method :wave, :postings, :profile, :person
+
   layout 'wave/profile'
 
   cattr_reader :per_page
@@ -114,6 +116,10 @@ class Wave::ProfilesController < ApplicationController
 
   def postings
     @postings ||= wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+  end
+
+  def person
+    wave.person
   end
 
 end
