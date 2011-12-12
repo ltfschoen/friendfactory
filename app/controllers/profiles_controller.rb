@@ -38,12 +38,12 @@ class ProfilesController < ApplicationController
       home_wave = current_site.home_wave
       # TODO: Following will unpublish the avatar.
       # It should just unpublish the flag.
-      # home_wave.postings.
-      #     type(Posting::Avatar).
-      #     published.
-      #     where(:created_at => (Time.now - RepublishWindow)...Time.now).
-      #     where(:user_id => @posting.user[:id]).
-      #     map(&:unpublish!)
+      home_wave.postings.
+          type(Posting::Avatar).
+          published.
+          where(:created_at => (Time.now - RepublishWindow)...Time.now).
+          where(:user_id => @posting.user[:id]).
+          map(&:unpublish!)
       home_wave.postings << @posting
     end
     respond_to do |format|
