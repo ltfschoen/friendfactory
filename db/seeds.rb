@@ -1,25 +1,25 @@
 # =============
 # Template Site
 
-def site
-  @site ||= Site.template
-rescue
-  Site.create!(
-    :name => Site::TemplateSiteName,
-    :display_name => 'FriskyFactory',
-    :analytics_account_number => '',
-    :analytics_domain_name => '')  
-end  
+# def site
+#   @site ||= Site.template
+# rescue
+#   Site.create!(
+#     :name => Site::TemplateSiteName,
+#     :display_name => 'FriskyFactory',
+#     :analytics_account_number => '',
+#     :analytics_domain_name => '')
+# end
 
 
 # =======
 # CSS
 
-file = File.join(Rails.root, 'db', 'seeds', "#{site.name}.css")
-if File.exists?(file)
-  site.stylesheets.clear
-  site.stylesheets.create(:css => IO.read(file))
-end
+# file = File.join(Rails.root, 'db', 'seeds', "#{site.name}.css")
+# if File.exists?(file)
+#   site.stylesheets.clear
+#   site.stylesheets.create(:css => IO.read(file))
+# end
 
 
 # ==========
