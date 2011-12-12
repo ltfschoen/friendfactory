@@ -73,7 +73,7 @@
                 = biometric_form.label('_destroy', 'Remove')
               - biometric_form.object.domain_values.each do |domain_value|
                 .domain_value
-                  = select_tag "site[biometric_domains_attributes][#{idx}][domain_values_attributes][signal_id][]", options_for_select([[ '', nil ]] + Biometric::Value.all.collect {|v| [ v.name, v.id ] }, domain_value.value_id)
+                  = select_tag "site[biometric_domains_attributes][#{idx}][domain_values_attributes][signal_id][]", options_for_select([[ '', nil ]] + Biometric::Value.order('`name` ASC').all.collect {|v| [ v.name, v.id ] }, domain_value.value_id)
               = button_tag 'Add Value', :id => 'new_domain_value', :class => 'add'
         = button_tag 'Add Another Biometric', :id => 'new_domain', :class => 'add'
 

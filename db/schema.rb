@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111211080912) do
+ActiveRecord::Schema.define(:version => 20111212061640) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -277,6 +277,7 @@ ActiveRecord::Schema.define(:version => 20111211080912) do
     t.integer "signal_id"
     t.integer "category_id"
     t.integer "ordinal"
+    t.integer "pane"
   end
 
   add_index "signal_categories_signals", ["category_id", "signal_id"], :name => "index_signal_categories_signals_on_category_id_and_signal_id"
