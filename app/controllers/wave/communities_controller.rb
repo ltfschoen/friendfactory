@@ -4,7 +4,8 @@ class Wave::CommunitiesController < ApplicationController
 
   before_filter :require_user
   helper_method :wave, :postings, :profiles, :profiles_on_wave, :tags
-  layout 'community'
+
+  layout 'wave/community'
 
   cattr_reader :per_page
 
