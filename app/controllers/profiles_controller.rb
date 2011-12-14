@@ -21,8 +21,13 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if current_user.person.update_attributes(params[:person])
-      current_profile.set_tag_list_on!(current_site)
+    person = current_user.person
+    if person && person.update_attributes(params[:person])
+      # TODO Person should be tagged, not profile
+      # TODO Move to after_create on person
+      if profile = person.profile
+        profile.set_tag_list_on!(current_site)
+      end
     end
     respond_to do |format|
       format.html { redirect_to profile_path }

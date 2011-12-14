@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Wave::ProfileController do
+describe ProfilesController do
   describe 'routing' do
     it 'recognizes #show' do
       pending
