@@ -64,7 +64,7 @@
         'app/layouts/application', |
         'app/posting/', |
         'waves/', |
-        :cache => 'application.cache'
+        :cache => 'layouts/application/cache'
 
     - file_name = "app/#{controller.request.path_parameters[:controller]}/#{controller_name}.js"
     - if File.exists?("public/javascripts/#{file_name}")

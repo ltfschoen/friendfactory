@@ -13,7 +13,7 @@
       'friskyfactory/postings/', |
       'friskyfactory/waves/', |
       :media => 'screen', |
-      :cache => 'friskyfactory/application.cache'
+      :cache => 'layouts/admin/cache'
 
     - file_name = "friskyfactory/app/#{controller.request.path_parameters[:controller]}/#{controller_name}.css"
     - if File.exists?("public/stylesheets/#{file_name}")
