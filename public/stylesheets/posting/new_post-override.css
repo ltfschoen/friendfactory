@@ -31,3 +31,8 @@
 .ie .new_post .foot {
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
 }
+
+.new_post .foot input[type="button"] {
+	border: 1px solid #333 !important;	
+}
+  
