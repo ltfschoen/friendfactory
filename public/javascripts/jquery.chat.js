@@ -20,7 +20,7 @@
 
 		$this
 			.find('form')
-				.find('button[type="submit"]')
+				.find('input[type="submit"]')
 					.hide()
 				.end()
 
