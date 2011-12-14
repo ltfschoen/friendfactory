@@ -3,7 +3,7 @@ class Wave::ConversationsController < ApplicationController
   before_filter :require_user
   helper_method :page_title, :conversations, :profiles, :profiles_by_user_id, :tags
 
-  layout 'conversation'
+  layout 'wave/conversation'
 
   cattr_reader :per_page
   @@per_page = 12
