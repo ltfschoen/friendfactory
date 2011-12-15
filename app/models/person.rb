@@ -13,7 +13,12 @@ class Person < ActiveRecord::Base
   alias_attribute :board_type_id,       :deafness
   alias_attribute :military_service_id, :deafness
 
-  attr_accessible :handle, :first_name, :age, :location, :dob, :biometric_values_attributes
+  attr_accessible :handle,
+      :first_name,
+      :age,
+      :location,
+      :dob,
+      :biometric_values_attributes
 
   validates_presence_of :handle, :age, :location
 

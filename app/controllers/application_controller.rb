@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging(:password, :password_confirmation) unless Rails.env.development?
 
-  helper_method :current_user_session, :current_user, :current_profile, :current_site
+  helper_method :current_user_session, :current_user, :current_profile, :current_person, :current_site
   helper_method :presenter, :resolver
 
   rescue_from UnauthorizedException do |exception|
@@ -30,6 +30,13 @@ class ApplicationController < ActionController::Base
     return @current_profile if defined?(@current_profile)
     if current_user
       @current_profile = current_user.profile(current_site)
+    end
+  end
+
+  def current_person
+    return @current_person if defined?(@current_person)
+    if current_user
+      @current_person = current_user.person
     end
   end
 

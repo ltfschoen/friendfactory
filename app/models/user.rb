@@ -10,11 +10,13 @@ class User < ActiveRecord::Base
       :password,
       :password_confirmation,
       :emailable,
-      :invitation_code
+      :invitation_code,
+      :invitations_attributes
 
   # TODO: delegate :handle, :age, :location, :to => :profile
 
   validates_presence_of :site
+
   validates_presence_of :invitation_code,
       :on => :create,
       :if => lambda { site.present? && site.invite_only? }
@@ -33,6 +35,7 @@ class User < ActiveRecord::Base
 
   after_initialize :build_empty_person
   after_initialize :set_email_address_from_invitation
+
   before_create :attach_to_account
 
   private
@@ -88,6 +91,7 @@ class User < ActiveRecord::Base
   has_one :profile, :class_name => 'Wave::Profile'
 
   has_many :bookmarks
+
   has_many :waves, :class_name => 'Wave::Base' do
     def type(*types)
       where('type in (?)', types.map(&:to_s))
@@ -147,6 +151,10 @@ class User < ActiveRecord::Base
     def site(site)
       where(:resource_id => site.id)
     end
+  end
+
+  def invitations_attributes=(attributes)
+    raise attributes.inspect
   end
 
   ### TODO: Delegate to Profile

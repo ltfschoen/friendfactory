@@ -5,16 +5,16 @@
         %table.biometrics
           %tr
             %td.label First Name
-            %td.detail= profile.handle
+            %td.detail= current_profile.handle
           %tr
             %td.label Age
-            %td.detail= profile.age.present? ? profile.age : '&nbsp;'.html_safe
+            %td.detail= current_profile.age.present? ? current_profile.age : '&nbsp;'.html_safe
           %tr
             %td.label Birthday
-            %td.detail= profile.dob.try(:strftime, '%B %e') || '&nbsp;'.html_safe
+            %td.detail= current_profile.dob.try(:strftime, '%B %e') || '&nbsp;'.html_safe
           %tr
             %td.label Location
-            %td.detail= profile.location
+            %td.detail= current_profile.location
           - current_site.biometric_domains.each do |biometric_domain|
             = render :partial => 'domain', :object => biometric_domain
       .button-bar

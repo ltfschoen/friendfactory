@@ -3,10 +3,9 @@ class ProfilesController < ApplicationController
   RepublishWindow = 6.hours
 
   before_filter :require_user
+  helper_method :page_title, :invitation_wave
 
   layout 'profile'
-
-  helper_method :page_title, :profile, :person
 
   def show
     respond_to do |format|
@@ -21,6 +20,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    raise params.inspect
     person = current_user.person
     if person && person.update_attributes(params[:person])
       # TODO Person should be tagged, not profile
@@ -74,15 +74,11 @@ class ProfilesController < ApplicationController
   end
 
   def page_title
-    "#{current_site.display_name} - #{current_profile.handle}'s Profile"
+    "#{current_site.display_name} - #{current_person.handle}'s Profile"
   end
 
-  def profile
-    current_profile
-  end
-
-  def person
-    @person ||= current_user.person
+  def invitation_wave
+    current_user.find_or_create_invitation_wave_for_site(current_site)
   end
 
 end

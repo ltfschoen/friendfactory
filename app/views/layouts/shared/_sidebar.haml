@@ -31,8 +31,9 @@
       %li.messages
         = link_to_unread_messages
         = link_to 'Inbox', inbox_path
-      %li.invites
-        = link_to 'Invitations', invitations_path
+      - if false
+        %li.invites
+          = link_to 'Invitations', invitations_path
       %li.account
         = link_to 'Profile', profile_path
       %li.logout
