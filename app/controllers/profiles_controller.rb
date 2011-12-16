@@ -20,7 +20,6 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    raise params.inspect
     person = current_user.person
     if person && person.update_attributes(params[:person])
       # TODO Person should be tagged, not profile
