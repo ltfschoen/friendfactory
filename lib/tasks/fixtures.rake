@@ -53,8 +53,8 @@ namespace :ff do
         end
 
         require 'active_record/fixtures'
-        ActiveRecord::Base.establish_connection(Rails.env.to_sym)        
-        if wave = Wave::Base.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)          
+        ActiveRecord::Base.establish_connection(Rails.env.to_sym)
+        if wave = Wave::Base.find_by_slug(Site::DefaultHomeWaveSlug)
           files_grouped_by_first_name.each do |files_by_first_name|
             if user = UserInfo.find_by_first_name(files_by_first_name.first).try(:user)
               wave.postings << new_album_with_photos(user, files_by_first_name.last)

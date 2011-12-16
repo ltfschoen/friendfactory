@@ -1,7 +1,5 @@
 class Wave::CommunitiesController < ApplicationController
 
-  DefaultWaveSlug = 'popular'
-
   before_filter :require_user
   helper_method :wave, :postings, :profiles, :profiles_on_wave, :tags
 

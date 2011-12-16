@@ -12,7 +12,7 @@ namespace :ff do
 end
 
 def community_wave
-  @community_wave ||= Wave::Community.find_by_slug(Wave::CommunitiesController::DefaultWaveSlug)
+  @community_wave ||= Wave::Community.find_by_slug(Site::DefaultHomeWaveSlug)
 end
 
 def create_album_wave(opts)

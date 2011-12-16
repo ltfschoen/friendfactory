@@ -7,9 +7,9 @@ namespace :ff do
       end
 
       Site.all.each do |site|
-        if site.waves.where(:slug => Wave::CommunitiesController::DefaultWaveSlug).empty?
-          site.waves << Wave::Community.create(  
-              :slug        => Wave::CommunitiesController::DefaultWaveSlug,
+        if site.waves.where(:slug => Site::DefaultHomeWaveSlug).empty?
+          site.waves << Wave::Community.create(
+              :slug        => Site::DefaultHomeWaveSlug,
               :topic       => 'Community Wave',
               :description => '',
               :state       => :published)

@@ -1,7 +1,8 @@
-class Site < ActiveRecord::Base  
+class Site < ActiveRecord::Base
 
-  TemplateSiteName = 'friskyfactory'
-  DefaultMailer    = 'mailer@friskyfactory.com'
+  TemplateSiteName    = 'friskyfactory'
+  DefaultMailer       = 'mailer@friskyfactory.com'
+  DefaultHomeWaveSlug = 'popular'
 
   validates_presence_of :name, :display_name
   validates_uniqueness_of :name
@@ -14,6 +15,10 @@ class Site < ActiveRecord::Base
       :join_table              => 'sites_waves',
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
+
+  belongs_to :home_wave,
+      :foreign_key => 'home_wave_id',
+      :class_name => 'Wave::Base'
 
   has_many :invitations, :foreign_key => 'resource_id', :class_name => 'Posting::Invitation'
 
@@ -67,17 +72,17 @@ class Site < ActiveRecord::Base
     stylesheets.map(&:css).compact.join("\n")
   end
 
-  after_create :create_home_wave
+  before_create :create_home_wave
 
   def signals
     Signal::Base.find_all_by_id(signal_categories_signals.map(&:signal_id))
   end
 
-  def to_s
+  def layout
     name
   end
 
-  def layout
+  def to_s
     name
   end
 
@@ -89,10 +94,6 @@ class Site < ActiveRecord::Base
 
   def mailer
     self[:mailer].present? ? self[:mailer] : DefaultMailer
-  end
-
-  def home_wave
-    @home_wave ||= waves.type(Wave::Community).where(:slug => Wave::CommunitiesController::DefaultWaveSlug).order('created_at desc').limit(1).first
   end
 
   def clone
@@ -108,14 +109,13 @@ class Site < ActiveRecord::Base
 
   private
 
-  def create_home_wave
-    unless waves.type(Wave::Community).find_by_slug(Wave::CommunitiesController::DefaultWaveSlug).present?
-      wave = Wave::Community.new(:slug => Wave::CommunitiesController::DefaultWaveSlug)
-      self.waves << wave
-      wave.publish!
-      wave
+  def create_home_wave_with_slug
+    unless self[:home_wave_id].present?
+      create_home_wave_without_slug(:slug => DefaultHomeWaveSlug).publish!
     end
   end
+
+  alias_method_chain :create_home_wave, :slug
 
   def raise_exception_if_signal_already_applied(signal)
     raise "Signal already exists for site" if signals.where(:id => signal.id)

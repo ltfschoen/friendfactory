@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212061640) do
+ActiveRecord::Schema.define(:version => 20111216002947) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -301,6 +301,7 @@ ActiveRecord::Schema.define(:version => 20111212061640) do
     t.datetime "updated_at"
     t.text     "css"
     t.string   "mailer"
+    t.integer  "home_wave_id"
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true
