@@ -1,4 +1,4 @@
-%script#biometric_domain-template{:type => "text/x-jquery-tmpl"}
+%script#biometric_domain-template{ :type => "text/x-jquery-tmpl" }
   .biometric_domain
     <input id="site_biometric_domains_attributes_${ domainSeq }_display_name" name="site[biometric_domains_attributes][${ domainSeq }][display_name]" placeholder="name" size="30" type="text" value="">
     .domain_value
@@ -7,28 +7,51 @@
       </select>
     <button class="add" id="new_domain_value">Add Value</button>
 
-%script#domain_value-template{:type => "text/x-jquery-tmpl"}
+%script#domain_value-template{ :type => "text/x-jquery-tmpl" }
   .domain_value
     <select id="site_biometric_domains_attributes_${ domainSeq }_domain_values_attributes_signal_id" name="site[biometric_domains_attributes][${ domainSeq }][domain_values_attributes][signal_id][]">
     = options_for_select([[ '', nil ]] + Biometric::Value.all.collect {|v| [ v.name, v.id ] })
     </select>
+
+%script#file-template{ :type => 'text/x-jquery-tmpl' }
+  .tr.asset.image
+    .td.silhouette
+      %img{ :alt => 'Silhouette-q', :src => '/images/friskyfactory/silhouette-q.gif', :height => '32', :width => '32' }
+    .td
+      <input id="site_images_attributes_${ seq }_name" name="site[images_attributes][${ seq }][name]" placeholder="name" type="text"><input id="site_images_attributes_${ seq }_asset" name="site[images_attributes][${ seq }][asset]" type="file">
+
+%script#asset-template{ :type => 'text/x-jquery-tmpl' }
+  <div class="tr asset ${ type }">
+  <div class='td'>
+  <input id="site_${ type }s_attributes_${ seq }_name" name="site[${ type }s_attributes][${ seq }][name]" placeholder="name" type="text">
+  </div>
+  <div class='td'>
+  <input id="site_${ type }s_attributes_${ seq }_value" name="site[${ type }s_attributes][${ seq }][value]" placeholder="value" type="text">
+  </div>
+  <div class='td'>
+  <button class="add asset">Add</button>
+  </div>
+  </div>
+
+%script#stylesheet-template{ :type => 'text/x-jquery-tmpl' }
+  .stylesheet
+    <input class="stylesheet_controller_name" id="site_stylesheets_attributes_${ seq }_controller_name" name="site[stylesheets_attributes][${ seq }][controller_name]" placeholder="controller name" size="30" type="text">
+    <textarea class="stylesheet_css" cols="40" id="site_stylesheets_attributes_${ seq }_css" name="site[stylesheets_attributes][${ seq }][css]" placeholder="css or scss" rows="20"></textarea>
 
 = form_for([ :admin, site_with_empty_fields(@site) ], :html => { :multipart => true }) do |f|
   %table.form
     %tr
       %td
         = f.label :name, 'Name in Url'
-        %br/
-        %span.unobtrusive
+        %p.instruction
           Name of the site in the url
-      %td
+      %td.detail
         = f.text_field :name, :placeholder => 'Lower case only, no spaces'
         = f.error_message_on :name
     %tr
       %td
         = f.label :display_name
-        %br/
-        %span.unobtrusive
+        %p.instruction
           Site's full human-readable name
       %td
         = f.text_field :display_name, :placeholder => 'Site Name'
@@ -36,30 +59,39 @@
     %tr
       %td
         = f.label :mailer, 'Mailer email address'
-        %br/
-        %span.unobtrusive
+        %p.instruction
           Sender and Reply-to email address
-      %td
+      %td.label
         = f.text_field :mailer, :placeholder => 'mailer@friskyfactory.com'
         = f.error_message_on :mailer
     %tr
       %td
         = f.label :analytics_domain_name
-        %br/
-        %span.unobtrusive
+        %p.instruction
           Copy from Google analytics
       %td
         = f.text_field :analytics_domain_name, :placeholder => '.excellent-site.com'
         = f.error_message_on :analytics_domain_name
-    %tr
+    %tr.analytics_account_number
       %td
         = f.label :analytics_account_number
-        %br/
-        %span.unobtrusive
+        %p.instruction
           Copy from Google analytics
       %td
         = f.text_field :analytics_account_number, :placeholder => 'UA-xxxxxxxx-x'
         = f.error_message_on :analytics_account_number
+
+    %tr
+      %td &nbsp;
+      %td
+        = f.check_box :launch
+        = f.label :launch, "&#8220;Coming Soon&#8221; launch page".html_safe
+    %tr.invite_only
+      %td &nbsp;
+      %td
+        = f.check_box :invite_only
+        = f.label :invite_only, 'Requires an invitation to join'
+
     %tr.biometrics
       %td
         %label Biometrics
@@ -76,40 +108,6 @@
                   = select_tag "site[biometric_domains_attributes][#{idx}][domain_values_attributes][signal_id][]", options_for_select([[ '', nil ]] + Biometric::Value.order('`name` ASC').all.collect {|v| [ v.name, v.id ] }, domain_value.value_id)
               = button_tag 'Add Value', :id => 'new_domain_value', :class => 'add'
         = button_tag 'Add Another Biometric', :id => 'new_domain', :class => 'add'
-
-    %tr.stylesheet
-      %td
-        =f.label :css, 'Stylesheet'
-      %td
-        = f.fields_for :stylesheets do |stylesheet_form|
-          .fields
-            = stylesheet_form.text_field :controller_name, :placeholder => 'controller name', :class => 'stylesheet_controller_name'
-            = stylesheet_form.check_box('_destroy')
-            = stylesheet_form.label('_destroy', 'Remove')
-            = stylesheet_form.text_area :css, :placeholder => 'css or scss', :class => 'stylesheet_css'
-          = stylesheet_form.button 'Add Another Stylesheet', :id => 'new_stylesheet' # , :class => 'hidden'
-
-    %tr.assets.constants
-      %td
-        = f.label :constants
-        %br/
-        %span.instruction
-          Available in SCSS as $name
-      %td
-        .table
-          = f.fields_for :constants do |asset_form|
-            .tr.asset.constant
-              .td
-                = asset_form.text_field :name, :placeholder => 'name'
-              .td
-                = asset_form.text_field :value, :placeholder => 'value'
-              - if asset_form.object.new_record?
-                .td
-                  = button_tag 'Add', :class => 'add asset'
-              - else
-                .td
-                  = asset_form.check_box('_destroy')
-                  = asset_form.label('_destroy', 'Remove')
 
     %tr.assets.texts
       %td
@@ -130,6 +128,26 @@
                   = asset_form.check_box('_destroy')
                   = asset_form.label('_destroy', 'Remove')
 
+    %tr.assets.constants
+      %td
+        = f.label :constants
+        %br/
+        %span.instruction
+          Available in SCSS as $name
+      %td
+        .table
+          = f.fields_for :constants do |asset_form|
+            .tr.asset.constant
+              .td
+                = asset_form.text_field :name, :placeholder => 'name'
+              .td
+                = asset_form.text_field :value, :placeholder => 'value'
+                - if asset_form.object.new_record?
+                  = button_tag 'Add', :class => 'add asset'
+                - else
+                  = asset_form.check_box('_destroy')
+                  = asset_form.label('_destroy', 'Remove')
+
     %tr.assets.images
       %td
         = f.label :images
@@ -141,28 +159,31 @@
           = f.fields_for :images do |asset_form|
             .tr.asset.image
               - if asset_form.object.new_record?
-                .td.silhouette= image_tag 'friskyfactory/silhouette-q.gif', :size => '32x32', :site => false
+                .td.silhouette
+                  = image_tag 'friskyfactory/silhouette-q.gif', :size => '32x32', :site => false
                 .td
                   = asset_form.text_field :name, :placeholder => 'name'
                   = asset_form.file_field :asset
-                .td &nbsp;
               - else
-                .td= image_tag asset_form.object.asset.url(:thumb), :site => false
-                .td= asset_form.text_field :name, :placeholder => 'name'
                 .td
+                  = image_tag asset_form.object.asset.url(:thumb), :site => false
+                .td
+                  = asset_form.text_field :name, :placeholder => 'name'
                   = asset_form.check_box('_destroy')
                   = asset_form.label('_destroy', 'Remove')
-    %tr
-      %td &nbsp;
+
+    %tr.stylesheets
       %td
-        = f.check_box :launch
-        = f.label :launch, "&#8220;Coming Soon&#8221; launch page".html_safe
-    %tr
-      %td &nbsp;
+        =f.label :css, 'Stylesheets'
       %td
-        = f.check_box :invite_only
-        = f.label :invite_only, 'Requires an invitation to join'
+        = f.fields_for :stylesheets do |stylesheet_form|
+          .stylesheet
+            = stylesheet_form.text_field :controller_name, :placeholder => 'controller name', :class => 'stylesheet_controller_name'
+            = stylesheet_form.check_box('_destroy')
+            = stylesheet_form.label('_destroy', 'Remove')
+            = stylesheet_form.text_area :css, :placeholder => 'css or scss', :class => 'stylesheet_css'
+        = button_tag 'Add Another Stylesheet', :id => 'new_stylesheet'
 
   .button-bar.footer
-    = f.submit 'Save', :button => true
-    = link_to 'Cancel', admin_sites_path, :class => 'button cancel'
+    = f.submit 'Save'
+    = link_to 'Cancel', admin_sites_path

@@ -1,0 +1,24 @@
+.admin.invitation.personal table.index tbody tr,
+.admin.invitation.personal table.index tbody tr:hover {
+	background-color: inherit;
+}
+
+.admin.invitation table.index li {
+	float: left;
+	margin-right: 10px;
+}
+.admin.invitation table.index img.thumb {
+	width: 80px;
+	height: 80px;
+	background-color: #FFF;
+	border: 1px solid lightgrey;
+}
+
+.admin.invitation table.index td {
+	vertical-align: middle;
+}
+
+table.index form.posting_invitation_state {
+	margin-left: 0px;
+}
+

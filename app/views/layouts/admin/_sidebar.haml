@@ -1,0 +1,4 @@
+#sidebar
+  #head
+    - if defined?(@site) && asset = @site.assets.type(Asset::Image).find_by_name(File.basename('logo', '.*'))
+      = image_tag(asset.url(:original))

@@ -1,0 +1,55 @@
+!!! 5
+:plain
+  <!--[if lt IE 8]><html lang="en-us" class="no-js ie"><![endif]-->
+  <!--[if IE 8]><html lang="en-us" class="no-js ie ie8"><![endif]-->
+  <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
+  <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
+%head
+  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
+  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %title= page_title
+
+  = stylesheet_link_tag |
+      'layouts/reset', |
+      'application', |
+      'layouts/shared/compatibility', |
+      'layouts/wave/community/sidebar', |
+      'layouts/wave/community/sidebar-override', |
+      'layouts/admin/base', |
+      'layouts/admin/sites', |
+      'layouts/admin/personals', |
+      'layouts/admin/universals', |
+    :media => 'screen', |
+    :cache => 'layouts/admin/cache'
+
+  = stylesheet_link_tag "#{current_site.name}/admin", :media => 'screen'
+
+  - if Rails.env.development?
+    = stylesheet_link_tag 'development'
+    = javascript_include_tag 'jquery'
+  - else
+    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+
+  = javascript_include_tag |
+      'modernizr', |
+      'jquery.tmpl.min', |      
+      'jquery_ujs', |
+      'application', |
+      'layouts/shared/compatibility', |
+      'layouts/admin/sites', |
+    :cache => 'layouts/admin/cache'
+
+  / [if lt IE 9]
+    = javascript_include_tag 'ie8', :media => 'screen'
+
+  - if Rails.env.development?
+    = javascript_include_tag 'development'
+
+  = csrf_meta_tag
+%body{ :class => [ 'admin', page_class ] }
+  = render :partial => 'layouts/admin/sidebar'
+  = compatibility_tag
+  = yield
+  = render :partial => 'layouts/shared/analytics'
+:plain
+  </html>

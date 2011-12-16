@@ -3,8 +3,9 @@ require 'sass'
 class Admin::SitesController < ApplicationController
 
   before_filter :require_admin, :except => [ :stylesheets ]
+  helper_method :page_title
 
-  layout 'admin'
+  layout 'admin/site'
 
   def index
     @sites = Site.order('name asc')
@@ -33,6 +34,9 @@ class Admin::SitesController < ApplicationController
 
   def edit
     @site = Site.find(params[:id])
+    respond_to do |format|
+      format.html
+    end
   end
 
   def update
@@ -71,6 +75,10 @@ class Admin::SitesController < ApplicationController
         .ie8 body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { visibility: visible; }
       EOF
     end
+  end
+
+  def page_title
+    "Site Administration"
   end
 
 end
