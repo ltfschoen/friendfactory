@@ -8,7 +8,8 @@
             %th Handle
             %th Email
             %th Last Login
-            %th &nbsp;
+            %th Role
+            %th Email
         %tbody
           - site.users.each do |user|
             %tr
@@ -18,4 +19,7 @@
               %td
                 = form_for [ :admin, site, user ], :remote => true, :format => :json do |f|
                   = f.select :role, ::Role.values, {}, { :id => "user_#{user.id}_role" }
+              %td
+                = form_for [ :admin, site, user ], :remote => true, :format => :json do |f|
+                  = f.check_box :emailable
     .button-bar.footer

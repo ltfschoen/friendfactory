@@ -32,9 +32,12 @@ class Admin::UsersController < ApplicationController
   end
   
   def update_user_role
-    if user && Role.values.include?(params[:user][:role])
-      user.role = params[:user][:role]
-      user.save!
+    if user
+      user.update_attributes(params[:user])
+      if Role.values.include?(params[:user][:role])
+        user.role = params[:user][:role]
+        user.save!
+      end
     end
   end
 

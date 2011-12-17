@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
   include ActiveRecord::Transitions
   include ActiveModel::Validations
 
+  ::Role.each do |key, value|
+    define_method("#{key}?".to_sym) do
+      self[:role] == value
+    end
+  end
+
   attr_accessor :invitation_code
 
   attr_accessible :email,
@@ -83,8 +89,6 @@ class User < ActiveRecord::Base
       [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] } }
 
   scope :featured, where('`users`.`score` > 0')
-
-  scope :ambassadors, where('`users`.`role` = "ambassador"')
 
   belongs_to :account
   belongs_to :site
@@ -261,9 +265,7 @@ class User < ActiveRecord::Base
     update_attribute(:emailable, false)
   end
 
-  def admin?
-    self.role == ::Role[:administrator]
-  end
+  alias :admin? :administrator?
 
   # ===
 

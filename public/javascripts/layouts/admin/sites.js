@@ -82,7 +82,7 @@ jQuery(function($) {
 		});
 
 	$('body.admin.users.index')
-		.find('select[name="user[role]"]').change(function (event) {
+		.find('select[name="user[role]"], input[name="user[emailable]"]').change(function (event) {
 			$(this).closest('form').submit();
 		});
 });

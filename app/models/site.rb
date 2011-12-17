@@ -12,10 +12,6 @@ class Site < ActiveRecord::Base
   has_many :users
   authenticates_many :user_sessions
 
-  has_many :ambassadors,
-      :class_name => 'User',
-      :conditions => { :role => ::Role[:ambassador] }
-
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
       :join_table              => 'sites_waves',
