@@ -15,11 +15,11 @@
             %tr
               %td= user.handle
               %td= user.email
-              %td= user.current_login_at || user.last_login_at
               %td
-                = form_for [ :admin, site, user ], :remote => true, :format => :json do |f|
-                  = f.select :role, ::Role.values, {}, { :id => "user_#{user.id}_role" }
-              %td
-                = form_for [ :admin, site, user ], :remote => true, :format => :json do |f|
-                  = f.check_box :emailable
+                - if login_date = (user.current_login_at || user.last_login_at)
+                  #{distance_of_time_in_words_to_now(login_date)}&nbsp;ago
+                - else
+                  &nbsp;
+              %td= select_tag "user[role]", options_for_select(::Role.values, user.role), :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_role"
+              %td= check_box_tag "user[emailable]", true, user.emailable?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_emailable"
     .button-bar.footer
