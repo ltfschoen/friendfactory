@@ -82,6 +82,12 @@
         = f.error_message_on :analytics_account_number
 
     %tr
+      %td
+        = f.label :home_wave_id
+      %td
+        = f.collection_select :home_wave_id, @site.waves.type(Wave::Community), :id, :slug
+
+    %tr
       %td &nbsp;
       %td
         = f.check_box :launch

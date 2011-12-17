@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111216002947) do
+ActiveRecord::Schema.define(:version => 20111216224112) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -393,7 +393,7 @@ ActiveRecord::Schema.define(:version => 20111216002947) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :null => false
+    t.string   "email",                                :null => false
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -401,24 +401,25 @@ ActiveRecord::Schema.define(:version => 20111216002947) do
     t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "perishable_token"
-    t.integer  "login_count",        :default => 0,     :null => false
-    t.integer  "failed_login_count", :default => 0,     :null => false
+    t.integer  "login_count",        :default => 0,    :null => false
+    t.integer  "failed_login_count", :default => 0,    :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.boolean  "emailable",          :default => true
-    t.boolean  "admin",              :default => false
-    t.integer  "site_id",                               :null => false
-    t.integer  "account_id",                            :null => false
+    t.integer  "site_id",                              :null => false
+    t.integer  "account_id",                           :null => false
     t.integer  "score",              :default => 0
+    t.string   "role"
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["role"], :name => "index_users_on_role"
   add_index "users", ["site_id", "email"], :name => "index_users_on_site_id_and_email", :unique => true
 
   create_table "users_deleted", :id => false, :force => true do |t|

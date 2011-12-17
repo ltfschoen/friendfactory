@@ -1,0 +1,21 @@
+#frame
+  .container
+    %h1 Users
+    - if site.users.present?
+      %table.index
+        %thead
+          %tr
+            %th Handle
+            %th Email
+            %th Last Login
+            %th &nbsp;
+        %tbody
+          - site.users.each do |user|
+            %tr
+              %td= user.handle
+              %td= user.email
+              %td= user.current_login_at || user.last_login_at
+              %td
+                = form_for [ :admin, site, user ], :remote => true, :format => :json do |f|
+                  = f.select :role, ::Role.values, {}, { :id => "user_#{user.id}_role" }
+    .button-bar.footer

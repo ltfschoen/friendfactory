@@ -80,4 +80,9 @@ jQuery(function($) {
 				$controllerName.shake();
 			}
 		});
+
+	$('body.admin.users.index')
+		.find('select[name="user[role]"]').change(function (event) {
+			$(this).closest('form').submit();
+		});
 });

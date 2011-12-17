@@ -1,4 +1,10 @@
 #sidebar
   #head
-    - if defined?(@site) && asset = @site.assets.type(Asset::Image).find_by_name(File.basename('logo', '.*'))
+    - if site.present? && asset = site.assets.type(Asset::Image).find_by_name(File.basename('logo', '.*'))
       = image_tag(asset.url(:original))
+  .block.navspace
+    %ul
+      %li= link_to 'Sites', admin_sites_path()
+      - if site.present?
+        %li= link_to 'Configuration', edit_admin_site_path(site)
+        %li= link_to 'Users', admin_site_users_path(site)

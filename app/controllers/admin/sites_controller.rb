@@ -3,7 +3,7 @@ require 'sass'
 class Admin::SitesController < ApplicationController
 
   before_filter :require_admin, :except => [ :stylesheets ]
-  helper_method :page_title
+  helper_method :site, :page_title
 
   layout 'admin/site'
 
@@ -75,6 +75,10 @@ class Admin::SitesController < ApplicationController
         .ie8 body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { visibility: visible; }
       EOF
     end
+  end
+
+  def site
+    @site
   end
 
   def page_title

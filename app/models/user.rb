@@ -1,3 +1,5 @@
+require 'roles'
+
 class User < ActiveRecord::Base
 
   include ActiveRecord::Transitions
@@ -81,6 +83,8 @@ class User < ActiveRecord::Base
       [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] } }
 
   scope :featured, where('`users`.`score` > 0')
+
+  scope :ambassadors, where('`users`.`role` = "ambassador"')
 
   belongs_to :account
   belongs_to :site
@@ -255,6 +259,10 @@ class User < ActiveRecord::Base
 
   def unsubscribe!
     update_attribute(:emailable, false)
+  end
+
+  def admin?
+    self.role == ::Role[:administrator]
   end
 
   # ===
