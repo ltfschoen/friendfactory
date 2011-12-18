@@ -182,27 +182,27 @@ class User < ActiveRecord::Base
     person.location
   end
 
-  def avatar(site)
+  def avatar(site = nil)
     delegate_to_profile_warning('avatar') unless site.nil?
     profile.avatar
   end
 
-  def first_name(site)
+  def first_name(site = nil)
     delegate_to_profile_warning('first_name') unless site.nil?
     person.first_name
   end
 
-  def last_name(site)
+  def last_name(site = nil)
     delegate_to_profile_warning('last_name') unless site.nil?
     person.last_name
   end
 
-  def full_name(site)
+  def full_name(site = nil)
     delegate_to_profile_warning('full_name') unless site.nil?
     person.full_name
   end
 
-  def gender(site)
+  def gender(site = nil)
     delegate_to_profile_warning('gender') unless site.nil?
     person.gender
   end

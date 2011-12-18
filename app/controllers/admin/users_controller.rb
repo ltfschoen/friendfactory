@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :require_admin
-  helper_method :site, :user, :page_title
+  helper_method :site, :user, :users, :page_title
 
   layout 'admin/site'
 
@@ -25,6 +25,10 @@ class Admin::UsersController < ApplicationController
 
   def user
     @user ||= site.users.find(params[:id]) if site
+  end
+
+  def users
+    @users ||= site.users.paginate(:page => params[:page], :per_page => params[:per_page])
   end
 
   def page_title

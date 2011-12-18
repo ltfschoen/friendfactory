@@ -12,11 +12,12 @@
   = stylesheet_link_tag |
       'layouts/reset', |
       'application', |
+      'posting/portrait', |
+      'posting/portrait-override', |
       'layouts/shared/compatibility', |
       'layouts/wave/community/sidebar', |
       'layouts/wave/community/sidebar-override', |
-      'layouts/admin/base', |
-      'layouts/admin/sites', |
+      'layouts/admin/site', |
       'layouts/admin/personals', |
       'layouts/admin/universals', |
     :media => 'screen', |
@@ -46,7 +47,7 @@
     = javascript_include_tag 'development'
 
   = csrf_meta_tag
-%body{ :class => [ 'admin', page_class ] }
+%body
   = render :partial => 'layouts/admin/sidebar'
   = compatibility_tag
   = yield

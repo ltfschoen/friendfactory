@@ -1,0 +1,250 @@
+body {
+/*	font-family: "Gill Sans MT", "Gill Sans", "Lucida Sans", Tahoma, Helvetica, sans-serif;*/
+	font-size: 12px;
+}
+
+#frame {
+	margin-left: 221px;
+}
+
+.container {
+	background-color: rgb(249, 249, 243);
+	background:
+		-webkit-gradient(linear, 0 0%, 0 80, from(lightgrey), to(rgba(249, 249, 243, 0))),
+		-webkit-gradient(linear, 0% 0, 10% 0, from(lightgrey), to(rgba(249, 249, 243, 0))),
+		-webkit-gradient(linear, 90% 0, 100% 0, from(rgba(249, 249, 243, 0)), to(lightgrey)),
+		-webkit-gradient(linear, 0% 0%, 20% 200, from(lightgrey), to(rgba(249, 249, 243, 0))),
+		-webkit-gradient(linear, 100% 0%, 80% 200, from(lightgrey), to(rgba(249, 249, 243, 0))), #FFF;
+
+    -webkit-box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
+		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);		
+    -moz-box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
+		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
+		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;	
+	border: none;
+	width: 90%;
+	padding: 12px 12px;
+	text-align: left;
+	margin: 20px auto;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+input[type='text'],
+textarea {
+	padding: 6px;
+}
+
+select {
+	margin-top: 4px;
+	margin-bottom: 4px;	
+}
+
+label {
+	font-size: 1em;
+}
+
+.flash.notice {
+	color: green;
+	margin-right: 8px;
+}
+
+.instruction {
+	color: gray;
+	font-size: 1em;
+}
+
+.field_with_errors, 
+.formError {
+	display: inline;
+	color: darkred;
+}
+
+.field_with_errors input {
+	border: 1px solid darkred;
+	color: darkred;
+}
+
+.pagination {
+	margin-top: 12px;
+}
+
+.button-bar {
+	text-align: right;
+	margin: 12px 8px 0 0;
+}
+
+.table {
+	display: table;
+}
+
+.table .tr {
+	display: table-row;
+	border-top: 1px solid #EEE;
+}
+
+.table .tr:first-child {
+	border-top: none;
+}
+
+.table .td {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.button-bar a {
+	color: #666;
+	text-decoration: none;
+}
+
+table.index {
+	margin: 0 auto;
+	width: 100%;
+}
+
+table.index th {
+	font-weight: bold;
+}
+
+table.index th,
+table.index td {
+	text-align: left;
+	padding: 5px 20px;
+}
+
+table.index th + th,
+table.index td + td {
+	border-left: 1px dotted grey;	
+}
+
+table.index tbody tr:nth-child(odd) {
+	background-color: rgba(120, 120, 120, 0.1);
+}
+
+table.index tbody tr:hover {
+	background-color: #FFFFE8;
+}
+
+table.index td.actions {
+	text-align: center;
+}
+table.index td.actions a:nth-child(1) {
+	margin-right: 5px;
+}
+
+table.index a {
+	color: #000;
+}
+
+table.sites.index th.launch,
+table.sites.index td.launch,
+table.sites.index th.invite_only,
+table.sites.index td.invite_only,
+table.sites.index th.state,
+table.sites.index td.state {
+	text-align: center;
+}
+
+table.sites.index td.state {
+	color: green;
+}
+
+table.form {
+	text-align: left;
+	margin: 0 auto;
+	width: 100%;
+}
+
+table.form td {
+	vertical-align: bottom;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+table.sites.form tr td:nth-child(1) {
+	padding-right: 20px;
+}
+
+table.sites.form tr.analytics_account_number td,
+table.sites.form tr.biometrics td {
+	padding-bottom: 10px;
+}
+
+table.sites.form tr.biometrics td,
+table.sites.form tr.stylesheets td,
+table.sites.form tr.assets td {
+	vertical-align: top;
+	border-top: 1px solid #CCC;
+}
+
+table.sites.form tr.assets .tr.asset .td:nth-child(1),
+table.sites.form tr.assets .tr.asset .td:nth-child(2) {
+	padding: 10px 10px 10px 0;
+}
+
+table.sites.form tr.assets .tr.asset .td:nth-child(3) {
+	white-space: nowrap;
+}
+
+table.sites.form tr.assets .tr.asset.image .td.silhouette {
+	text-align: center;
+}
+
+table.sites.form input.stylesheet_controller_name {
+	margin-bottom: 10px;
+}
+
+table.sites.form textarea.stylesheet_css {
+	display: block;
+	height: 16em;
+	min-width: 40em;
+	background-color: transparent;
+	margin-bottom: 10px;
+}
+
+table.form input[type='checkbox'] + label {
+	font-weight: normal;
+}
+
+table.sites.form tr.assets .tr.asset.constant .td:nth-child(1) input[type='text'],
+table.sites.form tr.assets .tr.asset.text .td:nth-child(1) input[type='text'] {
+	width: 85px;
+}
+
+table.sites.form tr.invite_only td {
+	padding-bottom: 10px;
+}
+
+table.sites.form .biometric_domain,
+table.sites.form .stylesheet {
+	border-top: 1px solid #CCC;
+	padding-top: 10px;
+	margin: 10px 0;
+}
+
+table.sites.form .biometric_domain:first-child,
+table.sites.form .stylesheet:first-child {
+	border-top: none;
+	padding-top: 4px;
+	margin: 0;
+}
+
+table.index.users td {
+	vertical-align: middle;
+}
+
+table.index.users td.last_login {
+	white-space: nowrap;
+}
+
+table.index.users td.emailable {
+	text-align: center;
+}
+
