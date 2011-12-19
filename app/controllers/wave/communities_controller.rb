@@ -1,6 +1,7 @@
 class Wave::CommunitiesController < ApplicationController
 
   before_filter :require_user
+  before_filter :redirect_to_home_wave, :only => [ :show ]
   helper_method :wave, :postings, :profiles, :profiles_on_wave, :tags
 
   layout 'wave/community'
@@ -58,6 +59,14 @@ class Wave::CommunitiesController < ApplicationController
 
   def scrub_tag(tag)
     tag.downcase.gsub(/-/, ' ')
+  end
+
+  def redirect_to_home_wave
+    # TODO Root path to be dynamic
+    home_wave = current_site.home_wave
+    if home_wave[:type] != 'Wave::Community'
+      redirect_to url_for(home_wave)
+    end
   end
 
 end

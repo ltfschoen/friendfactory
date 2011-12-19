@@ -7,17 +7,17 @@ class Wave::Profile < Wave::Base
 
   delegate :email, :emailable?, :admin, :admin?, :to => :user
 
-  delegate :handle, :age, :dob, :location, :first_name, :last_name, :to => :person
-
   # Default Signals
   # delegate :gender, :orientation, :relationship, :to => :person
 
   # Custom Signals
   # delegate :deafness, :hiv_status, :board_type, :military_service, :to => :person
-  
-  alias :user_info :resource
+
+  # alias :user_info :resource
 
   belongs_to :person, :class_name => 'Person', :foreign_key => 'resource_id'
+
+  delegate :handle, :age, :dob, :location, :first_name, :last_name, :to => :person
 
   alias_attribute :person_id, :resource_id
 

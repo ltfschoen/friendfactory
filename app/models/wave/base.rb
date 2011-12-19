@@ -67,6 +67,10 @@ class Wave::Base < ActiveRecord::Base
     save!
   end
 
+  def technical_description
+    self.class.name
+  end
+
   private
 
   def after_add_posting(posting)

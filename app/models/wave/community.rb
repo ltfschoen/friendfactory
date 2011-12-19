@@ -3,4 +3,8 @@ class Wave::Community < Wave::Base
     add_posting_to_personal_wave(posting)
     super
   end
+
+  def technical_description
+    [ super, slug ].compact * ' - '
+  end
 end

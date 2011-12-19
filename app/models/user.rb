@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   include ActiveRecord::Transitions
   include ActiveModel::Validations
 
-  ::Role.each do |key, value|
-    define_method("#{key}?".to_sym) do
-      self[:role] == value
+  ::Roles.each do |role|
+    define_method("#{role.name}?".to_sym) do
+      self[:role] == role.name
     end
   end
 
@@ -90,6 +90,8 @@ class User < ActiveRecord::Base
 
   scope :featured, where('`users`.`score` > 0')
 
+  scope :role, lambda { |role_name| where(:role => role_name) }
+
   belongs_to :account
   belongs_to :site
 
@@ -119,6 +121,27 @@ class User < ActiveRecord::Base
   end
 
   private :invitation_code_accept!
+
+
+  ### Role
+
+  def role=(role_name)
+    if role = ::Roles.detect{ |r| r.name == role_name }
+      self[:role] = role.name
+      self.profile[:type] = role.wave_type
+    else
+      nil
+    end
+  end
+
+  before_save :save_profile_if_role_changed
+
+  def save_profile_if_role_changed
+    profile.save if self.role_changed?
+  end
+
+  private :save_profile_if_role_changed
+
 
   ### Conversations
 

@@ -3,12 +3,15 @@ Friskyfactory::Application.routes.draw do
   # To show waves
   namespace :wave do
     get ':id/rollcall(/:tag)' => 'communities#rollcall', :as => 'rollcall'
+
     resources :communities, :only => [ :show ] do
       member do
         get :rollcall
       end
     end
+
     resources :events, :only => [ :index, :show, :new, :create ]
+
     resources :profiles, :only => [ :index, :show ] do
       member do
         get :signals
@@ -20,12 +23,16 @@ Friskyfactory::Application.routes.draw do
       end
       get 'conversation' => 'conversations#show'
     end
+
+    resources :ambassadors, :only => [ :show ]
+
     resources :conversations, :only => [ :index, :show ] do
       member do
         put :close
         get :popup
       end
     end
+
     resources :albums, :only => [ :index, :show, :new, :create ] # do
       # resources :photos, :only => [ :show ], :controller => 'albums'
     # end

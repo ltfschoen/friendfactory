@@ -1,4 +1,5 @@
 Friskyfactory::Application.configure do
+
   # Settings specified here will take precedence over those in config/environment.rb
 
   # In the development environment your application's code is reloaded on
@@ -11,7 +12,6 @@ Friskyfactory::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_view.debug_rjs             = false
   config.action_controller.perform_caching = false
 
   # config.cache_store = :mem_cache_store, 'localhost:11211'
@@ -42,6 +42,12 @@ Friskyfactory::Application.configure do
   config.action_mailer.default_url_options = {
       :host => 'friskyfactory.localhost',
       :port => 3000 }
+
+  config.after_initialize do
+    [ 'ambassador' ].each do |dep|
+      require_dependency(File.join(Rails.root, 'app', 'models', 'wave', dep))
+    end
+  end
 
 end
 

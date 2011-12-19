@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      format.json { render :json => update_user_role }
+      format.json { render :json => update_user }
     end
   end
 
@@ -35,13 +35,12 @@ class Admin::UsersController < ApplicationController
     "#{site.display_name} - Users"
   end
   
-  def update_user_role
+  def update_user
     if user
-      user.update_attributes(params[:user])
-      if Role.values.include?(params[:user][:role])
-        user.role = params[:user][:role]
-        user.save!
+      if current_user.administrator? && role_name = params[:user].delete(:role)
+        user.role = role_name
       end
+      user.update_attributes(params[:user])
     end
   end
 

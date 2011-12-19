@@ -85,7 +85,7 @@
       %td
         = f.label :home_wave_id
       %td
-        = f.collection_select :home_wave_id, @site.waves.type(Wave::Community), :id, :slug
+        = f.collection_select :home_wave_id, @site.waves.type(Wave::Community, Wave::Ambassador), :id, :technical_description
 
     %tr
       %td &nbsp;

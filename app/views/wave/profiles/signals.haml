@@ -1,18 +1,18 @@
-- if @profile.present?
+- if profile.present?
   %table.header<
     %tr
       %td.avatar<
-        = avatar_image_tag(@profile.avatar, :style => :thumb, :anonymous => true, :gender => @profile.gender)
+        = avatar_image_tag(profile.avatar, :style => :thumb, :anonymous => true, :gender => profile.gender)
       %td.username<
-        = @profile.handle
+        = profile.handle
       %td.age<
-        = @profile.age.present? ? @profile.age : '&nbsp;'.html_safe
+        = profile.age.present? ? profile.age : '&nbsp;'.html_safe
   %table.detail
     - current_site.signal_categories.each do |signal_category|
       = render :partial => 'signal_category', :object => signal_category
     %tr
       %td.label Birthday
-      %td.detail= @profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe
+      %td.detail= profile.dob.try(:strftime, '%e %B') || '&nbsp;'.html_safe
     %tr
       %td.label Location
-      %td.detail= @profile.location
+      %td.detail= profile.location

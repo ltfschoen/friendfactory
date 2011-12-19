@@ -1,0 +1,7 @@
+- if ambassadors.present?
+  %ul.block.ambassadors
+    - ambassadors.each do |user|
+      %li
+        .portrait= thimble_image_tag(user)
+        = link_to "#{user.handle}'s Wave", wave_ambassador_path(user.profile), :class => 'handle'
+        

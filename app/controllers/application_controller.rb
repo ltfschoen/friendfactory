@@ -3,6 +3,12 @@ require 'pusher'
 
 class ApplicationController < ActionController::Base
 
+  if Rails.env.development?
+    [ 'ambassador' ].each do |dep|
+      require_dependency(File.join(Rails.root, 'app', 'models', 'wave', dep))
+    end
+  end
+
   protect_from_forgery
 
   filter_parameter_logging(:password, :password_confirmation) unless Rails.env.development?

@@ -1,10 +1,12 @@
 - content_for :rollcall do
-  = render :partial => 'headshot'
+  = render :partial => 'wave/profiles/headshot'
 #floating
 #frame
+  %h1= profile.handle
   = render :partial => 'layouts/shared/reaction-template'
-  = render :partial => 'layouts/shared/nav'
+  - if current_user.id == wave.user_id
+    = render :partial => 'layouts/shared/nav'
   - postings.each do |posting|
-    = render_community_posting(posting)
+    = render_ambassadors_posting(posting)
   = will_paginate postings, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
   = render :partial => 'layouts/shared/unpublish_overlay'

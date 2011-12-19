@@ -8,12 +8,11 @@ module Posting::AvatarsHelper
     end
   end
 
-  def thimble_image_tag(profile, opts = {})
-    profile = profile.profile(current_site) if profile.is_a?(User)
+  def thimble_image_tag(user_or_profile, opts = {})
     size = opts.delete(:size) || '32x32'
-    if profile.present?
-      handle = profile.handle
-      image_tag(profile.avatar.url(:thumb), :size => size, :alt => handle, :title => handle)
+    if user_or_profile.present?
+      handle = user_or_profile.handle
+      image_tag(user_or_profile.avatar.url(:thumb), :size => size, :alt => handle, :title => handle)
     end
   end
 
