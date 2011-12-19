@@ -94,7 +94,7 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def find_all_profiles
-    current_site.waves.type(Wave::Profile).
+    current_site.profiles.
         where(:state => :published).
         order('updated_at desc').
         paginate(:page => params[:page], :per_page => @@per_page)
@@ -109,7 +109,7 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def wave
-    @wave ||= current_site.waves.type(Wave::Profile).find_by_id(params[:id])
+    @wave ||= current_site.profiles.find_by_id(params[:id])
   end
 
   alias :profile :wave

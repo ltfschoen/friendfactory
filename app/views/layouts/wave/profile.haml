@@ -1,5 +1,6 @@
 !!! 5
 :plain
+  <!--[if lt IE 8]><html lang="en-us" class="no-js ie"><![endif]-->
   <!--[if IE 8]><html lang="en-us" class="no-js ie ie8"><![endif]-->
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
   <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
@@ -12,19 +13,6 @@
       'layouts/reset', |
       'application', |
       'effects', |
-      'layouts/shared/unpublish-overlay', |
-      'layouts/shared/nav', |
-      'layouts/shared/tag_cloud', |
-      'layouts/wave/community/base', |
-      'layouts/wave/community/base-override', |
-      'layouts/wave/community/sidebar', |
-      'layouts/wave/community/sidebar-override', |
-      'layouts/wave/community/reaction', |
-      'layouts/wave/community/reaction-override', |
-      'layouts/wave/community/post_reaction', |
-      'layouts/wave/community/rollcall', |
-      'layouts/wave/community/floating', |
-      'layouts/wave/profile/base', |
       'posting/ads', |
       'posting/album', |
       'posting/blog', |
@@ -53,6 +41,20 @@
       'posting/tweet', |
       'posting/video', |
       'posting/video-override', |
+      'layouts/shared/unpublish-overlay', |
+      'layouts/shared/nav', |
+      'layouts/shared/tag_cloud', |
+      'layouts/wave/community/base', |
+      'layouts/wave/community/base-override', |
+      'layouts/wave/community/sidebar', |
+      'layouts/wave/community/sidebar-override', |
+      'layouts/wave/community/reaction', |
+      'layouts/wave/community/reaction-override', |
+      'layouts/wave/community/post_reaction', |
+      'layouts/wave/community/rollcall', |
+      'layouts/wave/community/floating', |
+      'layouts/wave/profile/base', |
+      'layouts/wave/ambassador/base', |
     :media => 'screen', |
     :cache => 'layouts/wave/profile/cache' #, :concat => true
 
@@ -96,7 +98,7 @@
     = javascript_include_tag 'development'
 
   = csrf_meta_tag
-%body{sid, uid, gid, :class => page_class}
+%body{ uid, gid, :class => controller.controller_name }
   = render :partial => 'layouts/shared/sidebar'
   = yield
   - if Rails.env.development?

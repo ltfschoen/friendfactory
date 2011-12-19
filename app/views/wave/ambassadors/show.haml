@@ -2,7 +2,7 @@
   = render :partial => 'wave/profiles/headshot'
 #floating
 #frame
-  %h1= profile.handle
+  %h1 #{profile.handle}'s Wave
   = render :partial => 'layouts/shared/reaction-template'
   - if current_user.id == wave.user_id
     = render :partial => 'layouts/shared/nav'

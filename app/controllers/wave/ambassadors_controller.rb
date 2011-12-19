@@ -3,7 +3,7 @@ class Wave::AmbassadorsController < ApplicationController
   before_filter :require_user
   helper_method :person, :wave, :profile, :postings
 
-  layout 'wave/ambassador'
+  layout 'wave/profile'
 
   cattr_reader :per_page
 

@@ -87,10 +87,8 @@ class Wave::Base < ActiveRecord::Base
   end
 
   def add_posting_to_personal_wave(posting)
-    if posting.present? && posting.site.present?
-      if profile = posting.user.profile(posting.site)
-        profile.postings << posting
-      end
+    if posting.present? && profile = posting.user.profile
+      profile.postings << posting
     end
   end
 
