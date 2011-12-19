@@ -1,0 +1,12 @@
+%script#reaction-template{:type => "text/x-jquery-tmpl"}
+  .mini_comment
+    .portrait
+      %img{ :src => '${ image_path }', :width => '32', :height => '32', :title => '${ handle }' }/
+    .comment
+      %p
+        ${ handle }
+        \-
+        %a{ :href => '/postings/${ posting_id }/comments', :'data-remote' => "true", :class => 'comments' } ${ body }
+      %span.date Posted ${ updated_at } ago
+      %span.comments
+        %a{ :href => '/postings/${ posting_id }/comments', :'data-remote' => "true" } Reply

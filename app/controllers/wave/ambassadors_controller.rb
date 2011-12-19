@@ -1,9 +1,13 @@
+require 'ambassador_resolver'
+
 class Wave::AmbassadorsController < ApplicationController
-  
+
   before_filter :require_user
   helper_method :person, :wave, :profile, :postings
 
   layout 'wave/profile'
+
+  # prepend_view_path ::AmbassadorResolver.new
 
   cattr_reader :per_page
 
@@ -13,35 +17,6 @@ class Wave::AmbassadorsController < ApplicationController
       format.html do
         render
       end
-    end
-  end
-
-  ### Pane
-
-  def headshot
-    respond_to do |format|
-      format.html { render :partial => 'headshot', :locals => { :profile => wave } }
-    end
-  end
-
-  def signals
-    @profile = Wave::Profile.find_by_id(params[:id])
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-
-  def biometrics
-    @profile = Wave::Profile.find_by_id(params[:id])
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-
-  def photos
-    @wave = Wave::Profile.find_by_id(params[:id])
-    respond_to do |format|
-      format.html { render :layout => false }
     end
   end
 

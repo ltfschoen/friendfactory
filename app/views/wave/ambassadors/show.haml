@@ -3,7 +3,7 @@
 #floating
 #frame
   %h1 #{profile.handle}'s Wave
-  = render :partial => 'layouts/shared/reaction-template'
+  = render :partial => 'reaction-template'
   - if current_user.id == wave.user_id
     = render :partial => 'layouts/shared/nav'
   - postings.each do |posting|
