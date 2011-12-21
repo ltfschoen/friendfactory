@@ -53,7 +53,7 @@ module ApplicationHelper
     profile = profile.profile(current_site) if profile.is_a?(User)
     if profile.present?
       name = opts[:label] || profile.handle
-      link_to(name, wave_profile_path(profile), :class => 'profile username')
+      link_to(name, url_for(profile), :class => 'profile username')
     end
   end
 
