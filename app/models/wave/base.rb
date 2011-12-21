@@ -71,12 +71,27 @@ class Wave::Base < ActiveRecord::Base
     self.class.name
   end
 
+  def permitted?(user_or_user_id)
+    return true if permitted_user_ids == :all
+    if user_or_user_id
+      user_id = user_or_user_id.is_a?(User) ? user_or_user_id.id : user_or_user_id
+      ids = *permitted_user_ids
+      ids.include?(user_id)
+    else
+      false
+    end
+  end
+
   private
+
+  def permitted_user_ids
+    :all
+  end
 
   def transaction
     ActiveRecord::Base.transaction { yield }
   rescue ActiveRecord::RecordInvalid
-    nil
+    false
   end
 
   def after_add_posting(posting)
@@ -97,14 +112,14 @@ class Wave::Base < ActiveRecord::Base
   end
 
   def publish_posting_to_profile_wave(posting)
-    if posting.present? && profile = posting.user.profile
+    if posting && profile = posting.user.profile
       profile
     end
   end
 
   def publish_posting_to_home_wave(posting)
-    if posting.present? && posting.site.present?
-      posting.site.home_wave
+    if posting && site = posting.site
+      site.home_wave
     end
   end
 
