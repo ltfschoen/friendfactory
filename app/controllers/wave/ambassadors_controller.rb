@@ -1,4 +1,4 @@
-require 'ambassador_resolver'
+require 'resolver'
 
 class Wave::AmbassadorsController < ApplicationController
 
@@ -7,7 +7,7 @@ class Wave::AmbassadorsController < ApplicationController
 
   layout 'wave/profile'
 
-  # prepend_view_path ::AmbassadorResolver.new
+  prepend_view_path ::Resolver.new('wave/ambassadors')
 
   cattr_reader :per_page
 

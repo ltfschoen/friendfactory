@@ -1,11 +1,8 @@
 module Posting::AvatarsHelper
 
-  def thimble_link_to_profile(profile, path = nil)
-    profile = profile.profile(current_site) if profile.is_a?(User)
-    if profile.present?
-      path = wave_profile_path(profile) if path.nil?
-      link_to(thimble_image_tag(profile), path)
-    end
+  def thimble_link_to_profile(profile_or_user, path = nil)
+    profile = profile_or_user.is_a?(User) ? profile_or_user.profile : profile_or_user
+    render :partial => 'posting/avatars/thimble_link_to_profile', :locals => { :profile => profile, :path => path }
   end
 
   def thimble_image_tag(user_or_profile, opts = {})
