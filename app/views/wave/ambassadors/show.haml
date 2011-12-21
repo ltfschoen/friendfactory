@@ -4,8 +4,7 @@
 #frame
   %h1 #{profile.handle}'s Wave
   = render :partial => 'reaction-template'
-  - if current_user.id == wave.user_id
-    = render :partial => 'layouts/shared/nav'
+  = render :partial => 'layouts/shared/nav'
   - postings.each do |posting|
     = render_ambassadors_posting(posting)
   = will_paginate postings, :class => 'pagination footer', :inner_window => 1, :outer_window => 1

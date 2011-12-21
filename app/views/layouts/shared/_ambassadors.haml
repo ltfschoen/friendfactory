@@ -3,5 +3,5 @@
     - ambassadors.each do |user|
       %li
         .portrait= thimble_image_tag(user)
-        = link_to "#{user.handle}'s Wave", wave_ambassador_path(user.profile), :class => 'handle'
+        = link_to "#{user.handle}'s Wave", url_for(user.profile), :class => 'handle'
         
