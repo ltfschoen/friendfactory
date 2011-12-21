@@ -1,5 +1,4 @@
 require 'roles'
-# require 'waves'
 
 class Site < ActiveRecord::Base
 
@@ -26,8 +25,8 @@ class Site < ActiveRecord::Base
       :association_foreign_key => 'wave_id'
 
   belongs_to :home_wave,
-      :foreign_key => 'home_wave_id',
-      :class_name => 'Wave::Base'
+      :class_name  => 'Wave::Base',
+      :foreign_key => 'home_wave_id'
 
   has_many :invitations, :foreign_key => 'resource_id', :class_name => 'Posting::Invitation'
 

@@ -11,9 +11,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  ###
+
   attr_accessor :invitation_code
 
-  attr_accessible :email,
+  attr_accessible \
+      :email,
       :person_attributes,
       :password,
       :password_confirmation,
@@ -41,32 +44,21 @@ class User < ActiveRecord::Base
 
   private :invitation_code_offered?
 
-  after_initialize :build_empty_person
+  ###
+
   after_initialize :set_email_address_from_invitation
 
-  before_create :attach_to_account
-
-  private
-
-  def build_empty_person
-    build_person if new_record? && person.nil?
-  end
-
   def set_email_address_from_invitation
-    if new_record?
-      if site && site.invite_only?
-        if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
-          self.email ||= invitation.email
-        end
+    if new_record? && site && site.invite_only?
+      if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
+        self.email ||= invitation.email
       end
     end
   end
 
-  def attach_to_account
-    self.account = Account.find_or_create_for_user(self) if account.nil?
-  end
+  private :set_email_address_from_invitation
 
-  public
+  ###
 
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
@@ -96,13 +88,33 @@ class User < ActiveRecord::Base
 
   belongs_to :site
 
-  has_one :person, :class_name => 'Persona::Person'
+  ### Persona and Profile
 
-  alias :persona :person
+  has_one :person, :class_name => 'Persona::Person'
 
   accepts_nested_attributes_for :person
 
+  alias :persona :person
+
+  after_initialize :build_empty_person
+
   has_one :profile, :class_name => 'Wave::Profile'
+
+  before_create :build_profile_wave
+
+  private
+
+  def build_empty_person
+    build_person if new_record? && person.nil?
+  end
+
+  def build_profile_wave
+    build_profile(:person => person, :sites => [ site ])
+  end
+  
+  public
+
+  ### Waves
 
   has_many :bookmarks
 
@@ -116,17 +128,30 @@ class User < ActiveRecord::Base
     end
   end
 
-  after_create :invitation_code_accept!
+  ###
 
-  def invitation_code_accept!
-    if site.invite_only? && invitation = site.invitations.offered.find_by_code(invitation_code)
+  before_create :attach_to_account
+
+  after_create  :accept_invitation_code
+
+  private
+
+  def attach_to_account
+    if account.nil?
+      self.account = Account.find_or_create_for_user(self)
+    end
+  end
+
+  def accept_invitation_code
+    if site.invite_only? &&
+        invitation = site.invitations.offered.find_by_code(invitation_code)
       invitation.accept!
     end
   end
 
-  private :invitation_code_accept!
+  public
 
-  ### Role
+  ### Roles
 
   def role=(role_name)
     if role_name && role = ::Roles.detect{ |r| r.name == role_name }

@@ -37,8 +37,6 @@ class Persona::Person < Persona::Base
 
   alias :biometric_values :biometric_person_values
 
-  after_create :create_profile_wave
-
   def biometric_values_attributes=(attributes)
     attributes.each do |domain_id, value_id|
       if domain_id.present? && value_id.present?
@@ -78,14 +76,5 @@ class Persona::Person < Persona::Base
   end
 
   alias_method_chain :avatar, :silhouette
-
-  private
-
-  def create_profile_wave
-    profile = build_profile
-    profile.person_id = self.id
-    profile.user_id = self.user_id
-    profile.save && profile
-  end
 
 end
