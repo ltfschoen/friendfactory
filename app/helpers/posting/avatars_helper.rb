@@ -16,10 +16,6 @@ module Posting::AvatarsHelper
     end
   end
 
-  # def thumb_avatar_image_tag(avatar, opts = {})
-  #   image_tag(avatar.url(:thumb), wave_profile_path(avatar.profile(current_site)), :size => '100x100')
-  # end
-
   def headshot_image_tag(profile, opts = {})
     opts.merge!(:size => '190x190', :alt => profile.handle, :title => profile.handle)
     image_tag(profile.avatar.url(:polaroid), opts)

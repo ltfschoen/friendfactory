@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111216224112) do
+ActiveRecord::Schema.define(:version => 20111220232854) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -138,6 +138,24 @@ ActiveRecord::Schema.define(:version => 20111216224112) do
   add_index "nusers", ["persistence_token"], :name => "index_nusers_on_persistence_token"
   add_index "nusers", ["site_id"], :name => "index_nusers_on_site_id"
 
+  create_table "personas", :force => true do |t|
+    t.integer  "user_id"
+    t.date     "dob"
+    t.string   "age"
+    t.string   "location"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "handle"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "avatar_id"
+    t.string   "type"
+  end
+
+  add_index "personas", ["first_name"], :name => "index_user_info_on_first_name"
+  add_index "personas", ["handle"], :name => "index_user_info_on_handle"
+
   create_table "posting_chats", :force => true do |t|
     t.integer "receiver_id"
     t.text    "body"
@@ -156,7 +174,6 @@ ActiveRecord::Schema.define(:version => 20111216224112) do
     t.datetime "updated_at"
     t.text     "subject"
     t.text     "body"
-    t.boolean  "active"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -356,26 +373,6 @@ ActiveRecord::Schema.define(:version => 20111216224112) do
 
   add_index "uber_waves", ["uber_wave_id", "wave_id"], :name => "index_uber_waves_on_uber_wave_id_and_wave_id"
   add_index "uber_waves", ["wave_id"], :name => "index_uber_waves_on_wave_id"
-
-  create_table "user_info", :force => true do |t|
-    t.integer  "user_id"
-    t.date     "dob"
-    t.string   "age"
-    t.integer  "gender"
-    t.integer  "orientation"
-    t.integer  "relationship"
-    t.string   "location"
-    t.integer  "deafness"
-    t.text     "about_me"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "handle"
-    t.string   "first_name"
-    t.string   "last_name"
-  end
-
-  add_index "user_info", ["first_name"], :name => "index_user_info_on_first_name"
-  add_index "user_info", ["handle"], :name => "index_user_info_on_handle"
 
   create_table "user_info_deleted", :id => false, :force => true do |t|
     t.integer  "id",           :default => 0, :null => false

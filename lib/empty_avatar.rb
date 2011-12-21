@@ -4,16 +4,16 @@ class EmptyAvatar
 
   attr_accessor :profile
 
-  def initialize(profile)
-    @profile = profile
+  def initialize(persona)
+    @persona = persona
   end
 
   def profile_id
-    @profile.id
+    @persona.id
   end
 
   def user
-    @profile.user
+    @persona.user
   end
 
   def url(style = nil)

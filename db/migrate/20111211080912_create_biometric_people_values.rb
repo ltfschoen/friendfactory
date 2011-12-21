@@ -23,9 +23,6 @@ class CreateBiometricPeopleValues < ActiveRecord::Migration
     end
 
     add_index :biometric_people_values, [ :person_id, :domain_id ]
-
-    # TODO
-    # remove_columns :user_info, :gender, :orientation, :relationship, :deafness
   end
 
   def self.down

@@ -1,30 +1,32 @@
-class Person < ActiveRecord::Base
+require 'empty_avatar'
 
-  set_table_name 'user_info'
+class Persona::Person < Persona::Base
 
-  alias_attribute :hiv_status,          :deafness
-  alias_attribute :board_type,          :deafness
-  alias_attribute :military_service,    :deafness
-  alias_attribute :gender_id,           :gender
-  alias_attribute :orientation_id,      :orientation
-  alias_attribute :relationship_id,     :relationship
-  alias_attribute :deafness_id,         :deafness
-  alias_attribute :hiv_status_id,       :deafness
-  alias_attribute :board_type_id,       :deafness
-  alias_attribute :military_service_id, :deafness
-
-  attr_accessible :handle,
+  attr_accessible \
+      :handle,
       :first_name,
+      :last_name,
+      :description,
       :age,
       :location,
       :dob,
+      :avatar_id,
       :biometric_values_attributes
 
-  validates_presence_of :handle, :age, :location
+  validates_presence_of \
+      :handle,
+      :age,
+      :location
 
   belongs_to :user
 
-  has_one :profile, :class_name => 'Wave::Profile', :foreign_key => 'resource_id'
+  has_one :profile,
+      :class_name  => 'Wave::Profile',
+      :foreign_key => 'resource_id'
+
+  belongs_to :avatar,
+      :class_name => 'Posting::Avatar',
+      :conditions => { :state => :published }
 
   has_many :biometric_person_values,
       :class_name  => 'Biometric::PersonValue',
@@ -68,6 +70,12 @@ class Person < ActiveRecord::Base
   def full_name
     [ first_name, last_name ].compact.join(' ')
   end
+
+  def avatar_with_silhouette
+    avatar_without_silhouette || EmptyAvatar.new(self)
+  end
+
+  alias_method_chain :avatar, :silhouette
 
   private
 

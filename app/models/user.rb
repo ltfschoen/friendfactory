@@ -93,9 +93,11 @@ class User < ActiveRecord::Base
   scope :role, lambda { |role_name| where(:role => role_name) }
 
   belongs_to :account
+
   belongs_to :site
 
-  has_one :person
+  has_one :person, :class_name => 'Persona::Person'
+
   accepts_nested_attributes_for :person
 
   has_one :profile, :class_name => 'Wave::Profile'
@@ -122,7 +124,6 @@ class User < ActiveRecord::Base
 
   private :invitation_code_accept!
 
-
   ### Role
 
   def role=(role_name)
@@ -141,7 +142,6 @@ class User < ActiveRecord::Base
   end
 
   private :save_profile_if_role_changed
-
 
   ### Conversations
 
@@ -258,7 +258,7 @@ class User < ActiveRecord::Base
 
   private :create_invitation_wave_for_site
 
-  # ===
+  ###
   
   def self.online?(user)
     online.include?(user)
@@ -289,8 +289,6 @@ class User < ActiveRecord::Base
   end
 
   alias :admin? :administrator?
-
-  # ===
 
   def uid
     "uid-#{self.id}"
