@@ -34,21 +34,14 @@ class ProfilesController < ApplicationController
   end
 
   def avatar
-    @posting = new_posting_avatar
-    if @posting.valid? && profile = current_user.profile(current_site)
-      profile.postings << @posting
+    transaction do
+      @posting = Posting::Avatar.new(params[:posting_avatar]) do |avatar|
+        avatar.user = current_user
+        avatar.persona = current_persona
+      end
+      current_profile.postings << @posting
       @posting.publish!
-      profile.set_active_avatar(@posting)
-      home_wave = current_site.home_wave
-      # TODO: Following will unpublish the avatar.
-      # It should just unpublish the flag.
-      home_wave.postings.
-          type(Posting::Avatar).
-          published.
-          where(:created_at => (Time.now - RepublishWindow)...Time.now).
-          where(:user_id => @posting.user[:id]).
-          map(&:unpublish!)
-      home_wave.postings << @posting
+      publish_to_home_wave(@posting)
     end
     respond_to do |format|
       format.html { redirect_to profile_path }
@@ -65,10 +58,23 @@ class ProfilesController < ApplicationController
 
   private
 
-  def new_posting_avatar
-    Posting::Avatar.new(params[:posting_avatar]) do |avatar|
-      avatar.user = current_user
-      avatar.active = true
+  def transaction
+    ActiveRecord::Base.transaction { yield }
+  rescue ActiveRecord::RecordInvalid
+    nil
+  end
+
+  def publish_to_home_wave(posting)
+    # TODO: Only publish a flag, not the avatar itself
+    if posting
+      home_wave = current_site.home_wave
+      home_wave.postings.
+          type(Posting::Avatar).
+          published.
+          where(:created_at => (Time.now - RepublishWindow)...Time.now).
+          where(:user_id => posting.user[:id]).
+          map(&:unpublish!)
+      home_wave.postings << posting
     end
   end
 

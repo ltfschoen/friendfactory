@@ -10,19 +10,19 @@ class Posting::Avatar < Posting::Base
           :ad       => [ '300x250#', :jpg ]},
       :default_style => :portrait,
       :convert_options => { :all => [ '-strip', '-depth 8' ] }
-  
+
   validates_attachment_presence     :image
   validates_attachment_size         :image, :less_than => 5.megabytes
   validates_attachment_content_type :image, :content_type => [ 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png' ]
 
-  before_create :set_dimensions  
+  before_create :set_dimensions
   before_create :randomize_file_name
-  
-  scope :activated, where(:active => true)
 
-  def profile(site)
-    waves.type(Wave::Profile).site(site).order('`waves`.`created_at` desc').limit(1).first
-  end
+  has_one :persona,
+      :class_name  => 'Persona::Base',
+      :foreign_key => 'avatar_id'
+
+  delegate :profile, :to => :user
 
   def url(style = nil)
     image.url(style)
@@ -33,9 +33,9 @@ class Posting::Avatar < Posting::Base
   end
 
   private
-  
+
   def set_dimensions
-    tempfile = self.image.queued_for_write[:original]    
+    tempfile = self.image.queued_for_write[:original]
     unless tempfile.nil?
       dimensions = Paperclip::Geometry.from_file(tempfile)
       self.width = dimensions.width

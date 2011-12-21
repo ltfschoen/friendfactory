@@ -28,6 +28,10 @@ class Persona::Person < Persona::Base
       :class_name => 'Posting::Avatar',
       :conditions => { :state => :published }
 
+  def avatar?
+    avatar.present?
+  end
+
   has_many :biometric_person_values,
       :class_name  => 'Biometric::PersonValue',
       :foreign_key => 'person_id',

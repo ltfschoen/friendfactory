@@ -1,5 +1,4 @@
 require 'tag_scrubber'
-# require 'empty_avatar'
 
 class Wave::Profile < Wave::Base
 
@@ -20,6 +19,7 @@ class Wave::Profile < Wave::Base
       :first_name,
       :last_name,
       :avatar,
+      :avatar?,
     :to => :person
 
   belongs_to :person,
@@ -27,24 +27,6 @@ class Wave::Profile < Wave::Base
       :foreign_key => 'resource_id'
 
   alias_attribute :person_id, :resource_id
-
-  # Use an association to provide eager loading.
-  # has_many :avatars,
-  #     :through      => :publications,
-  #     :source       => :resource,
-  #     :source_type  => 'Posting::Base',
-  #     :conditions => { :type => Posting::Avatar, :parent_id => nil }
-  
-  # Use an association to provide eager loading.
-  # Can't use has_one :active_avatar becauses condition clause
-  # isn't respected and all associated postings (not just avatars)
-  # are eagerly loaded and a completely wrong posting will be returned.
-  # has_many :active_avatars,
-  #     :through      => :publications,
-  #     :source       => :resource,
-  #     :source_type  => 'Posting::Base',
-  #     :conditions   => { :postings => { :type => Posting::Avatar, :parent_id => nil, :active => true, :state => :published }},
-  #     :order        => '`postings`.`created_at` desc'
 
   has_many :friendships, :class_name => 'Friendship::Base'
 
@@ -65,26 +47,6 @@ class Wave::Profile < Wave::Base
   # TODO Implement
   # def admirers(site)
   #   inverse_friends.map{ |user| user.profile(site) }
-  # end
-
-  # def avatar(reload = false)
-  #   return @avatar if reload == false && defined?(@avatar)
-  #   @avatar = active_avatars.limit(1).first || EmptyAvatar.new(self)
-  # end
-
-  # def avatar?
-  #   @avatar.present? && !@avatar.silhouette?
-  # end
-
-  # def avatar_id
-  #   @avatar.try(:id)
-  # end
-
-  # def set_active_avatar(avatar)
-  #   if avatar.active?
-  #     avatar_ids = avatars.map(&:id)
-  #     Posting::Avatar.update_all([ 'active = ?', false], [ 'id in (?)', (avatar_ids - [ avatar.id ]) ])
-  #   end
   # end
 
   def tag_list

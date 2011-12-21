@@ -98,6 +98,8 @@ class User < ActiveRecord::Base
 
   has_one :person, :class_name => 'Persona::Person'
 
+  alias :persona :person
+
   accepts_nested_attributes_for :person
 
   has_one :profile, :class_name => 'Wave::Profile'

@@ -3,18 +3,26 @@ require 'pusher'
 
 class ApplicationController < ActionController::Base
 
+  protect_from_forgery
+
+  filter_parameter_logging \
+      :password,
+      :password_confirmation
+
   if Rails.env.development?
     [ 'ambassador' ].each do |dep|
       require_dependency(File.join(Rails.root, 'app', 'models', 'wave', dep))
     end
   end
 
-  protect_from_forgery
-
-  filter_parameter_logging(:password, :password_confirmation) unless Rails.env.development?
-
-  helper_method :current_user_session, :current_user, :current_profile, :current_person, :current_site
-  helper_method :presenter, :resolver
+  helper_method \
+      :current_user_session,
+      :current_user,
+      :current_profile,
+      :current_person,
+      :current_site,
+      :presenter,
+      :resolver
 
   rescue_from UnauthorizedException do |exception|
     render :file => "#{Rails.root}/public/401.html", :status => 401
@@ -39,12 +47,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_person
-    return @current_person if defined?(@current_person)
+  def current_persona
+    return @current_persona if defined?(@current_persona)
     if current_user
-      @current_person = current_user.person
+      @current_persona = current_user.persona
     end
   end
+
+  alias :current_person :current_persona
 
   def current_site
     @current_site ||= begin
@@ -63,7 +73,6 @@ class ApplicationController < ActionController::Base
         end
         return false
       else
-        # flash[:notice] = "You must be logged in to access this page"
         redirect_to welcome_url
         return false
        end
