@@ -14,10 +14,8 @@ class Wave::Invitation < Wave::Base
     all
   end
 
-  def add_posting_to_other_waves(posting)
-    add_posting_to_personal_wave(posting)
-    add_posting_to_home_wave(posting)
-    super
+  def publish_posting_to_waves(posting)
+    [ publish_posting_to_personal_wave(posting), publish_posting_to_home_wave(posting) ]
   end
 
 end

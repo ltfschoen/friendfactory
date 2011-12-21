@@ -73,30 +73,38 @@ class Wave::Base < ActiveRecord::Base
 
   private
 
+  def transaction
+    ActiveRecord::Base.transaction { yield }
+  rescue ActiveRecord::RecordInvalid
+    nil
+  end
+
   def after_add_posting(posting)
+    return unless posting
     increment!(:postings_count) if posting.published?
     unless @@ignore_after_add_posting_callback
       @@ignore_after_add_posting_callback = true
-      add_posting_to_other_waves(posting)
+      transaction do
+        waves = *publish_posting_to_waves(posting)
+        waves.compact.uniq.each { |wave| wave.postings << posting }
+      end
       @@ignore_after_add_posting_callback = false
     end
   end
 
-  def add_posting_to_other_waves(posting)
+  def publish_posting_to_waves(posting)
     # Override in inherited classes
   end
 
-  def add_posting_to_personal_wave(posting)
+  def publish_posting_to_profile_wave(posting)
     if posting.present? && profile = posting.user.profile
-      profile.postings << posting
+      profile
     end
   end
 
-  def add_posting_to_home_wave(posting)
+  def publish_posting_to_home_wave(posting)
     if posting.present? && posting.site.present?
-      if wave = posting.site.home_wave
-        wave.postings << posting
-      end
+      posting.site.home_wave
     end
   end
 

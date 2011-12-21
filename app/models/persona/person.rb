@@ -13,10 +13,8 @@ class Persona::Person < Persona::Base
       :avatar_id,
       :biometric_values_attributes
 
-  validates_presence_of \
-      :handle,
-      :age,
-      :location
+  validates_presence_of :handle
+  validates_presence_of :age, :location, :on => :create
 
   belongs_to :user
 

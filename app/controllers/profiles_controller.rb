@@ -1,7 +1,5 @@
 class ProfilesController < ApplicationController
 
-  RepublishWindow = 6.hours
-
   before_filter :require_user
   helper_method :page_title, :invitation_wave
 
@@ -35,13 +33,13 @@ class ProfilesController < ApplicationController
 
   def avatar
     transaction do
-      @posting = Posting::Avatar.new(params[:posting_avatar]) do |avatar|
-        avatar.user = current_user
-        avatar.persona = current_persona
+      @posting = Posting::Avatar.new(params[:posting_avatar]) do |posting|
+        posting.user = current_user
+        posting.site = current_site
+        posting.persona = current_persona
       end
       current_profile.postings << @posting
       @posting.publish!
-      publish_to_home_wave(@posting)
     end
     respond_to do |format|
       format.html { redirect_to profile_path }
@@ -62,20 +60,6 @@ class ProfilesController < ApplicationController
     ActiveRecord::Base.transaction { yield }
   rescue ActiveRecord::RecordInvalid
     nil
-  end
-
-  def publish_to_home_wave(posting)
-    # TODO: Only publish a flag, not the avatar itself
-    if posting
-      home_wave = current_site.home_wave
-      home_wave.postings.
-          type(Posting::Avatar).
-          published.
-          where(:created_at => (Time.now - RepublishWindow)...Time.now).
-          where(:user_id => posting.user[:id]).
-          map(&:unpublish!)
-      home_wave.postings << posting
-    end
   end
 
   def page_title

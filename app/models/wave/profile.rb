@@ -4,6 +4,8 @@ class Wave::Profile < Wave::Base
 
   include TagScrubber
 
+  RepublishWindow = 6.hours
+
   delegate \
       :email,
       :emailable?,
@@ -56,9 +58,9 @@ class Wave::Profile < Wave::Base
   def photos
     postings.type(Posting::Photo).published.order('created_at desc').limit(9)
   end
-    
+
+  # TODO Implement
   def set_tag_list_on(site)
-    # TODO
     # if resource.present?
     #   signal_ids = site.signal_categories.map { |category| resource.send(:"#{category.name}_id") }.compact
     #   signal_display_names = Signal::Base.find_all_by_id(signal_ids).map(&:display_name)
@@ -66,7 +68,7 @@ class Wave::Profile < Wave::Base
     #   super(site, tag_list)
     # end
   end
-  
+
   def toggle_poke(profile_id)
     return false if profile_id == self.id
     if poke = self.friendships.type(Friendship::Poke).find_by_friend_id(profile_id)
@@ -89,6 +91,23 @@ class Wave::Profile < Wave::Base
 
   def touch(avatar = nil)
     super()
+  end
+
+  def publish_posting_to_waves(posting)
+    # TODO: Only publish a flag, not the avatar itself
+    if site = posting.site
+      related_postings(posting).map(&:unpublish!)
+      site.home_wave
+    end
+  end
+
+  def related_postings(posting)
+    posting.site.home_wave.postings.
+        type(Posting::Avatar).
+        published.
+        where(:created_at => (Time.now - RepublishWindow)...Time.now).
+        where(:user_id => posting.user[:id]).
+        where('`postings`.`id` <> ?', posting.id)
   end
 
 end

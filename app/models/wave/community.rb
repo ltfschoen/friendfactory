@@ -1,7 +1,6 @@
 class Wave::Community < Wave::Base
-  def add_posting_to_other_waves(posting)
-    add_posting_to_personal_wave(posting)
-    super
+  def publish_posting_to_waves(posting)
+    publish_posting_to_profile_wave(posting)
   end
 
   def technical_description

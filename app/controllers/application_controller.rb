@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  filter_parameter_logging \
-      :password,
-      :password_confirmation
-
   if Rails.env.development?
     [ 'ambassador' ].each do |dep|
       require_dependency(File.join(Rails.root, 'app', 'models', 'wave', dep))

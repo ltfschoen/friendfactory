@@ -12,10 +12,10 @@ class Wave::Conversation < Wave::Base
     postings.type(Posting::Message).scoped
   end
 
-  def add_posting_to_other_waves(posting)
-    if (posting.receiver_id != posting.sender_id) && (wave = posting.receiver.conversation_with(posting.sender, posting.site))
-      wave.postings << posting
-      wave.touch_and_publish!
+  def publish_posting_to_waves(posting)
+    if (posting.receiver_id != posting.sender_id) &&
+        (wave = posting.receiver.conversation_with(posting.sender, posting.site))
+      wave.touch_and_publish! && wave
     end
   end
 
