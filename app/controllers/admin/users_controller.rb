@@ -37,9 +37,7 @@ class Admin::UsersController < ApplicationController
   
   def update_user
     if user
-      if current_user.administrator? && role_name = params[:user].delete(:role)
-        user.role = role_name
-      end
+      user.role = params[:user].delete(:role)
       user.update_attributes(params[:user])
     end
   end

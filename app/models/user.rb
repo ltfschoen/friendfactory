@@ -129,9 +129,10 @@ class User < ActiveRecord::Base
   ### Role
 
   def role=(role_name)
-    if role = ::Roles.detect{ |r| r.name == role_name }
+    if role_name && role = ::Roles.detect{ |r| r.name == role_name }
       self[:role] = role.name
       self.profile[:type] = role.wave_type
+      self.persona[:type] = role.persona_type
     else
       nil
     end
