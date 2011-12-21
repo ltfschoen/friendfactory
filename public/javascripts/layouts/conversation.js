@@ -4,9 +4,9 @@ jQuery(window).load(function() {
 		$container.fadeTo('slow', 0.0, function () {
 			$container.animate({ width: 0 }, 'fast', function () {
 				$container.remove();
-				return true;
 			});
 		});
+		return true;
 	};
 
 	$('div.headshot').headshot({ pane: 'conversation', setFocus: false, beforeClose: callback });
