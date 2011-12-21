@@ -109,7 +109,8 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def wave
-    @wave ||= current_site.profiles.find_by_id(params[:id])
+    # Get Wave::Profile only, no subclasses
+    @wave ||= current_site.profiles.type(Wave::Profile).find_by_id(params[:id])
   end
 
   alias :profile :wave
