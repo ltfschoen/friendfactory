@@ -10,6 +10,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe Admin::AmbassadorsHelper do
+describe Admin::UsersHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end
