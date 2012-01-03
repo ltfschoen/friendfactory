@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def build_profile_wave
-    build_profile(:person => person, :sites => [ site ])
+    build_profile(:person => person, :sites => [ site ], :state => :published)
   end
   
   public
