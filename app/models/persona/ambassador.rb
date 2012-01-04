@@ -1,2 +1,2 @@
-class Persona::User
+class Persona::Ambassador < Persona::Person
 end

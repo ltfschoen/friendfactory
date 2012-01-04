@@ -22,13 +22,23 @@ class Wave::Profile < Wave::Base
       :last_name,
       :avatar,
       :avatar?,
-    :to => :person
+    :to => :persona
 
-  belongs_to :person,
+  belongs_to :persona,
       :class_name  => 'Persona::Base',
       :foreign_key => 'resource_id'
 
-  alias_attribute :person_id, :resource_id
+  alias_attribute :persona_id, :resource_id
+
+  before_save :update_persona
+
+  def update_persona
+    if user_id_changed?
+      self.persona_id = user.person.id
+    end
+  end
+
+  private :update_persona
 
   has_many :friendships, :class_name => 'Friendship::Base'
 

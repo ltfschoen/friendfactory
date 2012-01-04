@@ -1,2 +1,2 @@
-class Persona::Place
+class Persona::Place < Persona::Base
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220232854) do
+ActiveRecord::Schema.define(:version => 20120103071507) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -281,6 +281,13 @@ ActiveRecord::Schema.define(:version => 20111220232854) do
     t.integer "location_id"
   end
 
+  create_table "roles", :force => true do |t|
+    t.string "name",                 :null => false
+    t.string "display_name",         :null => false
+    t.string "default_profile_type", :null => false
+    t.string "default_persona_type", :null => false
+  end
+
   create_table "signal_categories", :force => true do |t|
     t.string  "name",         :null => false
     t.string  "display_name"
@@ -409,14 +416,13 @@ ActiveRecord::Schema.define(:version => 20111220232854) do
     t.integer  "site_id",                              :null => false
     t.integer  "account_id",                           :null => false
     t.integer  "score",              :default => 0
-    t.string   "role"
+    t.integer  "role_id"
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
-  add_index "users", ["role"], :name => "index_users_on_role"
   add_index "users", ["site_id", "email"], :name => "index_users_on_site_id_and_email", :unique => true
 
   create_table "users_deleted", :id => false, :force => true do |t|

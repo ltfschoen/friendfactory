@@ -48,15 +48,15 @@
   #badge
     = form_for @user, :url => welcome_signup_path do |f|
       %h2 Sign up to meet others just like you!
-      = f.fields_for :person do |person_form|
-        = person_form.text_field :handle, :placeholder => 'First Name'
+      = f.fields_for :persona do |persona_form|
+        = persona_form.text_field :handle, :placeholder => 'First Name'
       = f.text_field :email, :placeholder => 'Email Address'
       = f.password_field :password, :placeholder => 'Password'
       = f.existing_user_password_confirmation_field :password, :current_site => current_site
       = f.new_user_password_confirmation_field :password_confirmation, :current_site => current_site, :placeholder => 'Retype Password'
-      = f.fields_for :person do |person_form|
-        = person_form.text_field :age, :placeholder => 'Age'
-        = person_form.text_field :location, :placeholder => 'Location'
+      = f.fields_for :persona do |persona_form|
+        = persona_form.text_field :age, :placeholder => 'Age'
+        = persona_form.text_field :location, :placeholder => 'Location'
       - if current_site.invite_only?
         = f.text_field :invitation_code, :placeholder => 'Invite Code'
         = f.submit 'Signup', :class => 'narrow'

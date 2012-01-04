@@ -1,17 +1,7 @@
-require 'roles'
-
 class User < ActiveRecord::Base
 
   include ActiveRecord::Transitions
   include ActiveModel::Validations
-
-  ::Roles.each do |role|
-    define_method("#{role.name}?".to_sym) do
-      self[:role] == role.name
-    end
-  end
-
-  ###
 
   attr_accessor :invitation_code
 
@@ -24,41 +14,16 @@ class User < ActiveRecord::Base
       :invitation_code,
       :invitations_attributes
 
-  # TODO: delegate :handle, :age, :location, :to => :profile
-
-  validates_presence_of :site
-
-  validates_presence_of :invitation_code,
-      :on => :create,
-      :if => lambda { site.present? && site.invite_only? }
-
-  validate :invitation_code_offered?,
-      :on => :create,
-      :if => lambda { site.present? && site.invite_only? && invitation_code.present? }
-
-  def invitation_code_offered?
-    unless site.invitations.offered.find_by_code(invitation_code)
-      errors.add(:invitation_code, 'is not valid')
-    end
-  end
-
-  private :invitation_code_offered?
-
-  ###
-
-  after_initialize :set_email_address_from_invitation
-
-  def set_email_address_from_invitation
-    if new_record? && site && site.invite_only?
-      if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
-        self.email ||= invitation.email
-      end
-    end
-  end
-
-  private :set_email_address_from_invitation
-
-  ###
+  delegate \
+      :handle,
+      :age,
+      :dob,
+      :location,
+      :first_name,
+      :last_name,
+      :avatar,
+      :avatar?,
+    :to => :persona
 
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
@@ -68,51 +33,121 @@ class User < ActiveRecord::Base
   state_machine do
     state :enabled
     state :disabled
-    
+
     event :enable do
       transitions :to => :enabled, :from => [ :disabled ]
-    end    
+    end
     event :disable do
       transitions :to => :disabled, :from => [ :enabled ], :on_transition => :unsubscribe!
     end
   end
 
-  scope :online, lambda { { :conditions =>
-      [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] } }
+  scope :online, lambda {{ :conditions =>
+      [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] }}
 
   scope :featured, where('`users`.`score` > 0')
 
-  scope :role, lambda { |role_name| where(:role => role_name) }
+  scope :role, lambda { |role_name| joins(:role).where(:roles => { :name => role_name }) }
 
-  belongs_to :account
+
+  ### Site
 
   belongs_to :site
+  validates_presence_of :site
 
-  ### Persona and Profile
 
-  has_one :person, :class_name => 'Persona::Person'
+  ### Role && Persona
 
-  accepts_nested_attributes_for :person
+  belongs_to :role
+  validates_presence_of :role
 
-  alias :persona :person
+  has_one :persona, :class_name => 'Persona::Base'
+  validates_presence_of :persona
 
-  after_initialize :build_empty_person
+  accepts_nested_attributes_for :persona
 
-  has_one :profile, :class_name => 'Wave::Profile'
+  alias :person :persona
 
-  before_create :build_profile_wave
+  after_initialize :initialize_role_and_persona
+
+  before_update :update_persona_type
+
+  ::Role.all.each do |role|
+    define_method("#{role.name}?".to_sym) do
+      role_id == role.id
+    end
+  end
+
+  alias :admin? :administrator?
 
   private
 
-  def build_empty_person
-    build_person if new_record? && person.nil?
+  def initialize_role_and_persona
+    if new_record?
+      initialize_role
+      initialize_persona
+    end
   end
 
-  def build_profile_wave
-    build_profile(:person => person, :sites => [ site ], :state => :published)
+  def initialize_role
+    if role_id.nil?
+      self.role = Role.default
+    end
   end
-  
+
+  def initialize_persona
+    if persona.nil?
+      self.persona = role.default_persona_type.constantize.new
+    end
+  end
+
+  def update_persona_type
+    if role_id_changed?
+      self.persona[:type] = role.default_persona_type
+    end
+  end
+
+
+  ### Profile
+
   public
+
+  has_one :profile,
+      :class_name => 'Wave::Base',
+      :autosave   => true
+
+  before_create :build_profile
+  before_update :update_profile_type
+
+  private
+
+  def build_profile
+    self.profile = role.default_profile_type.constantize.new(:sites => [ site ], :state => :published)
+  end
+
+  def update_profile_type
+    if role_id_changed?
+      self.profile[:type] = role.default_profile_type
+    end
+  end
+
+
+  ### Account
+
+  public
+
+  belongs_to :account
+
+  before_create :attach_to_account
+
+  def attach_to_account
+    if account.nil?
+      self.account = Account.find_or_create_for_user(self)
+    end
+  end
+
+  private :attach_to_account
+
 
   ### Waves
 
@@ -128,48 +163,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  ###
-
-  before_create :attach_to_account
-
-  after_create  :accept_invitation_code
-
-  private
-
-  def attach_to_account
-    if account.nil?
-      self.account = Account.find_or_create_for_user(self)
-    end
-  end
-
-  def accept_invitation_code
-    if site.invite_only? &&
-        invitation = site.invitations.offered.find_by_code(invitation_code)
-      invitation.accept!
-    end
-  end
-
-  public
-
-  ### Roles
-
-  def role=(role_name)
-    if role_name && role = ::Roles.detect{ |r| r.name == role_name }
-      self[:role] = role.name
-      self.profile[:type] = role.wave_type
-      self.persona[:type] = role.persona_type
-    else
-      nil
-    end
-  end
-
-  before_save :save_profile_if_role_changed
-
-  def save_profile_if_role_changed
-    profile.save if self.role_changed?
-  end
-
-  private :save_profile_if_role_changed
 
   ### Conversations
 
@@ -202,11 +195,18 @@ class User < ActiveRecord::Base
     conversations.site(site).chatty.published
   end
 
+
   ### Postings
 
   has_many :postings, :class_name => 'Posting::Base'
 
-  has_many :invitations, :foreign_key => 'body', :primary_key => 'email', :class_name => 'Posting::Invitation' do
+
+  ### Invitations
+
+  has_many :invitations,
+      :foreign_key => 'body',
+      :primary_key => 'email',
+      :class_name  => 'Posting::Invitation' do
     def site(site)
       where(:resource_id => site.id)
     end
@@ -216,55 +216,17 @@ class User < ActiveRecord::Base
     raise attributes.inspect
   end
 
-  ### TODO: Delegate to Profile
+  validates_presence_of :invitation_code,
+      :on => :create,
+      :if => lambda { site.present? && site.invite_only? }
 
-  def handle(site = nil)
-    delegate_to_profile_warning('handle') unless site.nil?
-    person.handle
-  end
+  validate :invitation_code_offered?,
+      :on => :create,
+      :if => lambda { site.present? && site.invite_only? && invitation_code.present? }
 
-  def age(site = nil)
-    delegate_to_profile_warning('age') unless site.nil?
-    person.age
-  end
+  after_initialize :set_email_address_from_invitation
 
-  def location(site = nil)
-    delegate_to_profile_warning('location') unless site.nil?
-    person.location
-  end
-
-  def avatar(site = nil)
-    delegate_to_profile_warning('avatar') unless site.nil?
-    profile.avatar
-  end
-
-  def first_name(site = nil)
-    delegate_to_profile_warning('first_name') unless site.nil?
-    person.first_name
-  end
-
-  def last_name(site = nil)
-    delegate_to_profile_warning('last_name') unless site.nil?
-    person.last_name
-  end
-
-  def full_name(site = nil)
-    delegate_to_profile_warning('full_name') unless site.nil?
-    person.full_name
-  end
-
-  def gender(site = nil)
-    delegate_to_profile_warning('gender') unless site.nil?
-    person.gender
-  end
-
-  def delegate_to_profile_warning(attribute)
-    Rails.logger.warn("User##{attribute} called with site")
-  end
-
-  private :delegate_to_profile_warning
-
-  ### Invitations
+  after_create :accept_invitation_code
 
   def find_or_create_invitation_wave_for_site(site)
     invitation_wave_for_site(site) || create_invitation_wave_for_site(site)
@@ -278,32 +240,56 @@ class User < ActiveRecord::Base
     waves.site(site).type(Wave::Invitation).published.limit(1).try(:first)
   end
 
+  private
+
+  def invitation_code_offered?
+    unless site.invitations.offered.find_by_code(invitation_code)
+      errors.add(:invitation_code, 'is not valid')
+    end
+  end
+
+  def set_email_address_from_invitation
+    if new_record? && site && site.invite_only?
+      if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
+        self.email ||= invitation.email
+      end
+    end
+  end
+
+  def accept_invitation_code
+    if site.invite_only? &&
+        invitation = site.invitations.offered.find_by_code(invitation_code)
+      invitation.accept!
+    end
+  end
+
   def create_invitation_wave_for_site(site)
     wave = Wave::Invitation.new.tap { |wave| wave.user = self }
     site.waves << wave && wave.publish!
     wave.reload
   end
 
-  private :create_invitation_wave_for_site
 
   ###
-  
+
+  public
+
   def self.online?(user)
     online.include?(user)
   end
-  
+
   def online?
     User.online?(self)
   end
-  
+
   def existing_record?
     !new_record?
   end
-  
+
   def to_s
     email
   end
-  
+
   def reset_password!
     reset_perishable_token!
   end
@@ -315,8 +301,6 @@ class User < ActiveRecord::Base
   def unsubscribe!
     update_attribute(:emailable, false)
   end
-
-  alias :admin? :administrator?
 
   def uid
     "uid-#{self.id}"

@@ -16,8 +16,6 @@ class Persona::Person < Persona::Base
   validates_presence_of :handle
   validates_presence_of :age, :location, :on => :create
 
-  belongs_to :user
-
   has_one :profile,
       :class_name  => 'Wave::Profile',
       :foreign_key => 'resource_id'

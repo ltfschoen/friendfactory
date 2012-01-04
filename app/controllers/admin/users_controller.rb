@@ -1,7 +1,8 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :require_admin
-  helper_method :site, :user, :users, :page_title
+  helper_method :site, :user, :users
+  helper_method :page_title
 
   layout 'admin/site'
 
@@ -12,8 +13,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    user.role_id = params[:user].delete(:role_id) || user.role_id
     respond_to do |format|
-      format.json { render :json => update_user }
+      format.json { render :json => user.update_attributes(params[:user]) }
     end
   end
 
@@ -24,7 +26,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def user
-    @user ||= site.users.find(params[:id]) if site
+    @user ||= site.users.find(params[:id])
   end
 
   def users
@@ -33,13 +35,6 @@ class Admin::UsersController < ApplicationController
 
   def page_title
     "#{site.display_name} - Users"
-  end
-  
-  def update_user
-    if user
-      user.role = params[:user].delete(:role)
-      user.update_attributes(params[:user])
-    end
   end
 
 end

@@ -1,5 +1,3 @@
-require 'roles'
-
 class Site < ActiveRecord::Base
 
   TemplateSiteName    = 'friskyfactory'
