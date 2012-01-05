@@ -16,12 +16,6 @@ class Site < ActiveRecord::Base
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
 
-  has_and_belongs_to_many :profiles,
-      :class_name              => 'Wave::Profile',
-      :join_table              => 'sites_waves',
-      :foreign_key             => 'site_id',
-      :association_foreign_key => 'wave_id'
-
   belongs_to :home_wave,
       :class_name  => 'Wave::Base',
       :foreign_key => 'home_wave_id'

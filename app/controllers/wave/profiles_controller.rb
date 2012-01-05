@@ -73,10 +73,13 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def pokes
-    if @profile = Wave::Profile.scoped_by_id(params[:id]).preload(:resource).first
-      @avatars = @profile.inverse_friends.type(Friendship::Poke).order('`friendships`.`created_at` desc').limit(9).
-          preload(:active_avatars).
-          map{ |p| p.active_avatars.first || EmptyAvatar.new(self) }
+    if @profile = Wave::Profile.find(params[:id])
+      @avatars = @profile.inverse_friends.
+          type(Friendship::Poke).
+          includes(:persona => :avatar).
+          order('`friendships`.`created_at` desc').
+          limit(9).
+          map { |p| p.persona.avatar }
     end
     respond_to do |format|
       format.html { render :layout => false }
@@ -94,7 +97,8 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def find_all_profiles
-    current_site.profiles.
+    current_site.waves.
+        type(Wave::Profile).
         where(:state => :published).
         order('updated_at desc').
         paginate(:page => params[:page], :per_page => @@per_page)
@@ -109,8 +113,8 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def wave
-    # Get Wave::Profile only, no subclasses
-    @wave ||= current_site.profiles.type(Wave::Profile).find_by_id(params[:id])
+    # TODO Rescue from find exception
+    @wave ||= current_site.waves.type(Wave::Profile).find(params[:id])
   end
 
   alias :profile :wave
@@ -120,7 +124,7 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def person
-    wave.person
+    wave.persona
   end
 
 end
