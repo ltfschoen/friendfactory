@@ -34,7 +34,7 @@ module Posting::PostingsHelper
           [ user_or_avatar.user, user_or_avatar ]
 
       if user.present? && avatar.present?
-        opts.reverse_merge!(:alt => user.handle(current_site))
+        opts.reverse_merge!(:alt => user.handle)
         online = 'online' if (user.online? && (opts[:online_badge] == true))
         klass = (klass << online).compact * ' '
         
@@ -43,7 +43,7 @@ module Posting::PostingsHelper
             :class => klass,
             :site  => opts[:site],
             :id    => opts[:id],
-            :title => user.handle(current_site))
+            :title => user.handle)
         
         if opts[:link_to_profile]
           return link_to(image_tag, wave_profile_path(user.profile(current_site)), :class => 'profile')

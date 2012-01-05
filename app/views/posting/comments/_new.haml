@@ -7,6 +7,6 @@
       .foot
         %span.reply_to
           - if nested
-            In response to #{posting.user.handle(current_site)}
+            In response to #{posting.user.handle}
         = f.submit 'OK'
         = f.cancel 'Cancel'

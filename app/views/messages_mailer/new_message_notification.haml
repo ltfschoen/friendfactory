@@ -5,9 +5,9 @@
       h1 { font-size: 1em; }
   %body
     %p
-      = "Hey #{@message.receiver.handle(@site)},"
+      = "Hey #{@message.receiver.handle},"
     %p
-      = "You have a new message from #{@message.sender.handle(@site)}."
+      = "You have a new message from #{@message.sender.handle}."
       To get your message, click the following link:
     %p
       = inbox_url(:host => @host) # wave_conversation_url(@conversation)

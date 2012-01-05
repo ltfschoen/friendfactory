@@ -33,7 +33,7 @@ class WelcomeController < ApplicationController
   def login
     respond_to do |format|
       if user_session.save
-        flash[:notice] = "Welcome back, #{user_session.record.handle(current_site)}!"
+        flash[:notice] = "Welcome back, #{user_session.record.handle}!"
         format.html { redirect_back_or_default(root_path) }
       else
         @user = User.new({ :invitation_code => params[:invitation_code] })

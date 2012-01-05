@@ -2,7 +2,7 @@
   .wave[@wave]{ :'data-id' => @wave.id }
     .header
       = avatar_image_tag(@wave.recipient, :style => :thimble, :class => 'recipient', :link_to_profile => false)
-      .recipient= @wave.recipient.handle(current_site)
+      .recipient= @wave.recipient.handle
       = avatar_image_tag(@wave.user, :style => :thimble)
     - cache("#{@wave.cache_key}-#{@wave.last_read_at.nil? || (@wave.updated_at > @wave.last_read_at) ? 'U' : 'R'}") do
       .thread

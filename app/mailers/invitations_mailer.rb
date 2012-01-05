@@ -7,7 +7,7 @@ class InvitationsMailer < ApplicationMailer
   def new_invitation_mail(invitation)
     @invitation = invitation
     @host = host_for_site(@invitation.site)
-    subject = "Invitation from #{@invitation.sponsor.handle(@invitation.site)} to join #{@invitation.site.display_name}!"
+    subject = "Invitation from #{@invitation.sponsor.handle} to join #{@invitation.site.display_name}!"
     mail :from => @invitation.site.mailer, :to => email_for_environment(@invitation.email), :subject => subject
   end
   
