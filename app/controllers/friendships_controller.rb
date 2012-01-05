@@ -43,7 +43,7 @@ class FriendshipsController < ApplicationController
     respond_to do |format|
       if current_site.waves.type(Wave::Profile).exists?(params[:profile_id]) &&
         poke = current_profile.toggle_poke(params[:profile_id])           
-        FriendshipsMailer.new_poke_mail(current_site, poke).deliver if poke.receiver.emailable?
+        FriendshipsMailer.new_poke_mail(poke, current_site).deliver if poke.receiver.emailable?
       end
       format.json { render :json => { :poked => poke.present? }}
     end
