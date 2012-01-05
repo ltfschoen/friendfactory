@@ -11,23 +11,30 @@
 	color: white;
 }
 
-#sidebar .block.userspace a:hover,
-#sidebar .block.navspace a:hover {
-	margin: 0;
+#sidebar .block.userspace span.username {
+	width: auto;
 }
 
 #sidebar .block.userspace span.username a {
 	margin: 0;
 	font-size: inherit;
 	font-style: inherit;
+	display: block;
+}
+
+#sidebar .block.userspace span.username a[href='/profile'] {
+	font-size: 12px;
+	font-style: italic;
+	margin-top: 4px;
+}
+
+#sidebar .block.navspace ul li {
+	line-height: 20px;
 }
 
 #sidebar .block.navspace ul li.messages:before {
 	background-position: 0 -25px;
-}
-
-#sidebar .block.userspace a:hover {
-	margin-left: 0;
+	margin-top: -2px;
 }
 
 #sidebar .block.navspace ul li:hover span {
@@ -88,6 +95,12 @@
 
 .ie #sidebar .portrait {
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#333333', Direction=155, Strength=3);
+}
+
+#sidebar .block.ambassador a {
+	display: block;
+	float: left;
+	margin: 8px 0 0 10px;
 }
 
 #sidebar ul.block.ambassadors li {

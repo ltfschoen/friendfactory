@@ -1,8 +1,8 @@
-- content_for :rollcall do
-  = render :partial => 'wave/profiles/headshot'
+- content_for :sidebar_headshot do
+  = render :partial => 'persona/base', :locals => { :persona => persona }
 #floating
 #frame
-  %h1 #{profile.handle}'s Wave
+  %h1 #{wave.subject}
   = render :partial => 'reaction-template'
   = render :partial => 'layouts/shared/nav'
   - postings.each do |posting|

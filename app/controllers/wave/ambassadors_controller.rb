@@ -2,8 +2,10 @@ require 'resolver'
 
 class Wave::AmbassadorsController < ApplicationController
 
+  extend ActiveSupport::Memoizable
+
   before_filter :require_user
-  helper_method :person, :wave, :profile, :postings
+  helper_method :wave, :postings, :persona
 
   layout 'wave/profile'
 
@@ -14,31 +16,29 @@ class Wave::AmbassadorsController < ApplicationController
   def show
     @@per_page = 50
     respond_to do |format|
-      format.html do
-        render
-      end
+      format.html { render }
     end
   end
 
   private
 
   def wave
-    @wave ||= current_site.waves.type(Wave::Ambassador).find_by_id(params[:id])
+    # TODO Rescue from find exception
+    current_site.waves.type(Wave::Ambassador).find(params[:id])
   end
 
-  alias :profile :wave
+  memoize :wave
 
   def postings
-    if wave
-      @postings ||= wave.postings.
-          published.
-          order('`postings`.`updated_at` DESC').
-          paginate(:page => params[:page], :per_page => @@per_page)
-    end
+    wave.postings.published.order('`postings`.`updated_at` DESC').paginate(:page => params[:page], :per_page => @@per_page)
   end
 
-  def person
-    @person ||= wave.person if wave
+  memoize :postings
+
+  def persona
+    wave.persona
   end
+
+  memoize :persona
 
 end

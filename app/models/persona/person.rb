@@ -1,32 +1,16 @@
-require 'empty_avatar'
-
 class Persona::Person < Persona::Base
 
   attr_accessible \
-      :handle,
       :first_name,
       :last_name,
       :description,
       :age,
       :location,
       :dob,
-      :avatar_id,
       :biometric_values_attributes
 
   validates_presence_of :handle
   validates_presence_of :age, :location, :on => :create
-
-  has_one :profile,
-      :class_name  => 'Wave::Profile',
-      :foreign_key => 'resource_id'
-
-  belongs_to :avatar,
-      :class_name => 'Posting::Avatar',
-      :conditions => { :state => :published }
-
-  def avatar?
-    avatar.present?
-  end
 
   has_many :biometric_person_values,
       :class_name  => 'Biometric::PersonValue',
@@ -53,10 +37,6 @@ class Persona::Person < Persona::Base
     end
   end
 
-  def handle
-    self[:handle].strip if self[:handle].present?
-  end
-
   def first_name
     self[:first_name].present? ? self[:first_name].strip.titleize : handle
   end
@@ -68,11 +48,5 @@ class Persona::Person < Persona::Base
   def full_name
     [ first_name, last_name ].compact.join(' ')
   end
-
-  def avatar_with_silhouette
-    avatar_without_silhouette || EmptyAvatar.new(self)
-  end
-
-  alias_method_chain :avatar, :silhouette
 
 end
