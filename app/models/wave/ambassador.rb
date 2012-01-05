@@ -1,7 +1,11 @@
 class Wave::Ambassador < Wave::Profile
 
+  def subject
+    persona.handle
+  end
+
   def technical_description
-    [ super, slug, person.handle ].compact * ' - '
+    [ super, persona.handle ].compact * '/'
   end
 
   private

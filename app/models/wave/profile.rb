@@ -24,6 +24,8 @@ class Wave::Profile < Wave::Base
       :avatar?,
     :to => :persona
 
+  alias :subject :handle
+
   belongs_to :persona,
       :class_name  => 'Persona::Base',
       :foreign_key => 'resource_id'
@@ -42,15 +44,21 @@ class Wave::Profile < Wave::Base
 
   has_many :friendships, :class_name => 'Friendship::Base'
 
-  has_many :friends, :through => :friendships, :class_name => 'Wave::Profile' do
+  has_many :friends,
+      :through    => :friendships,
+      :class_name => 'Wave::Profile' do
     def type(type)
       where(:friendships => { :type => type })
     end
   end
 
-  has_many :inverse_friendships, :class_name => 'Friendship::Base', :foreign_key => '`friend_id`'
+  has_many :inverse_friendships,
+      :class_name  => 'Friendship::Base',
+      :foreign_key => '`friend_id`'
 
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :profile do
+  has_many :inverse_friends,
+      :through => :inverse_friendships,
+      :source  => :profile do
     def type(type)
       where(:friendships => { :type => type })
     end
