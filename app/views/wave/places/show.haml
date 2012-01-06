@@ -1,11 +1,11 @@
 - content_for :sidebar_headshot do
-  = render_headshot(persona)
+  = render_headshot(persona, :wave => wave)
 #floating
 #frame
-  %h1 #{wave.subject}
-  = render :partial => 'reaction-template'
+  %h1 #{persona.handle}
+  = render :partial => 'layouts/shared/reaction-template'
   = render :partial => 'layouts/shared/nav'
   - postings.each do |posting|
-    = render_ambassador_posting(posting)
+    = render_posting(posting)
   = will_paginate postings, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
   = render :partial => 'layouts/shared/unpublish_overlay'

@@ -20,6 +20,7 @@ Friskyfactory::Application.routes.draw do
         get :invitations
         get :conversation
         get :pokes
+        get :location
       end
       get 'conversation' => 'conversations#show'
     end
@@ -36,6 +37,8 @@ Friskyfactory::Application.routes.draw do
     resources :albums, :only => [ :index, :show, :new, :create ] # do
       # resources :photos, :only => [ :show ], :controller => 'albums'
     # end
+    
+    resources :places, :only => [ :show ]
   end
 
   scope :module => :wave do

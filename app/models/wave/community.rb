@@ -13,11 +13,15 @@ class Wave::Community < Wave::Base
   end
 
   def technical_description
-    [ super, slug ].compact * ' - '
+    [ super, slug ].compact.join(' - ')
   end
 
   def avatar
     @avatar ||= WaveIconAvatar.new
+  end
+  
+  def subject
+    'Community'
   end
 
 end

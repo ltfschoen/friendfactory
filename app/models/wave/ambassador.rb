@@ -5,7 +5,7 @@ class Wave::Ambassador < Wave::Profile
   end
 
   def technical_description
-    [ super, persona.handle ].compact * '/'
+    "Ambassador #{persona.handle}"
   end
 
   private

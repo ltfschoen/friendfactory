@@ -85,6 +85,12 @@ class Wave::ProfilesController < ApplicationController
       format.html { render :layout => false }
     end
   end
+  
+  def location
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
 
   private
 

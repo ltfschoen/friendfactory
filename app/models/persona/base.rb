@@ -10,6 +10,7 @@ class Persona::Base < ActiveRecord::Base
 
   belongs_to :user
 
+  # TODO Remove
   has_one :profile,
       :class_name  => 'Wave::Profile',
       :foreign_key => 'resource_id'

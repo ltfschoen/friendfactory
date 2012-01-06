@@ -11,7 +11,7 @@ class CreateRoles < ActiveRecord::Migration
     create_role 'user', 'User', 'Wave::Profile', 'Persona::Person'
     create_role 'administrator', 'Administrator', 'Wave::Profile', 'Persona::Person'
     create_role 'ambassador', 'Ambassador', 'Wave::Ambassador', 'Persona::Ambassador'
-    create_role 'place', 'Place', 'Wave::Community', 'Persona::Place'
+    create_role 'place', 'Place', 'Wave::Place', 'Persona::Place'
   end
 
   def self.down

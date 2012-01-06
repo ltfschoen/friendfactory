@@ -237,6 +237,11 @@
 	background-position: -362px -2px;
 }
 
+.headshot a.location {
+	width: 24px;
+	background-position: -220px -1px;
+}
+
 /* Pane */
 
 .headshot .pane {

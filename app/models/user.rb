@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
 
   scope :featured, where('`users`.`score` > 0')
 
-  scope :role, lambda { |role_name| joins(:role).where(:roles => { :name => role_name }) }
+  scope :role, lambda { |*role_name| joins(:role).where(:roles => { :name => role_name }) }
 
 
   ### Site

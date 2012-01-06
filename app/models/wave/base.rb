@@ -8,6 +8,10 @@ class Wave::Base < ActiveRecord::Base
 
   alias_attribute :subject, :topic
   alias_attribute :body, :description
+  
+  def technical_description
+    self.class.name.demodulize
+  end
 
   state_machine do
     state :published
@@ -22,8 +26,12 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
-  scope :site, lambda { |site| joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').where('`sites_waves`.`site_id` = ?', site.id) }
-  scope :type, lambda { |*types| where('`waves`.`type` in (?)', types.map(&:to_s)) }
+  scope :site, lambda { |site|
+    joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
+    where('`sites_waves`.`site_id` = ?', site.id)
+  }
+  
+  scope :type, lambda { |*types| where('`waves`.`type` in (?)', types.map(&:to_s)) }  
   scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
 
@@ -65,10 +73,6 @@ class Wave::Base < ActiveRecord::Base
   def set_tag_list_on!(site)
     set_tag_list_on(site)
     save!
-  end
-
-  def technical_description
-    self.class.name
   end
 
   def permitted?(user_or_user_id)

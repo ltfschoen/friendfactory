@@ -1,19 +1,18 @@
-- profile = persona.profile
-- link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || profile.id
+- link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || wave.id
 .headshot-container
-  .headshot[ profile ]{ :class => poke_class(profile.id) }
+  .headshot[ wave ]{ :class => poke_class(wave.id) }
     .face-container
       .front.face
-        = headshot_image_tag(profile)
+        = headshot_image_tag(wave)
         = link_to_close(link_to_close_wave_id)
         %span.handle
           PLACE
-          = profile.handle
+          = persona.handle
         %ul.buddy-bar.primary
-          %li= link_to 'Location', photos_wave_profile_path(profile), :class => 'flip icon photos', :'data-pane-name' => 'photos'
+          %li= link_to 'Location', location_wave_profile_path(wave), :class => 'flip icon location', :'data-pane-name' => 'location'
     .face-container
       .back.face
         .content
           = link_to_close(link_to_close_wave_id)
           .pane
-          .portrait= link_to thimble_image_tag(profile, :size => '18x18'), wave_profile_path(profile), :class => 'flip'
+          .portrait= link_to thimble_image_tag(wave, :size => '18x18'), wave_place_path(wave), :class => 'flip'

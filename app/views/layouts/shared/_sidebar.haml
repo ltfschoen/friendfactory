@@ -27,9 +27,6 @@
 
   .block.navspace
     %ul
-      - if false
-        %li.rollcall
-          = link_to 'Roll Call', wave_rollcall_path(params[:id] || current_site.home_wave, :page => params[:page])
       %li.messages
         = link_to_unread_messages
         = link_to 'Inbox', inbox_path

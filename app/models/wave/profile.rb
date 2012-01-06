@@ -36,7 +36,7 @@ class Wave::Profile < Wave::Base
 
   def update_persona
     if user_id_changed?
-      self.persona_id = user.person.id
+      self.persona_id = user.persona.id
     end
   end
 

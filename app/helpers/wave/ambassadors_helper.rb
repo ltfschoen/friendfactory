@@ -1,5 +1,5 @@
 module Wave::AmbassadorsHelper
-  def render_ambassadors_posting(posting)
+  def render_ambassador_posting(posting)
     render_posting(posting)
   end
 end
