@@ -2,7 +2,11 @@ class Wave::CommunitiesController < ApplicationController
 
   before_filter :require_user
   before_filter :redirect_to_home_wave, :only => [ :show ]
-  helper_method :wave, :postings, :profiles, :profiles_on_wave, :tags
+
+  helper_method :wave, :postings, :profiles, :tags
+
+  helper_method :personages_on_wave
+  helper_method :page_title
 
   layout 'wave/community'
 
@@ -38,14 +42,17 @@ class Wave::CommunitiesController < ApplicationController
     @profiles ||= profiles_with_tag.paginate(:page => params[:page], :per_page => @@per_page)
   end
 
+  # TODO Fix
   def tags
     @tags ||= profiles_on_wave.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
   end
 
-  def profiles_on_wave
-    @profiles_on_wave ||= begin
-      user_ids = wave.postings.published.map(&:user_id).uniq
-      current_site.waves.type(Wave::Profile).where(:user_id => user_ids).scoped
+  def personages_on_wave(opts)
+    @personages_on_wave ||= begin
+      personage_ids = Posting::Base.select('distinct `postings`.`user_id`').joins(:waves).where(:waves => { :id => wave.id }).map(&:user_id)
+      relation = Personage.includes(:persona).joins(:persona).where(:id => personage_ids).where('`personas`.`avatar_id` is not null')
+      relation.limit(opts[:limit]) if opts[:limit]
+      relation.all.reject{ |p| p.avatar.silhouette? }.uniq
     end
   end
 
@@ -67,6 +74,10 @@ class Wave::CommunitiesController < ApplicationController
     if home_wave[:type] != 'Wave::Community'
       redirect_to url_for(home_wave)
     end
+  end
+
+  def page_title
+    "#{current_site.display_name} - Community"
   end
 
 end

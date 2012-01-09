@@ -6,14 +6,7 @@ class Persona::Base < ActiveRecord::Base
 
   attr_accessible \
       :handle,
-      :avatar_id
-
-  belongs_to :user
-
-  # TODO Remove
-  has_one :profile,
-      :class_name  => 'Wave::Profile',
-      :foreign_key => 'resource_id'
+      :avatar
 
   belongs_to :avatar,
       :class_name => 'Posting::Avatar',

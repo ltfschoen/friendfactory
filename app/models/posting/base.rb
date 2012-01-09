@@ -35,7 +35,7 @@ class Posting::Base < ActiveRecord::Base
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
   scope :order_by_updated_at_desc, order('`postings`.`updated_at` DESC')
 
-  belongs_to :user
+  belongs_to :user, :class_name => 'Personage'
 
   has_many :children, :class_name  => 'Posting::Base', :foreign_key => 'parent_id'
   has_many :publications, :as => :resource

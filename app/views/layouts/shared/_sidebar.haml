@@ -9,10 +9,13 @@
   - if current_user
     .block.userspace
       .portrait
-        = thimble_link_to_profile(current_profile, profile_path)
+        = thimble_link_to_profile(current_user, profile_path)
       %span.username
-        - title = Rails.env.development? ? "#{current_user.id}:#{current_user.person.id}:#{current_profile.id}" : nil
-        = link_to current_profile.subject, url_for(current_profile), :title => title
+        - personages = current_user.personages
+        - if personages.length == 1
+          = link_to current_user.handle, url_for(current_profile)
+        - else
+          = select_tag personages
         = link_to 'Edit', profile_path
 
   .block.ambassador

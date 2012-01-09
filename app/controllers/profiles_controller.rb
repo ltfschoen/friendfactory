@@ -33,11 +33,8 @@ class ProfilesController < ApplicationController
 
   def avatar
     transaction do
-      @posting = Posting::Avatar.new(params[:posting_avatar]) do |posting|
-        posting.user = current_user
-        posting.site = current_site
-        posting.persona = current_persona
-      end
+      @posting = Posting::Avatar.new(params[:posting_avatar]) { |posting| posting.user = current_user }
+      current_user.update_attribute(:avatar, @posting)
       current_profile.postings << @posting
       @posting.publish!
     end

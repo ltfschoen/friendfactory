@@ -1,10 +1,13 @@
 class Wave::ProfilesController < ApplicationController
 
+  extend ActiveSupport::Memoizable
+
   before_filter :require_user
 
-  helper_method :wave, :postings, :profile, :person
+  helper_method :wave, :postings, :profile
+  helper_method :page_title
 
-  layout 'wave/profile'
+  layout 'wave/community'
 
   cattr_reader :per_page
 
@@ -118,19 +121,23 @@ class Wave::ProfilesController < ApplicationController
     tag.downcase.gsub(/-/, ' ')
   end
 
+  ###
+
   def wave
     # TODO Rescue from find exception
-    @wave ||= current_site.waves.type(Wave::Profile).find(params[:id])
+    current_site.waves.type(Wave::Profile).find(params[:id])
   end
 
   alias :profile :wave
 
   def postings
-    @postings ||= wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+    wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
   end
 
-  def person
-    wave.persona
+  def page_title
+    "#{current_site.display_name} - #{wave.persona.handle}"
   end
+
+  memoize :wave, :postings, :page_title
 
 end

@@ -8,10 +8,14 @@ class CreateRoles < ActiveRecord::Migration
     end
 
     Role.reset_column_information
-    create_role 'user', 'User', 'Wave::Profile', 'Persona::Person'
-    create_role 'administrator', 'Administrator', 'Wave::Profile', 'Persona::Person'
-    create_role 'ambassador', 'Ambassador', 'Wave::Ambassador', 'Persona::Ambassador'
-    create_role 'place', 'Place', 'Wave::Place', 'Persona::Place'
+
+    Role.transaction do
+      create_role 'user', 'User', 'Wave::Profile', 'Persona::Person'
+      create_role 'administrator', 'Administrator', 'Wave::Profile', 'Persona::Person'
+      create_role 'ambassador', 'Ambassador', 'Wave::Ambassador', 'Persona::Ambassador'
+      create_role 'community', 'Community', 'Wave::Community', 'Persona::Community'
+      create_role 'place', 'Place', 'Wave::Place', 'Persona::Place'    
+    end
   end
 
   def self.down

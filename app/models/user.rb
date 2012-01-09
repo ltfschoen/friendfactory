@@ -14,17 +14,6 @@ class User < ActiveRecord::Base
       :invitation_code,
       :invitations_attributes
 
-  delegate \
-      :handle,
-      :age,
-      :dob,
-      :location,
-      :first_name,
-      :last_name,
-      :avatar,
-      :avatar?,
-    :to => :persona
-
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::InactivityTimeout
     config.validations_scope = :site_id
@@ -61,12 +50,13 @@ class User < ActiveRecord::Base
   belongs_to :role
   validates_presence_of :role
 
-  has_one :persona, :class_name => 'Persona::Base'
-  validates_presence_of :persona
+  has_many :personages
 
-  accepts_nested_attributes_for :persona
+  accepts_nested_attributes_for :personages
 
-  alias :person :persona
+  def default_personage
+    personages.default.first
+  end
 
   after_initialize :initialize_role_and_persona
 
@@ -147,127 +137,6 @@ class User < ActiveRecord::Base
   end
 
   private :attach_to_account
-
-
-  ### Waves
-
-  has_many :bookmarks
-
-  has_many :waves, :class_name => 'Wave::Base' do
-    def type(*types)
-      where('type in (?)', types.map(&:to_s))
-    end
-    def site(site)
-      joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
-      where(:sites_waves => { :site_id => site.id })
-    end
-  end
-
-
-  ### Conversations
-
-  has_many :conversations, :class_name => 'Wave::Conversation' do
-    def with(receiver, site)
-      if receiver.present? && site.present?
-        site(site).where('resource_id = ? and resource_type = ?', receiver.id, 'User').order('updated_at desc').limit(1).first
-      end
-    end
-  end
-
-  # Syntatic sugar <user1>.conversation.with.<user2>
-  alias :conversation :conversations
-
-  def conversation_with(receiver, current_site)
-    conversation.with(receiver, current_site) || create_conversation_with(receiver, current_site)
-  end
-
-  def create_conversation_with(receiver, site)
-    if receiver.present? && site.present?
-      wave = conversations.build
-      wave.resource = receiver
-      site.waves << wave
-      wave.publish!
-      wave
-    end
-  end
-
-  def inbox(site)
-    conversations.site(site).chatty.published
-  end
-
-
-  ### Postings
-
-  has_many :postings, :class_name => 'Posting::Base'
-
-
-  ### Invitations
-
-  has_many :invitations,
-      :foreign_key => 'body',
-      :primary_key => 'email',
-      :class_name  => 'Posting::Invitation' do
-    def site(site)
-      where(:resource_id => site.id)
-    end
-  end
-
-  def invitations_attributes=(attributes)
-    raise attributes.inspect
-  end
-
-  validates_presence_of :invitation_code,
-      :on => :create,
-      :if => lambda { site.present? && site.invite_only? }
-
-  validate :invitation_code_offered?,
-      :on => :create,
-      :if => lambda { site.present? && site.invite_only? && invitation_code.present? }
-
-  after_initialize :set_email_address_from_invitation
-
-  after_create :accept_invitation_code
-
-  def find_or_create_invitation_wave_for_site(site)
-    invitation_wave_for_site(site) || create_invitation_wave_for_site(site)
-  end
-
-  def find_invitation_wave_by_id(id)
-    waves.type(Wave::Invitation).published.find_by_id(id)
-  end
-
-  def invitation_wave_for_site(site)
-    waves.site(site).type(Wave::Invitation).published.limit(1).try(:first)
-  end
-
-  private
-
-  def invitation_code_offered?
-    unless site.invitations.offered.find_by_code(invitation_code)
-      errors.add(:invitation_code, 'is not valid')
-    end
-  end
-
-  def set_email_address_from_invitation
-    if new_record? && site && site.invite_only?
-      if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
-        self.email ||= invitation.email
-      end
-    end
-  end
-
-  def accept_invitation_code
-    if site.invite_only? &&
-        invitation = site.invitations.offered.find_by_code(invitation_code)
-      invitation.accept!
-    end
-  end
-
-  def create_invitation_wave_for_site(site)
-    wave = Wave::Invitation.new.tap { |wave| wave.user = self }
-    site.waves << wave && wave.publish!
-    wave.reload
-  end
 
 
   ###

@@ -7,40 +7,13 @@ class Wave::Profile < Wave::Base
   RepublishWindow = 6.hours
 
   delegate \
-      :email,
-      :emailable?,
-      :admin,
-      :admin?,
-    :to => :user
-
-  delegate \
       :handle,
+      :first_name,
+      :last_name,
       :age,
       :dob,
       :location,
-      :first_name,
-      :last_name,
-      :avatar,
-      :avatar?,
-    :to => :persona
-
-  alias :subject :handle
-
-  belongs_to :persona,
-      :class_name  => 'Persona::Base',
-      :foreign_key => 'resource_id'
-
-  alias_attribute :persona_id, :resource_id
-
-  before_save :update_persona
-
-  def update_persona
-    if user_id_changed?
-      self.persona_id = user.persona.id
-    end
-  end
-
-  private :update_persona
+    :to => :user
 
   has_many :friendships, :class_name => 'Friendship::Base'
 

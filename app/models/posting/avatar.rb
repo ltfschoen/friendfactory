@@ -18,10 +18,6 @@ class Posting::Avatar < Posting::Base
   before_create :set_dimensions
   before_create :randomize_file_name
 
-  has_one :persona,
-      :class_name  => 'Persona::Base',
-      :foreign_key => 'avatar_id'
-
   delegate :profile, :to => :user
 
   def url(style = nil)

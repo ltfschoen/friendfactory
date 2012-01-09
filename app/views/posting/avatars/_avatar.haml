@@ -1,11 +1,11 @@
-- profile = avatar.profile
+-# profile = avatar.profile
 .post_frame
   .posting.post.signal[avatar]{uid(avatar[:user_id])}
     = link_to_unpublish(avatar)
-    .portrait= thimble_link_to_profile(profile)
+    .portrait= thimble_link_to_profile(avatar.user)
     .clear
       .cell
-        = link_to_profile(profile)
+        = link_to_profile(avatar.user)
         = link_to 'posted a new profile', avatar_comments_posting_path(avatar), :class => 'comments', :remote => true
       %span.date Uploaded #{distance_of_time_in_words_to_now(avatar.updated_at)} ago
       = link_to_comments(avatar.comments.published.count, avatar_comments_posting_path(avatar))

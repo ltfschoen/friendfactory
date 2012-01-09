@@ -48,14 +48,6 @@ module ApplicationHelper
     css_class = [ 'spinner', 'hidden', opts[:class] ].compact * ' '
     image_tag('friskyfactory/ajax-loader.gif', :size => size, :class => css_class, :id => opts[:id], :site => false)
   end
-  
-  def link_to_profile(profile, opts = {})
-    profile = profile.profile(current_site) if profile.is_a?(User)
-    if profile.present?
-      name = opts[:label] || profile.handle
-      link_to(name, url_for(profile), :class => 'profile username')
-    end
-  end
 
   def link_to_bio(opts = {})
     label = opts[:label] || 'Bio'

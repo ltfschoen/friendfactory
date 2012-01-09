@@ -13,13 +13,15 @@ class CreatePersonas < ActiveRecord::Migration
 
     say_with_time 'initializing avatar_id' do
       Persona::Person.transaction do
-        Persona::Person.includes(:profile).all.each do |person|
-          if avatar = person.profile.postings.
-              where(:type => Posting::Avatar, :parent_id => nil, :active => true, :state => :published).
-              order('`postings`.`created_at` DESC').
-              limit(1).first
-            person.avatar_id = avatar.id
-            person.save(false)
+        Persona::Person.all.each do |person|
+          if profile = Wave::Profile.find_by_resource_id(person.id)
+            if avatar = profile.postings.
+                where(:type => Posting::Avatar, :parent_id => nil, :active => true, :state => :published).
+                order('`postings`.`created_at` DESC').
+                limit(1).first
+              person.avatar_id = avatar.id
+              person.save!(:validate => false)
+            end
           end
         end
       end
@@ -37,7 +39,7 @@ class CreatePersonas < ActiveRecord::Migration
           avatar = person.avatar
           if avatar && !avatar.silhouette?
             avatar.active = true
-            avatar.save(false)
+            avatar.save!(:validate => false)
           end
         end
       end

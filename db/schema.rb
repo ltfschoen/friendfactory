@@ -138,8 +138,16 @@ ActiveRecord::Schema.define(:version => 20120103071507) do
   add_index "nusers", ["persistence_token"], :name => "index_nusers_on_persistence_token"
   add_index "nusers", ["site_id"], :name => "index_nusers_on_site_id"
 
+  create_table "personages", :force => true do |t|
+    t.integer  "user_id",                       :null => false
+    t.integer  "persona_id",                    :null => false
+    t.integer  "profile_id",                    :null => false
+    t.boolean  "default",    :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "personas", :force => true do |t|
-    t.integer  "user_id"
     t.date     "dob"
     t.string   "age"
     t.string   "location"

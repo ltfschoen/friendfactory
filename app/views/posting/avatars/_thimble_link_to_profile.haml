@@ -1,3 +1,3 @@
-- if profile.present?
-  - path = wave_profile_path(profile) if path.nil?
-  = link_to(thimble_image_tag(profile), path)
+- if personage.present?
+  - path = wave_profile_path(personage.profile) if path.nil?
+  = link_to(thimble_image_tag(personage), path)

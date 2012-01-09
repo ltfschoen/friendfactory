@@ -13,14 +13,24 @@ class Wave::Base < ActiveRecord::Base
     self.class.name.demodulize
   end
 
+  delegate \
+      :email,
+      :emailable?,
+      :admin,
+      :admin?,
+      :handle,
+      :avatar,
+      :avatar?,
+    :to => :user
+
   state_machine do
     state :published
     state :unpublished
-    
+
     event :publish do
       transitions :to => :published, :from => [ :unpublished, :published ]
     end
-    
+
     event :unpublish do
       transitions :to => :unpublished, :from => [ :unpublished, :published ]
     end
@@ -30,14 +40,14 @@ class Wave::Base < ActiveRecord::Base
     joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
     where('`sites_waves`.`site_id` = ?', site.id)
   }
-  
+
   scope :type, lambda { |*types| where('`waves`.`type` in (?)', types.map(&:to_s)) }  
   scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
 
   acts_as_taggable
 
-  belongs_to :user
+  belongs_to :user, :class_name => 'Personage', :include => :persona
 
   has_and_belongs_to_many :sites,
       :class_name              => 'Site',

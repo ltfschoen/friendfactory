@@ -1,9 +1,9 @@
 - content_for :rollcall do
-  - profiles = profiles_on_wave.limit(40).reject{ |p| p.avatar.silhouette? }
-  - max = [ profiles.length / 5 * 5, 30 ].min
-  - profiles[0..(max-1)].each_with_index do |profile, idx|
+  - personages = personages_on_wave(:limit => 40)
+  - max = [ personages.length / 5 * 5, 30 ].min
+  - personages[0..(max-1)].each_with_index do |personage, idx|
     - css_class = (idx + 1) % 5 == 0 ? 'omega' : nil
-    .portrait{ :class => css_class }= thimble_link_to_profile(profile)
+    .portrait{ :class => css_class }= thimble_link_to_profile(personage)
   = link_to "More &rarr;".html_safe, wave_rollcall_path(params[:id] || current_site.home_wave, :page => params[:page]), :class => 'more'
 #floating
 #frame

@@ -6,7 +6,7 @@
       = thimble_link_to_profile(user)
     .clear
       .cell
-        By #{link_to_profile(user)}    
+        By #{link_to_profile(user)}
         - unless link.embeds.primary.present?
           %p
             - link.photos.each do |photo|

@@ -1,5 +1,6 @@
 class Bookmark < ActiveRecord::Base
-  belongs_to :user
+
+  belongs_to :user, :class_name => 'Personage'
   belongs_to :wave, :class_name => 'Wave::Base'
 
   def read
@@ -11,4 +12,5 @@ class Bookmark < ActiveRecord::Base
   def last_read_at
     defined?(@last_read_at) ? @last_read_at : read_at
   end
+
 end
