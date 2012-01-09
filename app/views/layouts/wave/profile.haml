@@ -44,6 +44,7 @@
       'layouts/shared/unpublish-overlay', |
       'layouts/shared/nav', |
       'layouts/shared/tag_cloud', |
+      'layouts/shared/compatibility', |
       'layouts/wave/community/base', |
       'layouts/wave/community/base-override', |
       'layouts/wave/community/sidebar', |
@@ -53,8 +54,6 @@
       'layouts/wave/community/post_reaction', |
       'layouts/wave/community/rollcall', |
       'layouts/wave/community/floating', |
-      'layouts/wave/profile/base', |
-      'layouts/wave/ambassador/base', |
     :media => 'screen', |
     :cache => 'layouts/wave/profile/cache' #, :concat => true
 
@@ -76,8 +75,8 @@
       'jquery.tmpl.min', |
       'jquery.flip', |
       'jquery.scrollTo-1.4.2-min', |
-      'jquery.fileupload', |
-      'jquery.fileupload-ui', |
+      'jquery.fileupload.v4/jquery.fileupload', |
+      'jquery.fileupload.v4/jquery.fileupload-ui', |
       'jquery.placeholder.min', |
       'jquery.chat', |
       'jquery.headshot', |
@@ -88,6 +87,7 @@
       'application', |
       'layouts/shared/album', |
       'layouts/shared/video', |
+      'layouts/shared/compatibility', |
       'layouts/community', |
     :cache => 'layouts/wave/profile.cached'
 
@@ -100,6 +100,7 @@
   = csrf_meta_tag
 %body{ uid, gid, :class => controller.controller_name }
   = render :partial => 'layouts/shared/sidebar'
+  = compatibility_tag
   = yield
   - if Rails.env.development?
     #footnotes_holder{ :style => 'display:block' }
