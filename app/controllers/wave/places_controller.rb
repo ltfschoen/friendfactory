@@ -5,7 +5,7 @@ class Wave::PlacesController < ApplicationController
   before_filter :require_user
   helper_method :wave, :postings, :persona
 
-  layout 'wave/profile'
+  layout 'wave/conversation'
 
   cattr_reader :per_page
 
