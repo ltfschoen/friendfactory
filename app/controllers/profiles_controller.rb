@@ -18,13 +18,10 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    person = current_user.person
-    if person && person.update_attributes(params[:person])
+    if current_persona.update_attributes(params[:person])
       # TODO Person should be tagged, not profile
       # TODO Move to after_create on person
-      if profile = person.profile
-        profile.set_tag_list_on!(current_site)
-      end
+      current_profile.set_tag_list_on!(current_site)
     end
     respond_to do |format|
       format.html { redirect_to profile_path }
@@ -60,7 +57,7 @@ class ProfilesController < ApplicationController
   end
 
   def page_title
-    "#{current_site.display_name} - #{current_person.handle}'s Profile"
+    "#{current_site.display_name} - #{current_user.handle}'s Profile"
   end
 
   def invitation_wave

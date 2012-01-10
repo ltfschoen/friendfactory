@@ -13,6 +13,7 @@ class Personage < ActiveRecord::Base
       :admin?,
       :uid,
       :gid,
+      :emailable?,
       :current_login_at,
       :current_login_at=,
     :to => :user

@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
       :current_user_session,
       :current_user,
       :current_profile,
+      :current_persona,
       :current_site,
       :presenter,
       :resolver
@@ -38,6 +39,11 @@ class ApplicationController < ActionController::Base
   def current_profile
     return @current_profile if defined?(@current_profile)
     @current_profile = current_user && current_user.profile
+  end
+
+  def current_persona
+    return @current_persona if defined?(@current_persona)
+    @current_persona = current_user && current_user.persona
   end
 
   def current_site

@@ -65,34 +65,7 @@ class User < ActiveRecord::Base
     build_default_personage(attrs.merge(:default => true))
   end
 
-
-  ### Profile
-
-  public
-
-  # has_one :profile,
-  #     :class_name => 'Wave::Base',
-  #     :autosave   => true
-
-  # before_create :build_profile
-  # before_update :update_profile_type
-
-  private
-
-  # def build_profile
-  #   self.profile = role.default_profile_type.constantize.new(:sites => [ site ], :state => :published)
-  # end
-
-  # def update_profile_type
-  #   if role_id_changed?
-  #     self.profile[:type] = role.default_profile_type
-  #   end
-  # end
-
-
   ### Account
-
-  public
 
   belongs_to :account
 

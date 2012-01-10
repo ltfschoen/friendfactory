@@ -1,4 +1,4 @@
-= form_for current_person, :url => profile_path do |f|
+= form_for current_persona, :url => profile_path do |f|
   .headshot-container
     .headshot
       .face
@@ -22,7 +22,7 @@
                   = domain.display_name
                 %td.detail
                   = select_tag "person[biometric_values_attributes][#{domain.id}]", |
-                    options_for_select([[ '', nil ]] + domain.values.collect {|v| [ v.display_name, v.id ] }, current_person.biometric_value_id(domain))
+                    options_for_select([[ '', nil ]] + domain.values.collect {|v| [ v.display_name, v.id ] }, current_persona.biometric_value_id(domain))
         .button-bar
           = link_to 'Cancel', profile_path
           = f.submit 'OK'
