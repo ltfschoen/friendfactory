@@ -1,18 +1,20 @@
 class Personage < ActiveRecord::Base
 
   attr_accessible \
-      :user,
-      :persona,
+      :persona_attributes,
       :profile,
-      :avatar
+      :avatar,
+      :default
 
   delegate \
+      :site,
       :email,
       :state,
-      :roles,
       :admin?,
       :uid,
       :gid,
+      :current_login_at,
+      :current_login_at=,
     :to => :user
 
   delegate \
@@ -20,26 +22,52 @@ class Personage < ActiveRecord::Base
       :first_name,
       :last_name,
       :dob,
+      :age,
+      :description,
       :location,
       :avatar,
       :avatar?,
       :avatar=,
     :to => :persona
 
-  scope :default, where(:default => true).order('`updated_at` DESC').limit(1)
-
   belongs_to :user
-  validates_presence_of :user
-
-  belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
-  validates_presence_of :persona
-
+  belongs_to :persona, :class_name => 'Persona::Base'
   belongs_to :profile, :class_name => 'Wave::Base'
-  validates_presence_of :persona
+
+  accepts_nested_attributes_for :persona
+
+  def persona_attributes=(attrs)
+    attrs.reverse_merge!(:type => 'Persona::Base')
+    if klass = attrs.delete(:type).constantize rescue nil
+      self.persona = klass.create(attrs)
+    end
+  end
+
+  before_create :initialize_profile
+  after_create  :update_profile_user_id
+
+  private
+
+  def initialize_profile
+    if persona
+      self.profile = persona.default_profile_type.constantize.create do |wave|
+        wave.sites.push(site)
+        wave.state = :published
+      end
+    end
+  end
+
+  def update_profile_user_id
+    profile[:user_id] = self
+    profile.save
+  end
+
+  public
 
   def personages
     Personage.where(:user_id => user_id)
   end
+
 
   ### Waves
 
@@ -111,17 +139,17 @@ class Personage < ActiveRecord::Base
     raise attributes.inspect
   end
 
-  validates_presence_of :invitation_code,
-      :on => :create,
-      :if => lambda { site.present? && site.invite_only? }
+  # validates_presence_of :invitation_code,
+  #     :on => :create,
+  #     :if => lambda { site.present? && site.invite_only? }
 
-  validate :invitation_code_offered?,
-      :on => :create,
-      :if => lambda { site.present? && site.invite_only? && invitation_code.present? }
+  # validate :invitation_code_offered?,
+  #     :on => :create,
+  #     :if => lambda { site.present? && site.invite_only? && invitation_code.present? }
 
-  after_initialize :set_email_address_from_invitation
+  # after_initialize :set_email_address_from_invitation
 
-  after_create :accept_invitation_code
+  # after_create :accept_invitation_code
 
   def find_or_create_invitation_wave_for_site(site)
     invitation_wave_for_site(site) || create_invitation_wave_for_site(site)
@@ -143,13 +171,13 @@ class Personage < ActiveRecord::Base
     end
   end
 
-  def set_email_address_from_invitation
-    if new_record? && site && site.invite_only?
-      if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
-        self.email ||= invitation.email
-      end
-    end
-  end
+  # def set_email_address_from_invitation
+  #   if new_record? && site && site.invite_only?
+  #     if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
+  #       self.email ||= invitation.email
+  #     end
+  #   end
+  # end
 
   def accept_invitation_code
     if site.invite_only? &&

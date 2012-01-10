@@ -1,5 +1,7 @@
 class CreateRoles < ActiveRecord::Migration
   def self.up
+    return
+
     create_table :roles, :force => true do |t|
       t.string :name, :null => false
       t.string :display_name, :null => false
@@ -19,6 +21,8 @@ class CreateRoles < ActiveRecord::Migration
   end
 
   def self.down
+    return
+
     drop_table :roles rescue nil
   end
 

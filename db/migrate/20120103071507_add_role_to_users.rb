@@ -1,5 +1,7 @@
 class AddRoleToUsers < ActiveRecord::Migration
   def self.up
+    return
+
     add_column :users, :role_id, :integer
 
     User.reset_column_information
@@ -23,6 +25,8 @@ class AddRoleToUsers < ActiveRecord::Migration
   end
 
   def self.down
+    return
+
     add_column :users, :admin, :boolean rescue nil
     User.reset_column_information
 

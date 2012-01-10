@@ -46,17 +46,22 @@
         %p= text
 
   #badge
-    = form_for @user, :url => welcome_signup_path do |f|
+    = form_for user_with_default_persona(@user), :url => welcome_signup_path do |f|
       %h2 Sign up to meet others just like you!
-      = f.fields_for :persona do |persona_form|
-        = persona_form.text_field :handle, :placeholder => 'First Name'
+      = f.fields_for :default_personage do |personage_form|
+        = personage_form.fields_for :persona do |persona_form|
+          = persona_form.text_field :handle, :placeholder => 'First Name', :class => 'user_persona_attributes_handle'
+
       = f.text_field :email, :placeholder => 'Email Address'
       = f.password_field :password, :placeholder => 'Password'
       = f.existing_user_password_confirmation_field :password, :current_site => current_site
       = f.new_user_password_confirmation_field :password_confirmation, :current_site => current_site, :placeholder => 'Retype Password'
-      = f.fields_for :persona do |persona_form|
-        = persona_form.text_field :age, :placeholder => 'Age'
-        = persona_form.text_field :location, :placeholder => 'Location'
+
+      = f.fields_for :default_personage do |personage_form|
+        = personage_form.fields_for :persona do |persona_form|
+          = persona_form.text_field :age, :maxlength => 2, :placeholder => 'Age', :class => 'user_persona_attributes_age'
+          = persona_form.text_field :location, :maxlength => 20, :placeholder => 'Location', :class => 'user_persona_attributes_location'
+
       - if current_site.invite_only?
         = f.text_field :invitation_code, :placeholder => 'Invite Code'
         = f.submit 'Signup', :class => 'narrow'

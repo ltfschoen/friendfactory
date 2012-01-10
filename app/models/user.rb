@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
 
   attr_accessible \
       :email,
-      :person_attributes,
       :password,
       :password_confirmation,
       :emailable,
+      :default_personage_attributes,
       :invitation_code,
       :invitations_attributes
 
@@ -36,65 +36,33 @@ class User < ActiveRecord::Base
 
   scope :featured, where('`users`.`score` > 0')
 
-  scope :role, lambda { |*role_name| joins(:role).where(:roles => { :name => role_name }) }
-
+  scope :role, lambda { |*role_names| joins(:personages => :persona).
+      where(:personages => {
+        :personas => {
+          :type => role_names.map { |role_name| "persona/#{role_name}".camelize }
+        }
+      })
+  }
 
   ### Site
 
   belongs_to :site
   validates_presence_of :site
 
-
-  ### Role && Persona
-
-  belongs_to :role
-  validates_presence_of :role
+  ### Personage
 
   has_many :personages
 
-  accepts_nested_attributes_for :personages
+  has_one :default_personage,
+      :class_name => 'Personage',
+      :conditions => { :default => true },
+      :order      => 'created_at ASC'
 
-  def default_personage
-    personages.default.first
-  end
+  accepts_nested_attributes_for :default_personage
 
-  after_initialize :initialize_role_and_persona
-
-  before_update :update_persona_type
-
-  ::Role.all.each do |role|
-    define_method("#{role.name}?".to_sym) do
-      role_id == role.id
-    end
-  end
-
-  alias :admin? :administrator?
-
-  private
-
-  def initialize_role_and_persona
-    if new_record?
-      initialize_role
-      initialize_persona
-    end
-  end
-
-  def initialize_role
-    if role_id.nil?
-      self.role = Role.default
-    end
-  end
-
-  def initialize_persona
-    if persona.nil?
-      self.persona = role.default_persona_type.constantize.new
-    end
-  end
-
-  def update_persona_type
-    if role_id_changed?
-      self.persona[:type] = role.default_persona_type
-    end
+  def default_personage_attributes=(attrs)
+    attrs[:persona_attributes].merge!(:type => 'Persona::Person')
+    build_default_personage(attrs.merge(:default => true))
   end
 
 
@@ -102,24 +70,24 @@ class User < ActiveRecord::Base
 
   public
 
-  has_one :profile,
-      :class_name => 'Wave::Base',
-      :autosave   => true
+  # has_one :profile,
+  #     :class_name => 'Wave::Base',
+  #     :autosave   => true
 
-  before_create :build_profile
-  before_update :update_profile_type
+  # before_create :build_profile
+  # before_update :update_profile_type
 
   private
 
-  def build_profile
-    self.profile = role.default_profile_type.constantize.new(:sites => [ site ], :state => :published)
-  end
+  # def build_profile
+  #   self.profile = role.default_profile_type.constantize.new(:sites => [ site ], :state => :published)
+  # end
 
-  def update_profile_type
-    if role_id_changed?
-      self.profile[:type] = role.default_profile_type
-    end
-  end
+  # def update_profile_type
+  #   if role_id_changed?
+  #     self.profile[:type] = role.default_profile_type
+  #   end
+  # end
 
 
   ### Account
@@ -175,8 +143,8 @@ class User < ActiveRecord::Base
     "uid-#{self.id}"
   end
 
-  def roles
-    "gid-admin" if self.admin?
+  def gid
+    self.admin? ? 'gid-admin' : 'gid-user'
   end
 
 end

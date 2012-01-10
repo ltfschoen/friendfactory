@@ -139,9 +139,9 @@ ActiveRecord::Schema.define(:version => 20120103071507) do
   add_index "nusers", ["site_id"], :name => "index_nusers_on_site_id"
 
   create_table "personages", :force => true do |t|
-    t.integer  "user_id",                       :null => false
-    t.integer  "persona_id",                    :null => false
-    t.integer  "profile_id",                    :null => false
+    t.integer  "user_id"
+    t.integer  "persona_id"
+    t.integer  "profile_id"
     t.boolean  "default",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -405,7 +405,7 @@ ActiveRecord::Schema.define(:version => 20120103071507) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                :null => false
+    t.string   "email",                                 :null => false
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -413,18 +413,18 @@ ActiveRecord::Schema.define(:version => 20120103071507) do
     t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "perishable_token"
-    t.integer  "login_count",        :default => 0,    :null => false
-    t.integer  "failed_login_count", :default => 0,    :null => false
+    t.integer  "login_count",        :default => 0,     :null => false
+    t.integer  "failed_login_count", :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.boolean  "emailable",          :default => true
-    t.integer  "site_id",                              :null => false
-    t.integer  "account_id",                           :null => false
+    t.boolean  "admin",              :default => false
+    t.integer  "site_id",                               :null => false
+    t.integer  "account_id",                            :null => false
     t.integer  "score",              :default => 0
-    t.integer  "role_id"
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"

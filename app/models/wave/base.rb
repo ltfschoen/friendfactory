@@ -47,7 +47,9 @@ class Wave::Base < ActiveRecord::Base
 
   acts_as_taggable
 
-  belongs_to :user, :class_name => 'Personage', :include => :persona
+  belongs_to :user,
+      :class_name => 'Personage',
+      :include    => :persona
 
   has_and_belongs_to_many :sites,
       :class_name              => 'Site',

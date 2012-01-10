@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
         @launch_user = LaunchUser.new
         format.html { render :action => 'launch' }
       else
-        @user = User.new({ :invitation_code => params[:invitation_code] })
+        @user = User.new(:invitation_code => params[:invitation_code])
         format.html
       end
     end
@@ -22,7 +22,7 @@ class WelcomeController < ApplicationController
     @user = User.new(params[:user]) { |user| user.site = current_site }
     respond_to do |format|
       if @user.save && current_site.user_sessions.create(params[:user])
-        flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.handle}!"
+        flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.default_personage.handle}!"
         format.html { redirect_to root_path }
       else
         format.html { render :action => 'show' }

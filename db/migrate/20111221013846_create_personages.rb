@@ -1,9 +1,9 @@
 class CreatePersonages < ActiveRecord::Migration
   def self.up
     create_table :personages, :force => true do |t|
-      t.integer :user_id, :null => false
-      t.integer :persona_id, :null => false
-      t.integer :profile_id, :null => false
+      t.integer :user_id
+      t.integer :persona_id
+      t.integer :profile_id
       t.boolean :default, :default => false
       t.timestamps
     end

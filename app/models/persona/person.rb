@@ -1,5 +1,7 @@
 class Persona::Person < Persona::Base
 
+  self.default_profile_type = 'Wave::Profile'
+
   attr_accessible \
       :first_name,
       :last_name,

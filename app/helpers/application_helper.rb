@@ -79,7 +79,7 @@ module ApplicationHelper
   end
 
   def gid(id = nil)
-    { :class => current_user.roles } if current_user.present?
+    { :class => current_user.gid } if current_user.present?
   end
 
   def link_to_unpublish(posting)

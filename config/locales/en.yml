@@ -4,12 +4,19 @@
 en:
   hello: "Hello world"
   activerecord:
+    models:
+      personage: "Personal details"
     attributes:
       posting:
         comment:
           body: "Comment"
       user:
-        handle: "First name"
+        default_personage:
+          persona:
+            handle: 'First name'
+            age: 'Age'
+            location: 'Location'
+
   authlogic:
     error_messages:
       no_authentication_details: Login and Password required
