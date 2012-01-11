@@ -45,12 +45,12 @@ class Personage < ActiveRecord::Base
   end
 
   before_create :initialize_profile
-  after_create  :update_profile_user_id
+  after_create  :initialize_profile_user_id
 
   private
 
   def initialize_profile
-    if persona
+    if persona && profile.nil?
       self.profile = persona.default_profile_type.constantize.create do |wave|
         wave.sites.push(site)
         wave.state = :published
@@ -58,9 +58,11 @@ class Personage < ActiveRecord::Base
     end
   end
 
-  def update_profile_user_id
-    profile[:user_id] = self
-    profile.save
+  def initialize_profile_user_id
+    if profile[:user_id].nil?
+      profile[:user_id] = self
+      profile.save
+    end
   end
 
   public

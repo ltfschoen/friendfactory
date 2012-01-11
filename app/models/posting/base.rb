@@ -23,9 +23,6 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
-  # TODO: Implement
-  # validates_presence_of :site
-
   scope :type, lambda { |*types| where(:type => types.map(&:to_s)) }
   scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
 

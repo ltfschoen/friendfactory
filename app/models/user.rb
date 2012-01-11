@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   scope :featured, where('`users`.`score` > 0')
 
-  scope :role, lambda { |*role_names| joins(:personages => :persona).
+  scope :persona, lambda { |*role_names| joins(:personages => :persona).
       where(:personages => {
         :personas => {
           :type => role_names.map { |role_name| "persona/#{role_name}".camelize }

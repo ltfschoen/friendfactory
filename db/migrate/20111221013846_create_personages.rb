@@ -15,7 +15,7 @@ class CreatePersonages < ActiveRecord::Migration
     Personage.transaction do
       User.all.each do |user|
         persona = Persona::Base.find_by_user_id(user.id)
-        profile = Wave::Profile.find_by_resource_id(persona.id)
+        profile = Wave::Profile.find_by_user_id(user.id)
         Personage.create!(:id => user.id, :user => user, :persona => persona, :profile => profile, :default => true)
       end
     end

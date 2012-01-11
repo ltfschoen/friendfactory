@@ -12,7 +12,7 @@ class CreatePersonas < ActiveRecord::Migration
     end
 
     say_with_time 'initializing avatar_id' do
-      Persona::Person.transaction do
+      ActiveRecord::Base.transaction do
         Persona::Person.all.each do |person|
           if profile = Wave::Profile.find_by_resource_id(person.id)
             if avatar = profile.postings.
