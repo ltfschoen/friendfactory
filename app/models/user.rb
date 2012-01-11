@@ -55,8 +55,7 @@ class User < ActiveRecord::Base
 
   has_one :default_personage,
       :class_name => 'Personage',
-      :conditions => { :default => true },
-      :order      => 'created_at ASC'
+      :order      => '`default` DESC, `created_at` ASC'
 
   accepts_nested_attributes_for :default_personage
 

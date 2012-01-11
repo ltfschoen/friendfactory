@@ -1,6 +1,6 @@
-class EmptyAvatar
+class WaveAvatar
 
-  EmptyAvatarUrl = 'silhouette-q.gif'
+  WaveAvatarUrl = 'wave-icon.png'
 
   def initialize(personage)
     @personage = personage
@@ -15,11 +15,11 @@ class EmptyAvatar
   end
 
   def url(style = nil)
-    EmptyAvatarUrl
+    WaveAvatarUrl
   end
 
   def silhouette?
-    true
+    false
   end
 
 end

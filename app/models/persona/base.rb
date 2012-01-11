@@ -12,6 +12,10 @@ class Persona::Base < ActiveRecord::Base
       :avatar,
       :default
 
+  has_one :user,
+      :class_name  => 'Personage',
+      :foreign_key => 'persona_id'
+
   belongs_to :avatar,
       :class_name => 'Posting::Avatar',
       :conditions => { :state => :published }
@@ -25,7 +29,7 @@ class Persona::Base < ActiveRecord::Base
   end
 
   def avatar_with_silhouette
-    avatar_without_silhouette || EmptyAvatar.new(self)
+    avatar_without_silhouette || EmptyAvatar.new(user)
   end
 
   alias_method_chain :avatar, :silhouette

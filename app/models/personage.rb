@@ -2,7 +2,6 @@ class Personage < ActiveRecord::Base
 
   attr_accessible \
       :persona_attributes,
-      :profile,
       :avatar,
       :default
 
@@ -32,15 +31,22 @@ class Personage < ActiveRecord::Base
     :to => :persona
 
   belongs_to :user
-  belongs_to :persona, :class_name => 'Persona::Base'
+  belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
   belongs_to :profile, :class_name => 'Wave::Base'
+
+  scope :wave, lambda { |wave|
+    joins(:postings => :waves).
+    joins(:persona).
+    where(:postings => { :waves => { :id => wave.id }}).
+    where('`personas`.`avatar_id` is not null')
+  }
 
   accepts_nested_attributes_for :persona
 
   def persona_attributes=(attrs)
     attrs.reverse_merge!(:type => 'Persona::Base')
     if klass = attrs.delete(:type).constantize rescue nil
-      self.persona = klass.create(attrs)
+      self.persona = klass.new(attrs)
     end
   end
 
@@ -76,7 +82,9 @@ class Personage < ActiveRecord::Base
 
   has_many :bookmarks
 
-  has_many :waves, :class_name => 'Wave::Base', :foreign_key => 'user_id' do
+  has_many :waves,
+      :class_name  => 'Wave::Base',
+      :foreign_key => 'user_id' do
     # def type(*types)
     #   where('type in (?)', types.map(&:to_s))
     # end
