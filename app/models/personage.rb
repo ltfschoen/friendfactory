@@ -35,10 +35,12 @@ class Personage < ActiveRecord::Base
   belongs_to :profile, :class_name => 'Wave::Base'
 
   scope :wave, lambda { |wave|
-    joins(:postings => :waves).
-    joins(:persona).
-    where(:postings => { :waves => { :id => wave.id }}).
-    where('`personas`.`avatar_id` is not null')
+      select('distinct `personages`.*').
+      joins(:postings => :waves).
+      joins(:persona).
+      where(:postings => { :waves => { :id => wave.id }}).
+      merge(Posting::Base.published).
+      merge(Persona::Base.has_avatar)
   }
 
   accepts_nested_attributes_for :persona

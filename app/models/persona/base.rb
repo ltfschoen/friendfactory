@@ -20,6 +20,8 @@ class Persona::Base < ActiveRecord::Base
       :class_name => 'Posting::Avatar',
       :conditions => { :state => :published }
 
+  scope :has_avatar, where('`avatar_id` is not null')
+
   def handle
     self[:handle].strip if self[:handle].present?
   end
