@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
   def destroy_session
     clear_lurker
     if current_user
-      current_user.update_attribute(:current_login_at, nil)
+      current_user.user.update_attribute(:current_login_at, nil)
       current_user_session.destroy
     end
   end
