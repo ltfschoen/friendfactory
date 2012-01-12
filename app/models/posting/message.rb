@@ -12,7 +12,18 @@ class Posting::Message < Posting::Base
   validates_presence_of :receiver, :site, :on => :create
 
   def receiver
-    @receiver ||= waves.where('`waves`.`user_id` <> ?', user_id).limit(1).first.try(:user)
+    return @receiver if defined?(@receiver)
+    if wave = receiver_wave
+      wave.user
+    end
+  end
+
+  def sender_wave
+    waves.where(:user_id => user_id).limit(1).first
+  end
+
+  def receiver_wave
+    waves(true).where('`waves`.`user_id` <> ?', user_id).limit(1).first
   end
 
   def receiver_id

@@ -68,7 +68,7 @@ class Wave::ProfilesController < ApplicationController
   def conversation
     @legacy = params[:legacy]
     if receiver = Wave::Profile.find_by_id(params[:id]).try(:user)
-      @wave = current_user.conversation_with(receiver, current_site).read
+      @wave = current_user.find_or_create_conversation_with(receiver, current_site).mark_as_read
     end
     respond_to do |format|
       format.html { render :layout => false }
@@ -135,7 +135,7 @@ class Wave::ProfilesController < ApplicationController
   end
 
   def page_title
-    "#{current_site.display_name} - #{wave.persona.handle}"
+    "#{current_site.display_name} - #{wave.user.handle}"
   end
 
   memoize :wave, :postings, :page_title

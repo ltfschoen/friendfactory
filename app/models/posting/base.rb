@@ -34,13 +34,15 @@ class Posting::Base < ActiveRecord::Base
 
   belongs_to :user, :class_name => 'Personage'
 
-  has_many :children, :class_name  => 'Posting::Base', :foreign_key => 'parent_id'
+  has_many :children,
+      :class_name  => 'Posting::Base',
+      :foreign_key => 'parent_id'
+
   has_many :publications, :as => :resource
-  has_many :waves, :through => :publications, :order => 'updated_at desc' do
-    def except(*waves)
-      where('`waves`.`id` not in (?)', waves.map(&:id))
-    end
-  end
+
+  has_many :waves,
+      :through => :publications,
+      :order   => 'updated_at desc'
 
   def attributes=(attrs)
     sanitize_for_mass_assignment(attrs).each do |k, v|

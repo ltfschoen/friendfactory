@@ -14,7 +14,7 @@ class Personage < ActiveRecord::Base
       :gid,
       :emailable?,
       :current_login_at,
-      :current_login_at=,
+      :online?,
     :to => :user
 
   delegate \
@@ -101,22 +101,18 @@ class Personage < ActiveRecord::Base
 
   has_many :conversations, :class_name => 'Wave::Conversation', :foreign_key => 'user_id' do
     def with(receiver, site)
-      if receiver.present? && site.present?
-        # site(site).where('resource_id = ? and resource_type = ?', receiver.id, 'User').order('updated_at desc').limit(1).first
+      if receiver && site
         site(site).where(:resource_id => receiver.id).order('updated_at DESC').limit(1).first
       end
     end
   end
 
-  # Syntatic sugar <user1>.conversation.with.<user2>
-  alias :conversation :conversations
-
-  def conversation_with(receiver, current_site)
-    conversation.with(receiver, current_site) || create_conversation_with(receiver, current_site)
+  def find_or_create_conversation_with(receiver, current_site)
+    conversations.with(receiver, current_site) || create_conversation_with(receiver, current_site)
   end
 
   def create_conversation_with(receiver, site)
-    if receiver.present? && site.present?
+    if receiver && site
       wave = conversations.build
       wave.resource = receiver
       site.waves << wave
@@ -124,6 +120,8 @@ class Personage < ActiveRecord::Base
       wave
     end
   end
+
+  private :create_conversation_with
 
   def inbox(site)
     conversations.site(site).chatty.published

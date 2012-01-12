@@ -6,25 +6,29 @@ class Wave::Conversation < Wave::Base
 
   scope :chatty, where('`waves`.`postings_count` > 0')
 
-  alias :recipient :resource
+  # alias :recipient :resource
+
+  belongs_to :recipient,
+      :class_name => 'Personage',
+      :foreign_key => 'resource_id'
 
   def messages
     postings.type(Posting::Message).scoped
   end
 
   def publish_posting_to_waves(posting)
-    if (posting.receiver_id != posting.sender_id) &&
-        (wave = posting.receiver.conversation_with(posting.sender, posting.site))
+    if (posting.receiver.id != posting.sender_id) && wave = posting.receiver.find_or_create_conversation_with(posting.sender, posting.site)
       wave.touch_and_publish! && wave
     end
   end
 
-  def read
+  def mark_as_read
     bookmark.read
     self
   end
 
-  alias :read! :read
+  alias :read  :mark_as_read
+  alias :read! :mark_as_read
 
   def read_at
     bookmark.read_at

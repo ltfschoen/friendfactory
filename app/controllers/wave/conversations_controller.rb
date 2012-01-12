@@ -17,7 +17,7 @@ class Wave::ConversationsController < ApplicationController
   def show
     # Conversation with other user identified by :profile_id
     user = Wave::Profile.find_by_id(params[:profile_id]).try(:user)
-    @wave = current_user.conversation.with(user, current_site) || current_user.create_conversation_with(user, current_site)
+    @wave = current_user.find_or_create_conversation_with(user, current_site)
     respond_to do |format|
       format.html { render :layout => false }
     end

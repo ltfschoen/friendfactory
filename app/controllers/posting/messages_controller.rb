@@ -14,30 +14,26 @@ class Posting::MessagesController < ApplicationController
   end
 
   def create
-    success = false
-    if @wave = current_user.conversations.find_by_id(params[:wave_id])
-      @posting = Posting::Message.new(params[:posting_message]) { |posting| initialize_message(posting, @wave.recipient) }
-      if success = @posting.save && add_message_to_conversation(@posting, @wave)
-        conversations = @posting.waves(true).except(@wave)
-        broadcast_posting(@posting, conversations)
-      end
-    end
     respond_to do |format|
-      format.json { render :json => { :success => success }}
+      wave    = current_user.conversations.find(params[:wave_id])
+      posting = Posting::Message.new(params[:posting_message]) do |posting|
+        posting.site     = current_site
+        posting.sender   = current_user
+        posting.receiver = wave.recipient
+        posting.state    = :published
+      end
+      format.json { render :json => { :success => add_message_to_conversation(posting, wave) }}
     end
   end
 
   private
 
-  def initialize_message(posting, recipient)
-    posting.site = current_site
-    posting.sender = current_user
-    posting.receiver = recipient
-  end
-
   def add_message_to_conversation(posting, wave)
-    wave.postings << posting
-    wave.read! && posting.publish!
+    ActiveRecord::Base.transaction do
+      wave.postings << posting
+      wave.mark_as_read
+      broadcast_posting(posting, posting.receiver_wave)
+    end
   rescue
     false
   end
