@@ -75,10 +75,10 @@ module ApplicationHelper
 
   def uid(id = nil)
     id = current_user.id if id.nil? && current_user.present?
-    { :class => "u#{id}" } unless id.nil?
+    { :class=> User.uid(id) }
   end
 
-  def gid(id = nil)
+  def gid
     { :class => current_user.gid } if current_user.present?
   end
 

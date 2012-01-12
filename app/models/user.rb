@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
       :password_confirmation,
       :emailable,
       :default_personage_attributes,
+      :current_login_at,
       :invitation_code,
       :invitations_attributes
 
@@ -47,6 +48,7 @@ class User < ActiveRecord::Base
   ### Site
 
   belongs_to :site
+
   validates_presence_of :site
 
   ### Personage
@@ -111,8 +113,12 @@ class User < ActiveRecord::Base
     update_attribute(:emailable, false)
   end
 
+  def self.uid(id)
+    "uid-#{id}" if id
+  end
+
   def uid
-    "uid-#{self.id}"
+    User.uid(id)
   end
 
   def gid
