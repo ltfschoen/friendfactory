@@ -44,12 +44,19 @@ Friskyfactory::Application.routes.draw do
   scope :module => :wave do
     put 'waves/:id/unpublish' => 'waves#unpublish', :as => 'unpublish_wave'
   end
-  
-  resource :profile, :only => [ :show, :edit, :update ] do
+
+  # Headshots
+  resource :profile, :only => [ :show, :edit, :update ],
+      :controller => 'headshots' do
     member do
       post :avatar
-      put :unsubscribe
+      put  :unsubscribe
     end
+  end
+  
+  # Personages
+  resource :personages, :only => [] do
+    put :switch, :on => :member
   end
 
   # To add postings to a wave

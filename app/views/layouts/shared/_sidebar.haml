@@ -9,23 +9,16 @@
   - if current_user
     .block.userspace
       .portrait
-        = thimble_link_to_profile(current_user, profile_path)
+        = thimble_link_to_profile(current_user, profile_path, :class => 'current_user')
       %span.username
-        - personages = current_user.personages
-        - if personages.length == 1
-          = link_to current_user.handle, url_for(current_profile)
-        - else
-          = select_tag personages
+        = personages_select_tag(current_user)
         = link_to 'Edit', profile_path
 
   .block.ambassador
     .portrait= thimble_image_tag(current_site.home_wave)
     = link_to current_site.home_wave.subject, root_path
 
-  - if content_for? :sidebar_headshot
-    .block
-      = content_for :sidebar_headshot
-
+  = render_sidebar_headshot
   = render_ambassadors_list
 
   .block.navspace

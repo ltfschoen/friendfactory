@@ -1,5 +1,5 @@
 - content_for :sidebar_headshot do
-  = render_headshot(persona, :wave => wave)
+  = render_headshot(wave.user)
 #floating
 #frame
   %h1 #{persona.handle}

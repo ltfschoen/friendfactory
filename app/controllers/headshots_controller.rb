@@ -1,4 +1,4 @@
-class ProfilesController < ApplicationController
+class HeadshotsController < ApplicationController
 
   before_filter :require_user
   helper_method :page_title, :invitation_wave

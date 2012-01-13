@@ -1,0 +1,7 @@
+- if @personage
+  :plain
+    document.location="#{request.env['HTTP_REFERER']}";
+- else
+  -# // $('img.thimble.current_user', '#sidebar').replaceWith('#{escape_javascript(thimble_image_tag(@personage, :class => 'current_user'))}');
+  :plain
+    alert('Invalid Person');

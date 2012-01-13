@@ -49,7 +49,7 @@ class Wave::ProfilesController < ApplicationController
     end
   end
 
-  def photos    
+  def photos
     @wave = Wave::Profile.find_by_id(params[:id])
     respond_to do |format|
       format.html { render :layout => false }
@@ -128,16 +128,20 @@ class Wave::ProfilesController < ApplicationController
     current_site.waves.type(Wave::Profile).find(params[:id])
   end
 
+  memoize :wave
+
   alias :profile :wave
 
   def postings
     wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
   end
 
+  memoize :postings
+
   def page_title
     "#{current_site.display_name} - #{wave.user.handle}"
   end
 
-  memoize :wave, :postings, :page_title
+  memoize :page_title
 
 end

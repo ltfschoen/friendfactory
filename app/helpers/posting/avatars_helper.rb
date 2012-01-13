@@ -7,21 +7,17 @@ module Posting::AvatarsHelper
     end
   end
 
-  def thimble_link_to_profile(personage, path = nil)
-    render :partial => 'posting/avatars/thimble_link_to_profile', :locals => { :personage => personage, :path => path }
+  def thimble_link_to_profile(personage, path = nil, opts = {})
+    render :partial => 'posting/avatars/thimble_link_to_profile', :locals => { :personage => personage, :path => path,  :opts => opts }
   end
 
   def thimble_image_tag(personage, opts = {})
     if personage.present?
-      handle = personage.handle
-      size = opts.delete(:size) || '32x32'
-      image_tag(personage.avatar.url(:thumb), :size => size, :alt => handle, :title => handle)
+      handle    = personage.handle
+      size      = opts.delete(:size) || '32x32'
+      css_class = [ opts.delete(:class), 'thimble' ].compact.join(' ')
+      image_tag(personage.avatar.url(:thumb), :size => size, :alt => handle, :title => handle, :class => css_class)
     end
-  end
-
-  def headshot_image_tag(profile, opts = {})
-    opts.merge!(:size => '190x190', :alt => profile.handle, :title => profile.handle)
-    image_tag(profile.avatar.url(:polaroid), opts)
   end
 
   def placeholder_image_tag(opts = {})

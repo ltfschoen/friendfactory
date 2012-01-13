@@ -5,7 +5,7 @@ class Wave::AmbassadorsController < ApplicationController
   extend ActiveSupport::Memoizable
 
   before_filter :require_user
-  helper_method :wave, :postings, :persona
+  helper_method :wave, :postings
 
   layout 'wave/profile'
 
@@ -24,7 +24,7 @@ class Wave::AmbassadorsController < ApplicationController
 
   def wave
     # TODO Rescue from find exception
-    current_site.waves.type(Wave::Ambassador).find(params[:id])
+    current_site.waves.type(Wave::Ambassador).includes(:user => :persona).find(params[:id])
   end
 
   memoize :wave
@@ -34,11 +34,5 @@ class Wave::AmbassadorsController < ApplicationController
   end
 
   memoize :postings
-
-  def persona
-    wave.persona
-  end
-
-  memoize :persona
 
 end

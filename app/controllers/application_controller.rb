@@ -33,7 +33,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.record.default_personage
+    if user_record = current_user_session && current_user_session.record
+      @current_user = (session[:personage_id] && user_record.personages.find_by_id(session[:personage_id])) || user_record.default_personage
+    end
   end
 
   def current_profile
@@ -78,7 +80,7 @@ class ApplicationController < ActionController::Base
   end
   
   def require_admin
-    unless current_user && current_user.administrator?
+    unless current_user && current_user.admin?
       redirect_to welcome_url
       return false
     end

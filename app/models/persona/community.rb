@@ -7,7 +7,7 @@ class Persona::Community < Persona::Base
   self.default_profile_type = 'Wave::Community'
 
   def avatar
-    WaveAvatar.new(user)
+    super || WaveAvatar.new(user)
   end
 
   memoize :avatar

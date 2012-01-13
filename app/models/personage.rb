@@ -34,6 +34,16 @@ class Personage < ActiveRecord::Base
   belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
   belongs_to :profile, :class_name => 'Wave::Base'
 
+  scope :site, lambda { |site|
+      joins(:user).
+      where(:users => { :site_id => site.id })
+  }
+
+  scope :type, lambda { |type|
+      joins(:persona).
+      where(:personas => { :type => "Persona/#{type}".camelize })
+  }
+
   scope :wave, lambda { |wave|
       select('distinct `personages`.*').
       joins(:postings => :waves).
@@ -50,6 +60,14 @@ class Personage < ActiveRecord::Base
     if klass = attrs.delete(:type).constantize rescue nil
       self.persona = klass.new(attrs)
     end
+  end
+
+  def type
+    persona[:type].demodulize.downcase
+  end
+
+  def description
+    handle
   end
 
   before_create :initialize_profile
@@ -73,14 +91,10 @@ class Personage < ActiveRecord::Base
     end
   end
 
-  public
-
-  def personages
-    Personage.where(:user_id => user_id)
-  end
-
 
   ### Waves
+
+  public
 
   has_many :bookmarks
 

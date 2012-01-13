@@ -1,10 +1,12 @@
-- profile = persona.profile
+- profile = personage.profile
+- persona = personage.persona
 - link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || profile.id
+
 .headshot-container
   .headshot[ profile ]{ :class => poke_class(profile.id) }
     .face-container
       .front.face
-        = headshot_image_tag(profile)
+        = headshot_image_tag(persona)
         = link_to_close(link_to_close_wave_id)
         %span.handle
           = profile.handle

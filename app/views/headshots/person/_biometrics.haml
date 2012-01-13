@@ -16,6 +16,6 @@
             %td.label Location
             %td.detail= current_profile.location
           - current_site.biometric_domains.each do |biometric_domain|
-            = render :partial => 'domain', :object => biometric_domain
+            = render :partial => File.join('headshots', 'person', 'domain'), :object => biometric_domain
       .button-bar
         = link_to 'Edit', edit_profile_path, :class => 'button'
