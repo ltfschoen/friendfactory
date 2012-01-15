@@ -244,6 +244,12 @@ table.index.users td.last_login {
 	white-space: nowrap;
 }
 
+table.index.users th.role,
+table.index.users td.role {
+	text-align: center;
+}
+
+table.index.users th.emailable,
 table.index.users td.emailable {
 	text-align: center;
 }

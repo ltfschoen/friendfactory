@@ -7,7 +7,12 @@ class Site < ActiveRecord::Base
   validates_presence_of :name, :display_name
   validates_uniqueness_of :name
 
+  belongs_to :home_user,
+      :class_name  => 'Personage',
+      :foreign_key => 'user_id'
+
   has_many :users
+
   authenticates_many :user_sessions
 
   has_and_belongs_to_many :waves,
@@ -16,28 +21,9 @@ class Site < ActiveRecord::Base
       :foreign_key             => 'site_id',
       :association_foreign_key => 'wave_id'
 
-  belongs_to :home_wave,
-      :class_name  => 'Wave::Base',
-      :foreign_key => 'home_wave_id'
-
-  has_many :invitations, :foreign_key => 'resource_id', :class_name => 'Posting::Invitation'
-
-  # TODO Remove
-  has_many :signal_categories,
-      :class_name  => 'Signal::Category',
-      :foreign_key => 'site_id',
-      :order       => 'ordinal asc',
-      :dependent   => :destroy do
-    def clone(*category_names)
-      (category_names.empty? ? all : where('`signal_categories`.`name` in (?)', category_names.map(&:to_s))).map(&:clone)
-    end
-  end
-
-  # TODO Remove
-  has_many :signal_categories_signals,
-      :class_name => 'Signal::CategorySignal',
-      :through    => :signal_categories,
-      :source     => :categories_signals
+  has_many :invitations,
+      :foreign_key => 'resource_id',
+      :class_name  => 'Posting::Invitation'
 
   has_many :biometric_domains,
       :class_name  => 'Biometric::Domain',
@@ -72,10 +58,8 @@ class Site < ActiveRecord::Base
     stylesheets.map(&:css).compact.join("\n")
   end
 
-  before_create :create_home_wave
-
-  def signals
-    Signal::Base.find_all_by_id(signal_categories_signals.map(&:signal_id))
+  def home_wave
+    home_user.profile
   end
 
   def layout
@@ -93,7 +77,7 @@ class Site < ActiveRecord::Base
   alias :intern :to_sym
 
   def mailer
-    self[:mailer].present? ? self[:mailer] : DefaultMailer
+    self[:mailer] || DefaultMailer
   end
 
   def clone
@@ -105,20 +89,6 @@ class Site < ActiveRecord::Base
 
   def self.template
     Site.find_by_name(Site::TemplateSiteName) || raise("No template site")
-  end
-
-  private
-
-  def create_home_wave_with_slug
-    unless self[:home_wave_id].present?
-      create_home_wave_without_slug(:slug => DefaultHomeWaveSlug).publish!
-    end
-  end
-
-  alias_method_chain :create_home_wave, :slug
-
-  def raise_exception_if_signal_already_applied(signal)
-    raise "Signal already exists for site" if signals.where(:id => signal.id)
   end
 
 end

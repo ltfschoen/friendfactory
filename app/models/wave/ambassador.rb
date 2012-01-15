@@ -1,11 +1,7 @@
 class Wave::Ambassador < Wave::Profile
 
   def subject
-    persona.handle
-  end
-
-  def technical_description
-    "Ambassador #{persona.handle}"
+    handle
   end
 
   private

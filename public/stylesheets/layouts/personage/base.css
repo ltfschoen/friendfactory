@@ -76,37 +76,28 @@ p.instructions {
 	display: none;
 }
 
-a[href="/profile"],
-a[href="/profile/edit"] {
+.face a.edit_profile,
+.face a.cancel {
 	text-decoration: none;
 	color: #666;
 	font-size: 12px;
 }
 
-form.edit_person .headshot table.biometrics td {
-	height: 24px;
-}
-
-form.edit_person .headshot table.biometrics td.detail {
+form.edit_personage table.biometrics td.detail {
 	border-bottom: 1px solid transparent;
 }
 
-form.edit_person .headshot input[type='text'] {
+form.edit_personage input[type='text'] {
 	padding: 2px 4px;
 }
 
-form.edit_person .headshot input#person_handle,
-form.edit_person .headshot input#person_location {
+form.edit_personage input#personage_persona_attributes_handle,
+form.edit_personage input#personage_persona_attributes_location {
 	width: 95px;
 }
 
-form.edit_person .headshot select {
-	width: 105px;
-}
-
-form.edit_person .headshot select#person_dob_2i,
-form.edit_person .headshot select#person_dob_3i {
-	width: 50px;
+form.edit_personage select {
+	max-width: 110px;
 }
 
 .button-bar {
@@ -157,4 +148,16 @@ input#posting_invitation_body {
 	display: block;
 	margin-left: 4px;
 	padding: 2px;
+}
+
+form.edit_personage .field_with_errors input {
+	border: 1px solid #A00;
+}
+
+form.edit_personage .field_with_errors input::-webkit-input-placeholder {
+	color: #A00;
+}
+
+form.edit_personage .field_with_errors input:-moz-placeholder {
+	color: #A00;
 }

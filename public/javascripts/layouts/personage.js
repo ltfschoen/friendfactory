@@ -35,6 +35,7 @@ jQuery(function($) {
 
 	        buildDownloadRow: function (avatar, handler) {
 				$('ul#upload_posting_avatar').empty();
+				$('img.' + avatar.pid, '#sidebar').attr('src', avatar.url);
 	            return $('<li><img src="' + avatar.url + '" height="190" width="190" title="' + avatar.title + '"></li>');
 	        }
 	    })

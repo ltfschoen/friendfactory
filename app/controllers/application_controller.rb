@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 
   helper_method \
       :current_user_session,
+      :current_user_record,
       :current_user,
       :current_profile,
       :current_persona,
@@ -31,10 +32,15 @@ class ApplicationController < ActionController::Base
     @current_user_session = current_site.user_sessions.find
   end
 
+  def current_user_record
+    return @current_user_record if defined?(@current_user_record)
+    @current_user_record = current_user_session && current_user_session.record
+  end
+
   def current_user
     return @current_user if defined?(@current_user)
-    if user_record = current_user_session && current_user_session.record
-      @current_user = (session[:personage_id] && user_record.personages.find_by_id(session[:personage_id])) || user_record.default_personage
+    if current_user_record
+      @current_user = (session[:personage_id] && current_user_record.personages.enabled.find_by_id(session[:personage_id])) || current_user_record.default_personage
     end
   end
 

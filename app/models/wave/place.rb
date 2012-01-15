@@ -11,7 +11,7 @@ class Wave::Place < Wave::Base
   def technical_description
     [ super, persona.handle ].compact.join(' - ')
   end
-  
+
   def subject
     persona.handle
   end

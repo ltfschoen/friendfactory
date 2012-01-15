@@ -45,19 +45,16 @@ Friskyfactory::Application.routes.draw do
     put 'waves/:id/unpublish' => 'waves#unpublish', :as => 'unpublish_wave'
   end
 
-  # Headshots
-  resource :profile, :only => [ :show, :edit, :update ],
-      :controller => 'headshots' do
+  # Personages (Headshots)
+  resources :profiles, :only => [ :show, :new, :edit, :update ], :controller => 'personages' do
     member do
       post :avatar
       put  :unsubscribe
+      put  :switch
     end
   end
-  
-  # Personages
-  resource :personages, :only => [] do
-    put :switch, :on => :member
-  end
+
+  resource :profile, :only => [ :show ], :controller => 'personages', :as => 'current_profile'
 
   # To add postings to a wave
   resources :waves, :only => [] do
@@ -151,7 +148,7 @@ Friskyfactory::Application.routes.draw do
     end
 
     resources :sites, :except => [ :show, :destroy ] do
-      resources :users, :only => [ :index, :update ]
+      resources :users, :only => [ :index, :show, :update ]
     end
   end
 

@@ -1,0 +1,30 @@
+= form_for @personage, :url => profile_path(@personage) do |f|
+  .headshot-container
+    .headshot
+      .face
+        .pane
+          = f.fields_for :persona, @personage.persona do |persona_form|
+            %table.biometrics
+              %tr
+                %td.label First Name
+                %td.detail= persona_form.text_field :handle, :placeholder => 'first name', :maxlength => 12
+              %tr
+                %td.label Age
+                %td.detail= persona_form.text_field :age, :placeholder => 'age', :maxlength => 2
+              %tr
+                %td.label Birthday
+                %td.detail= persona_form.date_select :dob, { :order => [ :month, :day ], :discard_year => true, :use_short_month => true, :include_blank => true }
+              %tr
+                %td.label Location
+                %td.detail= persona_form.text_field :location, :placeholder => 'town or city, state', :maxlength => 20
+              - current_site.biometric_domains.each_with_index do |domain, idx|
+                %tr{ :class => domain.name }
+                  %td.label
+                    = domain.display_name
+                  %td.detail
+                    = select_tag "personage[persona_attributes][biometric_values_attributes][#{domain.id}]", |
+                      options_for_select([[ '', nil ]] + domain.values.collect {|v| [ v.display_name, v.id ] }, @personage.persona.biometric_value_id(domain))
+        .button-bar
+          = link_to 'Cancel', profile_path(@personage), :class => 'cancel'
+          = f.submit 'OK'
+          

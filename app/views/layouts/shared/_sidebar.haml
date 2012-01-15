@@ -9,13 +9,13 @@
   - if current_user
     .block.userspace
       .portrait
-        = thimble_link_to_profile(current_user, profile_path, :class => 'current_user')
+        = thimble_link_to_profile(current_user, profile_path(current_user), :class => 'current_user')
       %span.username
         = personages_select_tag(current_user)
-        = link_to 'Edit', profile_path
+        = link_to 'Edit', current_profile_path, :class => 'edit_profile'
 
   .block.ambassador
-    .portrait= thimble_image_tag(current_site.home_wave)
+    .portrait= thimble_image_tag(current_site.home_user)
     = link_to current_site.home_wave.subject, root_path
 
   = render_sidebar_headshot
@@ -31,6 +31,8 @@
           = link_to 'Invitations', invitations_path
       %li.logout
         = link_to 'Logout', logout_path, :method => :delete
+      - if content_for? :sidebar_menu
+        = content_for :sidebar_menu
 
   - if false
     %input{:name => "search", :placeholder => "Search...", :type => "text"}/

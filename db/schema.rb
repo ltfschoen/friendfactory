@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111221013846) do
+ActiveRecord::Schema.define(:version => 20111222002947) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20111221013846) do
     t.integer  "user_id"
     t.integer  "persona_id"
     t.integer  "profile_id"
+    t.string   "state"
     t.boolean  "default",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -333,7 +334,7 @@ ActiveRecord::Schema.define(:version => 20111221013846) do
     t.datetime "updated_at"
     t.text     "css"
     t.string   "mailer"
-    t.integer  "home_wave_id"
+    t.integer  "user_id"
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true

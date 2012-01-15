@@ -45,6 +45,8 @@ class User < ActiveRecord::Base
       })
   }
 
+  scope :enabled, where(:state => :enabled)
+
   ### Site
 
   belongs_to :site
@@ -62,7 +64,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :default_personage
 
   def default_personage_attributes=(attrs)
-    attrs[:persona_attributes].merge!(:type => 'Persona::Person')
+    attrs[:persona_attributes].merge!(:type => 'person')
     build_default_personage(attrs.merge(:default => true))
   end
 
@@ -79,7 +81,6 @@ class User < ActiveRecord::Base
   end
 
   private :attach_to_account
-
 
   ###
 

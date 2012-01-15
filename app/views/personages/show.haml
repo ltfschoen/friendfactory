@@ -1,0 +1,9 @@
+- if current_user.admin?
+  - content_for :sidebar_menu do
+    %li.logout= link_to 'New Person', new_profile_path(:type => 'person'), :class => 'new_personage'
+    %li.logout= link_to 'New Place', new_profile_path(:type => 'place'), :class => 'new_personage'
+    %li.logout= link_to 'New Community', new_profile_path(:type => 'community'), :class => 'new_personage'
+    %li.logout= link_to 'New Ambassador', new_profile_path(:type => 'ambassador'), :class => 'new_personage'
+
+#frame
+  = render :partial => File.join('personages', @personage.persona_type, 'show')

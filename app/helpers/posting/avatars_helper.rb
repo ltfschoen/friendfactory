@@ -15,7 +15,7 @@ module Posting::AvatarsHelper
     if personage.present?
       handle    = personage.handle
       size      = opts.delete(:size) || '32x32'
-      css_class = [ opts.delete(:class), 'thimble' ].compact.join(' ')
+      css_class = [ opts.delete(:class), 'thimble', "pid-#{personage[:id]}" ].compact.join(' ')
       image_tag(personage.avatar.url(:thumb), :size => size, :alt => handle, :title => handle, :class => css_class)
     end
   end

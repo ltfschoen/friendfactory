@@ -22,10 +22,11 @@
 	display: block;
 }
 
-#sidebar .block.userspace span.username a[href='/profile'] {
+#sidebar .block.userspace span.username a.edit_profile {
 	font-size: 12px;
 	font-style: italic;
 	margin-top: 4px;
+	padding-left: 2px;
 }
 
 #sidebar .block.navspace ul li {

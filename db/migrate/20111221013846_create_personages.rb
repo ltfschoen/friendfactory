@@ -4,12 +4,13 @@ class CreatePersonages < ActiveRecord::Migration
       t.integer :user_id
       t.integer :persona_id
       t.integer :profile_id
+      t.string  :state
       t.boolean :default, :default => false
       t.timestamps
     end
 
     Personage.class_eval {
-      attr_accessible :id, :user, :persona, :profile, :default
+      attr_accessible :id, :user, :persona, :profile, :default, :state
     }
 
     say_with_time 'initializing user personages' do
@@ -17,7 +18,7 @@ class CreatePersonages < ActiveRecord::Migration
         User.all.each do |user|
           persona = Persona::Base.find_by_user_id(user.id)
           profile = Wave::Profile.find_by_user_id(user.id)
-          Personage.create!(:id => user.id, :user => user, :persona => persona, :profile => profile, :default => true)
+          Personage.create!(:id => user.id, :user => user, :persona => persona, :profile => profile, :default => true, :state => :enabled)
         end
       end
     end
@@ -29,11 +30,12 @@ class CreatePersonages < ActiveRecord::Migration
             if user = site.users.find_by_email('michael@michaelbamford.com')
               personage = Personage.create!(
                   :default => true,
+                  :state   => :enabled,
                   :user    => user,
                   :profile => wave,
-                  :persona_attributes => { :type => 'Persona::Community', :handle => 'Community' })
+                  :persona_attributes => { :type => 'community', :handle => 'Popular' })
               wave[:user_id] = personage.id
-              wave.save!
+              wave.save(:validate => false)
             end
           end
         end

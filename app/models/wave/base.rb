@@ -9,10 +9,6 @@ class Wave::Base < ActiveRecord::Base
   alias_attribute :subject, :topic
   alias_attribute :body, :description
   
-  def technical_description
-    self.class.name.demodulize
-  end
-
   delegate \
       :email,
       :emailable?,

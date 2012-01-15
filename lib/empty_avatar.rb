@@ -1,6 +1,6 @@
 class EmptyAvatar
 
-  EmptyAvatarUrl = 'silhouette-q.gif'
+  EmptyAvatarUrl = '/images/silhouette-q.gif'
 
   def initialize(personage)
     @personage = personage

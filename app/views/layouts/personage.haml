@@ -11,14 +11,14 @@
   = stylesheet_link_tag |
       'layouts/reset', |
       'application', |
-      'layouts/profile/base', |
+      'layouts/personage/base', |
       'layouts/wave/community/sidebar', |
       'layouts/wave/community/sidebar-override', |
       'posting/headshot', |
       'posting/portrait', |
       'posting/portrait-override', |
     :media => 'screen', |
-    :cache => 'layouts/profile/cache'
+    :cache => 'layouts/personage/cache'
 
   = stylesheet_link_tag "#{current_site.name}/profile", :media => 'screen'
 
@@ -36,8 +36,9 @@
       'jquery.fileupload.v4/jquery.fileupload-ui', |
       'jquery.placeholder.min', |
       'jquery_ujs', |
-      'layouts/profile', |
-    :cache => 'layouts/profile.cached'
+      'layouts/shared/sidebar', |      
+      'layouts/personage', |
+    :cache => 'layouts/personage.cached'
 
   / [if lt IE 9]
     = javascript_include_tag 'ie8', :media => 'screen'

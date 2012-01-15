@@ -1,9 +1,9 @@
-= form_for Posting::Avatar.new, :url => avatar_profile_path, :html => { :multipart => true } do |f|
+= form_for Posting::Avatar.new, :url => avatar_profile_path(@personage), :html => { :multipart => true } do |f|
   .headshot-container
     .headshot
       .face.dropzone.avatar
         %ul#upload_posting_avatar
-          %li= headshot_image_tag(current_profile)
+          %li= headshot_image_tag(@personage.persona)
         %p.instructions
           %span.no-dragdrop.hidden Click here to choose
           %span.dragdrop Choose or drag

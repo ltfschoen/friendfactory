@@ -1,25 +1,27 @@
 module SidebarHelper
 
   def render_ambassadors_list
-    home_wave_user_id = current_site.home_wave[:user_id]
-    if ambassadors = Personage.site(current_site).
+    home_user_id = current_site.user_id
+    if ambassadors = Personage.enabled.site(current_site).
         type(:ambassador).
         includes(:persona => :avatar).
-        where([ '`personages`.`id` <> ?', home_wave_user_id ])
+        where([ '`personages`.`id` <> ?', home_user_id ])
       render :partial => 'layouts/shared/ambassadors', :object => ambassadors
     end
   end
 
   def personages_select_tag(personage)
-    personages = Personage.where(:user_id => personage[:user_id]).all
-    if personages.length == 1
+    personages = Personage.enabled.where(:user_id => personage[:user_id]).all
+    case
+    when personages.length == 1
       link_to current_user.handle, url_for(current_profile)
-    else
-      select_tag 'id', options_from_collection_for_select(personages, :id, :description, current_user.id),
+    when personages.length > 1
+      desc = 'description'
+      desc += '_with_id' if Rails.env == 'development'
+      select_tag 'personage[id]', options_from_collection_for_select(personages, :id, desc.to_sym, current_user.id),
           :include_blank => false,
           :'data-remote' => true,
-          :'data-method' => :put,
-          :'data-url'    => switch_personages_path(:format => :js)
+          :'data-method' => :put
     end
   end
 

@@ -1,19 +1,25 @@
 class Personage < ActiveRecord::Base
 
+  include ActiveRecord::Transitions
+
+  set_inheritance_column nil
+
   attr_accessible \
       :persona_attributes,
       :avatar,
+      :emailable,
       :default
 
   delegate \
       :site,
       :email,
-      :state,
       :admin?,
       :uid,
       :gid,
       :emailable?,
+      :emailable=,
       :current_login_at,
+      :last_login_at,
       :online?,
     :to => :user
 
@@ -30,6 +36,15 @@ class Personage < ActiveRecord::Base
       :avatar=,
     :to => :persona
 
+  state_machine do
+    state :disabled
+    state :enabled
+
+    event :enable do
+      transitions :to => :enabled, :from => [ :disabled ]
+    end
+  end
+
   belongs_to :user
   belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
   belongs_to :profile, :class_name => 'Wave::Base'
@@ -39,9 +54,13 @@ class Personage < ActiveRecord::Base
       where(:users => { :site_id => site.id })
   }
 
-  scope :type, lambda { |type|
+  scope :user, lambda { |user|
+      where(:user_id => user.id)
+  }
+
+  scope :type, lambda { |*types|
       joins(:persona).
-      where(:personas => { :type => "Persona/#{type}".camelize })
+      merge(Persona::Base.type(*types))
   }
 
   scope :wave, lambda { |wave|
@@ -53,24 +72,51 @@ class Personage < ActiveRecord::Base
       merge(Persona::Base.has_avatar)
   }
 
+  scope :home_users, lambda { |site|
+      type(:ambassador, :place, :community).
+      joins(:profile).
+      joins(:user).
+      merge(Wave::Base.published).
+      merge(Wave::Base.site(site)).
+      merge(User.enabled)
+  }
+
+  scope :enabled, where(:state => :enabled)
+
   accepts_nested_attributes_for :persona
 
   def persona_attributes=(attrs)
-    attrs.reverse_merge!(:type => 'Persona::Base')
-    if klass = attrs.delete(:type).constantize rescue nil
+    if persona.nil?
+      type = "Persona::#{(attrs.delete(:type) || 'base').titleize}"
+      klass = type.constantize
       self.persona = klass.new(attrs)
+    else
+      persona.update_attributes(attrs)
     end
   end
 
-  def type
-    persona[:type].demodulize.downcase
+  def persona_type
+    if persona
+      persona[:type].demodulize.downcase
+    end
   end
 
   def description
     handle
   end
 
+  def description_with_id
+    [ description, "(#{id})" ].compact.join(' ')
+  end
+
+  def display_name
+    [ type, handle ] * ' - '
+  end
+
+  ### Profile
+
   before_create :initialize_profile
+
   after_create  :initialize_profile_user_id
 
   private
@@ -85,12 +131,11 @@ class Personage < ActiveRecord::Base
   end
 
   def initialize_profile_user_id
-    if profile[:user_id].nil?
+    if profile && profile[:user_id].nil?
       profile[:user_id] = self
       profile.save
     end
   end
-
 
   ### Waves
 
@@ -109,7 +154,6 @@ class Personage < ActiveRecord::Base
     #   where(:sites_waves => { :site_id => site.id })
     # end
   end
-
 
   ### Conversations
 
@@ -141,13 +185,11 @@ class Personage < ActiveRecord::Base
     conversations.site(site).chatty.published
   end
 
-
   ### Postings
 
   has_many :postings,
       :class_name  => 'Posting::Base',
       :foreign_key => 'user_id'
-
 
   ### Invitations
 

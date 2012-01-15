@@ -9,19 +9,9 @@ module Admin::SitesHelper
       site.biometric_domains.build if site.biometric_domains.length == 0
     end
   end
-  
-  def home_waves(site)
-    (persona_waves(site) + community_waves(site)).uniq
-  end
-  
-  private
-  
-  def persona_waves(site)
-    site.waves.published.joins(:user => :role).where(:roles => { :name => [ :ambassador, :place ]})
-  end
-  
-  def community_waves(site)
-    site.waves.type(Wave::Community).published
+
+  def home_users(site)
+    Personage.home_users(site).includes(:profile).includes(:persona)
   end
 
 end

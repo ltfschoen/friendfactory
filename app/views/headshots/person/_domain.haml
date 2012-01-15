@@ -1,5 +1,0 @@
-%tr{ :class => domain.name }
-  %td.label
-    = domain.display_name
-  %td.detail
-    = domain.values.where(:id => current_persona.biometric_value_id(domain)).first.try(:display_name)

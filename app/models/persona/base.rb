@@ -5,6 +5,7 @@ class Persona::Base < ActiveRecord::Base
   set_table_name 'personas'
 
   class_attribute :default_profile_type
+
   self.default_profile_type = 'Wave::Base'
 
   attr_accessible \
@@ -19,6 +20,10 @@ class Persona::Base < ActiveRecord::Base
   belongs_to :avatar,
       :class_name => 'Posting::Avatar',
       :conditions => { :state => :published }
+
+  scope :type, lambda { |*types|
+      where(:type => types.map { |type| "Persona/#{type}".camelize })
+  }
 
   scope :has_avatar, where('`avatar_id` is not null')
 

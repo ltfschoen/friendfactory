@@ -1,0 +1,22 @@
+- persona = @personage.persona
+.headshot-container
+  .headshot
+    .face
+      .pane
+        %table.biometrics
+          %tr
+            %td.label First Name
+            %td.detail= persona.handle
+          %tr
+            %td.label Age
+            %td.detail= persona.age.present? ? persona.age : '&nbsp;'.html_safe
+          %tr
+            %td.label Birthday
+            %td.detail= persona.dob.try(:strftime, '%B %e') || '&nbsp;'.html_safe
+          %tr
+            %td.label Location
+            %td.detail= persona.location
+          - current_site.biometric_domains.each do |biometric_domain|
+            = render :partial => File.join('personages', 'person', 'domain'), :object => biometric_domain
+      .button-bar
+        = link_to 'Edit', edit_profile_path(@personage), :class => 'button edit_profile'
