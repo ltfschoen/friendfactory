@@ -162,6 +162,14 @@ form.edit_personage .field_with_errors input:-moz-placeholder {
 	color: #A00;
 }
 
-.place_persona_map {
+.face .place_persona_map {
 	margin-top: 4px;
 }
+
+form.edit_personage textarea.ambassador_persona_description {
+	width: 97%;
+	float: right;
+	height: 13em;
+	margin-top: 4px;
+}
+
