@@ -1,0 +1,8 @@
+- if user_type = local_assigns[:user_type] || 'users'
+  - user_type = user_type.to_s.pluralize
+- if users.present?
+  %ul.block{ :class => user_type }
+    - users.each do |user|
+      %li
+        .portrait= thimble_image_tag(user)
+        = link_to user.handle, url_for(user.profile), :class => 'handle'

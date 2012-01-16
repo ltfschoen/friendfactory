@@ -83,6 +83,8 @@ class Personage < ActiveRecord::Base
 
   scope :enabled, where(:state => :enabled)
 
+  scope :exclude, lambda { |id| where('`personages`.`id` <> ?', id) }
+
   accepts_nested_attributes_for :persona
 
   def persona_attributes=(attrs)

@@ -1,12 +1,30 @@
 module SidebarHelper
 
-  def render_ambassadors_list
-    home_user_id = current_site.user_id
-    if ambassadors = Personage.enabled.site(current_site).
-        type(:ambassador).
-        includes(:persona => :avatar).
-        where([ '`personages`.`id` <> ?', home_user_id ])
-      render :partial => 'layouts/shared/ambassadors', :object => ambassadors
+  def render_sidebar_ambassador
+    content_tag(:div, :class => 'block ambassador') do
+      content_tag(:div, thimble_image_tag(current_site.home_user), :class => 'portrait') <<
+        link_to(current_site.home_wave.subject, root_path)
+    end
+  end
+
+  def render_sidebar_users_list(user_type)
+    home_user_id = current_site[:user_id]
+    if users = Personage.enabled.site(current_site).type(user_type).includes(:persona => :avatar).exclude(home_user_id)
+      render :partial => 'layouts/shared/users_list', :locals => { :users => users, :user_type => user_type }
+    end
+  end
+
+  def render_sidebar_ambassadors_list
+    render_sidebar_users_list(:ambassador)
+  end
+
+  def render_sidebar_places_list
+    render_sidebar_users_list(:place)
+  end
+
+  def render_sidebar_headshot
+    if content_for? :sidebar_headshot
+      content_tag(:div, content_for(:sidebar_headshot ), :class => 'block')
     end
   end
 
@@ -20,12 +38,6 @@ module SidebarHelper
           :include_blank => false,
           :'data-remote' => true,
           :'data-method' => :put
-    end
-  end
-
-  def render_sidebar_headshot
-    if content_for? :sidebar_headshot
-      content_tag(:div, content_for(:sidebar_headshot ), :class => 'block')
     end
   end
 

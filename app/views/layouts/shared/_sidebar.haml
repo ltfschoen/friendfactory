@@ -14,12 +14,10 @@
         = personages_select_tag(current_user)
         = link_to 'Edit', current_profile_path, :class => 'edit_profile'
 
-  .block.ambassador
-    .portrait= thimble_image_tag(current_site.home_user)
-    = link_to current_site.home_wave.subject, root_path
-
+  = render_sidebar_ambassador
   = render_sidebar_headshot
-  = render_ambassadors_list
+  = render_sidebar_ambassadors_list
+  = render_sidebar_places_list
 
   .block.navspace
     %ul
