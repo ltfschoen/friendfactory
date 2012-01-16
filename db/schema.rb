@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111222002947) do
+ActiveRecord::Schema.define(:version => 20120116084905) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -160,6 +160,15 @@ ActiveRecord::Schema.define(:version => 20111222002947) do
     t.string   "last_name"
     t.integer  "avatar_id"
     t.string   "type"
+    t.string   "address"
+    t.string   "street"
+    t.string   "locality"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "post_code"
+    t.decimal  "lat",         :precision => 10, :scale => 7
+    t.decimal  "lng",         :precision => 10, :scale => 7
   end
 
   add_index "personas", ["first_name"], :name => "index_user_info_on_first_name"

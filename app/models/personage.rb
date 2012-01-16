@@ -102,11 +102,7 @@ class Personage < ActiveRecord::Base
   end
 
   def description
-    handle
-  end
-
-  def description_with_id
-    [ description, "(#{id})" ].compact.join(' ')
+    [ persona_type.try(:titleize), handle ].compact.join(' ')
   end
 
   def display_name

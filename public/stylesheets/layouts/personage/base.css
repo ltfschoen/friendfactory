@@ -88,12 +88,12 @@ form.edit_personage table.biometrics td.detail {
 }
 
 form.edit_personage input[type='text'] {
-	padding: 2px 4px;
+	padding: 2px 0 2px 2px;
 }
 
 form.edit_personage input#personage_persona_attributes_handle,
 form.edit_personage input#personage_persona_attributes_location {
-	width: 95px;
+	width: 98%;
 }
 
 form.edit_personage select {
@@ -160,4 +160,8 @@ form.edit_personage .field_with_errors input::-webkit-input-placeholder {
 
 form.edit_personage .field_with_errors input:-moz-placeholder {
 	color: #A00;
+}
+
+.place_persona_map {
+	margin-top: 4px;
 }

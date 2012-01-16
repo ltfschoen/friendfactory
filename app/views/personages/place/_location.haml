@@ -1,0 +1,15 @@
+- persona = @personage.persona
+.headshot-container
+  .headshot
+    .face
+      .pane
+        %table.biometrics
+          %tr
+            %td.label Name
+            %td.detail= persona.handle
+          %tr
+            %td.label Location
+            %td.detail= persona.location
+        = image_tag persona.map_url, :alt => persona.address, :title => persona.address, :class => 'place_persona_map'
+      .button-bar
+        = link_to 'Edit', edit_profile_path(@personage), :class => 'button edit_profile'

@@ -18,7 +18,7 @@ class PersonagesController < ApplicationController
     @personage = current_user_record.personages.build(attrs)
     @personage.save(:validate => false)
     respond_to do |format|
-      format.html
+      format.html { render :action => 'edit' }
     end
   end
 
@@ -34,7 +34,8 @@ class PersonagesController < ApplicationController
     respond_to do |format|
       if @personage.update_attributes(params[:personage])
         @personage.enable! unless @personage.enabled?
-        @personage.profile.set_tag_list_on!(current_site)
+        # TODO
+        # @personage.profile.set_tag_list_on!(current_site)
         format.html { redirect_to profile_path }
       else
         format.html { render :action => 'edit' }
@@ -56,6 +57,7 @@ class PersonagesController < ApplicationController
       @personage = current_user_record.personages.find(params[:id])
       @posting = Posting::Avatar.new(params[:posting_avatar]) { |posting| posting.user = @personage }
       if @personage.update_attribute(:avatar, @posting)
+        @personage.enable if @personage.disabled?
         @personage.profile.postings << @posting
         @posting.publish!
       end

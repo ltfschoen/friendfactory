@@ -7,7 +7,7 @@
             %table.biometrics
               %tr
                 %td.label First Name
-                %td.detail= persona_form.text_field :handle, :placeholder => 'first name', :maxlength => 12
+                %td.detail= persona_form.text_field :handle, :placeholder => 'first name', :maxlength => 20
               %tr
                 %td.label Age
                 %td.detail= persona_form.text_field :age, :placeholder => 'age', :maxlength => 2
@@ -27,4 +27,3 @@
         .button-bar
           = link_to 'Cancel', profile_path(@personage), :class => 'cancel'
           = f.submit 'OK'
-          
