@@ -72,7 +72,7 @@ class Personage < ActiveRecord::Base
       merge(Persona::Base.has_avatar)
   }
 
-  scope :home_users, lambda { |site|
+  scope :homeable, lambda { |site|
       type(:ambassador, :place, :community).
       joins(:profile).
       joins(:user).
@@ -101,12 +101,8 @@ class Personage < ActiveRecord::Base
     end
   end
 
-  def description
-    [ persona_type.try(:titleize), handle ].compact.join(' ')
-  end
-
   def display_name
-    [ type, handle ] * ' - '
+    [ persona_type.try(:titleize), handle ].compact.join(' ')
   end
 
   ### Profile

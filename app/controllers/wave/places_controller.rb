@@ -3,9 +3,11 @@ class Wave::PlacesController < ApplicationController
   extend ActiveSupport::Memoizable
 
   before_filter :require_user
-  helper_method :wave, :profile, :postings
 
-  layout 'wave/conversation'
+  helper_method :wave, :profile, :postings
+  helper_method :page_title
+
+  layout 'wave/community'
 
   cattr_reader :per_page
 
@@ -32,5 +34,9 @@ class Wave::PlacesController < ApplicationController
   end
 
   memoize :postings
+
+  def page_title
+    wave.user.handle
+  end
 
 end

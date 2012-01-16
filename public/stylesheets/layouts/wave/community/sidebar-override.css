@@ -29,6 +29,10 @@
 	padding-left: 2px;
 }
 
+#sidebar .block.userspace select {
+	max-width: 150px;
+}
+
 #sidebar .block.navspace ul li {
 	line-height: 20px;
 }

@@ -16,7 +16,7 @@ module SidebarHelper
     when personages.length == 1
       link_to current_user.handle, url_for(current_profile)
     when personages.length > 1
-      select_tag 'personage[id]', options_from_collection_for_select(personages, :id, :description, current_user.id),
+      select_tag 'personage[id]', options_from_collection_for_select(personages, :id, :display_name, current_user.id),
           :include_blank => false,
           :'data-remote' => true,
           :'data-method' => :put
