@@ -102,15 +102,15 @@
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#333333', Direction=155, Strength=3);
 }
 
-#sidebar .block.ambassador a,
-#sidebar .block.place a {
+#sidebar .block.home_user a {
 	display: block;
 	float: left;
 	margin: 8px 0 0 10px;
 }
 
 #sidebar ul.block.ambassadors li,
-#sidebar ul.block.places li {
+#sidebar ul.block.places li,
+#sidebar ul.block.communities li {
 	width: 180px;
 	display: block;
 	clear: both;
@@ -122,7 +122,8 @@
 }
 
 #sidebar ul.block.ambassadors a.handle,
-#sidebar ul.block.places a.handle {
+#sidebar ul.block.places a.handle,
+#sidebar ul.block.communities a.handle {
 	display: block;
 	float: left;
 	margin: 6px 0 0 10px;

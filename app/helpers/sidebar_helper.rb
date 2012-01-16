@@ -1,9 +1,9 @@
 module SidebarHelper
 
   def render_sidebar_ambassador
-    content_tag(:div, :class => 'block ambassador') do
+    content_tag(:div, :class => 'block home_user') do
       content_tag(:div, thimble_image_tag(current_site.home_user), :class => 'portrait') <<
-        link_to(current_site.home_wave.subject, root_path)
+      link_to(current_site.home_wave.subject, root_path)
     end
   end
 
@@ -20,6 +20,10 @@ module SidebarHelper
 
   def render_sidebar_places_list
     render_sidebar_users_list(:place)
+  end
+
+  def render_sidebar_communities_list
+    render_sidebar_users_list(:community)
   end
 
   def render_sidebar_headshot
