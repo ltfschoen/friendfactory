@@ -73,11 +73,11 @@ class Wave::Profile < Wave::Base
   end
 
   def has_friended?(profile_id, type)
-    self.friendships.where(:friend_id => profile_id).type(type).limit(1).present?
+    friendships.where(:friend_id => profile_id).type(type).limit(1).present?
   end
 
   def has_poked?(profile_id)
-    self.has_friended?(profile_id, ::Friendship::Poke)
+    has_friended?(profile_id, ::Friendship::Poke)
   end
 
   def touch(avatar = nil)

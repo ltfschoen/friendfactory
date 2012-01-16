@@ -1,1 +1,9 @@
-= image_tag 'map_placeholder_02.png'
+- persona = @personage.persona
+%table.biometrics
+  %tr
+    %td.label Name
+    %td.detail= persona.handle
+  %tr
+    %td.label Location
+    %td.detail= persona.location
+= image_tag persona.map_url, :alt => persona.address, :title => persona.address, :class => 'place_persona_map'

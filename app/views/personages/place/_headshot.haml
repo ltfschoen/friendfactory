@@ -1,4 +1,7 @@
-- link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || wave.id
+- profile = personage.profile
+- persona = personage.persona
+- link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || profile.id
+
 .headshot-container
   .headshot[ wave ]{ :class => poke_class(wave.id) }
     .face-container
@@ -6,7 +9,6 @@
         = headshot_image_tag(wave)
         = link_to_close(link_to_close_wave_id)
         %span.handle
-          PLACE
           = persona.handle
         %ul.buddy-bar.primary
           %li= link_to 'Location', location_wave_profile_path(wave), :class => 'flip icon location', :'data-pane-name' => 'location'

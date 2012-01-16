@@ -5,7 +5,7 @@ class Posting::AvatarsController < ApplicationController
   def comments
     @comments = []
     if @posting = Posting::Base.find_by_id(params[:id])
-      @profile = @posting.user.profile(current_site)
+      @personage = @posting.user
       @comments = @posting.comments.published.order('updated_at desc')
     end
     respond_to do |format|

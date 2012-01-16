@@ -4,7 +4,7 @@ class Wave::PlacesController < ApplicationController
 
   before_filter :require_user
 
-  helper_method :wave, :profile, :postings
+  helper_method :wave, :postings
   helper_method :page_title
 
   layout 'wave/community'
@@ -14,7 +14,7 @@ class Wave::PlacesController < ApplicationController
   def show
     @@per_page = 50
     respond_to do |format|
-      format.html { render }
+      format.html
     end
   end
 
@@ -24,8 +24,6 @@ class Wave::PlacesController < ApplicationController
     # TODO Rescue from find exception
     current_site.waves.type(Wave::Place).includes(:user => :persona).find(params[:id])
   end
-  
-  alias :profile :wave
 
   memoize :wave
 

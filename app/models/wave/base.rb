@@ -94,6 +94,14 @@ class Wave::Base < ActiveRecord::Base
     end
   end
 
+  def has_friended?(profile_id, type)
+    false
+  end
+
+  def has_poked?(profile_id)
+    false
+  end
+
   private
 
   def permitted_user_ids

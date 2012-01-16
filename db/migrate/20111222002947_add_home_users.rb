@@ -8,7 +8,6 @@ class AddHomeUsers < ActiveRecord::Migration
       Site.all.each do |site|
         if wave = site.waves.published.type(Wave::Community).where(:slug => Site::DefaultHomeWaveSlug).order('created_at desc').limit(1).first
           site[:user_id] = wave[:user_id]
-          puts site[:user_id]
           site.save!
         else
           say "#{site.name} (id:#{site.id}) has no home user"

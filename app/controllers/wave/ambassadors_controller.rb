@@ -16,7 +16,7 @@ class Wave::AmbassadorsController < ApplicationController
   def show
     @@per_page = 50
     respond_to do |format|
-      format.html { render }
+      format.html
     end
   end
 

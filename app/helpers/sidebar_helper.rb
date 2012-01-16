@@ -11,7 +11,7 @@ module SidebarHelper
   end
 
   def personages_select_tag(personage)
-    personages = Personage.enabled.where(:user_id => personage[:user_id]).all
+    personages = Personage.enabled.where(:user_id => personage[:user_id]).all.sort_by { |p| p.display_name }
     case
     when personages.length == 1
       link_to current_user.handle, url_for(current_profile)

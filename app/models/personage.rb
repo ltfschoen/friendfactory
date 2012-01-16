@@ -124,7 +124,7 @@ class Personage < ActiveRecord::Base
 
   def initialize_profile_user_id
     if profile && profile[:user_id].nil?
-      profile[:user_id] = self
+      profile[:user_id] = self.id
       profile.save
     end
   end

@@ -25,7 +25,7 @@ class Wave::ProfilesController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          render :partial => 'headshot', :locals => { :profile => wave }
+          render :partial => 'headshot', :locals => { :personage => wave.user }
         else
           render
         end
@@ -90,6 +90,8 @@ class Wave::ProfilesController < ApplicationController
   end
   
   def location
+    profile = Wave::Base.find(params[:id])
+    @personage = profile.user
     respond_to do |format|
       format.html { render :layout => false }
     end
@@ -125,7 +127,7 @@ class Wave::ProfilesController < ApplicationController
 
   def wave
     # TODO Rescue from find exception
-    current_site.waves.type(Wave::Profile).find(params[:id])
+    current_site.waves.type(Wave::Profile, Wave::Ambassador, Wave::Place, Wave::Community).find(params[:id])
   end
 
   memoize :wave
