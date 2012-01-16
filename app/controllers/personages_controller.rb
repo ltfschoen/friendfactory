@@ -7,7 +7,7 @@ class PersonagesController < ApplicationController
   layout 'personage'
 
   def show
-    @personage = params[:id] && current_user_record.personages.enabled.find(params[:id]) || current_user
+    @personage = params[:id] && current_user_record.personages.find(params[:id]) || current_user
     respond_to do |format|
       format.html
     end
