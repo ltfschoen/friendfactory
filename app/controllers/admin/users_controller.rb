@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :require_admin
+
   helper_method :site, :user, :users
   helper_method :page_title
 
@@ -12,10 +13,15 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def update
-    user.role_id = params[:user].delete(:role_id) || user.role_id
+  def show
     respond_to do |format|
-      format.json { render :json => user.update_attributes(params[:user]) }
+      format.html { render }
+    end
+  end
+
+  def update
+    respond_to do |format|
+      format.json { render :json => update_user_attributes }
     end
   end
 
@@ -35,6 +41,13 @@ class Admin::UsersController < ApplicationController
 
   def page_title
     "#{site.display_name} - Users"
+  end
+
+  def update_user_attributes
+    if admin = params[:user].delete(:admin)
+      user[:admin] = admin
+    end
+    update_attributes(params[:user])
   end
 
 end

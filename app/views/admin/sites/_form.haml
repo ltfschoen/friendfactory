@@ -85,7 +85,7 @@
       %td
         = f.label :home_wave_id
       %td
-        = f.collection_select :home_wave_id, home_waves(@site), :id, :technical_description
+        = f.collection_select :user_id, home_users(@site), :id, :display_name
 
     %tr
       %td &nbsp;

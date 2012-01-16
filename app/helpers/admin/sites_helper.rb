@@ -11,7 +11,7 @@ module Admin::SitesHelper
   end
 
   def home_users(site)
-    Personage.home_users(site).includes(:profile).includes(:persona)
+    Personage.homeable(site).enabled.includes(:profile).includes(:persona).sort_by{ |p| p.display_name }
   end
 
 end

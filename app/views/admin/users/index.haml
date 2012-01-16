@@ -5,26 +5,32 @@
       %table{ :class => [ 'admin', page_class ] }
         %thead
           %tr
-            %th &nbsp;
-            %th Email
+            %th Avatar
             %th Handle
-            %th Last Login
-            %th Role
             %th Email
+            %th Last Login
+            %th.role Admin
+            %th.emailable Email
         %tbody
           - users.each do |user|
+            - default_personage = user.default_personage
             %tr
               %td
-                .portrait= thimble_image_tag(user)
-              %td= user.email
-              %td= user.handle
+                .portrait= link_to thimble_image_tag(default_personage), admin_site_user_path(site, user)
+                - user.personages.each do |personage|
+                  - unless personage.id == default_personage.id
+                    .portrait= link_to thimble_image_tag(personage), admin_site_user_path(site, user)
+              %td
+                = link_to default_personage.handle, admin_site_user_path(site, user)
+              %td
+                = link_to user.email, admin_site_user_path(site, user)
               %td.last_login
-                - if login_date = (user.current_login_at || user.last_login_at)
+                - if login_date = user.current_login_at || user.last_login_at
                   #{distance_of_time_in_words_to_now(login_date)}&nbsp;ago
                 - else
                   &nbsp;
               %td.role
-                = select_tag "user[role_id]", options_from_collection_for_select(Role.all, :id, :display_name, user.role_id), :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_role"              
+                = check_box_tag "user[admin]", true, user.admin?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_admin"
               %td.emailable= check_box_tag "user[emailable]", true, user.emailable?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_emailable"
     = will_paginate(users)
     .button-bar.footer

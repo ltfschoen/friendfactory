@@ -1,0 +1,15 @@
+- personages = Personage.user(user)
+- default_personage_id = 
+
+              %td= link_to content_tag(:div, thimble_image_tag(user), :class => 'portrait'), admin_site_user_path(site, user)
+              %td= link_to user.handle, admin_site_user_path(site, user)
+
+#frame
+  .container
+    %h1 #{user.handle} @ #{site.display_name}
+    %table{ :class => [ 'admin', page_class ] }
+      %tr
+        %td Default Persona
+        %td
+          = select_tag "user[default_personage_id]", options_from_collection_for_select(Personage.user(user), :id, :display_name), :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_default_personage"
+        - for 
