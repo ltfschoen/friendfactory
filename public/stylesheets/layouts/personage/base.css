@@ -169,7 +169,8 @@ form.edit_personage .field_with_errors textarea:-moz-placeholder {
 	margin-top: 4px;
 }
 
-form.edit_personage textarea.ambassador_persona_description {
+form.edit_personage textarea.ambassador_persona_description,
+form.edit_personage textarea.community_persona_description {
 	width: 97%;
 	float: right;
 	height: 13em;

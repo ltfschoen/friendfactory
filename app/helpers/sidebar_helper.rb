@@ -10,7 +10,7 @@ module SidebarHelper
   def render_sidebar_users_list(user_type)
     home_user_id = current_site[:user_id]
     if users = Personage.enabled.site(current_site).type(user_type).includes(:persona => :avatar).exclude(home_user_id)
-      render :partial => 'layouts/shared/users_list', :locals => { :users => users, :user_type => user_type }
+      render :partial => 'layouts/shared/usersspace', :locals => { :users => users, :user_type => user_type }
     end
   end
 

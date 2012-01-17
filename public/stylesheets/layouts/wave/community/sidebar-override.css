@@ -108,9 +108,7 @@
 	margin: 8px 0 0 10px;
 }
 
-#sidebar ul.block.ambassadors li,
-#sidebar ul.block.places li,
-#sidebar ul.block.communities li {
+#sidebar ul.block.usersspace li {
 	width: 180px;
 	display: block;
 	clear: both;
@@ -119,11 +117,14 @@
 	line-height: 28px;
 	text-shadow: 0 1px 1px #000;
 	font-size: 13px;
+	margin-top: 6px;
 }
 
-#sidebar ul.block.ambassadors a.handle,
-#sidebar ul.block.places a.handle,
-#sidebar ul.block.communities a.handle {
+#sidebar ul.block.usersspace li:first-child {
+	margin-top: 0;
+}
+
+#sidebar ul.block.usersspace a.handle {
 	display: block;
 	float: left;
 	margin: 6px 0 0 10px;
