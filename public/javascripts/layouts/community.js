@@ -259,7 +259,16 @@ jQuery(function($) {
 
 jQuery(window).load(function() {
 
-	var $frames = $('.post_frame');
+	var $frames = $('.post_frame'),
+		$sidebar = $('#sidebar'),
+		$logout = $sidebar.find('.logout'),
+		sidebarHeight = $logout.position().top + $logout.height();
+
+	if (sidebarHeight > $(window).height()) {
+		$sidebar
+			.height($(document).height())
+			.addClass('small-screen');
+	}
 
 	$frames.each(function() {
 		$.initPost(this);

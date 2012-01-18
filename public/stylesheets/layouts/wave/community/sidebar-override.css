@@ -1,9 +1,16 @@
 #sidebar {
-  width: 220px;
+	width: 220px;
+}
+
+#sidebar.small-screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-height: 100%;
 }
 
 #sidebar .block {
-  width: 200px;
+	width: 200px;
 }
 
 #sidebar a {
@@ -80,7 +87,7 @@
 }
 
 #sidebar .block.navspace ul li.logout:before {
-	background: none;
+	background-position: -25px 0;
 }
 
 #sidebar .block.rollcall .portrait {
@@ -128,4 +135,8 @@
 	display: block;
 	float: left;
 	margin: 6px 0 0 10px;
+}
+
+#sidebar .block.logout {
+	border-bottom: none;
 }
