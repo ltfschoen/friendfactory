@@ -7,7 +7,7 @@
 %head
   %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
   %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
-  %title #{current_site.display_name}
+  %title #{page_title}
 
   = stylesheet_link_tag |
       'layouts/reset', |
@@ -44,20 +44,20 @@
       'layouts/shared/unpublish-overlay', |
       'layouts/shared/nav', |
       'layouts/shared/tag_cloud', |
+      'layouts/shared/sidebar', |
+      'layouts/shared/sidebar-override', |
       'layouts/shared/compatibility', |
-      'layouts/wave/community/base', |
-      'layouts/wave/community/base-override', |
-      'layouts/wave/community/sidebar', |
-      'layouts/wave/community/sidebar-override', |
-      'layouts/wave/community/reaction', |
-      'layouts/wave/community/reaction-override', |
-      'layouts/wave/community/post_reaction', |
-      'layouts/wave/community/rollcall', |
-      'layouts/wave/community/floating', |
+      'layouts/three-column/base', |
+      'layouts/three-column/base-override', |
+      'layouts/three-column/reaction', |
+      'layouts/three-column/reaction-override', |
+      'layouts/three-column/post_reaction', |
+      'layouts/three-column/rollcall', |
+      'layouts/three-column/floating', |
     :media => 'screen', |
-    :cache => 'layouts/wave/profile/cache' #, :concat => true
+    :cache => 'cache/three-column' #, :concat => true
 
-  = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
+  = stylesheet_link_tag "#{current_site.name}/three-column", :media => 'screen'
 
   - if Rails.env.development?
     = stylesheet_link_tag 'development'
@@ -88,9 +88,9 @@
       'layouts/shared/album', |
       'layouts/shared/video', |
       'layouts/shared/compatibility', |
-      'layouts/shared/sidebar', |      
-      'layouts/community', |
-    :cache => 'layouts/wave/profile.cached'
+      'layouts/shared/sidebar', |
+      'layouts/three-column', |
+    :cache => 'cache/three-column'
 
   / [if lt IE 9]
     = javascript_include_tag 'ie8', :media => 'screen'
@@ -99,7 +99,7 @@
     = javascript_include_tag 'development'
 
   = csrf_meta_tag
-%body{ uid, gid, :class => controller.controller_name }
+%body{ uid, gid, :class => page_class }
   = render :partial => 'layouts/shared/sidebar'
   = compatibility_tag
   = yield

@@ -5,7 +5,7 @@ class Wave::Community < Wave::Base
   end
 
   def subject
-    (slug && slug.titleize) || 'Community'
+    user.handle
   end
 
 end

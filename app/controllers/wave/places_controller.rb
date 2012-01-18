@@ -7,7 +7,7 @@ class Wave::PlacesController < ApplicationController
   helper_method :wave, :postings
   helper_method :page_title
 
-  layout 'wave/community'
+  layout 'three-column'
 
   cattr_reader :per_page
 
@@ -39,7 +39,7 @@ class Wave::PlacesController < ApplicationController
   memoize :postings
 
   def page_title
-    wave.user.handle
+    "#{current_site.display_name} - #{wave.handle}"
   end
 
 end

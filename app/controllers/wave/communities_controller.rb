@@ -4,10 +4,10 @@ class Wave::CommunitiesController < ApplicationController
 
   before_filter :require_user
 
-  helper_method :wave, :postings, :profiles, :tags
+  helper_method :wave, :postings, :paged_users, :profiles, :tags
   helper_method :page_title
 
-  layout 'wave/community'
+  layout 'three-column'
 
   cattr_reader :per_page
 
@@ -46,13 +46,11 @@ class Wave::CommunitiesController < ApplicationController
 
   memoize :postings
 
-  def profiles
-    profiles = profiles_on_wave
-    profiles = profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).scoped if params[:tag].present?
-    profiles.paginate(:page => params[:page], :per_page => @@per_page)
+  def paged_users
+    Personage.where(:profile_id => profiles.map(&:id)).paginate(:page => params[:page], :per_page => @@per_page)
   end
 
-  memoize :profiles
+  memoize :paged_users
 
   def tags
     profiles_on_wave.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
@@ -62,9 +60,19 @@ class Wave::CommunitiesController < ApplicationController
 
   ###
 
+  def users_on_wave
+    Personage.enabled.wave(wave).all
+  end
+
   def profiles_on_wave
-    profile_ids = Personage.wave(wave).map(&:profile_id)
+    profile_ids = users_on_wave.map(&:profile_id)
     current_site.waves.where(:id => profile_ids).scoped
+  end
+
+  def profiles
+    profiles = profiles_on_wave
+    profiles = profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).scoped if params[:tag].present?
+    profiles.scoped
   end
 
   def scrub_tag(tag)
@@ -72,7 +80,7 @@ class Wave::CommunitiesController < ApplicationController
   end
 
   def page_title
-    "#{current_site.display_name} - Community"
+    "#{current_site.display_name} - #{wave.subject}"
   end
 
 end

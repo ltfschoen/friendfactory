@@ -5,9 +5,11 @@ class Wave::AmbassadorsController < ApplicationController
   extend ActiveSupport::Memoizable
 
   before_filter :require_user
-  helper_method :wave, :postings
 
-  layout 'wave/profile'
+  helper_method :wave, :postings
+  helper_method :page_title
+
+  layout 'three-column'
 
   prepend_view_path ::Resolver.new('wave/ambassadors')
 
@@ -34,5 +36,9 @@ class Wave::AmbassadorsController < ApplicationController
   end
 
   memoize :postings
+
+  def page_title
+    "#{current_site.display_name} - #{wave.handle}"
+  end
 
 end

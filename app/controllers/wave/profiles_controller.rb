@@ -7,7 +7,7 @@ class Wave::ProfilesController < ApplicationController
   helper_method :wave, :postings, :profile
   helper_method :page_title
 
-  layout 'wave/community'
+  layout 'three-column'
 
   cattr_reader :per_page
 
