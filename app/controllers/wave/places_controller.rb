@@ -28,7 +28,12 @@ class Wave::PlacesController < ApplicationController
   memoize :wave
 
   def postings
-    wave.postings.published.order('updated_at desc').paginate(:page => params[:page], :per_page => @@per_page)
+    wave.postings.
+      published.
+      order('`postings`.`updated_at` DESC').
+      includes(:user => :persona).
+      includes(:user => :profile).
+      paginate(:page => params[:page], :per_page => @@per_page)
   end
 
   memoize :postings
