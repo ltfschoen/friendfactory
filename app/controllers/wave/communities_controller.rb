@@ -3,7 +3,6 @@ class Wave::CommunitiesController < ApplicationController
   extend ActiveSupport::Memoizable
 
   before_filter :require_user
-  before_filter :redirect_to_home_wave, :only => [ :show ]
 
   helper_method :wave, :postings, :profiles, :tags
   helper_method :page_title
@@ -70,14 +69,6 @@ class Wave::CommunitiesController < ApplicationController
 
   def scrub_tag(tag)
     tag.downcase.gsub(/-/, ' ')
-  end
-
-  def redirect_to_home_wave
-    # TODO Root path to be dynamic
-    home_wave = current_site.home_wave
-    if home_wave[:type] != 'Wave::Community'
-      redirect_to url_for(home_wave)
-    end
   end
 
   def page_title
