@@ -1,19 +1,20 @@
 Friskyfactory::Application.routes.draw do
 
+  root :to => redirect { |params, request|
+    site_name = request.domain && request.domain.gsub(/\..*$/, '')
+    if site = Site.find_by_name(site_name)
+      wave = site.home_wave
+      type = wave.class.name.demodulize.downcase.pluralize
+      "/wave/#{type}/#{wave.id}"
+    end
+  }
+
   scope :module => 'wave' do
     # get 'wave' => 'communities#show' # TODO Remove
     # get 'events(/:tag)' => 'events#index', :as => 'events' # TODO Remove
     # get 'invitations' => 'invitations#index'
     get 'inbox' => 'conversations#index'
     # get ':slug', :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
-    root :to => redirect { |params, request|
-      site_name = request.domain && request.domain.gsub(/\..*$/, '')
-      if site = Site.find_by_name(site_name)
-        wave = site.home_wave
-        type = wave.class.name.demodulize.downcase.pluralize
-        "/wave/#{type}/#{wave.id}"
-      end
-    }
   end
 
   # To show waves
