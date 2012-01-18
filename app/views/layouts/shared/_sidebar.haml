@@ -2,9 +2,7 @@
   #head
     = link_to image_tag('logo.png', :site => true), root_path
 
-  - if false
-    .block.adspace
-      %img{:src => "http://placehold.it/180x75"}
+  = render_sidebar_adspace
 
   - if current_user
     .block.userspace
@@ -13,25 +11,20 @@
       %span.username
         = personages_select_tag(current_user)
         = link_to 'Edit', current_profile_path, :class => 'edit_profile'
+    .block.navspace
+      %ul
+        %li.messages
+          = link_to_unread_messages
+          = link_to 'Inbox', inbox_path
+        - if false
+          %li.invites
+            = link_to 'Invitations', invitations_path
 
-  = render_sidebar_ambassador
+  = render_sidebar_home_user
   = render_sidebar_headshot
-  = render_sidebar_ambassadors_list
-  = render_sidebar_places_list
   = render_sidebar_communities_list
-
-  .block.navspace
-    %ul
-      %li.messages
-        = link_to_unread_messages
-        = link_to 'Inbox', inbox_path
-      - if false
-        %li.invites
-          = link_to 'Invitations', invitations_path
-      %li.logout
-        = link_to 'Logout', logout_path, :method => :delete
-      - if content_for? :sidebar_menu
-        = content_for :sidebar_menu
+  = render_sidebar_places_list
+  = render_sidebar_ambassadors_list
 
   - if false
     %input{:name => "search", :placeholder => "Search...", :type => "text"}/
@@ -43,3 +36,10 @@
   - if content_for? :tag_cloud
     .block.tag_cloud
       = content_for :tag_cloud
+
+  .block.navspace.logout
+    %ul
+      %li.logout
+        = link_to 'Logout', logout_path, :method => :delete
+      - if content_for? :sidebar_menu
+        = content_for :sidebar_menu

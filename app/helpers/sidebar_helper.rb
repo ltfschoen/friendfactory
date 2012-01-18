@@ -1,6 +1,12 @@
 module SidebarHelper
 
-  def render_sidebar_ambassador
+  def render_sidebar_adspace
+    if false
+      content_tag(:div, image_tag("http://placehold.it/180x75"), :class => 'block adspace')
+    end
+  end
+
+  def render_sidebar_home_user
     content_tag(:div, :class => 'block home_user') do
       content_tag(:div, thimble_image_tag(current_site.home_user), :class => 'portrait') <<
       link_to(current_site.home_wave.subject, root_path)
