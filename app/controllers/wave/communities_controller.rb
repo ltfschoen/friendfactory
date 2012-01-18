@@ -22,7 +22,7 @@ class Wave::CommunitiesController < ApplicationController
   def rollcall
     @@per_page = 48
     respond_to do |format|
-      format.html { render }
+      format.html { render File.join('wave', 'shared', 'rollcall') }
     end
   end
 

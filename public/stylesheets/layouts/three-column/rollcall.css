@@ -1,18 +1,22 @@
 #rollcall {
-	min-width: 960px;
+	min-width: 480px;
 	margin-left: 221px;
 	overflow: hidden;
 	position: relative;
 }
 
-#rollcall .polaroid-container {
-	float: left;
-	margin: 20px 0 0 20px;
+#rollcall > h1 {
+	font-size: 2em;
+	display: block;
+	color: #333;
+	text-shadow: 0 1px 2px #FFF;
+	margin: 10px 0 10px 22px;
+	text-align: left;
 }
 
 #rollcall .headshot-container {
 	float: left;
-	margin: 20px 0 0 20px;
+	margin: 0 0 20px 20px;
 }
 
 .ie #rollcall .headshot-container {

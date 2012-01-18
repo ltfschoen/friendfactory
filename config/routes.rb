@@ -9,25 +9,17 @@ Friskyfactory::Application.routes.draw do
     end
   }
 
-  scope :module => 'wave' do
-    # get 'wave' => 'communities#show' # TODO Remove
-    # get 'events(/:tag)' => 'events#index', :as => 'events' # TODO Remove
-    # get 'invitations' => 'invitations#index'
-    get 'inbox' => 'conversations#index'
-    # get ':slug', :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
-  end
+  get '/stylesheets/:site_name(/:controller_name).:format' => 'admin/sites#stylesheets'
 
   # To show waves
   namespace :wave do
-    get ':id/rollcall(/:tag)' => 'communities#rollcall', :as => 'rollcall'
-
     resources :communities, :only => [ :show ] do
       member do
-        get :rollcall
+        get :rollcall, :path => 'rollcall(/:tag)'
       end
     end
 
-    resources :events, :only => [ :index, :show, :new, :create ]
+    # resources :events, :only => [ :index, :show, :new, :create ]
 
     resources :profiles, :only => [ :index, :show ] do
       member do
@@ -44,6 +36,12 @@ Friskyfactory::Application.routes.draw do
 
     resources :ambassadors, :only => [ :show ]
 
+    resources :places, :only => [ :show ] do
+      member do
+        get :rollcall, :path => 'rollcall(/:tag)'
+      end
+    end
+
     resources :conversations, :only => [ :index, :show ] do
       member do
         put :close
@@ -54,12 +52,12 @@ Friskyfactory::Application.routes.draw do
     resources :albums, :only => [ :index, :show, :new, :create ] # do
       # resources :photos, :only => [ :show ], :controller => 'albums'
     # end
-    
-    resources :places, :only => [ :show ]
   end
 
   scope :module => :wave do
     put 'waves/:id/unpublish' => 'waves#unpublish', :as => 'unpublish_wave'
+    get 'inbox' => 'conversations#index'
+    # get ':slug', :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
   end
 
   # Personages (Headshots)
@@ -159,7 +157,5 @@ Friskyfactory::Application.routes.draw do
       resources :users, :only => [ :index, :show, :update ]
     end
   end
-
-  get 'stylesheets/:site_name(/:controller_name).:format' => 'admin/sites#stylesheets'
 
 end

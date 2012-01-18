@@ -7,15 +7,15 @@
       - current = true
       - css_class += " current"
       - tag_as_param = nil
-    = link_to tag.name, wave_rollcall_path(params[:id], :tag => tag_as_param), :class => css_class
+    = link_to tag.name, url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id, :tag => tag_as_param), :class => css_class
     - if current
-      = link_to "(untag)", wave_rollcall_path(params[:id]), :class => 'tag1 current'
+      = link_to "(untag)", url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id), :class => 'tag1 current'
 
 #rollcall
+  %h1 #{wave.subject} RollCall
   %div.clearfix
     - paged_users.in_groups_of(4) do |group|
       - group.each_with_index do |user, idx|
         - unless user.nil?
           = render_headshot(user)
-          =# render :partial => 'wave/profiles/headshot', :locals => { :profile => profile }
   = will_paginate paged_users, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
