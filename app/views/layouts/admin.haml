@@ -15,13 +15,13 @@
       'posting/portrait', |
       'posting/portrait-override', |
       'layouts/shared/compatibility', |
-      'layouts/wave/community/sidebar', |
-      'layouts/wave/community/sidebar-override', |
+      'layouts/shared/sidebar', |
+      'layouts/shared/sidebar-override', |
       'layouts/admin/site', |
       'layouts/admin/personals', |
       'layouts/admin/universals', |
     :media => 'screen', |
-    :cache => 'layouts/admin/cache'
+    :cache => 'cache/admin'
 
   = stylesheet_link_tag "#{current_site.name}/admin", :media => 'screen'
 
@@ -37,8 +37,8 @@
       'jquery_ujs', |
       'application', |
       'layouts/shared/compatibility', |
-      'layouts/admin/sites', |
-    :cache => 'layouts/admin/cache'
+      'layouts/admin', |
+    :cache => 'cache/admin'
 
   / [if lt IE 9]
     = javascript_include_tag 'ie8', :media => 'screen'
@@ -48,7 +48,17 @@
 
   = csrf_meta_tag
 %body
-  = render :partial => 'layouts/admin/sidebar'
+  #sidebar
+    #head
+      - if site.present? && asset = site.assets.type(Asset::Image).find_by_name(File.basename('logo', '.*'))
+        = image_tag(asset.url(:original))
+    .block.navspace
+      %ul
+        %li= link_to 'Sites', admin_sites_path()
+        - if site.present?
+          %li= link_to 'Configuration', edit_admin_site_path(site)
+          %li= link_to 'Users', admin_site_users_path(site)
+
   = compatibility_tag
   = yield
   = render :partial => 'layouts/shared/analytics'

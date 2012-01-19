@@ -5,7 +5,7 @@ class Admin::SitesController < ApplicationController
   before_filter :require_admin, :except => [ :stylesheets ]
   helper_method :site, :page_title
 
-  layout 'admin/site'
+  layout 'admin'
 
   def index
     @sites = Site.order('name asc')

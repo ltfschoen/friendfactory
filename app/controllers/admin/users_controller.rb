@@ -5,7 +5,7 @@ class Admin::UsersController < ApplicationController
   helper_method :site, :user, :users
   helper_method :page_title
 
-  layout 'admin/site'
+  layout 'admin'
 
   def index
     respond_to do |format|
