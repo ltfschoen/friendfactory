@@ -170,6 +170,7 @@
 	float: left;
 	margin: 10px 0 0 10px;
 	text-shadow: none;
+	font-size: 13px;
 }
 
 #sidebar .block.home_user .portrait a {
