@@ -22,9 +22,11 @@ module SidebarHelper
   def render_sidebar_home_user
     home_user = current_site.home_user
     url = url_for(home_user.profile)
-    content_tag(:div, :class => 'block home_user') do
-      content_tag(:div, thimble_link_to_profile(home_user, url), :class => 'portrait') <<
-      link_to(current_site.home_wave.subject, url)
+    unless current_page?(url)
+      content_tag(:div, :class => 'block home_user') do
+        content_tag(:div, thimble_link_to_profile(home_user, url), :class => 'portrait') <<
+        link_to(current_site.home_wave.subject, url)
+      end
     end
   end
 
@@ -32,13 +34,13 @@ module SidebarHelper
     home_user_id = current_site[:user_id]
     personages = Personage.sidebar_rollcall(current_site, persona_type, home_user_id, SidebarRollCallMaximumLength)
     personages_length = personages.length
-
-    if personages_length > SidebarUserListMaximumLength
+    case
+    when personages_length > SidebarUserListMaximumLength
       rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
       rollcall_length = sidebar_rollcall_length(personages_length)
       personages = personages[0..(rollcall_length-1)]
       render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type, :rollcall_path => rollcall_path }
-    else
+    when personages_length > 0
       render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
     end
   end
