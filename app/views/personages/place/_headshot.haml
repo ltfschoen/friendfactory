@@ -10,8 +10,11 @@
         = link_to_close(link_to_close_wave_id)
         %span.handle
           = persona.handle
+        %ul.buddy-bar.secondary
+          - title = "#{persona.handle} Wave"
+          %li= link_to title, wave_place_path(personage[:profile_id]), :class => 'icon profile', :title => title
         %ul.buddy-bar.primary
-          %li= link_to 'Location', location_wave_profile_path(profile), :class => 'flip icon location', :'data-pane-name' => 'location'
+          %li= link_to 'Location', location_wave_profile_path(profile), :class => 'flip icon location', :'data-pane-name' => 'location', :title => 'Location'
     .face-container
       .back.face
         .content

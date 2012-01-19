@@ -31,6 +31,7 @@ class PersonagesController < ApplicationController
     attrs = { :persona_attributes => { :type => params[:type] }}
     @personage = current_user_record.personages.build(attrs)
     @personage.save(:validate => false)
+    @page_title = "New #{params[:type]}"
     respond_to do |format|
       format.html { render :action => 'edit' }
     end
@@ -116,7 +117,10 @@ class PersonagesController < ApplicationController
   end
 
   def page_title
-    "#{current_site.display_name} - #{(@page_title || @personage.handle).titleize}"
+    if title = @page_title || @personage.handle
+      title.titleize
+    end
+    [ current_site.display_name, title ].join(' - ')
   end
 
   memoize :page_title

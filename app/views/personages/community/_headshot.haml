@@ -10,6 +10,9 @@
         = link_to_close(link_to_close_wave_id)
         %span.handle
           = profile.handle
+        %ul.buddy-bar.secondary
+          - title = "#{persona.handle} Wave"
+          %li= link_to title, wave_place_path(personage[:profile_id]), :class => 'icon profile', :title => title
     .face-container
       .back.face
         .content
