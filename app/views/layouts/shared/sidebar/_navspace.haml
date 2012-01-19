@@ -1,0 +1,12 @@
+.block.navspace
+  %ul
+    - if content_for? :sidebar_menu
+      = content_for :sidebar_menu
+    - if false
+      %li.messages
+        = link_to_unread_messages
+        = link_to 'Inbox', inbox_path
+      %li.invites
+        = link_to 'Invitations', invitations_path
+    %li.logout
+      = link_to 'Logout', logout_path, :method => :delete

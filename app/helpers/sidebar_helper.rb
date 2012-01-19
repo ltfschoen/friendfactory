@@ -6,6 +6,16 @@ module SidebarHelper
     end
   end
 
+  def render_sidebar_userspace
+    if current_user
+      render :partial => 'layouts/shared/sidebar/userspace'
+    end
+  end
+
+  def render_sidebar_navspace
+    render :partial => 'layouts/shared/sidebar/navspace'
+  end
+
   def render_sidebar_home_user
     content_tag(:div, :class => 'block home_user') do
       content_tag(:div, thimble_image_tag(current_site.home_user), :class => 'portrait') <<
@@ -13,10 +23,10 @@ module SidebarHelper
     end
   end
 
-  def render_sidebar_users_list(user_type)
+  def render_sidebar_users_list(persona_type)
     home_user_id = current_site[:user_id]
-    if users = Personage.enabled.site(current_site).type(user_type).includes(:persona => :avatar).exclude(home_user_id)
-      render :partial => 'layouts/shared/usersspace', :locals => { :users => users, :user_type => user_type }
+    if personages = Personage.enabled.site(current_site).type(persona_type).includes(:persona => :avatar).exclude(home_user_id)
+      render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
     end
   end
 
@@ -48,6 +58,21 @@ module SidebarHelper
           :include_blank => false,
           :'data-remote' => true,
           :'data-method' => :put
+    end
+  end
+
+  def link_to_unread_messages_unless_inbox
+    unless [ inbox_path, wave_conversations_path ].detect{ |path| current_page?(path) }.present?
+      link_to_unread_messages
+    end
+  end
+
+  def link_to_unread_messages
+    if current_user
+      unread_conversations_count = current_user.inbox(current_site).unread.count
+      if unread_conversations_count > 0
+        link_to(unread_conversations_count, inbox_path, :class => 'unread')
+      end
     end
   end
 

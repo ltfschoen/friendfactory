@@ -3,23 +3,7 @@
     = link_to image_tag('logo.png', :site => true), root_path
 
   = render_sidebar_adspace
-
-  - if current_user
-    .block.userspace
-      .portrait
-        = thimble_link_to_profile(current_user, profile_path(current_user), :class => 'current_user')
-      %span.username
-        = personages_select_tag(current_user)
-        = link_to 'Edit', current_profile_path, :class => 'edit_profile'
-    .block.navspace
-      %ul
-        %li.messages
-          = link_to_unread_messages
-          = link_to 'Inbox', inbox_path
-        - if false
-          %li.invites
-            = link_to 'Invitations', invitations_path
-
+  = render_sidebar_userspace
   = render_sidebar_home_user
   = render_sidebar_headshot
   = render_sidebar_communities_list
@@ -37,9 +21,4 @@
     .block.tag_cloud
       = content_for :tag_cloud
 
-  .block.navspace.logout
-    %ul
-      %li.logout
-        = link_to 'Logout', logout_path, :method => :delete
-      - if content_for? :sidebar_menu
-        = content_for :sidebar_menu
+  = render_sidebar_navspace

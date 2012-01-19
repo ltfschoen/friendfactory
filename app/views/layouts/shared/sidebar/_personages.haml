@@ -1,0 +1,8 @@
+- if persona_type = local_assigns[:persona_type] || 'users'
+  - persona_type = persona_type.to_s.pluralize
+- if personages.present?
+  %ul.block{ :class => [ persona_type, 'usersspace' ] }
+    - personages.each do |user|
+      %li
+        .portrait= thimble_image_tag(user)
+        = link_to user.handle, url_for(user.profile), :class => 'handle'

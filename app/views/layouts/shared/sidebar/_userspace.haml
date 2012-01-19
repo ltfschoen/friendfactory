@@ -1,0 +1,15 @@
+.block.userspace
+  .portrait
+    = thimble_link_to_profile(current_user)
+  %span.username
+    = personages_select_tag(current_user)
+
+  %ul.navspace
+    %li.messages
+      = link_to 'Inbox', inbox_path
+      = link_to_unread_messages
+    %li.profile
+      = link_to 'Edit', current_profile_path, :class => 'edit_profile'
+    - if false
+      %li.invites
+        = link_to 'Invitations', invitations_path

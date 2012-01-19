@@ -18,6 +18,10 @@
 	color: white;
 }
 
+#sidebar .block.userspace {
+	text-shadow: none;
+}
+
 #sidebar .block.userspace span.username {
 	width: auto;
 }
@@ -29,28 +33,85 @@
 	display: block;
 }
 
-#sidebar .block.userspace span.username a.edit_profile {
-	font-size: 12px;
-	font-style: italic;
-	margin-top: 4px;
-	padding-left: 2px;
+
+#sidebar .block.userspace .navspace {
+	float: left;
+	margin: 0 0 0 8px;
+	width: 152px;
+}
+
+#sidebar .block.userspace .navspace li {
+	position: relative;
+	float: left;
+	cursor: pointer;
+	line-height: 28px;
+	text-shadow : none;
+	font-size: 13px;
+}
+
+#sidebar .block.userspace .navspace li.profile {
+	float: right;
+	text-align: right;
+}
+
+#sidebar .block.userspace .navspace li a {
+	font-style: normal;
+	margin-left: 0px;
+}
+
+
+#sidebar .block.userspace .navspace li:before {
+  content: " ";
+  display: block;
+  float: left;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background: url(/images/user_buttons_transparent.png);
+}
+
+#sidebar .block.userspace .navspace li.messages:before {
+  background-position: 0 -23px;
+}
+
+#sidebar a.unread {
+	display: inline-block;
+	position: relative;
+	top: -4px;
+	min-width: 18px;
+	padding: 2px 5px 2px 4px;
+	text-align: center;
+	background: #ff0;
+/*	border-radius: 20px;*/
+	border-radius: 1em;
+	border: 1px solid #7b2011;
+	line-height: 18px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 11px;
+	background: #c44d3b;
+	background: -moz-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c44d3b), color-stop(100%, #ba311a));
+	background: -webkit-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+	background: -o-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+	background: -ms-linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+	background: linear-gradient(top, #c44d3b 0%, #ba311a 100%);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 3px rgba(0, 0, 0, 0.25);
+	text-shadow: none;
+}
+
+#sidebar .block.navspace {
+	border-bottom: none;
+	box-shadow: none;
 }
 
 #sidebar .block.userspace select {
 	max-width: 150px;
 }
 
-#sidebar .block.navspace ul li {
-	line-height: 20px;
-}
-
 #sidebar .block.navspace ul li.messages:before {
 	background-position: 0 -25px;
 	margin-top: -2px;
-}
-
-#sidebar .block.navspace ul li:hover span {
-	left: 12px;
 }
 
 #sidebar .block.navspace ul li:hover:before {
@@ -59,11 +120,6 @@
 
 #sidebar .block.userspace .portrait a {
 	margin: 0;
-}
-
-#sidebar .block.navspace ul .messages span {
-	border-radius: 1em;
-	padding: 0 2px;
 }
 
 #sidebar .block.navspace ul li.personal:before {
@@ -82,12 +138,12 @@
 	background-position: 0 -75px;
 }
 
-#sidebar .block.navspace ul li.account:before {
-	background: none;
-}
-
 #sidebar .block.navspace ul li.logout:before {
 	background-position: -25px 0;
+}
+
+#sidebar .block.navspace ul li.persona:before {
+	background: transparent;
 }
 
 #sidebar .block.rollcall .portrait {
@@ -112,31 +168,32 @@
 #sidebar .block.home_user a {
 	display: block;
 	float: left;
-	margin: 8px 0 0 10px;
+	margin: 10px 0 0 10px;
+	text-shadow: none;
 }
 
-#sidebar ul.block.usersspace li {
+#sidebar .block.navspace ul li {
+	text-shadow: none;
+}
+
+#sidebar .block.usersspace li {
 	width: 180px;
 	display: block;
 	clear: both;
 	float: left;
 	cursor: pointer;
 	line-height: 28px;
-	text-shadow: 0 1px 1px #000;
+	text-shadow: none;
 	font-size: 13px;
 	margin-top: 6px;
 }
 
-#sidebar ul.block.usersspace li:first-child {
+#sidebar .block.usersspace li:first-child {
 	margin-top: 0;
 }
 
-#sidebar ul.block.usersspace a.handle {
+#sidebar .block.usersspace a.handle {
 	display: block;
 	float: left;
 	margin: 6px 0 0 10px;
-}
-
-#sidebar .block.logout {
-	border-bottom: none;
 }

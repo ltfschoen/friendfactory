@@ -1,0 +1,6 @@
+- if current_user.admin?
+  - content_for :sidebar_menu do
+    %li.persona.person= link_to 'New Person', new_profile_path(:type => 'person'), :class => 'new_personage'
+    %li.persona.place= link_to 'New Place', new_profile_path(:type => 'place'), :class => 'new_personage'
+    %li.persona.community= link_to 'New Community', new_profile_path(:type => 'community'), :class => 'new_personage'
+    %li.persona.ambassador= link_to 'New Ambassador', new_profile_path(:type => 'ambassador'), :class => 'new_personage'
