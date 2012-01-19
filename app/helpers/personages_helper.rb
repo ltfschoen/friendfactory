@@ -1,7 +1,7 @@
 module PersonagesHelper
 
-  def render_headshot(personage)
-    render :partial => File.join('personages', personage.persona_type, 'headshot'), :locals => { :personage => personage }
+  def render_headshot(personage, opts = {})
+    render :partial => File.join('personages', personage.persona_type, 'headshot'), :locals => { :personage => personage }.merge(opts)
   end
 
   def headshot_image_tag(persona, opts = {})
