@@ -20,9 +20,11 @@ module SidebarHelper
   end
 
   def render_sidebar_home_user
+    home_user = current_site.home_user
+    url = url_for(home_user.profile)
     content_tag(:div, :class => 'block home_user') do
-      content_tag(:div, thimble_image_tag(current_site.home_user), :class => 'portrait') <<
-      link_to(current_site.home_wave.subject, root_path)
+      content_tag(:div, thimble_link_to_profile(home_user, url), :class => 'portrait') <<
+      link_to(current_site.home_wave.subject, url)
     end
   end
 
