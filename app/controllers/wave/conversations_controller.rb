@@ -60,9 +60,10 @@ class Wave::ConversationsController < ApplicationController
 
   def conversations
     @conversations ||= begin
-      conversations = current_user.inbox(current_site)
-          .select('`waves`.`id`, `waves`.`resource_id` AS recipient_id')
-          .order('`waves`.`updated_at` DESC')
+      conversations = current_user.inbox(current_site).
+          select('`waves`.`id`, `waves`.`user_id`, `waves`.`resource_id` AS recipient_id').
+          includes(:user => :persona).
+          order('`waves`.`updated_at` DESC')
 
       if params[:tag].present?
         conversations.all
@@ -74,23 +75,23 @@ class Wave::ConversationsController < ApplicationController
 
   def profiles
     @profiles ||= begin
-      profiles = current_site.waves.type(Wave::Profile).where(:user_id => conversations.map(&:recipient_id)).scoped
+      profiles = current_site.waves.where(:user_id => conversations.map(&:recipient_id)).scoped
       if params[:tag].present?
-        profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).paginate(:page => params[:page], :per_page => @@per_page)
+        profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).paginate(:page => params[:page], :per_page => @@per_page).scoped
       else
-        profiles.all
+        profiles.scoped
       end
     end
   end
 
   def profiles_by_user_id
-    @profiles_by_user_id ||= profiles.index_by(&:user_id)
+    @profiles_by_user_id ||= profiles.includes(:user => { :persona => :avatar }).index_by(&:user_id)
   end
 
   def tags
     @tags ||= begin
       user_ids = current_user.inbox(current_site).select('`resource_id`').map(&:resource_id)
-      profiles = current_site.waves.type(Wave::Profile).where(:user_id => user_ids)
+      profiles = current_site.waves.where(:user_id => user_ids)
       profiles.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
     end
   end

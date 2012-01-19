@@ -8,7 +8,7 @@ module Posting::AvatarsHelper
   end
 
   def thimble_link_to_profile(personage, path = nil, opts = {})
-    render :partial => 'posting/avatars/thimble_link_to_profile', :locals => { :personage => personage, :path => path,  :opts => opts }
+    render :partial => 'posting/avatars/thimble_link_to_profile', :locals => { :personage => personage, :path => path, :opts => opts }
   end
 
   def thimble_image_tag(personage, opts = {})
