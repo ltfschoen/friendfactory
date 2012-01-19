@@ -262,12 +262,18 @@ jQuery(window).load(function() {
 	var $frames = $('.post_frame'),
 		$sidebar = $('#sidebar'),
 		$logout = $sidebar.find('.logout'),
-		sidebarHeight = $logout.position().top + $logout.height();
+		documentHeight = $(document).height(),
+		sidebarHeight = $logout.position().top + $logout.outerHeight(true);
 
 	if (sidebarHeight > $(window).height()) {
-		$sidebar
-			.height($(document).height())
-			.addClass('small-screen');
+		if (sidebarHeight > documentHeight) {
+			$sidebar.height(sidebarHeight);
+			$('#frame').height(sidebarHeight);
+		} else {
+			$sidebar.height(documentHeight)
+		}
+
+		$sidebar.addClass('small-screen');
 	}
 
 	$frames.each(function() {
