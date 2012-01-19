@@ -33,12 +33,11 @@ module SidebarHelper
   def render_sidebar_users_list(persona_type)
     home_user_id = current_site[:user_id]
     personages = Personage.sidebar_rollcall(current_site, persona_type, home_user_id, SidebarRollCallMaximumLength)
-    personages_length = personages.length
+    personages_length = sidebar_rollcall_length(personages.length)
     case
     when personages_length > SidebarUserListMaximumLength
       rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
-      rollcall_length = sidebar_rollcall_length(personages_length)
-      personages = personages[0..(rollcall_length-1)]
+      personages = personages[0..(personages_length-1)]
       render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type, :rollcall_path => rollcall_path }
     when personages_length > 0
       render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
@@ -123,8 +122,8 @@ module SidebarHelper
 
   private
 
-  def sidebar_rollcall_length(current_length, default_max = 10)
-    [ current_length / 5 * 5, default_max ].min
+  def sidebar_rollcall_length(current_length)
+    [ current_length / 5 * 5, SidebarRollCallMaximumLength ].min
   end
 
 end
