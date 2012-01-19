@@ -1,5 +1,8 @@
 module SidebarHelper
 
+  SidebarUserListMaximumLength = 4
+  SidebarRollCallMaximumLength = 10
+
   def render_sidebar_adspace
     if false
       content_tag(:div, image_tag("http://placehold.it/180x75"), :class => 'block adspace')
@@ -23,9 +26,24 @@ module SidebarHelper
     end
   end
 
-  def render_sidebar_users_list(persona_type)
+  def render_sidebar_users_list(persona_type, list_maximum_length = SidebarUserListMaximumLength)
     home_user_id = current_site[:user_id]
-    if personages = Personage.enabled.site(current_site).type(persona_type).includes(:persona => :avatar).exclude(home_user_id)
+    personages = Personage.enabled.
+        site(current_site).
+        type(persona_type).
+        joins(:profile).
+        includes(:persona => :avatar).
+        includes(:profile).
+        exclude(home_user_id).
+        limit(SidebarRollCallMaximumLength).
+        order('`waves`.`updated_at` DESC')
+
+    personages_length = personages.length
+    if personages_length > list_maximum_length
+      rollcall_length = sidebar_rollcall_length(personages_length)
+      personages = personages[0..(rollcall_length-1)]
+      render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type }
+    else
       render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
     end
   end
@@ -45,6 +63,33 @@ module SidebarHelper
   def render_sidebar_headshot
     if content_for? :sidebar_headshot
       content_tag(:div, content_for(:sidebar_headshot ), :class => 'block')
+    end
+  end
+
+  def render_sidebar_rollcall
+    if content_for? :sidebar_rollcall
+      content_for(:sidebar_rollcall)
+    end
+  end
+
+  def render_sidebar_search
+    if false
+      text_field_tag 'search', :placeholder => "Search"
+    end
+  end
+
+  def render_sidebar_tag_cloud
+    if content_for? :tag_cloud
+      content_tag(:div, content_for(:tag_cloud), :class => 'block tag_cloud')
+    end
+  end
+
+  ###
+
+  def sidebar_rollcall(users)
+    max = sidebar_rollcall_length(users.length)
+    content_for :sidebar_rollcall do
+      render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => users[0..(max-1)], :persona_type => 'person' }
     end
   end
 
@@ -74,6 +119,12 @@ module SidebarHelper
         link_to(unread_conversations_count, inbox_path, :class => 'unread')
       end
     end
+  end
+
+  private
+
+  def sidebar_rollcall_length(current_length, default_max = 10)
+    [ current_length / 5 * 5, default_max ].min
   end
 
 end

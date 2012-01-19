@@ -155,10 +155,10 @@
 }
 
 #sidebar .block.rollcall a.more {
-	font-size: 13px;
+	font-size: 11px;
 	display: block;
 	float: right;
-	font-style: italic;
+	margin-top: 2px;
 }
 
 .ie #sidebar .portrait {
