@@ -24,7 +24,7 @@ class Persona::Place < Persona::Base
   end
 
   def map_url
-    "http://maps.google.com/maps/api/staticmap?zoom=10&size=180x156&markers=color:red|size:mid|#{lat},#{lng}&sensor=false"
+    "http://maps.google.com/maps/api/staticmap?zoom=8&size=180x156&markers=color:red|size:mid|#{lat},#{lng}&sensor=false"
   end
 
   def link_url
