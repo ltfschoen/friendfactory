@@ -5,7 +5,6 @@ class Persona::Base < ActiveRecord::Base
   set_table_name 'personas'
 
   class_attribute :default_profile_type
-
   self.default_profile_type = 'Wave::Base'
 
   attr_accessible \
@@ -32,11 +31,11 @@ class Persona::Base < ActiveRecord::Base
   end
 
   def avatar?
-    avatar.present?
+    avatar_id.present?
   end
 
   def avatar_with_silhouette
-    avatar_without_silhouette || EmptyAvatar.new(user)
+    avatar? ? avatar_without_silhouette : EmptyAvatar.new(self)
   end
 
   alias_method_chain :avatar, :silhouette

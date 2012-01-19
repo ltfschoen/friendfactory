@@ -2,16 +2,16 @@ class EmptyAvatar
 
   EmptyAvatarUrl = '/images/silhouette-q.gif'
 
-  def initialize(personage)
-    @personage = personage
+  def initialize(persona)
+    @persona = persona
   end
 
   def user
-    @personage
+    @persona.user
   end
 
   def profile
-    @personage.profile
+    @persona.user.profile
   end
 
   def url(style = nil)
