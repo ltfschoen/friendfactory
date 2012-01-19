@@ -30,17 +30,27 @@ module SidebarHelper
     end
   end
 
-  def render_sidebar_users_list(persona_type)
-    home_user_id = current_site[:user_id]
-    personages = Personage.sidebar_rollcall(current_site, persona_type, home_user_id, SidebarRollCallMaximumLength)
+  def content_for_sidebar_users_list(personages, persona_type, rollcall_path)
     personages_length = personages.length
     case
     when personages_length > SidebarUserListMaximumLength
-      rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
       personages = personages[0..(sidebar_rollcall_length(personages_length)-1)]
       render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type, :rollcall_path => rollcall_path }
     when personages_length > 0
       render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
+    end
+  end
+
+  def render_sidebar_users_list(persona_type)
+    home_user_id = current_site[:user_id]
+    personages = Personage.sidebar_rollcall(current_site, persona_type, home_user_id, SidebarRollCallMaximumLength)
+    rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
+    content_for_sidebar_users_list(personages, persona_type, rollcall_path)
+  end
+
+  def content_for_sidebar_rollcall(personages, rollcall_path)
+    content_for :sidebar_rollcall do
+      content_for_sidebar_users_list(personages, 'person', rollcall_path)
     end
   end
 
@@ -54,17 +64,6 @@ module SidebarHelper
 
   def render_sidebar_communities_list
     render_sidebar_users_list(:community)
-  end
-
-  def content_for_sidebar_rollcall(users)
-    max = sidebar_rollcall_length(users.length)
-    users = users[0..(max-1)]
-    if users.present?
-      rollcall_path = rollcall_wave_community_path(params[:id] || current_site.home_wave, :page => params[:page])
-      content_for :sidebar_rollcall do
-        render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => users, :persona_type => 'person', :rollcall_path => rollcall_path }
-      end
-    end
   end
 
   def render_sidebar_rollcall
