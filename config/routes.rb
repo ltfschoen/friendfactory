@@ -49,9 +49,7 @@ Friskyfactory::Application.routes.draw do
       end
     end
 
-    resources :albums, :only => [ :index, :show, :new, :create ] # do
-      # resources :photos, :only => [ :show ], :controller => 'albums'
-    # end
+    resources :albums, :only => [ :index, :show, :new, :create ]
   end
 
   scope :module => :wave do
