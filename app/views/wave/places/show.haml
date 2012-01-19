@@ -1,9 +1,7 @@
-- user = wave.user
-- content_for :sidebar_headshot do
-  = render_headshot(user)
+= content_for_sidebar_headshot(wave.user)
 #floating
 #frame
-  %h1 #{user.handle}
+  %h1 #{wave.handle}
   = render :partial => 'layouts/shared/reaction-template'
   = render :partial => 'layouts/shared/nav'
   - postings.each do |posting|

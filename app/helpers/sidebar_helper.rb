@@ -1,6 +1,6 @@
 module SidebarHelper
 
-  SidebarUserListMaximumLength = 4
+  SidebarUserListMaximumLength = 3
   SidebarRollCallMaximumLength = 10
 
   def render_sidebar_adspace
@@ -47,7 +47,7 @@ module SidebarHelper
     end
   end
 
-  def sidebar_rollcall(users)
+  def content_for_sidebar_rollcall(users)
     max = sidebar_rollcall_length(users.length)
     rollcall_path = rollcall_wave_community_path(params[:id] || current_site.home_wave, :page => params[:page])
     content_for :sidebar_rollcall do
@@ -71,6 +71,10 @@ module SidebarHelper
 
   def render_sidebar_communities_list
     render_sidebar_users_list(:community)
+  end
+
+  def content_for_sidebar_headshot(user)
+    content_for :sidebar_headshot, render_headshot(user)
   end
 
   def render_sidebar_headshot

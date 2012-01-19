@@ -1,11 +1,10 @@
-- content_for :sidebar_rollcall do
-  = render_headshot(wave.user)
+= content_for_sidebar_headshot(profile.user)
 #floating
 #frame
-  %h1 #{profile.handle}'s Wave
+  %h1 #{profile.handle}
   = render :partial => 'layouts/shared/reaction-template'
   = render :partial => 'layouts/shared/nav'
   - postings.each do |posting|
-    = render_community_posting(posting)
+    = render_posting(posting)
   = will_paginate postings, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
   = render :partial => 'layouts/shared/unpublish_overlay'
