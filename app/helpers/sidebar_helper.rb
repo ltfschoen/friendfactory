@@ -58,9 +58,12 @@ module SidebarHelper
 
   def content_for_sidebar_rollcall(users)
     max = sidebar_rollcall_length(users.length)
-    rollcall_path = rollcall_wave_community_path(params[:id] || current_site.home_wave, :page => params[:page])
-    content_for :sidebar_rollcall do
-      render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => users[0..(max-1)], :persona_type => 'person', :rollcall_path => rollcall_path }
+    users = users[0..(max-1)]
+    if users.present?
+      rollcall_path = rollcall_wave_community_path(params[:id] || current_site.home_wave, :page => params[:page])
+      content_for :sidebar_rollcall do
+        render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => users, :persona_type => 'person', :rollcall_path => rollcall_path }
+      end
     end
   end
 
