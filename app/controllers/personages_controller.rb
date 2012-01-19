@@ -1,10 +1,24 @@
 class PersonagesController < ApplicationController
 
+  extend ActiveSupport::Memoizable
+
   before_filter :require_user
 
-  helper_method :page_title, :invitation_wave
+  helper_method :invitation_wave
+  helper_method :paged_users
+  helper_method :page_title
 
   layout 'personage'
+
+  cattr_reader :per_page
+
+  def index
+    @@per_page = 48
+    @page_title = params[:persona_type].pluralize
+    respond_to do |format|
+      format.html { render :layout => 'three-column' }
+    end
+  end
 
   def show
     @personage = params[:id] && current_user_record.personages.find(params[:id]) || current_user
@@ -77,6 +91,24 @@ class PersonagesController < ApplicationController
 
   private
 
+  def paged_users
+    users.paginate(:page => params[:page], :per_page => @@per_page)
+  end
+
+  memoize :paged_users
+
+  def users
+    Personage.enabled.
+      site(current_site).
+      type(params[:persona_type].singularize).
+      includes(:persona => :avatar).
+      includes(:profile).
+      order('`waves`.`updated_at` DESC').
+      scoped
+  end
+
+  memoize :users
+
   def transaction
     ActiveRecord::Base.transaction { yield }
   rescue ActiveRecord::RecordInvalid
@@ -84,8 +116,10 @@ class PersonagesController < ApplicationController
   end
 
   def page_title
-    "#{current_site.display_name} - #{@personage.handle}'s Profile"
+    "#{current_site.display_name} - #{(@page_title || @personage.handle).titleize}"
   end
+
+  memoize :page_title
 
   def invitation_wave
     current_user.find_or_create_invitation_wave_for_site(current_site)

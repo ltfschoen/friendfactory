@@ -1,0 +1,9 @@
+- subject = [ local_assigns[:subject], 'Rollcall' ].compact.join(' ')
+#rollcall
+  %h1 #{subject}
+  %div.clearfix
+    - users.in_groups_of(4) do |group|
+      - group.each_with_index do |user, idx|
+        - unless user.nil?
+          = render_headshot(user)
+  = will_paginate users, :class => 'pagination footer', :inner_window => 1, :outer_window => 1

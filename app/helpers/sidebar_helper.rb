@@ -28,9 +28,8 @@ module SidebarHelper
 
   def render_sidebar_users_list(persona_type, list_maximum_length = SidebarUserListMaximumLength)
     home_user_id = current_site[:user_id]
-    personages = Personage.enabled.
-        site(current_site).
-        type(persona_type).
+    rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
+    personages = Personage.enabled.site(current_site).type(persona_type).
         joins(:profile).
         includes(:persona => :avatar).
         includes(:profile).
@@ -42,9 +41,23 @@ module SidebarHelper
     if personages_length > list_maximum_length
       rollcall_length = sidebar_rollcall_length(personages_length)
       personages = personages[0..(rollcall_length-1)]
-      render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type }
+      render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type, :rollcall_path => rollcall_path }
     else
       render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
+    end
+  end
+
+  def sidebar_rollcall(users)
+    max = sidebar_rollcall_length(users.length)
+    rollcall_path = rollcall_wave_community_path(params[:id] || current_site.home_wave, :page => params[:page])
+    content_for :sidebar_rollcall do
+      render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => users[0..(max-1)], :persona_type => 'person', :rollcall_path => rollcall_path }
+    end
+  end
+
+  def render_sidebar_rollcall
+    if content_for? :sidebar_rollcall
+      content_for(:sidebar_rollcall)
     end
   end
 
@@ -66,12 +79,6 @@ module SidebarHelper
     end
   end
 
-  def render_sidebar_rollcall
-    if content_for? :sidebar_rollcall
-      content_for(:sidebar_rollcall)
-    end
-  end
-
   def render_sidebar_search
     if false
       text_field_tag 'search', :placeholder => "Search"
@@ -81,15 +88,6 @@ module SidebarHelper
   def render_sidebar_tag_cloud
     if content_for? :tag_cloud
       content_tag(:div, content_for(:tag_cloud), :class => 'block tag_cloud')
-    end
-  end
-
-  ###
-
-  def sidebar_rollcall(users)
-    max = sidebar_rollcall_length(users.length)
-    content_for :sidebar_rollcall do
-      render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => users[0..(max-1)], :persona_type => 'person' }
     end
   end
 

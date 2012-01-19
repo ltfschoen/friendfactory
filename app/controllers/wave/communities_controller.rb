@@ -15,14 +15,14 @@ class Wave::CommunitiesController < ApplicationController
     @@per_page = 50
     @users_on_wave = Personage.wave(wave).limit(30)
     respond_to do |format|
-      format.html { render }
+      format.html
     end
   end
 
   def rollcall
     @@per_page = 48
     respond_to do |format|
-      format.html { render File.join('wave', 'shared', 'rollcall') }
+      format.html
     end
   end
 

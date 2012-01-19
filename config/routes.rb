@@ -69,9 +69,14 @@ Friskyfactory::Application.routes.draw do
     end
   end
 
+  get ':persona_type' => 'personages#index',
+      :constraints => { :persona_type => /ambassadors|communities|places/ },
+      :as => 'persona_type_profiles'
+
+  # Show Current User's Personage
   resource :profile, :only => [ :show ], :controller => 'personages', :as => 'current_profile'
 
-  # To add postings to a wave
+  # Add Postings to Waves
   resources :waves, :only => [] do
     namespace :posting do
       resources :texts,        :only => [ :new, :create ]

@@ -1,5 +1,4 @@
 - persona_display_name = persona_type.to_s.titleize.pluralize
-- rollcall_path = rollcall_wave_community_path(params[:id] || current_site.home_wave, :page => params[:page])
 .block.rollcall
   - users.each_with_index do |user, idx|
     - css_class = (idx + 1) % 5 == 0 ? 'omega' : nil
