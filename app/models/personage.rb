@@ -91,7 +91,6 @@ class Personage < ActiveRecord::Base
       type(persona_type).
       joins(:profile).
       includes(:persona => :avatar).
-      includes(:profile).
       exclude(exclude_id).
       limit(limit).
       order('`waves`.`updated_at` DESC')
