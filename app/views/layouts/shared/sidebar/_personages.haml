@@ -1,5 +1,6 @@
 %ul.block{ :class => [ persona_type, 'usersspace' ]}
   - personages.each do |user|
     %li
-      .portrait= thimble_image_tag(user)
-      = link_to user.handle, url_for(user.profile), :class => 'handle'
+      - url = user.profile
+      .portrait= thimble_link_to_profile(user, url)
+      = link_to user.handle, url, :class => 'handle'
