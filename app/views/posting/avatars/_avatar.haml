@@ -2,7 +2,7 @@
 .post_frame
   .posting.post.signal[avatar]{uid(avatar[:user_id])}
     = link_to_unpublish(avatar)
-    .portrait= thimble_link_to_profile(avatar.user)
+    .portrait= thimble_link_to_profile(avatar.user, :remote => true)
     .clear
       .cell
         = link_to_profile(avatar.user)

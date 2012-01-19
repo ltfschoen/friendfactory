@@ -1,4 +1,3 @@
-=# render :partial => 'wave/profiles/headshot', :locals => { :personage => @personage }
 = render_headshot(@personage)
 = render :partial => 'posting/comments/new', :locals => { :posting => @posting }
 = render :partial => 'posting/comments/comment', :collection => @comments, :locals => { :posting => @posting }

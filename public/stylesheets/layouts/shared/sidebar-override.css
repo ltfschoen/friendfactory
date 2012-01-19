@@ -105,6 +105,10 @@
 	box-shadow: none;
 }
 
+#sidebar .block.navspace li.logout {
+	min-height: 6em;
+}
+
 #sidebar .block.userspace select {
 	max-width: 150px;
 }
@@ -176,7 +180,6 @@
 #sidebar .block.home_user .portrait a {
 	margin: 0;
 }
-
 
 #sidebar .block.navspace ul li {
 	text-shadow: none;

@@ -1,2 +1,6 @@
 - if personage.present?
-  = thimble_image_tag(personage, opts)
+  - if remote = opts.delete(:remote)
+    = thimble_image_tag(personage, opts)
+  - else
+    - path = wave_profile_path(personage[:profile_id]) if path.nil?
+    = link_to(thimble_image_tag(personage, opts), path)

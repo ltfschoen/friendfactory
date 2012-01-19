@@ -3,8 +3,7 @@
   .post_frame
     .posting.post.blog[text]{uid(text[:user_id])}
       = link_to_unpublish(text)
-      .portrait
-        = thimble_link_to_profile(user)
+      .portrait= thimble_link_to_profile(user, :remote => true)
       .clear
         .cell
           - if text.subject.present?

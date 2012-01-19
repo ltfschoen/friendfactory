@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-	$('.portrait a[href^="/wave/profiles"]')
+	$('.portrait a[href^="/wave"][data-remote]')
 		.live('click', function(event) {
 			var $this = $(this),
 				url = $this.attr('href');

@@ -2,8 +2,7 @@
 .post_frame
   .posting.post.link[link]{uid(link[:user_id])}
     = link_to_unpublish(link)
-    .portrait
-      = thimble_link_to_profile(user)
+    .portrait= thimble_link_to_profile(user, :remote => true)
     .clear
       .cell
         By #{link_to_profile(user)}
