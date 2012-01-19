@@ -85,6 +85,18 @@ class Personage < ActiveRecord::Base
 
   scope :exclude, lambda { |id| where('`personages`.`id` <> ?', id) }
 
+  scope :sidebar_rollcall, lambda { |site, persona_type, exclude_id, limit|
+      enabled.
+      site(site).
+      type(persona_type).
+      joins(:profile).
+      includes(:persona => :avatar).
+      includes(:profile).
+      exclude(exclude_id).
+      limit(limit).
+      order('`waves`.`updated_at` DESC')
+  }
+
   accepts_nested_attributes_for :persona
 
   def persona_attributes=(attrs)

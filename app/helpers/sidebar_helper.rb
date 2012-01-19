@@ -28,25 +28,31 @@ module SidebarHelper
     end
   end
 
-  def render_sidebar_users_list(persona_type, list_maximum_length = SidebarUserListMaximumLength)
+  def render_sidebar_users_list(persona_type)
     home_user_id = current_site[:user_id]
-    rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
-    personages = Personage.enabled.site(current_site).type(persona_type).
-        joins(:profile).
-        includes(:persona => :avatar).
-        includes(:profile).
-        exclude(home_user_id).
-        limit(SidebarRollCallMaximumLength).
-        order('`waves`.`updated_at` DESC')
-
+    personages = Personage.sidebar_rollcall(current_site, persona_type, home_user_id, SidebarRollCallMaximumLength)
     personages_length = personages.length
-    if personages_length > list_maximum_length
+
+    if personages_length > SidebarUserListMaximumLength
+      rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
       rollcall_length = sidebar_rollcall_length(personages_length)
       personages = personages[0..(rollcall_length-1)]
       render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type, :rollcall_path => rollcall_path }
     else
       render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
     end
+  end
+
+  def render_sidebar_ambassadors_list
+    render_sidebar_users_list(:ambassador)
+  end
+
+  def render_sidebar_places_list
+    render_sidebar_users_list(:place)
+  end
+
+  def render_sidebar_communities_list
+    render_sidebar_users_list(:community)
   end
 
   def content_for_sidebar_rollcall(users)
@@ -61,18 +67,6 @@ module SidebarHelper
     if content_for? :sidebar_rollcall
       content_for(:sidebar_rollcall)
     end
-  end
-
-  def render_sidebar_ambassadors_list
-    render_sidebar_users_list(:ambassador)
-  end
-
-  def render_sidebar_places_list
-    render_sidebar_users_list(:place)
-  end
-
-  def render_sidebar_communities_list
-    render_sidebar_users_list(:community)
   end
 
   def content_for_sidebar_headshot(user)
