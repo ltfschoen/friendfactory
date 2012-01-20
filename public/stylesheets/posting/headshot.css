@@ -9,7 +9,7 @@
 	display: none;
 }
 
-.headshot-container.floating {
+.headshot-container.floating .face {
 	-webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 	-ms-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
