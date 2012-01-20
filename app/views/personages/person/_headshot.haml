@@ -1,36 +1,37 @@
-- profile = personage.profile
 - persona = personage.persona
-- link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || profile.id
+- link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || personage[:profile_id]
 
 .headshot-container
-  .headshot[ profile ]{ :class => poke_class(profile.id) }
+  .headshot[ personage ]{ :class => poke_class(personage[:profile_id]) }
     .face-container
       .front.face
         = headshot_image_tag(persona)
         = link_to_close(link_to_close_wave_id)
         %span.handle
-          = profile.handle
+          = persona.handle
         %ul.buddy-bar.secondary
-          %li= link_to 'Profile', wave_profile_path(profile), :class => 'icon profile'
+          %li= link_to 'Profile', wave_profile_path(personage[:profile_id]), :class => 'icon profile'
         %ul.buddy-bar.primary
-          %li= link_to 'Biometrics', biometrics_wave_profile_path(profile), :class => 'flip icon mini-profile', :'data-pane-name' => 'biometrics'
-          %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'flip icon photos', :'data-pane-name' => 'photos'
-          %li.invitations= link_to 'Invitations', invitations_wave_profile_path(profile), :class => 'flip icon invitations', :'data-pane-name' => 'invitations'
-          %li.pokes= link_to 'Pokes', pokes_wave_profile_path(profile), :class => 'flip icon pokes', :'data-pane-name' => 'pokes'
-          - if current_user.present? && (current_user.id != profile.user_id)
+          %li= link_to 'Biometrics', biometrics_profile_path(personage[:id]), :class => 'flip icon mini-profile', :'data-pane-name' => 'biometrics'
+
+          %li= link_to 'Photos', photos_wave_profile_path(personage[:profile_id]), :class => 'flip icon photos', :'data-pane-name' => 'photos'
+          %li.invitations= link_to 'Invitations', invitations_wave_profile_path(personage[:profile_id]), :class => 'flip icon invitations', :'data-pane-name' => 'invitations'
+          %li.pokes= link_to 'Pokes', pokes_wave_profile_path(personage[:profile_id]), :class => 'flip icon pokes', :'data-pane-name' => 'pokes'
+          - if current_user.present? && (current_user.id != personage[:id])
             - if false
-              %li= link_to 'Buddy', buddy_new_friendship_path(profile), :class => buddy_link_class(profile.id), :remote => true, :'data-type' => :json, :method => :put, :'data-pane-name' => 'buddies'
-            %li.chat= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'flip icon chat last', :'data-pane-name' => 'conversation'
+              %li= link_to 'Buddy', buddy_new_friendship_path(personage[:profile_id]), :class => buddy_link_class(personage[:profile_id]), :remote => true, :'data-type' => :json, :method => :put, :'data-pane-name' => 'buddies'
+            %li.chat= link_to 'Chat', conversation_wave_profile_path(personage[:profile_id]), :class => 'flip icon chat last', :'data-pane-name' => 'conversation'
     .face-container
       .back.face
         .content
           = link_to_close(link_to_close_wave_id)
           .pane
-          .portrait= link_to thimble_image_tag(profile, :size => '18x18'), wave_profile_path(profile), :class => 'flip'
+          .portrait= link_to thimble_image_tag(personage, :size => '18x18'), wave_profile_path(personage[:profile_id]), :class => 'flip'
           %ul.buddy-bar.primary
-            %li= link_to 'Biometrics', biometrics_wave_profile_path(profile), :class => 'swipe icon mini-profile', :'data-pane-name' => 'biometrics'
-            %li= link_to 'Photos', photos_wave_profile_path(profile), :class => 'swipe icon photos', :'data-pane-name' => 'photos'
-            %li.invitations= link_to 'Invitations', invitations_wave_profile_path(profile), :class => 'swipe icon invitations', :'data-pane-name' => 'invitations'
-            %li.pokes= link_to 'Pokes', pokes_wave_profile_path(profile), :class => 'swipe icon pokes', :'data-pane-name' => 'pokes'
-            - if current_user.present? && (current_user.id != profile.user_id)
-              %li.chat= link_to 'Chat', conversation_wave_profile_path(profile), :class => 'swipe icon chat', :'data-pane-name' => 'conversation'
+            %li= link_to 'Biometrics', biometrics_profile_path(personage[:id]), :class => 'swipe icon mini-profile', :'data-pane-name' => 'biometrics'
+
+            %li= link_to 'Photos', photos_wave_profile_path(personage[:profile_id]), :class => 'swipe icon photos', :'data-pane-name' => 'photos'
+            %li.invitations= link_to 'Invitations', invitations_wave_profile_path(personage[:profile_id]), :class => 'swipe icon invitations', :'data-pane-name' => 'invitations'
+            %li.pokes= link_to 'Pokes', pokes_wave_profile_path(personage[:profile_id]), :class => 'swipe icon pokes', :'data-pane-name' => 'pokes'
+            - if current_user.present? && (current_user.id != personage[:id])
+              %li.chat= link_to 'Chat', conversation_wave_profile_path(personage[:profile_id]), :class => 'swipe icon chat', :'data-pane-name' => 'conversation'

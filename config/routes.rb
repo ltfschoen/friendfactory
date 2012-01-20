@@ -20,15 +20,12 @@ Friskyfactory::Application.routes.draw do
 
     resources :profiles, :only => [ :index, :show ] do
       member do
-        get :signals
-        get :biometrics
         get :photos
         get :invitations
         get :conversation
         get :pokes
         get :location
       end
-      get 'conversation' => 'conversations#show'
     end
 
     resources :ambassadors, :only => [ :show ]
@@ -54,7 +51,6 @@ Friskyfactory::Application.routes.draw do
     resources :waves, :only => [] do
       member do
         put :unpublish
-        # get :conversation
       end
     end
     get :inbox, :to => 'conversations#index'
@@ -83,17 +79,17 @@ Friskyfactory::Application.routes.draw do
       post :avatar
       put  :unsubscribe
       put  :switch
+      get  :biometrics
     end
   end
-
-  get ':persona_type' => 'personages#index',
-      :constraints => { :persona_type => /ambassadors|communities|places/ },
-      :as => 'persona_type_profiles'
 
   resource :profile, :only => [ :show ],
       :controller => 'personages',
       :as => 'current_profile'
 
+  get ':persona_type' => 'personages#index',
+      :constraints => { :persona_type => /ambassadors|communities|places/ },
+      :as => 'persona_type_profiles'
 
   # Postings
   scope :module => :posting do

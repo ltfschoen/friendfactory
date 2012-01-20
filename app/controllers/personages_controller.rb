@@ -90,6 +90,18 @@ class PersonagesController < ApplicationController
     end
   end
 
+  ### Panes
+
+  def biometrics
+    respond_to do |format|
+      if @personage = Personage.enabled.site(current_site).includes(:persona).find(params[:id])
+        format.html { render :layout => false }
+      else
+        format.html { render :nothing => true }
+      end
+    end
+  end
+
   private
 
   def paged_users

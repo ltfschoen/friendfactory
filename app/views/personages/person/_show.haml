@@ -1,4 +1,12 @@
 = render :partial => File.join('personages', 'shared', 'avatar')
-= render :partial => File.join('personages', 'person', 'biometrics')
+
+.headshot-container
+  .headshot
+    .face
+      .pane
+        = render :partial => File.join('personages', 'person', 'biometrics'), :locals => { :persona => @personage.persona }
+      .button-bar
+        = link_to 'Edit', edit_profile_path(@personage), :class => 'button edit_profile'
+
 =# render :partial => 'invitations'
 = render :partial => File.join('personages', 'shared', 'preferences')

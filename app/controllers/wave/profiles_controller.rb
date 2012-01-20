@@ -33,13 +33,6 @@ class Wave::ProfilesController < ApplicationController
 
   # === Panes ===
 
-  def biometrics
-    @personage = Personage.enabled.site(current_site).includes(:persona).find_by_profile_id(params[:id])
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-
   def photos
     @wave = Wave::Profile.find_by_id(params[:id])
     respond_to do |format|
