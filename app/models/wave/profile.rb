@@ -89,7 +89,6 @@ class Wave::Profile < Wave::Base
   end
 
   def publish_posting_to_waves(posting)
-    # TODO: Only publish a flag, not the avatar itself
     if site = posting.site
       related_postings(posting).map(&:unpublish!)
       site.home_wave

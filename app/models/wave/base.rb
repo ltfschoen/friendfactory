@@ -114,7 +114,10 @@ class Wave::Base < ActiveRecord::Base
       @@ignore_after_add_posting_callback = true
       transaction do
         waves = *publish_posting_to_waves(posting)
-        waves.compact.uniq.each { |wave| wave.postings << posting }
+        if waves.present?
+          waves.delete(self)
+          waves.compact.uniq.each { |wave| wave.postings << posting }
+        end
       end
       @@ignore_after_add_posting_callback = false
     end
@@ -122,6 +125,7 @@ class Wave::Base < ActiveRecord::Base
 
   def publish_posting_to_waves(posting)
     # Override in inherited classes
+    []
   end
 
   def publish_posting_to_profile_wave(posting)
