@@ -7,16 +7,14 @@ class Posting::PostItsController < ApplicationController
   end
   
   def create
-    wave = Wave::Base.find_by_id(params[:wave_id])
-    if wave.present?
-      @posting = Posting::PostIt.new(params[:posting_post_it]) do |post_it|
-        post_it.site = current_site
-        post_it.user = current_user
-      end
-      if @posting.save
-        wave.postings << @posting
-        @posting.publish!
-      end
+    wave = Wave::Base.find(params[:wave_id])
+    @posting = Posting::PostIt.new(params[:posting_post_it]) do |post_it|
+      post_it.site = current_site
+      post_it.user = current_user
+    end
+    if @posting.save
+      wave.postings << @posting
+      @posting.publish!
     end
     respond_to do |format|
       format.js { render :layout => false }
