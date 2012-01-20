@@ -32,7 +32,10 @@ class Wave::AmbassadorsController < ApplicationController
   memoize :wave
 
   def postings
-    wave.postings.published.order('`postings`.`updated_at` DESC').paginate(:page => params[:page], :per_page => @@per_page)
+    wave.postings.published.
+      includes(:user => { :persona => :avatar }).
+      order('`sticky_until` DESC, `updated_at` DESC').
+      paginate(:page => params[:page], :per_page => @@per_page)
   end
 
   memoize :postings
