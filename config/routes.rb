@@ -22,7 +22,6 @@ Friskyfactory::Application.routes.draw do
       member do
         get :photos
         get :invitations
-        get :conversation
         get :pokes
         get :location
       end
@@ -80,6 +79,7 @@ Friskyfactory::Application.routes.draw do
       put  :unsubscribe
       put  :switch
       get  :biometrics
+      get  :conversation
     end
   end
 

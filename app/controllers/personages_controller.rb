@@ -102,6 +102,18 @@ class PersonagesController < ApplicationController
     end
   end
 
+  def conversation
+    respond_to do |format|
+      if receiver = Personage.enabled.site(current_site).includes(:persona).find(params[:id])
+        @wave = current_user.find_or_create_conversation_with(receiver, current_site).mark_as_read
+        format.html { render :layout => false }
+      else
+        format.html { render :nothing => true }
+      end
+    end
+  end
+
+
   private
 
   def paged_users

@@ -48,16 +48,6 @@ class Wave::ProfilesController < ApplicationController
       format.html { render :layout => false }
     end
   end
-  
-  def conversation
-    @legacy = params[:legacy]
-    if receiver = Wave::Profile.find_by_id(params[:id]).try(:user)
-      @wave = current_user.find_or_create_conversation_with(receiver, current_site).mark_as_read
-    end
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
 
   def pokes
     if @profile = Wave::Profile.find(params[:id])
