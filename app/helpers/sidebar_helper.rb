@@ -22,7 +22,7 @@ module SidebarHelper
   def render_sidebar_home_user
     home_user = current_site.home_user
     url = url_for(home_user.profile)
-    unless current_page?(url)
+    unless current_page?(url) && content_for?(:sidebar_headshot)
       content_tag(:div, :class => 'block home_user') do
         content_tag(:div, thimble_link_to_profile(home_user, url), :class => 'portrait') <<
         link_to(current_site.home_wave.subject, url)
