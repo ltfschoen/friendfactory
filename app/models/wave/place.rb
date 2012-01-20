@@ -16,4 +16,8 @@ class Wave::Place < Wave::Base
     persona.handle
   end
 
+  def writable?(user_id)
+    true
+  end
+
 end

@@ -8,4 +8,8 @@ class Wave::Community < Wave::Base
     user.handle
   end
 
+  def writable?(user_id)
+    true
+  end
+
 end

@@ -1,4 +1,4 @@
-- if wave.permitted?(current_user)
+- if wave.writable?(current_user[:id])
   %ul.wave.community.nav
     %li.posting_post_it= link_to 'Status', new_wave_posting_post_it_path(wave), :rel => '#new_posting_post_it'
     %li.posting_text= link_to 'Blog', new_wave_posting_text_path(wave), :rel => '#new_posting_text'

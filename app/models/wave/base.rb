@@ -83,15 +83,12 @@ class Wave::Base < ActiveRecord::Base
     save!
   end
 
-  def permitted?(user_or_user_id)
-    return true if permitted_user_ids == :all
-    if user_or_user_id
-      user_id = user_or_user_id.is_a?(User) ? user_or_user_id.id : user_or_user_id
-      ids = *permitted_user_ids
-      ids.include?(user_id)
-    else
-      false
-    end
+  def readable?(user_id)
+    false
+  end
+
+  def writable?(user_id)
+    false
   end
 
   def has_friended?(profile_id, type)
@@ -103,10 +100,6 @@ class Wave::Base < ActiveRecord::Base
   end
 
   private
-
-  def permitted_user_ids
-    :all
-  end
 
   def transaction
     ActiveRecord::Base.transaction { yield }
@@ -141,6 +134,10 @@ class Wave::Base < ActiveRecord::Base
     if posting && site = posting.site
       site.home_wave
     end
+  end
+
+  def owner?(user_id)
+    user_id == self[:user_id]
   end
 
 end

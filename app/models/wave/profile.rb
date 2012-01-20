@@ -72,6 +72,10 @@ class Wave::Profile < Wave::Base
     end
   end
 
+  def writable?(user_id)
+    owner?(user_id)
+  end
+
   def has_friended?(profile_id, type)
     friendships.where(:friend_id => profile_id).type(type).limit(1).present?
   end

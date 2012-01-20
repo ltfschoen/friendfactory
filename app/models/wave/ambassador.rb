@@ -4,10 +4,8 @@ class Wave::Ambassador < Wave::Profile
     handle
   end
 
-  private
-
-  def permitted_user_ids
-    self[:user_id]
+  def writable?(user_id)
+    owner?(user_id)
   end
 
 end
