@@ -98,7 +98,7 @@ module SidebarHelper
     personages = Personage.enabled.where(:user_id => personage[:user_id]).all.sort_by { |p| p.display_name }
     case
     when personages.length == 1
-      link_to current_user.handle, url_for(current_profile)
+      link_to current_user.handle, current_profile_path
     when personages.length > 1
       select_tag 'personage[id]', options_from_collection_for_select(personages, :id, :display_name, current_user.id),
           :include_blank => false,
