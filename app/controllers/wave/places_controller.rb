@@ -1,4 +1,8 @@
-class Wave::PlacesController < Wave::BaseController
+require 'render_headshot'
+
+class Wave::PlacesController < ApplicationController
+
+  include RenderHeadshot
 
   extend ActiveSupport::Memoizable
 

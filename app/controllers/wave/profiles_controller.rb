@@ -1,4 +1,8 @@
-class Wave::ProfilesController < Wave::BaseController
+require 'render_headshot'
+
+class Wave::ProfilesController < ApplicationController
+
+  include RenderHeadshot
 
   extend ActiveSupport::Memoizable
 

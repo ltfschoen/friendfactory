@@ -1,6 +1,9 @@
 require 'resolver'
+require 'render_headshot'
 
-class Wave::AmbassadorsController < Wave::BaseController
+class Wave::AmbassadorsController < ApplicationController
+
+  include RenderHeadshot
 
   extend ActiveSupport::Memoizable
 

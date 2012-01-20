@@ -1,4 +1,8 @@
-class Wave::CommunitiesController < Wave::BaseController
+require 'render_headshot'
+
+class Wave::CommunitiesController < ApplicationController
+
+  include RenderHeadshot
 
   extend ActiveSupport::Memoizable
 
