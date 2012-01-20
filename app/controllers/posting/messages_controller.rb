@@ -38,16 +38,14 @@ class Posting::MessagesController < ApplicationController
     false
   end
 
-  def broadcast_posting(posting, waves)
-    broadcast_posting_via_pusher(posting, waves)
+  def broadcast_posting(posting, wave)
+    broadcast_posting_via_pusher(posting, wave)
     broadcast_posting_via_email(posting)
   end
 
-  def broadcast_posting_via_pusher(posting, waves)
-    waves.each do |wave|
-      channel_id = dom_id(wave)
-      Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, posting), :dom_id => "##{channel_id}" })
-    end
+  def broadcast_posting_via_pusher(posting, wave)
+    channel_id = dom_id(wave)
+    Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, posting), :dom_id => "##{channel_id}" })
   end
 
   def broadcast_posting_via_email(posting)
