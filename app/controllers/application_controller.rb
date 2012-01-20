@@ -84,14 +84,14 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   def require_admin
     unless current_user && current_user.admin?
       redirect_to welcome_url
       return false
     end
   end
-  
+
   def require_no_user
     if current_user
       store_location
@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   def store_location
     session[:return_to] = request.fullpath
   end
@@ -109,23 +109,23 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
-    
+
   def store_lurker
     session[:lurker] = true
   end
-    
+
   def clear_lurker
     session[:lurker] = nil
   end
-      
+
   def lurker
     session[:lurker].present? && session[:lurker] == true
   end
-        
+
   def presenter
     @presenter ||= ApplicationPresenter.new(params)
   end
-  
+
   def resolver
     params[:resolver] || controller_name.singularize
   end

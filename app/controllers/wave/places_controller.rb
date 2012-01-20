@@ -1,4 +1,4 @@
-class Wave::PlacesController < ApplicationController
+class Wave::PlacesController < Wave::BaseController
 
   extend ActiveSupport::Memoizable
 
@@ -14,15 +14,14 @@ class Wave::PlacesController < ApplicationController
   def show
     @@per_page = 50
     respond_to do |format|
-      format.html
+      format.html { request.xhr? ? render_headshot(params[:id]) : render }
     end
   end
 
   private
 
   def wave
-    # TODO Rescue from find exception
-    current_site.waves.type(Wave::Place).includes(:user => :persona).find(params[:id])
+    current_site.waves.published.type(Wave::Place).includes(:user => :persona).find(params[:id])
   end
 
   memoize :wave
@@ -31,8 +30,7 @@ class Wave::PlacesController < ApplicationController
     wave.postings.
       published.
       order('`postings`.`updated_at` DESC').
-      includes(:user => :persona).
-      includes(:user => :profile).
+      includes(:user => { :persona => :avatar }).
       paginate(:page => params[:page], :per_page => @@per_page)
   end
 

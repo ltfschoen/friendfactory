@@ -1,5 +1,5 @@
 .block.rollcall
   - users.each_with_index do |user, idx|
     - css_class = (idx + 1) % 5 == 0 ? 'omega' : nil
-    .portrait{ :class => css_class }= thimble_link_to_profile(user, url_for(user.profile))
+    .portrait{ :class => css_class }= thimble_link_to_profile(user)
   = link_to "More #{persona_type.to_s.pluralize.titleize} &rarr;".html_safe, rollcall_path, :class => 'more'

@@ -17,16 +17,16 @@ class Posting::BaseController < ApplicationController
     fetchables = params[:id].to_a
     fetchables.map! do |posting_id, limit|
       if posting = Posting::Base.find_by_id(posting_id)
-        comments = posting.comments.published.order('updated_at desc').limit(limit)
+        comments = posting.comments.published.includes(:user => :profile).order('`updated_at` DESC').limit(limit)
         comments.map! do |comment|
-          if profile = comment.user.profile(current_site)
-            { :id         => comment.id,
-              :posting_id => posting_id,
-              :profile_id => profile.id,
-              :image_path => profile.avatar.url(:thumb),
-              :handle     => profile.handle,
-              :body       => tag_helper.truncate(comment.body, :length => 60),
-              :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }
+          if profile = comment.user.profile
+            { :id           => comment.id,
+              :posting_id   => posting_id,
+              :profile_path => url_for(profile),
+              :image_path   => profile.avatar.url(:thumb),
+              :handle       => profile.handle,
+              :body         => tag_helper.truncate(comment.body, :length => 60),
+              :updated_at   => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }
           else
             Rails.logger.warn("#{comment[:type]}:#{comment.id}@#{current_site.name} -- no profile")
             nil

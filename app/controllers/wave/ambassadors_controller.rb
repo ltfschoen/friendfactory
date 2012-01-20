@@ -1,6 +1,6 @@
 require 'resolver'
 
-class Wave::AmbassadorsController < ApplicationController
+class Wave::AmbassadorsController < Wave::BaseController
 
   extend ActiveSupport::Memoizable
 
@@ -18,14 +18,13 @@ class Wave::AmbassadorsController < ApplicationController
   def show
     @@per_page = 50
     respond_to do |format|
-      format.html
+      format.html { request.xhr? ? render_headshot(params[:id]) : render }
     end
   end
 
   private
 
   def wave
-    # TODO Rescue from find exception
     current_site.waves.type(Wave::Ambassador).includes(:user => :persona).find(params[:id])
   end
 

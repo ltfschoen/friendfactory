@@ -9,7 +9,7 @@ module Posting::AvatarsHelper
 
   def thimble_link_to_profile(personage, *args)
     opts = args.extract_options!
-    path = args.first
+    path = args.first || url_for(personage.profile)
     render :partial => 'posting/avatars/thimble_link_to_profile', :locals => { :personage => personage, :path => path, :opts => opts }
   end
 

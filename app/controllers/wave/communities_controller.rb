@@ -1,4 +1,4 @@
-class Wave::CommunitiesController < ApplicationController
+class Wave::CommunitiesController < Wave::BaseController
 
   extend ActiveSupport::Memoizable
 
@@ -15,7 +15,7 @@ class Wave::CommunitiesController < ApplicationController
     @@per_page = 50
     @users_on_wave = Personage.wave(wave).limit(30)
     respond_to do |format|
-      format.html
+      format.html { request.xhr? ? render_headshot(params[:id]) : render }
     end
   end
 

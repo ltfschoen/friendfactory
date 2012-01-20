@@ -1,4 +1,4 @@
-class Wave::ProfilesController < ApplicationController
+class Wave::ProfilesController < Wave::BaseController
 
   extend ActiveSupport::Memoizable
 
@@ -23,13 +23,7 @@ class Wave::ProfilesController < ApplicationController
   def show
     @@per_page = 50
     respond_to do |format|
-      format.html do
-        if request.xhr?
-          render :partial => 'headshot', :locals => { :personage => wave.user }
-        else
-          render
-        end
-      end
+      format.html { request.xhr? ? render_headshot(params[:id]) : render }
     end
   end
 
@@ -126,8 +120,7 @@ class Wave::ProfilesController < ApplicationController
   ###
 
   def wave
-    # TODO Rescue from find exception
-    current_site.waves.type(Wave::Profile, Wave::Ambassador, Wave::Place, Wave::Community).find(params[:id])
+    current_site.waves.published.type(Wave::Profile).find(params[:id])
   end
 
   memoize :wave

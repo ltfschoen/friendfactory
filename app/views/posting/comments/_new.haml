@@ -1,7 +1,7 @@
 - if current_user
   - nested = posting[:parent_id].present?
   %div{ :class => [ 'comment_box', nested && 'nested' ]}
-    .portrait= thimble_link_to_profile(current_user)
+    .portrait= thimble_link_to_profile(current_user, :remote => true)
     = form_for Posting::Comment.new, :url => posting_comments_path(posting), :html => { :id => "#{dom_id(posting)}_new_comment" }, :remote => true do |f|
       = f.text_area :body, :placeholder => "Write a comment..."
       .foot
