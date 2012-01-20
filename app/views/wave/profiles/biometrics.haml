@@ -1,16 +1,16 @@
-- if profile.present?
-  %table.biometrics
-    %tr
-      %td.label First Name
-      %td.detail= profile.handle
-    %tr
-      %td.label Age
-      %td.detail= profile.age.present? ? profile.age : '&nbsp;'.html_safe
-    %tr
-      %td.label Birthday
-      %td.detail= profile.dob.try(:strftime, '%B %e') || '&nbsp;'.html_safe
-    %tr
-      %td.label Location
-      %td.detail= profile.location
-    - current_site.biometric_domains.each do |biometric_domain|
-      = render :partial => 'domain', :object => biometric_domain
+- persona = @personage.persona
+%table.biometrics
+  %tr
+    %td.label First Name
+    %td.detail= persona.handle
+  %tr
+    %td.label Age
+    %td.detail= persona.age.present? ? persona.age : '&nbsp;'.html_safe
+  %tr
+    %td.label Birthday
+    %td.detail= persona.dob.present? ? persona.dob.strftime('%B %e') : '&nbsp;'.html_safe
+  %tr
+    %td.label Location
+    %td.detail= persona.location
+  - current_site.biometric_domains.each do |biometric_domain|
+    = render :partial => 'domain', :object => biometric_domain, :locals => { :persona => persona }

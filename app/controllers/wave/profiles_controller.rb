@@ -33,15 +33,8 @@ class Wave::ProfilesController < ApplicationController
 
   # === Panes ===
 
-  def signals
-    @wave = Wave::Profile.find_by_id(params[:id])
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-  
   def biometrics
-    @wave = Wave::Profile.find_by_id(params[:id])
+    @personage = Personage.enabled.site(current_site).includes(:persona).find_by_profile_id(params[:id])
     respond_to do |format|
       format.html { render :layout => false }
     end
