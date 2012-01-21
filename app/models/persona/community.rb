@@ -8,7 +8,7 @@ class Persona::Community < Persona::Base
 
   attr_accessible :description
 
-  validates_presence_of :handle, :description
+  validates_presence_of :handle
 
   def avatar
     super || WaveAvatar.new(user)
