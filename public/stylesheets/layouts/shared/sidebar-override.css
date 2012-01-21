@@ -161,7 +161,7 @@
 #sidebar .block.rollcall a.more {
 	font-size: 11px;
 	display: block;
-	float: right;
+	float: left;
 	margin-top: 2px;
 }
 
