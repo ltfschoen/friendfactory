@@ -12,6 +12,8 @@
         %ul.buddy-bar.secondary
           - title = "#{persona.handle} Wave"
           %li= link_to title, wave_community_path(personage[:profile_id]), :class => 'icon profile', :title => title
+        %ul.buddy-bar.primary
+          %li= link_to 'Biometrics', biometrics_profile_path(personage[:id]), :class => 'flip icon mini-profile', :'data-pane-name' => 'biometrics'
     .face-container
       .back.face
         .content

@@ -1,16 +1,16 @@
-- photos = @wave.photos
-- matrix = [ empty_thumb_image_tag, empty_thumb_image_tag, empty_thumb_image_tag ] * 3
+- profile = personage.profile
+- matrix  = [ empty_thumb_image_tag, empty_thumb_image_tag, empty_thumb_image_tag ] * 3
 %table.grid{ :cellspacing => '0' }
   - matrix.zip(photos).in_groups_of(3) do |photo_row|
     %tr
       - photo_row.each do |photo_with_fill|
         %td
           - fill_image_tag = photo_with_fill[0]
-          - photo_posting = photo_with_fill[1]
+          - photo_posting  = photo_with_fill[1]
           - if photo_posting.present? && photo_posting.image
             - image_tag = image_tag(photo_posting.image.url(:thumb), :site => false, :class => 'thumb')
-            = link_to(image_tag, wave_album_path(@wave, :photo_id => photo_posting), :target => '_blank')
+            = link_to(image_tag, wave_album_path(profile, :photo_id => photo_posting), :target => '_blank')
           - else
             = fill_image_tag
 .caption
-  #{@wave.handle}&#39;s&nbsp;9 recent photos
+  #{personage.handle}&#39;s&nbsp;9 recent photos

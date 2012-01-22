@@ -1,6 +1,6 @@
 - matrix = [ empty_thumb_image_tag, empty_thumb_image_tag, empty_thumb_image_tag ] * 3
 %table.grid{ :cellspacing => '0' }
-  - matrix.zip(@avatars).in_groups_of(3) do |avatar_row|
+  - matrix.zip(avatars).in_groups_of(3) do |avatar_row|
     %tr
       - avatar_row.each do |avatar_with_fill|
         %td
@@ -13,4 +13,4 @@
             = image_tag(avatar.url(:thumb), :site => false, :class => 'thumb')
           - else
             = fill_image_tag
-= link_to_send_cocktail(@profile)
+= link_to_send_cocktail(personage.profile)

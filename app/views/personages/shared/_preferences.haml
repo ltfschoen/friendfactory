@@ -5,5 +5,5 @@
       %table.preferences
         %tr
           %td
-            = check_box_tag 'user[emailable]', 1, @personage.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-url' => unsubscribe_profile_path(@personage)
+            = check_box_tag 'user[emailable]', 1, personage.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-url' => unsubscribe_profile_path(personage)
             = label_tag :user_emailable, 'Subscribe to emails'

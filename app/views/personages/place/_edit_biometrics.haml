@@ -1,9 +1,9 @@
-= form_for @personage, :url => profile_path(@personage) do |f|
+= form_for personage, :url => profile_path(personage) do |f|
   .headshot-container
     .headshot
       .face
         .pane
-          = f.fields_for :persona, @personage.persona do |persona_form|
+          = f.fields_for :persona, personage.persona do |persona_form|
             %table.biometrics
               %tr
                 %td.label Name
@@ -12,5 +12,5 @@
                 %td.label Location
                 %td.detail= persona_form.text_field :location, :placeholder => 'town or city, state', :maxlength => 20
         .button-bar
-          = link_to 'Cancel', profile_path(@personage), :class => 'cancel'
+          = link_to 'Cancel', profile_path(personage), :class => 'cancel'
           = f.submit 'OK'

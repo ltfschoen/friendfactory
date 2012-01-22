@@ -15,6 +15,13 @@ class Wave::Profile < Wave::Base
       :location,
     :to => :user
 
+  has_many :photos,
+      :through     => :publications,
+      :source      => :resource,
+      :source_type => 'Posting::Base',
+      :conditions  => { :postings => { :state => :published, :type => 'Posting::Photo' }},
+      :order       => '`postings`.`created_at` DESC'
+
   has_many :friendships, :class_name => 'Friendship::Base'
 
   has_many :friends,
@@ -44,10 +51,6 @@ class Wave::Profile < Wave::Base
 
   def tag_list
     current_site.present? ? tag_list_on(current_site) : []
-  end
-
-  def photos
-    postings.type(Posting::Photo).published.order('created_at desc').limit(9)
   end
 
   # TODO Implement

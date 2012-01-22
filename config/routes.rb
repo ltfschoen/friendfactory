@@ -17,18 +17,8 @@ Friskyfactory::Application.routes.draw do
     resources :communities, :only => [ :show ] do
       get :rollcall, :path => 'rollcall(/:tag)', :on => :member
     end
-
-    resources :profiles, :only => [ :index, :show ] do
-      member do
-        get :photos
-        get :invitations
-        get :pokes
-        get :location
-      end
-    end
-
+    resources :profiles, :only => [ :index, :show ]
     resources :ambassadors, :only => [ :show ]
-
     resources :places, :only => [ :show ] do
       get :rollcall, :path => 'rollcall(/:tag)', :on => :member
     end
@@ -80,6 +70,9 @@ Friskyfactory::Application.routes.draw do
       put  :switch
       get  :biometrics
       get  :conversation
+      get  :invitations
+      get  :photos
+      get  :pokes
     end
   end
 
@@ -98,10 +91,11 @@ Friskyfactory::Application.routes.draw do
         delete :unpublish, :controller => 'base'
         get 'avatar/comments' => 'avatars#comments'
       end
+
       collection do
         get :fetch, :controller => 'base'
       end
-      # To manage children of a posting
+
       resources :comments, :only => [ :index, :new, :create ]
     end
   end
@@ -123,9 +117,9 @@ Friskyfactory::Application.routes.draw do
 
 
   # Geocode
-  resources :locations, :only => [] do
-    get 'geocode', :on => :collection
-  end
+  # resources :locations, :only => [] do
+  #   get 'geocode', :on => :collection
+  # end
 
 
   # Welcome

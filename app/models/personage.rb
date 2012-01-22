@@ -105,7 +105,9 @@ class Personage < ActiveRecord::Base
       klass = type.constantize
       self.persona = klass.new(attrs)
     else
-      persona.update_attributes(attrs)
+      if persona[:id] == attrs.delete('id').to_i
+        persona.update_attributes(attrs)
+      end
     end
   end
 

@@ -1,17 +1,10 @@
-- persona = @personage.persona
-.headshot-container
-  .headshot
-    .face
-      .pane
-        %table.biometrics
-          %tr
-            %td.label First Name
-            %td.detail= persona.handle
-          %tr
-            %td.label Location
-            %td.detail= persona.location
-          %tr
-            %td.detail{ :colspan => '2'}
-              = persona.description
-      .button-bar
-        = link_to 'Edit', edit_profile_path(@personage), :class => 'button edit_profile'
+%table.biometrics
+  %tr
+    %td.label First Name
+    %td.detail= persona.handle
+  %tr
+    %td.label Location
+    %td.detail= persona.location
+  %tr
+    %td.detail{ :colspan => '2'}
+      = persona.description

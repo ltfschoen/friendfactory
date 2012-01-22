@@ -14,14 +14,14 @@ class Wave::ConversationsController < ApplicationController
     end
   end
 
-  def show
-    # Conversation with other user identified by :profile_id
-    user = Wave::Profile.find_by_id(params[:profile_id]).try(:user)
-    @wave = current_user.find_or_create_conversation_with(user, current_site)
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
+  # def show
+  #   # Conversation with other user identified by :profile_id
+  #   user = Wave::Profile.find_by_id(params[:profile_id]).try(:user)
+  #   @wave = current_user.find_or_create_conversation_with(user, current_site)
+  #   respond_to do |format|
+  #     format.html { render :layout => false }
+  #   end
+  # end
 
   def popup
     @popup = true

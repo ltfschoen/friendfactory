@@ -1,0 +1,38 @@
+=# form_for Posting::Invitation.new, :url => wave_posting_invitations_path(invitation_wave), :remote => true do |f|
+= form_for current_user, :url => profile_path do |f|
+  %div{ :style => 'margin:0;padding:0;display:inline' }
+    = hidden_field_tag :li_eq
+    = hidden_field_tag :_method
+  .headshot-container
+    .headshot
+      .face.invitations
+        %ul= render_photo_grid(invitation_wave, invitation_wave.nine_recent_invitations)
+        %p.instructions
+          Click an empty box to send an invitation to join to a buddy
+        = f.fields_for :invitations do |invitation_form|
+          = invitation_form.text_field :body, :placeholder => "buddy's email"
+        .button-bar
+          = link_to 'Cancel', profile_path
+          = f.submit 'OK'
+
+- if false
+  .grid_6
+    .polaroid.edit      
+      .face-container
+        .back.face
+          .content.scrollable
+            .items
+              .pane.photo-grid
+                = render_photo_grid(@wave, @invitation_postings)
+            %p.unobtrusive
+              Click an empty box to invite a buddy            
+          %table.button-bar.hidden
+            %tr
+              %td.input
+                = f.text_field :body, :placeholder => "buddy's email"
+                %div{ :style => 'margin:0;padding:0;display:inline' }
+                  = hidden_field_tag :li_eq
+                  = hidden_field_tag :_method
+              %td.ok-cancel
+                = f.submit 'OK', :button => true
+                = f.button 'Cancel', :class => 'cancel'

@@ -5,6 +5,7 @@ class PersonagesController < ApplicationController
   before_filter :require_user
 
   helper_method :invitation_wave
+  helper_method :personage
   helper_method :paged_users
   helper_method :page_title
 
@@ -47,10 +48,9 @@ class PersonagesController < ApplicationController
   def update
     @personage = current_user_record.personages.find(params[:id])
     respond_to do |format|
-      if @personage.update_attributes(params[:personage])
-        @personage.enable! unless @personage.enabled?
-        # TODO
-        # @personage.profile.set_tag_list_on!(current_site)
+      if personage.update_attributes(params[:personage])
+        personage.enable! unless personage.enabled?
+        # TODO: @personage.profile.set_tag_list_on!(current_site)
         format.html { redirect_to profile_path }
       else
         format.html { render :action => 'edit' }
@@ -59,9 +59,8 @@ class PersonagesController < ApplicationController
   end
 
   def switch
-    if @personage = current_user_session.record.personages.find_by_id(params[:id])
-      session[:personage_id] = @personage.id
-    end
+    @personage = current_user_session.record.personages.find(params[:id])
+    session[:personage_id] = @personage.id
     respond_to do |format|
       format.js { render :layout => false }
     end
@@ -94,7 +93,7 @@ class PersonagesController < ApplicationController
 
   def biometrics
     respond_to do |format|
-      if @personage = Personage.enabled.site(current_site).includes(:persona).find(params[:id])
+      if personage
         format.html { render :layout => false }
       else
         format.html { render :nothing => true }
@@ -104,8 +103,7 @@ class PersonagesController < ApplicationController
 
   def conversation
     respond_to do |format|
-      if receiver = Personage.enabled.site(current_site).includes(:persona).find(params[:id])
-        @wave = current_user.find_or_create_conversation_with(receiver, current_site).mark_as_read
+      if @wave = current_user.find_or_create_conversation_with(personage, current_site).mark_as_read
         format.html { render :layout => false }
       else
         format.html { render :nothing => true }
@@ -113,8 +111,55 @@ class PersonagesController < ApplicationController
     end
   end
 
+  def invitations
+    respond_to do |format|
+      if personage
+        @invitations = personage.profile.postings.type(Posting::Invitation).order('`postings`.`created_at` DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
+        format.html { render :layout => false }
+      else
+        format.html { render :nothing => true }
+      end
+    end
+  end
+
+  def photos
+    respond_to do |format|
+      if personage(:include => :profile)
+        @photos = personage.profile.photos.limit(Wave::InvitationsHelper::MaximumDefaultImages)
+        format.html { render :layout => false }
+      else
+        format.html { render :nothing => true }
+      end
+    end
+  end
+
+  def pokes
+    respond_to do |format|
+      if personage(:include => :profile)
+        @avatars = personage.profile.inverse_friends.
+            type(Friendship::Poke).
+            includes(:user => { :persona => :avatar }).
+            order('`friendships`.`created_at` DESC').
+            limit(Wave::InvitationsHelper::MaximumDefaultImages).
+            map { |p| p.user.avatar }
+        format.html { render :layout => false }
+      else
+        format.html { render :nothing => true }
+      end
+    end
+  end
 
   private
+
+  def personage(opts = {})
+    @personage ||= begin
+      relation = Personage.enabled.site(current_site).includes(:persona).scoped
+      if includes = opts.delete(:include)
+        relation = relation.includes(includes).scoped
+      end
+      relation.find(params[:id])
+    end
+  end
 
   def paged_users
     users.paginate(:page => params[:page], :per_page => @@per_page)
@@ -141,7 +186,7 @@ class PersonagesController < ApplicationController
   end
 
   def page_title
-    if title = @page_title || @personage.handle
+    if title = @page_title || personage.handle
       title.titleize
     end
     [ current_site.display_name, title ].join(' - ')

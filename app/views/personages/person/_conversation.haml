@@ -1,0 +1,15 @@
+.wave[ wave ]{ :'data-id' => wave.id }
+  .thread
+    %ul.messages
+      - timestamp, previous_timestamp = nil, nil
+      - wave.messages.published.each_with_index do |posting, idx|
+        %li
+          - timestamp = render :partial => File.join('personages', 'shared', 'timestamp'), :object => posting.updated_at
+          = timestamp if (timestamp != previous_timestamp) || (idx % 5 == 0)
+          - previous_timestamp = timestamp
+          = render :partial => File.join('posting', 'messages', 'message'), :object => posting, :locals => { :last_read_at => wave.last_read_at }
+  = form_for Posting::Message.new, :url => wave_posting_messages_path(:wave_id => wave.id), :remote => true, :html => { :'data-type' => :json } do |f|
+    .message-input
+      = f.text_area :body
+    .button-bar
+      = f.submit 'Send', :button => true
