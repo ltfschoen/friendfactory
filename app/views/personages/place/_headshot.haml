@@ -13,7 +13,7 @@
           - title = "#{persona.handle} Wave"
           %li= link_to title, wave_place_path(personage[:profile_id]), :class => 'icon profile', :title => title
         %ul.buddy-bar.primary
-          %li= link_to 'Location', location_profile_path(personage[:id]), :class => 'flip icon location', :'data-pane-name' => 'location', :title => 'Location'
+          %li= link_to 'Location', biometrics_profile_path(personage[:id]), :class => 'flip icon location', :'data-pane-name' => 'location', :title => 'Location'
     .face-container
       .back.face
         .content
