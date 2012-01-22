@@ -4,6 +4,6 @@ class Persona::Ambassador < Persona::Person
 
   attr_accessible :location, :description
 
-  validates_presence_of :handle, :location, :description
+  validates_presence_of :handle, :location
 
 end

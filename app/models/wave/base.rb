@@ -91,13 +91,53 @@ class Wave::Base < ActiveRecord::Base
     false
   end
 
+  ###
+
+  has_many :friendships,
+      :foreign_key => 'profile_id',
+      :class_name  => 'Friendship::Base'
+
+  has_many :friends, :through => :friendships do
+    def type(type)
+      where(:friendships => { :type => type })
+    end
+  end
+
+  has_many :inverse_friendships,
+      :foreign_key => '`friend_id`',
+      :class_name  => 'Friendship::Base'
+
+  has_many :inverse_friends,
+      :through => :inverse_friendships,
+      :source  => :profile do
+    def type(type)
+      where(:friendships => { :type => type })
+    end
+  end
+
+  alias :admirers :inverse_friends
+
+  def toggle_poke(profile_id)
+    return false if profile_id == self.id
+    if poke = self.friendships.type(Friendship::Poke).find_by_friend_id(profile_id)
+      poke.delete
+      nil
+    else
+      poke = Friendship::Poke.new(:friend_id => profile_id)
+      self.friendships << poke
+      poke
+    end
+  end
+
   def has_friended?(profile_id, type)
-    false
+    friendships.where(:friend_id => profile_id).type(type).limit(1).present?
   end
 
   def has_poked?(profile_id)
-    false
+    has_friended?(profile_id, ::Friendship::Poke)
   end
+
+  ###
 
   private
 

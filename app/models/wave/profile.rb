@@ -22,33 +22,6 @@ class Wave::Profile < Wave::Base
       :conditions  => { :postings => { :state => :published, :type => 'Posting::Photo' }},
       :order       => '`postings`.`created_at` DESC'
 
-  has_many :friendships, :class_name => 'Friendship::Base'
-
-  has_many :friends,
-      :through    => :friendships,
-      :class_name => 'Wave::Profile' do
-    def type(type)
-      where(:friendships => { :type => type })
-    end
-  end
-
-  has_many :inverse_friendships,
-      :class_name  => 'Friendship::Base',
-      :foreign_key => '`friend_id`'
-
-  has_many :inverse_friends,
-      :through => :inverse_friendships,
-      :source  => :profile do
-    def type(type)
-      where(:friendships => { :type => type })
-    end
-  end
-
-  # TODO Implement
-  # def admirers(site)
-  #   inverse_friends.map{ |user| user.profile(site) }
-  # end
-
   def tag_list
     current_site.present? ? tag_list_on(current_site) : []
   end
@@ -63,28 +36,8 @@ class Wave::Profile < Wave::Base
     # end
   end
 
-  def toggle_poke(profile_id)
-    return false if profile_id == self.id
-    if poke = self.friendships.type(Friendship::Poke).find_by_friend_id(profile_id)
-      poke.delete
-      nil
-    else
-      poke = Friendship::Poke.new(:friend_id => profile_id)
-      self.friendships << poke
-      poke
-    end
-  end
-
   def writable?(user_id)
     owner?(user_id)
-  end
-
-  def has_friended?(profile_id, type)
-    friendships.where(:friend_id => profile_id).type(type).limit(1).present?
-  end
-
-  def has_poked?(profile_id)
-    has_friended?(profile_id, ::Friendship::Poke)
   end
 
   def touch(avatar = nil)
