@@ -1,6 +1,5 @@
 - content_for :tag_cloud do
   - tag_cloud(tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
-    - css_class = 'tag4' if tag.name.downcase == 'deaf' && current_site.name == 'friskyhands' # TODO !!!
     - tag_as_param = tag.name.gsub(/\s/, '-').downcase
     - current = false
     - if tag_as_param == params[:tag]
@@ -14,8 +13,6 @@
 #rollcall
   %h1 #{wave.subject} RollCall
   %div.clearfix
-    - paged_users.in_groups_of(4) do |group|
-      - group.each_with_index do |user, idx|
-        - unless user.nil?
-          = render_headshot(user)
-  = will_paginate paged_users, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
+    - paged_users_from_tagged_personas.each do |user|
+      = render_headshot(user)
+  = will_paginate paged_users_from_tagged_personas, :class => 'pagination footer', :inner_window => 1, :outer_window => 1

@@ -17,12 +17,6 @@ class Persona::Base < ActiveRecord::Base
 
   before_save :set_tag_list
 
-  def set_tag_list
-    # Override in inherited classes
-  end
-
-  private :set_tag_list
-
   has_one :user,
       :class_name  => 'Personage',
       :foreign_key => 'persona_id'
@@ -50,5 +44,11 @@ class Persona::Base < ActiveRecord::Base
   end
 
   alias_method_chain :avatar, :silhouette
+
+  private
+
+  def set_tag_list
+    # Override in inherited classes
+  end
 
 end

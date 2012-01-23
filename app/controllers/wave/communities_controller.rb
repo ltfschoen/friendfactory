@@ -8,23 +8,23 @@ class Wave::CommunitiesController < ApplicationController
 
   before_filter :require_user
 
-  helper_method :wave, :postings, :paged_users, :profiles, :tags
+  helper_method :wave, :paged_postings, :users_from_paged_postings
+  helper_method :tags, :paged_users_from_tagged_personas
+
   helper_method :page_title
 
   layout 'three-column'
 
   cattr_reader :per_page
+  @@per_page = 50
 
   def show
-    @@per_page = 50
-    @users_on_wave = Personage.wave(wave).limit(30)
     respond_to do |format|
       format.html { request.xhr? ? render_headshot(params[:id]) : render }
     end
   end
 
   def rollcall
-    @@per_page = 48
     respond_to do |format|
       format.html
     end
@@ -40,47 +40,54 @@ class Wave::CommunitiesController < ApplicationController
     end
   end
 
-  memoize :wave
-
-  def postings
-    wave.postings.published.
+  def paged_postings
+    postings.
       includes(:user => { :persona => :avatar }).
-      order('`sticky_until` DESC, `updated_at` DESC').
       paginate(:page => params[:page], :per_page => @@per_page)
   end
 
-  memoize :postings
-
-  def paged_users
-    Personage.where(:profile_id => profiles.map(&:id)).paginate(:page => params[:page], :per_page => @@per_page)
+  def users_from_paged_postings
+    paged_postings.map(&:user).uniq
   end
 
-  memoize :paged_users
-
-  def tags
-    profiles_on_wave.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
-  end
-
-  memoize :tags
+  memoize :wave, :paged_postings, :users_from_paged_postings
 
   ###
 
-  def users_on_wave
-    Personage.enabled.wave(wave).all
+  def tags
+    personas.tag_counts.order('`name` ASC').select{ |tag| tag.count > 1 }
   end
 
-  def profiles_on_wave
-    profile_ids = users_on_wave.map(&:profile_id)
-    current_site.waves.where(:id => profile_ids).scoped
+  def paged_users_from_tagged_personas
+    Personage.
+      includes(:persona => :avatar ).
+      where(:persona_id => tagged_personas.map(&:id)).
+      paginate(:page => params[:page], :per_page => @@per_page)
   end
 
-  def profiles
-    profiles = profiles_on_wave
-    profiles = profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).scoped if params[:tag].present?
-    profiles.scoped
+  memoize :tags, :paged_users_from_tagged_personas
+
+  ###
+
+  def tagged_personas
+    tagged_personas = personas
+    tagged_personas = personas.tagged_with(parameterize_tag(params[:tag]), :on => :tags).scoped if params[:tag]
+    tagged_personas
   end
 
-  def scrub_tag(tag)
+  def personas
+    user_ids = postings.map(&:user_id)
+    Persona::Base.joins(:user).where(:personages => { :id => user_ids }).scoped
+  end
+
+  def postings
+    wave.postings.published.
+      joins(:user).
+      merge(Personage.enabled).
+      order('`sticky_until` DESC, `updated_at` DESC').scoped
+  end
+
+  def parameterize_tag(tag)
     tag.downcase.gsub(/-/, ' ')
   end
 
