@@ -2,6 +2,11 @@
 	line-height: 100%;
 }
 
+.tag_cloud a {
+	display: inline-block;
+	margin: 0 1px;
+}
+
 .tag_cloud a:hover,
 .tag_cloud a.current,
 .tag_cloud a.current:hover {

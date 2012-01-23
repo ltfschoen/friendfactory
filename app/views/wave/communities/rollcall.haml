@@ -1,14 +1,16 @@
-- content_for :tag_cloud do
-  - tag_cloud(tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
-    - tag_as_param = tag.name.gsub(/\s/, '-').downcase
-    - current = false
-    - if tag_as_param == params[:tag]
-      - current = true
-      - css_class += " current"
-      - tag_as_param = nil
-    = link_to tag.name, url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id, :tag => tag_as_param), :class => css_class
-    - if current
-      = link_to "(untag)", url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id), :class => 'tag1 current'
+- if false
+  - content_for :sidebar_tag_cloud do
+    - tag_cloud(tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
+      - tag_as_param = tag.name.gsub(/\s/, '-').downcase
+      - current = false
+      - if tag_as_param == params[:tag]
+        - current = true
+        - css_class += " current"
+        - tag_as_param = nil
+      = link_to tag.name, url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id, :tag => tag_as_param), :class => css_class
+      - if current
+        = link_to "(untag)", url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id), :class => 'tag1 current'
+- content_for_sidebar_tag_cloud(tags, params[:tag])
 
 #rollcall
   %h1 #{wave.subject} RollCall
