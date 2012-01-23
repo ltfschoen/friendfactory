@@ -10,14 +10,20 @@ module Geolocation
 
   def location=(location)
     write_attribute(:location, location)
-    if geocode = geocoded_location
+    if location.present? && geocode = geocoded_location
       geocode.map { |k, v|  write_attribute(k ,v) }
     end
   end
 
   def city
-    self[:city] || self[:locality]
+    self[:city]
   end
+
+  def city_with_locality
+    city_without_locality || self[:locality]
+  end
+
+  alias_method_chain :city, :locality
 
   def map_url
     "http://maps.google.com/maps/api/staticmap?zoom=8&size=180x156&markers=color:red|size:mid|#{lat},#{lng}&sensor=false"
