@@ -41,8 +41,6 @@ class Wave::Base < ActiveRecord::Base
   scope :user, lambda { |user| where(:user_id => user.id) }
   scope :published, where(:state => :published)
 
-  acts_as_taggable
-
   belongs_to :user,
       :class_name => 'Personage',
       :include    => :persona
@@ -69,19 +67,6 @@ class Wave::Base < ActiveRecord::Base
   has_many :bookmarks, :foreign_key => 'wave_id'
   
   belongs_to :resource, :polymorphic => true
-
-  # before_save do |wave|
-  #   empty_tag_list = nil
-  #   wave.sites.each do |site|
-  #     # Override set_tag_list_on in inherited classes and call super.
-  #     wave.set_tag_list_on(site, empty_tag_list)
-  #   end
-  # end
-
-  def set_tag_list_on!(site)
-    set_tag_list_on(site)
-    save!
-  end
 
   def readable?(user_id)
     false

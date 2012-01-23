@@ -1,4 +1,8 @@
+require 'geolocation'
+
 class Persona::Person < Persona::Base
+
+  include Geolocation
 
   self.default_profile_type = 'Wave::Profile'
 
@@ -49,6 +53,22 @@ class Persona::Person < Persona::Base
 
   def full_name
     [ first_name, last_name ].compact.join(' ')
+  end
+
+  def set_tag_list
+    biometric_list = biometric_person_values.map do |biometric_person_value|
+      if value = biometric_person_value.value
+        value.display_name
+      end
+    end
+
+    biometric_list = biometric_list.compact.join(',')
+    location_list  = [ state, country ].compact.join(',')
+    tag_list = [ biometric_list, location_list ].compact.join(',')
+
+    self.location_list  = location_list
+    self.biometric_list = biometric_list
+    self.tag_list = tag_list
   end
 
 end

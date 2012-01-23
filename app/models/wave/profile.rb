@@ -1,8 +1,4 @@
-require 'tag_scrubber'
-
 class Wave::Profile < Wave::Base
-
-  include TagScrubber
 
   RepublishWindow = 6.hours
 
@@ -21,20 +17,6 @@ class Wave::Profile < Wave::Base
       :source_type => 'Posting::Base',
       :conditions  => { :postings => { :state => :published, :type => 'Posting::Photo' }},
       :order       => '`postings`.`created_at` DESC'
-
-  def tag_list
-    current_site.present? ? tag_list_on(current_site) : []
-  end
-
-  # TODO Implement
-  def set_tag_list_on(site)
-    # if resource.present?
-    #   signal_ids = site.signal_categories.map { |category| resource.send(:"#{category.name}_id") }.compact
-    #   signal_display_names = Signal::Base.find_all_by_id(signal_ids).map(&:display_name)
-    #   tag_list = [ signal_display_names, scrub_tag(resource.location) ].flatten.compact.join(',')
-    #   super(site, tag_list)
-    # end
-  end
 
   def writable?(user_id)
     owner?(user_id)

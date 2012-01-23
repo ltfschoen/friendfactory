@@ -7,10 +7,21 @@ class Persona::Base < ActiveRecord::Base
   class_attribute :default_profile_type
   self.default_profile_type = 'Wave::Base'
 
+  acts_as_taggable
+  acts_as_taggable_on :locations, :biometrics
+
   attr_accessible \
       :handle,
       :avatar,
       :default
+
+  before_save :set_tag_list
+
+  def set_tag_list
+    # Override in inherited classes
+  end
+
+  private :set_tag_list
 
   has_one :user,
       :class_name  => 'Personage',

@@ -30,7 +30,7 @@ gem 'remotipart'
 gem 'haml', '>= 3.1.2'
 gem 'haml-rails'
 gem 'sass', '>= 3.1.1'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'pusher', '~> 0.8.1'
 gem 'will_paginate', '~> 3.0.2'
 gem 'whenever', :require => false

@@ -35,7 +35,8 @@ GEM
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
     activesupport (3.0.9)
-    acts-as-taggable-on (2.0.6)
+    acts-as-taggable-on (2.2.2)
+      rails (~> 3.0)
     addressable (2.2.6)
     arel (2.0.10)
     authlogic (3.1.0)
@@ -143,7 +144,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on
+  acts-as-taggable-on (~> 2.2.2)
   authlogic (~> 3.1.0)
   embedly
   factory_girl!

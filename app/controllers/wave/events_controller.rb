@@ -18,7 +18,7 @@ class Wave::EventsController < ApplicationController
     if @wave.save
       current_site.waves << @wave
       current_site.home_wave.postings << @wave
-      @wave.set_tag_list_on(current_site) # TODO: Move to before_save callback
+      # @wave.set_tag_list_on(current_site) # TODO: Move to before_save callback
       @wave.publish!
     end
     respond_to do |format|

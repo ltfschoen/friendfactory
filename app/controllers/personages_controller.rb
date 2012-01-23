@@ -50,7 +50,6 @@ class PersonagesController < ApplicationController
     respond_to do |format|
       if personage.update_attributes(params[:personage])
         personage.enable! unless personage.enabled?
-        # TODO: @personage.profile.set_tag_list_on!(current_site)
         format.html { redirect_to profile_path }
       else
         format.html { render :action => 'edit' }

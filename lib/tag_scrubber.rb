@@ -1,5 +1,9 @@
 module TagScrubber
 
+  def parameterize_tag(tag)
+    tag.downcase.gsub(/-/, ' ').strip
+  end
+
   def scrub_tag(dirty_tag)
     unless dirty_tag.blank?
       tag = reduce(unpunctuate(dirty_tag.strip))
