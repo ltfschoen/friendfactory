@@ -12,6 +12,8 @@ module Geolocation
     write_attribute(:location, location)
     if location.present? && geocode = geocoded_location
       geocode.map { |k, v|  write_attribute(k ,v) }
+    else
+      nullify_location_attributes
     end
   end
 
@@ -95,6 +97,23 @@ module Geolocation
       end
     end
     nil
+  end
+
+  def nullify_location_attributes
+    [ :address,
+      :subpremise,
+      :street_number,
+      :street,
+      :neighborhood,
+      :sublocality,
+      :locality,
+      :city,
+      :abbreviated_state,
+      :state,
+      :country,
+      :post_code,
+      :lat,
+      :lng ].each { |attr| write_attribute(attr, nil) }
   end
 
 end
