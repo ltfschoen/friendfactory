@@ -34,6 +34,9 @@ class Personage < ActiveRecord::Base
       :avatar,
       :avatar?,
       :avatar=,
+      :tag_list,
+      :location_list,
+      :biometric_list,
     :to => :persona
 
   state_machine do
