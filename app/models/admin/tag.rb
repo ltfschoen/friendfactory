@@ -25,7 +25,6 @@ class Admin::Tag < ActiveRecord::Base
     Persona::Base.includes(:taggings).all.each do |persona|
       if location = persona.location
         persona.send(:location=, location)
-        persona.set_tag_list
         persona.save(:validate => false)
       end
     end
