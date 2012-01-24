@@ -6,8 +6,6 @@ class Wave::Conversation < Wave::Base
 
   scope :chatty, where('`waves`.`postings_count` > 0')
 
-  # alias :recipient :resource
-
   belongs_to :recipient,
       :class_name => 'Personage',
       :foreign_key => 'resource_id'

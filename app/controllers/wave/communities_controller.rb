@@ -8,8 +8,16 @@ class Wave::CommunitiesController < ApplicationController
 
   before_filter :require_user
 
-  helper_method :wave, :paged_postings, :users_from_paged_postings
-  helper_method :tags, :paged_users_from_tagged_personas
+  # Show helpers
+  helper_method \
+      :wave,
+      :paged_postings,
+      :users_from_paged_postings
+
+  # Rollcall helpers
+  helper_method \
+      :tags,
+      :paged_users_from_tagged_personas
 
   helper_method :page_title
 

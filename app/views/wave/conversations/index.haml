@@ -1,18 +1,7 @@
-- content_for :tag_cloud do
-  - tag_cloud(tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
-    - tag_as_param = tag.name.gsub(/\s/, '-').downcase
-    - current = false
-    - if tag_as_param == params[:tag]
-      - current = true
-      - css_class += " current"
-      - tag_as_param = nil
-    = link_to tag.name, inbox_path(:tag => tag_as_param), :class => css_class
-    - if current
-      = link_to "(untag)", inbox_path, :class => 'tag1 current'
+- path_proc = proc { |tag_as_param| inbox_path(:tag => tag_as_param) }
+- content_for_sidebar_tag_cloud(tags, params[:tag], path_proc)
 #inbox
   %div.clearfix
-    - conversations.each do |conversation|
-      - if profile = profiles_by_user_id[conversation.recipient_id]
-        = render_headshot(profile.user, :link_to_close_wave_id => conversation.id)
-  - collection = [ conversations, profiles ].detect { |col| col.respond_to?(:total_pages) }
-  = will_paginate collection, :class => 'footer pagination', :inner_window => 1, :outer_window => 1
+    - paged_conversations.each do |conversation|
+      = render_headshot(conversation.recipient, :link_to_close_wave_id => conversation[:id])
+  = will_paginate paged_conversations, :class => 'footer pagination', :inner_window => 1, :outer_window => 1

@@ -1,7 +1,11 @@
 class Wave::ConversationsController < ApplicationController
 
+  extend ActiveSupport::Memoizable
+
   before_filter :require_user
-  helper_method :page_title, :conversations, :profiles, :profiles_by_user_id, :tags
+
+  helper_method :paged_conversations, :tags
+  helper_method :page_title
 
   layout 'wave/conversation'
 
@@ -14,90 +18,86 @@ class Wave::ConversationsController < ApplicationController
     end
   end
 
-  # def show
-  #   # Conversation with other user identified by :profile_id
-  #   user = Wave::Profile.find_by_id(params[:profile_id]).try(:user)
-  #   @wave = current_user.find_or_create_conversation_with(user, current_site)
+  # def popup
+  #   @popup = true
+  #   @title = current_site.name
+  #   @wave = current_user.conversations.site(current_site).find_by_id(params[:id])
+  #   if @wave.present? && @wave.recipient.present?
+  #     @title += " with #{@wave.recipient.handle}"
+  #   end
   #   respond_to do |format|
-  #     format.html { render :layout => false }
+  #     format.html { render :action => 'show' }
   #   end
   # end
 
-  def popup
-    @popup = true
-    @title = current_site.name
-    @wave = current_user.conversations.site(current_site).find_by_id(params[:id])
-    if @wave.present? && @wave.recipient.present?
-      @title += " with #{@wave.recipient.handle}"
-    end
-    respond_to do |format|
-      format.html { render :action => 'show' }
-    end
-  end
-
   def close
-    if @wave = current_user.inbox(current_site).find_by_id(params[:id])
-      @wave.read && @wave.unpublish!
-    end
+    @wave = current_user.inbox(current_site).find(params[:id])
     respond_to do |format|
+      @wave.read && @wave.unpublish!
       format.json { render :json => { :closed => true }}
     end
   end
 
   private
 
-  def page_title
-    "#{current_site.display_name} - #{current_profile.handle}'s Inbox"
-  end
-
-  def conversation_dates
-    @conversation_dates ||=
-      current_user.inbox(current_site).
-          select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS user_ids').
-          group('date(`waves`.`updated_at`)').
-          order('date(`waves`.`updated_at`) DESC')
-  end
-
-  def conversations
-    @conversations ||= begin
-      conversations = current_user.inbox(current_site).
-          select('`waves`.`id`, `waves`.`user_id`, `waves`.`resource_id` AS recipient_id').
-          includes(:user => :persona).
-          order('`waves`.`updated_at` DESC')
-
-      if params[:tag].present?
-        conversations.all
-      else
-        conversations.paginate(:page => params[:page], :per_page => @@per_page)
-      end
-    end
-  end
-
-  def profiles
-    @profiles ||= begin
-      profiles = current_site.waves.where(:user_id => conversations.map(&:recipient_id)).scoped
-      if params[:tag].present?
-        profiles.tagged_with(scrub_tag(params[:tag]), :on => current_site).paginate(:page => params[:page], :per_page => @@per_page).scoped
-      else
-        profiles.scoped
-      end
-    end
-  end
-
-  def profiles_by_user_id
-    @profiles_by_user_id ||= profiles.includes(:user => { :persona => :avatar }).index_by(&:user_id)
+  def paged_conversations
+    conversations.paginate(:page => params[:page], :per_page => @@per_page)
   end
 
   def tags
-    @tags ||= begin
-      user_ids = current_user.inbox(current_site).select('`resource_id`').map(&:resource_id)
-      profiles = current_site.waves.where(:user_id => user_ids)
-      profiles.tag_counts_on(current_site).order('name asc').select{ |tag| tag.count > 1 }
-    end
+    personas.tag_counts.order('`name` ASC').select{ |tag| tag.count > 1 }
   end
 
-  def scrub_tag(tag)
+  memoize :paged_conversations, :tags
+
+  ###
+
+  def conversations
+    conversations = params[:tag] ?
+        conversations_from_tagged_personas :
+        conversations_from_all
+
+    conversations.
+        includes(:recipient => { :persona => :avatar }).
+        order('`waves`.`updated_at` DESC').scoped
+  end
+
+  def conversations_from_all
+    conversations = current_user.inbox(current_site).
+        joins(:recipient).
+        merge(Personage.enabled).scoped
+  end
+
+  memoize :conversations_from_all
+
+  def conversations_from_tagged_personas
+    conversations_from_all.where(:resource_id => tagged_personas.map(&:id)).scoped
+  end
+
+  def tagged_personas
+    tagged_personas = personas
+    tagged_personas = personas.tagged_with(parameterize_tag(params[:tag]), :on => :tags).scoped if params[:tag]
+    tagged_personas
+  end
+
+  def personas
+    user_ids = conversations_from_all.map(&:resource_id)
+    Persona::Base.joins(:user).where(:personages => { :id => user_ids }).scoped
+  end
+
+  def conversation_dates
+    current_user.inbox(current_site).
+        select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS recipient_ids').
+        group('date(`waves`.`updated_at`)').
+        order('date(`waves`.`updated_at`) DESC')
+  end
+
+  def parameterize_tag(tag)
     tag.downcase.gsub(/-/, ' ')
+  end
+
+  def page_title
+    "#{current_site.display_name} - #{current_profile.handle}'s Inbox"
   end
 
 end

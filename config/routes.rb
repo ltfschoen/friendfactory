@@ -42,7 +42,7 @@ Friskyfactory::Application.routes.draw do
         put :unpublish
       end
     end
-    get :inbox, :to => 'conversations#index'
+    get 'inbox(/:tag)', :to => 'conversations#index', :as => 'inbox'
     # get ':slug', :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
   end
 

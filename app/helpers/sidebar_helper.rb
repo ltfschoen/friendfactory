@@ -94,7 +94,7 @@ module SidebarHelper
     end
   end
 
-  def content_for_sidebar_tag_cloud(tags, current_tag)
+  def content_for_sidebar_tag_cloud(tags, current_tag, proc_path)
     tag_cloud(tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
       tag_as_param = tag.name.gsub(/\s/, '-').downcase
       current = false
@@ -106,11 +106,11 @@ module SidebarHelper
       end
 
       content_for :sidebar_tag_cloud do
-        link_to(tag.name, url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id, :tag => tag_as_param), :class => css_class)
+        link_to(tag.name, proc_path.call(tag_as_param), :class => css_class)
       end
 
       content_for :sidebar_tag_cloud do
-        link_to("(untag)", url_for(:controller => controller.controller_name, :action => 'rollcall', :id => wave.id), :class => 'tag1 current')
+        link_to("(untag)", proc_path.call(nil), :class => 'tag1 current')
       end if current
     end
   end

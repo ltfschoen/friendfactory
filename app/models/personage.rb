@@ -171,13 +171,14 @@ class Personage < ActiveRecord::Base
   has_many :conversations, :class_name => 'Wave::Conversation', :foreign_key => 'user_id' do
     def with(receiver, site)
       if receiver && site
-        site(site).where(:resource_id => receiver.id).order('updated_at DESC').limit(1).first
+        # site(site).where(:resource_id => receiver.id).order('`updated_at` DESC').limit(1).first
+        site(site).find_by_resource_id(receiver[:id])
       end
     end
   end
 
-  def find_or_create_conversation_with(receiver, current_site)
-    conversations.with(receiver, current_site) || create_conversation_with(receiver, current_site)
+  def conversation_with(receiver, site)
+    conversations.with(receiver, site)
   end
 
   def create_conversation_with(receiver, site)
@@ -188,6 +189,10 @@ class Personage < ActiveRecord::Base
       wave.publish!
       wave
     end
+  end
+
+  def find_or_create_conversation_with(receiver, site)
+    conversation_with(receiver, site) || create_conversation_with(receiver, site)
   end
 
   private :create_conversation_with
