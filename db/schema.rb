@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116084905) do
+ActiveRecord::Schema.define(:version => 20120124032044) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -62,14 +62,14 @@ ActiveRecord::Schema.define(:version => 20120116084905) do
 
   create_table "friendships", :force => true do |t|
     t.string   "type"
-    t.integer  "profile_id"
+    t.integer  "user_id"
     t.integer  "friend_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "friendships", ["type", "friend_id"], :name => "index_friendships_on_type_and_friend_id"
-  add_index "friendships", ["type", "profile_id", "friend_id"], :name => "index_friendships_on_type_and_profile_id_and_friend_id", :unique => true
+  add_index "friendships", ["type", "user_id", "friend_id"], :name => "index_friendships_on_type_and_user_id_and_friend_id", :unique => true
 
   create_table "invitations", :force => true do |t|
     t.integer  "event_id"
