@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120124032044) do
     t.integer  "friend_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state"
   end
 
   add_index "friendships", ["type", "friend_id"], :name => "index_friendships_on_type_and_friend_id"

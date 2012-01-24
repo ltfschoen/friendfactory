@@ -3,8 +3,9 @@ class CreatePersonas < ActiveRecord::Migration
   def self.up
     rename_table   :user_info, :personas
 
-    add_column     :personas, :avatar_id, :integer
-    add_column     :personas, :type, :string
+    add_column     :personas, :avatar_id,         :integer
+    add_column     :personas, :type,              :string
+    add_column     :personas, :score,             :integer, :default => 0
     add_column     :personas, :address,           :string
     add_column     :personas, :subpremise,        :string
     add_column     :personas, :street_number,     :string
@@ -67,6 +68,7 @@ class CreatePersonas < ActiveRecord::Migration
 
     remove_column :user_info, :avatar_id
     remove_column :user_info, :type
+    remove_column :user_info, :score
     rename_column :user_info, :description, :about_me
     remove_column :user_info, :address
     remove_column :user_info, :subpremise
