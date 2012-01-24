@@ -2,10 +2,28 @@ class CreatePersonas < ActiveRecord::Migration
 
   def self.up
     rename_table   :user_info, :personas
+
     add_column     :personas, :avatar_id, :integer
     add_column     :personas, :type, :string
-    rename_column  :personas, :about_me, :description 
+    add_column     :personas, :address,           :string
+    add_column     :personas, :subpremise,        :string
+    add_column     :personas, :street_number,     :string
+    add_column     :personas, :street,            :string
+    add_column     :personas, :neighborhood,      :string
+    add_column     :personas, :sublocality,       :string
+    add_column     :personas, :locality,          :string
+    add_column     :personas, :city,              :string
+    add_column     :personas, :abbreviated_state, :string
+    add_column     :personas, :state,             :string
+    add_column     :personas, :country,           :string
+    add_column     :personas, :post_code,         :string
+    add_column     :personas, :lat,               :decimal, :precision => 10, :scale => 7
+    add_column     :personas, :lng,               :decimal, :precision => 10, :scale => 7
+
+    rename_column  :personas, :about_me, :description
     remove_columns :personas, :gender, :orientation, :relationship, :deafness
+
+    Persona::Base.reset_column_information
 
     say_with_time 'initializing all personas to Persona::Person' do
       Persona::Base.update_all(:type => 'Persona::Person')
@@ -46,8 +64,24 @@ class CreatePersonas < ActiveRecord::Migration
     end
 
     rename_table  :personas,  :user_info
+
     remove_column :user_info, :avatar_id
     remove_column :user_info, :type
+    rename_column :user_info, :description, :about_me
+    remove_column :user_info, :address
+    remove_column :user_info, :subpremise
+    remove_column :user_info, :street_number
+    remove_column :user_info, :street
+    remove_column :user_info, :neighborhood
+    remove_column :user_info, :sublocality
+    remove_column :user_info, :locality
+    remove_column :user_info, :city
+    remove_column :user_info, :state
+    remove_column :user_info, :country
+    remove_column :user_info, :post_code
+    remove_column :user_info, :lat
+    remove_column :user_info, :lng
+
     rename_column :user_info, :description, :about_me
     add_column    :user_info, :gender, :integer
     add_column    :user_info, :orientation, :integer
