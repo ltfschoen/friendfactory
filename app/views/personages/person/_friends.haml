@@ -1,0 +1,14 @@
+- matrix = [ empty_thumb_image_tag ] * Wave::InvitationsHelper::MaximumDefaultImages
+%table.grid{ :cellspacing => '0' }
+  - matrix.zip(inverse_friends).in_groups_of(3) do |avatar_row|
+    %tr
+      - avatar_row.each do |fill_image_tag, inverse_friend_personage|
+        %td
+          - if inverse_friend_personage && avatar = inverse_friend_personage.avatar
+            - if avatar.silhouette?
+              = image_tag(avatar.url(:thumb), :site => false, :class => 'thumb')
+            - else
+              = link_to(image_tag(avatar.url(:thumb), :site => false, :class => 'thumb'), url_for(inverse_friend_personage.profile), :class => 'profile')
+          - else
+            = fill_image_tag
+= link_to_send_cocktail(personage)

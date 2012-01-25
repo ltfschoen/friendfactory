@@ -72,19 +72,23 @@ Friskyfactory::Application.routes.draw do
       get  :conversation
       get  :invitations
       get  :photos
-      get  :pokes
+    end
+
+    resources :friendships, :only => [ :create ], :controller => 'friendships' do
+      collection do
+        get ':type', :action => 'index', :as => 'typed'
+        get ':type/inverse', :action => 'index', :as => 'inverse_typed'
+      end
     end
   end
 
-  resource :profile, :only => [ :show ],
-      :controller => 'personages',
-      :as => 'current_profile'
+  resource :profile, :only => [ :show ], :controller => 'personages', :as => 'current_profile'
 
   get ':persona_type' => 'personages#index',
       :constraints => { :persona_type => /ambassadors|communities|places/ },
       :as => 'persona_type_profiles'
 
-  # Postings
+  # Basic Posting Functions
   scope :module => :posting do
     resources :postings, :only => [] do |posting|
       member do
@@ -100,27 +104,10 @@ Friskyfactory::Application.routes.draw do
     end
   end
 
-
-  # Friendships
-  resources :friendships, :only => [] do
-    collection do
-      get :pokes
-      get :admirers
-    end
-    new do
-      put ':id/buddy',:action => :buddy , :as => 'buddy'
-      post :poke
-    end
-  end
-
-  get 'buddies' => 'friendships#index'
-
-
   # Geocode
   # resources :locations, :only => [] do
   #   get 'geocode', :on => :collection
   # end
-
 
   # Welcome
   namespace :welcome do

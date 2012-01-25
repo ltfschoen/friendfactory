@@ -29,6 +29,11 @@ class Persona::Base < ActiveRecord::Base
       where(:type => types.map { |type| "Persona/#{type}".camelize })
   }
 
+  scope :site, lambda { |site|
+      joins(:user => :user).
+      where(:personages => { :users => { :site_id => site.id }})
+  }
+
   scope :has_avatar, where('`avatar_id` is not null')
 
   def handle

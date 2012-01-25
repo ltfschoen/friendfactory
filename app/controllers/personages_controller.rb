@@ -132,22 +132,6 @@ class PersonagesController < ApplicationController
     end
   end
 
-  def pokes
-    respond_to do |format|
-      if personage(:include => :profile)
-        @avatars = personage.profile.inverse_friends.
-            type(Friendship::Poke).
-            includes(:user => { :persona => :avatar }).
-            order('`friendships`.`created_at` DESC').
-            limit(Wave::InvitationsHelper::MaximumDefaultImages).
-            map { |p| p.user.avatar }
-        format.html { render :layout => false }
-      else
-        format.html { render :nothing => true }
-      end
-    end
-  end
-
   private
 
   def personage(opts = {})

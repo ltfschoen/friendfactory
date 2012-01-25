@@ -2,7 +2,7 @@
 - link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || personage[:profile_id]
 
 .headshot-container
-  .headshot[ personage ]{ :class => poke_class(personage[:profile_id]) }
+  .headshot[ personage ]{ :class => poke_css_class(personage[:id]) }
     .face-container
       .front.face
         = headshot_image_tag(persona)

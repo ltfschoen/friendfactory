@@ -1,51 +1,50 @@
 class FriendshipsController < ApplicationController
 
+  extend ActiveSupport::Memoizable
+
   before_filter :require_user
 
-  cattr_reader :per_page
+  helper_method :personage, :inverse_friends
 
-  def pokes
-    @@per_page = 102
-    @waves = current_profile.
-        friends.
-        where(:friendships => { :type => 'Friendship::Poke' }).
-        published.
-        order('`friendships`.`created_at` desc').
-        paginate(:page => params[:page], :per_page => @@per_page)
+  def index
     respond_to do |format|
-      format.html { render :action => 'index' }
-    end
-  end
-
-  def admirers
-    @@per_page = 102
-    @waves = current_profile.
-        inverse_friends.
-        where(:friendships => { :type => 'Friendship::Poke' }).
-        published.
-        order('`friendships`.`created_at` desc').
-        paginate(:page => params[:page], :per_page => @@per_page)
-    respond_to do |format|
-      format.html { render :action => 'index' }
-    end
-  end
-
-  def buddy
-    respond_to do |format|
-      if profile = current_site.waves.type(Wave::Profile).find_by_id(params[:id])
-        format.json { render :json => { :buddied => current_user.toggle_friendship(profile) }}
+      if inverse_friends
+        format.html { render 'personages/friends', :layout => false }
+      else
+        format.html { render :nothing => true }
       end
     end
   end
 
-  def poke
-    poke = nil
+  def create
     respond_to do |format|
-      if current_site.waves.type(Wave::Profile).exists?(params[:profile_id]) &&
-        poke = current_profile.toggle_poke(params[:profile_id])           
-        FriendshipsMailer.new_poke_mail(poke, current_site).deliver if poke.receiver.emailable?
+      if personage && poke = current_user.toggle_poke(personage)
+        # FriendshipsMailer.new_poke_mail(poke, current_site).deliver if poke.friend.emailable?
+        format.json { render :json => { :poked => true }}
+      else
+        format.json { render :json => { :poked => false }}
       end
-      format.json { render :json => { :poked => poke.present? }}
     end
   end
+
+  private
+
+  def personage
+    Personage.enabled.site(current_site).find(params[:profile_id])
+  end
+
+  def inverse_friends
+    type = "Friendship::#{params[:type].singularize.titleize}".constantize
+    personage.inverse_friends.enabled.
+        where(:friendships => { :type => type }).
+        includes(:persona => :avatar).
+        includes(:profile).
+        order('`friendships`.`created_at` DESC').
+        limit(Wave::InvitationsHelper::MaximumDefaultImages)
+  rescue
+    nil
+  end
+
+  memoize :personage, :inverse_friends
+
 end

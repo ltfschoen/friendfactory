@@ -2,7 +2,7 @@
 - link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || personage[:profile_id]
 
 .headshot-container
-  .headshot[ personage ]{ :class => poke_class(personage[:profile_id]) }
+  .headshot[ personage ]{ :class => poke_css_class(personage[:id]) }
     .face-container
       .front.face
         = headshot_image_tag(persona)
@@ -16,7 +16,7 @@
           %li= link_to 'Photos', photos_profile_path(personage[:id]), :class => 'flip icon photos', :'data-pane-name' => 'photos'
           %li.invitations= link_to 'Invitations', invitations_profile_path(personage[:id]), :class => 'flip icon invitations', :'data-pane-name' => 'invitations'
           - if current_user && (current_user[:id] != personage[:id])
-            %li.pokes= link_to 'Pokes', pokes_profile_path(personage[:id]), :class => 'flip icon pokes', :'data-pane-name' => 'pokes'
+            %li.pokes= link_to 'Pokes', inverse_typed_profile_friendships_path(personage[:id], 'pokes'), :class => 'flip icon pokes', :'data-pane-name' => 'pokes'
             - if false
               %li= link_to 'Buddy', buddy_new_friendship_path(personage[:profile_id]), :class => buddy_link_class(personage[:profile_id]), :remote => true, :'data-type' => :json, :method => :put, :'data-pane-name' => 'buddies'
             %li.chat= link_to 'Chat', conversation_profile_path(personage[:id]), :class => 'flip icon chat last', :'data-pane-name' => 'conversation'
@@ -31,5 +31,5 @@
             %li= link_to 'Photos', photos_profile_path(personage[:id]), :class => 'swipe icon photos', :'data-pane-name' => 'photos'
             %li.invitations= link_to 'Invitations', invitations_profile_path(personage[:id]), :class => 'swipe icon invitations', :'data-pane-name' => 'invitations'
             - if current_user && (current_user.id != personage[:id])
-              %li.pokes= link_to 'Pokes', pokes_profile_path(personage[:id]), :class => 'swipe icon pokes', :'data-pane-name' => 'pokes'
+              %li.pokes= link_to 'Pokes', inverse_typed_profile_friendships_path(personage[:id], 'pokes'), :class => 'swipe icon pokes', :'data-pane-name' => 'pokes'
               %li.chat= link_to 'Chat', conversation_profile_path(personage[:id]), :class => 'swipe icon chat', :'data-pane-name' => 'conversation'

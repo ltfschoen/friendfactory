@@ -18,4 +18,27 @@ module PersonagesHelper
     Persona::Base.types.map { |p| [ p.demodulize, p ] }.sort_by { |p| p.first }
   end
 
+  def poke_css_class(personage_id)
+    if current_user && current_user[:id] != personage_id
+      current_user.has_poked?(personage_id) && 'poked'
+    end
+  end
+
+  def link_to_send_cocktail(personage)
+    if current_user && (current_user[:id] != personage[:id])
+      handle = (personage.handle.length < 8) && personage.handle
+      msg = [ 'Send', handle, 'a Cocktail']
+
+      if current_user.has_poked?(personage[:id])
+        msg = msg.unshift("Don't")
+        disable_with = "Trashing cocktail..."
+      else
+        disable_with = "Sending cocktail..."
+      end
+
+      link_to(msg.compact.join(' '), profile_friendships_path(personage, :type => 'poke'),
+          :class => 'poke', :remote => true, :method => :post, :'data-type' => :json, :'data-disable-with' => disable_with)
+    end
+  end
+
 end

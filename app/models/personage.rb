@@ -148,6 +148,54 @@ class Personage < ActiveRecord::Base
     end
   end
 
+  ### Friendships
+
+  public
+
+  has_many :friendships,
+      :foreign_key => 'user_id',
+      :class_name  => 'Friendship::Base'
+
+  has_many :friends, :through => :friendships do
+    def type(*types)
+      where(:friendships => { :type => types.map(&:to_s) })
+    end
+  end
+
+  has_many :inverse_friendships,
+      :foreign_key => '`friend_id`',
+      :class_name  => 'Friendship::Base'
+
+  has_many :inverse_friends,
+      :through => :inverse_friendships,
+      :source  => :user do
+    def type(*types)
+      where(:friendships => { :type => types.map(&:to_s) })
+    end
+  end
+
+  alias :admirers :inverse_friends
+
+  def toggle_poke(personage)
+    return if personage[:id] == self[:id]
+    if poke = friendships.type(Friendship::Poke).find_by_friend_id(personage[:id])
+      poke.delete
+      nil
+    else
+      poke = Friendship::Poke.new(:friend => personage)
+      friendships << poke
+      poke
+    end
+  end
+
+  def has_friended?(personage_id, type)
+    friendships.type(type).find_by_friend_id(personage_id).present?
+  end
+
+  def has_poked?(personage_id)
+    has_friended?(personage_id, ::Friendship::Poke)
+  end
+
   ### Waves
 
   public
@@ -157,13 +205,6 @@ class Personage < ActiveRecord::Base
   has_many :waves,
       :class_name  => 'Wave::Base',
       :foreign_key => 'user_id' do
-    # def type(*types)
-    #   where('type in (?)', types.map(&:to_s))
-    # end
-    # def site(site)
-    #   joins('INNER JOIN `sites_waves` on `waves`.`id` = `sites_waves`.`wave_id`').
-    #   where(:sites_waves => { :site_id => site.id })
-    # end
   end
 
   ### Conversations
@@ -171,7 +212,6 @@ class Personage < ActiveRecord::Base
   has_many :conversations, :class_name => 'Wave::Conversation', :foreign_key => 'user_id' do
     def with(receiver, site)
       if receiver && site
-        # site(site).where(:resource_id => receiver.id).order('`updated_at` DESC').limit(1).first
         site(site).find_by_resource_id(receiver[:id])
       end
     end
@@ -207,9 +247,13 @@ class Personage < ActiveRecord::Base
       :class_name  => 'Posting::Base',
       :foreign_key => 'user_id'
 
+
+
   ### Invitations
 
-  has_many :invitations,
+  # @invitations = personage.profile.postings.type(Posting::Invitation).order('`postings`.`created_at` DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
+
+  has_many :received_invitations,
       :foreign_key => 'body',
       :primary_key => 'email',
       :class_name  => 'Posting::Invitation' do
