@@ -25,11 +25,9 @@ class Persona::Base < ActiveRecord::Base
       :class_name => 'Posting::Avatar',
       :conditions => { :state => :published }
 
-  # scope :type, lambda { |*types|
-  #     where(:type => types.map { |type| "Persona/#{type}".camelize })
-  # }
-
-  scope :type, lambda { |*types| where(:type => types.map(&:to_s)) }
+  scope :type, lambda { |*types|
+      where(:type => types.map { |type| type.is_a?(Class) ? type.to_s : "Persona/#{type}".camelize })
+  }
 
   scope :site, lambda { |site|
       joins(:user => :user).

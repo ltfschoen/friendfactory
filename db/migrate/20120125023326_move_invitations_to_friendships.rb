@@ -21,9 +21,13 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
     drop_table :resource_invitations
 
     ActiveRecord::Base.transaction do
-      say_with_time 'moving invitation postings to invitations' do
+      say_with_time 'moving site invitation postings to invitations' do
         move_site_invitation_postings
+      end
+      say_with_time 'moving personal invitation postings to invitations' do
         move_personal_invitation_postings
+      end
+      say_with_time 'deleting invitation postings' do
         delete_posting_invitations
       end
     end
@@ -64,9 +68,9 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
       user.invitations << invite
       memo << invite
 
-      site = posting_invitation.site
-      if invitee_user_record = User.find_by_email_and_site_id(email, site[:id])
-        invitee = invitee_user_record.personages.type(Persona::Person).first
+      site_id = posting_invitation.resource_id
+      if invitee_user_record = User.find_by_email_and_site_id(email, site_id)
+        invitee = invitee_user_record.personages.type(:person).first
         confirmation = Invitation::Confirmation.new
         confirmation.invitation = invite
         confirmation.invitee = invitee
@@ -86,7 +90,7 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
   def self.delete_posting_invitations
     Posting::Invitation.all.each do |posting|
       waves = posting.waves
-      wave.each do |wave|
+      waves.each do |wave|
         wave.postings.delete(posting)
       end
       posting.destroy
