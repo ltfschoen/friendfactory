@@ -3,7 +3,6 @@ class MoveFriendshipsToPersonages < ActiveRecord::Migration
   def self.up
     remove_index  :friendships, [ :type, :profile_id, :friend_id ]
     rename_column :friendships, :profile_id, :user_id
-    add_column    :friendships, :state, :string
 
     Friendship::Base.reset_column_information
     Friendship::Base.record_timestamps = false
@@ -21,7 +20,6 @@ class MoveFriendshipsToPersonages < ActiveRecord::Migration
   def self.down
     remove_index  :friendships, [ :type, :user_id, :friend_id ]
     rename_column :friendships, :user_id, :profile_id
-    remove_column :friendships, :state
     add_index     :friendships, [ :type, :profile_id, :friend_id ], :unique => true
     ## Non-reversable data migration!
   end

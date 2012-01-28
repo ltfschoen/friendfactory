@@ -247,24 +247,30 @@ class Personage < ActiveRecord::Base
       :class_name  => 'Posting::Base',
       :foreign_key => 'user_id'
 
-
-
   ### Invitations
+
+  has_many :invitations,
+      :foreign_key => 'user_id',
+      :class_name  => 'Invitation::Base'
+
+  has_one :invitation_confirmation,
+      :foreign_key => 'invitee_id',
+      :class_name  => 'Invitation::Confirmation'
 
   # @invitations = personage.profile.postings.type(Posting::Invitation).order('`postings`.`created_at` DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
 
-  has_many :received_invitations,
-      :foreign_key => 'body',
-      :primary_key => 'email',
-      :class_name  => 'Posting::Invitation' do
-    def site(site)
-      where(:resource_id => site.id)
-    end
-  end
+  # has_many :received_invitations,
+  #     :foreign_key => 'body',
+  #     :primary_key => 'email',
+  #     :class_name  => 'Posting::Invitation' do
+  #   def site(site)
+  #     where(:resource_id => site.id)
+  #   end
+  # end
 
-  def invitations_attributes=(attributes)
-    raise attributes.inspect
-  end
+  # def invitations_attributes=(attributes)
+  #   raise attributes.inspect
+  # end
 
   # validates_presence_of :invitation_code,
   #     :on => :create,

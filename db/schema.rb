@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124032044) do
+ActiveRecord::Schema.define(:version => 20120125023326) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -72,16 +72,28 @@ ActiveRecord::Schema.define(:version => 20120124032044) do
   add_index "friendships", ["type", "friend_id"], :name => "index_friendships_on_type_and_friend_id"
   add_index "friendships", ["type", "user_id", "friend_id"], :name => "index_friendships_on_type_and_user_id_and_friend_id", :unique => true
 
-  create_table "invitations", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "profile_id"
-    t.integer  "attendance"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "invitation_confirmations", :force => true do |t|
+    t.integer "invitation_id"
+    t.integer "friendship_id"
+    t.integer "invitee_id"
   end
 
-  add_index "invitations", ["event_id", "profile_id"], :name => "index_invitations_on_event_id_and_profile_id"
-  add_index "invitations", ["profile_id"], :name => "index_invitations_on_profile_id"
+  create_table "invitation_invitees", :force => true do |t|
+    t.integer "invitation_id"
+    t.integer "friendship_id"
+    t.integer "invitee_id"
+  end
+
+  create_table "invitations", :force => true do |t|
+    t.string   "type"
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "code"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "expires_at"
+  end
 
   create_table "launch_users", :force => true do |t|
     t.string   "email"
@@ -161,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20120124032044) do
     t.string   "last_name"
     t.integer  "avatar_id"
     t.string   "type"
+    t.integer  "score",                                            :default => 0
     t.string   "address"
     t.string   "subpremise"
     t.string   "street_number"
@@ -278,10 +291,6 @@ ActiveRecord::Schema.define(:version => 20120124032044) do
     t.datetime "end_date"
     t.boolean  "private"
     t.boolean  "rsvp"
-  end
-
-  create_table "resource_invitations", :force => true do |t|
-    t.datetime "expires_at"
   end
 
   create_table "resource_links", :force => true do |t|
