@@ -22,8 +22,9 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
 
     ActiveRecord::Base.transaction do
       say_with_time 'moving invitation postings to invitations' do
-        # move_anonymous_invitation_postings_to_friendships
-        # move_personal_invitation_postings_to_friendships
+        move_site_invitation_postings
+        move_personal_invitation_postings
+        delete_posting_invitations
       end
     end
   end
@@ -38,17 +39,58 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
     drop_table :invitations
   end
 
-  def self.move_anonymous_invitation_postings_to_friendships
-    Posting::Invitation.where(:body => nil).all.each do |invitation|
-      site = invitation.site
-      code = invitation.code
-      home_user = site.home_user
-      
-      home_user.friends.create({:type => 'invitation', :invitation_resource_attributes => { :code => code }})
+  private
+
+  def self.move_site_invitation_postings
+    Posting::Invitation.where(:body => nil).all.inject([]) do |memo, posting_invitation|
+      code   = posting_invitation.subject
+      user   = posting_invitation.user
+      state  = posting_invitation.state
+      invite = Invitation::Site.new(:code => code)
+      invite.state = state
+      user.invitations << invite
+      memo << invite
     end
   end
-  
-  def self.personal_invitation_postings_to_friendships
+
+  def self.move_personal_invitation_postings
+    Posting::Invitation.where('`body` IS NOT NULL').all.inject([]) do |memo, posting_invitation|
+      code    = posting_invitation.subject
+      email   = posting_invitation.body
+      user    = posting_invitation.user
+      state   = posting_invitation.state
+      invite  = Invitation::Personal.new(:code => code, :email => email)
+      invite.state = state
+      user.invitations << invite
+      memo << invite
+
+      site = posting_invitation.site
+      if invitee_user_record = User.find_by_email_and_site_id(email, site[:id])
+        invitee = invitee_user_record.personages.type(Persona::Person).first
+        confirmation = Invitation::Confirmation.new
+        confirmation.invitation = invite
+        confirmation.invitee = invitee
+        confirmation.save!
+
+        unless Friendship::Invitation.exists?(:user_id => user[:id], :friend_id => invitee[:id])
+          friendship = Friendship::Invitation.new
+          friendship.user = user
+          friendship.friend = invitee
+          friendship.save!
+        end
+      end
+      memo
+    end
+  end
+
+  def self.delete_posting_invitations
+    Posting::Invitation.all.each do |posting|
+      waves = posting.waves
+      wave.each do |wave|
+        wave.postings.delete(posting)
+      end
+      posting.destroy
+    end
   end
 
 end
