@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20120125023326) do
 
   create_table "invitations", :force => true do |t|
     t.string   "type"
+    t.integer  "site_id"
     t.integer  "user_id"
     t.string   "email"
     t.string   "code"
