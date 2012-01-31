@@ -9,7 +9,7 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
       t.string    :code
       t.string    :state
       t.timestamps
-      t.datetime  :expires_at
+      t.datetime  :expired_at
     end
     
     create_table :invitation_confirmations, :force => true do |t|
@@ -22,12 +22,13 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
     drop_table :resource_invitations rescue nil
 
     ActiveRecord::Base.record_timestamps = false
+
     ActiveRecord::Base.transaction do
       say_with_time 'moving site invitation postings to invitations' do
-        move_site_invitation_postings
+        say "moved #{move_site_invitation_postings.length} site invitations"
       end
       say_with_time 'moving personal invitation postings to invitations' do
-        move_personal_invitation_postings
+        say "moved #{move_personal_invitation_postings.length} personal invitations"
       end
       say_with_time 'deleting invitation postings' do
         delete_invitation_postings
@@ -36,6 +37,8 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
         delete_invitation_waves
       end
     end
+
+    ActiveRecord::Base.record_timestamps = true
   end
 
   def self.down

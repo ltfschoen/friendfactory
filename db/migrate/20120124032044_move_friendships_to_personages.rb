@@ -26,16 +26,17 @@ class MoveFriendshipsToPersonages < ActiveRecord::Migration
 
   def self.associate_friendships_to_persoanges
     Friendship::Base.all.each do |friendship|
-      sender_profile_id = friendship[:user_id]
+      user_profile_id = friendship[:user_id]
       friend_profile_id = friendship[:friend_id]
 
-      wave = Wave::Base.find(sender_profile_id)
-      friendship[:user_id] = wave[:user_id]
+      user_profile = Wave::Base.find(user_profile_id)
+      friend_profile = Wave::Base.find(friend_profile_id)
 
-      wave = Wave::Base.find(friend_profile_id)
-      friendship[:friend_id] = wave[:user_id]
-
-      friendship.save!
+      if user_profile && friend_profile
+        friendship[:user_id] = user_profile[:user_id]
+        friendship[:friend_id] = friend_profile[:user_id]
+        friendship.save!
+      end
     end
   end
 

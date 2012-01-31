@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20120125023326) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "expires_at"
+    t.datetime "expired_at"
   end
 
   create_table "launch_users", :force => true do |t|
