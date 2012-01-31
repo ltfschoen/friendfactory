@@ -22,8 +22,7 @@ class Site < ActiveRecord::Base
       :association_foreign_key => 'wave_id'
 
   has_many :invitations,
-      :foreign_key => 'resource_id',
-      :class_name  => 'Posting::Invitation'
+      :class_name  => 'Invitation::Base'
 
   has_many :biometric_domains,
       :class_name  => 'Biometric::Domain',

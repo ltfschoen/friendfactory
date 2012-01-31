@@ -74,13 +74,51 @@ class User < ActiveRecord::Base
 
   before_create :attach_to_account
 
+  private
+
   def attach_to_account
     if account.nil?
       self.account = Account.find_or_create_for_user(self)
     end
   end
 
-  private :attach_to_account
+  ### Invitation Code
+
+  public
+
+  validates_presence_of :invitation_code,
+      :on => :create,
+      :if => lambda { site && site.invite_only? }
+
+  validate :invitation_code_offered?,
+      :on => :create,
+      :if => lambda { site && site.invite_only? && invitation_code.present? }
+
+  after_initialize :set_email_address_from_invitation
+
+  after_create :accept_invitation_code
+
+  private
+
+  def set_email_address_from_invitation
+    if new_record? && email.nil?
+      if site && site.invite_only? && invitation = site.invitations.type(:personal).offered.find_by_code(invitation_code)
+        self[:email] = invitation.email
+      end
+    end
+  end
+
+  def invitation_code_offered?
+    unless site.invitations.offered.find_by_code(invitation_code)
+      errors.add(:invitation_code, 'is not valid')
+    end
+  end
+
+  def accept_invitation_code
+    if site && site.invite_only? && invitation = site.invitations.offered.find_by_code(invitation_code)
+      invitation.accept!
+    end
+  end
 
   ###
 

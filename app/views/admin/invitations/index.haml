@@ -1,0 +1,32 @@
+#frame
+  .container
+    %h1 Invitations
+    %table{ :class => [ 'admin', page_class ] }
+      %thead
+        %tr
+          %th Inviter
+          %th Code
+          %th.type Type
+          %th.created_at Created
+          %th.confirmations Enrollments
+          %th.status Status
+          %th &nbsp;
+      %tbody
+        - invitations.each do |invitation|
+          %tr
+            %td.inviter
+              .portrait= thimble_image_tag(invitation.user)
+              %span.username= invitation.user.handle
+            %td= invitation.code
+            %td.type= invitation[:type].demodulize
+            %td.created_at #{distance_of_time_in_words_to_now(invitation.created_at)}&nbsp;ago
+            %td.confirmations= invitation.confirmations_count
+            %td.status
+              = select_tag('invitation[state]', options_for_select([ %w{ Offered offered }, %w{ Expired expired } ], invitation.state), :'data-remote' => true, :'data-url' => admin_site_invitation_path(site, invitation), :'data-type' => :json, :'data-method' => :put, :id => "invitation_#{invitation.id}_state")
+            %td.actions
+              = link_to 'Edit', edit_admin_site_invitation_path(site, invitation)
+              = link_to 'Delete', admin_site_invitation_path(site, invitation), :confirm => 'Are you sure?', :remote => true, :method => :delete
+    .button-bar.footer
+      - if flash[:notice].present?
+        %span.flash.notice= flash[:notice]
+      = link_to 'New Site Invitation', new_admin_site_invitation_path(site)

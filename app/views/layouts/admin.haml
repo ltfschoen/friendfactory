@@ -17,9 +17,7 @@
       'layouts/shared/compatibility', |
       'layouts/shared/sidebar', |
       'layouts/shared/sidebar-override', |
-      'layouts/admin/site', |
-      'layouts/admin/personals', |
-      'layouts/admin/universals', |
+      'layouts/admin/base', |
     :media => 'screen', |
     :cache => 'cache/admin'
 
@@ -50,14 +48,14 @@
 %body
   #sidebar
     #head
-      - if site.present? && asset = site.assets.type(Asset::Image).find_by_name(File.basename('logo', '.*'))
-        = image_tag(asset.url(:original))
+      = site_logo_image_tag(site)
     .block.navspace
       %ul
-        %li= link_to 'Sites', admin_sites_path()
+        %li= link_to 'Sites', admin_sites_path
         - if site.present?
           %li= link_to 'Configuration', edit_admin_site_path(site)
           %li= link_to 'Users', admin_site_users_path(site)
+          %li= link_to 'Invitations', admin_site_invitations_path(site)
 
   = compatibility_tag
   = yield

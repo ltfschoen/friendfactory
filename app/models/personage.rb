@@ -259,31 +259,6 @@ class Personage < ActiveRecord::Base
 
   # @invitations = personage.profile.postings.type(Posting::Invitation).order('`postings`.`created_at` DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
 
-  # has_many :received_invitations,
-  #     :foreign_key => 'body',
-  #     :primary_key => 'email',
-  #     :class_name  => 'Posting::Invitation' do
-  #   def site(site)
-  #     where(:resource_id => site.id)
-  #   end
-  # end
-
-  # def invitations_attributes=(attributes)
-  #   raise attributes.inspect
-  # end
-
-  # validates_presence_of :invitation_code,
-  #     :on => :create,
-  #     :if => lambda { site.present? && site.invite_only? }
-
-  # validate :invitation_code_offered?,
-  #     :on => :create,
-  #     :if => lambda { site.present? && site.invite_only? && invitation_code.present? }
-
-  # after_initialize :set_email_address_from_invitation
-
-  # after_create :accept_invitation_code
-
   def find_or_create_invitation_wave_for_site(site)
     invitation_wave_for_site(site) || create_invitation_wave_for_site(site)
   end
@@ -297,27 +272,6 @@ class Personage < ActiveRecord::Base
   end
 
   private
-
-  def invitation_code_offered?
-    unless site.invitations.offered.find_by_code(invitation_code)
-      errors.add(:invitation_code, 'is not valid')
-    end
-  end
-
-  # def set_email_address_from_invitation
-  #   if new_record? && site && site.invite_only?
-  #     if invitation = site.invitations.offered.personal.find_by_code(invitation_code)
-  #       self.email ||= invitation.email
-  #     end
-  #   end
-  # end
-
-  def accept_invitation_code
-    if site.invite_only? &&
-        invitation = site.invitations.offered.find_by_code(invitation_code)
-      invitation.accept!
-    end
-  end
 
   def create_invitation_wave_for_site(site)
     wave = Wave::Invitation.new.tap { |wave| wave.user = self }

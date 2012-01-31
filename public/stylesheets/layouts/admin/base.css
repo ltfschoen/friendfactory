@@ -1,5 +1,4 @@
 body {
-/*	font-family: "Gill Sans MT", "Gill Sans", "Lucida Sans", Tahoma, Helvetica, sans-serif;*/
 	font-size: 12px;
 }
 
@@ -35,6 +34,10 @@ body {
 
 h1 {
 	font-size: 2em;
+	text-align: center;
+	margin: 10px 0;
+}
+
 }
 
 input[type='text'],
@@ -116,12 +119,12 @@ table.index th {
 table.index th,
 table.index td {
 	text-align: left;
-	padding: 5px 20px;
+	padding: 5px;
 }
 
 table.index th + th,
 table.index td + td {
-	border-left: 1px dotted grey;	
+	border-left: 1px dotted grey;
 }
 
 table.index tbody tr:nth-child(odd) {
@@ -254,3 +257,27 @@ table.index.users td.emailable {
 	text-align: center;
 }
 
+table.index.invitations td {
+	vertical-align: middle;
+}
+
+table.index.invitations span.username {
+	display: inline-block;
+	padding: 12px 0 0 6px;
+}
+
+table.index.invitations td.inviter,
+table.index.invitations td.actions {
+	white-space: nowrap;
+}
+
+table.index.invitations th.created_at,
+table.index.invitations td.created_at,
+table.index.invitations th.confirmations,
+table.index.invitations td.confirmations,
+table.index.invitations th.status,
+table.index.invitations td.status,
+table.index.invitations th.type,
+table.index.invitations td.type {
+	text-align: center;
+}

@@ -14,4 +14,10 @@ module Admin::SitesHelper
     Personage.homeable(site).enabled.includes(:profile).includes(:persona).sort_by{ |p| p.display_name }
   end
 
+  def site_logo_image_tag(site)
+    if site && asset = site.assets.type(Asset::Image).find_by_name(File.basename('logo', '.*'))
+      image_tag(asset.url(:original))
+    end
+  end
+
 end

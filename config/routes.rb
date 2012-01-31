@@ -112,9 +112,9 @@ Friskyfactory::Application.routes.draw do
   # Welcome
   namespace :welcome do
     get 'headshot/:pane', :action => 'headshot', :as => 'headshot'
-    get '(/:invitation_code)', :action => 'show'
     post 'signup'
     post 'login'
+    get '(/:invitation_code)', :action => 'show'
   end
 
   post 'launch' => 'welcome#launch'
@@ -137,17 +137,13 @@ Friskyfactory::Application.routes.draw do
 
   # Admin
   namespace :admin do
-    resources :tags, :except => [ :show ] do
-      collection { get 'commit' }
-    end
-
-    namespace :invitation do
-      resources :universals, :only => [ :index, :new, :create, :edit, :update, :destroy ]
-      resources :personals, :only => [ :index ]
-    end
+    # resources :tags, :except => [ :show ] do
+    #   collection { get 'commit' }
+    # end
 
     resources :sites, :except => [ :show, :destroy ] do
       resources :users, :only => [ :index, :show, :update ]
+      resources :invitations
     end
   end
 

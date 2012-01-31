@@ -14,4 +14,12 @@ class Invitation::Site < Invitation::Base
 
   has_many :friendships, :through => :confirmations
 
+  def confirmations_count
+    confirmations.count
+  end
+
+  def acceptable?
+    false
+  end
+
 end
