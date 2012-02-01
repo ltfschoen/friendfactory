@@ -18,8 +18,8 @@ class FriendshipsController < ApplicationController
 
   def create
     respond_to do |format|
-      if personage && poke = current_user.toggle_poke(personage)
-        # FriendshipsMailer.new_poke_mail(poke, current_site).deliver if poke.friend.emailable?
+      if poke = current_user.toggle_poke(personage)
+        deliver_friendship_email(poke)
         format.json { render :json => { :poked => true }}
       else
         format.json { render :json => { :poked => false }}
@@ -46,5 +46,11 @@ class FriendshipsController < ApplicationController
   end
 
   memoize :personage, :inverse_friends
+
+  def deliver_friendship_email(poke)
+    if mail = FriendshipsMailer.new_poke_mail(poke, current_site)
+      mail.deliver
+    end
+  end
 
 end

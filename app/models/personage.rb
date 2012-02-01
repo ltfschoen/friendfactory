@@ -185,12 +185,12 @@ class Personage < ActiveRecord::Base
   alias :admirers :inverse_friends
 
   def toggle_poke(personage)
-    return if personage[:id] == self[:id]
-    if poke = friendships.type(Friendship::Poke).find_by_friend_id(personage[:id])
+    if personage[:id] == self[:id]
+      nil
+    elsif poke = friendships.type(Friendship::Poke).find_by_friend_id(personage[:id])
       poke.delete
       nil
-    else
-      poke = Friendship::Poke.new(:friend => personage)
+    elsif poke = Friendship::Poke.new(:friend => personage)
       friendships << poke
       poke
     end

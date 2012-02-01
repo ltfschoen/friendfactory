@@ -1,12 +1,11 @@
 :plain
-  Hey #{@poke.receiver.handle}!
+  Hey #{@poke.friend.handle}!
 
-  #{@poke.sender.handle} has sent you a cocktail!
+  #{@poke.user.handle} has sent you a cocktail!
 
-  Don't know who #{@poke.sender.handle} is and want to find out more? Click below to check out their bio:
+  Don't know who #{@poke.user.handle} is and want to find out more? Click below to check out their bio:
 
-  #{@wave_profile_url}
-  #{wave_profile_url(@poke.sender, :host => @host)}
+  http://#{@host}#{url_for(@poke.user.profile)}
 
   You received this email since you subscribed to message notifications at #{@site.display_name}.
   Send an email to unsubscribe@friskyfactory.com, and we'll remove you right away.
