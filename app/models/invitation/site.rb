@@ -3,6 +3,12 @@ class Invitation::Site < Invitation::Base
   attr_accessible :code
   validates_presence_of :code
 
+  state_machine do
+    event :accept do
+      transitions :to => :offered, :from => [ :offered ], :on_transition => [ :create_confirmation_and_friendship_with_invitee_personage ]
+    end
+  end
+
   validates_length_of :email,
       :is => 0,
       :message => 'not allowed for site invitations',
@@ -18,8 +24,12 @@ class Invitation::Site < Invitation::Base
     confirmations.count
   end
 
-  def acceptable?
-    false
+  def create_confirmation_and_friendship_with_invitee_personage
+    if confirmation = confirmations.build(:invitee => invitee_personage)
+      friendship = Friendship::Invitation.new(:friend => invitee_personage)
+      friendship.invitation_confirmation = confirmation
+      user.friendships << friendship
+    end
   end
 
 end

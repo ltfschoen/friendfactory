@@ -21,7 +21,7 @@ class WelcomeController < ApplicationController
   def signup
     @user = User.new(params[:user]) { |user| user.site = current_site }
     respond_to do |format|
-      if @user.save && current_site.user_sessions.create(params[:user])
+      if create_user_and_log_in
         flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.default_personage.handle}!"
         format.html { redirect_to root_path }
       else
@@ -72,6 +72,16 @@ class WelcomeController < ApplicationController
 
   def user_session
     @user_session ||= current_site.user_sessions.new(params[:user_session])
+  end
+
+  def create_user_and_log_in
+    User.transaction do
+      if @user.save && @user.accept_invitation
+        current_site.user_sessions.create(params[:user])
+      else
+        raise ActiveRecord::Rollback
+      end
+    end
   end
 
 end

@@ -96,7 +96,19 @@ class User < ActiveRecord::Base
 
   after_initialize :set_email_address_from_invitation
 
-  after_create :accept_invitation_code
+  def accept_invitation
+    case
+    when site.nil?
+      false
+    when (!site.invite_only?)
+      true
+    when invitation = site.invitations.offered.find_by_code(invitation_code)
+      invitation.set_invitee_personage(default_personage)
+      invitation.accept!
+    else
+      false
+    end
+  end
 
   private
 
@@ -111,12 +123,6 @@ class User < ActiveRecord::Base
   def invitation_code_offered?
     unless site.invitations.offered.find_by_code(invitation_code)
       errors.add(:invitation_code, 'is not valid')
-    end
-  end
-
-  def accept_invitation_code
-    if site && site.invite_only? && invitation = site.invitations.offered.find_by_code(invitation_code)
-      invitation.accept!
     end
   end
 

@@ -2,16 +2,14 @@ class Invitation::Base < ActiveRecord::Base
 
   include ActiveRecord::Transitions
 
+  attr_reader :invitee_personage
+
   set_table_name 'invitations'
 
   state_machine do
     state :offered
     state :accepted
     state :expired
-
-    event :accept do
-      transitions :to => :accepted, :from => [ :offered ], :guard => lambda { |invitation| invitation.acceptable? }
-    end
 
     event :expire do
       transitions :to => :expired, :from => [ :offered ]
@@ -30,12 +28,12 @@ class Invitation::Base < ActiveRecord::Base
   belongs_to :site
   validates_presence_of :site_id
 
-  def confirmations_count
-    0
+  def set_invitee_personage(personage)
+    @invitee_personage = personage
   end
 
-  def acceptable?
-    true
+  def confirmations_count
+    0
   end
 
 end
