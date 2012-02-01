@@ -70,7 +70,7 @@ class PersonagesController < ApplicationController
       @personage = current_user_record.personages.find(params[:id])
       @posting = Posting::Avatar.new(params[:posting_avatar]) { |posting| posting.user = @personage }
       if @personage.update_attribute(:avatar, @posting)
-        @personage.enable if @personage.disabled?
+        @personage.enable unless @personage.enabled?
         @personage.profile.postings << @posting
         @posting.publish!
       end

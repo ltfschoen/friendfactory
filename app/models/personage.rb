@@ -48,8 +48,16 @@ class Personage < ActiveRecord::Base
     end
   end
 
+  def default=(is_default)
+    if self[:default] = is_default
+      self[:state] = :enabled
+    end
+  end
+
   belongs_to :user
+
   belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
+
   belongs_to :profile, :class_name => 'Wave::Base'
 
   scope :site, lambda { |site|
@@ -100,6 +108,8 @@ class Personage < ActiveRecord::Base
       order('`waves`.`updated_at` DESC')
   }
 
+  ### Persona
+
   accepts_nested_attributes_for :persona
 
   def persona_attributes=(attrs)
@@ -107,10 +117,8 @@ class Personage < ActiveRecord::Base
       type = "Persona::#{(attrs.delete(:type) || 'base').titleize}"
       klass = type.constantize
       self.persona = klass.new(attrs)
-    else
-      if persona[:id] == attrs.delete('id').to_i
-        persona.update_attributes(attrs)
-      end
+    elsif persona[:id] == attrs.delete('id').to_i
+      persona.update_attributes(attrs)
     end
   end
 
