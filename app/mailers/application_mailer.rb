@@ -5,7 +5,7 @@ class ApplicationMailer < ActionMailer::Base
   private
 
   def email_for_environment(email)
-    [ 'staging', 'production' ].include?(Rails.env) ? email : 'michael@michaelbamford.com'
+    [ 'production' ].include?(Rails.env) ? email : 'michael@michaelbamford.com'
   end
 
   def host_for_site(site)
