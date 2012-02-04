@@ -33,6 +33,7 @@ class Posting::MessagesController < ApplicationController
       wave.postings << posting
       wave.mark_as_read
       broadcast_posting(posting, posting.receiver_wave)
+      true
     end
   rescue
     false
