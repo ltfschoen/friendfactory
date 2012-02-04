@@ -30,7 +30,7 @@ class CreateAccounts < ActiveRecord::Migration
 
     say_with_time 'migrating users from multi-site to uni-site model' do
       ActiveRecord::Base.record_timestamps = false
-      Account.transaction do
+      ActiveRecord::Base.transaction do
         XUser.all.each do |xuser|
           create_user_for_each_site(xuser, create_account(xuser))
         end
@@ -38,9 +38,10 @@ class CreateAccounts < ActiveRecord::Migration
     end
 
     say_with_time 'fixing Person#user_id and handle' do
-      Person.transaction do
+      ActiveRecord::Base.transaction do
         Wave::Profile.all.each do |profile|
           person = profile.user_info
+          # person = Persona::Base.find_by_id(profile.resource_id)
           if person[:user_id].nil?
             person.update_attribute(:user_id, profile[:user_id])
           end
