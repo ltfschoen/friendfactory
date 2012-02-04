@@ -43,6 +43,8 @@ class Wave::Base < ActiveRecord::Base
 
   scope :published, where(:state => :published)
 
+  scope :unpublished, where(:state => :unpublished)
+
   belongs_to :user,
       :class_name => 'Personage',
       :include    => :persona
