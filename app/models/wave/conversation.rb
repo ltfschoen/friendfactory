@@ -16,7 +16,8 @@ class Wave::Conversation < Wave::Base
 
   def publish_posting_to_waves(posting)
     if (posting.receiver.id != posting.sender_id) && wave = posting.receiver.find_or_create_conversation_with(posting.sender, posting.site)
-      wave.touch_and_publish! && wave
+      wave.touch_and_publish!
+      wave
     end
   end
 
