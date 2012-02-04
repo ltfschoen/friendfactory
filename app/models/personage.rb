@@ -56,6 +56,8 @@ class Personage < ActiveRecord::Base
 
   belongs_to :user
 
+  alias :user_record :user
+
   belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
 
   belongs_to :profile, :class_name => 'Wave::Base'
