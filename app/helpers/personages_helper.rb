@@ -31,8 +31,9 @@ module PersonagesHelper
 
   def link_to_send_cocktail(personage)
     if current_user && (current_user[:id] != personage[:id])
-      handle = (personage.handle.length < 8) && personage.handle
-      msg = [ 'Send', handle, 'a Cocktail']
+      handle = personage.handle
+      handle = nil if handle.length > 7
+      msg    = [ 'Send', handle, 'a Cocktail']
 
       if current_user.has_poked?(personage[:id])
         msg = msg.unshift("Don't")
