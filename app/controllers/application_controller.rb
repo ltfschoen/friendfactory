@@ -27,6 +27,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_site
+    @current_site ||= begin
+      site_name = request.domain && request.domain.gsub(/\..*$/, '')
+      site_name = ActionController::Base.localhost if [ nil, 'localhost' ].include?(site_name)
+      Site.find_by_name(site_name)
+    end
+  end
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = current_site.user_sessions.find
@@ -52,14 +60,6 @@ class ApplicationController < ActionController::Base
   def current_persona
     return @current_persona if defined?(@current_persona)
     @current_persona = current_user && current_user.persona
-  end
-
-  def current_site
-    @current_site ||= begin
-      site_name = request.domain && request.domain.gsub(/\..*$/, '')
-      site_name = ActionController::Base.localhost if [ nil, 'localhost' ].include?(site_name)
-      Site.find_by_name(site_name)
-    end
   end
 
   def require_user

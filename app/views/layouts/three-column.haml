@@ -59,6 +59,10 @@
 
   = stylesheet_link_tag "#{current_site.name}/three-column", :media => 'screen'
 
+  :css
+    body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { opacity: 1; }
+    .ie8 body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { visibility: visible; }
+
   - if Rails.env.development?
     = stylesheet_link_tag 'development'
     = javascript_include_tag 'jquery'
