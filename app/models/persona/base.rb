@@ -41,7 +41,7 @@ class Persona::Base < ActiveRecord::Base
   end
 
   def avatar?
-    avatar_id.present?
+    avatar_without_silhouette.present?
   end
 
   def avatar_with_silhouette

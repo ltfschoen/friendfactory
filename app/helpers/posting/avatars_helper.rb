@@ -14,11 +14,14 @@ module Posting::AvatarsHelper
   end
 
   def thimble_image_tag(personage, opts = {})
-    if personage.present?
+    if personage && personage.avatar
       handle = personage.handle
       size = opts.delete(:size) || '32x32'
       css_class = [ opts.delete(:class), 'thimble', "pid-#{personage[:id]}" ].compact.join(' ')
       image_tag(personage.avatar.url(:thumb), :size => size, :alt => handle, :title => handle, :class => css_class)
+    elsif personage
+      Rails.logger.warn "Personage:#{personage.id} has no avatar"
+      content_tag(:span, "&nbsp;".html_safe, :class => 'avatar-with-error', :style => 'display:inline-block;width:32px;height:32px;')
     end
   end
 

@@ -5,8 +5,13 @@ module PersonagesHelper
   end
 
   def headshot_image_tag(persona, opts = {})
-    opts.merge!(:size => '190x190', :alt => persona.handle, :title => persona.handle)
-    image_tag(persona.avatar.url(:polaroid), opts)
+    if persona && persona.avatar
+      opts.merge!(:size => '190x190', :alt => persona.handle, :title => persona.handle)
+      image_tag(persona.avatar.url(:polaroid), opts)
+    elsif persona
+      Rails.logger.warn "Persona:#{persona.id} has no avatar"
+      content_tag(:span, "&nbsp;".html_safe, :class => 'headshot-with-error', :style => 'display:inline-block;width:190px;height:190px;')
+    end
   end
 
   def build_empty_personage(personage)
