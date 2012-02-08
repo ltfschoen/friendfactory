@@ -1,15 +1,5 @@
 class FriendshipsMailer < ApplicationMailer
 
-  class << self
-    def new(*args)
-      super
-    end
-  end
-
-  def set_controller(controller)
-    @controller = controller
-  end
-
   def new_poke_mail(poke, site, host, port)
     if poke.friend.emailable?
       @poke = poke
@@ -18,7 +8,7 @@ class FriendshipsMailer < ApplicationMailer
       @host_with_port = host_with_port(host, port)
       @featured_personages = featured_personages(site)
       subject = "#{@poke.user.handle} at #{@site.display_name} has sent you a cocktail!"
-      mail :from => @site.mailer, :to => email_for_environment(@poke.friend.email), :subject => subject do |format|
+      mail :from => @site.mailer, :to => email_for_environment(@poke.friend.email, @poke.user.email), :subject => subject do |format|
         format.html { render :layout => false }
         format.text
       end

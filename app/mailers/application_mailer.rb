@@ -2,10 +2,19 @@ class ApplicationMailer < ActionMailer::Base
 
   default :from => Site::DefaultMailer
 
+  DummyEmail = 'michael@michaelbamford.com'
+
   private
 
-  def email_for_environment(email)
-    [ 'production' ].include?(Rails.env) ? email : 'michael@michaelbamford.com'
+  def email_for_environment(email, current_user_email = nil)
+    case Rails.env
+    when 'production'
+      email
+    when 'staging'
+      current_user_email || DummyEmail
+    else
+      DummyEmail
+    end
   end
 
   def host_for_site(site)
