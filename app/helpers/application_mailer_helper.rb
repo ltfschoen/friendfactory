@@ -18,7 +18,7 @@ module ApplicationMailerHelper
   end
 
   def full_url(host, path = nil)
-    "#{protocol}#{host}"
+    "#{protocol}#{host}#{path}"
   end
 
 end

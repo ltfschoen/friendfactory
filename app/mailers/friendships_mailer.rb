@@ -7,7 +7,7 @@ class FriendshipsMailer < ApplicationMailer
       @host = host
       @host_with_port = host_with_port(host, port)
       @featured_personages = featured_personages(site)
-      subject = "#{@poke.user.handle} at #{@site.display_name} has sent you a cocktail!"
+      subject = "#{@poke.user.handle.titleize} at #{@site.display_name} sent you a cocktail"
       mail :from => @site.mailer, :to => email_for_environment(@poke.friend.email, @poke.user.email), :subject => subject do |format|
         format.html { render :layout => false }
         format.text
