@@ -23,14 +23,14 @@ module ApplicationHelper
     files.map! { |file| File.join(site_name, *file) }
     content_for(:stylesheets) { stylesheet_link_tag(files) }
   end
-    
-  def image_tag(source, opts = {})    
+
+  def image_tag(source, opts = {})
     if (opts.delete(:site) == true) && (asset = current_site.assets.type(Asset::Image).find_by_name(File.basename(source, '.*')))
       source = asset.url(:original)
     end
     super(source, opts)
   end
-  
+
   def button_tag(text = nil, opts = {})
     content_tag(:button, text, opts)
   end

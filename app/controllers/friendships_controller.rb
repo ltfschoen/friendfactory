@@ -48,7 +48,7 @@ class FriendshipsController < ApplicationController
   memoize :personage, :inverse_friends
 
   def deliver_friendship_email(poke)
-    if mail = FriendshipsMailer.new_poke_mail(poke, current_site)
+    if mail = FriendshipsMailer.new_poke_mail(poke, current_site, request.host, request.port)
       mail.deliver
     end
   end
