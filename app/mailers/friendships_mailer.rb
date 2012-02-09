@@ -12,8 +12,8 @@ class FriendshipsMailer < ApplicationMailer
   def new_poke_mail(poke, site, host, port)
     if poke.friend.emailable?
       set_env(poke, site, host, port)
-      subject = "#{@poke.user.handle.titleize} at #{@site.display_name} sent you a cocktail"
-      mail :from => @site.mailer, :to => email_for_environment(@poke.friend.email, @poke.user.email), :subject => subject do |format|
+      subject = "#{poke.user.handle.titleize} at #{site.display_name} sent you a cocktail"
+      mail :from => site.mailer, :to => email_for_environment(poke.friend.email, poke.user.email), :subject => subject do |format|
         format.text { render :layout => false }
         format.html
       end
