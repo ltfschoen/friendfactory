@@ -1,96 +1,49 @@
-%html
-  %head
-    %title #{@site.display_name} - New Cocktail from #{@poke.user.handle.titleize}
-    %meta{ :content => "text/html; charset=iso-8859-1", "http-equiv" => "Content-Type" }/
-  %body{ :alink => "#0099cc", :bgcolor => "#f4ede5", :leftmargin => "0", :link => "#0099cc", :topmargin => "0", :vlink => "#0099cc" }
-    %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :width => '100%', :height => '100%', :style => "min-width:710px; text-align:left; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
-      %tr
-        %td{ :bgcolor => "#f4ede5", :valign => 'top', :style => "background:url('#{mailer_image_url('body_background.jpg', @site, @host_with_port)}') #f4ede5;" }
-          %center
-            %table{ :border => "0", :cellpadding => "0", :cellspacing => "0" }
-              %tr
-                %td{ :width=> '650', :height => '30', :style => 'padding:0; border:0; margin:0;' } &nbsp;
-              %tr
-                %td{ :background => "#{mailer_image_url('page-top.gif', @site, @host_with_port)}", :valign => "top", :width => '650', :height => '10', :style => 'overflow:hidden;' }
-                  %img{ :height => "10", :src => "#{mailer_image_url('page-top_1.gif', @site, @host_with_port)}", :width => '650', :style => 'display:block; height:10px' }/
-              %tr
-                %td{ :background => "#{mailer_image_url('page-bkgd_2.gif', @site, @host_with_port)}", :width => '650', :style => "padding-top:10px; padding-bottom:0; text-align:left; background-color:#fff; background-image:url('#{mailer_image_url('page-bkgd_2.gif', @site, @host_with_port)}'); background-repeat:repeat; background-position:top left; background-attachment:scroll; display:block;" }
-                  %center
-                    %div{ :style => '' }
-                    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
-                      %tr
-                        %td{ :width => '600', :style => "font-size:16px; text-align:left; line-height:1.5em; padding:0; border:0; margin:0;", :valign => "top"}
-                          = link_to mailer_image_tag('logo.png', @site, @host_with_port, :border => '0', :alt => @site.display_name, :height => '75'), full_url(@host_with_port)
-                          %h1{:style => "color:#{Asset::Constant['color_main_2', @site]}; font-size:38px; margin-top:0; padding-top:10px; padding-bottom:10px; padding-right:0; padding-left:0; line-height:1.1em; letter-spacing:-1px;"} You've been sent a cocktail.
+- content_for(:title) do
+  #{site.display_name} - New Cocktail from #{poke.user.handle.titleize}
+- content_for(:subject) do
+  You've been sent a cocktail.
 
-                          %hr{ :width => '600', :align => 'center', :noshade => 'noshade', :size => '1', :style => 'height:1px; border-width:0; color:#ccc; background-color:#ccc' }
+%table{ :width => '600', :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "margin-top:20px; margin-bottom:20px; width:600px; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+  %tr
+    %td{ :style => "padding:0; border:0; margin:0;", :width => '400' }
+      %p
+        Hey #{poke.friend.handle.titleize},
+      %p
+        #{poke.user.handle.titleize} just sent you a cocktail. They saw your headshot on
+        = link_to site.display_name, full_url(host_with_port)
+        and want to meet you. Lucky you!
+      %h2{ :style => "font-size:18px; line-height:1.3em; margin-bottom:5px;" } What do I do now?
+      %p
+        = link_to 'Look at their profile', wave_profile_url(poke.friend.profile, :host => host, :only_path => false)
+        and send them a cocktail, too! It's a great way to meet new people.
+    %td{ :style => "padding:0; border:0; margin:0;", :width => '200', :align => 'center' }
+      = image_tag("http://#{host_with_port}#{poke.user.avatar.url(:polaroid)}", :size => '190x190', :align => 'right', :border => '0', :style => "margin-left:15px; padding:1px; border-width:1px; border-style:solid; border-color:#ccc;")
 
-                          %table{ :width => '600', :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "margin-top:20px; margin-bottom:20px; width:600px; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
-                            %tr
-                              %td{ :style => "padding:0; border:0; margin:0;", :width => '400' }
-                                %p
-                                  Hey #{@poke.friend.handle.titleize},
-                                %p
-                                  #{@poke.user.handle.titleize} just sent you a cocktail. They saw your headshot on
-                                  = link_to @site.display_name, full_url(@host_with_port)
-                                  and want to meet you. Lucky you!
-                                %h2{ :style => "font-size:18px; line-height:1.3em; margin-bottom:5px;" } What do I do now?
-                                %p
-                                  = link_to 'Look at their profile', wave_profile_url(@poke.friend.profile, :host => @host, :only_path => false)
-                                  and send them a cocktail, too! It's a great way to meet new people.
-                              %td{ :style => "padding:0; border:0; margin:0;", :width => '200', :align => 'center' }
-                                = image_tag("http://#{@host_with_port}#{@poke.user.avatar.url(:polaroid)}", :size => '190x190', :align => 'right', :border => '0', :style => "margin-left:15px; padding:1px; border-width:1px; border-style:solid; border-color:#ccc;")
+%hr{ :width => '600', :align => 'center', :noshade => 'noshade', :size => '1', :style => 'height:1px; border-width:0; color:#ccc; background-color:#ccc' }
 
-                          %hr{ :width => '600', :align => 'center', :noshade => 'noshade', :size => '1', :style => 'height:1px; border-width:0; color:#ccc; background-color:#ccc' }
+%table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+  %tr
+    %td{ :width => '600', :style => "padding:0; border:0; margin:0;"  }
+      %h2{:style => "font-size:18px; line-height:1.3em; margin-bottom:5px; padding-top:15px;" } Some more interesting people to meet on #{site.display_name}.
+      %p{:style => "margin-bottom:30px;" }
+        There's lots of interesting people waiting to meet you on #{site.display_name}. Log in anytime to meet someone new!
 
-                          %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
-                            %tr
-                              %td{ :width => '600', :style => "padding:0; border:0; margin:0;"  }
-                                %h2{:style => "font-size:18px; line-height:1.3em; margin-bottom:5px; padding-top:15px;" } Some more interesting people to meet on #{@site.display_name}.
-                                %p{:style => "margin-bottom:30px;" }
-                                  Lots of interesting people are waiting to meet you on #{@site.display_name}. Log in and meet someone, now!
+%table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+  %tr{ :height => '84' }
+    - featured_personages.each do |featured_personage|
+      %td{ :align => 'center', :width => '84', :valign => 'middle', :style => "padding:0; border:0; margin:0;" }
+        = link_to image_tag("http://#{host_with_port}#{featured_personage.avatar.url(:polaroid)}", :size => '80x80', :align => 'left', :border => '0', :style => "padding:1px; border-width:1px; border-style:solid; border-color:#ccc;"), wave_profile_url(featured_personage, :host => host, :only_path => false)
+      %td{ :width => '15', :style => "padding:0; border:0; margin:0;" } &nbsp;
+  %tr{ :height => '12' }
+    - featured_personages.each do |featured_personage|
+      %td{ :align => 'center', :width => '84', :valign => 'top', :style => "padding:0; border:0; margin:0; line-height: 1em;" }
+        = link_to featured_personage.handle.titleize, wave_profile_url(featured_personage, :host => host, :only_path => false), :style => 'font-size:10px; color:#ccc; text-decoration:none;'
+      %td{ :width => '15', :style => "padding:0; border:0; margin:0;" } &nbsp;
 
-                          %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
-                            %tr{ :height => '84' }
-                              - @featured_personages.each do |featured_personage|
-                                %td{ :align => 'center', :width => '84', :valign => 'middle', :style => "padding:0; border:0; margin:0;" }
-                                  = link_to image_tag("http://#{@host_with_port}#{featured_personage.avatar.url(:polaroid)}", :size => '80x80', :align => 'left', :border => '0', :style => "padding:1px; border-width:1px; border-style:solid; border-color:#ccc;"), wave_profile_url(featured_personage, :host => @host, :only_path => false)
-                                %td{ :width => '15', :style => "padding:0; border:0; margin:0;" } &nbsp;
-                            %tr{ :height => '12' }
-                              - @featured_personages.each do |featured_personage|
-                                %td{ :align => 'center', :width => '84', :valign => 'top', :style => "padding:0; border:0; margin:0; line-height: 1em;" }
-                                  = link_to featured_personage.handle, wave_profile_url(featured_personage, :host => @host, :only_path => false), :style => 'font-size:10px; color:#ccc; text-decoration:none;'
-                                %td{ :width => '15', :style => "padding:0; border:0; margin:0;" } &nbsp;
-
-                          %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
-                            %tr
-                              %td{ :height => '80', :valign => 'middle', :style => "padding:0; border:0; margin:0;" }
-                                Thanks for using #{@site.display_name}!
-                          - if false
-                            %p
-                              %img{:alt => "The team at #{@site.display_name}", :height => "69", :src => "#{mailer_image_url('signature_7.png', @site, @host_with_port)}", :width => "401"}/
-              %tr
-                %td{ :background => "#{mailer_image_url('page-bottom_8.gif', @site, @host_with_port)}", :width => '650', :height => '10', :valign => "top", :style => 'overflow:hidden;' }
-                  %img{ :height => "10", :src => "#{mailer_image_url('page-bottom_8.gif', @site, @host_with_port)}", :width => '650', :style => 'display:block;height:10px' }/
-
-            %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:11px" }
-              %tr
-                %td{ :width => '620', :style => 'padding:0; border:0; margin:0;' }
-                  %center
-                    %p{:style => "font-size:12px; width:630px; line-height:1.5em;"}
-                      You received this email because you're subscribe to email notifications at
-                      = succeed "." do
-                        = link_to @site.display_name, full_url(@host_with_port), :style => 'color:#0099cc;text-decoration:underline;'
-                      - if false
-                        Having trouble viewing this email?
-                        = succeed "." do
-                          = link_to 'View it in your browser', full_url(@host_with_port), :style => 'color:#0099cc;text-decoration:underline;'
-                      If you don't wish to receive this notification, please
-                      = succeed "." do
-                        = link_to 'unsubscribe', "mailto:unsubscribe@friskyfactory.com?subject=Unsubscribe from #{@site.name} cocktails&body=To #{@site.name},%0A%0APlease don't email me any more cocktails. Thanks!%0A%0AFrom #{@poke.friend.handle}", :style => "color:#0099cc;text-decoration:underline;"
-                    %p{:style => "font-size:12px; width:630px; line-height:1.5em;"}
-                      &copy; #{Date.today.year} FriendFactory, LLC 151 First Ave Suite 205, New York, NY 10003
-        - if false
-          %img{:src => "http://37assets.s3.amazonaws.com/newsletters/basecamp/http//dash.37signals.com/beacon.gif?event[][name]=newsletterOpen&event[][value]=02072012 Basecamp Videos"}/
-          %img{:border => "0", :height => "1", :src => "https://createsend1.com/t/y/o/yhkjltl/xhdhkdiuy/o.gif", :style => "height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;", :width => "1"}/
-    
+%table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+  %tr
+    %td{ :height => '80', :valign => 'middle', :style => "padding:0; border:0; margin:0;" }
+      Thanks for using #{site.display_name}!
+- if false
+  %p
+    %img{:alt => "The team at #{site.display_name}", :height => "69", :src => "#{mailer_image_url('signature_7.png', site, host_with_port)}", :width => "401"}/

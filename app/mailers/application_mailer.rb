@@ -3,7 +3,6 @@ class ApplicationMailer < ActionMailer::Base
   default :from => Site::DefaultMailer
 
   DummyEmail  = 'michael@michaelbamford.com'
-  LitmusEmail = 'babacb3@emailtests.com'
 
   private
 

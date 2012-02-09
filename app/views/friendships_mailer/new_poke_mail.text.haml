@@ -1,15 +1,27 @@
 :plain
-  Hey #{@poke.friend.handle}!
+  Hey #{poke.friend.handle.titleize}!
+  
+  #{poke.user.handle.titleize} just sent you a cocktail. They saw your headshot on #{site.display_name} and want to meet you. Lucky you!
+  
+  What do I do now?
+  
+  Look at their profile and send them a cocktail, too! It's a great way to meet new people. Click here:
+  
+  #{wave_profile_url(poke.friend.profile, :host => host, :only_path => false)}
+  
+  There's lots of interesting people waiting to meet you at #{site.display_name}. Log in anytime to meet someone new!
+  
+  * Featured Profiles
+- featured_personages.each do |featured_personage|
+  :plain
+    * #{featured_personage.handle.titleize} #{wave_profile_url(featured_personage, :host => host, :only_path => false)}
 
-  #{@poke.user.handle} has sent you a cocktail!
-
-  Don't know who #{@poke.user.handle} is and want to find out more? Click below to check out their bio:
-
-  http://#{@host}#{url_for(@poke.user.profile)}
-
-  You received this email since you subscribed to message notifications at #{@site.display_name}.
-  Send an email to unsubscribe@friskyfactory.com, and we'll remove you right away.
-
+:plain
+  
+  You received this email because you're subscribe to email notifications at #{site.display_name} #{full_url(host_with_port)}.
+  
+  If you do not wish to receive this notification, send an email to unsubscribe@friskyfactory.com.
+  
   FriendFactory, LLC
   151 First Ave Suite 205,
   New York, NY 10003
