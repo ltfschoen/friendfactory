@@ -20,15 +20,34 @@ class Posting::CommentsController < ApplicationController
   end
 
   def create
-    @comment = nil
-    if @posting = Posting::Base.find_by_id(params[:posting_id])
-      @comment = Posting::Comment.new(params[:posting_comment]) { |p| p.user = current_user }
-      if @posting.children << @comment
-        @comment.publish!
-      end
+    @posting = Posting::Base.find(params[:posting_id])
+    if @comment = add_comment_to_posting(new_comment, @posting)
+      broadcast_posting(@comment, @posting.user)
     end
     respond_to do |format|
       format.js { render :layout => false }
+    end
+  end
+
+  private
+
+  def new_comment
+    Posting::Comment.new(params[:posting_comment]) do |comment|
+      comment.user = current_user
+    end
+  end
+
+  def add_comment_to_posting(comment, posting)
+    ActiveRecord::Base.transaction do
+      posting.children << comment
+      comment.publish!
+      comment
+    end
+  end
+
+  def broadcast_posting(comment, recipient)
+    if (recipient.offline? && recipient.emailable?) || Rails.env.development?
+      PostingsMailer.new_comment_notification(comment, recipient, current_site, request.host, request.port).deliver
     end
   end
 
