@@ -32,7 +32,6 @@ class Posting::MessagesController < ApplicationController
       posting.site     = current_site
       posting.sender   = current_user
       posting.receiver = receiver
-      posting.state    = :published
     end
   end
 
@@ -40,6 +39,7 @@ class Posting::MessagesController < ApplicationController
     ActiveRecord::Base.transaction do
       wave.postings << posting
       wave.mark_as_read
+      posting.publish!
       posting
     end
   end
