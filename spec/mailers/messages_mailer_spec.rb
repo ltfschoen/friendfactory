@@ -1,13 +1,13 @@
 require "spec_helper"
 
-describe MessagesMailer do
+describe PostingsMailer do
   
   fixtures :users
   
   it "renders the headers" do
     pending
     message = mock_model(Posting::Message, :sender => users(:adam), :receiver => users(:bert))
-    mail = MessagesMailer.new_message_notification(message)
+    mail = PostingsMailer.new_message_notification(message)
     mail.should_not be_nil
     mail.subject.should eq "Forgot password"
     mail.to.should eq(["to@example.org"])

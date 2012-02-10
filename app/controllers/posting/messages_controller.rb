@@ -58,7 +58,7 @@ class Posting::MessagesController < ApplicationController
   def broadcast_posting_via_email(posting)
     receiver = posting.receiver
     if (receiver.offline? && receiver.emailable?) || Rails.env.development?
-      MessagesMailer.new_message_notification(posting, request.host, request.port).deliver
+      PostingsMailer.new_message_notification(posting, request.host, request.port).deliver
     end
   end
 
