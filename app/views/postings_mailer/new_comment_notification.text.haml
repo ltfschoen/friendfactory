@@ -1,13 +1,11 @@
 :plain
-  Hey #{posting.receiver.display_handle},
+  Hey #{recipient.display_handle},
 
-  You have a new message from #{posting.sender.display_handle}.
+  #{posting.user.display_handle} just commented in your posting.
 
-  To get your message, click the following link:
+  "#{posting.body}"
 
-  #{inbox_url(:host => host)}
-
-  You can view their profile at:
+  View and reply to their comment at #{site.display_name} by clicking here. You can also view #{posting.user.display_handle}'s profile at
 
   #{wave_profile_url(posting.user.profile, :host => host, :only_path => false)}
 

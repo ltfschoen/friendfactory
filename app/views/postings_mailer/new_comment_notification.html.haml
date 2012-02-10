@@ -7,12 +7,12 @@
   %tr
     %td{ :style => "padding:0; border:0; margin:0; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px", :width => '600' }
       %p
-        Hey #{posting.receiver.display_handle},
+        Hey #{recipient.display_handle},
       %table{ :border => "0", :cellpadding => "0", :cellspacing => "0" }
         %tr
           %td{ :style => "padding:0; border:0; margin:0; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px", :width => '400' }
             %p
-              #{posting.user.display_handle} just commented in your posting on the #{wave.topic} wave:
+              #{posting.user.display_handle} just commented in your posting.
             %table{ :border => "0", :cellpadding => "0", :cellspacing => "0" }
               %tr
                 %td{ :style => "padding:0; border:0; margin:0; font-size:120px; line-height:20px; font-weight:bold; color:#cccccc; font-family:Helvetica, Arial, sans-serif;", :width => '80', :valign => 'top' }
@@ -21,11 +21,11 @@
                   %p #{posting.body}
             %h2{ :style => "font-size:16px; line-height:1.3em; margin-bottom:5px;" } What do I do now?
             %p
-              View their comment on the #{wave.topic} wave at #{site.display_name} by clicking here.
-              Reply to their comment by clicking here.
+              = succeed '.' do
+                View their comment at #{site.display_name} by clicking here
               You can also
               = succeed "." do
-                #{link_to 'view their profile', wave_profile_url(posting.user.profile, :host => host, :only_path => false)}
+                #{link_to "view #{posting.user.display_handle}'s profile", wave_profile_url(posting.user.profile, :host => host, :only_path => false)}
           %td{ :style => "padding:0; border:0; margin:0;", :width => '200', :align => 'center', :valign => 'top' }
             = image_tag("http://#{host_with_port}#{posting.user.avatar.url(:polaroid)}", :size => '190x190', :align => 'right', :border => '0', :style => "margin-left:15px; padding:1px; border-width:1px; border-style:solid; border-color:#ccc;")
 %hr{ :width => '600', :align => 'center', :noshade => 'noshade', :size => '1', :style => 'height:1px; border-width:0; color:#ccc; background-color:#ccc' }

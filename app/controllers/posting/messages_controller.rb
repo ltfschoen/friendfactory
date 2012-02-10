@@ -37,11 +37,12 @@ class Posting::MessagesController < ApplicationController
 
   def add_message_to_conversation(posting, wave)
     ActiveRecord::Base.transaction do
-      wave.postings << posting
-      wave.mark_as_read
-      posting.publish!
-      posting
+      if wave.postings << posting
+        wave.mark_as_read
+        posting.publish!
+      end
     end
+    posting
   end
 
   def broadcast_posting(posting)

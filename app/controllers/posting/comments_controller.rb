@@ -21,8 +21,9 @@ class Posting::CommentsController < ApplicationController
 
   def create
     @posting = Posting::Base.find(params[:posting_id])
-    @comment = add_comment_to_posting(new_comment, @posting)
-    broadcast_posting(@comment, @posting.user) if @comment.present?
+    if @comment = add_comment_to_posting(new_comment, @posting)
+      broadcast_posting(@comment, @posting.user)
+    end
     respond_to do |format|
       format.js { render :layout => false }
     end
@@ -38,10 +39,11 @@ class Posting::CommentsController < ApplicationController
 
   def add_comment_to_posting(comment, posting)
     ActiveRecord::Base.transaction do
-      posting.children << comment
-      comment.publish!
-      comment
+      if posting.children << comment
+        comment.publish!
+      end
     end
+    comment
   end
 
   def broadcast_posting(comment, recipient)
