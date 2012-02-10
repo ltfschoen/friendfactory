@@ -12,7 +12,7 @@
         %tr
           %td{ :style => "padding:0; border:0; margin:0; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px", :width => '400' }
             %p
-              #{posting.user.display_handle} just commented in your posting.
+              #{posting.user.display_handle} just commented on your posting &#8220;#{truncate(posting.parent.subject || posting.parent.body)}&#8221;
             %table{ :border => "0", :cellpadding => "0", :cellspacing => "0" }
               %tr
                 %td{ :style => "padding:0; border:0; margin:0; font-size:120px; line-height:20px; font-weight:bold; color:#cccccc; font-family:Helvetica, Arial, sans-serif;", :width => '80', :valign => 'top' }
