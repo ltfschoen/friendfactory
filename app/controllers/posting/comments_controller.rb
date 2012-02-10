@@ -21,9 +21,8 @@ class Posting::CommentsController < ApplicationController
 
   def create
     @posting = Posting::Base.find(params[:posting_id])
-    if @comment = add_comment_to_posting(new_comment, @posting)
-      broadcast_posting(@comment, @posting.user)
-    end
+    @comment = add_comment_to_posting(new_comment, @posting)
+    broadcast_posting(@comment, @posting.user) if @comment.present?
     respond_to do |format|
       format.js { render :layout => false }
     end
