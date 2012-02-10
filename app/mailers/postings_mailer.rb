@@ -13,9 +13,10 @@ class PostingsMailer < ApplicationMailer
     end
   end
 
-  def new_comment_notification(comment, host, port)
-    set_env(comment, nil, nil, host, port)
-    mail :from => site.mailer, :to => email_for_environment(comment.receiver.email, comment.user.email), :subject => subject do |format|
+  def new_comment_notification(comment, recipient, site, host, port)
+    set_env(comment, recipient, site, host, port)
+    subject = "Comment from #{comment.user.display_handle} at #{site.display_name}"
+    mail :from => site.mailer, :to => email_for_environment(recipient.email, comment.user.email), :subject => subject do |format|
       format.text
       format.html
     end
@@ -27,7 +28,7 @@ class PostingsMailer < ApplicationMailer
     super(recipient, site, host, port)
     @posting = posting
   end
-  
+
   def posting
     @posting
   end
