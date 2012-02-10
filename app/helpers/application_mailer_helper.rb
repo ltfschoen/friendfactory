@@ -21,4 +21,8 @@ module ApplicationMailerHelper
     "#{protocol}#{host}#{path}"
   end
 
+  def render_featured_personages(personages)
+    render :partial => 'layouts/shared/featured_personages', :object => personages
+  end
+
 end

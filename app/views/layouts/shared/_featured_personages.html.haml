@@ -1,0 +1,17 @@
+%table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+  %tr
+    %td{ :width => '600', :style => "padding:0; border:0; margin:0;"  }
+      %h2{:style => "font-size:18px; line-height:1.3em; margin-bottom:5px; padding-top:15px;" } Some more interesting people to meet on #{site.display_name}.
+      %p{:style => "margin-bottom:30px;" }
+        There's lots of interesting people waiting to meet you on #{site.display_name}. Log in anytime to meet someone new!
+%table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+  %tr{ :height => '84' }
+    - featured_personages.each do |featured_personage|
+      %td{ :align => 'center', :width => '84', :valign => 'middle', :style => "padding:0; border:0; margin:0;" }
+        = link_to image_tag("http://#{host_with_port}#{featured_personage.avatar.url(:polaroid)}", :size => '80x80', :align => 'left', :border => '0', :style => "padding:1px; border-width:1px; border-style:solid; border-color:#ccc;"), wave_profile_url(featured_personage, :host => host, :only_path => false)
+      %td{ :width => '15', :style => "padding:0; border:0; margin:0;" } &nbsp;
+  %tr{ :height => '12' }
+    - featured_personages.each do |featured_personage|
+      %td{ :align => 'center', :width => '84', :valign => 'top', :style => "padding:0; border:0; margin:0; line-height: 1em;" }
+        = link_to featured_personage.handle.titleize, wave_profile_url(featured_personage, :host => host, :only_path => false), :style => 'font-size:10px; color:#ccc; text-decoration:none;'
+      %td{ :width => '15', :style => "padding:0; border:0; margin:0;" } &nbsp;

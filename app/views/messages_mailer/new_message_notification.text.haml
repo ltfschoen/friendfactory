@@ -1,14 +1,14 @@
 :plain    
-  Hey #{@message.receiver.handle},
+  Hey #{posting_message.receiver.display_handle},
 
-  You have a new message from #{@message.sender.handle}.
+  You have a new message from #{posting_message.sender.display_handle}.
 
   To get your message, click the following link:
 
   #{inbox_url(:host => @host)}
 
-  To unsubscribe from these messages, send an email to unsubscribe@friskyfactory.com, and we'll remove you right away.
+  You can view their profile at:
 
-  FriendFactory, LLC
-  151 First Ave, Suite 205
-  New York, NY 10003
+  #{wave_profile_url(posting_message.user.profile, :host => host, :only_path => false)}
+
+  #{render :partial => 'layouts/shared/featured_personages', :object => featured_personages, :locals => { :host => host }}

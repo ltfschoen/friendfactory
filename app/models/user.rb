@@ -138,6 +138,10 @@ class User < ActiveRecord::Base
     User.online?(self)
   end
 
+  def offline?
+    !online?
+  end
+
   def existing_record?
     !new_record?
   end

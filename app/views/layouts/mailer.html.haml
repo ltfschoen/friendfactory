@@ -1,0 +1,57 @@
+%html
+  %head
+    - if content_for?(:title)
+      %title= content_for(:title)
+    %meta{ :content => "text/html; charset=iso-8859-1", "http-equiv" => "Content-Type" }/
+  %body{ :alink => "#0099cc", :bgcolor => "#f4ede5", :leftmargin => "0", :link => "#0099cc", :topmargin => "0", :vlink => "#0099cc" }
+    %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :width => '100%', :height => '100%', :style => "min-width:710px; text-align:left; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+      %tr
+        %td{ :bgcolor => "#f4ede5", :valign => 'top', :style => "background:url('#{mailer_image_url('body_background.jpg', site, host_with_port)}') #f4ede5;" }
+          %center
+            %table{ :border => "0", :cellpadding => "0", :cellspacing => "0" }
+              %tr
+                %td{ :width=> '650', :height => '30', :style => 'padding:0; border:0; margin:0;' } &nbsp;
+              %tr
+                %td{ :background => "#{mailer_image_url('page-top.gif', site, host_with_port)}", :valign => "top", :width => '650', :height => '10', :style => 'overflow:hidden;' }
+                  %img{ :height => "10", :src => "#{mailer_image_url('page-top_1.gif', site, host_with_port)}", :width => '650', :style => 'display:block; height:10px' }/
+              %tr
+                %td{ :background => "#{mailer_image_url('page-bkgd_2.gif', site, host_with_port)}", :width => '650', :style => "padding-top:10px; padding-bottom:0; text-align:left; background-color:#fff; background-image:url('#{mailer_image_url('page-bkgd_2.gif', site, host_with_port)}'); background-repeat:repeat; background-position:top left; background-attachment:scroll; display:block;" }
+                  %center
+                    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+                      %tr
+                        %td{ :width => '600', :style => "font-size:16px; text-align:left; line-height:1.5em; padding:0; border:0; margin:0;", :valign => "top"}
+                          = link_to mailer_image_tag('logo.png', site, host_with_port, :border => '0', :alt => site.display_name, :height => '75'), full_url(host_with_port)
+                          - if content_for?(:subject)
+                            %h1{:style => "color:#{Asset::Constant['color_main_2', site]}; font-size:38px; margin-top:0; padding-top:10px; padding-bottom:10px; padding-right:0; padding-left:0; line-height:1.1em; letter-spacing:-1px;"} #{content_for(:subject)}
+                          %hr{ :width => '600', :align => 'center', :noshade => 'noshade', :size => '1', :style => 'height:1px; border-width:0; color:#ccc; background-color:#ccc' }
+                          = yield
+                          %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
+                            %tr
+                              %td{ :height => '80', :valign => 'middle', :style => "padding:0; border:0; margin:0;" }
+                                Thanks for using #{site.display_name}!
+                          - if false
+                            %p
+                              %img{:alt => "The team at #{site.display_name}", :height => "69", :src => "#{mailer_image_url('signature_7.png', site, host_with_port)}", :width => "401"}/
+              %tr
+                %td{ :background => "#{mailer_image_url('page-bottom_8.gif', site, host_with_port)}", :width => '650', :height => '10', :valign => "top", :style => 'overflow:hidden;' }
+                  %img{ :height => "10", :src => "#{mailer_image_url('page-bottom_8.gif', site, host_with_port)}", :width => '650', :style => 'display:block;height:10px' }/
+            %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "font-family:Helvetica, Verdana, Arial, sans-serif; font-size:11px" }
+              %tr
+                %td{ :width => '620', :style => 'padding:0; border:0; margin:0;' }
+                  %center
+                    %p{:style => "font-size:12px; width:630px; padding-top:10px; line-height:1.5em;"}
+                      You received this email because you're subscribe to email notifications at
+                      = succeed "." do
+                        = link_to site.display_name, full_url(host_with_port), :style => 'color:#0099cc;text-decoration:underline;'
+                      - if false
+                        Having trouble viewing this email?
+                        = succeed "." do
+                          = link_to 'View it in your browser', full_url(host_with_port), :style => 'color:#0099cc;text-decoration:underline;'
+                      If you do not wish to receive this notification, please
+                      = succeed "." do
+                        = link_to 'unsubscribe', "mailto:unsubscribe@friskyfactory.com?subject=Unsubscribe from #{site.name} cocktails&body=To #{site.name},%0A%0APlease don't email me any more cocktails. Thanks!%0A%0AFrom #{recipient.display_handle}", :style => "color:#0099cc;text-decoration:underline;"
+                    %p{:style => "font-size:12px; width:630px; line-height:1.5em;"}
+                      &copy; #{Date.today.year} FriendFactory, LLC 151 First Ave Suite 205, New York, NY 10003
+        - if false
+          %img{:src => "http://37assets.s3.amazonaws.com/newsletters/basecamp/http//dash.37signals.com/beacon.gif?event[][name]=newsletterOpen&event[][value]=02072012 Basecamp Videos"}/
+          %img{:border => "0", :height => "1", :src => "https://createsend1.com/t/y/o/yhkjltl/xhdhkdiuy/o.gif", :style => "height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;", :width => "1"}/

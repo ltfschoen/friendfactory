@@ -7,21 +7,6 @@
   
   Look at their profile and send them a cocktail, too! It's a great way to meet new people. Click here:
   
-  #{wave_profile_url(poke.friend.profile, :host => host, :only_path => false)}
+  #{wave_profile_url(poke.user.profile, :host => host, :only_path => false)}
   
-  There's lots of interesting people waiting to meet you at #{site.display_name}. Log in anytime to meet someone new!
-  
-  * Featured Profiles
-- featured_personages.each do |featured_personage|
-  :plain
-    * #{featured_personage.handle.titleize} #{wave_profile_url(featured_personage, :host => host, :only_path => false)}
-
-:plain
-  
-  You received this email because you're subscribe to email notifications at #{site.display_name} #{full_url(host_with_port)}.
-  
-  If you do not wish to receive this notification, send an email to unsubscribe@friskyfactory.com.
-  
-  FriendFactory, LLC
-  151 First Ave Suite 205,
-  New York, NY 10003
+  #{render :partial => 'layouts/shared/featured_personages', :object => featured_personages, :locals => { :host => host }}

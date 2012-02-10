@@ -1,0 +1,7 @@
+:plain
+  There's lots of interesting people waiting to meet you at #{site.display_name}. Log in anytime to meet someone new!
+  
+  * Featured Profiles
+- featured_personages.each do |featured_personage|
+  :plain
+    * #{featured_personage.handle.titleize} #{wave_profile_url(featured_personage, :host => host, :only_path => false)}

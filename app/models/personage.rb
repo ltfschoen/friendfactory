@@ -21,10 +21,12 @@ class Personage < ActiveRecord::Base
       :current_login_at,
       :last_login_at,
       :online?,
+      :offline?,
     :to => :user
 
   delegate \
       :handle,
+      :display_handle,
       :first_name,
       :last_name,
       :dob,

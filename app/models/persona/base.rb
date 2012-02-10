@@ -40,6 +40,10 @@ class Persona::Base < ActiveRecord::Base
     self[:handle].strip if self[:handle].present?
   end
 
+  def display_handle
+    handle.titleize if handle
+  end
+
   def avatar?
     avatar_without_silhouette.present?
   end
