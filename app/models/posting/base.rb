@@ -23,8 +23,18 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
-  scope :type, lambda { |*types| where(:type => types.map(&:to_s)) }
-  scope :exclude, lambda { |*types| where('`postings`.`type` NOT IN (?)', types.map(&:to_s)) }
+  scope :site, lambda { |site|
+    joins(:waves => :sites).
+    where(:waves => { :sites => { :id => site[:id] }})
+  }
+
+  scope :type, lambda { |*types|
+    where(:type => types.map(&:to_s))
+  }
+
+  scope :exclude, lambda { |*types|
+    where('`postings`.`type` NOT IN (?)', types.map(&:to_s))
+  }
 
   scope :published, where(:state => [ :published, :offered ])
   scope :unpublished, where(:state => :unpublished)

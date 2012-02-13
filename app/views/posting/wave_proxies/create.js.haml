@@ -1,7 +1,7 @@
 - if @posting.present? && @posting.valid?
   :plain
     var
-      $posting = $("#{escape_javascript(render(:partial => 'wave_proxy', :object => @posting))}"),
+      $posting = $("#{escape_javascript(render(:partial => 'wave_proxy', :object => @posting, :locals => { :wave => @wave }))}"),
       $nav = $('li.current', 'ul.nav'),
       $form = $($('a', $nav).attr('rel')),
       $firstPosting = $('.post_frame').filter(':first');

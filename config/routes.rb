@@ -11,7 +11,6 @@ Friskyfactory::Application.routes.draw do
 
   get '/stylesheets/:site_name(/:controller_name).:format' => 'admin/sites#stylesheets'
 
-
   # Waves
   namespace :wave do
     resources :communities, :only => [ :show ] do
@@ -22,20 +21,17 @@ Friskyfactory::Application.routes.draw do
     resources :places, :only => [ :show ] do
       get :rollcall, :path => 'rollcall(/:tag)', :on => :member
     end
-
     resources :conversations, :only => [ :index, :show ] do
       member do
         put :close
         get :popup
       end
     end
-
     resources :albums, :only => [ :index, :show, :new, :create ]
     # resources :events, :only => [ :index, :show, :new, :create ]
   end
 
-
-  # Basic Wave Functions
+  # Wave Functions
   scope :module => :wave do
     resources :waves, :only => [] do
       member do
@@ -45,7 +41,6 @@ Friskyfactory::Application.routes.draw do
     get 'inbox(/:tag)', :to => 'conversations#index', :as => 'inbox'
     # get ':slug', :to => 'communities#show', :constraints => { :slug => /\D\w*/ }
   end
-
 
   # Waves' Postings
   resources :waves, :only => [] do
@@ -61,6 +56,24 @@ Friskyfactory::Application.routes.draw do
     end
   end
 
+  # Posting Functions
+  namespace :posting do
+    resources :avatars, :only => [] do
+      get :comments, :on => :member
+    end
+  end
+
+  scope :module => :posting do
+    resources :postings, :only => [ :show ] do |posting|
+      member do
+        delete :unpublish, :controller => 'base'
+      end
+      collection do
+        get :fetch, :controller => 'base'
+      end
+      resources :comments, :only => [ :index, :new, :create ]
+    end
+  end
 
   # Personages and Headshots
   resources :profiles, :only => [ :show, :new, :edit, :update ], :controller => 'personages' do
@@ -82,27 +95,13 @@ Friskyfactory::Application.routes.draw do
     end
   end
 
-  resource :profile, :only => [ :show ], :controller => 'personages', :as => 'current_profile'
+  resource :profile, :only => [ :show ],
+      :controller => 'personages',
+      :as => 'current_profile'
 
   get ':persona_type' => 'personages#index',
       :constraints => { :persona_type => /ambassadors|communities|places/ },
       :as => 'persona_type_profiles'
-
-  # Basic Posting Functions
-  scope :module => :posting do
-    resources :postings, :only => [] do |posting|
-      member do
-        delete :unpublish, :controller => 'base'
-        get 'avatar/comments' => 'avatars#comments'
-      end
-
-      collection do
-        get :fetch, :controller => 'base'
-      end
-
-      resources :comments, :only => [ :index, :new, :create ]
-    end
-  end
 
   # Geocode
   # resources :locations, :only => [] do
@@ -111,15 +110,14 @@ Friskyfactory::Application.routes.draw do
 
   # Welcome
   namespace :welcome do
-    get 'headshot/:pane', :action => 'headshot', :as => 'headshot'
+    get  'headshot/:pane', :action => 'headshot', :as => 'headshot'
     post 'signup'
     post 'login'
-    get '(/:invitation_code)', :action => 'show'
+    get  '(/:invitation_code)', :action => 'show'
   end
 
   post 'launch' => 'welcome#launch'
   match 'logout' => 'user_sessions#destroy', :via => [ :get, :delete ]
-
 
   # Reset passwords
   resources :passwords, :only => [ :new, :create, :edit, :update ]
@@ -128,19 +126,16 @@ Friskyfactory::Application.routes.draw do
     get 'lurk', :on => :new
   end
 
-
   # Labs
   if [ 'development', 'staging' ].include?(Rails.env)
     get 'labs/:action' => 'labs'
   end
-
 
   # Admin
   namespace :admin do
     # resources :tags, :except => [ :show ] do
     #   collection { get 'commit' }
     # end
-
     resources :sites, :except => [ :show, :destroy ] do
       resources :users, :only => [ :index, :show, :update ]
       resources :invitations

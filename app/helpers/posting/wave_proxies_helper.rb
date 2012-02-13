@@ -1,5 +1,4 @@
 module Posting::WaveProxiesHelper
-  
   def render_wave_as_posting(proxy)
     if wave = proxy.resource
       wave_type = wave.class.name.demodulize.tableize
@@ -7,6 +6,4 @@ module Posting::WaveProxiesHelper
       render :partial => file_name, :object => wave, :locals => { :proxy => proxy }
     end
   end
-  
 end
-

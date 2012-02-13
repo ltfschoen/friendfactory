@@ -1,0 +1,7 @@
+-# content_for_sidebar_rollcall(users_from_paged_postings, rollcall_wave_community_path(params[:id], :page => params[:page]))
+#floating
+#frame
+  %h1 #{posting[:type].demodulize} Posting by #{posting.user.display_handle}
+  = render :partial => 'layouts/shared/reaction-template'
+  = render_posting(posting)
+  = render :partial => 'layouts/shared/unpublish_overlay'

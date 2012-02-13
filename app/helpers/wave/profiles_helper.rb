@@ -2,14 +2,6 @@
 
 module Wave::ProfilesHelper
 
-  def render_profile_posting(posting)
-    render_posting(posting)
-  end
-
-  def render_profile_wave_posting(posting)
-    posting.class == Posting::Avatar ? render(:partial => 'avatar', :object => posting) : render_posting(posting)
-  end
-
   def render_friendships(wave)
     friends = wave.user.friends.site(current_site)
     content_tag(:div, :class => 'attachment') do

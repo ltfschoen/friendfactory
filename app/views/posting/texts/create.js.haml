@@ -1,7 +1,7 @@
 - if @posting.present? && @posting.valid?
   :plain
     var
-      $posting = $("#{escape_javascript(self.send(('render_' + resolver + '_posting').to_sym, @posting))}"),
+      $posting = $("#{escape_javascript(render_posting(@posting))}"),
       $nav = $('li.current', 'ul.nav'),
       $form = $($('a', $nav).attr('rel')),
       $firstPosting = $('.post_frame').filter(':first');

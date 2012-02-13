@@ -3,8 +3,8 @@
 #frame
   %h1 #{wave.subject}
   = render :partial => 'layouts/shared/reaction-template'
-  = render :partial => 'layouts/shared/nav'
+  = render :partial => 'layouts/shared/nav', :locals => { :wave => wave }
   - paged_postings.each do |posting|
-    = render_community_posting(posting)
+    = render_posting(posting)
   = will_paginate paged_postings, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
   = render :partial => 'layouts/shared/unpublish_overlay'

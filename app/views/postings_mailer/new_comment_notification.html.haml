@@ -22,7 +22,7 @@
             %h2{ :style => "font-size:16px; line-height:1.3em; margin-bottom:5px;" } What do I do now?
             %p
               = succeed '.' do
-                View their comment at #{site.display_name} by clicking here
+                View the comment thread at #{site.display_name} by clicking #{link_to 'here', posting_url(posting.root, :host => host, :only_path => false)}
               You can also
               = succeed "." do
                 #{link_to "view #{posting.user.display_handle}'s profile", wave_profile_url(posting.user.profile, :host => host, :only_path => false)}

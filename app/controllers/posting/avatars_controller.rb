@@ -3,14 +3,12 @@ class Posting::AvatarsController < ApplicationController
   before_filter :require_user
 
   def comments
-    @comments = []
-    if @posting = Posting::Base.find_by_id(params[:id])
-      @personage = @posting.user
-      @comments = @posting.comments.published.order('updated_at desc')
-    end
+    @posting = Posting::Base.site(current_site).find(params[:id])
+    @comments = @posting.comments.published.order('updated_at desc')
+    @personage = @posting.user
     respond_to do |format|
       format.html { render :layout => false }
-    end    
+    end
   end
 
 end
