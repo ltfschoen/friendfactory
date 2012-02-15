@@ -1,6 +1,0 @@
-- stylesheet 'app/admin/admin'
-- javascript 'app/admin/invitation/invitations'
-.grid_14.push_1.admin.blank.canvas.invitation.universals
-  %h1 Edit Universal Invitation
-  = form_for @posting, :url => admin_invitation_universal_path(@posting), :html => { :method => :put } do |f|
-    = render :partial => 'form', :locals => { :f => f }

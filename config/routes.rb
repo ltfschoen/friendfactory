@@ -138,7 +138,9 @@ Friskyfactory::Application.routes.draw do
     # end
     resources :sites, :except => [ :show, :destroy ] do
       resources :users, :only => [ :index, :show, :update ]
-      resources :invitations
+      namespace :invitation do
+        resources :sites, :except => [ :destroy ]
+      end
     end
   end
 

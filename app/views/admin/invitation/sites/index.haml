@@ -1,7 +1,7 @@
 #frame
   .container
-    %h1 Invitations
-    %table{ :class => [ 'admin', page_class ] }
+    %h1 #{site.display_name} Sign Up Codes
+    %table.invitations.index
       %thead
         %tr
           %th Inviter
@@ -22,11 +22,11 @@
             %td.created_at #{distance_of_time_in_words_to_now(invitation.created_at)}&nbsp;ago
             %td.confirmations= invitation.confirmations_count
             %td.status
-              = select_tag('invitation[state]', options_for_select([ %w{ Offered offered }, %w{ Expired expired } ], invitation.state), :'data-remote' => true, :'data-url' => admin_site_invitation_path(site, invitation), :'data-type' => :json, :'data-method' => :put, :id => "invitation_#{invitation.id}_state")
+              =# select_tag('invitation[state]', options_for_select([ %w{ Offered offered }, %w{ Expired expired } ], invitation.state), :'data-remote' => true, :'data-url' => admin_site_invitation_sites_path(site, invitation), :'data-type' => :json, :'data-method' => :put, :id => "invitation_#{invitation.id}_state")
             %td.actions
-              = link_to 'Edit', edit_admin_site_invitation_path(site, invitation)
-              = link_to 'Delete', admin_site_invitation_path(site, invitation), :confirm => 'Are you sure?', :remote => true, :method => :delete
+              = link_to 'Edit', edit_admin_site_invitation_site_path(site, invitation)
+              =# link_to 'Delete', admin_site_invitation_path(site, invitation), :confirm => 'Are you sure?', :remote => true, :method => :delete
     .button-bar.footer
       - if flash[:notice].present?
         %span.flash.notice= flash[:notice]
-      = link_to 'New Site Invitation', new_admin_site_invitation_path(site)
+      = link_to 'New Sign Up Code', new_admin_site_invitation_site_path(site)

@@ -1,6 +1,6 @@
 #frame
   .container
-    %h1 Users
+    %h1 #{site.display_name} Users
     - if users.present?
       %table{ :class => [ 'admin', page_class ] }
         %thead

@@ -39,7 +39,7 @@
     <textarea class="stylesheet_css" cols="40" id="site_stylesheets_attributes_${ seq }_css" name="site[stylesheets_attributes][${ seq }][css]" placeholder="css or scss" rows="20"></textarea>
 
 = form_for([ :admin, site_with_empty_fields(@site) ], :html => { :multipart => true }) do |f|
-  %table{ :class => [ 'admin', 'form', page_class ] }
+  %table.form.sites
     %tr
       %td
         = f.label :name, 'Name in Url'

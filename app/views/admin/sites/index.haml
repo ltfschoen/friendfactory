@@ -1,6 +1,7 @@
 #frame
   .container
-    %table{ :class => [ 'admin', page_class ] }
+    %h1 Sites
+    %table.sites.index
       %thead
         %tr
           %th Site
@@ -10,16 +11,18 @@
           %th.launch Coming Soon
           %th.invite_only Invitation Only
           %th.state State
+          %th &nbsp;
       %tbody
         - @sites.each do |site|
           %tr
-            %td= link_to(site.name, edit_admin_site_path(site))
-            %td= link_to(site.display_name, edit_admin_site_path(site))
-            %td= link_to(site.analytics_domain_name || '', edit_admin_site_path(site))
-            %td= link_to(site.analytics_account_number || '', edit_admin_site_path(site))
+            %td= site.name
+            %td= site.display_name
+            %td= site.analytics_domain_name
+            %td= site.analytics_account_number
             %td.launch= check_box_tag('site[launch]', '0', site.launch, :remote => true)
             %td.invite_only= check_box_tag('site[invite_only]', '0', site.invite_only, :remote => true)
             %td.state OK
+            %td.actions= link_to 'Edit', edit_admin_site_path(site)
     .button-bar.footer
       - if flash[:notice].present?
         %span.flash.notice= flash[:notice]

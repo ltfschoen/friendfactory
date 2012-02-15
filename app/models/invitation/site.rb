@@ -2,6 +2,7 @@ class Invitation::Site < Invitation::Base
 
   attr_accessible :code
   validates_presence_of :code
+  validates_uniqueness_of :code
 
   state_machine do
     event :accept do
