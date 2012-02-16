@@ -14,6 +14,8 @@ class Admin::Invitation::SitesController < ApplicationController
   layout 'admin'
 
   def index
+    params[:sort] ||= 'created_at'
+    params[:direction] ||= 'desc'
     respond_to do |format|
       format.html
     end
@@ -58,7 +60,14 @@ class Admin::Invitation::SitesController < ApplicationController
   end
 
   def invitations
-    site.invitations.type(:site)
+    sort_fields = params[:sort].split('.').map{ |field| "`#{field}`" }.join('.')
+    site.invitations.
+        select('`invitations`.*, count(`invitation_confirmations`.`id`) AS confirmations_count').
+        type(:site).
+        joins(:user => :persona).
+        joins('LEFT OUTER JOIN `invitation_confirmations` ON `invitations`.`id` = `invitation_confirmations`.`invitation_id`').
+        group('`invitations`.`id`').
+        order("#{sort_fields} #{params[:direction]}")
   end
 
   def invitation

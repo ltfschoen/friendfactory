@@ -55,7 +55,8 @@
         - if site.present?
           %li= link_to 'Configuration', edit_admin_site_path(site)
           %li= link_to 'Users', admin_site_users_path(site)
-          %li= link_to 'Sign Up Codes', admin_site_invitation_sites_path(site)
+          - if site.invite_only?
+            %li= link_to 'Sign Up Codes', admin_site_invitation_sites_path(site)
 
   = compatibility_tag
   = yield
