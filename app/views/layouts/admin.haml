@@ -35,6 +35,7 @@
       'jquery_ujs', |
       'application', |
       'layouts/shared/compatibility', |
+      'layouts/shared/sidebar', |
       'layouts/admin', |
     :cache => 'cache/admin'
 
@@ -48,7 +49,11 @@
 %body
   #sidebar
     #head= site_logo_image_tag(site)
-    = render_sidebar_userspace
+    .block.userspace
+      .portrait
+        = thimble_link_to_profile(current_user)
+      %span.username
+        = personages_select_tag(current_user)
     .block.navspace
       %ul
         %li= link_to 'Sites', admin_sites_path
