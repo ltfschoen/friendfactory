@@ -28,9 +28,9 @@
 	opacity: 1;
 }
 
-body.gid_admin .post:hover .remove,
-.ie8 body.gid_admin .post:hover .remove {
+body.gid_admin .post:hover .remove {
 	visibility: visible;
+	opacity: 1;
 }
 
 .post .clear .comments a,

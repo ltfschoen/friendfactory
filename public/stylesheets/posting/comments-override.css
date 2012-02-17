@@ -72,6 +72,11 @@
 	opacity: 1;
 }
 
+body.gid_admin .comment_box:hover .remove {
+	visibility: visible;
+	opacity: 1;
+}
+
 .ie8 .comment_box form {
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
 }
