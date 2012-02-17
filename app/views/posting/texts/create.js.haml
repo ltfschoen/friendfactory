@@ -1,15 +1,17 @@
 - if @posting.present? && @posting.valid?
   :plain
     var
-      $posting = $("#{escape_javascript(render_posting(@posting))}"),
-      $nav = $('li.current', 'ul.nav'),
-      $form = $($('a', $nav).attr('rel')),
-      $firstPosting = $('.post_frame').filter(':first');
+      $posting = $("#{escape_javascript(render_posting(@posting))}");
+      // $nav = $('li.current', 'ul.nav'),
+      // $form = $($('a', $nav).attr('rel')),
+      // $firstPosting = $('.post_frame').filter(':first');
 
-    $nav.removeClass('current');
-    $form.hide()[0].reset();
-    $firstPosting.before($posting);
-    $.initPost($posting);
+    $.navOK($posting);
+    // $nav.removeClass('current');
+
+    // $form.hide()[0].reset();
+    // $firstPosting.before($posting);
+    // $.initPost($posting);
     
 - else
   :plain

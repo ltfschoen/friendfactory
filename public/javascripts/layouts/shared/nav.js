@@ -1,5 +1,36 @@
 (function($) {
 
+	$.navOK = function ($frame) {
+	    var
+			$nav = $('li.current', 'ul.nav'),
+			$form = $($('a', $nav).attr('rel')),
+			$firstPosting = $('.post_frame').filter(':first');
+
+		$nav.removeClass('current');
+
+		$form.fadeTo('fast', 0.0, function() {
+			$form.slideUp('fast', 'linear', function () {
+				$frame
+					.css({ opacity: 0.0 })
+					.hide()
+					.insertBefore($firstPosting)
+					.delay(600)
+					.slideDown(function () {
+						var
+							$post = $frame.find('.post'),
+							height = $post.height() + 20,
+							limit = Math.floor(height/50);
+
+						$frame
+							.height(height)
+							.data('limit', limit)
+							.fadeTo('fast', 1.0)
+							.find('a.remove[rel]').unpublishOverlay();
+					});
+			});
+		});
+	};
+
 	$.fn.navCancel = function () {
 		return this.each(function () {
 			$(this).click(function (event) {
