@@ -9,3 +9,7 @@
 .ie8 .new_post.status textarea {
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
 }
+
+.ie .status textarea {
+	overflow: hidden;
+}
