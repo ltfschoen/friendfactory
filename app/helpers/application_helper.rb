@@ -75,7 +75,7 @@ module ApplicationHelper
 
   def uid(id = nil)
     id = current_user.id if id.nil? && current_user.present?
-    { :class=> User.uid(id) }
+    { :class=> Personage.uid(id) }
   end
 
   def gid

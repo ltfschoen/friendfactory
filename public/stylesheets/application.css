@@ -33,14 +33,6 @@ a:focus {
 	color: darkred !important;
 }
 
-body.gid-admin .post:hover .remove {
-	opacity: 1;
-}
-
-.ie8 body.gid-admin .post:hover .remove {
-	visibility: visible;
-}
-
 .clear {
 	float: left;
 }

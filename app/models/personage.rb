@@ -14,7 +14,6 @@ class Personage < ActiveRecord::Base
       :site,
       :email,
       :admin?,
-      :uid,
       :gid,
       :emailable?,
       :emailable=,
@@ -111,6 +110,14 @@ class Personage < ActiveRecord::Base
       limit(limit).
       order('`waves`.`updated_at` DESC')
   }
+
+  def self.uid(id)
+    "uid_#{id}" if id
+  end
+
+  def uid
+    Personage.uid(id)
+  end
 
   ### Persona
 

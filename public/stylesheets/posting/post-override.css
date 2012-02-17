@@ -9,30 +9,27 @@
 	background: transparent;
 	text-decoration: none;
 	display: block;
-	opacity: 0;
-/*	-webkit-transition: opacity 0.2s linear;
-	-moz-transition: opacity 0.2s linear;
-	-o-transition: opacity 0.2s linear;
-	transition: opacity 0.2s linear;*/
-}
-
-.ie8 .post .remove {
 	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.1s linear;
+	-moz-transition: opacity 0.1s linear;
+	-ms-transition: opacity 0.1s linear;
+	-o-transition: opacity 0.1s linear;
+	transition: opacity 0.1s linear;
 }
 
 .post:hover .remove {
+	visibility: hidden;
 	opacity: 0;
 }
 
+.ie8 .post .remove,
 .ie8 .post:hover .remove {
-	visibility: hidden;
-}
-
-body.admin .post:hover .remove {
 	opacity: 1;
 }
 
-.ie8 body.admin .post:hover .remove {
+body.gid_admin .post:hover .remove,
+.ie8 body.gid_admin .post:hover .remove {
 	visibility: visible;
 }
 

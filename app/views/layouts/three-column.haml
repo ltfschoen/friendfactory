@@ -60,8 +60,11 @@
   = stylesheet_link_tag "#{current_site.name}/three-column", :media => 'screen'
 
   :css
-    body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { opacity: 1; }
-    .ie8 body.#{current_user.uid} .post.#{current_user.uid}:hover .remove { visibility: visible; }
+    body.#{current_user.uid} .post.#{current_user.uid}:hover a.remove,
+    body.#{current_user.uid} .comment_box.#{current_user.uid}:hover a.remove { visibility: visible; opacity: 1; }
+
+    .ie8 body.#{current_user.uid} .post.#{current_user.uid}:hover a.remove,
+    .ie8 body.#{current_user.uid} .comment_box.#{current_user.uid}:hover a.remove { visibility: visible; }
 
   - if Rails.env.development?
     = stylesheet_link_tag 'development'

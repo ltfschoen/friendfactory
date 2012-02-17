@@ -162,16 +162,8 @@ class User < ActiveRecord::Base
     update_attribute(:emailable, false)
   end
 
-  def self.uid(id)
-    "uid-#{id}" if id
-  end
-
-  def uid
-    User.uid(id)
-  end
-
   def gid
-    self.admin? ? 'gid-admin' : 'gid-user'
+    self.admin? ? 'gid_admin' : 'gid_user'
   end
 
 end

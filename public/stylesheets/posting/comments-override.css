@@ -47,16 +47,29 @@
 	font-weight: bold;
 	background: transparent;
 	cursor: pointer;
-	display: none;
+	display: block;
 	text-decoration: none;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.1s linear;
+	-moz-transition: opacity 0.1s linear;
+	-ms-transition: opacity 0.1s linear;
+	-o-transition: opacity 0.1s linear;
+	transition: opacity 0.1s linear;
+}
+
+.comment_box:hover .remove {
+	visibility: hidden;
+	opacity: 0;
 }
 
 .ie .comment_box .remove {
 	top: 12px;
 }
 
-.comment_box:hover .remove {
-  display: inline-block;
+.ie8 .comment_box .remove,
+.ie8 .comment_box:hover .remove {
+	opacity: 1;
 }
 
 .ie8 .comment_box form {

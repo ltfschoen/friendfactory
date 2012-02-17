@@ -1,6 +1,6 @@
 - user = post_it.user
 .post_frame
-  .posting.post.status[post_it]{uid(post_it[:user_id])}
+  .posting.post.status[post_it]{ uid(post_it[:user_id]) }
     = link_to_unpublish(post_it)
     .portrait= thimble_link_to_profile(user, :remote => true)
     .clear
