@@ -190,48 +190,6 @@ jQuery(function($) {
 		return false;
 	});
 
-
-	// Nav
-	$('.new_post_frame')
-		.hide()
-		.find('input.cancel')
-			.navCancel()
-		.end()
-		.bind('ajax:before', function() {
-			$(this).find('.spinner').css({ visibility: 'visible' });
-			return true;
-		})
-		.bind('ajax:complete', function() {
-			$(this).find('.spinner').css({ visibility: 'hidden' });
-			return true;
-		});
-
-
-	$('a[rel]', 'ul.nav')
-		.bounceable()
-		.shakeable()
-		.click(function(event) {
-			var $this = $(this),
-				$newForm = $($this.attr('rel'));
-				
-			event.preventDefault();	
-			if (!$this.closest('li').siblings('li').andSelf().hasClass('current')) {
-				$this.trigger('bounce')
-					.closest('li')
-					.addClass('current');
-
-				$newForm
-					.css({ opacity: 0.0, visibility: 'hidden' })
-					.delay(1200)
-					.slideDown(function() {
-						$newForm
-							.css({ visibility: 'visible' })
-							.fadeTo('fast', 1.0);
-					});
-			} else {
-				$this.trigger('shake');
-			}	
-		});
 });
 
 
