@@ -49,7 +49,7 @@ class FriendshipsController < ApplicationController
 
   def deliver_friendship_email(poke)
     if poke.friend.emailable?
-      FriendshipsMailer.new_poke_mail(poke, current_site, request.host, request.port).deliver
+      FriendshipsMailer.delay.new_poke_mail(poke, current_site, request.host, request.port)
     end
   end
 

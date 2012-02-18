@@ -36,6 +36,8 @@ gem 'will_paginate', '~> 3.0.2'
 gem 'whenever', :require => false
 gem 'embedly'
 gem 'user_agent'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 # gem 'responsalizr'
 # gem 'exifr'

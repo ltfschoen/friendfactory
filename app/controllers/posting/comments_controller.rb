@@ -48,7 +48,7 @@ class Posting::CommentsController < ApplicationController
   def broadcast_posting(comment, parent)
     recipient = parent.user
     if (recipient.offline? && recipient.emailable?) || Rails.env.development?
-      PostingsMailer.new_comment_notification(comment, recipient, current_site, request.host, request.port).deliver
+      PostingsMailer.delay.new_comment_notification(comment, recipient, current_site, request.host, request.port)
     end
   end
 
