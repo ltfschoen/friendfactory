@@ -1,6 +1,6 @@
 (function($) {
 
-	$.initPost = function(frame) {
+	$.initPost = function (frame) {
 		var $this = $(frame),
 			$post = $this.find('.post'),
 			height = $post.height() + 20,
@@ -19,7 +19,7 @@
 			idMap = {},
 			fetchables = {};
 
-		$.each(frames, function() {
+		$.each(frames, function () {
 			var $this = $(this),
 				$post = $this.find('.post'),
 				$reaction = $this.find('.reaction'),
@@ -33,7 +33,7 @@
 			}
 		});
 
-		$.getJSON(url, { id: fetchables }, function(data) {
+		$.getJSON(url, { id: fetchables }, function (data) {
 			$.each(data, function() {
 				var domId = idMap[this.id],
 					$reaction,
@@ -74,7 +74,7 @@
 		$reaction
 			.css({ opacity: 0.0 })
 			.html(html)
-			.fadeTo('slow', 1.0, function() {
+			.fadeTo('slow', 1.0, function () {
 				$('a.remove[rel="#unpublish_overlay"]', $reaction).unpublishOverlay();
 				if (callback !== undefined) callback();
 			});
@@ -111,16 +111,13 @@ jQuery(function($) {
 	// Initialize rollcall headshots
 	$('div.headshot').headshot();
 
-	// Initialize forms
-	$('input[type="text"], textarea', 'form').placeholder();
-
 	// Comments
 	$('.comments a, a.comments')
-		.live('ajax:beforeSend', function() {
+		.live('ajax:beforeSend', function () {
 			var $frame = $(this).closest('.post_frame');
 
 			if ($frame.hasClass('active')) {
-				$.unsetActiveFrame(function() {
+				$.unsetActiveFrame(function () {
 					setWideFrameBorders();
 					showAllReactions();
 				});
@@ -130,27 +127,26 @@ jQuery(function($) {
 			return true;
 		})
 
-		.live('ajax:success', function(xhr, html) {
+		.live('ajax:success', function (xhr, html) {
 			var $this = $(this),
 				$html = $(html),
 				$frame = $this.closest('.post_frame');
 
 			$html
 				.find('.headshot').headshot().end()
+				.find('input[type="text"], textarea').placeholder().end()
 				.filter('.comment_box:first')
 				.shakeable();
 
-			$.hideAllReactionsExcept($frame, $html, function() {
-				// $(this).find('.comment_box:first textarea').focus();
-			});
+			$.hideAllReactionsExcept($frame, $html, function () {});
 		});
 
 
 	// Reaction cancel
-	$('.reaction').live('click', function(event) {
+	$('.reaction').live('click', function (event) {
 		if (event.target.value === 'Cancel') {
 			var $frame = $(this).closest('.post_frame');
-			$.unsetActiveFrame(function() {
+			$.unsetActiveFrame(function () {
 				setWideFrameBorders();
 				showAllReactions();
 			});
@@ -161,7 +157,7 @@ jQuery(function($) {
 
 	// Nested Comments
 	$('.comment_box .reply a')
-		.live('ajax:success', function(xhr, form) {
+		.live('ajax:success', function (xhr, form) {
 			var $form = $(form);
 
 			$form.shakeable();
@@ -171,18 +167,21 @@ jQuery(function($) {
 				.css({ opacity: 0.0 })
 				.insertAfter($(this)
 				.closest('.comment_box'))
-					.slideDown('fast', function() {
-						$form.fadeTo('fast', 1.0, function() {
-							$form.find('textarea').focus();
+					.slideDown('fast', function () {
+						$form.fadeTo('fast', 1.0, function () {
+							$form
+								.find('input[type="text"], textarea').placeholder().end()
+								.find('textarea').focus();
 						});
 					});
 		});
 
-	$('.comment_box.nested input.cancel').live('click', function() {
+	$('.comment_box.nested input.cancel').live('click', function () {
 		var $commentBox = $(this).closest('.comment_box'),
 			$prevCommentBox = $commentBox.prev('.comment_box');
-		$commentBox.fadeTo('fast', 0.0, function() {
-			$(this).slideUp('fast', function() {
+
+		$commentBox.fadeTo('fast', 0.0, function () {
+			$(this).slideUp('fast', function () {
 				$(this).remove();
 				$prevCommentBox.find('.reply a').show();
 			});
@@ -193,7 +192,7 @@ jQuery(function($) {
 });
 
 
-jQuery(window).load(function() {
+jQuery(window).load(function () {
 
 	var $frames = $('.post_frame'),
 		$sidebar = $('#sidebar'),
@@ -212,11 +211,11 @@ jQuery(window).load(function() {
 		$sidebar.addClass('small-screen');
 	}
 
-	$frames.each(function() {
+	$frames.each(function () {
 		$.initPost(this);
 	});
 
-	$.getMiniComments($frames, function() {
+	$.getMiniComments($frames, function () {
 		$frames.find('.reaction').fadeTo('fast', 1.0);
 		// $.waypoints('refresh');
 	});

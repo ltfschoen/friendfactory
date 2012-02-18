@@ -8,5 +8,5 @@
         %span.reply_to
           - if nested
             In response to #{posting.user.handle}
-        = f.submit 'OK'
+        = f.submit 'OK', :'data-disable-with' => 'OK'
         = f.cancel 'Cancel'

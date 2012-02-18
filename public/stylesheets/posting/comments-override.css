@@ -26,9 +26,24 @@
   margin: 5px;
 }
 
+.comment_box form input[type='text'],
+.comment_box form textarea {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+}
+
 .comment_box form .foot input[type="submit"], .comment_box form .foot input[type="button"] {
 	height: inherit;
 	padding: 3px 8px 4px 8px;
+}
+
+.comment_box form .foot input[type="submit"]:disabled,
+.comment_box form .foot input[type="submit"]:disabled:active {
+	border: 1px solid #333;
+	background: gray !important;
+	opacity: 0.6;
+	top: 0;
 }
 
 .comment_box .remove {
@@ -79,4 +94,8 @@ body.gid_admin .comment_box:hover .remove {
 
 .ie8 .comment_box form {
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
+.ie .comment_box textarea {
+	overflow: hidden;
 }

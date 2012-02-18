@@ -39,7 +39,7 @@
 				event.preventDefault();
 				$('li.current', 'ul.nav').removeClass('current');
 				$form.fadeTo('fast', 0.0, function () {
-					$form[0].reset;
+					$form[0].reset();
 					// $form.trigger('reset');
 					$('input[type="text"], textarea', $form).val('').trigger('blur.placeholder');
 					$form.slideUp(900, 'easeOutBounce');
@@ -56,6 +56,10 @@ jQuery(function($) {
 	$('form.new_post_frame')
 		.hide()
 
+		.find('input[type="text"], textarea')
+			.placeholder()
+		.end()
+
 		.find('input.cancel')
 			.navCancel()
 		.end()
@@ -67,9 +71,9 @@ jQuery(function($) {
 
 		.bind('ajax:success', function () {
 			var $this = $(this);
-			$this[0].reset;
+			$this[0].reset();
 			$('input[type="text"], textarea', $this).val('').trigger('blur.placeholder');
-		})		
+		})
 
 		.bind('ajax:complete', function () {
 			$(this).find('.spinner').css({ visibility: 'hidden' });
@@ -83,8 +87,8 @@ jQuery(function($) {
 		.click(function(event) {
 			var $this = $(this),
 				$newForm = $($this.attr('rel'));
-				
-			event.preventDefault();	
+
+			event.preventDefault();
 			if (!$this.closest('li').siblings('li').andSelf().hasClass('current')) {
 				$this.trigger('bounce')
 					.closest('li')
