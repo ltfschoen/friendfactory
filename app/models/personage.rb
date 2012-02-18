@@ -55,7 +55,7 @@ class Personage < ActiveRecord::Base
     end
   end
 
-  belongs_to :user
+  belongs_to :user, :autosave => true
 
   alias :user_record :user
 
