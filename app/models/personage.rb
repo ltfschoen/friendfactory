@@ -61,8 +61,6 @@ class Personage < ActiveRecord::Base
 
   belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
 
-  belongs_to :profile, :class_name => 'Wave::Base'
-
   scope :site, lambda { |site|
       joins(:user).
       where(:users => { :site_id => site.id })
@@ -145,25 +143,27 @@ class Personage < ActiveRecord::Base
 
   ### Profile
 
-  before_create :initialize_profile
+  belongs_to :profile, :class_name => 'Wave::Base', :autosave => true
 
-  after_create  :initialize_profile_user_id
+  alias_method :profile_without_initialized_user=, :profile=
+
+  def profile=(profile)
+    profile.user = self if profile
+    self.profile_without_initialized_user = profile
+  end
+
+  after_create :create_profile_wave
 
   private
 
-  def initialize_profile
+  def create_profile_wave
     if persona && profile.nil?
-      self.profile = persona.default_profile_type.constantize.create do |wave|
+      persona.default_profile_type.constantize.new do |wave|
+        self.profile = wave
         wave.sites.push(site)
-        wave.state = :published
+        wave.publish
       end
-    end
-  end
-
-  def initialize_profile_user_id
-    if profile && profile[:user_id].nil?
-      profile[:user_id] = self.id
-      profile.save
+      save
     end
   end
 
