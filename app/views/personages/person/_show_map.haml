@@ -1,0 +1,7 @@
+.headshot-container
+  .headshot
+    .face
+      .pane
+        = render :partial => File.join('personages', 'person', 'map'), :locals => { :persona => personage.persona }
+      .button-bar
+        = link_to 'Edit', edit_profile_path(personage), :class => 'button edit_profile'

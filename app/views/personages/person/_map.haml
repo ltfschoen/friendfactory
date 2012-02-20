@@ -1,0 +1,7 @@
+%table.biometrics.map
+  %tr
+    %td.label.location Location
+    %td.detail= persona.location
+  %tr
+    %td{ :colspan => '2' }
+      = image_tag persona.map_url, :alt => persona.address, :title => persona.address, :class => 'place_persona_map'

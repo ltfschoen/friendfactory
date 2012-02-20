@@ -27,8 +27,9 @@ module Geolocation
 
   alias_method_chain :city, :locality
 
-  def map_url
-    "http://maps.google.com/maps/api/staticmap?zoom=8&size=180x156&markers=color:red|size:mid|#{lat},#{lng}&sensor=false"
+  def map_url(opts = {})
+    size = opts.delete(:size) || '180x180'
+    "http://maps.google.com/maps/api/staticmap?zoom=8&size=#{size}&markers=color:red|size:mid|#{lat},#{lng}&sensor=false"
   end
 
   def link_url

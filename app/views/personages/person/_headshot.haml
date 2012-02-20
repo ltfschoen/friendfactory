@@ -13,6 +13,7 @@
           %li= link_to 'Profile', wave_profile_path(personage[:profile_id]), :class => 'icon profile'
         %ul.buddy-bar.primary
           %li= link_to 'Biometrics', biometrics_profile_path(personage[:id]), :class => 'flip icon mini-profile', :'data-pane-name' => 'biometrics'
+          %li= link_to 'Location', map_profile_path(personage[:id]), :class => 'flip icon location', :'data-pane-name' => 'location', :title => 'Location'
           %li= link_to 'Photos', photos_profile_path(personage[:id]), :class => 'flip icon photos', :'data-pane-name' => 'photos'
           %li.invitations= link_to 'Invitations', invitations_profile_path(personage[:id]), :class => 'flip icon invitations', :'data-pane-name' => 'invitations'
           - if current_user && (current_user[:id] != personage[:id])
@@ -28,6 +29,7 @@
           .portrait= link_to thimble_image_tag(personage, :size => '18x18'), wave_profile_path(personage[:profile_id]), :class => 'flip'
           %ul.buddy-bar.primary
             %li= link_to 'Biometrics', biometrics_profile_path(personage[:id]), :class => 'swipe icon mini-profile', :'data-pane-name' => 'biometrics'
+            %li= link_to 'Location', map_profile_path(personage[:id]), :class => 'swipe icon location', :'data-pane-name' => 'location', :title => 'Location'
             %li= link_to 'Photos', photos_profile_path(personage[:id]), :class => 'swipe icon photos', :'data-pane-name' => 'photos'
             %li.invitations= link_to 'Invitations', invitations_profile_path(personage[:id]), :class => 'swipe icon invitations', :'data-pane-name' => 'invitations'
             - if current_user && (current_user.id != personage[:id])

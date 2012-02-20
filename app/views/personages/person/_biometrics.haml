@@ -8,8 +8,5 @@
   %tr
     %td.label Birthday
     %td.detail= persona.dob.try(:strftime, '%B %e') || '&nbsp;'.html_safe
-  %tr
-    %td.label Location
-    %td.detail= persona.location
   - current_site.biometric_domains.each do |biometric_domain|
     = render :partial => File.join('personages', 'person', 'domain'), :object => biometric_domain, :locals => { :persona => persona }

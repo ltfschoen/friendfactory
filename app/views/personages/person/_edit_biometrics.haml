@@ -14,9 +14,6 @@
               %tr
                 %td.label Birthday
                 %td.detail= persona_form.date_select :dob, { :order => [ :month, :day ], :discard_year => true, :use_short_month => true, :include_blank => true }
-              %tr
-                %td.label Location
-                %td.detail= persona_form.text_field :location, :placeholder => 'town or city, state', :maxlength => 20
               - current_site.biometric_domains.each_with_index do |domain, idx|
                 %tr{ :class => domain.name }
                   %td.label

@@ -167,23 +167,21 @@
 }
 
 .headshot a.icon {
-	display: block;
+	display: inline-block;
 	text-decoration: none;
 	text-indent: -5000px;
 	margin-left: 6px;
-	width: 18px;
+	width: 22px;
 	height: 20px;
 	background: url(/images/friskyfactory/buddy-bar.png) top left no-repeat;	
 }
 
-.headshot ul.buddy-bar.secondary a {
-	margin-left: 0px;
-	margin-right: 6px;
+.headshot ul.buddy-bar li:first-child a {
+	margin-left: 0;
 }
 
 .headshot a.profile {
-	width: 22px;
-	background-position: -300px -1px;
+	background-position: -300px -2px;
 }
 
 .headshot a.comment {
@@ -208,36 +206,33 @@
 }
 
 .headshot a.chat {
-	width: 24px;
 	background-position: -92px -1px;
 }
 
 .headshot a.conversation {
-	width: 26px;
 	background-position: -120px -1px;
 }
 
 .headshot a.photos {
-	width: 24px;
 	background-position: -150px -1px;
 }
 
 .headshot a.mini-profile {
-	width: 22px;
 	background-position: -178px -1px;
 }
 
 .headshot a.headshot {
-	width: 22px;
 	background-position: -200px -1px;
 }
 
 .headshot a.invitations {
 	background-position: -276px -2px;
-	width: 20px;
 }
 
 .headshot a.pokes {
+	width: 18px;
+	margin-right: 2px;
+	margin-left: 4px;
 	background-position: -346px -2px;
 }
 
@@ -246,7 +241,6 @@
 }
 
 .headshot a.location {
-	width: 24px;
 	background-position: -220px -1px;
 }
 
@@ -289,9 +283,13 @@
 	padding-right: 2px;
 }
 
+.headshot table.biometrics.map td.label.location {
+	width: 50px;
+}
+
 .headshot table.biometrics td.detail {
 	color: #666;
-	border-bottom: 1px dotted #333;
+	border-bottom: 1px solid #EEE;
 	text-shadow: 0 1px 0 #fff;
 }
 

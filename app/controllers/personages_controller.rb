@@ -146,6 +146,16 @@ class PersonagesController < ApplicationController
     end
   end
 
+  def map
+    respond_to do |format|
+      if personage
+        format.html { render :layout => false }
+      else
+        format.html { render :nothing => true }
+      end
+    end
+  end
+
   private
 
   def personage(opts = {})

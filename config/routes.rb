@@ -83,6 +83,7 @@ Friskyfactory::Application.routes.draw do
       put  :unsubscribe
       put  :switch
       get  :biometrics
+      get  :map
       get  :conversation
       get  :invitations
       get  :photos

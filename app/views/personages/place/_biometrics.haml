@@ -5,4 +5,4 @@
   %tr
     %td.label Location
     %td.detail= persona.location
-= image_tag persona.map_url, :alt => persona.address, :title => persona.address, :class => 'place_persona_map'
+= image_tag persona.map_url(:size => '180x156'), :alt => persona.address, :title => persona.address, :class => 'place_persona_map'
