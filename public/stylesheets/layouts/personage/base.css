@@ -52,7 +52,7 @@ h1 {
 	text-align: center;
 	margin: 6px auto;
 	padding-bottom: 6px;
-	border-bottom: 1px dashed #CCC
+	border-bottom: 1px solid #EEE
 }
 
 p.instructions {

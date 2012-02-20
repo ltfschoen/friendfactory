@@ -11,12 +11,13 @@
   = stylesheet_link_tag |
       'layouts/reset', |
       'application', |
-      'layouts/personage/base', |
-      'layouts/shared/sidebar', |
-      'layouts/shared/sidebar-override', |
       'posting/headshot', |
       'posting/portrait', |
       'posting/portrait-override', |
+      'layouts/personage/base', |
+      'layouts/shared/sidebar', |
+      'layouts/shared/sidebar-override', |
+      'layouts/shared/unpublish-overlay', |
     :media => 'screen', |
     :cache => 'layouts/personage/cache'
 
@@ -25,18 +26,22 @@
   - if Rails.env.development?
     = stylesheet_link_tag 'development'
     = javascript_include_tag 'jquery'
+    = javascript_include_tag 'jquery.tools-1.2.6.tiny.min'
   - else
     = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
 
   = javascript_include_tag |
       'modernizr', |
+      'jquery.tools-1.2.6.expose.min', |
       'jquery-ui-1.8.16.custom.min', |
       'jquery.tmpl.min', |
       'jquery.fileupload.v4/jquery.fileupload', |
       'jquery.fileupload.v4/jquery.fileupload-ui', |
       'jquery.placeholder.min', |
+      'jquery.unpublish-overlay', |
       'jquery_ujs', |
-      'layouts/shared/sidebar', |      
+      'layouts/shared/sidebar', |
       'layouts/personage', |
     :cache => 'layouts/personage.cached'
 

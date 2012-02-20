@@ -7,6 +7,9 @@ jQuery(function($) {
 		return true;
 	});
 
+	$('button[rel="#disable_personage_overlay"]').disablePersonageOverlay();
+	$('button[rel="#delete_profile_overlay"]').deleteProfileOverlay();
+
 	$('form#new_posting_avatar')
 		.fileUploadUI({
 			dropEffect: null,

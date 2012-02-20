@@ -55,7 +55,7 @@
       'layouts/three-column/rollcall', |
       'layouts/three-column/floating', |
     :media => 'screen', |
-    :cache => 'cache/three-column' #, :concat => true
+    :cache => 'cache/three-column', :concat => true
 
   = stylesheet_link_tag "#{current_site.name}/three-column", :media => 'screen'
 
@@ -78,6 +78,7 @@
 
   = javascript_include_tag |
       'modernizr', |
+      'jquery.tools-1.2.6.expose.min', |
       'jquery-ui-1.8.16.custom.min', |
       'jquery.tmpl.min', |
       'jquery.flip', |

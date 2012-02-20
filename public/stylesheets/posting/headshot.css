@@ -514,7 +514,18 @@
 }
 
 .headshot table.preferences td {
-	vertical-align: middle;
-	line-height: 2.0em;
+	vertical-align: top;
 	text-align: left;
+	padding: 2px 2px;
+}
+
+.headshot table.preferences .instructions {
+	font-size: 11px;
+	margin: 2px 0;
+}
+
+.headshot table.preferences button.delete {
+	width: 9em;
+	display: block;
+	margin: 0 auto;
 }

@@ -95,13 +95,15 @@ Friskyfactory::Application.routes.draw do
     end
   end
 
-  resource :profile, :only => [ :show ],
+  resource :profile, :only => [ :show, :destroy ],
       :controller => 'personages',
       :as => 'current_profile'
 
   get ':persona_type' => 'personages#index',
       :constraints => { :persona_type => /ambassadors|communities|places/ },
       :as => 'persona_type_profiles'
+
+  resource :user, :only => [ :destroy ], :as => 'current_user_record'
 
   # Geocode
   # resources :locations, :only => [] do

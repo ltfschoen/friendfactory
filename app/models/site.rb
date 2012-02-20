@@ -79,6 +79,16 @@ class Site < ActiveRecord::Base
     self[:mailer].present? ? self[:mailer] : DefaultMailer
   end
 
+  def domain_name
+    if analytics_domain_name
+      analytics_domain_name.gsub(/^\.+/, '')
+    end
+  end
+
+  def help_email
+    "help@#{domain_name}"
+  end
+
   def clone
     super.tap do |clone|
       clone.name, clone.display_name = nil, nil

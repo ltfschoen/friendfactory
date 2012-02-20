@@ -4,10 +4,11 @@ class PersonagesController < ApplicationController
 
   before_filter :require_user
 
-  helper_method :invitation_wave
-  helper_method :personage
-  helper_method :paged_users
-  helper_method :page_title
+  helper_method \
+      :personage,
+      :invitation_wave,
+      :paged_users,
+      :page_title
 
   layout 'personage'
 
@@ -87,6 +88,13 @@ class PersonagesController < ApplicationController
       format.js { head :ok }
     end
   end
+  
+  # def destroy
+  #   # current_user.disable!
+  #   respond_to do |format|
+  #     format.html { redirect_to welcome_url }
+  #   end
+  # end
 
   ### Panes
 
