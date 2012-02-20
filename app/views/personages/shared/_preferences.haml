@@ -1,9 +1,33 @@
+- unless current_user.admin?
+  #delete_profile_overlay.overlay
+    %h1 Delete Profile?
+    %p Your profile will be disabled and you will be immediately logged out. You will no longer be able to log into #{current_site.display_name}. Material you have uploaded will be removed within an hour.
+    %p If you'd like again to join #{current_site.display_name}, let us know by sending an email to #{mail_to(current_site.help_email)}.
+    = form_tag current_user_record_path, :method => :delete do
+      %button{ :class => 'close ok', :type => 'submit' } OK
+    %button{ :class => 'close cancel', :type => 'button' } Cancel
 .headshot-container
   .headshot
     .face
       %h1 Preferences
       %table.preferences
         %tr
+          %td= check_box_tag 'user[emailable]', 1, personage.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-url' => unsubscribe_profile_path(personage)
           %td
-            = check_box_tag 'user[emailable]', 1, personage.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-url' => unsubscribe_profile_path(personage)
             = label_tag :user_emailable, 'Subscribe to emails'
+            .instructions Emails are sent for cocktails, new messages and new comments.
+        %tr
+          - disabled = current_site.home_wave == current_user.profile
+          - if current_user.admin?
+            %td
+              = check_box_tag 'personage[state]', 1, personage.enabled?, :disabled => disabled, :'data-remote' => true, :'data-method' => :put, :'data-url' => enable_profile_path(current_user), :'data-type' => :json
+            %td
+              = label_tag :personage_state, 'Enabled'
+              .instructions
+                - if disabled
+                  Persona is site's home wave. Select another wave as the home wave to disable this persona.
+                - else
+                  When disabled, persona is removed from sidebar. Its waves and postings remain published.
+          -else
+            - if !disabled
+              %td{ :colspan => '2' }= button_tag 'Delete Account', :class => 'delete', :rel => '#delete_profile_overlay'
