@@ -52,6 +52,7 @@ class PersonagesController < ApplicationController
       if personage.update_attributes(params[:personage])
         personage.enable! unless personage.enabled?
         format.html { redirect_to profile_path }
+        format.json { render :json => { :ok => true }}
       else
         format.html { render :action => 'edit' }
       end
@@ -89,12 +90,17 @@ class PersonagesController < ApplicationController
     end
   end
   
-  # def destroy
-  #   # current_user.disable!
-  #   respond_to do |format|
-  #     format.html { redirect_to welcome_url }
-  #   end
-  # end
+  def enable
+    respond_to do |format|
+      begin
+        personage = current_user_record.personages.find(params[:id])
+        personage.send(params[:personage][:state].to_sym)
+        format.json { render :json => { :state => personage.current_state }}
+      rescue => exception
+        format.json { render :json => { :state => false, :exception => { :class => exception.class.to_s, :message => exception.message }}}
+      end
+    end
+  end
 
   ### Panes
 

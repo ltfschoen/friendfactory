@@ -22,13 +22,18 @@ class Wave::Base < ActiveRecord::Base
   state_machine do
     state :published
     state :unpublished
+    state :disabled
 
     event :publish do
-      transitions :to => :published, :from => [ :unpublished, :published ]
+      transitions :to => :published, :from => [ :unpublished, :published, :disabled ]
     end
 
     event :unpublish do
       transitions :to => :unpublished, :from => [ :unpublished, :published ]
+    end
+
+    event :disable do
+      transitions :to => :disabled, :from => [ :published ]
     end
   end
 

@@ -7,7 +7,11 @@ jQuery(function($) {
 		return true;
 	});
 
-	$('button[rel="#disable_personage_overlay"]').disablePersonageOverlay();
+	$('input[name="personage[state]"]').bind('ajax:before', function() {
+		$(this).data('params', this.name + '=' + (this.checked ? 'enable!' : 'disable!'));
+		return true;
+	});
+
 	$('button[rel="#delete_profile_overlay"]').deleteProfileOverlay();
 
 	$('form#new_posting_avatar')

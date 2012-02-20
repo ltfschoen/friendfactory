@@ -79,6 +79,7 @@ Friskyfactory::Application.routes.draw do
   resources :profiles, :only => [ :show, :new, :edit, :update ], :controller => 'personages' do
     member do
       post :avatar
+      put  :enable
       put  :unsubscribe
       put  :switch
       get  :biometrics
@@ -95,9 +96,9 @@ Friskyfactory::Application.routes.draw do
     end
   end
 
-  resource :profile, :only => [ :show, :destroy ],
+  resource :profile, :only => [ :show ],
       :controller => 'personages',
-      :as => 'current_profile'
+      :as => 'current_personage'
 
   get ':persona_type' => 'personages#index',
       :constraints => { :persona_type => /ambassadors|communities|places/ },

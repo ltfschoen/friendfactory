@@ -116,15 +116,12 @@ module SidebarHelper
   end
 
   def personages_select_tag(personage)
-    personages = Personage.enabled.where(:user_id => personage[:user_id]).all.sort_by { |p| p.display_name }
-    case
-    when personages.length == 1
-      link_to current_user.handle, current_profile_path
-    when personages.length > 1
-      select_tag 'personage[id]', options_from_collection_for_select(personages, :id, :display_name, current_user.id),
-          :include_blank => false,
+    if current_user.admin?
+      select_tag 'personage[id]', grouped_options_for_select(personages_group_by_current_state(personage), current_user.id),
           :'data-remote' => true,
           :'data-method' => :put
+    else
+      link_to current_user.handle, current_personage_path
     end
   end
 
@@ -147,6 +144,15 @@ module SidebarHelper
 
   def sidebar_rollcall_length(current_length)
     [ current_length / 5 * 5, SidebarRollCallMaximumLength ].min
+  end
+
+  def personages_group_by_current_state(personage)
+    Personage.site(current_site).
+        where(:user_id => personage[:user_id]).
+        sort_by { |p| p.display_name }.
+        group_by(&:current_state).
+        sort { |a, b| b.first <=> a.first }.
+        map { |state, personages| [ state.to_s.titleize, personages.map { |personage| [ personage.display_name, personage.id ] }]}
   end
 
 end

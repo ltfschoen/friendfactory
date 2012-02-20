@@ -44,6 +44,10 @@ class Personage < ActiveRecord::Base
     state :disabled
     state :enabled
 
+    event :disable do
+      transitions :to => :disabled, :from => [ :enabled ]
+    end
+
     event :enable do
       transitions :to => :enabled, :from => [ :disabled ]
     end

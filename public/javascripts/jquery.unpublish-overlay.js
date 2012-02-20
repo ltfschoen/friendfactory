@@ -11,12 +11,20 @@
 			closeSpeed: 300,
 			effect: 'evaporate',
 			mask: { color: '#000', opacity: 0.5 },
+
+			onOK: function (event) {
+				return true;
+			},
+
+			onCancel: function (event) {
+				return false;
+			},
+
 			onClose: function (event) {
-				var url = this.getTrigger().attr('href'),
+				var config = this.getConf(),
 					originalTarget = (event.originalTarget || event.srcElement || event.originalEvent.target),
 					ok = (originalTarget && $(originalTarget).hasClass('ok')) || false;
-				// if (ok) { $.ajax({ type: 'delete', url: url, dataType: 'script' }); }
-				if (ok) { this.getConf().onOK(this); }
+				ok ? config.onOK(this) : config.onCancel(this);
 			}
 		},
 
@@ -32,7 +40,10 @@
 
 			config.fixed || (position.top += $window.scrollTop(), position.left += $window.scrollLeft()),
 			position.position = config.fixed ? "fixed" : "absolute",
-			this.getOverlay().css(position).css({ opacity: 0, display: 'block' }).animate({ marginTop: -50, opacity: 1 }, speed, 'linear', callback);
+			this.getOverlay()
+				.css(position)
+				.css({ marginTop: 0, opacity: 0, display: 'block' })
+				.animate({ marginTop: -50, opacity: 1 }, speed, 'linear', callback);
 		},
 
 		function (callback) {
@@ -41,7 +52,7 @@
 				speed = config.closeSpeed;
 
 			this.getOverlay().animate({ marginTop: -400, opacity: 0 }, speed, 'linear', function () {
-				overlay.css({ opacity: 0, marginTop: 0});
+				overlay.css({ display: 'none' });
 				callback.call();
 			});
 		}
@@ -58,21 +69,10 @@
 		});
 	};
 
-	$.fn.disablePersonageOverlay = function () {
-		return this.each(function() {
-			$(this).overlay(extendDefaultOverlayOptionsWith({
-				onOK: function (overlay) {
-					alert('here');
-				}
-			}));
-		});
-	};
-
 	$.fn.deleteProfileOverlay = function () {
 		return this.each(function() {
 			$(this).overlay(extendDefaultOverlayOptionsWith({
-				onOK: function (overlay) {
-				}
+				// onOK: function (overlay) {}
 			}));
 		});
 	};

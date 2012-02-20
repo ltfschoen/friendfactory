@@ -1,5 +1,6 @@
 .overlay {
 	opacity: 1;
+	margin-top: 0;
 	display: none;
 	width: 400px;
 	border: 6px solid #666;
