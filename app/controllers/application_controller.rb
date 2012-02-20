@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     if current_user_record
-      @current_user = (session[:personage_id] && current_user_record.personages.enabled.find_by_id(session[:personage_id])) || current_user_record.default_personage
+      @current_user = (session[:personage_id] && current_user_record.personages.find_by_id(session[:personage_id])) || current_user_record.default_personage
     end
   end
 
