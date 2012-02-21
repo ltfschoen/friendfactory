@@ -15,7 +15,8 @@
           - if false
             %p{:style => "text-align: center;"}
               %a{:href => ""} View Full Post &rarr;
-        .torn
+        - if false
+          .torn
         = posted_distance_of_time(text)
         = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text))
     .reaction

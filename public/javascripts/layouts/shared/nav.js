@@ -53,11 +53,21 @@
 
 jQuery(function($) {
 
+	var
+		convert = new Showdown('datetimes', 'abbreviations').convert,
+		$preview = $('.new_post.blog.preview .body');
+
 	$('form.new_post_frame')
 		.hide()
 
 		.find('input[type="text"], textarea')
 			.placeholder()
+		.end()
+
+		.find('textarea#posting_text_body')
+			.bind('keyup', function () {
+				$preview.html(convert(this.value));
+			})
 		.end()
 
 		.find('input.cancel')
@@ -79,6 +89,10 @@ jQuery(function($) {
 			$(this).find('.spinner').css({ visibility: 'hidden' });
 			return true;
 		});
+
+	Hashify.editor('posting_text_body', false, function () {
+		$preview.html(convert(this.value));
+	});
 
 	$('a[rel]', 'ul.nav')
 		.bounceable()

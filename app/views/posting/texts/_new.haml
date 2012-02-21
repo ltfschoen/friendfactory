@@ -1,10 +1,14 @@
 = form_for Posting::Text.new, :url => wave_posting_texts_path(wave), :remote => true, :html => { :class => 'new_posting_text new_post_frame' } do |f|
-  = f.resolve resolver  
+  = f.resolve resolver
   .new_post.blog
     .body
-      = f.text_field :subject, :placeholder => 'Blog Title'
-      = f.text_area :body, :placeholder => "What's on your mind?"
+      =# f.text_field :subject, :placeholder => 'Blog Title'
+      = f.text_area :body, :placeholder => "Write a blog. What's on your mind?"
     .foot
       = f.sticky_until if current_user.admin?
       = f.submit 'Post', :'data-disable-with' => 'Post'
       = f.cancel 'Cancel'
+  .new_post.blog.preview
+    .body &nbsp;
+    .foot
+      %span.sticky_until Preview - use #{link_to 'markdown syntax', 'http://daringfireball.net/projects/markdown/syntax', :target => '_blank' } to style your blog
