@@ -7,10 +7,16 @@ jQuery(function($) {
 		return true;
 	});
 
-	$('input[name="personage[state]"]').bind('ajax:before', function() {
-		$(this).data('params', this.name + '=' + (this.checked ? 'enable!' : 'disable!'));
-		return true;
-	});
+	$('input[name="personage[state]"]')
+		.bind('ajax:before', function() {
+			$(this).data('params', this.name + '=' + (this.checked ? 'enable!' : 'disable!'));
+			return true;
+		})
+		.bind('ajax:success', function(data, status) {
+			if (status['state'] !== undefined) {
+				document.location.reload(true);
+			}
+		});
 
 	$('button[rel="#delete_profile_overlay"]').deleteProfileOverlay();
 
