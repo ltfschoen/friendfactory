@@ -1,7 +1,7 @@
 .post.blog .cell {
 	overflow: hidden;
 	background: #FFF;
-	font: 12px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;
+	font: 13px "Helvetica Neue", 'Myriad Pro', Arial, Helvetica, Geneva, sans-serif;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
 	-o-border-radius: 5px 5px 5px 5px;
@@ -48,7 +48,7 @@
 	min-height: 50px;
 	max-height: 540px;
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: normal;
 	overflow: auto;
 }
@@ -65,7 +65,7 @@
 
 .blog.preview .body h1,
 .blog.post .cell h1 {
-	margin: 24px 0;
+	margin: 12px 0;
 	font-size: 22px;
 	line-height: 1em;
 }
@@ -77,7 +77,7 @@
 
 .blog.preview .body h2,
 .blog.post .cell h2 {
-	margin: 18px 0;
+	margin: 12px 0;
 	font-size: 18px;
 	line-height: 1em;
 }
@@ -90,7 +90,7 @@
 .blog.post .cell h5,
 .blog.preview .body h6,
 .blog.post .cell h6 {
-	margin: 18px 0;
+	margin: 12px 0;
 	line-height: 1em;
 }
 
@@ -117,7 +117,7 @@
 
 .blog.preview .body hr,
 .blog.post .cell hr {
-	margin: 18px 0 12px;
+	margin: 6px 0;
 	border: none;
 	border-top: 1px solid #cccccc;
 }
@@ -128,7 +128,8 @@
 .blog.post .cell ol,
 .blog.preview .body ul,
 .blog.post .cell ul {
-	margin: 12px 0;
+	margin: 6px 0;
+	line-height: 1.5em;
 }
 
 .blog.preview .body p:first-child,
