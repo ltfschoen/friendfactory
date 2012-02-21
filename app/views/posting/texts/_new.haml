@@ -2,8 +2,7 @@
   = f.resolve resolver
   .new_post.blog
     .body
-      =# f.text_field :subject, :placeholder => 'Blog Title'
-      = f.text_area :body, :placeholder => "Write a blog. What's on your mind?"
+      = f.text_area :body, :placeholder => "What's on your mind?"
     .foot
       = f.sticky_until if current_user.admin?
       = f.submit 'Post', :'data-disable-with' => 'Post'

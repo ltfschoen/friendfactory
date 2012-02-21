@@ -38,6 +38,7 @@ gem 'embedly'
 gem 'user_agent'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'bluecloth', '~> 2.0.10'
 
 # gem 'responsalizr'
 # gem 'exifr'

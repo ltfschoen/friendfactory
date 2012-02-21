@@ -18,6 +18,7 @@
 }
 
 .new_post.blog textarea {
+	display: block;
 	font: 12px/1.25 Monaco, monospace;
 }
 
@@ -45,113 +46,160 @@
 	width: 340px;
 	height: auto;
 	min-height: 50px;
+	max-height: 540px;
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	font-size: 12px;
-	font-weight: normal;	
+	font-weight: normal;
+	overflow: auto;
 }
 
-.blog.preview .body strong {
+.blog.preview .body strong,
+.blog.post .cell strong {
 	font-weight: bold;
 }
 
-.blog.preview .body em {
+.blog.preview .body em,
+.blog.post .cell em {
 	font-style: italic;
 }
 
-.blog.preview .body h1 {
+.blog.preview .body h1,
+.blog.post .cell h1 {
 	margin: 24px 0;
-	font-size: 48px;
-	line-height: 1;
+	font-size: 22px;
+	line-height: 1em;
+}
+
+.blog.preview .body h1:first-child,
+.blog.post .cell h1:first-child {
+	margin-top: 0;
 }
 
 .blog.preview .body h2,
+.blog.post .cell h2 {
+	margin: 18px 0;
+	font-size: 18px;
+	line-height: 1em;
+}
+
 .blog.preview .body h3,
+.blog.post .cell h3,
 .blog.preview .body h4,
+.blog.post .cell h4,
 .blog.preview .body h5,
-.blog.preview .body h6 {
-	margin: 12px 0;
-	font-size: 24px;
-	line-height: 36px;
+.blog.post .cell h5,
+.blog.preview .body h6,
+.blog.post .cell h6 {
+	margin: 18px 0;
+	line-height: 1em;
 }
 
-.blog.preview .body h2 {
-	margin-top: 24px;
-	font-size: 36px;
+.blog.preview .body h3,
+.blog.post .cell h3 {
+	font-size: 16px;
 }
 
-.blog.preview .body h3 {
-	margin-top: 24px;
-	font-size: 30px;
+.blog.preview .body h4,
+.blog.post .cell h4 {
+	font-size: 14px;
 }
 
-.blog.preview .body hr {
+.blog.preview .body h5,
+.blog.post .cell h5 {
+	font-size: 12px;
+}
+
+.blog.preview .body h6,
+.blog.post .cell h6 {
+	font-size: 10px;
+	color: #999;
+}
+
+.blog.preview .body hr,
+.blog.post .cell hr {
 	margin: 18px 0 12px;
 	border: none;
 	border-top: 1px solid #cccccc;
 }
 
 .blog.preview .body p,
+.blog.post .cell p,
 .blog.preview .body ol,
-.blog.preview .body ul {
+.blog.post .cell ol,
+.blog.preview .body ul,
+.blog.post .cell ul {
 	margin: 12px 0;
 }
 
-.blog.preview .body p:first-child {
+.blog.preview .body p:first-child,
+.blog.post .cell p:first-child {
 	margin-top: 0;
 }
 
-.blog.preview .body ul {
+.blog.preview .body ul,
+.blog.post .cell ul {
 	padding: 0;
 	list-style: disc outside;
 }
 
 .blog.preview .body li ol,
-.blog.preview .body li ul {
+.blog.post .cell li ol,
+.blog.preview .body li ul,
+.blog.post .cell li ul {
 	margin: 0;
 }
 
-.blog.preview .body li li {
+.blog.preview .body li li,
+.blog.post .cell li li {
 	margin-left: 32px;
 }
 
-.blog.preview .body blockquote {
+.blog.preview .body blockquote,
+.blog.post .cell blockquote {
 	margin: 12px 0;
 	font-style: italic;
 	font-family: Georgia, serif;
 	color: #440077;
 }
 
-.blog.preview .body blockquote em {
+.blog.preview .body blockquote em,
+.blog.post .cell blockquote em {
 	font-style: normal;
 }
 
-.blog.preview .body pre {
+.blog.preview .body pre,
+.blog.post .cell pre {
 	margin: 24px 0;
 	border: 1px solid #cccccc;
 	padding: 1px;
 	white-space: pre-wrap;
 }
 
-.blog.preview .body pre > code {
+.blog.preview .body pre > code,
+.blog.post .cell pre > code {
 	display: block;
 	padding: 12px 18px;
 	font-size: 18px;
 	line-height: 24px;
 }
 
-.blog.preview .body code {
+.blog.preview .body code,
+.blog.post .cell code {
 	background: #eeeeee;
 	padding: 0 0.25em;
 	line-height: 1;
 }
 
-.blog.preview .body a {
+.blog.preview .body a,
+.blog.post .cell a {
 	color: inherit;
 	text-decoration: none;
 }
 
 .blog.preview .body a:focus,
-.blog.preview .body a:hover {
+.blog.post .cell a:focus,
+.blog.preview .body a:hover,
+.blog.post .cell a:hover {
 	color: #333333;
 	outline: none;
 }

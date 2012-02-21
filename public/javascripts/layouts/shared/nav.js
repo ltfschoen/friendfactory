@@ -65,6 +65,7 @@ jQuery(function($) {
 		.end()
 
 		.find('textarea#posting_text_body')
+			.autoResize({ extraSpace: 10 })
 			.bind('keyup', function () {
 				$preview.html(convert(this.value));
 			})

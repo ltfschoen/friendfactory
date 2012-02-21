@@ -6,17 +6,8 @@
       .portrait= thimble_link_to_profile(user, :remote => true)
       .clear
         .cell
-          - if text.subject.present?
-            %h1= text.subject
-          by
-          = link_to_profile(user)
-          - if text.body.present?
-            %p= text.body
-          - if false
-            %p{:style => "text-align: center;"}
-              %a{:href => ""} View Full Post &rarr;
-        - if false
-          .torn
+          = text.subject.html_safe if text.subject
+          %p By #{link_to_profile(user)}
         = posted_distance_of_time(text)
         = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text))
     .reaction

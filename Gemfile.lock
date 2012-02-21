@@ -42,6 +42,7 @@ GEM
     authlogic (3.1.0)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
+    bluecloth (2.0.11)
     builder (2.1.2)
     crack (0.1.8)
     daemons (1.1.8)
@@ -152,6 +153,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on (~> 2.2.2)
   authlogic (~> 3.1.0)
+  bluecloth (~> 2.0.10)
   daemons
   delayed_job_active_record
   embedly
