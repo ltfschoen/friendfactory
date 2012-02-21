@@ -7,7 +7,7 @@
       .clear
         .cell
           = text.subject.html_safe if text.subject
-          %p By #{link_to_profile(user)}
+          %p.footer By #{link_to_profile(user)}
         = posted_distance_of_time(text)
         = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text))
     .reaction
