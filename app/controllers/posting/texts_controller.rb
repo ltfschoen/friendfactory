@@ -19,7 +19,6 @@ class Posting::TextsController < Posting::BaseController
   def new_text_posting
     @posting ||= begin
       Posting::Text.new(params[:posting_text]) do |text|
-        text.subject = BlueCloth.new(text.body).to_html
         text.site = current_site
         text.user = current_user
         text.sticky_until = params[:posting_text][:sticky_until] if current_user.admin?
