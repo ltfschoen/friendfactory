@@ -108,9 +108,6 @@ jQuery(function($) {
 	// Hide post frames until we know their heights
 	$('.post_frame').css({ visibility: 'hidden' });
 
-	// Initialize rollcall headshots
-	$('div.headshot').headshot();
-
 	// Comments
 	$('.comments a, a.comments')
 		.live('ajax:beforeSend', function () {

@@ -34,7 +34,7 @@ class Wave::CommunitiesController < ApplicationController
 
   def rollcall
     respond_to do |format|
-      format.html
+      format.html { render :layout => 'rollcall' }
     end
   end
 
