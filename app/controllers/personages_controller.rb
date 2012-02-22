@@ -18,7 +18,7 @@ class PersonagesController < ApplicationController
     @@per_page = 48
     @page_title = params[:persona_type].pluralize
     respond_to do |format|
-      format.html { render :layout => 'three-column' }
+      format.html { render :layout => 'rollcall' }
     end
   end
 

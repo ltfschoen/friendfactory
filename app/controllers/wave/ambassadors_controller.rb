@@ -12,7 +12,7 @@ class Wave::AmbassadorsController < ApplicationController
   helper_method :wave, :postings
   helper_method :page_title
 
-  layout 'three-column'
+  layout 'community'
 
   prepend_view_path ::Resolver.new('wave/ambassadors')
 

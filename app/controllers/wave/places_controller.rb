@@ -11,7 +11,7 @@ class Wave::PlacesController < ApplicationController
   helper_method :wave, :postings
   helper_method :page_title
 
-  layout 'three-column'
+  layout 'community'
 
   cattr_reader :per_page
 

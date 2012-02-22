@@ -19,13 +19,13 @@
       'layouts/shared/sidebar', |
       'layouts/shared/sidebar-override', |
       'layouts/shared/compatibility', |
-      'layouts/three-column/base', |
-      'layouts/three-column/base-override', |
-      'layouts/three-column/rollcall', |
+      'layouts/community/base', |
+      'layouts/community/base-override', |
+      'layouts/community/rollcall', |
     :media => 'screen', |
     :cache => 'cache/rollcall' #, :concat => true
 
-  = stylesheet_link_tag "#{current_site.name}/three-column", :media => 'screen'
+  = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
 
   - if Rails.env.development?
     = stylesheet_link_tag 'development'

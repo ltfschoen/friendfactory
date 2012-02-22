@@ -4,7 +4,7 @@ class Posting::PostingsController < ApplicationController
 
   helper_method :posting, :page_title
 
-  layout 'three-column'
+  layout 'community'
 
   def show
     @posting = Posting::Base.site(current_site).find(params[:id])

@@ -21,7 +21,7 @@ class Wave::CommunitiesController < ApplicationController
 
   helper_method :page_title
 
-  layout 'three-column'
+  layout 'community'
 
   cattr_reader :per_page
   @@per_page = 50
