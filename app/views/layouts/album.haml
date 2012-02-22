@@ -1,10 +1,33 @@
-!!!
-%html.no-js
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
-    %meta{:content => "IE=8", "http-equiv" => "X-UA-Compatible"}/
-    %title= @title || current_site
-    = stylesheet_link_tag 'friskyfactory/album.css'
-    = javascript_includes 'lib/jquery/jquery.min', 'lib/modernizr-1.6.min', 'lib/jquery/supersized.3.1.2'
-  %body
-    = yield
+!!! 5
+:plain
+  <!--[if lt IE 8]><html lang="en-us" class="no-js ie"><![endif]-->
+  <!--[if IE 8]><html lang="en-us" class="no-js ie ie8"><![endif]-->
+  <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
+  <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
+%head
+  %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
+  %meta{:content => "IE=8", "http-equiv" => "X-UA-Compatible"}/
+  %title= @title || current_site
+
+  = stylesheet_link_tag 'layouts/album/base.css'
+
+  - if Rails.env.development?
+    = stylesheet_link_tag 'development'
+    = javascript_include_tag 'jquery'
+  - else
+    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
+
+  = javascript_include_tag |
+      'modernizr', |
+      'supersized.3.1.2.min', |
+    :cache => 'cache/album'
+
+  - if Rails.env.development?
+    = javascript_include_tag 'development'
+
+%body
+  = yield
+  = render :partial => 'layouts/shared/analytics'
+:plain
+  </html>
+  
