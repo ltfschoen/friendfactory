@@ -130,11 +130,6 @@ Friskyfactory::Application.routes.draw do
     get 'lurk', :on => :new
   end
 
-  # Labs
-  if [ 'development', 'staging' ].include?(Rails.env)
-    get 'labs/:action' => 'labs'
-  end
-
   # Admin
   namespace :admin do
     # resources :tags, :except => [ :show ] do
