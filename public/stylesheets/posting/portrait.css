@@ -8,10 +8,12 @@
   background: #000;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -23,6 +25,7 @@
   display: block;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
 }

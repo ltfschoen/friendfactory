@@ -24,8 +24,9 @@ module SidebarHelper
     url = url_for(home_user.profile)
     unless current_page?(url) && content_for?(:sidebar_headshot)
       content_tag(:div, :class => 'block home_user') do
-        content_tag(:div, thimble_link_to_profile(home_user, url), :class => 'portrait') <<
-        link_to(current_site.home_wave.subject, url)
+        css_class = [ 'portrait', current_page_class(home_user) ].join(' ')
+        content_tag(:div, thimble_link_to_profile(home_user, url), :class => css_class) <<
+            link_to(current_site.home_wave.subject, url)
       end
     end
   end
@@ -138,6 +139,10 @@ module SidebarHelper
         link_to(unread_conversations_count, inbox_path, :class => 'unread')
       end
     end
+  end
+
+  def current_page_class(personage)
+    current_page?(url_for(personage.profile)) ? 'current_page' : nil
   end
 
   private
