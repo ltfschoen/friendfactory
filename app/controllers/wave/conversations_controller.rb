@@ -7,7 +7,7 @@ class Wave::ConversationsController < ApplicationController
   helper_method :paged_conversations, :tags
   helper_method :page_title
 
-  layout 'wave/conversation'
+  layout 'inbox'
 
   cattr_reader :per_page
   @@per_page = 12
