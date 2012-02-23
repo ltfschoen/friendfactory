@@ -68,6 +68,7 @@
 	margin: 12px 0;
 	font-size: 22px;
 	line-height: 1em;
+	font-weight: normal;
 }
 
 .blog.preview .body h1:first-child,
