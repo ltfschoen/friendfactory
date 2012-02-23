@@ -99,15 +99,15 @@ class Personage < ActiveRecord::Base
 
   scope :enabled, where(:state => :enabled)
 
-  scope :exclude, lambda { |id| where('`personages`.`id` <> ?', id) }
+  scope :exclude, lambda { |*ids| where('`personages`.`id` NOT IN (?)', ids) }
 
-  scope :sidebar_rollcall, lambda { |site, persona_type, exclude_id, limit|
+  scope :sidebar_rollcall, lambda { |site, persona_type, limit, *exclude_ids|
       enabled.
       site(site).
       type(persona_type).
       joins(:profile).
       includes(:persona => :avatar).
-      exclude(exclude_id).
+      exclude(*exclude_ids).
       where('`personas`.`avatar_id` IS NOT NULL').
       limit(limit).
       order('`waves`.`updated_at` DESC')

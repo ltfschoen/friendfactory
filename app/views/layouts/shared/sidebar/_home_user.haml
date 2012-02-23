@@ -1,0 +1,6 @@
+.block.home_user
+  %ul
+    %li
+      .portrait= current_page_for_wave?(home_user.profile) ? monochrome_thimble_image_tag(home_user) : thimble_link_to_profile(home_user, url)
+      = link_to(current_site.home_wave.subject, url, :class => 'handle')
+          

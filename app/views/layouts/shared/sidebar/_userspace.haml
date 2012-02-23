@@ -1,5 +1,5 @@
 .block.userspace
-  .portrait{ :class => current_page_class(current_user) }= thimble_link_to_profile(current_user)
+  .portrait= current_page_for_wave?(current_user.profile) ? monochrome_thimble_image_tag(current_user) : thimble_link_to_profile(current_user)
   %span.username
     = personages_select_tag(current_user)
   %ul.navspace

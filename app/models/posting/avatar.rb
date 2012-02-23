@@ -2,14 +2,18 @@ class Posting::Avatar < Posting::Base
 
   has_attached_file :image,
       :styles => {
-          :thumb    => [ '100x100#', :jpg ],
-          :portrait => [ '200x280#', :jpg ],
-          :polaroid => [ '260x260#', :jpg ],
-          :iphone   => [ '320x480#', :jpg ],
-          :iphoneR  => [ '480x320#', :jpg ],
-          :ad       => [ '300x250#', :jpg ]},
+          :thumb     => [ '128x128#', :jpg ],
+          :thumbbw   => [ '128x128#', :jpg ],
+          :thimble   => [ '32x32#',   :jpg ],
+          :thimblebw => [ '32x32#',   :jpg ],
+          :portrait  => [ '200x280#', :jpg ],
+          :polaroid  => [ '260x260#', :jpg ]},
       :default_style => :portrait,
-      :convert_options => { :all => [ '-strip', '-depth 8' ] }
+      :convert_options => {
+          :all       => [ '-strip', '-depth 8' ],
+          :thumbbw   => [ '-transparent white', '-colorspace gray' ],
+          :thimblebw => [ '-transparent white', '-colorspace gray' ]
+      }
 
   validates_attachment_presence     :image
   validates_attachment_size         :image, :less_than => 5.megabytes

@@ -23,7 +23,7 @@ class Posting::BaseController < ApplicationController
             { :id           => comment.id,
               :posting_id   => posting_id,
               :profile_path => url_for(profile),
-              :image_path   => profile.avatar.url(:thumb),
+              :image_path   => profile.avatar.url(:thimble),
               :handle       => profile.handle,
               :body         => tag_helper.truncate(comment.body, :length => 60),
               :updated_at   => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }

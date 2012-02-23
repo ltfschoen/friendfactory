@@ -2,5 +2,5 @@
   - personages.each do |user|
     %li
       - url = url_for(user.profile)
-      .portrait{ :class => current_page_class(user) }= thimble_link_to_profile(user, url)
+      .portrait= current_page_for_wave?(user.profile) ? monochrome_thimble_image_tag(user) : thimble_link_to_profile(user, url)
       = link_to user.handle, url, :class => 'handle'

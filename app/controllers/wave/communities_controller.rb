@@ -12,7 +12,7 @@ class Wave::CommunitiesController < ApplicationController
   helper_method \
       :wave,
       :paged_postings,
-      :users_from_paged_postings
+      :users_from_paged_postings_excluding_wave_owner
 
   # Rollcall helpers
   helper_method \
@@ -54,11 +54,11 @@ class Wave::CommunitiesController < ApplicationController
       paginate(:page => params[:page], :per_page => @@per_page)
   end
 
-  def users_from_paged_postings
-    paged_postings.map(&:user).uniq
+  def users_from_paged_postings_excluding_wave_owner
+    paged_postings.map(&:user).uniq.select { |user| user[:id] != wave[:user_id] }
   end
 
-  memoize :wave, :paged_postings, :users_from_paged_postings
+  memoize :wave, :paged_postings, :users_from_paged_postings_excluding_wave_owner
 
   ###
 

@@ -13,12 +13,17 @@ module Posting::AvatarsHelper
     render :partial => 'posting/avatars/thimble_link_to_profile', :locals => { :personage => personage, :path => path, :opts => opts }
   end
 
+  def monochrome_thimble_image_tag(personage, opts = {})
+    thimble_image_tag(personage, opts.merge(:style => 'thimblebw'))
+  end
+
   def thimble_image_tag(personage, opts = {})
     if personage && personage.avatar
       handle = personage.handle
       size = opts.delete(:size) || '32x32'
+      style = opts.delete(:style) || 'thimble'
       css_class = [ opts.delete(:class), 'thimble', "pid-#{personage[:id]}" ].compact.join(' ')
-      image_tag(personage.avatar.url(:thumb), :size => size, :alt => handle, :title => handle, :class => css_class)
+      image_tag(personage.avatar.url(style.to_sym), :size => size, :alt => handle, :title => handle, :class => css_class)
     elsif personage
       Rails.logger.warn "Personage:#{personage.id} has no avatar"
       content_tag(:span, "&nbsp;".html_safe, :class => 'avatar-with-error', :style => 'display:inline-block;width:32px;height:32px;')

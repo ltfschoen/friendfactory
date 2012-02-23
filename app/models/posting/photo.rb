@@ -5,12 +5,13 @@ class Posting::Photo < Posting::Base
           :h4x6    => [ '460x310#', :jpg ],
           :v4x6    => [ '310x460#', :jpg ],
           :w460    => [ '460',      :jpg ], # Slideshow
-          :thumb   => [ '100x100#', :jpg ],
-          :iphone  => [ '320x480#', :jpg ],
-          :iphoneR => [ '480x320#', :jpg ],
-          :ad      => [ '300x250#', :jpg ]},
+          :thumb   => [ '128x128#', :jpg ],
+          :thumbbw => [ '128x128#', :jpg ]},
       :default_style => :'h4x6',
-      :convert_options => { :all => [ '-strip', '-depth 8' ] }
+      :convert_options => {
+          :all     => [ '-strip', '-depth 8' ],
+          :thumbbw => [ '-transparent white', '-colorspace gray' ]
+      }
 
   validates_attachment_presence     :image
   validates_attachment_size         :image, :less_than => 5.megabytes

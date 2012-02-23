@@ -23,11 +23,7 @@ module SidebarHelper
     home_user = current_site.home_user
     url = url_for(home_user.profile)
     unless current_page?(url) && content_for?(:sidebar_headshot)
-      content_tag(:div, :class => 'block home_user') do
-        css_class = [ 'portrait', current_page_class(home_user) ].join(' ')
-        content_tag(:div, thimble_link_to_profile(home_user, url), :class => css_class) <<
-            link_to(current_site.home_wave.subject, url)
-      end
+      render :partial => 'layouts/shared/sidebar/home_user', :object => home_user, :locals => { :url => url }
     end
   end
 
@@ -44,7 +40,7 @@ module SidebarHelper
 
   def render_sidebar_users_list(persona_type)
     home_user_id = current_site[:user_id]
-    personages = Personage.sidebar_rollcall(current_site, persona_type, home_user_id, SidebarRollCallMaximumLength)
+    personages = Personage.sidebar_rollcall(current_site, persona_type, SidebarRollCallMaximumLength, home_user_id)
     rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
     content_for_sidebar_users_list(personages, persona_type, rollcall_path)
   end
@@ -122,7 +118,7 @@ module SidebarHelper
           :'data-remote' => true,
           :'data-method' => :put
     else
-      link_to current_user.handle, current_personage_path
+      link_to_profile(current_user)
     end
   end
 
@@ -141,8 +137,8 @@ module SidebarHelper
     end
   end
 
-  def current_page_class(personage)
-    current_page?(url_for(personage.profile)) ? 'current_page' : nil
+  def current_page_for_wave?(profile)
+    current_page?(url_for(profile))
   end
 
   private
