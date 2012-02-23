@@ -108,6 +108,9 @@ jQuery(function($) {
 	// Hide post frames until we know their heights
 	$('.post_frame').css({ visibility: 'hidden' });
 
+	// Headshots in sidebar
+	$('div.headshot', '#sidebar').headshot();
+
 	// Comments
 	$('.comments a, a.comments')
 		.live('ajax:beforeSend', function () {

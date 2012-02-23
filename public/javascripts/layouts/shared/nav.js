@@ -48,14 +48,31 @@
 		});
 	};
 
+	$.fn.hashify = function () {
+
+		var convert = new Showdown('datetimes', 'abbreviations').convert;
+
+		return this.each(function () {
+			var $this = $(this),
+				$preview = $this.closest('.new_post_frame').find('.preview .body'),
+				id = $this.attr('id');
+
+			$this
+				.autoResize({ extraSpace: 10 })
+				.bind('keyup', function () {
+					$preview.html(convert(this.value));
+				});
+
+			Hashify.editor(id, false, function () {
+				$preview.html(convert(this.value));
+			});
+		});
+	};
+
 })(jQuery);
 
 
 jQuery(function($) {
-
-	var
-		convert = new Showdown('datetimes', 'abbreviations').convert,
-		$preview = $('.new_post.blog.preview .body');
 
 	$('form.new_post_frame')
 		.hide()
@@ -64,11 +81,8 @@ jQuery(function($) {
 			.placeholder()
 		.end()
 
-		.find('textarea#posting_text_body')
-			.autoResize({ extraSpace: 10 })
-			.bind('keyup', function () {
-				$preview.html(convert(this.value));
-			})
+		.find('textarea#posting_text_body').
+			hashify()
 		.end()
 
 		.find('input.cancel')
@@ -90,10 +104,6 @@ jQuery(function($) {
 			$(this).find('.spinner').css({ visibility: 'hidden' });
 			return true;
 		});
-
-	Hashify.editor('posting_text_body', false, function () {
-		$preview.html(convert(this.value));
-	});
 
 	$('a[rel]', 'ul.nav')
 		.bounceable()
