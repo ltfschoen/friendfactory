@@ -1,4 +1,5 @@
 = form_for personage, :url => profile_path(personage) do |f|
+  = hidden_field_tag :pane, params[:pane], :id => nil
   .headshot-container
     .headshot
       .face
