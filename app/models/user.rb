@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
 
   def default_personage_attributes=(attrs)
     attrs[:persona_attributes].merge!(:type => 'Persona::Person')
-    build_default_personage(attrs.merge(:default => true))
+    build_default_personage(attrs.merge(:default => true, :emailable => true))
   end
 
   ### Account
