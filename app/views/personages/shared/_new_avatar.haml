@@ -3,7 +3,9 @@
     .headshot
       .face.dropzone.avatar
         %ul#upload_posting_avatar
-          %li= headshot_image_tag(personage.persona)
+          %li
+            - persona = personage.persona
+            = image_tag(persona.unpublished_avatar_with_silhouette.url(:polaroid), :size => '190x190', :alt => persona.handle, :title => persona.handle)
         %p.instructions
           %span.no-dragdrop.hidden Click here to choose
           %span.dragdrop Choose or drag

@@ -41,16 +41,11 @@ class PersonagesController < ApplicationController
 
   def create
     state = params[:personage].delete(:state)
-    avatar_id = params[:personage].delete(:avatar_id)
     @personage = current_user_record.personages.build(params[:personage])
     @personage.state = state
     respond_to do |format|
-      if @personage.save!
-        if avatar_id && avatar = Posting::Avatar.find_by_id(avatar_id)
-          @personage.update_attribute(:avatar, avatar)
-          @personage.profile.postings << avatar
-          avatar.publish!
-        end
+      if @personage.save
+        @personage.publish_avatar_to_profile_wave
         session[:personage_id] = @personage.id
         format.html { redirect_to profile_path(@personage) }
       else
@@ -89,27 +84,16 @@ class PersonagesController < ApplicationController
   end
 
   def avatar
-    @posting = Posting::Avatar.new(params[:posting_avatar])
     respond_to do |format|
-      begin
-        Personage.transaction do
-          if params[:id]
-            @personage = current_user_record.personages.find(params[:id])
-            @posting.user = @personage
-            @personage.update_attribute(:avatar, @posting)
-            @personage.profile.postings << @posting
-            @posting.publish!
-            pid = "pid-#{@personage[:id]}"
-          else
-            @posting.user = current_user
-            @posting.save
-            pid = nil
-          end
-          format.json { render :json => { :url => @posting.url(:polaroid), :title => current_profile.handle, :pid => pid, :avatar_id => @posting[:id] }, :content_type => 'text/html' }          
-        end
-      rescue
-        format.json { render :json => { :ok => false }}
+      avatar = if params[:id] && personage = current_user_record.personages.find_by_id(params[:id])
+        pid = "pid-#{personage[:id]}"
+        handle = personage.handle
+        personage.create_and_publish_avatar_to_profile_wave(params[:posting_avatar])
+      else
+        handle = current_user.handle
+        Posting::Avatar.create(params[:posting_avatar]) { |posting| posting.user = current_user }
       end
+      format.json { render :json => { :url => avatar.url(:polaroid), :title => handle, :pid => pid, :avatar_id => avatar[:id] }, :content_type => 'text/html' }
     end
   end
 

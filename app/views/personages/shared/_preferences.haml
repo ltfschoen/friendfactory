@@ -12,9 +12,9 @@
       %h1 Preferences
       %table.preferences
         %tr
-          %td= check_box_tag 'personage[emailable]', 1, personage.emailable?, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage)
+          %td= check_box_tag 'personage[emailable_without_enabled_personage]', 1, personage.emailable_without_enabled_personage, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage)
           %td
-            = label_tag :personage_emailable, 'Subscribe to emails'
+            = label_tag :personage_emailable_without_enabled_personage, 'Subscribe to emails'
             .instructions Emails are sent for cocktails, new messages and new comments.
         %tr
           - disabled = current_site.home_wave == current_user.profile

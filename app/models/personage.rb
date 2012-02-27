@@ -6,8 +6,7 @@ class Personage < ActiveRecord::Base
 
   attr_accessible \
       :persona_attributes,
-      :avatar,
-      :emailable,
+      :emailable_without_enabled_personage,
       :default
 
   delegate \
@@ -32,7 +31,6 @@ class Personage < ActiveRecord::Base
       :location,
       :avatar,
       :avatar?,
-      :avatar=,
       :tag_list,
       :location_list,
       :biometric_list,
@@ -51,8 +49,8 @@ class Personage < ActiveRecord::Base
     end
   end
 
-  def default=(is_default)
-    if self[:default] = is_default
+  def default=(bool)
+    if self[:default] = bool
       self[:state] = :enabled
     end
   end
@@ -119,10 +117,12 @@ class Personage < ActiveRecord::Base
     Personage.uid(id)
   end
 
-  ###
+  ### Emailable
+
+  alias_attribute :emailable_without_enabled_personage, :emailable
 
   def emailable?
-    super && enabled? && user_record.enabled?
+    self[:emailable] && enabled? && user_record.enabled?
   end
 
   def subscribe!
@@ -131,6 +131,26 @@ class Personage < ActiveRecord::Base
 
   def unsubscribe!
     update_attribute(:emailable, false)
+  end
+
+  ### Avatar
+
+  def publish_avatar_to_profile_wave
+    avatar = persona.avatar_without_silhouette
+    if avatar && avatar.unpublished?
+      avatar.publish!
+      profile.postings << avatar
+      avatar
+    end
+  end
+
+  def create_and_publish_avatar_to_profile_wave(attrs)
+    avatar = persona.build_avatar(attrs)
+    if persona.save
+      avatar.publish!
+      profile.postings << avatar
+    end
+    avatar
   end
 
   ### Persona

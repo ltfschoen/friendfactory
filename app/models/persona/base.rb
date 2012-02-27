@@ -12,7 +12,7 @@ class Persona::Base < ActiveRecord::Base
 
   attr_accessible \
       :handle,
-      :avatar,
+      :avatar_id,
       :default
 
   before_save :set_tag_list
@@ -23,7 +23,15 @@ class Persona::Base < ActiveRecord::Base
 
   belongs_to :avatar,
       :class_name => 'Posting::Avatar',
-      :conditions => { :state => :published }
+      :autosave   => true
+
+  def build_avatar_with_default_user(avatar_params)
+    avatar = build_avatar_without_default_user(avatar_params)
+    avatar.user = self.user
+    avatar
+  end
+
+  alias_method_chain :build_avatar, :default_user
 
   scope :type, lambda { |*types|
       where(:type => types.map { |type| type.is_a?(Class) ? type.to_s : "Persona/#{type}".camelize })
@@ -45,11 +53,15 @@ class Persona::Base < ActiveRecord::Base
   end
 
   def avatar?
-    avatar_without_silhouette.present?
+    avatar_without_silhouette.present? && avatar_without_silhouette.published?
   end
 
   def avatar_with_silhouette
     avatar? ? avatar_without_silhouette : EmptyAvatar.new(self)
+  end
+
+  def unpublished_avatar_with_silhouette
+    avatar_without_silhouette.present? ? avatar_without_silhouette : EmptyAvatar.new(self)
   end
 
   alias_method_chain :avatar, :silhouette

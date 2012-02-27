@@ -2,7 +2,7 @@ jQuery(function($) {
 
 	$('input[type="text"], textarea').placeholder();
 
-	$('input[name="personage[emailable]"]').bind('ajax:before', function() {
+	$('input[name="personage[emailable_without_enabled_personage]"]').bind('ajax:before', function() {
 		$(this).data('params', this.name + '=' + this.checked);
 		return true;
 	});
@@ -48,7 +48,7 @@ jQuery(function($) {
 
 	        buildDownloadRow: function (avatar, handler) {
 				$('ul#upload_posting_avatar').empty();
-				$('input#personage_avatar_id').val(avatar.avatar_id);
+				$('input#personage_persona_attributes_avatar_id').val(avatar.avatar_id);
 				$('img.' + avatar.pid, '#sidebar').attr('src', avatar.url);
 	            return $('<li><img src="' + avatar.url + '" height="190" width="190" title="' + avatar.title + '"></li>');
 	        }
