@@ -8,7 +8,7 @@
             %table.biometrics
               %tr
                 %td.label Name
-                %td.detail= persona_form.text_field :handle, :placeholder => 'name', :maxlength => 20
+                %td.detail= persona_form.text_field :handle, :placeholder => 'name', :maxlength => 20, :size => 16
               %tr
                 %td.detail{ :colspan => '2' }
                   = persona_form.text_area :description, :placeholder => 'about the community', :maxlength => 200

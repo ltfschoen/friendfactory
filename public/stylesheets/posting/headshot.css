@@ -280,12 +280,6 @@
 	max-width: 70px;
 	color: #999;
 	text-shadow: 0 1px 0 #fff;
-	padding-right: 4px;
-}
-
-.headshot table.biometrics.map td.label {
-	width: 50px;
-	max-width: 50px;
 }
 
 .headshot table.biometrics td.detail {
@@ -294,11 +288,6 @@
 	text-shadow: 0 1px 0 #fff;
 	width: 110px;
 	max-width: 110px;
-}
-
-.headshot table.biometrics.map td.detail {
-	width: 130px;
-	max-width: 130px;
 }
 
 /* Photos */
