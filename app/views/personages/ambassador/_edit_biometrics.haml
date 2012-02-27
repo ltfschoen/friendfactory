@@ -7,14 +7,14 @@
           = f.fields_for :persona, personage.persona do |persona_form|
             %table.biometrics
               %tr
-                %td.label Name
+                %td.label Handle
                 %td.detail= persona_form.text_field :handle, :placeholder => 'name', :maxlength => 16
               %tr
                 %td.label Location
                 %td.detail= persona_form.text_field :location, :placeholder => 'location', :maxlength => 16
               %tr
                 %td.detail{ :colspan => '2' }
-                  = persona_form.text_area :description, :placeholder => 'about me', :maxlength => 200, :cols => 22, :class => 'ambassador_persona_description'
+                  = persona_form.text_area :description, :placeholder => 'about me', :maxlength => 200, :class => 'ambassador_persona_description'
         .button-bar
           = link_to 'Cancel', profile_path(personage), :class => 'cancel'
           = f.submit 'OK'
