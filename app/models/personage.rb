@@ -5,6 +5,7 @@ class Personage < ActiveRecord::Base
   set_inheritance_column nil
 
   attr_accessible \
+      :user_attributes,
       :persona_attributes,
       :emailable_without_enabled_personage,
       :default
@@ -152,6 +153,10 @@ class Personage < ActiveRecord::Base
     end
     avatar
   end
+
+  ### User Record
+
+  accepts_nested_attributes_for :user
 
   ### Persona
 
