@@ -23,6 +23,10 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
+  scope :user, lambda { |user|
+    where(:user_id => user[:id])
+  }
+
   scope :site, lambda { |site|
     joins(:waves => :sites).
     where(:waves => { :sites => { :id => site[:id] }})

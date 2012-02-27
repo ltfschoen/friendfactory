@@ -264,7 +264,6 @@
 
 .headshot table.biometrics {
 	color: gray;
-	width: 180px;
 	margin: 0 auto;
 	font-size: 12px;
 	color: #000;
@@ -273,24 +272,33 @@
 .headshot table.biometrics td {
 	vertical-align: middle;
 	text-align: left;
-	height: 24px;
+	padding: 4px 0;
 }
 
 .headshot table.biometrics td.label {
 	width: 70px;
+	max-width: 70px;
 	color: #999;
 	text-shadow: 0 1px 0 #fff;
-	padding-right: 2px;
+	padding-right: 4px;
 }
 
-.headshot table.biometrics.map td.label.location {
+.headshot table.biometrics.map td.label {
 	width: 50px;
+	max-width: 50px;
 }
 
 .headshot table.biometrics td.detail {
 	color: #666;
 	border-bottom: 1px solid #EEE;
 	text-shadow: 0 1px 0 #fff;
+	width: 110px;
+	max-width: 110px;
+}
+
+.headshot table.biometrics.map td.detail {
+	width: 130px;
+	max-width: 130px;
 }
 
 /* Photos */

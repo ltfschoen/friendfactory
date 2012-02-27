@@ -1,0 +1,9 @@
+= form.fields_for :persona, personage.persona do |persona_form|
+  .headshot-container
+    .headshot
+      .face
+        .pane
+          %table.biometrics.map
+            %tr
+              %td.label.location Location
+              %td.detail= persona_form.text_field :location, :placeholder => 'town or city, state', :maxlength => 40, :size => 18

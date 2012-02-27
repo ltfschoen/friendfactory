@@ -4,4 +4,5 @@
     %td.detail= persona.location
   %tr
     %td{ :colspan => '2' }
-      = image_tag persona.map_url, :alt => persona.address, :title => persona.address, :class => 'place_persona_map'
+      - if persona.lat && persona.lng
+        = image_tag persona.map_url, :alt => persona.address, :title => persona.address, :class => 'place_persona_map'

@@ -1,0 +1,22 @@
+= form.fields_for :persona, personage.persona do |persona_form|
+  .headshot-container
+    .headshot
+      .face
+        .pane
+          %table.biometrics
+            %tr
+              %td.label First Name
+              %td.detail= persona_form.text_field :handle, :placeholder => 'first name', :maxlength => 20, :size => 16
+            %tr
+              %td.label Age
+              %td.detail= persona_form.text_field :age, :placeholder => 'age', :maxlength => 2
+            %tr
+              %td.label Birthday
+              %td.detail= persona_form.date_select :dob, { :order => [ :month, :day ], :discard_year => true, :use_short_month => true, :include_blank => true }
+            - current_site.biometric_domains.each_with_index do |domain, idx|
+              %tr{ :class => domain.name }
+                %td.label
+                  = domain.display_name
+                %td.detail
+                  = select_tag "personage[persona_attributes][biometric_values_attributes][#{domain.id}]", |
+                    options_for_select([[ '', nil ]] + domain.values.collect {|v| [ v.display_name, v.id ] }, personage.persona.biometric_value_id(domain))

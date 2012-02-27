@@ -52,7 +52,7 @@
     = javascript_include_tag 'development'
       
   = csrf_meta_tag 
-%body
+%body{ :class => page_class }
   = render :partial => 'personages/sidebar_menu'
   = render :partial => 'layouts/shared/sidebar'
   = yield

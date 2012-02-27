@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120217063032) do
+ActiveRecord::Schema.define(:version => 20120224002944) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(:version => 20120217063032) do
     t.boolean  "default",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "emailable"
   end
 
   create_table "personas", :force => true do |t|
@@ -462,7 +463,6 @@ ActiveRecord::Schema.define(:version => 20120217063032) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.boolean  "emailable",          :default => true
     t.boolean  "admin",              :default => false
     t.integer  "site_id",                               :null => false
     t.integer  "account_id",                            :null => false

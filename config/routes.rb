@@ -76,11 +76,11 @@ Friskyfactory::Application.routes.draw do
   end
 
   # Personages and Headshots
-  resources :profiles, :only => [ :show, :new, :edit, :update ], :controller => 'personages' do
+  resources :profiles, :only => [ :show, :new, :create, :edit, :update ], :controller => 'personages' do
+    post :avatar, :on => :new
     member do
       post :avatar
       put  :enable
-      put  :unsubscribe
       put  :switch
       get  :biometrics
       get  :map

@@ -83,21 +83,50 @@ p.instructions {
 	font-size: 12px;
 }
 
+form.new_personage .headshot table.biometrics td,
+form.edit_personage .headshot table.biometrics td {
+	padding: 1px 0;
+}
+
+.ie form.new_personage .headshot table.biometrics td,
+.ie form.edit_personage .headshot table.biometrics td {
+	padding: 2px 0;
+}
+
+form.new_personage table.biometrics td.detail,
 form.edit_personage table.biometrics td.detail {
 	border-bottom: 1px solid transparent;
 }
 
+form.new_personage .headshot table.biometrics td.label,
+form.edit_personage .headshot table.biometrics td.label {
+	width: auto;
+	padding-right: 4px;
+}
+
+form.new_personage .headshot table.biometrics td.detail,
+form.edit_personage .headshot table.biometrics td.label {
+	width: auto;
+}
+
+form.new_personage input[type='text'],
 form.edit_personage input[type='text'] {
-	padding: 2px 0 2px 2px;
+	padding: 2px;
 }
 
-form.edit_personage input#personage_persona_attributes_handle,
-form.edit_personage input#personage_persona_attributes_location {
-	width: 98%;
+.ie form.new_personage input#personage_persona_attributes_handle,
+.ie form.edit_personage input#personage_persona_attributes_handle {
+	width: 8em;
 }
 
+form.new_personage select,
 form.edit_personage select {
-	max-width: 110px;
+	max-width: 8em;
+}
+
+.ie form.new_personage input#personage_persona_attributes_location,
+.ie form.edit_personage input#personage_persona_attributes_location {
+	width: 9em;
 }
 
 .button-bar {
@@ -150,17 +179,23 @@ input#posting_invitation_body {
 	padding: 2px;
 }
 
+form.new_personage .field_with_errors input,
 form.edit_personage .field_with_errors input,
+form.new_personage .field_with_errors textarea,
 form.edit_personage .field_with_errors textarea {
 	border: 1px solid #A00;
 }
 
+form.new_personage .field_with_errors input::-webkit-input-placeholder,
 form.edit_personage .field_with_errors input::-webkit-input-placeholder,
+form.new_personage .field_with_errors textarea::-webkit-input-placeholder,
 form.edit_personage .field_with_errors textarea::-webkit-input-placeholder {
 	color: #A00;
 }
 
+form.new_personage .field_with_errors input:-moz-placeholder,
 form.edit_personage .field_with_errors input:-moz-placeholder,
+form.new_personage .field_with_errors textarea:-moz-placeholder,
 form.edit_personage .field_with_errors textarea:-moz-placeholder {
 	color: #A00;
 }
@@ -169,7 +204,9 @@ form.edit_personage .field_with_errors textarea:-moz-placeholder {
 	margin-top: 4px;
 }
 
+form.new_personage textarea.ambassador_persona_description,
 form.edit_personage textarea.ambassador_persona_description,
+form.new_personage textarea.community_persona_description,
 form.edit_personage textarea.community_persona_description {
 	width: 97%;
 	float: right;

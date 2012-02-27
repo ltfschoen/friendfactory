@@ -150,6 +150,7 @@ module SidebarHelper
   def personages_group_by_current_state(personage)
     Personage.site(current_site).
         where(:user_id => personage[:user_id]).
+        includes(:persona).
         sort_by { |p| p.display_name }.
         group_by(&:current_state).
         sort { |a, b| b.first <=> a.first }.

@@ -1,0 +1,25 @@
+.headshot-container
+  .headshot
+    .face
+      .pane
+        %h1 Preferences
+        %table.preferences
+          %tr
+            %td
+              = form.check_box :emailable, {}, 1, 0
+            %td
+              = form.label :emailable, 'Subscribe to emails'
+              .instructions Emails are sent for cocktails, new messages and new comments.
+          %tr
+            %td
+              = hidden_field_tag 'personage[state]', 'disabled', :id => nil
+              = check_box_tag 'personage[state]', 'enabled', personage.enabled?
+            %td
+              = label_tag :personage_state, 'Enabled'
+              .instructions
+                When disabled, persona is not shown in sidebar. Its waves and postings remain published.
+              = personage.current_state
+              = personage[:state]
+      .button-bar
+        = link_to 'Cancel', current_personage_path, :class => 'cancel'
+        = form.submit 'OK'

@@ -1,0 +1,13 @@
+= form_for Posting::Avatar.new, :url => avatar_new_profile_path, :html => { :multipart => true } do |f|
+  .headshot-container
+    .headshot
+      .face.dropzone.avatar
+        %ul#upload_posting_avatar
+          %li= headshot_image_tag(personage.persona)
+        %p.instructions
+          %span.no-dragdrop.hidden Click here to choose
+          %span.dragdrop Choose or drag
+          avatar
+          %span.dragdrop here
+        = f.file_field :image
+        = f.submit 'Upload', :id => 'avatar_upload_submit', :disable_with => 'Upload'

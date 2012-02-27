@@ -15,8 +15,6 @@ class Personage < ActiveRecord::Base
       :email,
       :admin?,
       :gid,
-      :emailable?,
-      :emailable=,
       :current_login_at,
       :last_login_at,
       :online?,
@@ -41,8 +39,8 @@ class Personage < ActiveRecord::Base
     :to => :persona
 
   state_machine do
-    state :disabled
     state :enabled
+    state :disabled
 
     event :disable do
       transitions :to => :disabled, :from => [ :enabled ]
@@ -127,7 +125,7 @@ class Personage < ActiveRecord::Base
 
   def persona_attributes=(attrs)
     if persona.nil?
-      type = "Persona::#{(attrs.delete(:type) || 'base').titleize}"
+      type = attrs.delete(:type)
       klass = type.constantize
       self.persona = klass.new(attrs)
     elsif persona[:id] == attrs.delete('id').to_i
@@ -167,7 +165,7 @@ class Personage < ActiveRecord::Base
         wave.sites.push(site)
         wave.publish
       end
-      save
+      save(:validate => false)
     end
   end
 

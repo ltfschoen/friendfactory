@@ -48,7 +48,7 @@ module PersonagesHelper
   end
 
   def show_or_edit_headshot_pane(personage, pane)
-    action = params[:pane] == pane ? 'edit' : 'show'
+    action = (params[:pane] == pane) || params[:pane].blank? ? 'edit' : 'show'
     render :partial => File.join('personages', 'person', "#{action}_#{pane}"), :locals => { :personage => personage }
   end
 

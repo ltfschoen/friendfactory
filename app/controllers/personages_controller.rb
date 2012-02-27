@@ -3,6 +3,7 @@ class PersonagesController < ApplicationController
   extend ActiveSupport::Memoizable
 
   before_filter :require_user
+  before_filter :require_admin, :only => [ :new, :create ]
 
   helper_method \
       :personage,
@@ -23,24 +24,45 @@ class PersonagesController < ApplicationController
   end
 
   def show
-    @personage = params[:id] && current_user_record.personages.find(params[:id]) || current_user
+    @personage = params[:id].present? ?
+        current_user_record.personages.find(params[:id]) :
+        current_user
     respond_to do |format|
       format.html
     end
   end
 
   def new
-    attrs = { :persona_attributes => { :type => params[:type] }}
-    @personage = current_user_record.personages.build(attrs)
-    @personage.save(:validate => false)
-    @page_title = "New #{params[:type]}"
+    @personage = current_user_record.personages.build(default_attributes)
     respond_to do |format|
-      format.html { render :action => 'edit' }
+      format.html
+    end
+  end
+
+  def create
+    state = params[:personage].delete(:state)
+    avatar_id = params[:personage].delete(:avatar_id)
+    @personage = current_user_record.personages.build(params[:personage])
+    @personage.state = state
+    respond_to do |format|
+      if @personage.save!
+        if avatar_id && avatar = Posting::Avatar.find_by_id(avatar_id)
+          @personage.update_attribute(:avatar, avatar)
+          @personage.profile.postings << avatar
+          avatar.publish!
+        end
+        session[:personage_id] = @personage.id
+        format.html { redirect_to profile_path(@personage) }
+      else
+        format.html { render :action => 'new' }
+      end
     end
   end
 
   def edit
-    @personage = params[:id] && current_user_record.personages.find(params[:id]) || current_user
+    @personage = params[:id].present? ?
+        current_user_record.personages.find(params[:id]) :
+        current_user
     respond_to do |format|
       format.html
     end
@@ -50,7 +72,6 @@ class PersonagesController < ApplicationController
     @personage = current_user_record.personages.find(params[:id])
     respond_to do |format|
       if personage.update_attributes(params[:personage])
-        personage.enable! unless personage.enabled?
         format.html { redirect_to profile_path }
         format.json { render :json => { :ok => true }}
       else
@@ -68,28 +89,30 @@ class PersonagesController < ApplicationController
   end
 
   def avatar
-    transaction do
-      @personage = current_user_record.personages.find(params[:id])
-      @posting = Posting::Avatar.new(params[:posting_avatar]) { |posting| posting.user = @personage }
-      if @personage.update_attribute(:avatar, @posting)
-        @personage.enable unless @personage.enabled?
-        @personage.profile.postings << @posting
-        @posting.publish!
-      end
-    end
+    @posting = Posting::Avatar.new(params[:posting_avatar])
     respond_to do |format|
-      format.html { redirect_to profile_path }
-      format.json { render :json => { :url => @posting.url(:polaroid), :title => current_profile.handle, :pid => "pid-#{@personage.id}" }, :content_type => 'text/html' }
+      begin
+        Personage.transaction do
+          if params[:id]
+            @personage = current_user_record.personages.find(params[:id])
+            @posting.user = @personage
+            @personage.update_attribute(:avatar, @posting)
+            @personage.profile.postings << @posting
+            @posting.publish!
+            pid = "pid-#{@personage[:id]}"
+          else
+            @posting.user = current_user
+            @posting.save
+            pid = nil
+          end
+          format.json { render :json => { :url => @posting.url(:polaroid), :title => current_profile.handle, :pid => pid, :avatar_id => @posting[:id] }, :content_type => 'text/html' }          
+        end
+      rescue
+        format.json { render :json => { :ok => false }}
+      end
     end
   end
 
-  def unsubscribe
-    current_user.update_attributes(params[:user])
-    respond_to do |format|
-      format.js { head :ok }
-    end
-  end
-  
   def enable
     respond_to do |format|
       begin
@@ -203,6 +226,13 @@ class PersonagesController < ApplicationController
 
   def invitation_wave
     current_user.find_or_create_invitation_wave_for_site(current_site)
+  end
+
+  ###
+
+  def default_attributes
+    type = params[:type] || 'person'
+    { :emailable => true, :persona_attributes => { :type => "Persona::#{type.titleize}" }}
   end
 
 end
