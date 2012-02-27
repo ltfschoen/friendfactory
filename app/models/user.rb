@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
       transitions :to => :enabled, :from => [ :disabled ]
     end
     event :disable do
-      transitions :to => :disabled, :from => [ :enabled ], :on_transition => :unsubscribe!
+      transitions :to => :disabled, :from => [ :enabled ]
     end
   end
 
@@ -152,14 +152,6 @@ class User < ActiveRecord::Base
 
   def reset_password!
     reset_perishable_token!
-  end
-
-  def subscribe!
-    update_attribute(:emailable, true)
-  end
-
-  def unsubscribe!
-    update_attribute(:emailable, false)
   end
 
   def gid

@@ -119,6 +119,20 @@ class Personage < ActiveRecord::Base
     Personage.uid(id)
   end
 
+  ###
+
+  def emailable?
+    super && enabled? && user_record.enabled?
+  end
+
+  def subscribe!
+    update_attribute(:emailable, true)
+  end
+
+  def unsubscribe!
+    update_attribute(:emailable, false)
+  end
+
   ### Persona
 
   accepts_nested_attributes_for :persona
