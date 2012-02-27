@@ -9,8 +9,9 @@
             %th Handle
             %th Email
             %th Last Login
-            %th.role Admin
-            %th.emailable Email
+            %th.state Enabled?
+            %th.role Admin?
+            %th.emailable Emails?
         %tbody
           - users.each do |user|
             - default_personage = user.default_personage
@@ -29,10 +30,11 @@
                   #{distance_of_time_in_words_to_now(login_date)}&nbsp;ago
                 - else
                   &nbsp;
+              %td.state
+                = check_box_tag "user[state]", true, user.enabled?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_admin"
               %td.role
                 = check_box_tag "user[admin]", true, user.admin?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_admin"
               %td.emailable
-                =# check_box_tag "user[emailable]", true, user.emailable?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_emailable"
-                = check_box_tag 'personage[emailable]', true, personage.emailable?, :disabled => true
+                = check_box_tag 'user[default_personage_attributes][emailable_without_enabled_personage]', true, user.default_personage.emailable?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_emailable"
     = will_paginate(users)
     .button-bar.footer

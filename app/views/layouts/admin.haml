@@ -46,7 +46,7 @@
     = javascript_include_tag 'development'
 
   = csrf_meta_tag
-%body
+%body{ :class => [ 'admin', page_class ]}
   #sidebar
     #head= site_logo_image_tag(site)
     .block.userspace
@@ -57,7 +57,7 @@
     .block.navspace
       %ul
         %li= link_to 'Sites', admin_sites_path
-        - if site.present?
+        - if site.present? && site.persisted?
           %li= link_to 'Configuration', edit_admin_site_path(site)
           %li= link_to 'Users', admin_site_users_path(site)
           - if site.invite_only?

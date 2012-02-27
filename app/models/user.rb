@@ -64,8 +64,12 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :default_personage
 
   def default_personage_attributes=(attrs)
-    attrs[:persona_attributes].merge!(:type => 'Persona::Person')
-    build_default_personage(attrs.merge(:default => true, :emailable => true))
+    if default_personage.nil?
+      attrs[:persona_attributes].merge!(:type => 'Persona::Person')
+      build_default_personage(attrs.merge(:default => true, :emailable => true))
+    else
+      default_personage.update_attributes(attrs)
+    end
   end
 
   ### Account
@@ -129,6 +133,20 @@ class User < ActiveRecord::Base
   ###
 
   public
+
+  def update_attributes_with_role(attrs, role = {})
+    if attrs.present?
+      admin = attrs.delete(:admin)
+      state = attrs.delete(:state)
+      update_attributes_without_role(attrs)
+      if role[:as] == :admin
+        update_attribute(:admin, admin) if admin.present?
+        self.send(state.to_sym) if state.present?
+      end
+    end
+  end
+
+  alias_method_chain :update_attributes, :role
 
   def self.online?(user)
     online.include?(user)

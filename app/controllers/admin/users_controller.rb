@@ -2,8 +2,11 @@ class Admin::UsersController < ApplicationController
 
   before_filter :require_admin
 
-  helper_method :site, :user, :users
-  helper_method :page_title
+  helper_method \
+      :site,
+      :user,
+      :users,
+      :page_title
 
   layout 'admin'
 
@@ -21,7 +24,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      format.json { render :json => update_user_attributes }
+      format.json { render :json => { :ok => user.update_attributes(params[:user], :as => :admin) }}
     end
   end
 
@@ -41,13 +44,6 @@ class Admin::UsersController < ApplicationController
 
   def page_title
     "#{site.display_name} - Users"
-  end
-
-  def update_user_attributes
-    if admin = params[:user].delete(:admin)
-      user[:admin] = admin
-    end
-    update_attributes(params[:user])
   end
 
 end

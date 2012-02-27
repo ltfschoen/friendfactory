@@ -82,11 +82,19 @@ jQuery(function($) {
 		});
 
 	$('body.admin.users.index')
-		.find('input[name="user[emailable]"]').bind('ajax:before', function() {
-			$(this).data('params', this.name + '=' + this.checked);
-			return true;
-		});
 
+		.find('input[name="user[default_personage_attributes][emailable_without_enabled_personage]"], input[name="user[admin]"]')
+			.bind('ajax:before', function() {
+				$(this).data('params', this.name + '=' + this.checked);
+				return true;
+			})
+		.end()
+
+		.find('input[name="user[state]"]')
+			.bind('ajax:before', function() {
+				$(this).data('params', this.name + '=' + (this.checked ? 'enable!' : 'disable!'));
+				return true;
+			});
 
 	$('form.invitation_state')
 		.bind('ajax:before', function() {

@@ -71,6 +71,7 @@ class PersonagesController < ApplicationController
         format.json { render :json => { :ok => true }}
       else
         format.html { render :action => 'edit' }
+        format.json { render :json => { :ok => false }}
       end
     end
   end
