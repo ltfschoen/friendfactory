@@ -5,6 +5,7 @@
   %tr
     %td.label Location
     %td.detail= persona.location
-  %tr
-    %td.detail{ :colspan => '2'}
-      = persona.description
+  - if persona.description.present?
+    %tr
+      %td.detail{ :colspan => '2'}
+        = persona.description
