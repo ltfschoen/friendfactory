@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :default_personage
 
   def default_personage_attributes=(attrs)
-    attrs[:persona_attributes].merge!(:type => 'person')
+    attrs[:persona_attributes].merge!(:type => 'Persona::Person')
     build_default_personage(attrs.merge(:default => true))
   end
 
