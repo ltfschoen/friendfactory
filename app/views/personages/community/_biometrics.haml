@@ -2,6 +2,7 @@
   %tr
     %td.label First Name
     %td.detail= persona.handle
-  %tr
-    %td.detail{ :colspan => '2'}
-      = persona.description
+  - if persona.description.present?
+    %tr
+      %td.detail{ :colspan => '2'}
+        = persona.description
