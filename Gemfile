@@ -25,7 +25,7 @@ gem 'mysql2'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
 gem 'authlogic', '~> 3.1.0'
-gem 'paperclip', '>= 2.3.1.1'
+gem 'paperclip', '>= 2.4'
 gem 'remotipart'
 gem 'haml', '>= 3.1.2'
 gem 'haml-rails'

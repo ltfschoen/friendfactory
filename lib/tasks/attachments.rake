@@ -2,14 +2,14 @@ namespace :ff do
   namespace :attachments do
     desc "Reprocess posting attachments"
     task :reprocess => :environment do
+      styles = (ENV['STYLES'] || '').split(',').map(&:to_sym)
       Posting::Base.all.each do |posting|
         if posting.respond_to?(:image)
-          print "#{posting.id} "
-          STDOUT.flush
-          posting.send(:image).reprocess!
+            print "#{posting.id} "
+            STDOUT.flush
+          posting.send(:image).reprocess!(*styles)
         end
       end
-      puts "Done"
     end
 
     desc "Reprocess posting image attachments geometry"
@@ -27,14 +27,14 @@ namespace :ff do
           end
         end
       end
-      puts "Done"
     end
 
     desc "Delete all (except the original) posting image attachments"
     task :delete => :environment do
       require 'fileutils'
-      dirs = (Dir['public/system/images/*/*'] - Dir['public/system/images/*/original'])
+      styles = ENV['STYLES'].present? ? "{#{ENV['STYLES']}}" : '*'
+      dirs = (Dir["public/system/images/*/#{styles}"] - Dir['public/system/images/*/original'])
       dirs.each { |dir| FileUtils.rm_rf dir }
-    end    
-  end  
+    end
+  end
 end
