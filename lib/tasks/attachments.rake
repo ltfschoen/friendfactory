@@ -2,8 +2,9 @@ namespace :ff do
   namespace :attachments do
     desc "Reprocess posting attachments"
     task :reprocess => :environment do
+      klass  = (ENV['KLASS'] || 'Posting::Base').constantize
       styles = (ENV['STYLES'] || '').split(',').map(&:to_sym)
-      Posting::Base.all.each do |posting|
+      klass.all.each do |posting|
         if posting.respond_to?(:image)
             print "#{posting.id} "
             STDOUT.flush
