@@ -25,7 +25,7 @@
                 View the comment thread at #{site.display_name} by clicking #{link_to 'here', posting_url(posting.root, :host => host, :only_path => false)}
               You can also
               = succeed "." do
-                #{link_to "view #{posting.user.display_handle}'s profile", wave_profile_url(posting.user.profile, :host => host, :only_path => false)}
+                #{link_to "view #{posting.user.display_handle}'s profile", url_for(posting.user.profile, :host => host, :only_path => false)}
           %td{ :style => "padding:0; border:0; margin:0;", :width => '200', :align => 'center', :valign => 'top' }
             = image_tag("http://#{host_with_port}#{posting.user.avatar.url(:polaroid)}", :size => '190x190', :align => 'right', :border => '0', :style => "margin-left:15px; padding:1px; border-width:1px; border-style:solid; border-color:#ccc;")
 %hr{ :width => '600', :align => 'center', :noshade => 'noshade', :size => '1', :style => 'height:1px; border-width:0; color:#ccc; background-color:#ccc' }
