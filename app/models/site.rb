@@ -1,19 +1,59 @@
 class Site < ActiveRecord::Base
 
-  TemplateSiteName    = 'friskyfactory'
   DefaultMailer       = 'mailer@friskyfactory.com'
   DefaultHomeWaveSlug = 'popular'
 
   validates_presence_of :name, :display_name
+
   validates_uniqueness_of :name
+
+  ###
 
   belongs_to :home_user,
       :class_name  => 'Personage',
       :foreign_key => 'user_id'
 
+  def home_wave
+    home_user.profile
+  end
+
+  def create_home!(user, handle)
+    if user[:site_id] == self[:id]
+      personage = user.personages.create!(:emailable => true, :persona_attributes => { :type => 'Persona::Community', :handle => handle })
+      update_attribute(:home_user, personage)
+      personage
+    end
+  end
+
+  ###
+
   has_many :users
 
   authenticates_many :user_sessions
+
+  def build_user(handle, email, password, *opts)
+    persona_attributes = opts.extract_options!
+    persona_attributes.merge!(:handle => handle).reverse_merge!(:type => 'Persona::Person')
+    admin = opts.first
+    user  = users.build({
+        :email                        => email,
+        :password                     => password,
+        :password_confirmation        => password,
+        :default_personage_attributes => {
+            :default            => true,
+            :emailable          => true,
+            :persona_attributes => persona_attributes }})
+    user.admin = admin
+    user
+  end
+
+  def create_user!(handle, email, password, *opts)
+    build_user(handle, email, password, false, *opts).save!
+  end
+
+  def create_admin_user!(handle, email, password, *opts)
+    build_user(handle, email, password, true, *opts).save!
+  end
 
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',
@@ -29,7 +69,9 @@ class Site < ActiveRecord::Base
       :foreign_key => 'site_id',
       :order       => '`ordinal` ASC'
 
-  accepts_nested_attributes_for :biometric_domains, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :biometric_domains,
+      :reject_if     => :all_blank,
+      :allow_destroy => true
 
   has_many :assets, :class_name => 'Asset::Base' do
     def [](name)
@@ -38,9 +80,10 @@ class Site < ActiveRecord::Base
   end
 
   has_many :stylesheets, :order => '`controller_name` asc'
-  has_many :images, :class_name => 'Asset::Image'
+
+  has_many :images,    :class_name => 'Asset::Image'
   has_many :constants, :class_name => 'Asset::Constant'
-  has_many :texts, :class_name => 'Asset::Text'
+  has_many :texts,     :class_name => 'Asset::Text'
 
   with_options :allow_destroy => true, :reject_if => :all_blank do |opts|
     opts.accepts_nested_attributes_for :stylesheets
@@ -57,9 +100,7 @@ class Site < ActiveRecord::Base
     stylesheets.map(&:css).compact.join("\n")
   end
 
-  def home_wave
-    home_user.profile
-  end
+  ###
 
   def layout
     name
@@ -87,17 +128,6 @@ class Site < ActiveRecord::Base
 
   def help_email
     "help@#{domain_name}"
-  end
-
-  def clone
-    super.tap do |clone|
-      clone.name, clone.display_name = nil, nil
-      clone.signal_categories = self.signal_categories.clone
-    end
-  end
-
-  def self.template
-    Site.find_by_name(Site::TemplateSiteName) || raise("No template site")
   end
 
 end
