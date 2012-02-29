@@ -7,7 +7,7 @@ class Posting::TextsController < Posting::BaseController
   end
 
   def create
-    wave = current_site.waves.find_by_id(params[:wave_id])
+    wave = current_site.waves.find(params[:wave_id])
     add_posting_to_wave(new_text_posting, wave)
     respond_to do |format|
       format.js { render :layout => false }
