@@ -377,8 +377,6 @@ ActiveRecord::Schema.define(:version => 20120229021446) do
     t.text     "css"
     t.string   "mailer"
     t.integer  "user_id"
-    t.string   "email_regex",               :default => "*"
-    t.string   "email_regex_error_message"
     t.string   "email_domain_regex",        :default => ".*"
     t.string   "email_domain_display_name"
   end

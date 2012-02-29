@@ -27,10 +27,14 @@
 				ok ? config.onOK(this) : config.onCancel(this);
 			}
 		},
-
-		extendDefaultOverlayOptionsWith = function(opts) {
-			return $.extend({}, defaultOverLayConfig, opts);
+		
+		overlayWithoutEvaporation = $.fn.overlay,
+		
+		overlayWithEvaporation = function (opts) {
+			return overlayWithoutEvaporation.call(this, $.extend({}, defaultOverLayConfig, opts));
 		};
+		
+	$.fn.overlay = overlayWithEvaporation;
 
 	$.tools.overlay.addEffect('evaporate',
 		function (position, callback) {
@@ -60,20 +64,12 @@
 
 	$.fn.unpublishOverlay = function () {
 		return this.each(function() {
-			$(this).overlay(extendDefaultOverlayOptionsWith({
+			$(this).overlay({
 				onOK: function (overlay) {
 					var url = overlay.getTrigger().attr('href');
 					$.ajax({ type: 'delete', url: url, dataType: 'script' });
 				}
-			}));
-		});
-	};
-
-	$.fn.deleteProfileOverlay = function () {
-		return this.each(function() {
-			$(this).overlay(extendDefaultOverlayOptionsWith({
-				// onOK: function (overlay) {}
-			}));
+			});
 		});
 	};
 

@@ -18,7 +18,7 @@ jQuery(function($) {
 			}
 		});
 
-	$('button[rel="#delete_profile_overlay"]').deleteProfileOverlay();
+	$('button[rel="#delete_profile_overlay"]').overlay();
 
 	$('form#new_posting_avatar')
 		.fileUploadUI({
