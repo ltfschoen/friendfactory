@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120224002944) do
+ActiveRecord::Schema.define(:version => 20120229021446) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -366,10 +366,10 @@ ActiveRecord::Schema.define(:version => 20120224002944) do
   add_index "signals", ["name"], :name => "index_signals_on_name", :unique => true
 
   create_table "sites", :force => true do |t|
-    t.string   "name",                                        :null => false
-    t.string   "display_name",                                :null => false
-    t.boolean  "launch",                   :default => false
-    t.boolean  "invite_only",              :default => false
+    t.string   "name",                                         :null => false
+    t.string   "display_name",                                 :null => false
+    t.boolean  "launch",                    :default => false
+    t.boolean  "invite_only",               :default => false
     t.string   "analytics_domain_name"
     t.string   "analytics_account_number"
     t.datetime "created_at"
@@ -377,6 +377,10 @@ ActiveRecord::Schema.define(:version => 20120224002944) do
     t.text     "css"
     t.string   "mailer"
     t.integer  "user_id"
+    t.string   "email_regex",               :default => "*"
+    t.string   "email_regex_error_message"
+    t.string   "email_domain_regex",        :default => ".*"
+    t.string   "email_domain_display_name"
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true

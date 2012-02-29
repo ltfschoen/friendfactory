@@ -53,7 +53,23 @@ class User < ActiveRecord::Base
 
   validates_presence_of :site
 
+  validate :email_domain, :if => lambda { |user|
+      user.site && user.site.email_domain_regex.present?
+  }
+
+  private
+
+  def email_domain
+    unless email =~ /#{site.email_domain_regex}/
+      domain_display_name = site.email_domain_display_name
+      domain_display_name = %w(a e i o u).include?(domain_display_name[0].downcase) ? "an #{domain_display_name}" : "a #{domain_display_name}"
+      errors.add(:email, "must be from #{domain_display_name} domain")
+    end
+  end
+
   ### Personage
+
+  public
 
   has_many :personages
 

@@ -7,6 +7,8 @@ class Site < ActiveRecord::Base
 
   validates_uniqueness_of :name
 
+  validates_presence_of :email_domain_display_name, :if => lambda { |site| site.email_domain_regex.present? }
+
   ###
 
   belongs_to :home_user,
@@ -54,6 +56,8 @@ class Site < ActiveRecord::Base
   def create_admin_user!(handle, email, password, *opts)
     build_user(handle, email, password, true, *opts).save!
   end
+
+  ###
 
   has_and_belongs_to_many :waves,
       :class_name              => 'Wave::Base',

@@ -1,4 +1,5 @@
 class UserSession < Authlogic::Session::Base
+
   extend ActiveModel::Naming
 
   generalize_credentials_error_messages "Login and password are invalid"

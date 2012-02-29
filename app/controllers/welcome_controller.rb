@@ -12,14 +12,14 @@ class WelcomeController < ApplicationController
         @launch_user = LaunchUser.new
         format.html { render :action => 'launch' }
       else
-        @user = User.new(:invitation_code => params[:invitation_code])
+        @user = current_site.users.build(:invitation_code => params[:invitation_code])
         format.html
       end
     end
   end
 
   def signup
-    @user = User.new(params[:user]) { |user| user.site = current_site }
+    @user = current_site.users.build(params[:user])
     respond_to do |format|
       if create_user_and_log_in
         flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.default_personage.handle}!"
