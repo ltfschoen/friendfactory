@@ -156,6 +156,11 @@
 	list-style: disc outside;
 }
 
+.blog.preview .body li,
+.blog.post .cell li {
+	clear: both;
+}
+
 .blog.preview .body li ol,
 .blog.post .cell li ol,
 .blog.preview .body li ul,
@@ -221,7 +226,7 @@
 .blog.post .cell img {
 	float: left;
 	margin: 2px;
-	width: 141px;
+	max-width: 141px;
 }
 
 .blog.preview .body img:only-of-type,
@@ -235,6 +240,13 @@
 	margin-bottom: 10px;
 }
 
+.blog.preview .body li > img,
+.blog.post .cell li > img {
+	max-width: 96px !important;
+	margin-right: 10px;
+}
+
 .blog.post .cell p.footer {
 	margin: 12px 0 0 0;
+	clear: both;
 }
