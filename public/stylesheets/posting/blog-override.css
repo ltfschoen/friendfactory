@@ -230,6 +230,11 @@
 	max-width: 286px;
 }
 
+.blog.preview .body img:last-of-type,
+.blog.post .cell img:last-of-type {
+	margin-bottom: 10px;
+}
+
 .blog.post .cell p.footer {
 	margin: 12px 0 0 0;
 }
