@@ -49,7 +49,6 @@
 	width: 290px;
 	height: auto;
 	min-height: 50px;
-	max-height: 540px;
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	font-size: 13px;
 	font-weight: normal;
@@ -128,6 +127,7 @@
 	margin: 6px 0;
 	border: none;
 	border-top: 1px solid #cccccc;;
+	clear: both;
 }
 
 .blog.preview .body p + p,
@@ -221,13 +221,13 @@
 .blog.post .cell img {
 	float: left;
 	margin: 2px;
-	width: 140px;
+	width: 141px;
 }
 
 .blog.preview .body img:only-of-type,
 .blog.post .cell img:only-of-type {
-	width: 290px;
-	max-width: 290px;
+	width: 286px;
+	max-width: 286px;
 }
 
 .blog.post .cell p.footer {
