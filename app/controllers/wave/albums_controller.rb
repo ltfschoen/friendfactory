@@ -29,6 +29,7 @@ class Wave::AlbumsController < ApplicationController
       end
     end
     if @wave.postings << new_posting_photo
+      current_user.find_or_create_photos_wave.postings << new_posting_photo
       render :json => created_wave_to_json(@wave, @posting), :content_type => 'text/html'
     else
       render :json => { :result => 'error' }, :content_type => 'text/html'      
