@@ -239,8 +239,11 @@
 .blog.preview .body img,
 .blog.post .cell img {
 	float: left;
-	margin: 2px;
+	margin: 2px 2px 5px 2px;
 	max-width: 141px;
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	-moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
 }
 
 .blog.preview .body img:only-of-type,
@@ -265,6 +268,10 @@
 .blog.post .cell li > img {
 	max-width: 96px !important;
 	margin-right: 10px;
+	margin-bottom: 5px;
+	-webkit-box-shadow: 0 6px 6px -6px black;
+	-moz-box-shadow: 0 6px 6px -6px black;
+	box-shadow: 0 6px 6px -6px black;
 }
 
 .blog.post .cell p.footer {
