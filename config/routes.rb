@@ -76,7 +76,8 @@ Friskyfactory::Application.routes.draw do
   end
 
   # Personages and Headshots
-  resources :profiles, :only => [ :show, :new, :create, :edit, :update ], :controller => 'personages' do
+  resources :profiles, :only => [ :show, :new, :create, :edit, :update ],
+      :controller => 'personages' do
     post :avatar, :on => :new
     member do
       post :avatar
@@ -94,6 +95,10 @@ Friskyfactory::Application.routes.draw do
         get ':type', :action => 'index', :as => 'typed'
         get ':type/inverse', :action => 'index', :as => 'inverse_typed'
       end
+    end
+
+    namespace :wave do
+      resource :photos, :only => [ :show ]
     end
   end
 

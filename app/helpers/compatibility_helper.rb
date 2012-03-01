@@ -20,13 +20,23 @@ module CompatibilityHelper
   end
 
   def browser_compatibility_tag
-    user_agent = UserAgent.new(request.user_agent)
-    browser = CompatibleBrowsers.detect { |browser| browser.name == user_agent.name }
     if browser && (browser.version > user_agent.version.to_f)
       # TODO user_agent.version.to_f may not resolve correctly
       # to a useful number. E.g. "5.1.2" will resolve to 5.1.
       render :partial => 'layouts/shared/nobrowser', :locals => { :browser => browser, :user_agent => user_agent }
     end
+  end
+
+  def user_agent
+    @user_agent ||= UserAgent.new(request.user_agent)
+  end
+
+  def browser
+    @browser ||= CompatibleBrowsers.detect { |browser| browser.name == user_agent.name }
+  end
+
+  def isIE?
+    browser.name == :ie
   end
 
 end
