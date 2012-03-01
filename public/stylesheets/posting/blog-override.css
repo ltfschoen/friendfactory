@@ -46,7 +46,7 @@
 
 .new_post.blog.preview .body {
 	padding: 10px;
-	width: 340px;
+	width: 290px;
 	height: auto;
 	min-height: 50px;
 	max-height: 540px;
@@ -54,6 +54,10 @@
 	font-size: 13px;
 	font-weight: normal;
 	overflow: auto;
+}
+
+.new_post.blog.preview .foot {
+	width: 310px;
 }
 
 .blog.preview .body strong,
@@ -218,6 +222,8 @@
 	float: left;
 	margin-right: 5px;
 	margin-bottom: 5px;
+	max-width: 290px;
+	max-height: 290px;
 }
 
 .blog.post .cell p.footer {

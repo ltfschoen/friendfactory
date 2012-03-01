@@ -1,6 +1,6 @@
 %script#photo-picker-template{:type => "text/x-jquery-tmpl"}
   %li
-    %a{ :href => '${ photo_picker_image_path }' }
+    %a{ :href => '${ best_fit_image_path }' }
       %img{ :src => '${ photo_picker_image_path }', :width => '64', :height => '64', :title => '' }
 #photo_picker_overlay.overlay{ :'data-profile_wave_photos_url' => profile_wave_photos_path(current_user) }
   %h1 Select a Photo

@@ -23,11 +23,15 @@ class Posting::Photo < Posting::Base
   before_create :randomize_file_name
 
   def as_json(opts = nil)
-    super(:only => [ :id ], :methods => [ :photo_picker_image_path ])
+    super(:only => [ :id, :horizontal ], :methods => [ :photo_picker_image_path, :best_fit_image_path ])
   end
 
   def photo_picker_image_path
     image.url(:thumb)
+  end
+
+  def best_fit_image_path
+    horizontal ? image.url(:h4x6) : image.url(:v4x6)
   end
 
   private
