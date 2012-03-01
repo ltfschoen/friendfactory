@@ -220,10 +220,14 @@
 .blog.preview .body img,
 .blog.post .cell img {
 	float: left;
-	margin-right: 5px;
-	margin-bottom: 5px;
+	margin: 2px;
+	width: 140px;
+}
+
+.blog.preview .body img:only-of-type,
+.blog.post .cell img:only-of-type {
+	width: 290px;
 	max-width: 290px;
-	max-height: 290px;
 }
 
 .blog.post .cell p.footer {
