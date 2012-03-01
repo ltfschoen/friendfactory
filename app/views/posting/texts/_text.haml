@@ -1,12 +1,12 @@
 - user = text.user
-- if text.subject.present? || text.body.present?
+- if text.subject.present?
   .post_frame
     .posting.post.blog[text]{uid(text[:user_id])}
       = link_to_unpublish(text)
       .portrait= thimble_link_to_profile(user, :remote => true)
       .clear
         .cell
-          = text.subject.html_safe if text.subject
+          = text.subject.html_safe
           %p.footer By #{link_to_profile(user)}
         = posted_distance_of_time(text)
         = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text))

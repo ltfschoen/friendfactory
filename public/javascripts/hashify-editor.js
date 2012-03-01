@@ -466,6 +466,19 @@
           return false;
         }
       );
+
+		createButton(
+			'Select Photo',
+			'photo-picker',
+			function () {
+				var $overlay = $('#photo_picker_overlay');
+				if ($overlay.data('overlay') === undefined) {
+					$overlay.photoPickerOverlay(resolve, bind(callback_ || function () {}, editor.el));
+				}
+				$overlay.data("overlay").load();
+			}
+		);
+
       createButton(
         'Image',
         'img',

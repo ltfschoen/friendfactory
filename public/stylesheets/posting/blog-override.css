@@ -13,10 +13,6 @@
 	padding-bottom: 10px;
 }
 
-.hashify-editor-toolbar > li > a.hashify-editor-pre-code {
-	display: none;
-}
-
 .new_post.blog textarea {
 	display: block;
 	font: 12px/1.25 Monaco, monospace;
@@ -25,6 +21,13 @@
 .new_post.blog .foot .sticky_until {
 	float: left;
 	margin: 5px 0 5px 10px;
+	color: #666;
+	font: italic 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.new_post.blog .foot .instructions {
+	float: left;
+	margin: 8px 0 5px 10px;
 	color: #666;
 	font: italic 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
@@ -120,7 +123,12 @@
 .blog.post .cell hr {
 	margin: 6px 0;
 	border: none;
-	border-top: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;;
+}
+
+.blog.preview .body p + p,
+.blog.post .cell p + p {
+	clear: both;
 }
 
 .blog.preview .body p,
@@ -194,7 +202,6 @@
 
 .blog.preview .body a,
 .blog.post .cell a {
-	color: inherit;
 	text-decoration: none;
 }
 
@@ -202,8 +209,15 @@
 .blog.post .cell a:focus,
 .blog.preview .body a:hover,
 .blog.post .cell a:hover {
-	color: #333333;
 	outline: none;
+	text-decoration: underline;
+}
+
+.blog.preview .body img,
+.blog.post .cell img {
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
 }
 
 .blog.post .cell p.footer {

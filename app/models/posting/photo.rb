@@ -1,5 +1,7 @@
 class Posting::Photo < Posting::Base
 
+  self.include_root_in_json = false
+
   has_attached_file :image,
       :styles => {
           :h4x6    => [ '460x310#', :jpg ],
@@ -20,10 +22,18 @@ class Posting::Photo < Posting::Base
   before_create :set_dimensions
   before_create :randomize_file_name
 
+  def as_json(opts = nil)
+    super(:only => [ :id ], :methods => [ :photo_picker_image_path ])
+  end
+
+  def photo_picker_image_path
+    image.url(:thumb)
+  end
+
   private
   
   def set_dimensions
-    tempfile = self.image.queued_for_write[:original]    
+    tempfile = self.image.queued_for_write[:original]
     unless tempfile.nil?
       dimensions = Paperclip::Geometry.from_file(tempfile)
       self.width = dimensions.width
@@ -32,7 +42,7 @@ class Posting::Photo < Posting::Base
     end
     true # important!
   end
-  
+
   def randomize_file_name
     extension = File.extname(image_file_name).downcase
     self.image.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")

@@ -264,8 +264,7 @@ class Personage < ActiveRecord::Base
 
   has_many :waves,
       :class_name  => 'Wave::Base',
-      :foreign_key => 'user_id' do
-  end
+      :foreign_key => 'user_id'
 
   ### Conversations
 
@@ -337,6 +336,22 @@ class Personage < ActiveRecord::Base
     wave = Wave::Invitation.new.tap { |wave| wave.user = self }
     site.waves << wave && wave.publish!
     wave.reload
+  end
+
+  ### Photos Wave
+
+  public
+
+  has_one :photos_wave,
+      :class_name  => 'Wave::Photo',
+      :foreign_key => 'user_id'
+
+  def find_or_create_photos_wave
+    if photos_wave.nil?
+      create_photos_wave
+      photos_wave.publish!
+    end
+    photos_wave
   end
 
 end

@@ -81,8 +81,8 @@ jQuery(function($) {
 			.placeholder()
 		.end()
 
-		.find('textarea#posting_text_body').
-			hashify()
+		.find('textarea#posting_text_body')
+			.hashify()
 		.end()
 
 		.find('input.cancel')

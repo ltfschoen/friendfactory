@@ -1,13 +1,25 @@
+%script#photo-picker-template{:type => "text/x-jquery-tmpl"}
+  %li
+    %a{ :href => '${ photo_picker_image_path }' }
+      %img{ :src => '${ photo_picker_image_path }', :width => '64', :height => '64', :title => '' }
+#photo_picker_overlay.overlay{ :'data-profile_wave_photos_url' => profile_wave_photos_path(current_user) }
+  %h1 Select a Photo
+  %ul.clearfix
+  %button{ :class => 'close ok' } OK
+  %button{ :class => 'close cancel', :type => 'button' } Cancel
 = form_for Posting::Text.new, :url => wave_posting_texts_path(wave), :remote => true, :html => { :class => 'new_posting_text new_post_frame' } do |f|
   = f.resolve resolver
   .new_post.blog
     .body
       = f.text_area :body, :placeholder => "What's on your mind?"
     .foot
-      = f.sticky_until if current_user.admin?
+      - if current_user.admin?
+        = f.sticky_until
+      - else
+        %span.instructions Use #{link_to 'markdown', 'http://daringfireball.net/projects/markdown/syntax', :target => '_blank' } to style your blog
       = f.submit 'Post', :'data-disable-with' => 'Post'
       = f.cancel 'Cancel'
   .new_post.blog.preview
     .body &nbsp;
     .foot
-      %span.sticky_until Preview - use #{link_to 'markdown syntax', 'http://daringfireball.net/projects/markdown/syntax', :target => '_blank' } to style your blog
+      %span.sticky_until Preview

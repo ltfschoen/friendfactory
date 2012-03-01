@@ -13,11 +13,12 @@
       'layouts/reset', |
       'application', |
       'effects', |
+      'hashify-editor', |
+      'hashify-editor-override', |
       'posting/ads', |
       'posting/album', |
       'posting/blog', |
       'posting/blog-override', |
-      'hashify-editor', |
       'posting/checkin', |
       'posting/comments', |
       'posting/comments-override', |
@@ -54,7 +55,7 @@
       'layouts/community/post_reaction', |
       'layouts/community/floating', |
     :media => 'screen', |
-    :cache => 'cache/community' #, :concat => true
+    :cache => 'cache/community', :concat => (Rails.env.development? && isIE?)
 
   = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
 
