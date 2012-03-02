@@ -11,7 +11,7 @@
   = f.resolve resolver
   .new_post.blog
     .body
-      = f.text_area :body, :placeholder => "What's on your mind?"
+      = f.text_area :body
     .foot
       - if current_user.admin?
         = f.sticky_until

@@ -63,6 +63,10 @@
 	border: 1px solid #333;
 }
 
+.ie .overlay button {
+	padding-bottom: 4px;
+}
+
 .overlay button.ok {
 	background: #b94f42;
 	background: -moz-linear-gradient(top, #b94f42 0%, #972d20 100%);

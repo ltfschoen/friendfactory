@@ -61,6 +61,13 @@
 		$.getMiniComments($currentFrame, callback);
 	};
 
+	$.hideAllReactions = function () {
+		$('.post_frame').find('.reaction').hide();
+	};
+
+	$.showAllReactions = function () {
+		$('.post_frame').find('.reaction').show();
+	};
 
 	$.hideAllReactionsExcept = function (frame, html, callback) {
 		var $frame = $(frame),

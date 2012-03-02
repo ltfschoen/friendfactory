@@ -21,11 +21,15 @@
 							height = $post.height() + 20,
 							limit = Math.floor(height/50);
 
+						$form.trigger('close');
+
 						$frame
 							.height(height)
 							.data('limit', limit)
 							.fadeTo('fast', 1.0)
 							.find('a.remove[rel]').unpublishOverlay();
+
+						$.showAllReactions();
 					});
 			});
 		});
@@ -39,10 +43,10 @@
 				event.preventDefault();
 				$('li.current', 'ul.nav').removeClass('current');
 				$form.fadeTo('fast', 0.0, function () {
-					$form[0].reset();
-					// $form.trigger('reset');
-					$('input[type="text"], textarea', $form).val('').trigger('blur.placeholder');
-					$form.slideUp(900, 'easeOutBounce');
+					$('input[type="text"][placeholder], textarea[placeholder]', $form).val('').trigger('blur.placeholder');
+					$form.slideUp(900, 'easeOutBounce', function () {
+						$form.trigger('close');
+					});
 				});
 			});
 		});
@@ -77,7 +81,7 @@ jQuery(function($) {
 	$('form.new_post_frame')
 		.hide()
 
-		.find('input[type="text"], textarea')
+		.find('input[type="text"][placeholder], textarea[placeholder]')
 			.placeholder()
 		.end()
 
@@ -97,7 +101,7 @@ jQuery(function($) {
 		.bind('ajax:success', function () {
 			var $this = $(this);
 			$this[0].reset();
-			$('input[type="text"], textarea', $this).val('').trigger('blur.placeholder');
+			$('input[type="text"][placeholder], textarea[placeholder]', $this).val('').trigger('blur.placeholder');
 		})
 
 		.bind('ajax:complete', function () {
@@ -120,6 +124,7 @@ jQuery(function($) {
 					.addClass('current');
 
 				$newForm
+					.trigger('open')
 					.css({ opacity: 0.0, visibility: 'hidden' })
 					.delay(1200)
 					.slideDown(function() {
