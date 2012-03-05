@@ -21,17 +21,18 @@ class Posting::Photo < Posting::Base
 
   before_create :set_dimensions
   before_create :randomize_file_name
+  before_create :set_hash_key
 
   def as_json(opts = nil)
-    super(:only => [ :id, :horizontal ], :methods => [ :photo_picker_image_path, :best_fit_image_path ])
+    super(:only => [ :id, :horizontal ], :methods => [ :photo_picker_image_path, :hashed_image_path ])
   end
 
-  def photo_picker_image_path
-    image.url(:thumb)
+  def photo_picker_image_path  
+    "/h/#{hash_key}/thumb" # image.url(:thumb)
   end
 
-  def best_fit_image_path
-    horizontal ? image.url(:h4x6) : image.url(:v4x6)
+  def hashed_image_path
+    "/h/#{hash_key}/#{best_orientation_style}"
   end
 
   private
@@ -50,6 +51,14 @@ class Posting::Photo < Posting::Base
   def randomize_file_name
     extension = File.extname(image_file_name).downcase
     self.image.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
+  end
+
+  def best_orientation_style
+    horizontal ? :h4x6 : :v4x6
+  end
+
+  def set_hash_key
+    self.hash_key = ActiveSupport::SecureRandom.hex(4)
   end
 
 end

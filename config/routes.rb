@@ -11,6 +11,8 @@ Friskyfactory::Application.routes.draw do
 
   get '/stylesheets/:site_name(/:controller_name).:format' => 'admin/sites#stylesheets'
 
+  get '/h/:hash_key(/:style)' => 'posting/postings#show'
+
   # Waves
   namespace :wave do
     resources :communities, :only => [ :show ] do
