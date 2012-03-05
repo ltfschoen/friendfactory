@@ -15,7 +15,8 @@ class Persona::Person < Persona::Base
       :dob,
       :biometric_values_attributes
 
-  validates_presence_of :handle, :age, :location
+  validates_presence_of :handle
+  validates_presence_of :age, :location, :on => :create
 
   has_many :biometric_person_values,
       :class_name  => 'Biometric::PersonValue',
