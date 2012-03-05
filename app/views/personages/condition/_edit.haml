@@ -1,0 +1,4 @@
+= render :partial => File.join('personages', 'shared', 'avatar'), :locals => { :personage => personage }
+= show_or_edit_headshot_pane(personage, 'condition/biometrics')
+= render :partial => File.join('personages', 'shared', 'preferences'), :locals => { :personage => personage }
+= show_or_edit_headshot_pane(personage, 'shared/credentials')

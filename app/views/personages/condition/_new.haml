@@ -1,0 +1,7 @@
+= render :partial => File.join('personages', 'shared', 'new_avatar')
+= form_for personage, :url => profiles_path do |form|
+  = form.fields_for :persona, personage.persona do |persona_form|
+    = persona_form.hidden_field :type
+    = persona_form.hidden_field :avatar_id
+  = render :partial => File.join('personages', 'condition', 'new_biometrics'), :locals => { :form => form }
+  = render :partial => File.join('personages', 'shared', 'new_preferences'), :locals => { :form => form }

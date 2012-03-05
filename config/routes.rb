@@ -109,7 +109,7 @@ Friskyfactory::Application.routes.draw do
       :as => 'current_personage'
 
   get ':persona_type' => 'personages#index',
-      :constraints => { :persona_type => /ambassadors|communities|places/ },
+      :constraints => { :persona_type => /ambassadors|communities|places|conditions/ },
       :as => 'persona_type_profiles'
 
   resource :user, :only => [ :destroy ], :as => 'current_user_record'

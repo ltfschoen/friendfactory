@@ -1,0 +1,8 @@
+%table.biometrics
+  %tr
+    %td.label Title
+    %td.detail= persona.handle
+  - if persona.description.present?
+    %tr
+      %td.detail{ :colspan => '2'}
+        = persona.description

@@ -1,0 +1,23 @@
+- persona = personage.persona
+- link_to_close_wave_id = local_assigns[:link_to_close_wave_id] || personage[:profile_id]
+
+.headshot-container
+  .headshot[ personage ]{ :class => poke_css_class(personage[:id]) }
+    .face-container
+      .front.face
+        = headshot_image_tag(persona)
+        = link_to_close(link_to_close_wave_id)
+        %span.handle
+          = persona.handle
+        %ul.buddy-bar.secondary
+          %li= link_to 'Profile', wave_profile_path(personage[:profile_id]), :class => 'icon profile'
+        %ul.buddy-bar.primary
+          %li= link_to 'Biometrics', biometrics_profile_path(personage[:id]), :class => 'flip icon mini-profile', :'data-pane-name' => 'biometrics'
+    .face-container
+      .back.face
+        .content
+          = link_to_close(link_to_close_wave_id)
+          .pane
+          .portrait= link_to thimble_image_tag(personage, :size => '18x18'), wave_profile_path(personage[:profile_id]), :class => 'flip'
+          %ul.buddy-bar.primary
+            %li= link_to 'Biometrics', biometrics_profile_path(personage[:id]), :class => 'swipe icon mini-profile', :'data-pane-name' => 'biometrics'

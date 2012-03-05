@@ -1,0 +1,4 @@
+= render :partial => File.join('personages', 'shared', 'avatar'),:locals => { :personage => personage }
+= render :partial => File.join('personages', 'condition', 'show_biometrics'), :locals => { :personage => personage }
+= render :partial => File.join('personages', 'shared', 'preferences'), :locals => { :personage => personage }
+= render :partial => File.join('personages', 'shared', 'show_credentials'), :locals => { :personage => personage }

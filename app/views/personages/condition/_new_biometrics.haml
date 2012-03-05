@@ -1,0 +1,13 @@
+= form.fields_for :persona, personage.persona do |persona_form|
+  = hidden_field_tag :pane, params[:pane], :id => nil
+  .headshot-container
+    .headshot
+      .face
+        .pane
+          %table.biometrics
+            %tr
+              %td.label Title
+              %td.detail= persona_form.text_field :handle, :placeholder => 'name', :maxlength => 20, :size => 16
+            %tr
+              %td.detail{ :colspan => '2' }
+                = persona_form.text_area :description, :placeholder => 'description', :maxlength => 200, :class => 'condition_persona_description'
