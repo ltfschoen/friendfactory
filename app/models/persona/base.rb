@@ -13,7 +13,8 @@ class Persona::Base < ActiveRecord::Base
   attr_accessible \
       :handle,
       :avatar_id,
-      :default
+      :default,
+      :featured
 
   before_save :set_tag_list
 
@@ -43,6 +44,8 @@ class Persona::Base < ActiveRecord::Base
   }
 
   scope :has_avatar, where('`avatar_id` is not null')
+
+  scope :featured, where(:featured => true)
 
   def handle
     self[:handle].strip if self[:handle].present?

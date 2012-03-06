@@ -35,6 +35,7 @@ class Personage < ActiveRecord::Base
       :tag_list,
       :location_list,
       :biometric_list,
+      :featured?,
     :to => :persona
 
   state_machine do

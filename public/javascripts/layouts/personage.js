@@ -2,10 +2,11 @@ jQuery(function($) {
 
 	$('input[type="text"], textarea').placeholder();
 
-	$('input[name="personage[emailable_without_enabled_personage]"]').bind('ajax:before', function() {
-		$(this).data('params', this.name + '=' + this.checked);
-		return true;
-	});
+	$('input[name="personage[emailable_without_enabled_personage]"], input[name="personage[persona_attributes][featured]"]')
+		.bind('ajax:before', function() {
+			$(this).data('params', this.name + '=' + this.checked);
+			return true;
+		});
 
 	$('input[name="personage[state]"]')
 		.bind('ajax:before', function() {

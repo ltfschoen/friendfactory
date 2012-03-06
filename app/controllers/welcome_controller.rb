@@ -66,8 +66,9 @@ class WelcomeController < ApplicationController
   end
 
   def featured_profiles
-    @featured_profiles ||=
-      Personage.enabled.site(current_site).joins(:user).merge(User.featured).includes(:profile).limit(4).order('rand()').map(&:profile)
+    @featured_profiles ||= begin
+      Personage.enabled.site(current_site).joins(:persona).merge(Persona::Base.featured).includes(:profile).limit(4).order('rand()').map(&:profile)
+    end
   end
 
   def user_session

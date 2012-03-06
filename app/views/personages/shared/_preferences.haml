@@ -12,10 +12,17 @@
       %h1 Preferences
       %table.preferences
         %tr
-          %td= check_box_tag 'personage[emailable_without_enabled_personage]', 1, personage.emailable_without_enabled_personage, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage)
+          %td
+            = check_box_tag 'personage[emailable_without_enabled_personage]', 1, personage.emailable_without_enabled_personage, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage)
           %td
             = label_tag :personage_emailable_without_enabled_personage, 'Subscribe to emails'
             .instructions Emails are sent for cocktails, new messages and new comments.
+        %tr
+          %td
+            = check_box_tag 'personage[persona_attributes][featured]', 1, personage.featured?, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage)
+          %td
+            = label_tag :personage_persona_attributes_featured, 'Featured'
+            .instructions Your headshot is featured on #{current_site.display_name}'s welcome page and emails.
         %tr
           - disabled = current_site.home_wave == current_user.profile
           - if current_user.admin?
@@ -27,7 +34,7 @@
                 - if disabled
                   Persona is site's home wave. Select another wave as the home wave to disable this persona.
                 - else
-                  When disabled, persona is removed from sidebar. Its waves and postings remain published.
+                  Disabled personas are not displayed in sidebar.
           -else
             - if !disabled
               %td{ :colspan => '2' }= button_tag 'Delete Account', :class => 'delete', :rel => '#delete_profile_overlay'
