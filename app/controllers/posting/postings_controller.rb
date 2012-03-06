@@ -20,7 +20,7 @@ class Posting::PostingsController < ApplicationController
 
   def posting
     relation = Posting::Base.published.scoped
-    hash_key_param? ? relation.find_by_hash(params[:hash_key]) : relation.find(params[:id])
+    hash_key_param? ? relation.find_by_hash_key(params[:hash_key]) : relation.find(params[:id])
   end
 
   def page_title
