@@ -21,7 +21,6 @@ class Posting::Avatar < Posting::Base
 
   before_create :set_dimensions
   before_create :randomize_file_name
-  before_create :set_hash
 
   delegate :profile, :to => :user
 
@@ -49,10 +48,6 @@ class Posting::Avatar < Posting::Base
   def randomize_file_name
     extension = File.extname(image_file_name).downcase
     self.image.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
-  end
-
-  def set_hash
-    self.hash = ActiveSupport::SecureRandom.hex(4)
   end
 
 end

@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class Posting::Base < ActiveRecord::Base
 
   include ActiveRecord::Transitions
@@ -58,6 +60,10 @@ class Posting::Base < ActiveRecord::Base
       :through => :publications,
       :order   => 'updated_at desc'
 
+  before_create :set_hash_key
+
+  ###
+
   def attributes=(attrs)
     sanitize_for_mass_assignment(attrs).each do |k, v|
       send("#{k}=", v)
@@ -109,6 +115,10 @@ class Posting::Base < ActiveRecord::Base
 
   def decrement_postings_counter
     waves.map{|wave| wave.decrement!(:postings_count) }
+  end
+
+  def set_hash_key
+    self[:hash_key] = Digest::SHA1.hexdigest("#{id}#{created_at}")[0..7]
   end
 
 end

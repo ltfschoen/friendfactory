@@ -238,6 +238,7 @@ ActiveRecord::Schema.define(:version => 20120305234120) do
     t.integer  "height"
     t.boolean  "horizontal"
     t.string   "state"
+    t.string   "hash_key",           :limit => 8
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"

@@ -21,7 +21,6 @@ class Posting::Photo < Posting::Base
 
   before_create :set_dimensions
   before_create :randomize_file_name
-  before_create :set_hash_key
 
   def as_json(opts = nil)
     super(:only => [ :id, :horizontal ], :methods => [ :photo_picker_image_path, :hashed_image_path ])
@@ -55,10 +54,6 @@ class Posting::Photo < Posting::Base
 
   def best_orientation_style
     horizontal ? :h4x6 : :v4x6
-  end
-
-  def set_hash_key
-    self.hash_key = ActiveSupport::SecureRandom.hex(4)
   end
 
 end
