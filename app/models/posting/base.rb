@@ -118,7 +118,7 @@ class Posting::Base < ActiveRecord::Base
   end
 
   def set_hash_key
-    self[:hash_key] = Digest::SHA1.hexdigest("#{id}#{created_at}")[0..7]
+    self[:hash_key] = Digest::SHA1.hexdigest("#{id}#{created_at.to_i}")[0..7]
   end
 
 end
