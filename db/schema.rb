@@ -205,8 +205,8 @@ ActiveRecord::Schema.define(:version => 20120305234120) do
     t.string   "post_code"
     t.decimal  "lat",               :precision => 10, :scale => 7
     t.decimal  "lng",               :precision => 10, :scale => 7
-    t.boolean  "emailable"
     t.boolean  "featured"
+    t.boolean  "emailable"
   end
 
   add_index "personas", ["first_name"], :name => "index_user_info_on_first_name"

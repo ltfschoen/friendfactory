@@ -3,7 +3,7 @@ class AddFeaturedToPersonas < ActiveRecord::Migration
     ActiveRecord::Base.record_timestamps = false
     add_column :personas, :featured, :boolean rescue nil
     ActiveRecord::Base.transaction do
-      User.includes(:personages => :persona).where('`score` > 0').all.each do |user|
+      User.includes(:personages => :persona).where('`users`.`score` > 0').all.each do |user|
         user.personages.each do |personage|
           if persona = personage.persona
             persona.update_attribute(:featured, true)
