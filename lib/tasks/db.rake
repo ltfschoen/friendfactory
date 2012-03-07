@@ -23,7 +23,8 @@ namespace :ff do
       task :images => :environment do
         tar_filename = "images.#{timestamp}.tar.gz"
         if File.exists?("db/dumps/#{tar_filename}")
-          sh "rm -rf public/system/images/* && tar -xf db/dumps/#{tar_filename} -C public/system"
+          # sh "rm -rf public/system/images/* && tar -xf db/dumps/#{tar_filename} -C public/system"
+          sh "find public/system/images -type f -print0 | xargs -0 rm && tar -xf db/dumps/#{tar_filename} -C public/system"
         end
       end
       
