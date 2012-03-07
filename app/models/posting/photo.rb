@@ -21,6 +21,7 @@ class Posting::Photo < Posting::Base
 
   before_create :set_dimensions
   before_create :randomize_file_name
+  before_create :set_hash_key
 
   def as_json(opts = nil)
     super(:only => [ :id, :horizontal ], :methods => [ :photo_picker_image_path, :hashed_image_path ])

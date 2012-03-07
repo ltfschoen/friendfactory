@@ -7,7 +7,7 @@ namespace :ff do
           subject = text.subject
           body = text.body
           if subject.present?
-            text.body = subject.length < 30 ? "# #{subject}\n\n#{body}" : "#{subject}\n\n#{body}"
+            text.body = subject.length < 40 ? "# #{subject}\n\n#{body}" : "#{subject}\n\n#{body}"
           else
             text.body = body
           end

@@ -1,7 +1,7 @@
 namespace :ff do
   namespace :fix do
-    task :photos_waves => :environment do
-      ActiveRecord::Base.record_timestamps = false
+    task :photo_waves => :environment do
+      Posting::Photo.record_timestamps = false
       ActiveRecord::Base.transaction do
         Wave::Photo.delete_all
         Posting::Photo.includes(:user).all.each do |photo|
@@ -10,7 +10,7 @@ namespace :ff do
           end
         end
       end
-      ActiveRecord::Base.record_timestamps = true
+      Posting::Photo.record_timestamps = true
     end
   end
 end

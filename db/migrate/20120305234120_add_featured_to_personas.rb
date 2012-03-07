@@ -1,5 +1,6 @@
 class AddFeaturedToPersonas < ActiveRecord::Migration
   def self.up
+    ActiveRecord::Base.record_timestamps = false
     add_column :personas, :featured, :boolean rescue nil
     ActiveRecord::Base.transaction do
       User.includes(:personages => :persona).where('`score` > 0').all.each do |user|
@@ -10,6 +11,7 @@ class AddFeaturedToPersonas < ActiveRecord::Migration
         end
       end
     end
+    ActiveRecord::Base.record_timestamps = true
   end
 
   def self.down

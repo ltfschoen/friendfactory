@@ -60,8 +60,6 @@ class Posting::Base < ActiveRecord::Base
       :through => :publications,
       :order   => 'updated_at desc'
 
-  before_create :set_hash_key
-
   ###
 
   def attributes=(attrs)

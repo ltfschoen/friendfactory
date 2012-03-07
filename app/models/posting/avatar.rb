@@ -21,6 +21,7 @@ class Posting::Avatar < Posting::Base
 
   before_create :set_dimensions
   before_create :randomize_file_name
+  before_create :set_hash_key
 
   delegate :profile, :to => :user
 
