@@ -14,7 +14,8 @@ class Persona::Base < ActiveRecord::Base
       :handle,
       :avatar_id,
       :default,
-      :featured
+      :featured,
+      :emailable
 
   before_save :set_tag_list
 
@@ -68,6 +69,16 @@ class Persona::Base < ActiveRecord::Base
   end
 
   alias_method_chain :avatar, :silhouette
+
+  ### Emailable
+
+  def subscribe!
+    update_attribute(:emailable, true)
+  end
+
+  def unsubscribe!
+    update_attribute(:emailable, false)
+  end
 
   private
 

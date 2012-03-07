@@ -83,7 +83,7 @@ jQuery(function($) {
 
 	$('body.admin.users.index')
 
-		.find('input[name="user[default_personage_attributes][emailable_without_enabled_personage]"], input[name="user[admin]"]')
+		.find('input[name="user[default_personage_attributes][persona_attributes][emailable]"], input[name="user[admin]"]')
 			.bind('ajax:before', function() {
 				$(this).data('params', this.name + '=' + this.checked);
 				return true;

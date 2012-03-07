@@ -35,6 +35,6 @@
               %td.role
                 = check_box_tag "user[admin]", true, user.admin?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_admin"
               %td.emailable
-                = check_box_tag 'user[default_personage_attributes][emailable_without_enabled_personage]', true, user.default_personage.emailable?, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_emailable"
+                = check_box_tag 'user[default_personage_attributes][persona_attributes][emailable]', true, user.default_personage.persona.emailable, :'data-remote' => true, :'data-url' => admin_site_user_path(site, user, :format => :json), :'data-method' => :put, :id => "user_#{user.id}_emailable"
     = will_paginate(users)
     .button-bar.footer

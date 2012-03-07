@@ -13,13 +13,13 @@
       %table.preferences
         %tr
           %td
-            = check_box_tag 'personage[emailable_without_enabled_personage]', 1, personage.emailable_without_enabled_personage, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage)
+            = check_box_tag 'personage[persona_attributes][emailable]', 1, personage.persona.emailable, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage), :'data-persona_id' => personage[:persona_id]
           %td
-            = label_tag :personage_emailable_without_enabled_personage, 'Subscribe to emails'
+            = label_tag :personage_persona_attributes_emailable, 'Subscribe to emails'
             .instructions Emails are sent for cocktails, new messages and new comments.
         %tr
           %td
-            = check_box_tag 'personage[persona_attributes][featured]', 1, personage.featured?, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage)
+            = check_box_tag 'personage[persona_attributes][featured]', 1, personage.persona.featured, :'data-remote' => true, :'data-method' => :put, :'data-type' => :json, :'data-url' => profile_path(personage), :'data-persona_id' => personage[:persona_id]
           %td
             = label_tag :personage_persona_attributes_featured, 'Featured'
             .instructions Your headshot is featured on #{current_site.display_name}'s welcome page and emails.

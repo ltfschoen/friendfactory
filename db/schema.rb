@@ -176,7 +176,6 @@ ActiveRecord::Schema.define(:version => 20120305234120) do
     t.boolean  "default",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "emailable"
   end
 
   create_table "personas", :force => true do |t|
@@ -206,6 +205,7 @@ ActiveRecord::Schema.define(:version => 20120305234120) do
     t.string   "post_code"
     t.decimal  "lat",               :precision => 10, :scale => 7
     t.decimal  "lng",               :precision => 10, :scale => 7
+    t.boolean  "emailable"
     t.boolean  "featured"
   end
 

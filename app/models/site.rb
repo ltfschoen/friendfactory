@@ -21,7 +21,7 @@ class Site < ActiveRecord::Base
 
   def create_home!(user, handle)
     if user[:site_id] == self[:id]
-      personage = user.personages.create!(:emailable => true, :persona_attributes => { :type => 'Persona::Community', :handle => handle })
+      personage = user.personages.create!(:persona_attributes => { :type => 'Persona::Community', :handle => handle, :emailable => true })
       update_attribute(:home_user, personage)
       personage
     end
@@ -35,7 +35,7 @@ class Site < ActiveRecord::Base
 
   def build_user(handle, email, password, *opts)
     persona_attributes = opts.extract_options!
-    persona_attributes.merge!(:handle => handle).reverse_merge!(:type => 'Persona::Person')
+    persona_attributes.merge!(:handle => handle).reverse_merge!(:type => 'Persona::Person', :emailable => true)
     admin = opts.first
     user  = users.build({
         :email                        => email,
@@ -43,7 +43,6 @@ class Site < ActiveRecord::Base
         :password_confirmation        => password,
         :default_personage_attributes => {
             :default            => true,
-            :emailable          => true,
             :persona_attributes => persona_attributes }})
     user.admin = admin
     user

@@ -7,7 +7,6 @@ class Personage < ActiveRecord::Base
   attr_accessible \
       :user_attributes,
       :persona_attributes,
-      :emailable_without_enabled_personage,
       :default
 
   delegate \
@@ -36,6 +35,8 @@ class Personage < ActiveRecord::Base
       :location_list,
       :biometric_list,
       :featured?,
+      :subscribe!,
+      :unsubscribe!,
     :to => :persona
 
   state_machine do
@@ -117,22 +118,6 @@ class Personage < ActiveRecord::Base
 
   def uid
     Personage.uid(id)
-  end
-
-  ### Emailable
-
-  alias_attribute :emailable_without_enabled_personage, :emailable
-
-  def emailable?
-    self[:emailable] && enabled? && user_record.enabled?
-  end
-
-  def subscribe!
-    update_attribute(:emailable, true)
-  end
-
-  def unsubscribe!
-    update_attribute(:emailable, false)
   end
 
   ### Avatar
@@ -353,6 +338,14 @@ class Personage < ActiveRecord::Base
       photos_wave.publish!
     end
     photos_wave
+  end
+
+  ### Emailable
+
+  def emailable?
+    if persona && user_record
+      enabled? && persona.emailable && user_record.enabled?
+    end
   end
 
 end

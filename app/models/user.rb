@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
       :email,
       :password,
       :password_confirmation,
-      :emailable,
       :default_personage_attributes,
       :current_login_at,
       :invitation_code,
@@ -79,8 +78,8 @@ class User < ActiveRecord::Base
 
   def default_personage_attributes=(attrs)
     if default_personage.nil?
-      attrs[:persona_attributes].merge!(:type => 'Persona::Person')
-      build_default_personage(attrs.merge(:default => true, :emailable => true))
+      attrs[:persona_attributes].merge!(:type => 'Persona::Person', :emailable => true)
+      build_default_personage(attrs.merge(:default => true))
     else
       default_personage.update_attributes(attrs)
     end

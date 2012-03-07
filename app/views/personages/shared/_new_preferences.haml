@@ -4,18 +4,19 @@
       .pane
         %h1 Preferences
         %table.preferences
-          %tr
-            %td
-              = form.check_box :emailable_without_enabled_personage, {}, 1, 0
-            %td
-              = form.label :emailable_without_enabled_personage, 'Subscribe to emails'
-              .instructions Emails are sent for cocktails, new messages and new comments.
-          %tr
-            %td
-              = form.check_box :featured?
-            %td
-              = form.label :featured, 'Featured'
-              .instructions Featured headshots are displayed on #{current_site.display_name}'s welcome page and emails.
+          = form.fields_for :persona, personage.persona do |persona_form|
+            %tr
+              %td
+                = persona_form.check_box :emailable
+              %td
+                = persona_form.label :emailable, 'Subscribe to emails'
+                .instructions Emails are sent for cocktails, new messages and new comments.
+            %tr
+              %td
+                = persona_form.check_box :featured
+              %td
+                = persona_form.label :featured, 'Featured'
+                .instructions Featured headshots are displayed on #{current_site.display_name}'s welcome page and emails.
           %tr
             %td
               = hidden_field_tag 'personage[state]', 'disabled', :id => nil

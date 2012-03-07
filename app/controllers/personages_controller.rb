@@ -217,7 +217,7 @@ class PersonagesController < ApplicationController
 
   def default_attributes
     type = params[:type] || 'person'
-    { :emailable_without_enabled_personage => true, :persona_attributes => { :type => "Persona::#{type.titleize}" }}
+    { :persona_attributes => { :type => "Persona::#{type.titleize}", :emailable => true }}
   end
 
 end
