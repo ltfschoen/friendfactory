@@ -2,7 +2,7 @@ module Posting::AvatarsHelper
 
   def link_to_profile(personage, opts = {})
     if personage.present?
-      name = opts[:label] || personage.handle
+      name = opts[:label] || personage.display_handle
       link_to(name, url_for(personage.profile), :class => 'profile username')
     end
   end

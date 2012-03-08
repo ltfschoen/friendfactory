@@ -21,7 +21,9 @@ class Posting::AvatarsController < ApplicationController
   end
 
   def personage
-    posting.user
+    personage = Personage.includes(:persona => :avatar).find(posting[:user_id])
+    personage.persona.avatar = posting
+    personage
   end
 
   memoize :posting, :personage
