@@ -1,0 +1,10 @@
+.post_frame
+  .post.signal[ persona ]{ uid(persona[:user_id]) }
+    .portrait= thimble_link_to_profile(persona.user, :remote => true)
+    .clear
+      .cell
+        = link_to_profile(persona.user)
+        = link_to "just joined #{current_site.display_name}!", posting_comments_path(persona), :class => 'comments', :remote => true
+      %span.date Signed up #{distance_of_time_in_words_to_now(persona.created_at)} ago
+      = link_to_comments(persona.comments.published.count, posting_comments_path(persona))
+  .reaction

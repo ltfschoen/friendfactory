@@ -19,10 +19,10 @@ class WelcomeController < ApplicationController
   end
 
   def signup
-    @user = current_site.users.build(params[:user])
     respond_to do |format|
       if create_user_and_log_in
-        flash[:notice] = "Welcome to #{current_site.display_name}, #{@user.default_personage.handle}!"
+        current_site.home_wave.postings << new_persona_posting
+        new_persona_posting.publish!
         format.html { redirect_to root_path }
       else
         format.html { render :action => 'show' }
@@ -33,7 +33,6 @@ class WelcomeController < ApplicationController
   def login
     respond_to do |format|
       if user_session.save
-        flash[:notice] = "Welcome back, #{user_session.record.default_personage.handle}!"
         format.html { redirect_back_or_default(root_path) }
       else
         @user = User.new({ :invitation_code => params[:invitation_code] })
@@ -55,6 +54,48 @@ class WelcomeController < ApplicationController
 
   private
 
+  def featured_profiles
+    @featured_profiles ||= begin
+      Personage.enabled.
+          site(current_site).
+          joins(:persona).
+          merge(Persona::Base.featured).
+          includes(:profile).
+          limit(4).
+          order('rand()').
+          map(&:profile)
+    end
+  end
+
+  def user
+    @user
+  end
+
+  def user_session
+    @user_session ||= current_site.user_sessions.new(params[:user_session])
+  end
+
+  def new_persona_posting
+    @new_persona_posting ||= begin
+      Posting::Persona.new do |posting|
+        posting.user = user.default_personage
+      end
+    end
+  end
+
+  ###
+
+  def create_user_and_log_in
+    User.transaction do
+      @user = current_site.users.build(params[:user])
+      if @user.save && @user.accept_invitation
+        @user_session = current_site.user_sessions.create(params[:user])
+      else
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
+
   def new_launch_user
     LaunchUser.new(params[:launch_user]).tap do |user|
       user.site = current_site.name
@@ -63,26 +104,6 @@ class WelcomeController < ApplicationController
 
   def require_launch_site
     redirect_to welcome_path unless current_site.launch?
-  end
-
-  def featured_profiles
-    @featured_profiles ||= begin
-      Personage.enabled.site(current_site).joins(:persona).merge(Persona::Base.featured).includes(:profile).limit(4).order('rand()').map(&:profile)
-    end
-  end
-
-  def user_session
-    @user_session ||= current_site.user_sessions.new(params[:user_session])
-  end
-
-  def create_user_and_log_in
-    User.transaction do
-      if @user.save && @user.accept_invitation
-        current_site.user_sessions.create(params[:user])
-      else
-        raise ActiveRecord::Rollback
-      end
-    end
   end
 
 end

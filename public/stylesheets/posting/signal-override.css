@@ -1,0 +1,8 @@
+.post.signal.posting_persona .cell {
+  background: url(/images/ribbon_grey.png);
+  color: #333;
+  text-shadow: 0 1px 1px #fff;
+}
+.post.signal.posting_persona .cell a {
+  color: #333;
+}
