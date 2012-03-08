@@ -150,6 +150,11 @@ hr {
 	color: #A00;
 }
 
+.field_with_errors input {
+	color: #A00 !important;
+	font-weight: bold;
+}
+
 ul#errors li {
 	list-style: disc;
 	color: #333;
