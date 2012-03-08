@@ -133,6 +133,7 @@ class Personage < ActiveRecord::Base
 
   def create_and_publish_avatar_to_profile_wave(attrs)
     avatar = persona.build_avatar(attrs)
+    avatar.site = site
     if persona.save
       avatar.publish!
       profile.postings << avatar

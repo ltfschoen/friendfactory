@@ -92,7 +92,10 @@ class PersonagesController < ApplicationController
         personage.create_and_publish_avatar_to_profile_wave(params[:posting_avatar])
       else
         handle = current_user.handle
-        Posting::Avatar.create(params[:posting_avatar]) { |posting| posting.user = current_user }
+        Posting::Avatar.create(params[:posting_avatar]) do |posting|
+          posting.user = current_user
+          posting.site = current_site
+        end
       end
       format.json { render :json => { :url => avatar.url(:polaroid), :title => handle, :pid => pid, :avatar_id => avatar[:id] }, :content_type => 'text/html' }
     end

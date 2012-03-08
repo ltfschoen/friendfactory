@@ -33,6 +33,8 @@ class Wave::Profile < Wave::Base
     end
   end
 
+  private
+
   def related_postings(posting)
     posting.site.home_wave.postings.
         type(Posting::Avatar).
