@@ -4,7 +4,7 @@
     .clear
       .cell
         = link_to_profile(avatar.user)
-        = link_to 'posted a new profile', comments_posting_avatar_path(avatar), :class => 'comments', :remote => true
+        = link_to 'posted a new avatar', comments_posting_avatar_path(avatar), :class => 'comments', :remote => true
       %span.date Uploaded #{distance_of_time_in_words_to_now(avatar.updated_at)} ago
       = link_to_comments(avatar.comments.published.count, comments_posting_avatar_path(avatar))
   .reaction
