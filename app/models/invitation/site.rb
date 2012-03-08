@@ -5,8 +5,16 @@ class Invitation::Site < Invitation::Base
   validates_uniqueness_of :code
 
   state_machine do
+    state :offered
+    state :accepted
+    state :expired
+
     event :accept do
       transitions :to => :offered, :from => [ :offered ], :on_transition => [ :create_confirmation_and_friendship_with_invitee_personage ]
+    end
+
+    event :expire do
+      transitions :to => :expired, :from => [ :offered ]
     end
   end
 

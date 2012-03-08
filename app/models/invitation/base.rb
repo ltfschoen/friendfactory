@@ -6,16 +6,6 @@ class Invitation::Base < ActiveRecord::Base
 
   set_table_name 'invitations'
 
-  state_machine do
-    state :offered
-    state :accepted
-    state :expired
-
-    event :expire do
-      transitions :to => :expired, :from => [ :offered ]
-    end
-  end
-
   scope :offered, where(:state => 'offered')
 
   scope :type, lambda { |*types|
