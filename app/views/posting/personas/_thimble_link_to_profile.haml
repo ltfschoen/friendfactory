@@ -1,0 +1,3 @@
+- if personage.present?
+  - remote = opts.delete(:remote)
+  = link_to(thimble_image_tag(personage, opts), path, :remote => remote)

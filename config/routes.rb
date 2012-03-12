@@ -60,9 +60,8 @@ Friskyfactory::Application.routes.draw do
 
   # Posting Functions
   namespace :posting do
-    resources :avatars, :only => [] do
-      get :comments, :on => :member
-    end
+    resources :avatars,  :only => [] { get :comments, :on => :member }
+    resources :personas, :only => [] { get :comments, :on => :member }
   end
 
   scope :module => :posting do
