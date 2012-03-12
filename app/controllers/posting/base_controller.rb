@@ -25,7 +25,7 @@ class Posting::BaseController < ApplicationController
               :profile_path => url_for(profile),
               :image_path   => profile.avatar.url(:thimble),
               :handle       => profile.handle,
-              :body         => tag_helper.truncate(comment.body, :length => 60),
+              :body         => tag_helper.truncate(comment.body, :length => 100),
               :updated_at   => tag_helper.distance_of_time_in_words_to_now(comment.updated_at) }
           else
             Rails.logger.warn("#{comment[:type]}:#{comment.id}@#{current_site.name} -- no profile")
