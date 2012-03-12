@@ -7,6 +7,7 @@ namespace :ff do
         posting.user = personage
         posting.created_at = created_at
         posting.updated_at = created_at
+        posting.new_signup = true
         posting.state = :published
         posting.save!
         posting

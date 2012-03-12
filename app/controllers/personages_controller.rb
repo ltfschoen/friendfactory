@@ -67,6 +67,8 @@ class PersonagesController < ApplicationController
     @personage = current_user_record.personages.find(params[:id])
     respond_to do |format|
       if personage.update_attributes(params[:personage])
+        current_site.home_wave.postings << new_persona_posting
+        new_persona_posting.publish!
         format.html { redirect_to profile_path }
         format.json { render :json => { :ok => true }}
       else
@@ -183,8 +185,6 @@ class PersonagesController < ApplicationController
     users.paginate(:page => params[:page], :per_page => @@per_page)
   end
 
-  memoize :paged_users
-
   def users
     Personage.enabled.
       site(current_site).
@@ -195,12 +195,10 @@ class PersonagesController < ApplicationController
       scoped
   end
 
-  memoize :users
-
-  def transaction
-    ActiveRecord::Base.transaction { yield }
-  rescue ActiveRecord::RecordInvalid
-    nil
+  def new_persona_posting
+    Posting::Persona.new do |posting|
+      posting.user = current_user
+    end
   end
 
   def page_title
@@ -210,13 +208,23 @@ class PersonagesController < ApplicationController
     [ current_site.display_name, title ].join(' - ')
   end
 
-  memoize :page_title
-
   def invitation_wave
     current_user.find_or_create_invitation_wave_for_site(current_site)
   end
 
+  memoize \
+      :paged_users,
+      :users,
+      :page_title,
+      :new_persona_posting
+
   ###
+
+  def transaction
+    ActiveRecord::Base.transaction { yield }
+  rescue ActiveRecord::RecordInvalid
+    nil
+  end
 
   def default_attributes
     type = params[:type] || 'person'

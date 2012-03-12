@@ -1,11 +1,21 @@
 - user = persona.user
 .post_frame
-  .post.signal[ persona ]{ uid(persona[:user_id]) }
-    .portrait= thimble_link_to_profile(user, :remote => true)
-    .clear
-      .cell
-        = link_to_profile(user)
-        = link_to "just joined#{user.handle.length < 18 ? ' ' + current_site.display_name : nil}!", posting_comments_path(persona), :class => 'comments', :remote => true
-      %span.date Signed up #{distance_of_time_in_words_to_now(persona.created_at)} ago
-      %span.comments= link_to "Say&nbsp;hi&nbsp;&rarr;".html_safe, posting_comments_path(persona)
+  - if persona.new_signup?
+    .post.signal.new_signup[ persona ]{ uid(persona[:user_id]) }
+      .portrait= thimble_link_to_profile(user, :remote => true)
+      .clear
+        .cell
+          = link_to_profile(user)
+          = link_to "just joined#{user.handle.length < 18 ? ' ' + current_site.display_name : nil}!", comments_posting_persona_path(persona), :class => 'comments', :remote => true
+        %span.date Signed up #{distance_of_time_in_words_to_now(persona.created_at)} ago
+        %span.comments= link_to "Say&nbsp;hi&nbsp;&rarr;".html_safe, comments_posting_persona_path(persona), :remote => true
+  - else
+    .post.signal[ persona ]{ uid(persona[:user_id]) }
+      .portrait= thimble_link_to_profile(user, :remote => true)
+      .clear
+        .cell
+          = link_to_profile(user)
+          = link_to "updated their profile", comments_posting_persona_path(persona), :class => 'comments', :remote => true
+        %span.date Updated #{distance_of_time_in_words_to_now(persona.created_at)} ago
+        %span.comments= link_to "What's&nbsp;changed&nbsp;&rarr;".html_safe, comments_posting_persona_path(persona), :remote => true
   .reaction

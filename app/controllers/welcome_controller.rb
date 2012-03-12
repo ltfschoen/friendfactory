@@ -79,6 +79,7 @@ class WelcomeController < ApplicationController
     @new_persona_posting ||= begin
       Posting::Persona.new do |posting|
         posting.user = user.default_personage
+        posting.new_signup = true
       end
     end
   end
