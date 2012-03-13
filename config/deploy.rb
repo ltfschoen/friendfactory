@@ -14,7 +14,7 @@ default_run_options[:pty] = true
 ssh_options[:port] = 1968
 ssh_options[:username] = 'mrcap'
 
-# set :whenever_command, "bundle exec whenever"
+set :whenever_command, "bundle exec whenever"
 
 after 'deploy:symlink', 'deploy:config_symlinks'
 # after "deploy:symlink", "deploy:thinking_sphinx"
@@ -80,23 +80,6 @@ task :staging do
   set :rails_env, 'staging'
   set :whenever_environment, 'staging'
   set :deploy_to, '/home/mrcap/friskyfactory/staging'
-end
-
-desc 'Set biorealism environment'
-task :biorealism do
-  puts "*** deploying to biorealism"  
-  role :app, 'ff01.friskyfactory.com'
-  role :web, 'ff01.friskyfactory.com'
-  role :db,  'ff01.friskyfactory.com', :primary => true
-  set :branch do
-    default_tag = ENV['release'] || 'master'
-    tag = Capistrano::CLI.ui.ask "Pushed tag to deploy: [#{default_tag}] "
-    tag = default_tag if tag.empty?
-    tag
-  end
-  set :rails_env, 'staging'
-  # set :whenever_environment, 'staging'
-  set :deploy_to, '/home/mrcap/friskyfactory/biorealism'
 end
 
 desc "Set production environment"

@@ -23,6 +23,10 @@
 #   rake "thinking_sphinx:reindex"
 # end
 
-every 1.day, :at => '1:00am' do
-  rake "ff:invitations:redeliver"
+every 1.day, :at => '12:01am' do
+  # rake "ff:invitations:redeliver"
+end
+
+every 1.day, :at => '12:01pm' do
+  rake 'ff:postings:unstick'
 end

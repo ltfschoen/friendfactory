@@ -70,22 +70,10 @@ module Posting::PostingsHelper
       end      
     end
   end
-  
+
   def render_posting(posting)
     posting_type = posting.class.name.demodulize.tableize
     render :partial => File.join('posting', posting_type, posting_type.singularize), :object => posting
-  end
-  
-  def day_names_from_today
-    today = Date.today
-    1.upto(6).inject([]) do |memo, num|
-      date = today + num.days
-      memo << DateName.new(date, date.strftime("%A"))
-    end
-  end
-
-  def sticky_until_tag
-    "Sticky&nbsp;until&nbsp;#{select_tag(:sticky_until, options_from_collection_for_select(day_names_from_today, :date, :day_name), :include_blank => true)}".html_safe
   end
 
   def spinner_tag
