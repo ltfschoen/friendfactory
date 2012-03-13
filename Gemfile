@@ -33,7 +33,7 @@ gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'pusher', '~> 0.8.1'
 gem 'will_paginate', '~> 3.0.2'
-gem 'whenever', :require => false
+gem 'whenever', '~> 0.7.3', :require => false
 gem 'embedly'
 gem 'user_agent'
 gem 'delayed_job_active_record'
