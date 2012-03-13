@@ -2,16 +2,31 @@ class Posting::Link < Posting::Base
 
   attr_writer :url
 
-  attr_accessible :url, :subject, :body
+  attr_accessible \
+      :url,
+      :subject,
+      :body
 
   validates_presence_of :user, :resource
 
-  belongs_to :resource, :class_name => 'Resource::Link', :foreign_key => 'resource_id'
+  delegate \
+      :original_url,
+      :display_url,
+      :title,
+      :description,
+      :author_name,
+      :author_url,
+      :provider_name,
+      :provider_display,
+      :provider_url,
+      :embeds,
+    :to => :resource
+
+  belongs_to :resource,
+      :class_name => 'Resource::Link',
+      :foreign_key => 'resource_id'
 
   after_validation :set_user_id_on_photos
-
-  delegate :original_url, :display_url, :title, :description, :author_name, :author_url, :provider_name, :provider_display, :provider_url, :embeds,
-      :to => :resource
 
   def url
     resource.try(:url) || @url

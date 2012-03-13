@@ -34,7 +34,7 @@ gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'pusher', '~> 0.8.1'
 gem 'will_paginate', '~> 3.0.2'
 gem 'whenever', '~> 0.7.3', :require => false
-gem 'embedly'
+gem 'embedly', '~> 1.5.2'
 gem 'user_agent'
 gem 'delayed_job_active_record'
 gem 'daemons'

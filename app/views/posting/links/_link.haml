@@ -1,24 +1,19 @@
 - user = link.user
 .post_frame
-  .posting.post.link[link]{uid(link[:user_id])}
+  .posting.post.link[ link ]{ uid(link[:user_id]) }
     = link_to_unpublish(link)
     .portrait= thimble_link_to_profile(user, :remote => true)
     .clear
+      - if link.embeds.present?
+        - link.embeds.each do |embed|
+          .embed{ :class => embed.type }= render_embed(embed)
       .cell
-        By #{link_to_profile(user)}
         - unless link.embeds.primary.present?
-          %p
-            - link.photos.each do |photo|
-              = image_tag(photo.image.url(:thumb), :site => false, :size => '50x50')
-        %p
-          = link_to truncate(link.title, :length => 80), link.url, :target => '_blank'
-          %br/
-          = link_to link.provider_display, link.provider_url, :target => '_blank'
+          - link.photos.each do |photo|
+            = image_tag(photo.image.url(:thumb), :site => false, :size => '50x50')
+        %p= link_to truncate(link.title, :length => 80), link.url, :target => '_blank'
         %p= link.description
-        - if link.embeds.present?
-          - link.embeds.each do |embed|
-            .embed{ :class => embed.type }
-              =# render_embed(embed)
+        %p.provider= link_to link.provider_display, link.provider_url, :target => '_blank'
       = posted_distance_of_time(link)
       = link_to_comments(link.children.type(Posting::Comment).published.count, posting_comments_path(link))
   .reaction

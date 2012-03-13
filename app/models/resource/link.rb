@@ -1,23 +1,24 @@
 require 'open-uri'
 
 class Resource::Link < ActiveRecord::Base
-  
+
   set_inheritance_column nil
 
   has_many :embeds,
       :class_name  => 'Resource::Embed',
       :foreign_key => 'resource_link_id' do
     def primary
-      where(:primary => true).order('`resource_embeds`.`id` asc').limit(1).first
+      where(:primary => true).order('`resource_embeds`.`id` ASC').limit(1).first
     end
   end
 
   def embedify
     api = Embedly::API.new(:key => EmbedlyKey)
-    response = api.preview(:url => url, :maxwidth => 800).first
-    if response.try(:error_code).nil?
+    response = api.preview(:url => url, :maxwidth => 310).first
+    if response && response.error_code.nil?
       response = response.marshal_dump
       response.except(:object, :images, :embeds, :place, :event).each do |key, value|
+        Rails.logger.info "#{key} = #{value}"
         send("#{key}=", value) rescue nil
       end
       primary_embed = response[:object].present? ? response[:object].merge(:primary => true) : nil
@@ -28,13 +29,13 @@ class Resource::Link < ActiveRecord::Base
   rescue
     nil
   end
-    
+
   def images
     @images || []
-  end  
-    
+  end
+
   private
-  
+
   def build_embeds(new_embeds)
     new_embeds.each do |embed|
       if embed.present?
@@ -42,7 +43,7 @@ class Resource::Link < ActiveRecord::Base
       end
     end
   end
-  
+
   def download_images(image_urls)
     if image_urls.present?
       @images = image_urls.map do |image_url|
@@ -50,7 +51,7 @@ class Resource::Link < ActiveRecord::Base
       end.compact
     end
   end
-  
+
   def download_image(image_url)
     io = open(URI.parse(image_url), :redirect => true)
     def io.original_filename; base_uri.path.split('/').last; end
