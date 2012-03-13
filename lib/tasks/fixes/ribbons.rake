@@ -2,13 +2,24 @@ namespace :ff do
   namespace :fix do
     task :ribbons => :environment do
 
-      def create_signup_posting(personage, created_at)
+      def new_persona_posting(personage, created_at)
         posting = Posting::Persona.new
         posting.user = personage
         posting.created_at = created_at
         posting.updated_at = created_at
-        posting.new_signup = true
         posting.state = :published
+        posting
+      end
+
+      def create_signup_persona_posting(personage, created_at)
+        posting = new_persona_posting(personage, created_at)
+        posting.new_signup = true
+        posting.save!
+        posting
+      end
+
+      def create_updated_persona_posting(personage, created_at)
+        posting = new_persona_posting(personage, created_at)
         posting.save!
         posting
       end
@@ -36,13 +47,26 @@ namespace :ff do
             map(&:unpublish!)
       end
 
-      def create_signup_postings
+      def create_signup_persona_publications
         ActiveRecord::Base.record_timestamps = false
         Personage.includes(:user => :site).each do |personage|
           created_at = personage.persona.created_at
-          posting = create_signup_posting(personage, created_at)
+          posting = create_signup_persona_posting(personage, created_at)
           [ personage.site.home_wave.publications, personage.profile.publications ].each do |collection|
             create_publication(collection, posting, created_at)
+          end
+        end
+        ActiveRecord::Base.record_timestamps = true
+      end
+
+      def create_updated_persona_publications
+        ActiveRecord::Base.record_timestamps = false
+        Persona::Person.includes(:user => { :user => :site }).where('`created_at` <> `updated_at`').each do |person|
+          created_at = person.updated_at
+          personage = person.user
+          posting = create_updated_persona_posting(personage, created_at)
+          [ personage.site.home_wave, personage.profile ].each do |wave|
+            create_publication(wave.publications, posting, created_at)
           end
         end
         ActiveRecord::Base.record_timestamps = true
@@ -66,7 +90,8 @@ namespace :ff do
       end
 
       Personage.transaction do
-        create_signup_postings
+        create_signup_persona_publications
+        create_updated_persona_publications
         create_avatar_publications
       end
     end
