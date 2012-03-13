@@ -3,6 +3,7 @@ class Posting::LinksController < Posting::BaseController
   def create
     wave = current_site.waves.find(params[:wave_id])
     add_posting_to_wave(new_link_posting, wave)
+    new_link_posting.reload
     respond_to do |format|
       format.js { render :layout => false }
     end
