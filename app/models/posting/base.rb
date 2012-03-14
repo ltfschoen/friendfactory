@@ -74,7 +74,7 @@ class Posting::Base < ActiveRecord::Base
 
   def sticky_until=(sticky_until = nil)
     if sticky_until.present?
-      write_attribute(:sticky_until, (Time.zone.parse(sticky_until).utc.tomorrow - 1.second rescue nil))
+      write_attribute(:sticky_until, (Time.zone.parse(sticky_until).utc.end_of_day rescue nil))
     end
   end
 
