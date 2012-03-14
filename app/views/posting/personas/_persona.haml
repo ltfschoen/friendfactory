@@ -2,6 +2,8 @@
 .post_frame
   - if persona.new_signup?
     .post.signal.new_signup[ persona ]{ uid(persona[:user_id]) }
+      - if current_user.admin?
+        = link_to_unpublish(persona)
       .portrait= thimble_link_to_profile(user, :remote => true)
       .clear
         .cell
@@ -11,6 +13,8 @@
         %span.comments= link_to "Say&nbsp;hi&nbsp;&rarr;".html_safe, comments_posting_persona_path(persona), :remote => true
   - else
     .post.signal[ persona ]{ uid(persona[:user_id]) }
+      - if current_user.admin?
+        = link_to_unpublish(persona)
       .portrait= thimble_link_to_profile(user, :remote => true)
       .clear
         .cell
