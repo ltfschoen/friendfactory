@@ -105,6 +105,10 @@ class Posting::Base < ActiveRecord::Base
     !new_record?
   end
 
+  def authorizes?(user, action)
+    (action == 'show') || user.admin? || (user[:id] == self[:user_id])
+  end
+
   private
 
   def increment_postings_counter

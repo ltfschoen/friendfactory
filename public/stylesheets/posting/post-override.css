@@ -2,15 +2,18 @@
 	clear: both;
 }
 
-.post .remove {
-	right: 0px;
-	top: -6px;
-	color: #333;
-	background: transparent;
-	text-decoration: none;
+.post a.admin {
+	position: absolute;
 	display: block;
 	visibility: hidden;
 	opacity: 0;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	line-height: 15px;
+	color: #333;
+	background: transparent;
+	text-decoration: none;
 	-webkit-transition: opacity 0.1s linear;
 	-moz-transition: opacity 0.1s linear;
 	-ms-transition: opacity 0.1s linear;
@@ -18,17 +21,32 @@
 	transition: opacity 0.1s linear;
 }
 
-.post:hover .remove {
+.post a.admin img {
+	width: 10px;
+	height: 10px;
+}
+
+.post a.admin.remove {
+	right: 0px;
+	top: -8px;
+}
+
+.post a.admin.edit {
+	right: 15px;
+	top: -8px;
+}
+
+.post:hover a.admin {
 	visibility: hidden;
 	opacity: 0;
 }
 
-.ie8 .post .remove,
-.ie8 .post:hover .remove {
+.ie8 .post a.admin,
+.ie8 .post:hover a.admin {
 	opacity: 1;
 }
 
-body.gid_admin .post:hover .remove {
+body.gid_admin .post:hover a.admin {
 	visibility: visible;
 	opacity: 1;
 }
@@ -65,4 +83,14 @@ body.gid_admin .post:hover .remove {
 	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 	-o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.post:hover [contenteditable] {
+	outline: 2px dotted #CCC;
+
+}
+
+.post [contenteditable]:focus {
+	outline: 2px solid #CCC;
+	background-color: #FFFFE0;
 }

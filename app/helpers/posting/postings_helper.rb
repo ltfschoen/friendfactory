@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Posting::PostingsHelper
 
   DateName = Struct.new(:date, :day_name)
@@ -85,6 +87,14 @@ module Posting::PostingsHelper
       prefix = posting.updated_at == posting.created_at ? 'Posted' : 'Updated'
       "#{prefix} #{distance_of_time_in_words_to_now(posting.updated_at)} ago"
     end
+  end
+
+  def link_to_unpublish(posting)
+    link_to "×", unpublish_posting_path(posting), :title => 'Remove', :class => 'admin remove', :rel => '#unpublish_overlay'
+  end
+
+  def link_to_edit(posting)
+    link_to image_tag('icons/edition-modify.png', :size => '10x10'), edit_posting_path(posting), :title => 'Edit', :class => 'admin edit'
   end
 
 end

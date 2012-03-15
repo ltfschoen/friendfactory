@@ -3,6 +3,7 @@ class Posting::PostingsController < ApplicationController
   extend ActiveSupport::Memoizable
 
   before_filter :require_user
+  before_filter :require_authorized_user
 
   helper_method \
       :posting,
@@ -10,9 +11,22 @@ class Posting::PostingsController < ApplicationController
 
   layout 'community'
 
-  def show    
+  def show
     respond_to do |format|
       format.html { hash_key_param? ? send_posting : render }
+    end
+  end
+
+  def edit
+    respond_to do |format|
+      format.html { redirect_to '/501.html' }
+      format.any(:json, :js) { head :not_implemented }
+    end
+  end
+
+  def update
+    respond_to do |format|
+      format.json { render :json => { :ok => posting.update_attributes(params[:posting]) }}
     end
   end
 
@@ -38,6 +52,15 @@ class Posting::PostingsController < ApplicationController
   def send_posting
     if posting
       send_file(posting.image.path(params[:style]), :disposition => 'inline', :type => posting.image_content_type)
+    end
+  end
+
+  def require_authorized_user
+    unless posting.authorizes?(current_user, params[:action])
+      respond_to do |format|
+        format.html { redirect_to '/422.html' }
+        format.any(:json, :js) { head :unprocessable_entity }
+      end
     end
   end
 

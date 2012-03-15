@@ -65,7 +65,7 @@ Friskyfactory::Application.routes.draw do
   end
 
   scope :module => :posting do
-    resources :postings, :only => [ :show ] do |posting|
+    resources :postings, :only => [ :show, :edit, :update ] do |posting|
       member do
         delete :unpublish, :controller => 'base'
       end

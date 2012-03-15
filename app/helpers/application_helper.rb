@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ApplicationHelper
   
   def form_for(record_or_name_or_array, *args, &proc)
@@ -75,14 +73,11 @@ module ApplicationHelper
 
   def uid(id = nil)
     id = current_user.id if id.nil? && current_user.present?
-    { :class=> Personage.uid(id) }
+    { :class => Personage.uid(id) }
   end
 
   def gid
     { :class => current_user.gid } if current_user.present?
   end
 
-  def link_to_unpublish(posting)
-    link_to "×", unpublish_posting_path(posting), :title => 'Remove', :class => 'remove', :rel => '#unpublish_overlay'
-  end
 end

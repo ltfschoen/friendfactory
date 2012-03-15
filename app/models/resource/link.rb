@@ -4,6 +4,11 @@ class Resource::Link < ActiveRecord::Base
 
   set_inheritance_column nil
 
+  attr_accessible \
+      :url,
+      :title,
+      :description
+
   has_many :embeds,
       :class_name  => 'Resource::Embed',
       :foreign_key => 'resource_link_id' do
@@ -17,17 +22,13 @@ class Resource::Link < ActiveRecord::Base
     response = api.preview(:url => url, :maxwidth => 310).first
     if response && response.error_code.nil?
       response = response.marshal_dump
-      response.except(:object, :images, :embeds, :place, :event).each do |key, value|
-        Rails.logger.info "#{key} = #{value}"
-        send("#{key}=", value) rescue nil
-      end
-      primary_embed = response[:object].present? ? response[:object].merge(:primary => true) : nil
-      build_embeds([ primary_embed ] + response[:embeds])
-      download_images(response[:images])
+      assign_attributes(response)
+      build_embeds(response)
+      download_images(response)
       true
+    else
+      false
     end
-  rescue
-    nil
   end
 
   def images
@@ -36,16 +37,20 @@ class Resource::Link < ActiveRecord::Base
 
   private
 
-  def build_embeds(new_embeds)
-    new_embeds.each do |embed|
-      if embed.present?
-        embeds.build(embed)
-      end
+  def assign_attributes(response)
+    response.except(:object, :images, :embeds, :place, :event).each do |key, value|
+      send("#{key}=", value) rescue nil
     end
   end
 
-  def download_images(image_urls)
-    if image_urls.present?
+  def build_embeds(response)
+    primary_embed = response[:object].present? ? response[:object].merge(:primary => true) : nil
+    embeds = ([ primary_embed ] + response[:embeds]).compact
+    embeds.each { |embed| embeds.build(embed) }
+  end
+
+  def download_images(response)
+    if image_urls = response[:images]
       @images = image_urls.map do |image_url|
         download_image(image_url.to_options[:url])
       end.compact

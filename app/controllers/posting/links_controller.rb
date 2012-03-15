@@ -18,7 +18,6 @@ class Posting::LinksController < Posting::BaseController
         link.user = current_user
         link.sticky_until = params[:posting_link][:sticky_until] if current_user.admin?
         link.embedify
-        link.build_photos
       end
     end
   end

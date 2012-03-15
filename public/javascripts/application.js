@@ -9,15 +9,31 @@
 
 	$.support.csstransforms3d = Modernizr.csstransforms3d;
 
-	$.getId = function(element) {
+	$.getId = function (element) {
 		var id = $(element).attr('id'),
 			match;
-		if ((id !== undefined) && (match = id.match(/\d{1,}$/))) match = match[0];
+
+		if ((id !== undefined) && (match = id.match(/\d{1,}$/))) {
+			match = match[0];
+		}
 		return match;
 	};
 
 	$.fn.getId = function() {
 		return $.getId(this);
+	};
+
+	$.getUserId = function () {
+		var classNames = $($('body').attr('class').split(' ')),
+			match;
+
+		$(classNames).each(function (idx, className) {
+			if (match = className.match(/^uid_(\d{1,})$/)) {
+				match = match[0];
+				return false;
+			}
+		});
+		return match
 	};
 
 })(jQuery);
