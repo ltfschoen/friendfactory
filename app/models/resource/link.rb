@@ -45,8 +45,9 @@ class Resource::Link < ActiveRecord::Base
 
   def build_embeds(response)
     primary_embed = response[:object].present? ? response[:object].merge(:primary => true) : nil
-    embeds = ([ primary_embed ] + response[:embeds]).compact
-    embeds.each { |embed| embeds.build(embed) }
+    ([ primary_embed ] + response[:embeds]).flatten.compact.each do |embed|
+        embeds.build(embed)
+    end
   end
 
   def download_images(response)

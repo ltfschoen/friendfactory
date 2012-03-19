@@ -8,9 +8,8 @@
         - link.embeds.each do |embed|
           .embed{ :class => embed.type }= render_embed(embed)
       .cell
-        - unless link.embeds.primary.present?
-          - link.photos.each do |photo|
-            = image_tag(photo.image.url(:thumb), :site => false, :size => '50x50')
+        - link.photos.each do |photo|
+          = image_tag(photo.image.url(:thumb), :site => false, :size => '50x50')
         %p= link_to truncate(link.title, :length => 80), link.url, :target => '_blank', :class => 'title'
         %p.description= link.description
         %p= link_to link.provider_display, link.provider_url, :target => '_blank'
