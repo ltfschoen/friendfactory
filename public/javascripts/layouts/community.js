@@ -113,7 +113,10 @@ jQuery(function($) {
 		};
 
 	// Hide post frames until we know their heights
-	$('.post_frame').css({ visibility: 'hidden' });
+	$('div.post_frame').css({ visibility: 'hidden' });
+
+	// Do postings' own initialization
+	$('div.posting').posting();
 
 	// Headshots in sidebar
 	$('div.headshot', '#sidebar').headshot();
