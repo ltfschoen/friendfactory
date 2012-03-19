@@ -1,10 +1,10 @@
-= form_for Posting::Video.new, :url => wave_posting_videos_path(wave), :remote => true, :html => { :class => 'new_posting_link new_post_frame' } do |f|
+= form_for Posting::Link.new, :url => wave_posting_links_path(wave), :remote => true, :html => { :id => 'new_posting_video', :class => 'new_posting_link new_post_frame' } do |f|
   = f.resolve resolver
   .new_post.link
     .body
-      = f.text_field :url, :placeholder => 'http://www.youtu.be/...'
+      = f.text_field :url, :placeholder => 'http:// of a video to share'
     .foot
       = f.sticky_until if current_user.admin?
       = f.submit 'Post', :'data-disable-with' => 'Post'
       = f.cancel 'Cancel'
-      = spinner_tag      
+      = spinner_tag
