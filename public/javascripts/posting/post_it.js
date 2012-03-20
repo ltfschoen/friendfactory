@@ -2,15 +2,15 @@
 
 	$.posting = $.posting || {};
 
-	$.posting.link = function (links) {
-		links
+	$.posting.postIt = function (postings) {
+		postings
 			.filter('.' + $.getUserId())
-			.find('section.description, a.title')
+			.find('section')
 				.attr('contenteditable', true)
 
 				.bind('blur', function (event) {
 					var $this = $(this),
-						$posting = $this.closest('.posting_link'),
+						$posting = $this.closest('.posting'),
 						params = {};
 
 					if ($this.is('[contenteditable]')) {
@@ -18,7 +18,7 @@
 						$.ajax({
 							type: 'put',
 							url: '/postings/' + $posting.getId(),
-							data: { posting: { resource_attributes: params }},
+							data: { posting: params },
 							dataType: 'json',
 							success: function () {}
 						});

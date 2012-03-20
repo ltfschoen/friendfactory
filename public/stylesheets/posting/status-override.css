@@ -13,3 +13,7 @@
 .ie .status textarea {
 	overflow: hidden;
 }
+
+.status .cell section {
+	display: inline-block;
+}
