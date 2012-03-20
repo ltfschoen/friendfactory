@@ -19,16 +19,15 @@ class Resource::Link < ActiveRecord::Base
 
   def embedify
     api = Embedly::API.new(:key => EmbedlyKey)
-    response = api.preview(:url => url, :maxwidth => 310).first
-    if response && response.error_code.nil?
+    if response = api.preview(:url => url, :maxwidth => 310).first
       response = response.marshal_dump
       assign_attributes(response)
       build_embeds(response)
       download_images(response)
       true
-    else
-      false
     end
+  rescue
+    false
   end
 
   def images
