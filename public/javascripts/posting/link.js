@@ -10,18 +10,12 @@
 
 				.bind('blur', function (event) {
 					var $this = $(this),
-						$posting = $this.closest('.posting_link'),
+						$posting = $this.closest('.posting'),
 						params = {};
 
 					if ($this.is('[contenteditable]')) {
 						params[$this.attr('class')] = $this.html();
-						$.ajax({
-							type: 'put',
-							url: '/postings/' + $posting.getId(),
-							data: { posting: { resource_attributes: params }},
-							dataType: 'json',
-							success: function () {}
-						});
+						$.posting.ajax($posting, { resource_attributes: params });
 					};
 				})
 	};
