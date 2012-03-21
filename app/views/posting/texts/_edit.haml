@@ -1,0 +1,16 @@
+= form_for posting, :url => posting_path(posting), :remote => true, :html => { :class => 'new_posting_text new_post_frame' } do |f|
+  = f.resolve resolver
+  .new_post.blog
+    .body
+      = f.text_area :body
+    .foot
+      - if current_user.admin?
+        = f.sticky_until
+      - else
+        %span.instructions Use #{link_to 'markdown', 'http://daringfireball.net/projects/markdown/syntax', :target => '_blank' } to style your blog
+      = f.submit 'Post', :'data-disable-with' => 'Post'
+      = f.cancel 'Cancel'
+  .new_post.blog.preview
+    .body &nbsp;
+    .foot
+      %span.sticky_until Preview

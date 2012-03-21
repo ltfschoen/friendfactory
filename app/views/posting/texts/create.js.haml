@@ -1,9 +1,9 @@
 - if @posting.present? && @posting.valid?
   :plain
     var $posting = $("#{escape_javascript(render_posting(@posting))}");
+    $posting.posting();
     $.navOK($posting);
     
 - else
   :plain
-    // $('.flash').text("Couldn't save your posting: #{@posting.errors.full_messages.to_sentence}")
     alert(@posting.errors.full_messages.to_sentence);

@@ -68,7 +68,9 @@
 				});
 
 			Hashify.editor(id, false, function () {
-				$preview.html(convert(this.value));
+				if ($preview.length > 0) {
+					$preview.html(convert(this.value));
+				}
 			});
 		});
 	};
