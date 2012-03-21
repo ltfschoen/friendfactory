@@ -10,7 +10,8 @@
           #{truncate(text.body, :length => Posting::TextsHelper::PostingTextMaximumLength)}
         %p.footer By #{link_to_profile(user)}
         - if crop_text_posting?(text)
-          %p.ellipsis= link_to "Continue Reading&nbsp;&rarr;".html_safe, '#'
+          %p.ellipsis
+            = link_to "Continue Reading&nbsp;&rarr;".html_safe, posting_comments_path(text, :digest => (crop_text_posting?(text) && 1)), :class => 'comments', :remote => true
       - if crop_text_posting?(text)
         = image_tag 'torn-transparent.png', :class => 'torn', :alt => 'torn-edge'
       = posted_distance_of_time(text)
