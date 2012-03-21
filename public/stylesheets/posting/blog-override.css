@@ -347,3 +347,10 @@
 	margin: 10px 0 0 0;
 	clear: both;
 }
+
+.post.blog .torn {
+	position: relative;
+	top: -10px;
+	left: 0px;
+	width: 310px;
+}

@@ -1,0 +1,9 @@
+- if show_digest?
+  .posting.post.blog.posting_text
+    .portrait= thimble_link_to_profile(posting.user, :remote => true)
+    .clear
+      .cell
+        :markdown
+          #{posting.body}
+= render :partial => 'posting/comments/new', :locals => { :posting => posting }
+= render :partial => 'posting/comments/comment', :collection => comments, :locals => { :posting => posting }

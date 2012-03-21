@@ -1,13 +1,18 @@
 - user = text.user
-- if text.subject.present?
-  .post_frame
-    .posting.post.blog[text]{uid(text[:user_id])}
-      = link_to_unpublish(text)
-      .portrait= thimble_link_to_profile(user, :remote => true)
-      .clear
-        .cell
-          = text.subject.html_safe
-          %p.footer By #{link_to_profile(user)}
-        = posted_distance_of_time(text)
-        = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text))
-    .reaction
+.post_frame
+  .posting.post.blog[ text ]{ uid(text[:user_id]) }
+    =# link_to_edit(text)
+    = link_to_unpublish(text)
+    .portrait= thimble_link_to_profile(user, :remote => true)
+    .clear
+      .cell
+        :markdown
+          #{truncate(text.body, :length => Posting::TextsHelper::PostingTextMaximumLength)}
+        %p.footer By #{link_to_profile(user)}
+        - if crop_text_posting?(text)
+          %p.ellipsis= link_to "Continue Reading&nbsp;&rarr;".html_safe, '#'
+      - if crop_text_posting?(text)
+        = image_tag 'torn-transparent.png', :class => 'torn', :alt => 'torn-edge'
+      = posted_distance_of_time(text)
+      = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text, :digest => (crop_text_posting?(text) && 1)))
+  .reaction

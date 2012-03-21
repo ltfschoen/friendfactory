@@ -2,11 +2,15 @@ class Posting::CommentsController < ApplicationController
 
   before_filter :require_user
 
+  helper_method \
+      :posting,
+      :comments,
+      :posting_type
+
   def index
-    @posting = Posting::Base.site(current_site).find(params[:posting_id])
-    @comments = @posting.comments.published.order('updated_at desc')
     respond_to do |format|
-      format.html { render :layout => false }
+      posting_path = posting.class.name.underscore.tableize
+      format.html { render File.join(posting_path, 'comments'), :layout => false, :object => comments, :locals => { :posting => posting }}
     end
   end
 
@@ -28,6 +32,20 @@ class Posting::CommentsController < ApplicationController
   end
 
   private
+
+  def posting
+    @posting ||= begin
+      Posting::Base.find(params[:posting_id])
+    end
+  end
+
+  def comments
+    @comments ||= begin
+      posting.comments.published.order('`updated_at` DESC')
+    end
+  end
+
+  ###
 
   def new_comment
     @comment ||= begin

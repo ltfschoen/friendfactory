@@ -1,3 +1,16 @@
 .reaction .headshot-container {
 	margin: 0 0 20px 65px;
 }
+
+.reaction .post {
+	width: 500px;
+	float: left;
+}
+
+.reaction .post .clear {
+	width: 430px;
+}
+
+.reaction .post .clear .cell {
+	width: 430px;
+}

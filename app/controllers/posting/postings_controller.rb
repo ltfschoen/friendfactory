@@ -19,8 +19,8 @@ class Posting::PostingsController < ApplicationController
 
   def edit
     respond_to do |format|
-      format.html { redirect_to '/501.html' }
-      format.any(:json, :js) { head :not_implemented }
+      posting_type = posting.class.name.underscore.tableize
+      format.html { render :partial => File.join(posting_type, 'edit'), :object => posting }
     end
   end
 
