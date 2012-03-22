@@ -10,7 +10,7 @@ class Posting::Base < ActiveRecord::Base
 
   attr_accessor :site
 
-  acts_as_tree :order => 'created_at asc'
+  acts_as_tree :order => 'created_at ASC'
 
   state_machine do
     state :unpublished
@@ -54,11 +54,12 @@ class Posting::Base < ActiveRecord::Base
       :class_name  => 'Posting::Base',
       :foreign_key => 'parent_id'
 
-  has_many :publications, :as => :resource
+  has_many :publications,
+      :foreign_key => 'posting_id'
 
   has_many :waves,
       :through => :publications,
-      :order   => 'updated_at desc'
+      :order   => '`updated_at` DESC'
 
   ###
 
@@ -112,11 +113,11 @@ class Posting::Base < ActiveRecord::Base
   private
 
   def increment_postings_counter
-    waves.map{|wave| wave.increment!(:postings_count) }
+    waves.map{ |wave| wave.increment!(:postings_count) }
   end
 
   def decrement_postings_counter
-    waves.map{|wave| wave.decrement!(:postings_count) }
+    waves.map{ |wave| wave.decrement!(:postings_count) }
   end
 
   def set_hash_key

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305234120) do
+ActiveRecord::Schema.define(:version => 20120321040306) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -205,8 +205,8 @@ ActiveRecord::Schema.define(:version => 20120305234120) do
     t.string   "post_code"
     t.decimal  "lat",               :precision => 10, :scale => 7
     t.decimal  "lng",               :precision => 10, :scale => 7
-    t.boolean  "featured"
     t.boolean  "emailable"
+    t.boolean  "featured"
   end
 
   add_index "personas", ["first_name"], :name => "index_user_info_on_first_name"
@@ -239,6 +239,8 @@ ActiveRecord::Schema.define(:version => 20120305234120) do
     t.boolean  "horizontal"
     t.string   "state"
     t.string   "hash_key",           :limit => 8
+    t.datetime "commented_at"
+    t.datetime "primed_at"
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"
@@ -276,15 +278,13 @@ ActiveRecord::Schema.define(:version => 20120305234120) do
   add_index "postings_waves_as_habtm", ["wave_id"], :name => "index_postings_waves_on_wave_id"
 
   create_table "publications", :force => true do |t|
-    t.integer  "wave_id",       :null => false
-    t.integer  "resource_id",   :null => false
-    t.string   "resource_type", :null => false
+    t.integer  "wave_id",    :null => false
+    t.integer  "posting_id", :null => false
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
-  add_index "publications", ["resource_id"], :name => "index_publications_on_resource_id"
-  add_index "publications", ["wave_id", "resource_id"], :name => "index_publications_on_wave_id_and_resource_id"
+  add_index "publications", ["posting_id"], :name => "index_publications_on_resource_id"
+  add_index "publications", ["wave_id", "posting_id"], :name => "index_publications_on_wave_id_and_resource_id"
 
   create_table "resource_embeds", :force => true do |t|
     t.integer "resource_link_id"

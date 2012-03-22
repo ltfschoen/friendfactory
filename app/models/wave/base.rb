@@ -64,13 +64,23 @@ class Wave::Base < ActiveRecord::Base
 
   has_many :postings,
       :through       => :publications,
-      :source        => :resource,
-      :source_type   => 'Posting::Base',
-      :conditions    => 'parent_id is null',
+      :conditions    => { :parent_id => nil },
       :after_add     => :after_add_posting do
     def exclude(*types)
-      where('type not in (?)', types.map(&:to_s))
+      where('`type` NOT IN (?)', types.map(&:to_s))
     end
+
+    def natural_order
+      order('`postings`.`sticky_until` DESC, `postings`.`primed_at` DESC')
+    end
+    # def <<(posting)
+    #   raise 'here!'
+    #   # raise proxy_reflection.methods.sort.inspect
+    #   proxy_target << posting
+    #   proxy_owner
+    # # rescue
+    # #   puts "here!"
+    # end
   end
 
   has_many :bookmarks, :foreign_key => 'wave_id'

@@ -89,10 +89,9 @@ class Wave::CommunitiesController < ApplicationController
   end
 
   def postings
-    wave.postings.published.
+    wave.postings.natural_order.published.
       joins(:user).
-      merge(Personage.enabled).
-      order('`sticky_until` DESC, `updated_at` DESC').scoped
+      merge(Personage.enabled).scoped
   end
 
   def parameterize_tag(tag)
