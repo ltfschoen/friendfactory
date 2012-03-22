@@ -70,7 +70,8 @@
 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
 }
 
-.post.link .cell p {
+.post.link .cell p,
+.post.link .cell section {
 	margin: 5px 0 0 0;
 	color: #333;
 	line-height: 1.5;
