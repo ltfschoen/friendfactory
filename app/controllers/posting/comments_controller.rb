@@ -5,7 +5,7 @@ class Posting::CommentsController < ApplicationController
   helper_method \
       :posting,
       :comments,
-      :posting_type
+      :comment
 
   def index
     respond_to do |format|
@@ -15,19 +15,19 @@ class Posting::CommentsController < ApplicationController
   end
 
   def new
-    @posting = Posting::Base.find(params[:posting_id])
     respond_to do |format|
       format.html { render :layout => false }
     end
   end
 
   def create
-    @posting = Posting::Base.find(params[:posting_id])
-    if add_comment_to_posting(new_comment, @posting)
-      broadcast_posting(new_comment, @posting)
-    end
     respond_to do |format|
-      format.js { render :layout => false }
+      if posting.children << comment
+        comment.publish! && broadcast
+        format.js { render :layout => false }
+      else
+        format.js { head :unprocessable_entity }
+      end
     end
   end
 
@@ -45,9 +45,7 @@ class Posting::CommentsController < ApplicationController
     end
   end
 
-  ###
-
-  def new_comment
+  def comment
     @comment ||= begin
       Posting::Comment.new(params[:posting_comment]) do |comment|
         comment.user = current_user
@@ -55,16 +53,10 @@ class Posting::CommentsController < ApplicationController
     end
   end
 
-  def add_comment_to_posting(comment, posting)
-    not ActiveRecord::Base.transaction do
-      if posting.children << comment
-        comment.publish!
-      end
-    end.nil?
-  end
+  ###
 
-  def broadcast_posting(comment, parent)
-    recipient = parent.user
+  def broadcast
+    recipient = posting.user
     if (recipient.offline? && recipient.emailable?) || Rails.env.development?
       PostingsMailer.delay.new_comment_notification(comment, recipient, current_site, request.host, request.port)
     end

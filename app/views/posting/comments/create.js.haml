@@ -1,14 +1,14 @@
 :plain
   var
-    $form = $("form##{dom_id(@comment.parent)}_new_comment"),
+    $form = $("form##{dom_id(comment.parent)}_new_comment"),
     $preceding = $form.closest('.comment_box');
 
-- if @comment.present? && @comment.valid?
+- if comment.present? && comment.valid?
   :plain
     (function () {
       var
-        $comment = $("#{escape_javascript(render(:partial => 'comment', :object => @comment))}"),
-        $commentLink = $("#{escape_javascript(link_to_comments(@posting.children.type(Posting::Comment).published.count, posting_comments_path(@posting)))}"),
+        $comment = $("#{escape_javascript(render(:partial => 'comment', :object => comment))}"),
+        $commentLink = $("#{escape_javascript(link_to_comments(posting.children.type(Posting::Comment).published.count, posting_comments_path(posting)))}"),
         $frame = $form.closest('.post_frame'),
         insertComment = function () {
           $comment
@@ -33,12 +33,12 @@
         insertComment();
       }
 
-      $frame.find('.comments').html($commentLink);
+      $frame.find('span.comments').html($commentLink);
       $form[0].reset();
       $('input[type="text"], textarea', $form).val('').trigger('blur.placeholder');
     })();
 
 - else
   :plain
-    $form.find('.reply_to').addClass('error').html('Ouch! #{escape_javascript(@comment.errors.full_messages.to_sentence)}');
+    $form.find('.reply_to').addClass('error').html('Ouch! #{escape_javascript(comment.errors.full_messages.to_sentence)}');
     $preceding.trigger('shake');

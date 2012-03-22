@@ -10,8 +10,6 @@ class Posting::Base < ActiveRecord::Base
 
   attr_accessor :site
 
-  acts_as_tree :order => 'created_at ASC'
-
   state_machine do
     state :unpublished
     state :published, :exit => :decrement_postings_counter
@@ -50,9 +48,11 @@ class Posting::Base < ActiveRecord::Base
 
   belongs_to :user, :class_name => 'Personage'
 
-  has_many :children,
-      :class_name  => 'Posting::Base',
-      :foreign_key => 'parent_id'
+  acts_as_tree
+
+  def comments
+    children.type(Posting::Comment).scoped
+  end
 
   has_many :publications,
       :foreign_key => 'posting_id'
@@ -67,10 +67,6 @@ class Posting::Base < ActiveRecord::Base
     sanitize_for_mass_assignment(attrs).each do |k, v|
       send("#{k}=", v)
     end
-  end
-
-  def comments
-    self.children.type(Posting::Comment).scoped
   end
 
   def sticky_until=(sticky_until = nil)
