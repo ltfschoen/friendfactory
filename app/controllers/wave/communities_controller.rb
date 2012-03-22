@@ -89,9 +89,7 @@ class Wave::CommunitiesController < ApplicationController
   end
 
   def postings
-    wave.postings.natural_order.published.
-      joins(:user).
-      merge(Personage.enabled).scoped
+    wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
   end
 
   def parameterize_tag(tag)

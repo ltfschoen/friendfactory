@@ -1,4 +1,8 @@
+require 'primed_at'
+
 class Posting::Link < Posting::Base
+
+  include PrimedAt
 
   attr_writer :url
 

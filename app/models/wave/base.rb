@@ -73,6 +73,7 @@ class Wave::Base < ActiveRecord::Base
     def natural_order
       order('`postings`.`sticky_until` DESC, `postings`.`primed_at` DESC')
     end
+
     # def <<(posting)
     #   raise 'here!'
     #   # raise proxy_reflection.methods.sort.inspect

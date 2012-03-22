@@ -1,4 +1,8 @@
+require 'primed_at'
+
 class Posting::Photo < Posting::Base
+
+  include PrimedAt
 
   self.include_root_in_json = false
 

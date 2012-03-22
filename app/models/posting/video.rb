@@ -1,4 +1,8 @@
+require 'primed_at'
+
 class Posting::Video < Posting::Base
+
+  include PrimedAt
 
   VALID_URLS = [
     /^(http:\/\/)?(www\.)?youtube\.com\/watch[\\?&]v=([^&#]{11})$/, # youtube.com

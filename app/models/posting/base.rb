@@ -46,6 +46,8 @@ class Posting::Base < ActiveRecord::Base
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
   scope :order_by_updated_at_desc, order('`postings`.`updated_at` DESC')
 
+  before_create :initialize_primed_at
+
   belongs_to :user, :class_name => 'Personage'
 
   acts_as_tree
@@ -118,6 +120,10 @@ class Posting::Base < ActiveRecord::Base
 
   def set_hash_key
     self[:hash_key] = Digest::SHA1.hexdigest("#{id}#{created_at.to_i}")[0..7]
+  end
+
+  def initialize_primed_at
+    self[:primed_at] = Time.now.utc.to_s(:db)
   end
 
 end
