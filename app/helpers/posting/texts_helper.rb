@@ -1,6 +1,6 @@
 module Posting::TextsHelper
 
-  PostingTextMaximumLength = 256
+  PostingTextMaximumLength = 200
 
   def crop_text_posting?(posting)
     posting.body.length > PostingTextMaximumLength
