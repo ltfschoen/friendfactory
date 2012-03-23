@@ -66,13 +66,12 @@ Friskyfactory::Application.routes.draw do
 
   scope :module => :posting do
     resources :postings, :only => [ :show, :edit, :update ] do |posting|
-      member do
-        delete :unpublish, :controller => 'base'
-      end
-      collection do
-        get :fetch, :controller => 'base'
-      end
       resources :comments, :only => [ :index, :new, :create ]
+
+      with_options :controller => 'base' do |controller|
+        controller.delete :unpublish, :on => :member
+        controller.get    :fetch,     :on => :collection
+      end
     end
   end
 

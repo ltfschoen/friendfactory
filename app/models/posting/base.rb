@@ -40,6 +40,8 @@ class Posting::Base < ActiveRecord::Base
     where('`postings`.`type` NOT IN (?)', types.map(&:to_s))
   }
 
+  scope :roots, where(:parent_id => nil)
+
   scope :published, where(:state => [ :published, :offered ])
   scope :unpublished, where(:state => :unpublished)
 
@@ -50,11 +52,61 @@ class Posting::Base < ActiveRecord::Base
 
   belongs_to :user, :class_name => 'Personage'
 
+  ###
+
   acts_as_tree
+
+  belongs_to :parent,
+      :class_name   => 'Posting::Base',
+      :foreign_key  => 'parent_id',
+      :counter_cache => nil
+
+  has_many :children,
+      :class_name  => 'Posting::Base',
+      :foreign_key => 'parent_id',
+      :dependent   => :destroy,
+      :counter_sql => %q(
+        select count(*) from
+        ((select distinct p2.lev2 as id from
+            (select p1.id as lev1, p2.id as lev2
+            from postings as p1
+            left join postings as p2 on p2.parent_id = p1.id
+            where p1.id = #{id}) as p2
+         where lev2 is not null)
+        union
+        (select distinct p3.lev3 from
+            (select p1.id as lev1, p2.id as lev2, p3.id as lev3
+            from postings as p1
+            left join postings as p2 on p2.parent_id = p1.id
+            left join postings as p3 on p3.parent_id = p2.id
+            where p1.id = #{id}) as p3
+         where lev3 is not null)
+        union
+        (select distinct p4.lev4 from
+            (select p1.id as lev1, p2.id as lev2, p3.id as lev3, p4.id as lev4
+            from postings as p1
+            left join postings as p2 on p2.parent_id = p1.id
+            left join postings as p3 on p3.parent_id = p2.id
+            left join postings as p4 on p4.parent_id = p3.id
+            where p1.id = #{id}) as p4
+         where lev4 is not null)) t1),
+      :after_add   => :publish_child_to_parents_waves
 
   def comments
     children.type(Posting::Comment).scoped
   end
+
+  private
+
+  def publish_child_to_parents_waves(child)
+    root.publications.each do |publication|
+      child.publications << publication.clone
+    end
+  end
+
+  ###
+
+  public
 
   has_many :publications,
       :foreign_key => 'posting_id'

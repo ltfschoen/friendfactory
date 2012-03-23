@@ -6,6 +6,7 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
     rename_column :publications, :resource_id, :posting_id
     remove_column :publications, :resource_type
     remove_column :publications, :updated_at
+    add_column    :publications, :parent_id, :integer
 
     ActiveRecord::Base.record_timestamps = false
     Posting::Base.transaction do
@@ -14,6 +15,12 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
           posting.commented_at = last_commented_at(posting)
           posting.primed_at = latest_primed_at(posting)
           posting.save(:validate => false)
+        end
+      end
+
+      say_with_time "publishing comments to parents' waves" do
+        Posting::Comment.where('parent_id IS NOT NULL').all.each do |comment|
+          comment.parent.send(:publish_child_to_parents_waves, comment)
         end
       end
     end
@@ -59,15 +66,6 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
   end
 
   def self.latest_primed_at(posting)    
-    # latest_primed_at = posting.created_at
-    # comments = posting.comments.order('`created_at` DESC')
-    # if comments.present?
-    #   latest_primed_at = comments.inject(comments.first.created_at) do |memo, comment|
-    #     comment_latest_primed_at = latest_primed_at(comment)
-    #     memo < comment_latest_primed_at ? comment_latest_primed_at : memo
-    #   end
-    # end
-    # latest_primed_at < posting.created_at ? posting.created_at : latest_primed_at
     posting.commented_at || posting.created_at
   end
 
