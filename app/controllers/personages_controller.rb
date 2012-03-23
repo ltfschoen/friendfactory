@@ -14,12 +14,19 @@ class PersonagesController < ApplicationController
   layout 'personage'
 
   cattr_reader :per_page
+  @@per_page = 48
 
   def index
-    @@per_page = 48
-    @page_title = params[:persona_type].pluralize
+    @users = users.order('`waves`.`updated_at` DESC').scoped
     respond_to do |format|
       format.html { render :layout => 'rollcall' }
+    end
+  end
+
+  def online
+    @users = users.joins(:user).merge(User.online).merge(User.order_by_most_recent_request).scoped
+    respond_to do |format|
+      format.html { render 'index', :layout => 'rollcall' }
     end
   end
 
@@ -182,41 +189,40 @@ class PersonagesController < ApplicationController
   end
 
   def paged_users
-    users.paginate(:page => params[:page], :per_page => @@per_page)
+    @paged_users ||= begin
+      users.paginate(:page => params[:page], :per_page => @@per_page)
+    end
   end
 
   def users
-    Personage.enabled.
-      site(current_site).
-      type(params[:persona_type].singularize).
-      includes(:persona => :avatar).
-      includes(:profile).
-      order('`waves`.`updated_at` DESC').
-      scoped
+    @users ||= begin
+      users = Personage.enabled.site(current_site).scoped
+      users = users.type(params[:persona_type].singularize).scoped if params[:persona_type]
+      users.includes(:persona => :avatar).includes(:profile).scoped
+    end
   end
 
   def new_persona_posting
-    Posting::Persona.new do |posting|
-      posting.user = current_user
+    @new_persona_posting ||= begin
+      Posting::Persona.new do |posting|
+        posting.user = current_user
+      end
     end
   end
 
   def page_title
-    if title = @page_title || personage.handle
-      title.titleize
-    end
-    [ current_site.display_name, title ].join(' - ')
+    "title"
+    # if title = @page_title || personage.handle
+    #   title.titleize
+    # end
+    # [ current_site.display_name, title ].join(' - ')
   end
 
   def invitation_wave
     current_user.find_or_create_invitation_wave_for_site(current_site)
   end
 
-  memoize \
-      :paged_users,
-      :users,
-      :page_title,
-      :new_persona_posting
+  memoize :page_title
 
   ###
 

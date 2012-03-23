@@ -27,6 +27,8 @@ module SidebarHelper
     end
   end
 
+  ###
+
   def content_for_sidebar_users_list(personages, persona_type, rollcall_path)
     personages_length = personages.length
     case
@@ -34,7 +36,19 @@ module SidebarHelper
       personages = personages[0..(sidebar_rollcall_length(personages_length)-1)]
       render :partial => 'layouts/shared/sidebar/rollcall', :locals => { :users => personages, :persona_type => persona_type, :rollcall_path => rollcall_path }
     when personages_length > 0
-      render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type }
+      render :partial => 'layouts/shared/sidebar/personages', :object => personages, :locals => { :persona_type => persona_type, :rollcall_path => rollcall_path }
+    end
+  end
+
+  def content_for_sidebar_rollcall(personages, rollcall_path)
+    content_for :sidebar_rollcall do
+      content_for_sidebar_users_list(personages, 'person', rollcall_path)
+    end
+  end
+
+  def render_sidebar_rollcall
+    if content_for? :sidebar_rollcall
+      content_for(:sidebar_rollcall)
     end
   end
 
@@ -43,12 +57,6 @@ module SidebarHelper
     personages = Personage.sidebar_rollcall(current_site, persona_type, SidebarRollCallMaximumLength, home_user_id)
     rollcall_path = persona_type_profiles_path(:persona_type => persona_type.to_s.pluralize)
     content_for_sidebar_users_list(personages, persona_type, rollcall_path)
-  end
-
-  def content_for_sidebar_rollcall(personages, rollcall_path)
-    content_for :sidebar_rollcall do
-      content_for_sidebar_users_list(personages, 'person', rollcall_path)
-    end
   end
 
   def render_sidebar_ambassadors_list
@@ -63,11 +71,12 @@ module SidebarHelper
     render_sidebar_users_list(:community)
   end
 
-  def render_sidebar_rollcall
-    if content_for? :sidebar_rollcall
-      content_for(:sidebar_rollcall)
-    end
+  def render_sidebar_online_rollcall
+    personages = Personage.joins(:user).merge(User.online)
+    content_for_sidebar_users_list(personages, 'online', online_profiles_path)
   end
+
+  ###
 
   def content_for_sidebar_headshot(user)
     content_for :sidebar_headshot, render_headshot(user)
@@ -78,6 +87,8 @@ module SidebarHelper
       content_tag(:div, content_for(:sidebar_headshot ), :class => 'block')
     end
   end
+
+  ###
 
   def render_sidebar_search
     if false

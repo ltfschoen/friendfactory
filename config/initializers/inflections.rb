@@ -11,4 +11,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'wave', 'waves'
+  inflect.uncountable 'online'
 end

@@ -79,6 +79,7 @@ Friskyfactory::Application.routes.draw do
   resources :profiles, :only => [ :show, :new, :create, :edit, :update ],
       :controller => 'personages' do
     post :avatar, :on => :new
+    get  :online, :on => :collection
     member do
       post :avatar
       put  :enable

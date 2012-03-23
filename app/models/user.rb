@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   scope :online, lambda {{ :conditions =>
       [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] }}
 
+  scope :order_by_most_recent_request, order('`last_request_at` DESC')
+
   scope :persona, lambda { |*role_names| joins(:personages => :persona).
       where(:personages => {
         :personas => {

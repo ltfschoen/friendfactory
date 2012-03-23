@@ -1,6 +1,4 @@
 #rollcall
-  - users.in_groups_of(4) do |group|
-    - group.each_with_index do |user, idx|
-      - unless user.nil?
-        = render_headshot(user)
-  = will_paginate users, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
+  - paged_users.each do |user|
+    = render_headshot(user)
+  = will_paginate paged_users, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
