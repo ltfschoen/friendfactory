@@ -1,4 +1,4 @@
-class Posting::VideosController < Posting::BaseController
+class Posting::VideosController < ApplicationController
   
   def create
     @posting = nil

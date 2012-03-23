@@ -1,4 +1,4 @@
-class Posting::LinksController < Posting::BaseController
+class Posting::LinksController < ApplicationController
 
   def create
     wave = current_site.waves.find(params[:wave_id])
