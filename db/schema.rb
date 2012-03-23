@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(:version => 20120321040306) do
     t.integer  "wave_id",    :null => false
     t.integer  "posting_id", :null => false
     t.datetime "created_at"
+    t.integer  "parent_id"
   end
 
   add_index "publications", ["posting_id"], :name => "index_publications_on_resource_id"

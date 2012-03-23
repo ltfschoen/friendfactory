@@ -293,6 +293,8 @@ class Personage < ActiveRecord::Base
       :class_name  => 'Posting::Base',
       :foreign_key => 'user_id'
 
+  has_many :publications, :through => :postings
+
   ### Invitations
 
   has_many :invitations,

@@ -4,20 +4,18 @@ class Wave::CommunitiesController < ApplicationController
 
   include RenderHeadshot
 
-  extend ActiveSupport::Memoizable
-
   before_filter :require_user
 
   # Show helpers
   helper_method \
       :wave,
       :paged_postings,
-      :users_from_paged_postings_excluding_wave_owner
+      :sidebar_rollcall
 
   # Rollcall helpers
   helper_method \
       :tags,
-      :paged_users_from_tagged_personas
+      :paged_rollcall
 
   helper_method :page_title
 
@@ -41,56 +39,56 @@ class Wave::CommunitiesController < ApplicationController
   private
 
   def wave
-    if params[:id].present?
-      current_site.waves.published.find_by_id(params[:id])
-    else
-      current_site.home_wave
+    @wave ||= begin
+      if params[:id].present?
+        current_site.waves.published.find_by_id(params[:id])
+      else
+        current_site.home_wave
+      end
+    end
+  end
+
+  def postings
+    @postings ||= begin
+      wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
     end
   end
 
   def paged_postings
-    postings.
-      includes(:user => { :persona => :avatar }).
-      paginate(:page => params[:page], :per_page => @@per_page)
+    @paged_postings ||= begin
+      postings.includes(:user => { :persona => :avatar }).
+          paginate(:page => params[:page], :per_page => @@per_page)
+    end
   end
 
-  def users_from_paged_postings_excluding_wave_owner
-    paged_postings.map(&:user).uniq.select { |user| user[:id] != wave[:user_id] }
+  def sidebar_rollcall
+    @sidebar_rollcall ||= begin
+      paged_postings.map(&:user).uniq.select { |user| user[:id] != wave[:user_id] }
+    end
   end
 
-  memoize :wave, :paged_postings, :users_from_paged_postings_excluding_wave_owner
-
-  ###
+  def paged_rollcall
+    @paged_rollcall ||= begin
+      rollcall = wave.rollcall.order('`postings`.`created_at` DESC').includes(:persona => :avatar).scoped
+      rollcall = rollcall.joins(:persona).merge(Persona::Base.tagged_with(parameterize_tag(params[:tag]), :on => :tags)).scoped if params[:tag]
+      rollcall.paginate(:page => params[:page], :per_page => @@per_page)
+    end
+  end
 
   def tags
-    personas.tag_counts.order('`name` ASC').select{ |tag| tag.count > 1 }
-  end
-
-  def paged_users_from_tagged_personas
-    Personage.
-      includes(:persona => :avatar ).
-      where(:persona_id => tagged_personas.map(&:id)).
-      paginate(:page => params[:page], :per_page => @@per_page)
-  end
-
-  memoize :tags, :paged_users_from_tagged_personas
-
-  ###
-
-  def tagged_personas
-    tagged_personas = personas
-    tagged_personas = personas.tagged_with(parameterize_tag(params[:tag]), :on => :tags).scoped if params[:tag]
-    tagged_personas
+    @tags ||= begin
+      personas.tag_counts.order('`name` ASC').select{ |tag| tag.count > 1 }
+    end
   end
 
   def personas
-    user_ids = postings.map(&:user_id)
-    Persona::Base.joins(:user).where(:personages => { :id => user_ids }).scoped
+    @personas ||= begin
+      user_ids = postings.map(&:user_id)
+      Persona::Base.joins(:user).where(:personages => { :id => user_ids }).scoped
+    end
   end
 
-  def postings
-    wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
-  end
+  ###
 
   def parameterize_tag(tag)
     tag.downcase.gsub(/-/, ' ')

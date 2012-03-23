@@ -8,4 +8,6 @@ class Publication < ActiveRecord::Base
       :class_name  => 'Posting::Base',
       :foreign_key => 'posting_id'
 
+  has_one :user, :through => :posting
+
 end

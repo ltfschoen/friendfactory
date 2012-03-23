@@ -84,6 +84,13 @@ class Wave::Base < ActiveRecord::Base
     # end
   end
 
+  def rollcall
+    Personage.select('distinct `personages`.*').enabled.
+        joins(:postings => :publications).
+        merge(Posting::Base.published).
+        where(:publications => { :wave_id => self[:id] }).scoped
+  end
+
   has_many :bookmarks, :foreign_key => 'wave_id'
 
   belongs_to :resource, :polymorphic => true
