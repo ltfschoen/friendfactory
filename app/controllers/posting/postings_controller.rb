@@ -51,6 +51,17 @@ class Posting::PostingsController < ApplicationController
     end
   end
 
+  def unpublish
+    respond_to do |format|
+      begin
+        posting.unpublish!
+        format.js { render :layout => false }
+      rescue
+        format.js { head :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def posting

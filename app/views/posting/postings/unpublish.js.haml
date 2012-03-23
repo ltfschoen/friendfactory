@@ -1,6 +1,6 @@
-- if @posting.present? && @posting.unpublished?
+- if posting.present? && posting.unpublished?
   :plain
-    var $posting = $("##{dom_id(@posting)}").closest('.post_frame, .comment_box');
+    var $posting = $("##{dom_id(posting)}").closest('.post_frame, .comment_box');
     $posting.fadeTo('fast', 0.0, function() {
       $posting.slideUp('fast', 'linear', function() {
         $posting.remove();
