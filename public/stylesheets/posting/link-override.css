@@ -41,6 +41,7 @@
 	background-color: #000;
 	width: 310px;
 	margin-bottom: 12px;
+	overflow: hidden;
 }
 
 .post.link .cell {
