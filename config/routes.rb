@@ -68,7 +68,7 @@ Friskyfactory::Application.routes.draw do
     resources :postings, :only => [ :show, :edit, :update ] do |posting|
       resources :comments, :only => [ :index, :new, :create ]
 
-      with_options :controller => 'base' do |controller|
+      with_options :controller => 'postings' do |controller|
         controller.delete :unpublish, :on => :member
         controller.get    :fetch,     :on => :collection
       end
