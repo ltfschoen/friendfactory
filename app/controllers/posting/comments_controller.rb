@@ -10,7 +10,8 @@ class Posting::CommentsController < ApplicationController
   def index
     respond_to do |format|
       posting_path = posting.class.name.underscore.tableize
-      format.html { render File.join(posting_path, 'comments'), :layout => false, :object => comments, :locals => { :posting => posting }}
+      wave = params[:wave_id].present? ? Wave::Base.find_by_id(params[:wave_id]) : nil
+      format.html { render File.join(posting_path, 'comments'), :layout => false, :object => comments, :locals => { :posting => posting, :wave => wave }}
     end
   end
 

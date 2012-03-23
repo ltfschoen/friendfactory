@@ -115,6 +115,17 @@ class Posting::Base < ActiveRecord::Base
       :through => :publications,
       :order   => '`updated_at` DESC'
 
+  has_one :primary_publication,
+      :class_name  => 'Publication',
+      :foreign_key => 'posting_id',
+      :conditions  => { :parent_id => nil},
+      :order       => '`created_at` ASC'
+
+  has_one :primary_wave,
+      :through => :primary_publication,
+      :source  => :wave,
+      :order   => '`publications`.`created_at` ASC'
+
   ###
 
   def attributes=(attrs)

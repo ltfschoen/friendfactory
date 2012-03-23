@@ -1,2 +1,7 @@
+- wave = local_assigns[:wave]
+- if wave && wave.photos.count > 1
+  - wave.photos.order('`created_at` ASC').each do |photo|
+    .photo{ :class => photo.horizontal? ? nil : 'vertical' }
+      = render_photo(photo)
 = render :partial => 'posting/comments/new', :locals => { :posting => posting }
 = render :partial => 'posting/comments/comment', :collection => comments, :locals => { :posting => posting }

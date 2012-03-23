@@ -9,7 +9,7 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
     add_column    :publications, :parent_id, :integer
 
     ActiveRecord::Base.record_timestamps = false
-    Posting::Base.transaction do
+    ActiveRecord::Base.transaction do
       say_with_time 'initialized postings primed_at' do
         Posting::Base.where(:parent_id => nil).all.each do |posting|
           posting.commented_at = last_commented_at(posting)
