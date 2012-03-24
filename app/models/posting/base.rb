@@ -99,8 +99,10 @@ class Posting::Base < ActiveRecord::Base
   private
 
   def publish_child_to_parents_waves(child)
-    root.publications.each do |publication|
-      child.publications << publication.clone
+    if root
+      root.publications.each do |publication|
+        child.publications << publication.clone
+      end
     end
   end
 
