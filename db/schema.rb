@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -241,6 +242,7 @@ ActiveRecord::Schema.define(:version => 20120321040306) do
     t.string   "hash_key",           :limit => 8
     t.datetime "commented_at"
     t.datetime "primed_at"
+    t.integer  "children_count"
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"

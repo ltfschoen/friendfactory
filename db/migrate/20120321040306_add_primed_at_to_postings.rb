@@ -1,12 +1,13 @@
 class AddPrimedAtToPostings < ActiveRecord::Migration
   def self.up
-    add_column    :postings, :commented_at, :datetime
-    add_column    :postings, :primed_at, :datetime
+    add_column    :postings, :commented_at,   :datetime
+    add_column    :postings, :primed_at,      :datetime
+    add_column    :postings, :children_count, :integer
 
+    add_column    :publications, :parent_id,   :integer
     rename_column :publications, :resource_id, :posting_id
     remove_column :publications, :resource_type
     remove_column :publications, :updated_at
-    add_column    :publications, :parent_id, :integer
 
     ActiveRecord::Base.record_timestamps = false
     ActiveRecord::Base.transaction do
@@ -18,9 +19,13 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
         end
       end
 
-      say_with_time "publishing comments to parents' waves" do
+      say_with_time "publishing comments to their root postings' waves" do
         Posting::Comment.where('parent_id IS NOT NULL').all.each do |comment|
-          comment.parent.send(:publish_child_to_parents_waves, comment)
+          if parent = comment.parent
+            parent.send(:publish_child_to_parents_waves, comment)
+          else
+            raise comment.inspect
+          end
         end
       end
     end
@@ -34,6 +39,7 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
 
     remove_column :postings, :commented_at
     remove_column :postings, :primed_at
+    remove_column :postings, :children_count
 
     ActiveRecord::Base.record_timestamps = false
     Publication.reset_column_information
