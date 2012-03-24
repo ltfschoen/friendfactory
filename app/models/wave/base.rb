@@ -135,9 +135,8 @@ class Wave::Base < ActiveRecord::Base
   end
 
   def publish_posting_to_profile_wave(posting)
-    if posting && profile = posting.user.profile
-      profile
-    end
+    return if posting.nil? || posting.user.nil?
+    posting.user.profile
   end
 
   def publish_posting_to_home_wave(posting)
