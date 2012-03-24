@@ -40,12 +40,12 @@ class Posting::Base < ActiveRecord::Base
     where('`postings`.`type` NOT IN (?)', types.map(&:to_s))
   }
 
-  scope :roots, where(:parent_id => nil)
-
   scope :published, where(:state => [ :published, :offered ])
+
   scope :unpublished, where(:state => :unpublished)
 
   scope :since, lambda { |date| where('`postings`.`created_at` > ?', date) }
+
   scope :order_by_updated_at_desc, order('`postings`.`updated_at` DESC')
 
   before_create :initialize_primed_at
