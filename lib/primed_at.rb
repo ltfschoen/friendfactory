@@ -7,7 +7,7 @@ module PrimedAt
 
   def update_primed_at(datetime)
     self[:primed_at] = datetime
-    self.class.update_all({ :primed_at => datetime}, self.class.primary_key => self[:id])
+    self.class.update_all({ :primed_at => datetime }, self.class.primary_key => self[:id])
   end
 
 end

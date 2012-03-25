@@ -12,9 +12,10 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
     ActiveRecord::Base.transaction do
       say_with_time 'initialized postings primed_at' do
         Posting::Base.roots.find_each do |posting|
-          posting.commented_at = last_commented_at(posting)
-          posting.primed_at = latest_primed_at(posting)
-          posting.save(:validate => false)
+          posting.class.update_all(
+            { :commented_at => last_commented_at(posting),
+              :primed_at    => latest_primed_at(posting) },
+            { :id => posting[:id] })
         end
       end
     end
@@ -34,9 +35,10 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
     Publication.transaction do
       say_with_time 'initializing publication updated_at' do
         Publication.find_each do |publication|
-          publication.updated_at = publication.created_at
-          publication.resource_type = 'Posting::Base'
-          publication.save(:validate => false)
+          publication.class.update_all(
+            { :updated_at    => publication.created_at,
+              :resource_type => 'Posting::Base' },
+            { :id => publication[:id] })
         end
       end
     end
@@ -47,7 +49,7 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
 
   def self.last_commented_at(posting)
     return unless posting.commentable?
-    comments = posting.comments.order('`created_at` DESC')    
+    comments = posting.comments.order('`created_at` DESC')
     if comments.present?
       last_commented_at = comments.first.created_at
       comments.inject(last_commented_at) do |memo, comment|

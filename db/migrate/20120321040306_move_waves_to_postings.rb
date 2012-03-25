@@ -9,19 +9,30 @@ class MoveWavesToPostings < ActiveRecord::Migration
     set_table_name :sites_waves
   end
 
+  class WaveToPostingMigrationLog < ActiveRecord::Base
+    set_table_name :wave_to_posting_migration_logs
+  end
+
   def self.up
+    ActiveRecord::Base.record_timestamps = false
     ActiveRecord::Base.transaction do
       add_column :postings, :children_count,     :integer, :default => 0
       add_column :postings, :publications_count, :integer, :default => 0
 
+      create_table :wave_to_posting_migration_logs, :force => true do |t|
+        t.integer :wave_id
+        t.integer :posting_id
+      end
+
       say_with_time "migrating #{Wave.count} waves" do
         Wave.find_each do |wave|
           if migrated_wave = create_wave_as_posting(wave)
+            create_migration_log(wave, migrated_wave)
             migrate_publications(wave, migrated_wave)
             migrate_sites_waves(wave, migrated_wave)
-            migrate_bookmarks(wave, migrated_wave)
             migrate_personages(wave, migrated_wave)
             migrate_wave_proxies(wave, migrated_wave)
+            migrate_bookmarks(wave, migrated_wave)
           else
             raise "Migration failure for wave #{wave[:id]}"
           end
@@ -30,9 +41,11 @@ class MoveWavesToPostings < ActiveRecord::Migration
       rename_table :waves, :waves_not_as_postings
       create_waves_view
     end
+    ActiveRecord::Base.record_timestamps = true
   end
 
   def self.down
+    ActiveRecord::Base.record_timestamps = false
     ActiveRecord::Base.transaction do
       remove_waves_view
       delete_all_waves_as_postings
@@ -40,9 +53,14 @@ class MoveWavesToPostings < ActiveRecord::Migration
       remove_column :postings, :children_count
       remove_column :postings, :publications_count
     end
+    ActiveRecord::Base.record_timestamps = true
   end
 
   private
+
+  def self.create_migration_log(wave, migrated_wave)
+    WaveToPostingMigrationLog.create!(:wave_id => wave[:id], :posting_id => migrated_wave[:id])
+  end
 
   def self.migrate_publications(wave, migrated_wave)
     Publication.where(:wave_id => wave[:id]).update_all(:wave_id => migrated_wave[:id])

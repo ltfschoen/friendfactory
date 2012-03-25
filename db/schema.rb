@@ -528,6 +528,11 @@ ActiveRecord::Schema.define(:version => 20120324233726) do
     t.string   "domain"
   end
 
+  create_table "wave_to_posting_migration_logs", :force => true do |t|
+    t.integer "wave_id"
+    t.integer "posting_id"
+  end
+
   create_table "waves", :id => false, :force => true do |t|
     t.integer  "id",                              :default => 0, :null => false
     t.string   "type"
