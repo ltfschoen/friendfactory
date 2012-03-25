@@ -53,13 +53,10 @@ class Wave::ConversationsController < ApplicationController
   ###
 
   def conversations
-    conversations = params[:tag] ?
-        conversations_from_tagged_personas :
-        conversations_from_all
-
+    conversations = params[:tag] ? conversations_from_tagged_personas : conversations_from_all
     conversations.
         includes(:recipient => { :persona => :avatar }).
-        order('`waves`.`updated_at` DESC').scoped
+        order('`postings`.`updated_at` DESC').scoped
   end
 
   def conversations_from_all
@@ -87,9 +84,9 @@ class Wave::ConversationsController < ApplicationController
 
   def conversation_dates
     current_user.inbox(current_site).
-        select('date(`waves`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS recipient_ids').
-        group('date(`waves`.`updated_at`)').
-        order('date(`waves`.`updated_at`) DESC')
+        select('date(`postings`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS recipient_ids').
+        group('date(`postings`.`updated_at`)').
+        order('date(`postings`.`updated_at`) DESC')
   end
 
   def parameterize_tag(tag)

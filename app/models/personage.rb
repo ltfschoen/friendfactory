@@ -62,7 +62,9 @@ class Personage < ActiveRecord::Base
 
   alias :user_record :user
 
-  belongs_to :persona, :class_name => 'Persona::Base', :autosave => true
+  belongs_to :persona,
+      :class_name => 'Persona::Base',
+      :autosave   => true
 
   scope :site, lambda { |site|
       joins(:user).
@@ -98,7 +100,9 @@ class Personage < ActiveRecord::Base
 
   scope :enabled, where(:state => :enabled)
 
-  scope :exclude, lambda { |*ids| where('`personages`.`id` NOT IN (?)', ids) }
+  scope :exclude, lambda { |*ids|
+      where('`personages`.`id` NOT IN (?)', ids)
+  }
 
   scope :sidebar_rollcall, lambda { |site, persona_type, limit, *exclude_ids|
       enabled.
@@ -109,7 +113,7 @@ class Personage < ActiveRecord::Base
       exclude(*exclude_ids).
       where('`personas`.`avatar_id` IS NOT NULL').
       limit(limit).
-      order('`waves`.`updated_at` DESC')
+      order('`postings`.`updated_at` DESC')
   }
 
   def self.uid(id)
@@ -171,7 +175,9 @@ class Personage < ActiveRecord::Base
 
   ### Profile
 
-  belongs_to :profile, :class_name => 'Wave::Base', :autosave => true
+  belongs_to :profile,
+      :class_name => 'Wave::Base',
+      :autosave   => true
 
   alias_method :profile_without_initialized_user=, :profile=
 

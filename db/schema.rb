@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321040306) do
+ActiveRecord::Schema.define(:version => 20120324233726) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -240,9 +240,10 @@ ActiveRecord::Schema.define(:version => 20120321040306) do
     t.boolean  "horizontal"
     t.string   "state"
     t.string   "hash_key",           :limit => 8
+    t.integer  "children_count",                  :default => 0
+    t.integer  "publications_count",              :default => 0
     t.datetime "commented_at"
     t.datetime "primed_at"
-    t.integer  "children_count"
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"
@@ -527,23 +528,30 @@ ActiveRecord::Schema.define(:version => 20120321040306) do
     t.string   "domain"
   end
 
-  create_table "waves", :force => true do |t|
+  create_table "waves", :id => false, :force => true do |t|
+    t.integer  "id",                              :default => 0, :null => false
     t.string   "type"
     t.string   "slug"
     t.integer  "user_id"
-    t.string   "topic"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "parent_id"
     t.integer  "resource_id"
     t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "subject"
+    t.text     "body"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "sticky_until"
+    t.integer  "width"
+    t.integer  "height"
+    t.boolean  "horizontal"
     t.string   "state"
-    t.integer  "postings_count", :default => 0
+    t.string   "hash_key",           :limit => 8
+    t.integer  "children_count",                  :default => 0
+    t.integer  "publications_count",              :default => 0
   end
-
-  add_index "waves", ["resource_id", "resource_type"], :name => "index_waves_on_resource_id_and_resource_type"
-  add_index "waves", ["type"], :name => "index_waves_on_type"
-  add_index "waves", ["user_id"], :name => "index_waves_on_user_id"
 
   create_table "waves_deleted", :id => false, :force => true do |t|
     t.integer  "id",            :default => 0, :null => false
@@ -557,5 +565,23 @@ ActiveRecord::Schema.define(:version => 20120321040306) do
     t.integer  "resource_id"
     t.string   "resource_type"
   end
+
+  create_table "waves_not_as_postings", :force => true do |t|
+    t.string   "type"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.string   "topic"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.string   "state"
+    t.integer  "postings_count", :default => 0
+  end
+
+  add_index "waves_not_as_postings", ["resource_id", "resource_type"], :name => "index_waves_on_resource_id_and_resource_type"
+  add_index "waves_not_as_postings", ["type"], :name => "index_waves_on_type"
+  add_index "waves_not_as_postings", ["user_id"], :name => "index_waves_on_user_id"
 
 end

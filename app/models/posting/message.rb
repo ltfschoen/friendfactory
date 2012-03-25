@@ -23,7 +23,7 @@ class Posting::Message < Posting::Base
   end
 
   def receiver_wave
-    waves(true).where('`waves`.`user_id` <> ?', user_id).limit(1).first
+    waves(true).where('`postings`.`user_id` <> ?', user_id).limit(1).first
   end
 
   def receiver_id

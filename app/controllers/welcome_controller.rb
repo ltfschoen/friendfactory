@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   before_filter :require_launch_site, :only => [ :launch ]
   before_filter :clear_lurker
 
-  helper_method :featured_profiles, :user_session
+  helper_method :featured_personages, :user_session
 
   def show
     respond_to do |format|
@@ -54,16 +54,14 @@ class WelcomeController < ApplicationController
 
   private
 
-  def featured_profiles
+  def featured_personages
     @featured_profiles ||= begin
       Personage.enabled.
           site(current_site).
-          joins(:persona).
+          joins(:persona => :avatar).
           merge(Persona::Base.featured).
-          includes(:profile).
           limit(4).
-          order('rand()').
-          map(&:profile)
+          order('rand()')
     end
   end
 

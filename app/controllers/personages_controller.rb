@@ -17,7 +17,7 @@ class PersonagesController < ApplicationController
   @@per_page = 48
 
   def index
-    @users = users.order('`waves`.`updated_at` DESC').scoped
+    @users = users.order('`postings`.`updated_at` DESC').scoped
     respond_to do |format|
       format.html { render :layout => 'rollcall' }
     end

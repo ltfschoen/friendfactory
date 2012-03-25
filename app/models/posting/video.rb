@@ -4,6 +4,8 @@ class Posting::Video < Posting::Base
 
   include PrimedAt
 
+  acts_as_commentable
+
   VALID_URLS = [
     /^(http:\/\/)?(www\.)?youtube\.com\/watch[\\?&]v=([^&#]{11})$/, # youtube.com
     /^(http:\/\/)?(www\.)?youtu\.be\/([^&#]{11})$/ # youtu.be

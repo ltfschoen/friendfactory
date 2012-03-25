@@ -4,6 +4,8 @@ class Posting::Link < Posting::Base
 
   include PrimedAt
 
+  acts_as_commentable
+
   attr_writer :url
 
   attr_accessible \

@@ -4,6 +4,8 @@ class Posting::Photo < Posting::Base
 
   include PrimedAt
 
+  acts_as_commentable
+
   self.include_root_in_json = false
 
   has_attached_file :image,

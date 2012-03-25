@@ -13,8 +13,6 @@ class Wave::Profile < Wave::Base
 
   has_many :photos,
       :through     => :publications,
-      :source      => :resource,
-      :source_type => 'Posting::Base',
       :conditions  => { :postings => { :state => :published, :type => 'Posting::Photo' }},
       :order       => '`postings`.`created_at` DESC'
 

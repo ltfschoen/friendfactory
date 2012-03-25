@@ -1,5 +1,7 @@
 class Posting::Avatar < Posting::Base
 
+  acts_as_commentable
+
   has_attached_file :image,
       :styles => {
           :thumb     => [ '128x128#', :jpg ],

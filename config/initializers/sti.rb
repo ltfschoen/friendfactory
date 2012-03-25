@@ -1,6 +1,5 @@
-# STI requires children meta classes to be instantiated
-Wave::Buddy
-Wave::Poke
-
-Wave::Ambassador
-Wave::Profile
+if Rails.env.development?
+  Dir[File.join(Rails.root, 'app', 'models', '{posting,wave}', '*.rb')].each do |file|
+    require_dependency(file)
+  end
+end

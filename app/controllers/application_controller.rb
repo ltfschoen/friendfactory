@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   if Rails.env.development?
-    [ 'ambassador' ].each do |dep|
-      require_dependency(File.join(Rails.root, 'app', 'models', 'wave', dep))
+    Dir[File.join(Rails.root, 'app', 'models', '{posting,wave}', '*.rb')].each do |file|
+      require_dependency(file)
     end
   end
 
