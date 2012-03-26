@@ -21,10 +21,10 @@ class Posting::Base < ActiveRecord::Base
 
   state_machine do
     state :unpublished
-    state :published # , :exit => :decrement_postings_counter
+    state :published, :exit => :decrement_counts!
 
     event :publish do
-      transitions :to => :published, :from => [ :unpublished, :publish ] # , :on_transition => :increment_postings_counter
+      transitions :to => :published, :from => [ :unpublished, :publish ] , :on_transition => :increment_counts!
     end
 
     event :unpublish do
@@ -32,20 +32,29 @@ class Posting::Base < ActiveRecord::Base
     end
   end
 
-  scope :published,
-      where(:state => [ :published, :offered ])
+  private
 
-  scope :unpublished,
-      where(:state => :unpublished)
-
-  def published?
-    [ :published, :offered ].include?(current_state)
+  def increment_counts!
+    if self.published?
+      parent && parent.increment_children_count!(self)
+      waves.map{ |wave| wave.increment!(:publications_count) }
+    end
   end
+
+  def decrement_counts!
+    parent && parent.decrement_children_count!(self)
+    waves.map{ |wave| wave.decrement!(:publications_count) }
+  end
+
+  public
 
   ###
 
-  scope :roots,
-      where(:parent_id => nil)
+  scope :published, where(:state => :published)
+
+  scope :unpublished, where(:state => :unpublished)
+
+  scope :roots, where(:parent_id => nil)
 
   scope :user, lambda { |user|
       where(:user_id => user[:id])
@@ -68,6 +77,80 @@ class Posting::Base < ActiveRecord::Base
       :include    => :persona
 
   belongs_to :resource, :polymorphic => true
+
+  ###
+
+  has_many :publishables,
+      :class_name  => 'Publication',
+      :foreign_key => 'posting_id'
+
+  has_many :waves,
+      :through => :publishables
+
+  ###
+
+  belongs_to :parent,
+      :class_name    => 'Posting::Base',
+      :foreign_key   => 'parent_id'
+
+  has_many :children,
+      :class_name    => 'Posting::Base',
+      :foreign_key   => 'parent_id',
+      :dependent     => :destroy,
+      :before_add     => :increment_children_count!,
+      :before_remove  => :decrement_children_count!,
+      :counter_sql   => proc {
+          %Q(SELECT COUNT(*) FROM
+            ((SELECT DISTINCT p2.lev2 AS id FROM
+                (SELECT p1.id AS lev1, p2.id AS lev2
+                FROM postings AS p1
+                LEFT JOIN POSTINGS AS p2 ON p2.parent_id = p1.id
+                WHERE p1.id = #{id}
+                AND p2.state = 'published') AS p2
+             WHERE lev2 IS NOT NULL)
+            UNION
+            (SELECT DISTINCT p3.lev3 FROM
+                (SELECT p1.id AS lev1, p2.id AS lev2, p3.id AS lev3
+                FROM postings AS p1
+                LEFT JOIN POSTINGS AS p2 ON p2.parent_id = p1.id
+                LEFT JOIN POSTINGS AS p3 ON p3.parent_id = p2.id
+                WHERE p1.id = #{id}
+                AND p3.state = 'published') as p3
+             WHERE lev3 IS NOT NULL)) t1) }
+
+  def comments
+    children.type(Posting::Comment).scoped
+  end
+
+  def increment_children_count!(posting)
+    if posting.published?
+      root.increment!(:children_count)
+    end
+  end
+
+  def decrement_children_count!(posting)
+    root.decrement!(:children_count)
+  end
+
+  def ancestors
+    node, nodes = self, []
+    nodes << node = node.parent while node.parent
+    nodes
+  end
+
+  def root
+    node = self
+    node = node.parent while node.parent
+    node
+  end
+
+  def siblings
+    self_and_siblings - [self]
+  end
+
+  def self_and_siblings
+    parent ? parent.children : self.class.roots
+  end
 
   ###
 
@@ -96,14 +179,6 @@ class Posting::Base < ActiveRecord::Base
   end
 
   private
-
-  def increment_postings_counter
-    waves.map{ |wave| wave.increment!(:postings_count) }
-  end
-
-  def decrement_postings_counter
-    waves.map{ |wave| wave.decrement!(:postings_count) }
-  end
 
   def set_hash_key
     self[:hash_key] = Digest::SHA1.hexdigest("#{id}#{created_at.to_i}")[0..7]

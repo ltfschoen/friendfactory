@@ -48,8 +48,7 @@ class AddPrimedAtToPostings < ActiveRecord::Migration
   private
 
   def self.last_commented_at(posting)
-    return unless posting.commentable?
-    comments = posting.comments.order('`created_at` DESC')
+    comments = posting.comments.published.order('`created_at` DESC')
     if comments.present?
       last_commented_at = comments.first.created_at
       comments.inject(last_commented_at) do |memo, comment|

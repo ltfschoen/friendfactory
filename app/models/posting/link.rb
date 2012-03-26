@@ -4,8 +4,6 @@ class Posting::Link < Posting::Base
 
   include PrimedAt
 
-  acts_as_commentable
-
   attr_writer :url
 
   attr_accessible \
@@ -44,6 +42,9 @@ class Posting::Link < Posting::Base
   def embedify
     if build_resource(:url => url).embedify
       build_photos
+      self
+    else
+      false
     end
   end
 

@@ -1,7 +1,5 @@
 class Posting::Comment < Posting::Base
 
-  acts_as_commentable
-
   attr_accessible :body
 
   validates_presence_of :parent_id

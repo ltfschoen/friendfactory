@@ -1,7 +1,5 @@
 class Posting::Invitation < Posting::Base
 
-  acts_as_commentable
-
   FIRST_REMINDER_AGE  = 1.day
   SECOND_REMINDER_AGE = 7.days
   EXPIRATION_AGE      = 10.days
