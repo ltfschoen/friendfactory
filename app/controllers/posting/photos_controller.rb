@@ -8,9 +8,8 @@ class Posting::PhotosController < ApplicationController
   
   def create
     @wave = Wave::Base.find_by_id(params[:wave_id])
-    if @wave.present?      
+    if @wave.present?
       @posting = Posting::Photo.new(:image => params[:posting_photo][:image], :subject => params[:posting_photo][:subject]) do |photo|
-        photo.site = current_site
         photo.user = current_user
       end
       @wave.postings << @posting

@@ -34,7 +34,6 @@ class Wave::Base < ::Posting::Base
     # end
   end
 
-
   def rollcall
     Personage.select('distinct `personages`.*').
         enabled.

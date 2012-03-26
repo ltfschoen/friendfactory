@@ -27,7 +27,6 @@ class Posting::WaveProxiesController < ApplicationController
     if resource = current_site.waves.find_by_id(params[:resource_id])
       resource.publish!
       @posting = Posting::WaveProxy.new do |proxy|
-        proxy.site = current_site
         proxy.user = current_user
         proxy.sticky_until = params[:sticky_until] if current_user.admin?
         proxy.resource = resource

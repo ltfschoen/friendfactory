@@ -77,7 +77,6 @@ class Admin::Invitation::SitesController < ApplicationController
   def new_invitation
     ::Invitation::Site.new(params[:invitation_site]) do |invitation|
       invitation.user = current_user
-      invitation.site = current_site
     end
   end
 

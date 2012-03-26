@@ -19,7 +19,6 @@ class Posting::PostItsController < ApplicationController
   def new_post_it_posting
     @posting ||= begin
       Posting::PostIt.new(params[:posting_post_it]) do |post_it|
-        post_it.site = current_site
         post_it.user = current_user
       end
     end

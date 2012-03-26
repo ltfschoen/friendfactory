@@ -14,7 +14,6 @@ class Posting::LinksController < ApplicationController
   def new_link_posting
     @posting ||= begin
       Posting::Link.new(params[:posting_link]) do |link|
-        link.site = current_site
         link.user = current_user
         link.sticky_until = params[:posting_link][:sticky_until] if current_user.admin?
         link.embedify

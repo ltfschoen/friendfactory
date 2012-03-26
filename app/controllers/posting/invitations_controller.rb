@@ -33,7 +33,6 @@ class Posting::InvitationsController < ApplicationController
   def new_posting_invitation
     Posting::Invitation.new(params[:posting_invitation]) do |posting|
       posting.sponsor = current_user
-      posting.site = current_site
     end
   end
 

@@ -5,6 +5,7 @@ class Posting::Base < ActiveRecord::Base
   set_table_name :postings
 
   delegate \
+      :site,
       :email,
       :emailable?,
       :admin,
@@ -13,8 +14,6 @@ class Posting::Base < ActiveRecord::Base
       :avatar,
       :avatar?,
     :to => :user
-
-  attr_accessor :site
 
   before_create :initialize_primed_at
 
