@@ -50,7 +50,7 @@ class Wave::Base < ::Posting::Base
   def rollcall
     Personage.select('distinct `personages`.*').
         enabled.
-        joins(:postings => :publications).
+        joins(:postings => :publishables).
         merge(Posting::Base.published).
         where(:publications => { :wave_id => self[:id] }).
         scoped
