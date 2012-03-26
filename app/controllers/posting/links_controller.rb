@@ -1,30 +1,34 @@
 class Posting::LinksController < ApplicationController
 
+  before_filter :require_user
+
+  helper_method \
+      :wave,
+      :posting
+
   def create
-    wave = current_site.waves.find(params[:wave_id])
-    add_posting_to_wave(new_link_posting, wave)
-    new_link_posting.reload
     respond_to do |format|
-      format.js { render :layout => false }
+      if posting.embedify && wave.postings << posting
+        format.js { render :layout => false }
+      else
+        format.js { head :unprocessable_entity }
+      end
     end
   end
 
   private
 
-  def new_link_posting
-    @posting ||= begin
-      Posting::Link.new(params[:posting_link]) do |link|
-        link.user = current_user
-        link.sticky_until = params[:posting_link][:sticky_until] if current_user.admin?
-        link.embedify
-      end
+  def wave
+    @wave ||= begin
+      current_site.waves.find(params[:wave_id])
     end
   end
 
-  def add_posting_to_wave(posting, wave)
-    ActiveRecord::Base.transaction do
-      if wave.postings << posting
-        posting.publish!
+  def posting
+    @posting ||= begin
+      Posting::Link.published.new(params[:posting_link]) do |link|
+        link.user = current_user
+        link.sticky_until = params[:posting_link][:sticky_until] if current_user.admin?
       end
     end
   end
