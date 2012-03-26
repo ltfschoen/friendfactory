@@ -103,7 +103,6 @@ class PersonagesController < ApplicationController
         handle = current_user.handle
         Posting::Avatar.create(params[:posting_avatar]) do |posting|
           posting.user = current_user
-          posting.site = current_site
         end
       end
       format.json { render :json => { :url => avatar.url(:polaroid), :title => handle, :pid => pid, :avatar_id => avatar[:id] }, :content_type => 'text/html' }
