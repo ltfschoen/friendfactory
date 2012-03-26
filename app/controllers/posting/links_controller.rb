@@ -26,8 +26,7 @@ class Posting::LinksController < ApplicationController
 
   def posting
     @posting ||= begin
-      Posting::Link.published.new(params[:posting_link]) do |link|
-        link.user = current_user
+      Posting::Link.published.user(current_user).new(params[:posting_link]) do |link|
         link.sticky_until = params[:posting_link][:sticky_until] if current_user.admin?
       end
     end
