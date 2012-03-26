@@ -74,8 +74,10 @@ module Posting::PostingsHelper
   end
 
   def render_posting(posting)
-    posting_type = posting.class.name.demodulize.tableize
-    render :partial => File.join('posting', posting_type, posting_type.singularize), :object => posting
+    class_name = posting.class.name
+    view_path = class_name.underscore.pluralize
+    partial_name = class_name.demodulize.tableize.singularize
+    render :partial => File.join(view_path, partial_name), :object => posting
   end
 
   def spinner_tag

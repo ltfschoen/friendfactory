@@ -3,14 +3,12 @@
 - photo  = photos.first
 - if photo.present?
   .post_frame
-    .post.photos[ proxy ]{ uid(album[:user_id]), :class => [ 'wave_album', (photos.length > 1) ? 'multiple' : nil ]}
-      = link_to_unpublish(proxy)
+    .post.photos[ album ]{ uid(album[:user_id]), :class => [ 'wave_album', (photos.length > 1) ? 'multiple' : nil ]}
+      = link_to_unpublish(album)
       .portrait= thimble_link_to_profile(user, :remote => true)
       .clear
         .photo{ :class => photo.horizontal? ? nil : 'vertical' }
-          =# link_to render_photo(photo), wave_community_path(album)
-          =# link_to_album_photo(album, photo)
           = link_to render_photo(photo), posting_comments_path(photo, :wave_id => album[:id]), :class => 'comments', :remote => true
-        = posted_distance_of_time(proxy)
+        = posted_distance_of_time(album)
         = link_to_comments(photo.comments.published.count, posting_comments_path(photo, :wave_id => album[:id]))
     .reaction
