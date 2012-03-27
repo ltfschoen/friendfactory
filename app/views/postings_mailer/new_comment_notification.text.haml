@@ -9,6 +9,6 @@
 
   You can also view #{posting.user.display_handle}'s profile at:
 
-  #{url_for(posting.user.profile, :host => host, :only_path => false)}
+  #{polymorphic_path(posting.user.profile, :host => host, :only_path => false)}
 
   #{render :partial => 'layouts/shared/featured_personages', :object => featured_personages, :locals => { :host => host }}
