@@ -97,10 +97,10 @@ class Posting::PostingsController < ApplicationController
 
   def fetchables
     @fetchables ||= begin
-      params[:id].to_a.map do |posting_id, limit|
-        posting = postings.detect { |p| p[:id] == posting_id.to_i }
-        comments = posting.children.includes(:user => :profile, :user => { :persona => :avatar }).type(Posting::Comment).published.order('`updated_at` DESC').limit(limit)
-        comments.map! { |comment| build_fetchable(posting, comment) }.compact!
+      posting_id_to_limit_dictionary = params[:id]
+      postings.index_by(&:id).map do |posting_id, posting|
+        limit = posting_id_to_limit_dictionary[posting_id.to_s]
+        comments = posting.fetchables(limit).map { |comment| build_fetchable(posting, comment) }.compact
         { :id => posting_id, :comments => comments }
       end
     end

@@ -41,8 +41,7 @@
 
 				if ((this.comments.length > 0) && (domId !== undefined)) {
 					$reaction = $('#' + idMap[this.id]).next('.reaction');
-					html = $('#reaction-template').tmpl(this.comments);
-					// $reaction.html(html).fadeTo('fast', 1.0);
+					html = $('#reaction-template').mustache(this);
 					$reaction.html(html);
 				}
 			});

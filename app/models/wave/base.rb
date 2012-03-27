@@ -32,19 +32,12 @@ class Wave::Base < ::Posting::Base
   end
 
   has_many :postings,
-      :through       => :publications,
-      :conditions    => { :parent_id => nil },
-      :after_add     => :after_add_posting do
-
+      :through    => :publications,
+      :conditions => { :parent_id => nil },
+      :after_add  => :after_add_posting do
     def natural_order
       order('`postings`.`sticky_until` DESC, `postings`.`primed_at` DESC')
     end
-
-    # def <<(posting)
-    #   raise proxy_reflection.methods.sort.inspect
-    #   proxy_target << posting
-    #   proxy_owner
-    # end
   end
 
   def rollcall

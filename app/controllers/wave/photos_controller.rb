@@ -6,7 +6,7 @@ class Wave::PhotosController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render :json => wave.photos.published }
+      format.json { render :json => { :photos => wave.photos.published }}
     end
   end
 

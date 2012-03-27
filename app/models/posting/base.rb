@@ -97,8 +97,8 @@ class Posting::Base < ActiveRecord::Base
       :class_name    => 'Posting::Base',
       :foreign_key   => 'parent_id',
       :dependent     => :destroy,
-      :before_add     => :increment_children_count!,
-      :before_remove  => :decrement_children_count!,
+      :before_add    => :increment_children_count!,
+      :before_remove => :decrement_children_count!,
       :counter_sql   => proc {
           %Q(SELECT COUNT(*) FROM
             ((SELECT DISTINCT p2.lev2 AS id FROM
@@ -120,6 +120,16 @@ class Posting::Base < ActiveRecord::Base
 
   def comments
     children.type(Posting::Comment).scoped
+  end
+
+  def fetchables(limit = nil)
+    children.
+        published.
+        type(Posting::Comment).
+        includes(:user => :profile, :user => { :persona => :avatar }).
+        order('`updated_at` DESC').
+        limit(limit).
+        scoped
   end
 
   def increment_children_count!(posting)

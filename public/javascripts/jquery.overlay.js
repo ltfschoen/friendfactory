@@ -100,7 +100,7 @@
 						url = $overlay.data('profile_wave_photos_url');
 
 					$.getJSON(url, function (data) {
-						var html = $('#photo-picker-template').tmpl(data);
+						var html = $('#photo-picker-template').mustache(data);
 						$overlay.find('ul').html(html);
 					});
 				},
