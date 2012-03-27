@@ -59,7 +59,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def featured_personages(limit = 6)
     if site
-      Personage.enabled.site(site).joins(:user).merge(Persona::Base.featured).limit(limit).order('rand()')
+      Personage.enabled.site(site).joins(:persona).merge(Persona::Base.featured).limit(limit).order('rand()')
     else
       []
     end
