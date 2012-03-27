@@ -5,7 +5,7 @@
       h1 { font-size: 1em; }
   %body
     %p
-      = "Hey #{@user.handle},"
+      = "Hey #{@user.default_personage.handle},"
     %p
       A request was made to reset your #{@site.display_name} password. To do so, click the following link:
     %p
