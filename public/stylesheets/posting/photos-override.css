@@ -3,6 +3,10 @@
 	width: 340px;
 }
 
+.ie8 .new_post.photo .body {
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+}
+
 .post.photos .photo,
 .post.photos .photo img.v4x6 {
 	width: auto;
@@ -82,30 +86,89 @@
 	-webkit-transform: rotate(2deg);
 }
 
+.reaction .frame {
+	position: relative;
+	margin: 0 0 10px 20px;
+}
+
+.reaction .frame.posting {
+	display: inline-block;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
 .reaction .photo {
-	background: #fff;
-	cursor: pointer;
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	-o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-	width: 310px;
-	height: 230px;
-	float: left;
-	margin: 10px 0 0 10px;
 }
 
-.reaction .photo img {
-	width: 300px;
-	height: 220px;
-	margin: 5px;
+.reaction img.photo {
+	cursor: pointer;
+	width: 483px;
+	height: auto;
 }
 
-.reaction .photo,
-.reaction .photo img.v4x6 {
+.reaction img.photo.v4x6 {
 	width: auto;
+	height: 460px;
 }
 
-.ie8 .new_post.photo .body {
-	filter: progid:DXImageTransform.Microsoft.Shadow(color='#AAAAAA', Direction=155, Strength=3);
+.reaction div.photo {
+	margin: 0;
+	padding: 6px 6px 3px 6px;
+	background-color: #fff;
+	display: inline-block;
+}
+
+.reaction img.fetched.photo {
+	width: 150px;
+	height: 100px;
+	padding: 3px;
+	background-color: #fff;
+	float: left;
+	margin: 0 5px 5px 0;
+}
+
+.reaction img.fetched.photo.v4x6 {
+	width: 68px;
+	height: 100px;
+}
+
+.reaction .posting a.remove {
+	position: absolute;
+	display: block;
+	visibility: hidden;
+	opacity: 0;
+	cursor: pointer;
+	right: -10px;
+	top: -6px;
+	width: 20px;
+	height: 20px;
+	line-height: 15px;
+	color: #333;
+	background: transparent;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-transition: opacity 0.1s linear;
+	-moz-transition: opacity 0.1s linear;
+	-ms-transition: opacity 0.1s linear;
+	-o-transition: opacity 0.1s linear;
+	transition: opacity 0.1s linear;
+}
+
+.reaction .posting:hover a.admin {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.ie8 .reaction .posting a.admin,
+.ie8 .reaction .posting:hover a.admin {
+	opacity: 1;
+}
+
+body.gid_admin .reaction .posting:hover a.admin {
+	visibility: visible;
+	opacity: 1;
 }

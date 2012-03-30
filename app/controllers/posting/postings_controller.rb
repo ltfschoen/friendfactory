@@ -98,40 +98,19 @@ class Posting::PostingsController < ApplicationController
   def fetchables
     @fetchables ||= begin
       posting_id_to_limit_dictionary = params[:id]
-      postings.index_by(&:id).map do |posting_id, posting|
-        limit = posting_id_to_limit_dictionary[posting_id.to_s]
-        comments = posting.fetchables(limit).map { |comment| build_fetchable(posting, comment) }.compact
-        { :id => posting_id, :comments => comments }
+      postings.map do |posting|
+        limit = posting_id_to_limit_dictionary[posting[:id].to_s]
+        comments = posting.fetchables(limit).map { |comment| build_fetchable(comment) }.compact
+        { :posting_id => posting[:id], posting.fetch_type => true, :posting_comments_path => posting_comments_path(posting), :comments => comments }
       end
     end
   end
 
-  def build_fetchable(posting, comment)
+  def build_fetchable(comment)
     if comment.authorizes?(current_user, 'show')
-      user = comment.user
-      { :id         => comment.id,
-        :posting_id => posting.id,
-        :body       => tag_helper.truncate(comment.body, :length => 100),
-        :updated_at => tag_helper.distance_of_time_in_words_to_now(comment.updated_at),
-        :image_path => user.avatar.url(:thimble),
-        :handle     => user.handle
-      }.merge(build_fetchable_with_profile(user))
+      profile = comment.user.profile
+      comment.as_json(:fetch => true).merge(profile.present? ? { :profile_path => url_for(profile) } : {})
     end
-  end
-
-  def build_fetchable_with_profile(user)
-    profile = user.profile
-    profile.present? ? { :profile_path => url_for(profile) } : {}
-  end
-
-  def tag_helper
-    TagHelper.instance
-  end
-
-  class TagHelper
-    include Singleton
-    include ActionView::Helpers::TextHelper
-    include ActionView::Helpers::DateHelper
   end
 
 end

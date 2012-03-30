@@ -8,7 +8,7 @@
       .portrait= thimble_link_to_profile(user, :remote => true)
       .clear
         .photo{ :class => photo.horizontal? ? nil : 'vertical' }
-          = link_to render_photo(photo), posting_comments_path(photo, :wave_id => album[:id]), :class => 'comments', :remote => true
+          = link_to render_photo(photo), posting_comments_path(album), :class => 'comments', :remote => true
         = posted_distance_of_time(album)
-        = link_to_comments(photo.comments.published.count, posting_comments_path(photo, :wave_id => album[:id]))
+        = link_to_comments('Show photos', posting_comments_path(album))
     .reaction

@@ -61,10 +61,8 @@
   = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
 
   :css
-    body.#{current_user.uid} .post.#{current_user.uid}:hover a.admin,
-    body.#{current_user.uid} .comment_box.#{current_user.uid}:hover a.admin { visibility: visible; opacity: 1; }
-    .ie8 body.#{current_user.uid} .post.#{current_user.uid}:hover a.admin,
-    .ie8 body.#{current_user.uid} .comment_box.#{current_user.uid}:hover a.admin { visibility: visible; }
+    body.#{current_user.uid} .#{current_user.uid}:hover a.admin { visibility: visible; opacity: 1; }
+    .ie8 body.#{current_user.uid} .#{current_user.uid}:hover a.admin { visibility: visible; }
 
   - if Rails.env.development?
     = stylesheet_link_tag 'development'

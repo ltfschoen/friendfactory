@@ -16,7 +16,7 @@
 
 	$.getMiniComments = function (frames, callback) {
 		var url = '/postings/fetch.json',
-			idMap = {},
+			idDomIdMap = {},
 			fetchables = {};
 
 		$.each(frames, function () {
@@ -28,20 +28,22 @@
 
 			if (postId !== undefined) {
 				fetchables[postId] = limit;
-				idMap[postId] = $post.attr('id');
+				idDomIdMap[postId] = { domId: $post.attr('id'), limit: limit };
 				$reaction.html('');
 			}
 		});
 
 		$.getJSON(url, { id: fetchables }, function (data) {
 			$.each(data, function() {
-				var domId = idMap[this.id],
+				var idDomId = idDomIdMap[this.posting_id],
+					domId = idDomId.domId,
+					limit = idDomId.limit,
 					$reaction,
 					html;
 
 				if ((this.comments.length > 0) && (domId !== undefined)) {
-					$reaction = $('#' + idMap[this.id]).next('.reaction');
-					html = $('#reaction-template').mustache(this);
+					$reaction = $('#' + domId).next('.reaction');
+					html = $('#reaction-template').mustache($.extend(this, { limit: limit }));
 					$reaction.html(html);
 				}
 			});
@@ -51,13 +53,14 @@
 	};
 
 
-	$.unsetActiveFrame = function (callback) {
+	$.unsetActiveFrame = function () {
 		var $currentFrame = $('.post_frame.active');
 
 		$currentFrame
 			.removeClass('active')
 			.find('.reaction').hide();
-		$.getMiniComments($currentFrame, callback);
+
+		return $currentFrame;
 	};
 
 	$.hideAllReactions = function () {
@@ -75,7 +78,7 @@
 		$('.post_frame').not(frame)
 			.find('.reaction').hide();
 
-		$.unsetActiveFrame();
+		$.getMiniComments($.unsetActiveFrame());
 		$frame.addClass('active');
 		$reaction
 			.css({ opacity: 0.0 })
@@ -120,13 +123,18 @@ jQuery(function($) {
 	// Headshots in sidebar
 	$('div.headshot', '#sidebar').headshot();
 
+	// Broken Images
+	$('img').error(function () {
+		$(this).addClass('invisible');
+	});
+
 	// Comments
 	$('.comments a, a.comments')
 		.live('ajax:beforeSend', function () {
 			var $frame = $(this).closest('.post_frame');
 
 			if ($frame.hasClass('active')) {
-				$.unsetActiveFrame(function () {
+				$.getMiniComments($.unsetActiveFrame(), function () {
 					setWideFrameBorders();
 					showAllReactions();
 				});
@@ -155,7 +163,7 @@ jQuery(function($) {
 	$('.reaction').live('click', function (event) {
 		if (event.target.value === 'Cancel') {
 			var $frame = $(this).closest('.post_frame');
-			$.unsetActiveFrame(function () {
+			$.getMiniComments($.unsetActiveFrame(), function () {
 				setWideFrameBorders();
 				showAllReactions();
 			});

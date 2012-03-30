@@ -1,12 +1,24 @@
-%script#reaction-template{:type => "text/application"}
+%script#reaction-template{ :type => "text/application" }
+  {{#posting_base}}
   {{#comments}}
   .mini_comment{ uid, gid, :id => 'posting_comment_{{id}}' }
     .portrait
       %img{ :src => '{{image_path}}', :width => '32', :height => '32', :title => '{{handle}}' }/
     .comment
       %p
-        %a{ :href => "/postings/{{posting_id}}/comments", :'data-remote' => "true", :class => 'comments' } {{body}}
+        %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true', :class => 'comments' } {{body}}
       %span.date Posted {{updated_at}} ago
       %span.comments
-        %a{ :href => "/postings/{{posting_id}}/comments", :'data-remote' => "true" } Reply
+        %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true' } Reply
   {{/comments}}
+  {{/posting_comment}}
+  {{#wave_album}}
+  .frame
+    %ul
+      {{#comments}}
+      %li
+        %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true', :class => 'comments', :remote => true }
+          %img{ :src => '{{fetched_image_path}}', :class => 'photo fetched {{orientation}}' }
+      {{/comments}}
+    %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true', :class => 'comments footer', :remote => true } Show photos &rarr;
+  {{/wave_album}}

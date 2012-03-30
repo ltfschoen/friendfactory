@@ -7,11 +7,11 @@ module Posting::CommentsHelper
     end
   end
 
-  def link_to_comments(comment_count, url)
+  def link_to_comments(message, url)
+    message = (message > 0 ? pluralize(message, 'comment') : 'Write a comment') if message.is_a?(Integer)
     content_tag(:span, :class => 'comments') do
-      msg = comment_count > 0 ? pluralize(comment_count, 'comment') : 'Write a comment'
-      msg << '&nbsp;&rarr;'
-      link_to msg.html_safe, url, :remote => true
+      message << '&nbsp;&rarr;'
+      link_to message.html_safe, url, :remote => true
     end
   end
 

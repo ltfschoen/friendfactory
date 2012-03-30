@@ -41,7 +41,7 @@ class Wave::CommunitiesController < ApplicationController
   def wave
     @wave ||= begin
       if params[:id].present?
-        current_site.waves.published.find_by_id(params[:id])
+        current_site.waves.published.find(params[:id])
       else
         current_site.home_wave
       end

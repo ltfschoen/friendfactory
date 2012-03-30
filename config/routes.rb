@@ -1,12 +1,9 @@
+require 'sti'
+
 Friskyfactory::Application.routes.draw do
 
-  if Rails.env.development?
-    Dir[File.join(Rails.root, 'app', 'models', '{posting,wave}', '*.rb')].each do |file|
-      require_dependency(file)
-    end
-  end
-
   root :to => redirect { |params, request|
+    load 'sti.rb' if Rails.env.development?
     site_name = request.domain && request.domain.gsub(/\..*$/, '')
     if site = Site.find_by_name(site_name)
       wave = site.home_wave

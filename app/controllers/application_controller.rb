@@ -5,11 +5,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  if Rails.env.development?
-    Dir[File.join(Rails.root, 'app', 'models', '{posting,wave}', '*.rb')].each do |file|
-      require_dependency(file)
-    end
-  end
+  load 'sti.rb' if Rails.env.development?
 
   helper_method \
       :current_user_session,

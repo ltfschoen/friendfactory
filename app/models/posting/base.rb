@@ -122,16 +122,6 @@ class Posting::Base < ActiveRecord::Base
     children.type(Posting::Comment).scoped
   end
 
-  def fetchables(limit = nil)
-    children.
-        published.
-        type(Posting::Comment).
-        includes(:user => :profile, :user => { :persona => :avatar }).
-        order('`updated_at` DESC').
-        limit(limit).
-        scoped
-  end
-
   def increment_children_count!(posting)
     if posting.published?
       root.increment!(:children_count)
@@ -160,6 +150,22 @@ class Posting::Base < ActiveRecord::Base
 
   def self_and_siblings
     parent ? parent.children : self.class.roots
+  end
+
+  ###
+
+  def fetchables(limit = nil)
+    children.
+        published.
+        type(Posting::Comment).
+        includes(:user => :profile, :user => { :persona => :avatar }).
+        order('`updated_at` DESC').
+        limit(limit).
+        scoped
+  end
+
+  def fetch_type
+    :posting_base
   end
 
   ###

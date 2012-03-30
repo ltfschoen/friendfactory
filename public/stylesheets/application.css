@@ -15,6 +15,10 @@ input[type='text'], input[type='password'], textarea {
 	display: none;
 }
 
+.invisible {
+	visibility: none;
+}
+
 a {
 	color: #861c0f;
 	text-decoration: none;
