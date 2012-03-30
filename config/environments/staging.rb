@@ -59,4 +59,7 @@ Friskyfactory::Application.configure do
       :enable_starttls_auto => true  }
 
   config.action_mailer.default_url_options = { :host => 'staging.friskyfactory.com' }
+
+  config.after_initialize { require 'sti' }
+
 end
