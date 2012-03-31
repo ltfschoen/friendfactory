@@ -1,5 +1,4 @@
 body {
-/*  background: url('../../images/brands/friskyhands/tile.png');*/
   font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 a {
@@ -23,7 +22,6 @@ a:hover {
   min-height: 100%;
   overflow: hidden;
   margin-left: 201px;
-/*  background: url('../../images/brands/friskyhands/column_background.png') repeat-y;*/
 }
 #frame .post_frame, #frame .new_post_frame {
   float: left;
@@ -39,6 +37,3 @@ a:hover {
 .collapsed .post {
   border: none;
 }
-/*.collapsed - .post_frame {
-  background: #ff0000;
-}*/

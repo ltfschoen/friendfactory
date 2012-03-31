@@ -14,12 +14,11 @@
   {{/comments}}
   {{/posting_base}}
   {{#wave_album}}
-  .frame
-    %ul
-      {{#comments}}
-      %li
-        %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true', :class => 'comments', :remote => true }
-          %img{ :src => '{{fetched_image_path}}', :class => 'photo fetched {{orientation}}' }
-      {{/comments}}
-    %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true', :class => 'comments footer', :remote => true } Show photos &rarr;
+  %ul.photos.fetched
+    {{#comments}}
+    %li
+      %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true', :class => 'comments', :remote => true }
+        %img{ :src => '{{fetched_image_path}}', :class => 'photo {{orientation}}' }
+    {{/comments}}
+  %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true', :class => 'comments footer', :remote => true } Show photos &rarr;
   {{/wave_album}}

@@ -1,12 +1,16 @@
 .comment_box {
 	position: relative;
-	margin-top: 0;
-	margin-right: 0;
-	padding-right: 0;
+	margin: 0;
+	padding: 5px 0 0 0;
+}
+
+.comment_box.nested {
+	margin-left: 50px;
 }
 
 .comment_box .comment {
 	min-height: 20px;
+	padding: 8px 10px 6px 10px;
 }
 
 .ie8 .comment_box .comment {

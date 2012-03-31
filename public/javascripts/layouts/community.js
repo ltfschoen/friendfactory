@@ -129,7 +129,7 @@ jQuery(function($) {
 	});
 
 	// Comments
-	$('.comments a, a.comments')
+	$('.post .comments a')
 		.live('ajax:beforeSend', function () {
 			var $frame = $(this).closest('.post_frame');
 
@@ -157,7 +157,6 @@ jQuery(function($) {
 
 			$.hideAllReactionsExcept($frame, $html, function () {});
 		});
-
 
 	// Reaction cancel
 	$('.reaction').live('click', function (event) {

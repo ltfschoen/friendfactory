@@ -1,0 +1,6 @@
+.mini_comment{ uid, gid }[ mini_comment ]
+  .portrait= thimble_link_to_profile(mini_comment.user, :remote => true)
+  .comment
+    %p= link_to posting_comments_path(posting), mini_comment.body, :remote => true, :class => 'comments'
+    %span.date #{distance_of_time_in_words_to_now(mini_comment.created_at).titleize} ago
+    = link_to_comments('Reply', posting_comments_path(posting))

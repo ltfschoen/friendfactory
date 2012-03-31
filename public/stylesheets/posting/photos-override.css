@@ -86,17 +86,6 @@
 	-webkit-transform: rotate(2deg);
 }
 
-.reaction .frame {
-	position: relative;
-	margin: 0 0 10px 20px;
-}
-
-.reaction .frame.posting {
-	display: inline-block;
-	padding-top: 10px;
-	padding-right: 10px;
-}
-
 .reaction .photo {
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -104,46 +93,66 @@
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.reaction img.photo {
+.post.wave_album + .reaction img.photo {
 	cursor: pointer;
-	width: 483px;
+	width: 475px;
 	height: auto;
 }
 
-.reaction img.photo.v4x6 {
+.post.wave_album + .reaction img.photo.v4x6 {
 	width: auto;
 	height: 460px;
 }
 
-.reaction div.photo {
-	margin: 0;
+.post.wave_album + .reaction ul.photos li {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.post.wave_album + .reaction ul.photos.fetched li {
+	position: static;
+}
+
+.post.wave_album + .reaction ul.photos.fetched li {
+	margin-bottom: 0;
+}
+
+.post.wave_album + .reaction ul.photos li:first-child {
+	margin-top: 10px;
+}
+
+.post.wave_album + .reaction ul.photos.fetched li:first-child {
+	margin-top: 0;
+}
+
+.post.wave_album + .reaction ul.photos div.photo {
 	padding: 6px 6px 3px 6px;
 	background-color: #fff;
 	display: inline-block;
 }
 
-.reaction img.fetched.photo {
+.post.wave_album + .reaction ul.photos.fetched img.photo {
 	width: 150px;
 	height: 100px;
 	padding: 3px;
 	background-color: #fff;
 	float: left;
-	margin: 0 5px 5px 0;
+	margin: 0 9px 9px 0;
 }
 
-.reaction img.fetched.photo.v4x6 {
+.post.wave_album + .reaction ul.photos.fetched img.photo.v4x6 {
 	width: 68px;
 	height: 100px;
 }
 
-.reaction .posting a.remove {
+.post.wave_album + .reaction .posting a.remove {
 	position: absolute;
 	display: block;
 	visibility: hidden;
 	opacity: 0;
 	cursor: pointer;
 	right: -10px;
-	top: -6px;
+	top: -5px;
 	width: 20px;
 	height: 20px;
 	line-height: 15px;
@@ -158,17 +167,17 @@
 	transition: opacity 0.1s linear;
 }
 
-.reaction .posting:hover a.admin {
+.post.wave_album + .reaction li:hover a.remove {
 	visibility: hidden;
 	opacity: 0;
 }
 
-.ie8 .reaction .posting a.admin,
-.ie8 .reaction .posting:hover a.admin {
+.ie8 .post.wave_album + .reaction li a.remove,
+.ie8 .post.wave_album + .reaction li:hover a.remove {
 	opacity: 1;
 }
 
-body.gid_admin .reaction .posting:hover a.admin {
+body.gid_admin .post.wave_album + .reaction li:hover a.remove {
 	visibility: visible;
 	opacity: 1;
 }
