@@ -9,16 +9,21 @@
 }
 
 .reaction .post {
-	width: 480px;
+	width: 500px;
 	float: left;
+	padding-right: 0;
 }
 
-.reaction .post .clear,
+.reaction .post .clear {
+	width: 440px;
+}
+
 .reaction .post .clear .cell {
-	width: 430px;
+	width: 420px;
 }
 
-.reaction a.comments {
+.reaction a.comments,
+.reaction a.new_comment {
 	color: #666;
 	font-size: 11px;
 }

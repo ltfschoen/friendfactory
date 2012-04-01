@@ -129,7 +129,7 @@ jQuery(function($) {
 	});
 
 	// Comments
-	$('.post .comments a')
+	$('.post .comments a, ul.fetched.comments .comment a, .reaction a.comments.footer')
 		.live('ajax:beforeSend', function () {
 			var $frame = $(this).closest('.post_frame');
 
@@ -170,7 +170,6 @@ jQuery(function($) {
 		}
 	});
 
-
 	// Nested Comments
 	$('.comment_box .reply a')
 		.live('ajax:success', function (xhr, form) {
@@ -190,6 +189,17 @@ jQuery(function($) {
 								.find('textarea').focus();
 						});
 					});
+		});
+
+	// Comments to Photos
+	$('a.new_comment')
+		.live('ajax:success', function (xhr, form) {
+			var $form = $(form);
+			$form
+				// .shakeable()
+				// .hide()
+				// .css({ opacity: 0.0 })
+				.insertBefore(this);
 		});
 
 	$('.comment_box.nested input.cancel').live('click', function () {
