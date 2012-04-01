@@ -1,8 +1,15 @@
 .mini_comment {
 	padding: 2px 0px 2px 0px;
 	margin-left: 0;
+	margin-right: 0;
 	overflow: visible;
-	float: none;
+}
+
+.fetched .mini_comment {
+	height: 50px;
+	overflow: hidden;
+	margin-bottom: 0;
+	padding: 0;
 }
 
 .ie .mini_comment .comment {
@@ -11,6 +18,10 @@
 
 .mini_comment .comment {
 	width: 440px;
+}
+
+.fetched .mini_comment .comment {
+/*	margin-bottom: 5px;*/
 }
 
 .mini_comment .comment p {
@@ -25,4 +36,21 @@
 
 .mini_comment .comment a:hover {
 	text-decoration: underline;
+}
+
+.mini_comment .comment span.reply {
+	float: right;
+	margin: 2px 8px;
+	font-size: 10px;
+}
+
+.mini_comment.nested {
+	margin-top: 0;
+	margin-left: 45px;
+	width: 440px;
+	border-left: 1px solid #999;
+}
+
+.mini_comment.nested .comment {
+	width: 384px;
 }

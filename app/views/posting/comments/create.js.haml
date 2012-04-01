@@ -8,14 +8,14 @@
     (function () {
       var
         $comment = $("#{escape_javascript(render(:partial => 'comment', :object => comment))}"),
-        $commentLink = $("#{escape_javascript(link_to_comments(posting.children.type(Posting::Comment).published.count, posting_comments_path(posting)))}"),
+        $commentLink = $("#{escape_javascript(link_to_comments(posting.root.children_count, posting_comments_path(posting)))}"),
         $frame = $form.closest('.post_frame'),
         insertComment = function () {
           $comment
             .hide()
             .css({ opacity: 0.0 })
             .delay(600)
-            .insertAfter($preceding)
+            .insertBefore($preceding)
             .slideDown('fast', function () {
               $comment.fadeTo('fast', 1.0);
             });
@@ -33,7 +33,7 @@
         insertComment();
       }
 
-      $frame.find('span.comments').html($commentLink);
+      $frame.find('.post span.comments').html($commentLink);
       $form[0].reset();
       $('input[type="text"], textarea', $form).val('').trigger('blur.placeholder');
     })();

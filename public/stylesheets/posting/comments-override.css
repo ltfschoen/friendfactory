@@ -1,24 +1,24 @@
 .comment_box {
 	position: relative;
 	margin: 0;
-	padding: 5px 0 0 0;
+	padding: 5px 0;
 	width: 490px;
 }
 
 .comment_box.nested {
-	margin-left: 50px;
+	margin-left: 45px;
 	padding-left: 10px;
-	width: 430px;
+	width: 440px;
 }
 
 .comment_box.nested .comment,
 .comment_box.nested textarea {
-  width: 360px;
+  width: 364px;
 }
 
 .comment_box.nested form,
 .comment_box.nested .foot {
-  width: 380px;
+  width: 384px;
 }
 
 .comment_box .comment {

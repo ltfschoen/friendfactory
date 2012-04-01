@@ -1,4 +1,5 @@
-.mini_comment{ uid, gid }[ mini_comment ]
+- nested = mini_comment.parent[:parent_id].present? && 'nested'
+.mini_comment.posting{ uid, gid, :class => [ nested ] }[ mini_comment ]
   .portrait= thimble_link_to_profile(mini_comment.user, :remote => true)
   .comment
     %p= mini_comment.body

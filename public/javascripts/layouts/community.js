@@ -19,6 +19,10 @@
 			idDomIdMap = {},
 			fetchables = {};
 
+		if (frames.length === 0) {
+			return;
+		}
+
 		$.each(frames, function () {
 			var $this = $(this),
 				$post = $this.find('.post'),
@@ -129,7 +133,7 @@ jQuery(function($) {
 	});
 
 	// Comments
-	$('.post .comments a, ul.fetched.comments .comment a, .reaction a.comments.footer')
+	$('.post .comments > a, .reaction ul.fetched.comments .comment a, .reaction a.comments.footer')
 		.live('ajax:beforeSend', function () {
 			var $frame = $(this).closest('.post_frame');
 
@@ -158,6 +162,58 @@ jQuery(function($) {
 			$.hideAllReactionsExcept($frame, $html, function () {});
 		});
 
+	// Nested Comments
+	$('.mini_comment .reply > a')
+		.live('ajax:success', function (xhr, form) {
+			var $form = $(form);
+
+			$form.hide()
+				.shakeable()
+				.css({ opacity: 0.0 })
+				.insertAfter($(this).closest('.mini_comment'))
+				.slideDown('fast', function () {
+					$form.fadeTo('fast', 1.0, function () {
+						$form
+							.find('input[type="text"], textarea').placeholder().end()
+							.find('textarea').focus();
+					});
+				});
+		});
+
+	// Comments to Photos
+	$('a.new_comment')
+		.live('ajax:success', function (xhr, form) {
+			var $form = $(form);
+
+			// $(this).hide();
+			$form
+				.shakeable()
+				.hide()
+				.css({ opacity: 0.0 })
+				.insertBefore(this)
+				.slideDown('fast', function () {
+					$form.fadeTo('fast', 1.0, function () {
+						$form
+							.find('input[type="text"], textarea').placeholder().end()
+							.find('textarea').focus();
+					});
+				});
+		});
+
+	$('.comment_box.nested input.cancel')
+		.live('click', function () {
+			var $commentBox = $(this).closest('.comment_box'),
+				$prevCommentBox = $commentBox.prev('.comment_box');
+
+			$commentBox.fadeTo('fast', 0.0, function () {
+				$(this).slideUp('fast', function () {
+					$(this).remove();
+					$prevCommentBox.find('.reply a').show();
+				});
+			});
+			return false;
+		});
+
 	// Reaction cancel
 	$('.reaction').live('click', function (event) {
 		if (event.target.value === 'Cancel') {
@@ -168,51 +224,6 @@ jQuery(function($) {
 			});
 			return false;
 		}
-	});
-
-	// Nested Comments
-	$('.comment_box .reply a')
-		.live('ajax:success', function (xhr, form) {
-			var $form = $(form);
-
-			$form.shakeable();
-
-			$(this).hide();
-			$form.hide()
-				.css({ opacity: 0.0 })
-				.insertAfter($(this)
-				.closest('.comment_box'))
-					.slideDown('fast', function () {
-						$form.fadeTo('fast', 1.0, function () {
-							$form
-								.find('input[type="text"], textarea').placeholder().end()
-								.find('textarea').focus();
-						});
-					});
-		});
-
-	// Comments to Photos
-	$('a.new_comment')
-		.live('ajax:success', function (xhr, form) {
-			var $form = $(form);
-			$form
-				// .shakeable()
-				// .hide()
-				// .css({ opacity: 0.0 })
-				.insertBefore(this);
-		});
-
-	$('.comment_box.nested input.cancel').live('click', function () {
-		var $commentBox = $(this).closest('.comment_box'),
-			$prevCommentBox = $commentBox.prev('.comment_box');
-
-		$commentBox.fadeTo('fast', 0.0, function () {
-			$(this).slideUp('fast', function () {
-				$(this).remove();
-				$prevCommentBox.find('.reply a').show();
-			});
-		});
-		return false;
 	});
 
 });

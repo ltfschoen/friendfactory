@@ -2,6 +2,8 @@ class Posting::CommentsController < ApplicationController
 
   before_filter :require_user
 
+  after_filter :broadcast, :only => [ :create ]
+
   helper_method \
       :posting,
       :comments,
@@ -24,12 +26,8 @@ class Posting::CommentsController < ApplicationController
 
   def create
     respond_to do |format|
-      if posting.children << comment
-        comment.publish! && broadcast
-        format.js { render :layout => false }
-      else
-        format.js { head :unprocessable_entity }
-      end
+      posting.children << comment
+      format.js { render :layout => false }
     end
   end
 
@@ -49,18 +47,17 @@ class Posting::CommentsController < ApplicationController
 
   def comment
     @comment ||= begin
-      Posting::Comment.new(params[:posting_comment]) do |comment|
-        comment.user = current_user
-      end
+      Posting::Comment.user(current_user).published.new(params[:posting_comment])
     end
   end
 
   ###
 
   def broadcast
-    recipient = posting.user
-    if (recipient.offline? && recipient.emailable?) || Rails.env.development?
-      PostingsMailer.delay.new_comment_notification(comment, recipient, current_site, request.host, request.port)
+    if posting.valid? && recipient = posting.user
+      if (recipient.offline? && recipient.emailable?) || Rails.env.development?
+        PostingsMailer.delay.new_comment_notification(comment, recipient, current_site, request.host, request.port)
+      end
     end
   end
 
