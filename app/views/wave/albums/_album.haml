@@ -10,5 +10,5 @@
         .photo{ :class => photo.horizontal? ? nil : 'vertical' }
           = link_to render_photo(photo), posting_comments_path(album), :class => 'comments', :remote => true
         = posted_distance_of_time(album)
-        = link_to_comments('Show photos', posting_comments_path(album))
+        = link_to_comments("Show photos&nbsp;&rarr;", posting_comments_path(album))
     .reaction

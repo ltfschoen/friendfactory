@@ -28,8 +28,9 @@
 	font-size: 11px;
 }
 
+.reaction a.new_comment,
 .reaction a.comments.footer {
 	clear: both;
 	display: block;
-	margin: 5px 0;
+	margin: 5px 0 10px;
 }
