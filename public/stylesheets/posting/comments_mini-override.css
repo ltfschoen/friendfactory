@@ -2,7 +2,7 @@
 	padding: 2px 0px 2px 0px;
 	margin-left: 0;
 	margin-right: 0;
-	overflow: visible;
+	float: none;
 }
 
 .fetched .mini_comment {

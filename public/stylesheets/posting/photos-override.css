@@ -106,7 +106,6 @@
 
 .post.wave_album + .reaction ul.photos li {
 	position: relative;
-	margin-bottom: 20px;
 }
 
 .post.wave_album + .reaction ul.photos.fetched li {
