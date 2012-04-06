@@ -24,8 +24,8 @@
       if ($preceding.hasClass('nested')) {
         $preceding.fadeTo('fast', 0.0, function () {
           $preceding.slideUp('fast', 'linear', function () {
+            $preceding.prev().find('a.new_comment').removeClass('invisible');
             insertComment();
-            $preceding.prev('.comment_box').find('.reply a').show();
             $preceding.remove();
           });
         });

@@ -18,9 +18,14 @@
 
 .mini_comment .comment {
 	width: 440px;
+	height: auto;
 }
 
-.mini_comment .comment p {
+ul.comments.fetched .mini_comment .comment {
+	height: 45px;
+}
+
+ul.comments.fetched .mini_comment .comment p {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
