@@ -16,8 +16,11 @@ ssh_options[:username] = 'mrcap'
 
 set :whenever_command, "bundle exec whenever"
 
-after 'deploy:symlink', 'deploy:config_symlinks'
+after "deploy:symlink", "deploy:config_symlinks"
 # after "deploy:symlink", "deploy:thinking_sphinx"
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
  
 namespace :deploy do
   task :config_symlinks do
