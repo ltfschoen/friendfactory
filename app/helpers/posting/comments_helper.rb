@@ -13,7 +13,7 @@ module Posting::CommentsHelper
       message << '&nbsp;&rarr;'
     end
     content_tag(:span, :class => 'comments') do
-      link_to message.html_safe, url, :remote => true
+      link_to message.html_safe, url, :remote => true, :class => 'comments'
     end
   end
 

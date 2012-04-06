@@ -20,25 +20,17 @@
 	width: 440px;
 }
 
-.fetched .mini_comment .comment {
-/*	margin-bottom: 5px;*/
-}
-
 .mini_comment .comment p {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.mini_comment .comment a.comments {
-	color: #333;
-}
-
 .mini_comment .comment a:hover {
 	text-decoration: underline;
 }
 
-.mini_comment .comment span.reply {
+.mini_comment .comment a.new_comment {
 	float: right;
 	margin: 2px 8px;
 	font-size: 10px;
@@ -53,4 +45,8 @@
 
 .mini_comment.nested .comment {
 	width: 384px;
+}
+
+.mini_comment.nested .new_comment {
+	display: none;
 }

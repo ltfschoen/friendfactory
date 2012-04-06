@@ -1,12 +1,9 @@
-%ul.photos
-  - posting.photos.order('`created_at` ASC').each do |photo|
-    %li.clearfix
-      .posting{ uid(photo[:user_id]) }[ photo ]
-        = link_to_unpublish(photo)
-        .photo{ :class => photo.vertical? }= render_photo(photo)
-      - comments = photo.comments.published.includes(:user => :profile, :user => { :persona => :avatar }).order('`created_at` DESC')
-      - if comments.present?
-        %ul.comments
-          - comments.each do |comment|
-            %li= render :partial => 'posting/comments/comment', :object => comment, :locals => { :posting => photo }
-      = link_to 'Comment &rarr;'.html_safe, new_posting_comment_path(photo), :remote => true, :class => 'new_comment'
+- posting.photos.order('`created_at` ASC').each do |photo|
+  .posting{ gid, uid(photo[:user_id]) }[ photo ]
+    =# link_to_unpublish(photo)
+    .photo{ :class => photo.vertical? }= render_photo(photo)
+  - comments = photo.comments.published.includes(:user => :profile, :user => { :persona => :avatar }).order('`created_at` DESC')
+  - if comments.present?
+    - comments.each do |comment|
+      = render :partial => 'posting/comments/comment', :object => comment, :locals => { :posting => photo }
+  = link_to 'New Comment'.html_safe, new_posting_comment_path(photo), :remote => true, :class => 'new_comment'

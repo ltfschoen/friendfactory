@@ -16,7 +16,7 @@ input[type='text'], input[type='password'], textarea {
 }
 
 .invisible {
-	visibility: none;
+	visibility: hidden;
 }
 
 a {

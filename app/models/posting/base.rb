@@ -155,13 +155,11 @@ class Posting::Base < ActiveRecord::Base
   ###
 
   def fetchables(limit = nil)
-    children.
-        published.
-        type(Posting::Comment).
+    comments.published.
         includes(:user => :profile, :user => { :persona => :avatar }).
-        order('`updated_at` DESC').
+        order('`created_at` DESC').
         limit(limit).
-        scoped
+        sort_by { |comment| comment.created_at }
   end
 
   def fetch_type

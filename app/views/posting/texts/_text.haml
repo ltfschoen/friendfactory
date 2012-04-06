@@ -1,6 +1,6 @@
 - user = text.user
-.post_frame
-  .posting.post.blog[ text ]{ uid(text[:user_id]) }
+.post_frame.posting[ text ]{ uid(text[:user_id]) }
+  .post.blog
     =# link_to_edit(text)
     = link_to_unpublish(text)
     .portrait= thimble_link_to_profile(user, :remote => true)

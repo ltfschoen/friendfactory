@@ -24,15 +24,16 @@
 		}
 
 		$.each(frames, function () {
-			var $this = $(this),
-				$post = $this.find('.post'),
-				$reaction = $this.find('.reaction'),
-				postId = $post.getId(),
-				limit = $this.data('limit');
+			var $posting = $(this),
+				// $posting = $this,
+				// $post = $this.find('.post'),
+				$reaction = $posting.find('.reaction'),
+				postId = $posting.getId(),
+				limit = $posting.data('limit');
 
 			if (postId !== undefined) {
 				fetchables[postId] = limit;
-				idDomIdMap[postId] = { domId: $post.attr('id'), limit: limit };
+				idDomIdMap[postId] = { domId: $posting.attr('id'), limit: limit };
 				$reaction.html('');
 			}
 		});
@@ -46,12 +47,12 @@
 					html;
 
 				if ((this.comments.length > 0) && (domId !== undefined)) {
-					$reaction = $('#' + domId).next('.reaction');
+					// $reaction = $('#' + domId).next('.reaction');
+					$reaction = $('.reaction', '#' + domId);
 					html = $('#reaction-template').mustache($.extend(this, { limit: limit }));
 					$reaction.html(html);
 				}
 			});
-
 			if (callback !== undefined) callback();
 		});
 	};
@@ -133,11 +134,13 @@ jQuery(function($) {
 	});
 
 	// Comments
-	$('.post .comments > a, .reaction ul.fetched.comments .comment a, .reaction a.comments.footer')
-		.live('ajax:beforeSend', function () {
-			var $frame = $(this).closest('.post_frame');
+	$('.posting')
+		.on('click', 'a.comments', function (event) {
+			var $this = $(this),
+				$posting = $(event.delegateTarget),
+				toggle = ($this.closest('.post', $posting).length > 0);
 
-			if ($frame.hasClass('active')) {
+			if (toggle && $posting.hasClass('active')) {
 				$.getMiniComments($.unsetActiveFrame(), function () {
 					setWideFrameBorders();
 					showAllReactions();
@@ -148,29 +151,60 @@ jQuery(function($) {
 			return true;
 		})
 
-		.live('ajax:success', function (xhr, html) {
-			var $this = $(this),
-				$html = $(html),
-				$frame = $this.closest('.post_frame');
+		.on('ajax:success', 'a.comments', function (event, html, xhr) {
+			var $posting = $(event.delegateTarget),
+				$html = $(html);
 
 			$html
 				.find('.headshot').headshot().end()
 				.find('input[type="text"], textarea').placeholder().end()
-				.filter('.comment_box:first')
+				.filter('.comment_box')
 				.shakeable();
 
-			$.hideAllReactionsExcept($frame, $html, function () {});
-		});
+			$.hideAllReactionsExcept($posting, $html);
+		})
 
-	// Nested Comments
-	$('.mini_comment .reply > a')
-		.live('ajax:success', function (xhr, form) {
-			var $form = $(form);
+		.on('click', 'input.cancel', function (event) {
+			var $commentBox = $(this).closest('.comment_box'),
+				nested = $commentBox.hasClass('nested'),
+				$trigger;
+
+			if (nested) {
+				$commentBox.prev('.posting').find('a.new_comment')
+					.removeClass('invisible');
+
+				$commentBox.fadeTo('fast', 0.0, function () {
+					$(this).slideUp('fast', function () {
+						$(this).remove();
+						$trigger.removeClass('invisible');
+					});
+				})
+			} else {
+				$.getMiniComments($.unsetActiveFrame(), function () {
+					setWideFrameBorders();
+					showAllReactions();
+				});
+			}
+			return false;
+		})
+
+		.on('ajax:success', 'a.new_comment', function (event, html, xhr) {
+			var $this = $(this),
+				$form = $(html),
+				$preceding;
+
+			if ($this.hasClass('reply')) {
+				$preceding = $this.closest('.posting');
+			} else {
+				$preceding = $this.prev('.posting');
+			}
+
+			$this.addClass('invisible');
 
 			$form.hide()
 				.shakeable()
 				.css({ opacity: 0.0 })
-				.insertAfter($(this).closest('.mini_comment'))
+				.insertAfter($preceding)
 				.slideDown('fast', function () {
 					$form.fadeTo('fast', 1.0, function () {
 						$form
@@ -178,53 +212,27 @@ jQuery(function($) {
 							.find('textarea').focus();
 					});
 				});
-		});
+		})
 
-	// Comments to Photos
-	$('a.new_comment')
-		.live('ajax:success', function (xhr, form) {
-			var $form = $(form);
+		.filter('.wave_album').find('.reaction')
+			.on('click', 'input.cancel', function (event) {
+				var $commentBox = $(this).closest('.comment_box'),
+					nested = $commentBox.hasClass('nested'),
+					$trigger;
 
-			// $(this).hide();
-			$form
-				.shakeable()
-				.hide()
-				.css({ opacity: 0.0 })
-				.insertBefore(this)
-				.slideDown('fast', function () {
-					$form.fadeTo('fast', 1.0, function () {
-						$form
-							.find('input[type="text"], textarea').placeholder().end()
-							.find('textarea').focus();
+				if (nested) {
+					return true
+				} else {
+					$trigger = $commentBox.next('a.new_comment')
+					$commentBox.fadeTo('fast', 0.0, function () {
+						$(this).slideUp('fast', function () {
+							$(this).remove();
+							$trigger.removeClass('invisible');
+						});
 					});
-				});
-		});
-
-	$('.comment_box.nested input.cancel')
-		.live('click', function () {
-			var $commentBox = $(this).closest('.comment_box'),
-				$prevCommentBox = $commentBox.prev('.comment_box');
-
-			$commentBox.fadeTo('fast', 0.0, function () {
-				$(this).slideUp('fast', function () {
-					$(this).remove();
-					$prevCommentBox.find('.reply a').show();
-				});
+					return false;
+				}
 			});
-			return false;
-		});
-
-	// Reaction cancel
-	$('.reaction').live('click', function (event) {
-		if (event.target.value === 'Cancel') {
-			var $frame = $(this).closest('.post_frame');
-			$.getMiniComments($.unsetActiveFrame(), function () {
-				setWideFrameBorders();
-				showAllReactions();
-			});
-			return false;
-		}
-	});
 
 });
 

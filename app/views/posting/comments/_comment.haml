@@ -1,12 +1,16 @@
 - user = comment.user
 - nested = comment.parent[:parent_id].present? && 'nested'
+- reply_id = params[:reply]
 
 .mini_comment.posting{ uid(comment[:user_id]), gid, :class => [ nested ]}[ comment ]
   .portrait= thimble_link_to_profile(user, :remote => true)
   .comment
     %p #{comment.body}
     %span.date #{distance_of_time_in_words_to_now(comment.created_at).titleize} ago
-    %span.reply= link_to 'Reply', new_posting_comment_path(comment), :remote => true
+    = link_to('Reply', new_posting_comment_path(comment), :remote => true, :class => 'new_comment reply')
+
+    - if false && (params[:reply].to_i == comment[:id])
+      = render :partial => 'posting/comments/new', :locals => { :posting => comment }
 
 - comment_children = comment.children.type(Posting::Comment).published.order('created_at ASC')
 - comment_children.each do |comment|

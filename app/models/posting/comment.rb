@@ -28,7 +28,7 @@ class Posting::Comment < Posting::Base
   def fetch_as_json
     { :id         => id,
       :body       => tag_helper.truncate(body, :length => 100),
-      :updated_at => tag_helper.distance_of_time_in_words_to_now(updated_at),
+      :updated_at => tag_helper.distance_of_time_in_words_to_now(created_at),
       :image_path => user.avatar.url(:thimble),
       :handle     => user.handle }
   end

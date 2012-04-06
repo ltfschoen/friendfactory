@@ -2,8 +2,8 @@
 - photos = album.photos.limit(2)
 - photo  = photos.first
 - if photo.present?
-  .post_frame
-    .post.photos[ album ]{ uid(album[:user_id]), :class => [ 'wave_album', (photos.length > 1) ? 'multiple' : nil ]}
+  .post_frame.posting[ album ]{ gid, uid(album[:user_id]) }
+    .post.photos{ :class => [ 'wave_album', (photos.length > 1) ? 'multiple' : nil ]}
       = link_to_unpublish(album)
       .portrait= thimble_link_to_profile(user, :remote => true)
       .clear

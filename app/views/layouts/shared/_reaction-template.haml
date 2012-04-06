@@ -11,7 +11,7 @@
           %p {{body}}
           %span.date Posted {{updated_at}} ago
           %span.comments
-            %a{ :href => '{{posting_comments_path}}', :'data-remote' => 'true' } Reply
+            %a{ :href => '{{posting_comments_path}}?reply={{id}}', :'data-remote' => 'true', :class => 'comments' } Reply
     {{/comments}}
   {{/posting_base}}
   {{#wave_album}}

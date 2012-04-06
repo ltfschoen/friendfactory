@@ -4,4 +4,4 @@
   .comment
     %p= mini_comment.body
     %span.date #{distance_of_time_in_words_to_now(mini_comment.created_at).titleize} ago
-    = link_to_comments('Reply', posting_comments_path(posting))
+    = link_to_comments('Reply', posting_comments_path(posting), :class => 'comments', :reply => mini_comment[:id])

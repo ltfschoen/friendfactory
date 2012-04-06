@@ -41,7 +41,7 @@ class Posting::CommentsController < ApplicationController
 
   def comments
     @comments ||= begin
-      posting.comments.published.order('`updated_at` DESC')
+      posting.comments.published.order('`created_at` ASC')
     end
   end
 
