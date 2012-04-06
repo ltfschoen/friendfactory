@@ -1,5 +1,5 @@
 - user = link.user
-.post_frame.posting[ link ]{ gid, uid(link[:user_id]) }
+.post_frame.posting[ link ]{ uid(link[:user_id]) }
   .post.link
     = link_to_unpublish(link)
     .portrait= thimble_link_to_profile(user, :remote => true)

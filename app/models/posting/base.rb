@@ -72,6 +72,10 @@ class Posting::Base < ActiveRecord::Base
       where('`postings`.`created_at` > ?', date)
   }
 
+  scope :site, lambda { |site|
+      joins(:user => :user).where(:users => { :site_id => site[:id] })
+  }
+
   belongs_to :user,
       :class_name => 'Personage',
       :include    => :persona
@@ -119,7 +123,7 @@ class Posting::Base < ActiveRecord::Base
              WHERE lev3 IS NOT NULL)) t1) }
 
   def comments
-    children.type(Posting::Comment).scoped
+    children.type(Posting::Comment).where('length(`postings`.`body`) > 0').scoped
   end
 
   def increment_children_count!(posting)

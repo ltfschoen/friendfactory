@@ -1,5 +1,5 @@
-.post_frame
-  .posting.post.signal[avatar]{ uid(avatar[:user_id]) }
+.post_frame.posting[ avatar ]{ uid(avatar[:user_id]) }
+  .post.signal
     .portrait= thimble_link_to_profile(avatar.user, :remote => true)
     .clear
       .cell

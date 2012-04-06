@@ -1,6 +1,6 @@
 - user = tweet.user
-.post_frame
-  .posting.post.tweet[tweet]{uid(tweet[:user_id])}
+.post_frame.posting[ tweet ]{ uid(tweet[:user_id]) }
+  .post.tweet
     = link_to_unpublish(tweet)
     .portrait= thimble_link_to_profile(user, :remote => true)
     .clear

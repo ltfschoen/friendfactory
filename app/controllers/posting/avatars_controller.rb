@@ -1,7 +1,5 @@
 class Posting::AvatarsController < ApplicationController
 
-  extend ActiveSupport::Memoizable
-
   before_filter :require_user
 
   helper_method \
@@ -17,15 +15,17 @@ class Posting::AvatarsController < ApplicationController
   private
 
   def posting
-    Posting::Base.site(current_site).find(params[:id])
+    @posting ||= begin
+      Posting::Base.site(current_site).find(params[:id])
+    end
   end
 
   def personage
-    personage = Personage.includes(:persona => :avatar).find(posting[:user_id])
-    personage.persona.avatar = posting
-    personage
+    @personage ||= begin
+      personage = Personage.includes(:persona => :avatar).find(posting[:user_id])
+      personage.persona.avatar = posting
+      personage
+    end
   end
-
-  memoize :posting, :personage
 
 end

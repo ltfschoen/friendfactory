@@ -1,6 +1,6 @@
 - user = video.user
-.post_frame
-  .post.posting.video[video]{uid(video[:user_id])}
+.post_frame.posting[ video ]{ uid(video[:user_id]) }
+  .post.video
     = link_to_unpublish(video)
     .portrait= thimble_link_to_profile(user, :remote => true)
     .clear.video_player.youtube_video_player{ :'data-vid' => video.body }

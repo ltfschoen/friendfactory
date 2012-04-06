@@ -1,6 +1,6 @@
 - profile = invitation.user(current_site)
-.post_frame
-  .posting.post.signal[invitation]{ uid(invitation[:user_id]) }
+.post_frame.posting[ invitation ]{ uid(invitation[:user_id]) }
+  .post.signal
     = link_to_unpublish(invitation)
     .portrait= thimble_link_to_profile(profile, :remote => true)
     .clear

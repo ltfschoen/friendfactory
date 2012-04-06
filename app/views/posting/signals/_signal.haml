@@ -1,6 +1,6 @@
 - user = signal.user
-.post_frame
-  .posting.post.signal[signal]{uid(signal[:user_id])}
+.post_frame.posting[ signal ]{ uid(signal[:user_id]) }
+  .post.signal
     = link_to_unpublish(signal)
     .portrait= thimble_link_to_profile(user)
     .clear

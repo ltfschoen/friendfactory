@@ -1,6 +1,6 @@
 - user = photo.user
-.post_frame
-  .post.photos[ photo ]{ uid(photo[:user_id]) }
+.post_frame.posting[ photo ]{ uid(photo[:user_id]) }
+  .post.photos
     = link_to_unpublish(photo)
     .portrait
       = thimble_link_to_profile(user)
