@@ -150,12 +150,16 @@
 	height: 100px;
 }
 
-/*.post.wave_album + .reaction .posting a.remove {
+.posting.wave_album .reaction .posting {
+	position: relative;
+}
+
+.posting.wave_album .reaction .posting_photo a.remove {
 	position: absolute;
 	display: block;
 	visibility: hidden;
-	opacity: 0;
 	cursor: pointer;
+	opacity: 0;
 	right: -10px;
 	top: -5px;
 	width: 20px;
@@ -165,24 +169,17 @@
 	background: transparent;
 	text-decoration: none;
 	font-weight: bold;
+}
+
+.posting.wave_album .reaction .posting_photo:hover a.remove {
 	-webkit-transition: opacity 0.1s linear;
 	-moz-transition: opacity 0.1s linear;
 	-ms-transition: opacity 0.1s linear;
 	-o-transition: opacity 0.1s linear;
 	transition: opacity 0.1s linear;
-}*/
+}
 
-/*.post.wave_album + .reaction li:hover a.remove {
-	visibility: hidden;
-	opacity: 0;
-}*/
-
-/*.ie8 .post.wave_album + .reaction li a.remove,
-.ie8 .post.wave_album + .reaction li:hover a.remove {
-	opacity: 1;
-}*/
-
-/*body.gid_admin .post.wave_album + .reaction li:hover a.remove {
+body.gid_admin .posting.wave_album .posting_photo:hover a.remove {
 	visibility: visible;
 	opacity: 1;
-}*/
+}
