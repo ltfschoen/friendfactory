@@ -1,7 +1,8 @@
 - posting.photos.order('`created_at` ASC').each do |photo|
   .posting{ gid, uid(photo[:user_id]) }[ photo ]
-    =# link_to_unpublish(photo)
-    .photo{ :class => photo.vertical? }= render_photo(photo)
+    .photo{ :class => photo.vertical? }
+      = link_to_unpublish(photo)
+      = render_photo(photo)
   - comments = photo.comments.published.includes(:user => :profile, :user => { :persona => :avatar }).order('`created_at` DESC')
   - if comments.present?
     - comments.each do |comment|
