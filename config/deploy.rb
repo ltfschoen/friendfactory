@@ -1,5 +1,6 @@
 require 'bundler/capistrano'
-require "whenever/capistrano"
+require 'whenever/capistrano'
+require 'delayed/recipes'
 
 set :application, 'friskyfactory'
 
