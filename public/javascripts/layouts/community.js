@@ -4,7 +4,7 @@
 		var $this = $(frame),
 			$post = $this.find('.post'),
 			height = $post.height() + 20,
-			limit = Math.floor(height/50);
+			limit = Math.floor(height / 50);
 
 		$this
 			.height(height)
@@ -133,11 +133,13 @@ jQuery(function($) {
 		$(this).addClass('invisible');
 	});
 
-	// Comments
-	$('.posting')
-		.on('click', 'a.comments', function (event) {
+	// Fetchables
+	// $('.posting')
+	$('#frame')
+		.on('click', 'div.posting a.comments', function (event) {
 			var $this = $(this),
-				$posting = $(event.delegateTarget),
+				$posting = $this.closest('.posting'),
+				// $posting = $(event.delegateTarget),
 				toggle = ($this.closest('.post', $posting).length > 0);
 
 			if (toggle && $posting.hasClass('active')) {
@@ -151,8 +153,9 @@ jQuery(function($) {
 			return true;
 		})
 
-		.on('ajax:success', 'a.comments', function (event, html, xhr) {
-			var $posting = $(event.delegateTarget),
+		.on('ajax:success', 'div.posting a.comments', function (event, html, xhr) {
+			var // $posting = $(event.delegateTarget),
+				$posting = $(this).closest('.posting'),
 				$html = $(html);
 
 			$html
@@ -188,7 +191,7 @@ jQuery(function($) {
 			return false;
 		})
 
-		.on('ajax:success', 'a.new_comment', function (event, html, xhr) {
+		.on('ajax:success', 'div.posting a.new_comment', function (event, html, xhr) {
 			var $this = $(this),
 				$form = $(html),
 				$preceding;
