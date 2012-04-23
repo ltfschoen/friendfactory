@@ -1,10 +1,10 @@
 - posting.photos.order('`created_at` ASC').each do |photo|
-  .posting{ gid, uid(photo[:user_id]) }[ photo ]
+  .posting{ uid(photo[:user_id]) }[ photo ]
     .photo{ :class => photo.vertical? }
       = link_to_unpublish(photo)
       = render_photo(photo)
-  - comments = photo.comments.published.includes(:user => :profile, :user => { :persona => :avatar }).order('`created_at` DESC')
-  - if comments.present?
-    - comments.each do |comment|
-      = render :partial => 'posting/comments/comment', :object => comment, :locals => { :posting => photo }
-  = link_to 'New Comment'.html_safe, new_posting_comment_path(photo), :remote => true, :class => 'new_comment'
+    - comments = photo.comments.published.includes(:user => :profile, :user => { :persona => :avatar }).order('`created_at` DESC')
+    - if comments.present?
+      - comments.each do |comment|
+        = render :partial => 'posting/comments/comment', :object => comment, :locals => { :posting => photo }
+    = link_to 'New Comment'.html_safe, new_posting_comment_path(photo), :remote => true, :class => 'new_comment'
