@@ -10,16 +10,20 @@
 
     $form.fadeTo('fast', 0.0, function() {
       $form.slideUp('fast', 'linear', function() {
+        $posting
+          .css({ opacity: 0.0 })
+          .hide()
+          .insertBefore($firstPosting)
+          .delay(600)
+          .slideDown(function() {
             $posting
-              .css({ opacity: 0.0 })
-              .hide()
-              .insertBefore($firstPosting)
-              .delay(600)
-              .slideDown(function() {
-                $posting
-                  .fadeTo('fast', 1.0)
-                  .find('a.remove[rel]').unpublishOverlay();
-              });
+              .fadeTo('fast', 1.0)
+              .find('a.remove[rel]').unpublishOverlay();
+            $.initPost($posting);
+            $.getMiniComments($posting, function () {
+              // $posting.find('.reaction').fadeTo('fast', 1.0);
+            });
+          });
         $form.trigger('reset');
       });
     });
