@@ -3,6 +3,10 @@
 	height: 246px;	
     position: relative;
 	-webkit-perspective: 1200;
+	-moz-perspective: 1200;
+	-ms-perspective: 1200;
+	-o-perspective: 1200;
+	perspective: 1200;
 }
 
 .headshot-container .close {
@@ -26,6 +30,7 @@
 	margin-left: 172px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
 	text-decoration: none;
@@ -80,20 +85,46 @@
 .csstransforms3d .headshot {
 	position: absolute;	
 	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+
 	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	-ms-transition-property: -ms-transform;
+	-o-transition-property: -o-transform;
+	transition-property: transform;
+
 	-webkit-transition-duration: 0.8s;
+	-moz-transition-duration: 0.8s;
+	-ms-transition-duration: 0.8s;
+	-o-transition-duration: 0.8s;
+	transition-duration: 0.8s;
 }
 
 .csstransforms3d .headshot.flipped {
     -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 .csstransforms3d .headshot .face {
 	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
 }
 
 .csstransforms3d .headshot .back.face {
 	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
 }
 
 .headshot {
@@ -110,10 +141,12 @@
 	padding: 5px 5px 0 5px;
     -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), inset 0 0 20px 10px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), inset 0 0 20px 10px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), inset 0 0 20px 10px rgba(0, 0, 0, 0.1);
     -o-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), inset 0 0 20px 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), inset 0 0 20px 10px rgba(0, 0, 0, 0.1);
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;	
 }
@@ -129,6 +162,7 @@
 .headshot .front.face img {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
 	width: 190px;
@@ -139,6 +173,7 @@
 	margin: -1px 0 0 0;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
 }
@@ -148,6 +183,7 @@
 	height: 20px;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
+	-ms-border-radius: 0;
 	-o-border-radius: 0;
 	border-radius: 0;
 }
@@ -341,6 +377,7 @@
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 0px rgba(255, 255, 255, 0.2) inset;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	text-decoration: none;
@@ -422,6 +459,7 @@
 	background: none;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
 	background-color: #f9f9f9;
@@ -462,8 +500,10 @@
 	background: none;
 	overflow: hidden;
 	resize: none;
-	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
 	border-radius: 5px;
 	border: 2px solid #99CC66;
 }
@@ -481,6 +521,8 @@
 	background-color: #fff;
 	-webkit-border-bottom-left-radius: 18px 10px;
 	-moz-border-radius-bottomleft: 18px 10px;
+	-ms-border-radius-bottomleft: 18px 10px;
+	-o-border-radius-bottomleft: 18px 10px;
 	border-bottom-left-radius: 18px 10px;
 }
 
@@ -496,6 +538,8 @@
 	border-color: #99CC66;
 	-webkit-border-bottom-left-radius: 10px 20px;
 	-moz-border-radius-bottomleft: 10px 20px;
+	-ms-border-radius-bottomleft: 10px 20px;
+	-o-border-radius-bottomleft: 10px 20px;
 	border-bottom-left-radius: 10px 20px;
 }
 

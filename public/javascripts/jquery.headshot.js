@@ -105,7 +105,7 @@
 				$content.hide();
 			}
 
-			$headshot.bind('webkitTransitionEnd', function() {
+			$headshot.bind('webkitTransitionEnd transitionend', function() {
 				if ($headshot.hasClass('flipped')) {
 					// Back face init
 					var paneName = $headshot.data('pane-name'),
