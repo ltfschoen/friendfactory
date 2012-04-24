@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(:version => 20120324233726) do
     t.boolean  "horizontal"
     t.string   "state"
     t.string   "hash_key",           :limit => 8
-    t.integer  "children_count",                  :default => 0
+    t.integer  "comments_count",                  :default => 0
     t.integer  "publications_count",              :default => 0
     t.datetime "commented_at"
     t.datetime "primed_at"
@@ -554,7 +554,7 @@ ActiveRecord::Schema.define(:version => 20120324233726) do
     t.boolean  "horizontal"
     t.string   "state"
     t.string   "hash_key",           :limit => 8
-    t.integer  "children_count",                  :default => 0
+    t.integer  "comments_count",                  :default => 0
     t.integer  "publications_count",              :default => 0
   end
 

@@ -8,5 +8,5 @@
         = link_to_profile(profile)
         = "invited a friend to #{current_site.display_name}"
       %span.date Uploaded #{distance_of_time_in_words_to_now(invitation.updated_at)} ago
-      = link_to_comments(invitation.comments.published.count, posting_comments_path(invitation))
+      = link_to_comments(invitation.comments_count, posting_comments_path(invitation))
   .reaction

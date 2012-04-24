@@ -26,7 +26,7 @@ class Posting::CommentsController < ApplicationController
 
   def create
     respond_to do |format|
-      posting.children << comment
+      posting.comments << comment
       format.js { render :layout => false }
     end
   end

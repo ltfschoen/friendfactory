@@ -9,5 +9,5 @@
         \-
         %section.subject #{post_it.subject}
       = posted_distance_of_time(post_it)
-      = link_to_comments(post_it.children.type(Posting::Comment).published.count, posting_comments_path(post_it))
+      = link_to_comments(post_it.comments_count, posting_comments_path(post_it))
   .reaction

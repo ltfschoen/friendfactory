@@ -8,7 +8,7 @@
   :plain
     var
       $comment = $("#{escape_javascript(render(:partial => 'comment', :object => comment))}"),
-      $commentLink = $("#{escape_javascript(link_to_comments(posting.root.children_count, posting_comments_path(posting)))}"),
+      $commentLink = $("#{escape_javascript(link_to_comments(posting.root.comments_count, posting_comments_path(posting)))}"),
       $frame = $form.closest('.post_frame'),
       insertComment = function () {
         $comment

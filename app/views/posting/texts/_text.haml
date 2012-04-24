@@ -15,5 +15,5 @@
       - if crop_text_posting?(text)
         = image_tag 'torn-transparent.png', :class => 'torn', :alt => 'torn-edge'
       = posted_distance_of_time(text)
-      = link_to_comments(text.children.type(Posting::Comment).published.count, posting_comments_path(text, :digest => (crop_text_posting?(text) && 1)))
+      = link_to_comments(text.comments_count, posting_comments_path(text, :digest => (crop_text_posting?(text) && 1)))
   .reaction

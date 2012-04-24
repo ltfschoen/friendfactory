@@ -8,5 +8,5 @@
       .photo{ :class => photo.horizontal? ? nil : 'vertical' }
         = render_photo(photo)
       = posted_distance_of_time(photo)
-      = link_to_comments(photo.comments.published.count, posting_comments_path(photo))
+      = link_to_comments(photo.comments_count, posting_comments_path(photo))
   .reaction

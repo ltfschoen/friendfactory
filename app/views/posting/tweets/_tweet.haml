@@ -8,5 +8,5 @@
         = link_to_profile(user)
         #{tweet.subject}
       = posted_distance_of_time(tweet)
-      = link_to_comments(tweet.children.type(Posting::Comment).published.count, posting_comments_path(tweet))
+      = link_to_comments(tweet.comments_count, posting_comments_path(tweet))
   .reaction

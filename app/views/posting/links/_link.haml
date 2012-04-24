@@ -14,5 +14,5 @@
         %section.description= sanitize(link.description)
         %p= link_to strip_tags(link.provider_display), link.provider_url, :target => '_blank'
       = posted_distance_of_time(link)
-      = link_to_comments(link.children.type(Posting::Comment).published.count, posting_comments_path(link))
+      = link_to_comments(link.comments_count, posting_comments_path(link))
   .reaction

@@ -16,7 +16,7 @@ class MoveWavesToPostings < ActiveRecord::Migration
   def self.up
     ActiveRecord::Base.record_timestamps = false
     ActiveRecord::Base.transaction do
-      add_column :postings, :children_count,     :integer, :default => 0
+      add_column :postings, :comments_count,     :integer, :default => 0
       add_column :postings, :publications_count, :integer, :default => 0
 
       create_table :wave_to_posting_migration_logs, :force => true do |t|
@@ -50,7 +50,7 @@ class MoveWavesToPostings < ActiveRecord::Migration
       remove_waves_view
       delete_all_waves_as_postings
       rename_table  :waves_not_as_postings, :waves
-      remove_column :postings, :children_count
+      remove_column :postings, :comments_count
       remove_column :postings, :publications_count
     end
     ActiveRecord::Base.record_timestamps = true

@@ -9,7 +9,7 @@
     %span.date #{distance_of_time_in_words_to_now(comment.created_at).titleize} ago
     = link_to('Reply', new_posting_comment_path(comment), :remote => true, :class => 'new_comment reply')
 
-  - comment_children = comment.children.type(Posting::Comment).published.order('created_at ASC')
+  - comment_children = comment.comments.published.order('`created_at` ASC')
   - comment_children.each do |comment|
     - user = comment.user
     .mini_comment.posting.nested[ comment ]{ uid(comment[:user_id]) }

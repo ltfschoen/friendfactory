@@ -3,13 +3,13 @@ namespace :ff do
     task :recalculate => :environment do
       ActiveRecord::Base.transaction do
         Wave::Base.find_each do |wave|
-          publication_count = wave.publications.published.count
-          wave.class.update_all({ :publications_count => publication_count }, { :id => wave[:id] })
+          publications_count = wave.publications.published.count
+          wave.class.update_all({ :publications_count => publications_count }, { :id => wave[:id] })
         end
 
         Posting::Base.find_each do |posting|
-          children_count = posting.children.count
-          posting.class.update_all({ :children_count => children_count }, { :id => posting[:id] })
+          comments_count = posting.comments.count
+          posting.class.update_all({ :comments_count => comments_count }, { :id => posting[:id] })
         end
       end
     end

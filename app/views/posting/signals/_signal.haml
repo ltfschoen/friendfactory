@@ -8,5 +8,5 @@
         = link_to_profile(user)
         #{signal.subject}
       = posted_distance_of_time(signal)
-      = link_to_comments(signal.children.type(Posting::Comment).published.count, posting_comments_path(signal))
+      = link_to_comments(signal.comments_count, posting_comments_path(signal))
   .reaction
