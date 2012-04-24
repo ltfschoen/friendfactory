@@ -100,17 +100,25 @@ class Posting::Base < ActiveRecord::Base
   has_many :children,
       :class_name    => 'Posting::Base',
       :foreign_key   => 'parent_id',
+      :dependent     => :destroy
+
+  has_many :comments,
+      :class_name    => 'Posting::Comment',
+      :foreign_key   => 'parent_id',
       :dependent     => :destroy,
-      :before_add    => :increment_children_count!,
-      :before_remove => :decrement_children_count!,
+      :conditions    => 'length(`postings`.`body`) > 0',
+      :before_add    => :increment_comments_count!,
+      :before_remove => :decrement_comments_count!,
       :counter_sql   => proc {
           %Q(SELECT COUNT(*) FROM
             ((SELECT DISTINCT p2.lev2 AS id FROM
                 (SELECT p1.id AS lev1, p2.id AS lev2
                 FROM postings AS p1
                 LEFT JOIN POSTINGS AS p2 ON p2.parent_id = p1.id
-                WHERE p1.id = #{id}
-                AND p2.state = 'published') AS p2
+                WHERE p1.`id` = #{id}
+                AND p2.`state` = 'published'
+                AND p2.`type` = 'Posting::Comment'
+                AND (length(p2.`body`) > 0)) AS p2
              WHERE lev2 IS NOT NULL)
             UNION
             (SELECT DISTINCT p3.lev3 FROM
@@ -118,22 +126,20 @@ class Posting::Base < ActiveRecord::Base
                 FROM postings AS p1
                 LEFT JOIN POSTINGS AS p2 ON p2.parent_id = p1.id
                 LEFT JOIN POSTINGS AS p3 ON p3.parent_id = p2.id
-                WHERE p1.id = #{id}
-                AND p3.state = 'published') as p3
+                WHERE p1.`id` = #{id}
+                AND p3.`state` = 'published'
+                AND p3.`type` = 'Posting::Comment'
+                AND (length(p3.`body` > 0))) as p3
              WHERE lev3 IS NOT NULL)) t1) }
 
-  def comments
-    children.type(Posting::Comment).where('length(`postings`.`body`) > 0').scoped
-  end
-
-  def increment_children_count!(posting)
+  def increment_comments_count!(posting)
     if posting.published?
-      root.increment!(:children_count)
+      root.increment!(:comments_count)
     end
   end
 
-  def decrement_children_count!(posting)
-    root.decrement!(:children_count)
+  def decrement_comments_count!(posting)
+    root.decrement!(:comments_count)
   end
 
   def ancestors
