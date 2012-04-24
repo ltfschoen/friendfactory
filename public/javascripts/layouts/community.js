@@ -134,12 +134,10 @@ jQuery(function($) {
 	});
 
 	// Fetchables
-	// $('.posting')
 	$('#frame')
 		.on('click', 'div.posting a.comments', function (event) {
 			var $this = $(this),
 				$posting = $this.closest('.posting'),
-				// $posting = $(event.delegateTarget),
 				toggle = ($this.closest('.post', $posting).length > 0);
 
 			if (toggle && $posting.hasClass('active')) {
@@ -154,17 +152,31 @@ jQuery(function($) {
 		})
 
 		.on('ajax:success', 'div.posting a.comments', function (event, html, xhr) {
-			var // $posting = $(event.delegateTarget),
-				$posting = $(this).closest('.posting'),
+			var $posting = $(this).closest('.posting'),
 				$html = $(html);
 
 			$html
-				.find('.headshot').headshot().end()
-				.find('input[type="text"], textarea').placeholder().end()
+				.find('.headshot')
+					.headshot()
+				.end()
+
+				.find('input[type="text"], textarea')
+					.placeholder()
+				.end()
+
 				.filter('.comment_box')
-				.shakeable();
+					.shakeable()
+					.find('textarea')
+						.autoResize({ extraSpace: 15, maxWidth: 420 });
 
 			$.hideAllReactionsExcept($posting, $html);
+		})
+
+		.on('keypress', 'form.new_posting_comment textarea', function (event) {
+			if (event.which === 13) {
+				event.preventDefault();
+				$(this).closest('form').submit();
+			}
 		})
 
 		.on('click', 'input.cancel', function (event) {
@@ -191,23 +203,24 @@ jQuery(function($) {
 			return false;
 		})
 
-		.on('ajax:success', 'div.posting a.new_comment', function (event, html, xhr) {
+		.on('ajax:success', 'div.posting a.new_comment.reply', function (event, html, xhr) {
 			var $this = $(this),
 				$form = $(html),
-				$preceding;
-
-			if ($this.hasClass('reply')) {
 				$preceding = $this.closest('.posting');
-			} else {
-				$preceding = $this.prev('.posting');
-			}
 
 			$this.addClass('invisible');
 
-			$form.hide()
+			$form
+				.find('textarea')
+					.autoResize({ extraSpace: 15, maxWidth: 464 })
+				.end()
+
+				.hide()
 				.shakeable()
 				.css({ opacity: 0.0 })
-				.insertAfter($preceding)
+
+				.appendTo($preceding)
+
 				.slideDown('fast', function () {
 					$form.fadeTo('fast', 1.0, function () {
 						$form

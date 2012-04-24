@@ -14,12 +14,15 @@
 
 .comment_box.nested .comment,
 .comment_box.nested textarea {
-  width: 364px;
+	width: 364px;
 }
 
-.comment_box.nested form,
+.comment_box.nested form {
+	width: 384px;
+}
+
 .comment_box.nested .foot {
-  width: 384px;
+	width: 374px;
 }
 
 .comment_box .comment {
@@ -34,6 +37,10 @@
 
 .comment_box .comment p {
   margin-bottom: 0px;
+}
+
+.comment_box form .foot .reply_to {
+  margin: 5px 10px;
 }
 
 .comment_box .reply,
@@ -60,6 +67,8 @@
 
 .comment_box form textarea {
 	width: 420px;
+	height: 1em;
+	overflow: hidden;
 }
 
 .comment_box form .foot {
@@ -70,6 +79,7 @@
 .comment_box form .foot input[type="button"] {
 	height: inherit;
 	padding: 3px 8px 4px 8px;
+	margin: 2px 0 5px 5px;
 }
 
 .comment_box form .foot input[type="submit"]:disabled,
