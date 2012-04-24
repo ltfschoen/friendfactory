@@ -114,7 +114,7 @@ class Posting::Base < ActiveRecord::Base
             ((SELECT DISTINCT p2.lev2 AS id FROM
                 (SELECT p1.id AS lev1, p2.id AS lev2
                 FROM postings AS p1
-                LEFT JOIN POSTINGS AS p2 ON p2.parent_id = p1.id
+                LEFT JOIN postings AS p2 ON p2.parent_id = p1.id
                 WHERE p1.`id` = #{id}
                 AND p2.`state` = 'published'
                 AND p2.`type` = 'Posting::Comment'
@@ -124,8 +124,8 @@ class Posting::Base < ActiveRecord::Base
             (SELECT DISTINCT p3.lev3 FROM
                 (SELECT p1.id AS lev1, p2.id AS lev2, p3.id AS lev3
                 FROM postings AS p1
-                LEFT JOIN POSTINGS AS p2 ON p2.parent_id = p1.id
-                LEFT JOIN POSTINGS AS p3 ON p3.parent_id = p2.id
+                LEFT JOIN postings AS p2 ON p2.parent_id = p1.id
+                LEFT JOIN postings AS p3 ON p3.parent_id = p2.id
                 WHERE p1.`id` = #{id}
                 AND p3.`state` = 'published'
                 AND p3.`type` = 'Posting::Comment'
