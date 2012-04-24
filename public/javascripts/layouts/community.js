@@ -179,36 +179,80 @@ jQuery(function($) {
 			}
 		})
 
+		.on('click', '.wave_album input.cancel', function (event) {
+			var $commentBox = $(this).closest('.comment_box'),
+				nested = $commentBox.hasClass('nested'),
+				$trigger;
+
+			if (nested) {
+				return true
+			}
+
+			event.stopImmediatePropagation();
+
+			$trigger = $commentBox.next('a.new_comment')
+
+			$commentBox
+				.fadeTo('fast', 0.0, function () {
+					$(this).slideUp('fast', function () {
+						$(this).remove();
+						$trigger.removeClass('invisible');
+					});
+			});
+
+			return false;
+		})
+
 		.on('click', 'input.cancel', function (event) {
 			var $commentBox = $(this).closest('.comment_box'),
 				nested = $commentBox.hasClass('nested'),
 				$trigger;
 
 			if (nested) {
-				$commentBox.prev('.posting').find('a.new_comment')
-					.removeClass('invisible');
+				$commentBox
+					.prev('.posting')
+						.find('a.new_comment')
+							.removeClass('invisible');
 
-				$commentBox.fadeTo('fast', 0.0, function () {
-					$(this).slideUp('fast', function () {
-						$(this).remove();
-						$trigger.removeClass('invisible');
-					});
+				$commentBox
+					.fadeTo('fast', 0.0, function () {
+						$(this).slideUp('fast', function () {
+							$(this).remove();
+							$trigger.removeClass('invisible');
+						});
 				})
+
 			} else {
 				$.getMiniComments($.unsetActiveFrame(), function () {
 					setWideFrameBorders();
 					showAllReactions();
 				});
 			}
+
 			return false;
 		})
 
 		.on('ajax:success', 'div.posting a.new_comment.reply', function (event, html, xhr) {
 			var $this = $(this),
 				$form = $(html),
-				$preceding = $this.closest('.posting');
+				$parent = $this.closest('.posting');
 
-			$this.addClass('invisible');
+			event.stopImmediatePropagation();
+
+			$parent.append($form)
+			$this.trigger('comment.ff', [ $form ]);
+			return false;
+		})
+
+		.on('ajax:success', 'div.posting_photo a.new_comment', function (event, html, xhr) {
+			var $form = $(html);
+
+			$(this).before($form).trigger('comment.ff', [ $form ]);
+			return false;
+		})
+
+		.on('comment.ff', function (event, $form) {
+			$(event.target).addClass('invisible');
 
 			$form
 				.find('textarea')
@@ -219,37 +263,16 @@ jQuery(function($) {
 				.shakeable()
 				.css({ opacity: 0.0 })
 
-				.appendTo($preceding)
-
 				.slideDown('fast', function () {
 					$form.fadeTo('fast', 1.0, function () {
 						$form
-							.find('input[type="text"], textarea').placeholder().end()
+							.find('input[type="text"], textarea')
+								.placeholder()
+							.end()
 							.find('textarea').focus();
 					});
 				});
-		})
-
-		.filter('.wave_album').find('.reaction')
-			.on('click', 'input.cancel', function (event) {
-				var $commentBox = $(this).closest('.comment_box'),
-					nested = $commentBox.hasClass('nested'),
-					$trigger;
-
-				if (nested) {
-					return true
-				} else {
-					$trigger = $commentBox.next('a.new_comment')
-					$commentBox.fadeTo('fast', 0.0, function () {
-						$(this).slideUp('fast', function () {
-							$(this).remove();
-							$trigger.removeClass('invisible');
-						});
-					});
-					return false;
-				}
-			});
-
+		});
 });
 
 

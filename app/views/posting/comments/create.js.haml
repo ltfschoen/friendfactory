@@ -1,44 +1,46 @@
 :plain
-  var
-    $form = $("form##{dom_id(comment.parent)}_new_comment"),
-    $preceding = $form.closest('.comment_box');
+  (function () {
+    var
+      $form = $("form##{dom_id(comment.parent)}_new_comment"),
+      $preceding = $form.closest('.comment_box');
 
 - if comment.present? && comment.valid?
   :plain
-    (function () {
-      var
-        $comment = $("#{escape_javascript(render(:partial => 'comment', :object => comment))}"),
-        $commentLink = $("#{escape_javascript(link_to_comments(posting.root.children_count, posting_comments_path(posting)))}"),
-        $frame = $form.closest('.post_frame'),
-        insertComment = function () {
-          $comment
-            .hide()
-            .css({ opacity: 0.0 })
-            .delay(600)
-            .insertBefore($preceding)
-            .slideDown('fast', function () {
-              $comment.fadeTo('fast', 1.0);
-            });
-        };
-
-      if ($preceding.hasClass('nested')) {
-        $preceding.fadeTo('fast', 0.0, function () {
-          $preceding.slideUp('fast', 'linear', function () {
-            $preceding.prev().find('a.new_comment').removeClass('invisible');
-            insertComment();
-            $preceding.remove();
+    var
+      $comment = $("#{escape_javascript(render(:partial => 'comment', :object => comment))}"),
+      $commentLink = $("#{escape_javascript(link_to_comments(posting.root.children_count, posting_comments_path(posting)))}"),
+      $frame = $form.closest('.post_frame'),
+      insertComment = function () {
+        $comment
+          .hide()
+          .css({ opacity: 0.0 })
+          .delay(600)
+          .insertBefore($preceding)
+          .slideDown('fast', function () {
+            $comment.fadeTo('fast', 1.0);
           });
-        });
-      } else {
-        insertComment();
-      }
+      };
 
-      $frame.find('.post span.comments').html($commentLink);
-      $form[0].reset();
-      $('input[type="text"], textarea', $form).val('').trigger('blur.placeholder');
-    })();
+    if ($preceding.hasClass('nested')) {
+      $preceding.fadeTo('fast', 0.0, function () {
+        $preceding.slideUp('fast', 'linear', function () {
+          $preceding.prev().find('a.new_comment').removeClass('invisible');
+          insertComment();
+          $preceding.remove();
+        });
+      });
+    } else {
+      insertComment();
+    }
+
+    $frame.find('.post span.comments').replaceWith($commentLink);
+    $form[0].reset();
+    $('input[type="text"], textarea', $form).val('').trigger('blur.placeholder');
 
 - else
   :plain
     $form.find('.reply_to').addClass('error').html('Ouch! #{escape_javascript(comment.errors.full_messages.to_sentence)}');
     $preceding.trigger('shake');
+
+:plain
+  })();
