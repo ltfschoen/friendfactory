@@ -24,6 +24,7 @@ class PersonagesController < ApplicationController
   end
 
   def online
+    page_title 'Online'
     @users = users.joins(:user).merge(User.online).merge(User.order_by_most_recent_request).scoped
     respond_to do |format|
       format.html { render 'index', :layout => 'rollcall' }
@@ -209,19 +210,14 @@ class PersonagesController < ApplicationController
     end
   end
 
-  def page_title
-    "title"
-    # if title = @page_title || personage.handle
-    #   title.titleize
-    # end
-    # [ current_site.display_name, title ].join(' - ')
+  def page_title(page_title = nil)
+    @page_title = page_title unless page_title.nil?
+    [ current_site.display_name, @page_title ].compact.join(' - ')
   end
 
   def invitation_wave
     current_user.find_or_create_invitation_wave_for_site(current_site)
   end
-
-  memoize :page_title
 
   ###
 
