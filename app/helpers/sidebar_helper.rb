@@ -72,7 +72,7 @@ module SidebarHelper
   end
 
   def render_sidebar_online_rollcall
-    personages = Personage.joins(:user).merge(User.online)
+    personages = Personage.site(current_site).enabled.joins(:user).merge(User.online).merge(User.enabled)
     content_for_sidebar_users_list(personages, 'online', online_profiles_path)
   end
 
