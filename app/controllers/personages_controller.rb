@@ -32,9 +32,8 @@ class PersonagesController < ApplicationController
   end
 
   def show
-    @personage = params[:id].present? ?
-        current_user_record.personages.find(params[:id]) :
-        current_user
+    page_title current_user.handle
+    @personage = params[:id].present? ? current_user_record.personages.find(params[:id]) : current_user
     respond_to do |format|
       format.html
     end
@@ -63,9 +62,8 @@ class PersonagesController < ApplicationController
   end
 
   def edit
-    @personage = params[:id].present? ?
-        current_user_record.personages.find(params[:id]) :
-        current_user
+    page_title current_user.handle
+    @personage = params[:id].present? ? current_user_record.personages.find(params[:id]) : current_user
     respond_to do |format|
       format.html
     end
