@@ -41,12 +41,13 @@ class Wave::Base < ::Posting::Base
   end
 
   def rollcall
-    Personage.select('distinct `personages`.*').
-        enabled.
-        joins(:postings => :publishables).
-        merge(Posting::Base.published).
-        where(:publications => { :wave_id => self[:id] }).
-        scoped
+    @rollcall ||= begin
+      Personage.enabled.group('`personages`.`id`').
+          joins(:postings => :publishables).
+          merge(Posting::Base.published).
+          where(:publications => { :wave_id => self[:id] }).
+          scoped
+    end
   end
 
   has_many :bookmarks, :foreign_key => 'wave_id'
