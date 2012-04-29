@@ -300,6 +300,10 @@ class Personage < ActiveRecord::Base
 
   has_many :publications, :through => :postings
 
+  ###
+
+  has_many :subscriptions, :foreign_key => 'user_id'
+
   ### Invitations
 
   has_many :invitations,
@@ -351,8 +355,9 @@ class Personage < ActiveRecord::Base
   ### Emailable
 
   def emailable?
+    return true if Rails.configuration.ignore_recipient_emailability
     if persona && user_record
-      enabled? && persona.emailable && user_record.enabled?
+      enabled? && user_record.enabled? && user_record.offline? && persona.emailable
     end
   end
 
