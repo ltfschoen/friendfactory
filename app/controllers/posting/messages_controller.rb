@@ -28,10 +28,11 @@ class Posting::MessagesController < ApplicationController
   private
 
   def new_message(receiver)
-    Posting::Message.new(params[:posting_message]) do |posting|
-      posting.site     = current_site
-      posting.sender   = current_user
-      posting.receiver = receiver
+    @new_message ||= begin
+      Posting::Message.published.user(current_user).new(params[:posting_message]) do |posting|
+        posting.site     = current_site
+        posting.receiver = receiver
+      end
     end
   end
 
@@ -39,7 +40,6 @@ class Posting::MessagesController < ApplicationController
     ActiveRecord::Base.transaction do
       if wave.postings << posting
         wave.mark_as_read
-        posting.publish!
       end
     end
     posting

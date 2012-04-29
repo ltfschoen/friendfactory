@@ -11,6 +11,10 @@ class Posting::Message < Posting::Base
   validates_presence_of :user
   validates_presence_of :receiver, :site, :on => :create
 
+  scope :sender, lambda { |user|
+    where(:user_id => user[:id])
+  }
+
   def receiver
     return @receiver if defined?(@receiver)
     if wave = receiver_wave
