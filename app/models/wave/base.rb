@@ -13,21 +13,9 @@ class Wave::Base < ::Posting::Base
       :foreign_key             => 'wave_id',
       :association_foreign_key => 'site_id'
 
-  has_many :publications,
-      :foreign_key   => 'wave_id',
-      :before_add    => :increment_publications_count!,
-      :before_remove => :decrement_publications_count!
+  ###
 
-  def increment_publications_count!(publication)
-    posting = publication.posting
-    if posting && posting.published?
-      increment!(:publications_count)
-    end
-  end
-
-  def decrement_publications_count!(publication)
-    decrement!(:publications_count)
-  end
+  has_many :publications, :foreign_key => 'wave_id'
 
   has_many :postings,
       :through    => :publications,

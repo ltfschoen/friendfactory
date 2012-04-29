@@ -35,10 +35,8 @@ class Posting::Base < ActiveRecord::Base
   private
 
   def increment_counts!
-    if self.published?
-      parent && parent.increment_children_count!(self)
-      waves.map { |wave| wave.increment!(:postings_count) }
-    end
+    parent && parent.increment_children_count!(self)
+    waves.map { |wave| wave.increment!(:postings_count) }
   end
 
   def decrement_counts!
