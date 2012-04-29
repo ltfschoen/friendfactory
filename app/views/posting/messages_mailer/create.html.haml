@@ -1,0 +1,32 @@
+- content_for(:title) do
+  #{site.display_name} - New Message from #{posting.user.display_handle}
+- content_for(:subject) do
+  #{posting.user.display_handle} has sent you a message.
+- content_for(:receiver_display_name) do
+  #{posting.receiver.display_handle}
+
+%table{ :width => '600', :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "margin-top:20px; margin-bottom:20px; width:600px;" }
+  %tr
+    %td{ :style => "padding:0; border:0; margin:0; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px", :width => '600' }
+      %p
+        Hey #{posting.receiver.display_handle},
+      %table{ :border => "0", :cellpadding => "0", :cellspacing => "0" }
+        %tr
+          %td{ :style => "padding:0; border:0; margin:0; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px", :width => '400' }
+            %p
+              #{posting.user.display_handle} just sent you a message:
+            %table{ :border => "0", :cellpadding => "0", :cellspacing => "0" }
+              %tr
+                %td{ :style => "padding:0; border:0; margin:0; font-size:120px; line-height:20px; font-weight:bold; color:#cccccc; font-family:Helvetica, Arial, sans-serif;", :width => '80', :valign => 'top' }
+                  %div{ :style => 'margin-top:50px' } &#8220;
+                %td{ :style => "padding:0; border:0; margin:0; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px", :width => '320',  :valign => 'middle' }
+                  %p #{posting.body}
+            %h2{ :style => "font-size:16px; line-height:1.3em; margin-bottom:5px;" } What do I do now?
+            %p
+              Go to your #{link_to 'inbox', inbox_url(:host => host)} to respond to #{posting.user.display_handle}. You can also
+              = succeed "." do
+                #{link_to 'view their profile', wave_profile_url(posting.user.profile, :host => host, :only_path => false)}
+          %td{ :style => "padding:0; border:0; margin:0;", :width => '200', :align => 'center', :valign => 'top' }
+            = image_tag("http://#{host_with_port}#{posting.user.avatar.url(:polaroid)}", :size => '190x190', :align => 'right', :border => '0', :style => "margin-left:15px; padding:1px; border-width:1px; border-style:solid; border-color:#ccc;")
+%hr{ :width => '600', :align => 'center', :noshade => 'noshade', :size => '1', :style => 'height:1px; border-width:0; color:#ccc; background-color:#ccc' }
+= render_featured_personages(featured_personages)
