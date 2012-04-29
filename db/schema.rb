@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120324233726) do
+ActiveRecord::Schema.define(:version => 20120425032937) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -414,6 +414,16 @@ ActiveRecord::Schema.define(:version => 20120324233726) do
   end
 
   add_index "stylesheets", ["site_id", "controller_name"], :name => "index_stylesheets_on_site_id_and_controller_name"
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "posting_id",  :null => false
+    t.string   "type",        :null => false
+    t.string   "state"
+    t.datetime "notified_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
