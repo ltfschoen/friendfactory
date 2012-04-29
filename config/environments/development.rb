@@ -30,7 +30,9 @@ Friskyfactory::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   # config.action_mailer.delivery_method = :test
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
+
+  config.ignore_recipient_emailability = true
 
   config.action_mailer.smtp_settings = {
       :address              => 'smtp.postmarkapp.com',
@@ -45,6 +47,6 @@ Friskyfactory::Application.configure do
       :host => 'friskyfactory.localhost',
       :port => 3000 }
 
-  config.after_initialize { require 'sti' }
+  config.after_initialize { load 'sti.rb' }
 
 end
