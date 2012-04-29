@@ -2,6 +2,8 @@ class ApplicationMailer < ActionMailer::Base
 
   default :from => Site::DefaultMailer
 
+  attr_reader :site, :host, :port
+
   helper_method \
       :recipient,
       :site,
@@ -16,7 +18,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def email_for_environment(email, current_user_email = nil)
     case Rails.env
-    when 'production'
+    when 'production' || 'test'
       email
     when 'staging'
       current_user_email || DummyEmail
@@ -51,9 +53,9 @@ class ApplicationMailer < ActionMailer::Base
 
   def host_with_port
     @host_with_port ||= begin
-      current_host = host
-      current_host += ":#{port}" if port != 80
-      current_host
+      if defined?(@host)
+        @host + (port != 80 ? ":#{port}" : '')
+      end
     end
   end
 
