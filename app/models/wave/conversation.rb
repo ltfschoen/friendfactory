@@ -6,16 +6,45 @@ class Wave::Conversation < Wave::Base
 
   scope :chatty, where('`postings`.`postings_count` > 0')
 
+  scope :recipient, lambda { |user|
+    where(:resource_id => user[:id])
+  }
+
   belongs_to :recipient,
-      :class_name => 'Personage',
+      :class_name  => 'Personage',
       :foreign_key => 'resource_id'
+
+  ###
+
+  before_create :create_user_subscription
+
+  private
+
+  def create_user_subscription
+    subscriptions << self.class.subscription_class.subscriber(user).new
+  end
+
+  public
+
+  def self.subscription_class
+    Subscription::Conversation
+  end
+
+  ###
 
   def messages
     postings.type(Posting::Message).scoped
   end
 
+  # def publish_posting_to_waves(posting)
+  #   if (posting.receiver_id != posting.sender_id) && wave = posting.receiver.find_or_create_conversation_with(posting.sender, posting.site)
+  #     wave.touch_and_publish!
+  #     wave
+  #   end
+  # end
+
   def publish_posting_to_waves(posting)
-    if (posting.receiver.id != posting.sender_id) && wave = posting.receiver.find_or_create_conversation_with(posting.sender, posting.site)
+    if wave = posting.recipient_wave
       wave.touch_and_publish!
       wave
     end
