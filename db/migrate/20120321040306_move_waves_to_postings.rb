@@ -16,8 +16,8 @@ class MoveWavesToPostings < ActiveRecord::Migration
   def self.up
     ActiveRecord::Base.record_timestamps = false
     ActiveRecord::Base.transaction do
-      add_column :postings, :comments_count,     :integer, :default => 0
-      add_column :postings, :publications_count, :integer, :default => 0
+      add_column :postings, :comments_count, :integer, :default => 0
+      add_column :postings, :postings_count, :integer, :default => 0
 
       create_table :wave_to_posting_migration_logs, :force => true do |t|
         t.integer :wave_id
@@ -51,7 +51,7 @@ class MoveWavesToPostings < ActiveRecord::Migration
       delete_all_waves_as_postings
       rename_table  :waves_not_as_postings, :waves
       remove_column :postings, :comments_count
-      remove_column :postings, :publications_count
+      remove_column :postings, :postings_count
     end
     ActiveRecord::Base.record_timestamps = true
   end
@@ -85,7 +85,7 @@ class MoveWavesToPostings < ActiveRecord::Migration
   def self.create_wave_as_posting(wave)
     ActiveRecord::Base.connection.execute %Q(
       INSERT INTO postings
-        (type, slug, user_id, subject, body, created_at, updated_at, resource_id, resource_type, state, publications_count)
+        (type, slug, user_id, subject, body, created_at, updated_at, resource_id, resource_type, state, postings_count)
       SELECT
         type, slug, user_id, topic, description, created_at, updated_at, resource_id, resource_type, state, postings_count
       FROM waves

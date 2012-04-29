@@ -9,8 +9,8 @@ namespace :ff do
       task :postings => :environment do
         ActiveRecord::Base.transaction do
           Wave::Base.find_each do |wave|
-            publications_count = wave.publications.published.count
-            wave.class.update_all({ :publications_count => publications_count }, { :id => wave[:id] })
+            postings_count = wave.publications.published.count
+            wave.class.update_all({ :postings_count => postings_count }, { :id => wave[:id] })
           end
         end
       end

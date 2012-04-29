@@ -1,5 +1,7 @@
 class Publication < ActiveRecord::Base
 
+  validates_presence_of :wave, :postings
+
   delegate \
       :published?,
       :unpublished?,
