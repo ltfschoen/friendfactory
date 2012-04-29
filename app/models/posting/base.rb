@@ -37,13 +37,13 @@ class Posting::Base < ActiveRecord::Base
   def increment_counts!
     if self.published?
       parent && parent.increment_children_count!(self)
-      waves.map{ |wave| wave.increment!(:publications_count) }
+      waves.map { |wave| wave.increment!(:publications_count) }
     end
   end
 
   def decrement_counts!
     parent && parent.decrement_children_count!(self)
-    waves.map{ |wave| wave.decrement!(:publications_count) }
+    waves.map { |wave| wave.decrement!(:publications_count) }
   end
 
   public
@@ -90,6 +90,30 @@ class Posting::Base < ActiveRecord::Base
 
   has_many :waves,
       :through => :publishables
+
+  ###
+
+  has_many :subscriptions,
+      :class_name  => 'Subscription::Base',
+      :foreign_key => 'posting_id',  do
+    def notify?
+      scoped.merge(proxy_owner.class.subscription_class.notify?).any?
+    end
+
+    def notify
+      scoped.merge(proxy_owner.class.subscription_class.notify?).each do |subscription|
+        if yield subscription.subscriber
+          subscription.notified!
+        end
+      end
+    end
+  end
+
+  has_many :subscribers, :through => :subscriptions
+
+  def self.subscription_class
+    Subscription::Base
+  end
 
   ###
 
