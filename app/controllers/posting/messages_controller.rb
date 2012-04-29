@@ -29,10 +29,7 @@ class Posting::MessagesController < ApplicationController
 
   def new_message(receiver)
     @new_message ||= begin
-      Posting::Message.published.user(current_user).new(params[:posting_message]) do |posting|
-        posting.site     = current_site
-        posting.receiver = receiver
-      end
+      Posting::Message.published.user(current_user).new(params[:posting_message])
     end
   end
 

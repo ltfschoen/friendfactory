@@ -14,6 +14,8 @@ class Wave::Conversation < Wave::Base
       :class_name  => 'Personage',
       :foreign_key => 'resource_id'
 
+  alias_attribute :recipient_id, :resource_id
+
   ###
 
   before_create :create_user_subscription
@@ -37,8 +39,7 @@ class Wave::Conversation < Wave::Base
   end
 
   def publish_posting_to_waves(posting)
-    if (posting.receiver_id != posting.sender_id) && wave = posting.receiver.find_or_create_conversation_with(posting.sender, posting.site)
-    # TODO if wave = posting.recipient_wave
+    if (user_id != recipient_id) && wave = recipient.find_or_create_conversation_with(user, recipient.site)
       wave.touch_and_publish!
       wave
     end
