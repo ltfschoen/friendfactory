@@ -1,7 +1,5 @@
 class Wave::Base < ::Posting::Base
 
-  @@ignore_after_add_posting_callback = false
-
   alias_attribute :topic,       :subject
   alias_attribute :description, :body
 
@@ -33,12 +31,47 @@ class Wave::Base < ::Posting::Base
 
   has_many :postings,
       :through    => :publications,
-      :conditions => { :parent_id => nil },
-      :after_add  => :after_add_posting do
+      :conditions => { :parent_id => nil } do
+    def <<(posting)
+      proxy_owner.class.transaction do
+        parent = proxy_owner.publications.create!(:posting => posting)
+        secondary_waves = *proxy_owner.publish_posting_to_waves(posting)
+        if secondary_waves.present?
+          secondary_waves.delete(proxy_owner)
+          secondary_waves.compact.uniq.each do |wave|
+            posting.publishables.create!(:wave => wave, :parent => parent)
+          end
+        end
+        posting
+      end
+    end
+
     def natural_order
       order('`postings`.`sticky_until` DESC, `postings`.`primed_at` DESC')
     end
   end
+
+  def publish_posting_to_waves(posting)
+    [] # Override in descendant classes
+  end
+
+  def publish_posting_to_profile_wave(posting)
+    if posting && posting.user
+      posting.user.profile
+    end
+  end
+
+  def publish_posting_to_home_wave(posting)
+    @home_wave ||= begin
+      if posting && site = posting.site
+        site.home_wave
+      end
+    end
+  end
+
+  ###
+
+  has_many :bookmarks, :foreign_key => 'wave_id'
 
   def rollcall
     @rollcall ||= begin
@@ -50,8 +83,6 @@ class Wave::Base < ::Posting::Base
     end
   end
 
-  has_many :bookmarks, :foreign_key => 'wave_id'
-
   def writable?(user_id)
     false
   end
@@ -59,44 +90,6 @@ class Wave::Base < ::Posting::Base
   ###
 
   private
-
-  def transaction
-    ActiveRecord::Base.transaction { yield }
-  rescue ActiveRecord::RecordInvalid
-    false
-  end
-
-  def after_add_posting(posting)
-    return unless posting
-    increment!(:postings_count) if posting.published?
-    unless @@ignore_after_add_posting_callback
-      @@ignore_after_add_posting_callback = true
-      transaction do
-        waves = *publish_posting_to_waves(posting)
-        if waves.present?
-          waves.delete(self)
-          waves.compact.uniq.each { |wave| wave.postings << posting }
-        end
-      end
-      @@ignore_after_add_posting_callback = false
-    end
-  end
-
-  # Override in inherited classes
-  def publish_posting_to_waves(posting)
-    []
-  end
-
-  def publish_posting_to_profile_wave(posting)
-    return if posting.nil? || posting.user.nil?
-    posting.user.profile
-  end
-
-  def publish_posting_to_home_wave(posting)
-    if posting && site = posting.site
-      site.home_wave
-    end
-  end
 
   def owner?(user_id)
     user_id == self[:user_id]
