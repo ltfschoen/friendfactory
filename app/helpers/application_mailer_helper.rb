@@ -25,4 +25,11 @@ module ApplicationMailerHelper
     render :partial => 'layouts/shared/featured_personages', :object => personages
   end
 
+  def mail_to_unsubscribe
+    if content_for?(:receiver_display_name)
+      complimentary_closing = "Thanks!%0A%0AFrom #{content_for(:receiver_display_name)}"
+    end
+    "mailto:unsubscribe@friskyfactory.com?subject=Unsubscribe from #{site.name} cocktails&body=To #{site.name},%0A%0APlease don't email me any more cocktails. #{complimentary_closing}"
+  end
+
 end
