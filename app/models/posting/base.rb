@@ -95,12 +95,14 @@ class Posting::Base < ActiveRecord::Base
       :class_name  => 'Subscription::Base',
       :foreign_key => 'posting_id',  do
     def notify?
-      scoped.merge(proxy_owner.class.subscription_class.notify?).any?
+      subscription_class = proxy_owner.class.subscription_class
+      scoped.merge(subscription_class.enabled).merge(subscription_class.notify?).any?
     end
 
     def notify
-      scoped.merge(proxy_owner.class.subscription_class.notify?).each do |subscription|
-        if yield subscription.subscriber
+      subscription_class = proxy_owner.class.subscription_class
+      scoped.merge(subscription_class.enabled).merge(subscription_class.notify?).each do |subscription|
+        if subscription.notifiable? && yield(subscription.subscriber)
           subscription.notified!
         end
       end

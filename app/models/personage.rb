@@ -355,9 +355,8 @@ class Personage < ActiveRecord::Base
   ### Emailable
 
   def emailable?
-    return true if Rails.configuration.ignore_recipient_emailability
     if persona && user_record
-      enabled? && user_record.enabled? && user_record.offline? && persona.emailable
+      self.enabled? && user_record.enabled? && persona.emailable?
     end
   end
 

@@ -11,6 +11,8 @@ class Posting::Message < Posting::Base
     where(:user_id => user[:id])
   }
 
+  delegate :subscriptions, :to => :receiver_wave
+
   def receiver
     @receiver ||= begin
       sender_wave.recipient
@@ -32,7 +34,9 @@ class Posting::Message < Posting::Base
   end
 
   def receiver_id
-    sender_wave.recipient_id
+    if sender_wave
+      sender_wave.recipient_id
+    end
   end
 
 end

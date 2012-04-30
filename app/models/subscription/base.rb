@@ -39,6 +39,10 @@ class Subscription::Base < ActiveRecord::Base
       :class_name  => 'Personage',
       :foreign_key => 'user_id'
 
+  def notifiable?
+    Rails.configuration.ignore_recipient_emailability || (subscriber.emailable? && subscriber.offline?)
+  end
+
   def notified!
     touch(:notified_at)
   end

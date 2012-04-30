@@ -57,10 +57,8 @@ class Posting::MessagesController < ApplicationController
   end
 
   def notify_via_email
-    if receiver = new_message.receiver
-      if (receiver.offline? && receiver.emailable?) || Rails.env.development?
-        PostingsMailer.delay.new_message_notification(new_message, current_site, request.host, request.port)
-      end
+    new_message.subscriptions.notify do |subscriber|
+      Posting::MessagesMailer.delay.create(subscriber, new_message, current_site, request.host, request.port)
     end
   end
 

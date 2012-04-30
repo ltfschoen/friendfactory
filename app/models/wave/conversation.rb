@@ -18,6 +18,10 @@ class Wave::Conversation < Wave::Base
 
   ###
 
+  def self.subscription_class
+    Subscription::Conversation
+  end
+
   before_create :create_user_subscription
 
   private
@@ -27,10 +31,6 @@ class Wave::Conversation < Wave::Base
   end
 
   public
-
-  def self.subscription_class
-    Subscription::Conversation
-  end
 
   ###
 

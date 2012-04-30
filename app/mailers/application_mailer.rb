@@ -2,10 +2,11 @@ class ApplicationMailer < ActionMailer::Base
 
   default :from => Site::DefaultMailer
 
-  attr_reader :site, :host, :port
+  # attr_reader :site, :host, :port
 
   helper_method \
       :recipient,
+      :posting,
       :site,
       :host,
       :port,
@@ -13,6 +14,10 @@ class ApplicationMailer < ActionMailer::Base
       :featured_personages
 
   DummyEmail  = 'michael@michaelbamford.com'
+
+  def create(recipient, posting, site, host, port)
+    @recipient, @posting, @site, @host, @port = recipient, posting, site, host, port
+  end
 
   private
 
@@ -37,6 +42,10 @@ class ApplicationMailer < ActionMailer::Base
 
   def recipient
     @recipient
+  end
+
+  def posting
+    @posting
   end
 
   def site

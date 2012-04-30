@@ -2,26 +2,12 @@ class Posting::MessagesMailer < ApplicationMailer
 
   layout 'mailer'
 
-  helper_method :posting
-
-  def create(message, site, host, port)
-    @posting, @site, @host, @port = message, site, host, port
-    if receiver.emailable?
-      mail :from => sender_email, :to => recipient_email, :subject => subject
-    end
+  def create(recipient, message, site, host, port)
+    super
+    mail :from => sender_email, :to => recipient_email, :subject => subject
   end
 
   private
-
-  def posting
-    @posting
-  end
-
-  def receiver
-    posting.receiver
-  end
-
-  ###
 
   def sender_email
     site.mailer
