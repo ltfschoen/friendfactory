@@ -1,2 +1,2 @@
-- if @posting
-  = render :partial => 'message', :object => @posting
+- if posting
+  = render :partial => 'message', :object => posting, :locals => { :last_read_at => wave.read_at }

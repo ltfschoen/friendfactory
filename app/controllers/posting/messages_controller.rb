@@ -2,61 +2,64 @@ class Posting::MessagesController < ApplicationController
 
   before_filter :require_user
 
+  helper_method :wave, :posting
+
   def show
-    if wave = current_user.conversations.find_by_id(params[:wave_id])
-      wave.read!
-      @last_read_at = wave.read_at
-      @posting = wave.postings.find_by_id(params[:id])
-    end
     respond_to do |format|
+      wave.read!
       format.html { render :layout => false }
     end
   end
 
   def create
     respond_to do |format|
-      wave = current_user.conversations.find(params[:wave_id])
-      if posting = add_message_to_conversation(new_message(wave.recipient), wave)
-        broadcast_posting(posting)
+      if wave.postings << new_message
+        wave.mark_as_read
+        notify_subscribers
         format.json { render :json => { :success => true }}
       else
-        format.json { render :json => { :success => false }}
+        format.json { head :unprocessable_entity }
       end
     end
   end
 
   private
 
-  def new_message(receiver)
+  def wave
+    @wave ||= begin
+      current_user.conversations.find(params[:wave_id])
+    end
+  end
+
+  def posting
+    @posting ||= begin
+      wave.postings.find(params[:id])
+    end
+  end
+
+  def new_message
     @new_message ||= begin
       Posting::Message.published.user(current_user).new(params[:posting_message])
     end
   end
 
-  def add_message_to_conversation(posting, wave)
-    ActiveRecord::Base.transaction do
-      if wave.postings << posting
-        wave.mark_as_read
-      end
-    end
-    posting
+  ###
+
+  def notify_subscribers
+    notify_via_pusher
+    notify_via_email
   end
 
-  def broadcast_posting(posting)
-    broadcast_posting_via_pusher(posting)
-    broadcast_posting_via_email(posting)
-  end
-
-  def broadcast_posting_via_pusher(posting)
-    wave = posting.receiver_wave
+  def notify_via_pusher
+    wave = new_message.receiver_wave
     channel_id = dom_id(wave)
-    Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, posting), :dom_id => "##{channel_id}" })
+    Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, new_message), :dom_id => "##{channel_id}" })
   end
 
-  def broadcast_posting_via_email(posting)
-    if receiver = posting.receiver
+  def notify_via_email
+    if receiver = new_message.receiver
       if (receiver.offline? && receiver.emailable?) || Rails.env.development?
-        PostingsMailer.delay.new_message_notification(posting, current_site, request.host, request.port)
+        PostingsMailer.delay.new_message_notification(new_message, current_site, request.host, request.port)
       end
     end
   end
