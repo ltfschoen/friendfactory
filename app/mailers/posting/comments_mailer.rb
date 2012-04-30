@@ -2,36 +2,19 @@ class Posting::CommentsMailer < ApplicationMailer
 
   layout 'mailer'
 
-  helper_method :posting
-
-  def new_message_notification(message, site, host, port)
-    recipient = message.receiver
-    set_env(message, recipient, site, host, port)
-    subject = "Message from #{message.sender.display_handle} at #{site.display_name}"
-    mail :from => site.mailer, :to => email_for_environment(recipient.email, message.user.email), :subject => subject do |format|
-      format.text
-      format.html
-    end
-  end
-
-  def new_comment_notification(comment, recipient, site, host, port)
-    set_env(comment, recipient, site, host, port)
-    subject = "Comment from #{comment.user.display_handle} at #{site.display_name}"
-    mail :from => site.mailer, :to => email_for_environment(recipient.email, comment.user.email), :subject => subject do |format|
-      format.text
-      format.html
-    end
+  def create(recipient, comment, site, host, port)
+    super
+    mail :from => site_mailer, :to => recipient_email, :subject => subject
   end
 
   private
 
-  def set_env(posting, recipient, site, host, port)
-    super(recipient, site, host, port)
-    @posting = posting
+  def recipient_email
+    email_for_environment(recipient.email, posting.user.email)
   end
 
-  def posting
-    @posting
+  def subject
+    "Comment from #{posting.user.display_handle} at #{site.display_name}"
   end
 
 end
