@@ -12,22 +12,27 @@ class Posting::Message < Posting::Base
   }
 
   def receiver
-    return @receiver if defined?(@receiver)
-    if wave = receiver_wave
-      wave.user
+    @receiver ||= begin
+      sender_wave.recipient
     end
   end
 
-  def sender_wave
-    waves.where(:user_id => user_id).limit(1).first
+  def sender_wave(reload = false)
+    @sender_wave = nil if reload
+    @sender_wave ||= begin
+      waves(reload).type(Wave::Conversation).find_by_user_id(user_id)
+    end
   end
 
-  def receiver_wave
-    waves(true).where('`postings`.`user_id` <> ?', user_id).limit(1).first
+  def receiver_wave(reload = false)
+    @receiver_wave = nil if reload
+    @receiver_wave ||= begin
+      waves(reload).type(Wave::Conversation).find_by_user_id(receiver_id)
+    end
   end
 
   def receiver_id
-    @receiver.id
+    sender_wave.recipient_id
   end
 
 end
