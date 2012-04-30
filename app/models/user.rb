@@ -146,6 +146,7 @@ class User < ActiveRecord::Base
   end
 
   ###
+  ###
 
   public
 
@@ -189,6 +190,17 @@ class User < ActiveRecord::Base
 
   def gid
     self.admin? ? 'gid_admin' : 'gid_user'
+  end
+
+  def clone
+    User.new do |user|
+      user.email            = email
+      user.crypted_password = crypted_password
+      user.password_salt    = password_salt
+      user.account          = account
+      user.admin            = admin
+      user.site             = nil
+    end
   end
 
 end

@@ -19,14 +19,6 @@ class Site < ActiveRecord::Base
     home_user.profile
   end
 
-  def create_home!(user, handle)
-    if user[:site_id] == self[:id]
-      personage = user.personages.create!(:persona_attributes => { :type => 'Persona::Community', :handle => handle, :emailable => true })
-      update_attribute(:home_user, personage)
-      personage
-    end
-  end
-
   ###
 
   has_many :users

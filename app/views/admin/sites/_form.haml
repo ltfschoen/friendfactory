@@ -80,11 +80,12 @@
       %td
         = f.text_field :analytics_account_number, :placeholder => 'UA-xxxxxxxx-x'
         = f.error_message_on :analytics_account_number
-    %tr
-      %td
-        = f.label :home_wave_id
-      %td
-        = f.collection_select :user_id, home_users(@site), :id, :display_name
+    - if @site.persisted?
+      %tr
+        %td
+          = f.label :home_wave_id
+        %td
+          = f.collection_select :user_id, home_users(@site), :id, :display_name
     %tr
       %td
         = f.label :email_domain_regex, "Required users' email domain"

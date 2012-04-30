@@ -23,10 +23,9 @@ class Admin::SitesController < ApplicationController
   end
 
   def create
-    @site = Site.new(params[:site])
     respond_to do |format|
-      if @site.save
-        format.html { redirect_to admin_sites_path, :notice => "#{@site.name} was successfully created" }
+      if new_site.present?
+        format.html { redirect_to admin_sites_path, :notice => "#{new_site.name} was successfully created" }
       else
         format.html { render :action => "new" }
       end
@@ -68,6 +67,20 @@ class Admin::SitesController < ApplicationController
 
   def site
     @site
+  end
+
+  def new_site
+    @new_site ||= begin
+      Site.transaction do
+        site = Site.create!(params[:site])
+        user_record = current_user_record.clone
+        user_record.site = site
+        personage = user_record.personages.build(:persona_attributes => { :type => 'Persona::Community', :handle => site.display_name, :emailable => true })
+        user_record.save(:validate => false)
+        site.update_attribute(:home_user, personage)
+        site
+      end
+    end
   end
 
   def page_title

@@ -1,6 +1,6 @@
 class AddEmailRegexToSites < ActiveRecord::Migration
   def self.up
-    add_column :sites, :email_domain_regex, :string, :default => '.*'
+    add_column :sites, :email_domain_regex,        :string
     add_column :sites, :email_domain_display_name, :string
   end
 
