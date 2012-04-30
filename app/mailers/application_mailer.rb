@@ -2,7 +2,7 @@ class ApplicationMailer < ActionMailer::Base
 
   default :from => Site::DefaultMailer
 
-  # attr_reader :site, :host, :port
+  attr_reader :recipient, :posting, :site, :host, :port
 
   helper_method \
       :recipient,
@@ -13,7 +13,7 @@ class ApplicationMailer < ActionMailer::Base
       :host_with_port,
       :featured_personages
 
-  DummyEmail  = 'michael@michaelbamford.com'
+  DummyEmail = 'michael@michaelbamford.com'
 
   def create(recipient, posting, site, host, port)
     @recipient, @posting, @site, @host, @port = recipient, posting, site, host, port
@@ -21,12 +21,20 @@ class ApplicationMailer < ActionMailer::Base
 
   private
 
-  def email_for_environment(email, current_user_email = nil)
+  def site_mailer
+    if defined?(@site)
+      @site.mailer
+    end
+  end
+
+  def email_for_environment(email, alternate_email = nil)
     case Rails.env
-    when 'production' || 'test'
+    when 'production'
       email
     when 'staging'
-      current_user_email || DummyEmail
+      alternate_email || DummyEmail
+    when 'test'
+      email
     else
       DummyEmail
     end
@@ -38,26 +46,6 @@ class ApplicationMailer < ActionMailer::Base
 
   def set_env(recipient, site, host, port)
     @recipient, @site, @host, @port = recipient, site, host, port
-  end
-
-  def recipient
-    @recipient
-  end
-
-  def posting
-    @posting
-  end
-
-  def site
-    @site
-  end
-
-  def host
-    @host
-  end
-
-  def port
-    @port
   end
 
   def host_with_port
