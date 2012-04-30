@@ -115,25 +115,31 @@ class Posting::Base < ActiveRecord::Base
     Subscription::Base
   end
 
+  def create_subscription(user)
+    unless subscriptions.subscriber(user).present?
+      subscriptions << self.class.subscription_class.subscriber(user).new
+    end
+  end
+
   ###
 
   belongs_to :parent,
-      :class_name    => 'Posting::Base',
-      :foreign_key   => 'parent_id'
+      :class_name   => 'Posting::Base',
+      :foreign_key  => 'parent_id'
 
   has_many :children,
-      :class_name    => 'Posting::Base',
-      :foreign_key   => 'parent_id',
-      :dependent     => :destroy
+      :class_name   => 'Posting::Base',
+      :foreign_key  => 'parent_id',
+      :dependent    => :destroy
 
   has_many :comments,
-      :class_name    => 'Posting::Comment',
-      :foreign_key   => 'parent_id',
-      :dependent     => :destroy,
-      :conditions    => 'length(`postings`.`body`) > 0',
-      :before_add    => :increment_comments_count!,
-      :before_remove => :decrement_comments_count!,
-      :counter_sql   => proc {
+      :class_name   => 'Posting::Comment',
+      :foreign_key  => 'parent_id',
+      :dependent    => :destroy,
+      :conditions   => 'length(`postings`.`body`) > 0',
+      :after_add    => :after_add_to_comments,
+      :after_remove => :after_remove_from_comments,
+      :counter_sql  => proc {
           %Q(SELECT COUNT(*) FROM
             ((SELECT DISTINCT p2.lev2 AS id FROM
                 (SELECT p1.id AS lev1, p2.id AS lev2
@@ -156,15 +162,22 @@ class Posting::Base < ActiveRecord::Base
                 AND (length(p3.`body` > 0))) as p3
              WHERE lev3 IS NOT NULL)) t1) }
 
+  def after_add_to_comments(posting)
+    increment_comments_count!(posting)
+    posting.root.create_subscription(posting.user)
+  end
+
   def increment_comments_count!(posting)
     if posting.published?
-      root.increment!(:comments_count)
+      posting.root.increment!(:comments_count)
     end
   end
 
   def decrement_comments_count!(posting)
     root.decrement!(:comments_count)
   end
+
+  alias_method :after_remove_from_comments, :decrement_comments_count!
 
   def ancestors
     node, nodes = self, []

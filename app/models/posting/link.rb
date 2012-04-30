@@ -35,6 +35,10 @@ class Posting::Link < Posting::Base
 
   after_validation :set_user_id_on_photos
 
+  def self.subscription_class
+    Subscription::Comment
+  end
+
   def url
     resource.present? ? resource.url : @url
   end

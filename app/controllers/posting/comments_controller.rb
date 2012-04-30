@@ -2,7 +2,7 @@ class Posting::CommentsController < ApplicationController
 
   before_filter :require_user
 
-  after_filter :broadcast, :only => [ :create ]
+  after_filter :notify, :only => [ :create ]
 
   helper_method \
       :posting,
@@ -53,10 +53,10 @@ class Posting::CommentsController < ApplicationController
 
   ###
 
-  def broadcast
-    if posting.valid? && recipient = posting.user
-      if (recipient.offline? && recipient.emailable?) || Rails.env.development?
-        PostingsMailer.delay.new_comment_notification(comment, recipient, current_site, request.host, request.port)
+  def notify
+    if comment.persisted?
+      posting.root.subscriptions.notify do |subscriber|
+        Posting::CommentsMailer.delay.create(subscriber, comment, current_site, request.host, request.port)
       end
     end
   end

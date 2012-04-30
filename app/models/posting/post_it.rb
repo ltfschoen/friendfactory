@@ -8,4 +8,8 @@ class Posting::PostIt < Posting::Base
 
   validates_presence_of :subject, :user_id
 
+  def self.subscription_class
+    Subscription::Comment
+  end
+
 end

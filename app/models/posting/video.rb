@@ -22,6 +22,10 @@ class Posting::Video < Posting::Base
     end
   end
 
+  def self.subscription_class
+    Subscription::Comment
+  end
+
   def vid
     VALID_URLS.each do |valid_url|
       if match = valid_url.match(url)

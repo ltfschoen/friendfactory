@@ -29,6 +29,10 @@ class Posting::Photo < Posting::Base
   before_create :randomize_file_name
   before_create :set_hash_key
 
+  def self.subscription_class
+    Subscription::Comment
+  end
+
   def as_json(*args)
     opts = args.extract_options!
     if opts.delete(:fetch)
