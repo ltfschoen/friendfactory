@@ -11,7 +11,7 @@ module Admin::SitesHelper
   end
 
   def home_users(site)
-    Personage.homeable(site).enabled.includes(:profile).includes(:persona).sort_by{ |p| p.display_name }
+    Personage.homeable(site).includes(:profile).includes(:persona).sort_by{ |p| p.display_name }
   end
 
   def site_logo_image_tag(site)

@@ -91,10 +91,9 @@ class Personage < ActiveRecord::Base
 
   scope :homeable, lambda { |site|
       type(:ambassador, :place, :community).
-      joins(:profile).
+      enabled.
+      site(site).
       joins(:user).
-      merge(Wave::Base.published).
-      merge(Wave::Base.site(site)).
       merge(User.enabled)
   }
 
