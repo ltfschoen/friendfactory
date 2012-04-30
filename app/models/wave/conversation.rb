@@ -22,12 +22,12 @@ class Wave::Conversation < Wave::Base
     Subscription::Conversation
   end
 
-  before_create :create_user_subscription
+  before_create :create_subscription
 
   private
 
-  def create_user_subscription
-    subscriptions << self.class.subscription_class.subscriber(user).new
+  def create_subscription
+    super(user)
   end
 
   public
