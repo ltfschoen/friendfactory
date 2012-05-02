@@ -22,16 +22,6 @@ class Wave::Conversation < Wave::Base
     Subscription::Conversation
   end
 
-  before_create :create_subscription
-
-  private
-
-  def create_subscription
-    super(user)
-  end
-
-  public
-
   ###
 
   def messages

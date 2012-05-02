@@ -111,17 +111,24 @@ class Posting::Base < ActiveRecord::Base
 
   has_many :subscribers, :through => :subscriptions
 
+  before_create :create_subscription
+
+  # Override in descendants
   def self.subscription_class
-    Subscription::Base
   end
 
-  def create_subscription(user)
-    unless subscriptions.subscriber(user).present?
+  protected
+
+  def create_subscription(user = nil)
+    user ||= self.user
+    if self.class.subscription_class && subscriptions.subscriber(user).empty?
       subscriptions << self.class.subscription_class.subscriber(user).new
     end
   end
 
   ###
+
+  public
 
   belongs_to :parent,
       :class_name   => 'Posting::Base',
