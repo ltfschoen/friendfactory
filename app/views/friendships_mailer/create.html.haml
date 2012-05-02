@@ -2,6 +2,8 @@
   #{site.display_name} - New Cocktail from #{poke.user.handle.titleize}
 - content_for(:subject) do
   You've been sent a cocktail.
+- content_for(:receiver_display_name) do
+  #{recipient.display_handle}
 
 %table{ :width => '600', :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "margin-top:20px; margin-bottom:20px; width:600px; font-family:Helvetica, Verdana, Arial, sans-serif; font-size:16px" }
   %tr
