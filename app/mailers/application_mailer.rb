@@ -22,9 +22,7 @@ class ApplicationMailer < ActionMailer::Base
   private
 
   def site_mailer
-    if defined?(@site)
-      @site.mailer
-    end
+    defined?(@site) ? @site.mailer : Site::DefaultMailer
   end
 
   def email_for_environment(email, alternate_email = nil)
