@@ -190,12 +190,9 @@ class Personage < ActiveRecord::Base
 
   def create_profile_wave
     if persona && profile.nil?
-      persona.default_profile_type.constantize.new do |wave|
-        self.profile = wave
-        wave.sites.push(site)
-        wave.publish
-      end
-      save(:validate => false)
+      wave = persona.default_profile_type.constantize.published.new
+      wave.sites.push(site)
+      update_attribute(:profile, wave)
     end
   end
 
