@@ -1,0 +1,14 @@
+:plain
+  Hey #{recipient.display_handle},
+
+  #{posting.user.display_handle} just commented in your posting "#{posting.body}"
+
+  View and reply to the comment thread at #{site.display_name} by clicking here:
+
+  #{posting_url(posting.root, :host => host, :only_path => false)}
+
+  You can also view #{posting.user.display_handle}'s profile at:
+
+  #{polymorphic_url(posting.user.profile, :host => host, :only_path => false)}
+
+  #{render :partial => 'layouts/shared/featured_personages', :object => featured_personages, :locals => { :host => host }}
