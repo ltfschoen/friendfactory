@@ -28,11 +28,11 @@ class ApplicationMailer < ActionMailer::Base
     when 'production'
       email
     when 'staging'
-      Rails.configuration.action_mailer.dummy_email || alternate_email
+      Rails.configuration.dummy_email || alternate_email
     when 'test'
       email
     else
-      Rails.configuration.action_mailer.dummy_email
+      Rails.configuration.dummy_email
     end
   end
 
