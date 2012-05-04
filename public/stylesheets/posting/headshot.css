@@ -350,12 +350,13 @@
 
 .headshot table.grid td {
 	text-align: center;
+	line-height: 12px;
 }
 
 .headshot table.grid img {
-    width: 52px;
+    width: 54px;
     height: 52px;
-	margin: 2px;
+	margin-bottom: 6px;
     background-color: #fff;
     border: 1px solid #CCC;
 }
@@ -492,6 +493,8 @@
 }
 
 .headshot .pane.conversation textarea {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 11px;
 	outline: 0;
     height: 36px;
 	margin: 4px 5px;
