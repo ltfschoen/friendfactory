@@ -4,24 +4,21 @@ class FriendshipsMailer < ApplicationMailer
 
   helper_method :poke
 
-  def new_poke_mail(poke, site, host, port)
-    set_env(poke, site, host, port)
-    subject = "#{poke.user.display_handle} at #{site.display_name} sent you a cocktail"
-    mail :from => site.mailer, :to => email_for_environment(poke.friend.email, poke.user.email), :subject => subject do |format|
-      format.text
-      format.html
-    end
+  def create(recipient, poke, site, host, port)
+    super
+    mail :from => site_mailer, :to => recipient_email, :subject => subject
   end
 
   private
 
-  def set_env(poke, site, host, port)
-    super(poke.friend, site, host, port)
-    @poke = poke
+  alias_method :poke, :posting
+
+  def recipient_email
+    email_for_environment(recipient.email)
   end
 
-  def poke
-    @poke
+  def subject
+    "#{poke.user.display_handle} at #{site.display_name} sent you a cocktail"
   end
 
 end

@@ -241,7 +241,7 @@ ActiveRecord::Schema.define(:version => 20120425032937) do
     t.string   "state"
     t.string   "hash_key",           :limit => 8
     t.integer  "comments_count",                  :default => 0
-    t.integer  "publications_count",              :default => 0
+    t.integer  "postings_count",                  :default => 0
     t.datetime "commented_at"
     t.datetime "primed_at"
   end
@@ -416,14 +416,17 @@ ActiveRecord::Schema.define(:version => 20120425032937) do
   add_index "stylesheets", ["site_id", "controller_name"], :name => "index_stylesheets_on_site_id_and_controller_name"
 
   create_table "subscriptions", :force => true do |t|
-    t.integer  "user_id",     :null => false
-    t.integer  "posting_id",  :null => false
-    t.string   "type",        :null => false
+    t.integer  "user_id",       :null => false
+    t.integer  "resource_id",   :null => false
+    t.string   "resource_type"
+    t.string   "type",          :null => false
     t.string   "state"
     t.datetime "notified_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "subscriptions", ["user_id", "resource_id", "resource_type"], :name => "index_subscriptions_on_user_id_and_resource_id_and_resource_type", :unique => true
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -565,20 +568,7 @@ ActiveRecord::Schema.define(:version => 20120425032937) do
     t.string   "state"
     t.string   "hash_key",           :limit => 8
     t.integer  "comments_count",                  :default => 0
-    t.integer  "publications_count",              :default => 0
-  end
-
-  create_table "waves_deleted", :id => false, :force => true do |t|
-    t.integer  "id",            :default => 0, :null => false
-    t.string   "type"
-    t.string   "slug"
-    t.integer  "user_id"
-    t.string   "topic"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "resource_id"
-    t.string   "resource_type"
+    t.integer  "postings_count",                  :default => 0
   end
 
   create_table "waves_not_as_postings", :force => true do |t|

@@ -22,9 +22,7 @@ class Posting::Video < Posting::Base
     end
   end
 
-  def self.subscription_class
-    Subscription::Comment
-  end
+  subscribable :comment, :user
 
   def vid
     VALID_URLS.each do |valid_url|

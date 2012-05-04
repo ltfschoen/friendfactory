@@ -1,6 +1,9 @@
+require 'subscribable'
+
 class Posting::Base < ActiveRecord::Base
 
   include ActiveRecord::Transitions
+  include Subscribable
 
   set_table_name :postings
 
@@ -91,45 +94,6 @@ class Posting::Base < ActiveRecord::Base
 
   ###
 
-  has_many :subscriptions,
-      :class_name  => 'Subscription::Base',
-      :foreign_key => 'posting_id',  do
-    def notify?
-      subscription_class = proxy_owner.class.subscription_class
-      scoped.merge(subscription_class.enabled).merge(subscription_class.notify?).any?
-    end
-
-    def notify
-      subscription_class = proxy_owner.class.subscription_class
-      scoped.merge(subscription_class.enabled).merge(subscription_class.notify?).each do |subscription|
-        if subscription.notifiable? && yield(subscription.subscriber)
-          subscription.notified!
-        end
-      end
-    end
-  end
-
-  has_many :subscribers, :through => :subscriptions
-
-  before_create :create_subscription
-
-  # Override in descendants
-  def self.subscription_class
-  end
-
-  protected
-
-  def create_subscription(user = nil)
-    user ||= self.user
-    if self.class.subscription_class && subscriptions.subscriber(user).empty?
-      subscriptions << self.class.subscription_class.subscriber(user).new
-    end
-  end
-
-  ###
-
-  public
-
   belongs_to :parent,
       :class_name   => 'Posting::Base',
       :foreign_key  => 'parent_id'
@@ -171,7 +135,7 @@ class Posting::Base < ActiveRecord::Base
 
   def after_add_to_comments(posting)
     increment_comments_count!(posting)
-    posting.root.create_subscription(posting.user)
+    posting.root.subscriptions.create(posting.user)
   end
 
   def increment_comments_count!(posting)

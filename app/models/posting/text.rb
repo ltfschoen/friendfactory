@@ -4,8 +4,6 @@ class Posting::Text < Posting::Base
 
   include PrimedAt
 
-  def self.subscription_class
-    Subscription::Comment
-  end
+  subscribable :comment, :user
 
 end

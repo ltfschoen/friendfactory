@@ -228,7 +228,7 @@ class Personage < ActiveRecord::Base
     if personage[:id] == self[:id]
       nil
     elsif poke = friendships.type(Friendship::Poke).find_by_friend_id(personage[:id])
-      poke.delete
+      poke.destroy
       nil
     elsif poke = Friendship::Poke.new(:friend => personage)
       friendships << poke
@@ -298,7 +298,9 @@ class Personage < ActiveRecord::Base
 
   ###
 
-  has_many :subscriptions, :foreign_key => 'user_id'
+  has_many :subscriptions,
+      :class_name  => 'Subscription::Base',
+      :foreign_key => 'user_id'
 
   ### Invitations
 

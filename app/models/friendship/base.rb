@@ -1,4 +1,8 @@
+require 'subscribable'
+
 class Friendship::Base < ActiveRecord::Base
+
+  include Subscribable
 
   set_table_name :friendships
 
@@ -10,6 +14,12 @@ class Friendship::Base < ActiveRecord::Base
 
   belongs_to :friend, :class_name => 'Personage'
 
-  scope :type, lambda { |*types| where(:type => types.map(&:to_s)) }
+  scope :type, lambda { |*types|
+    where(:type => types.map(&:to_s))
+  }
+
+  scope :since, lambda { |datetime|
+    where('`created_at` > ?', datetime)
+  }
 
 end

@@ -16,11 +16,7 @@ class Wave::Conversation < Wave::Base
 
   alias_attribute :recipient_id, :resource_id
 
-  ###
-
-  def self.subscription_class
-    Subscription::Conversation
-  end
+  subscribable :conversation, :user
 
   ###
 

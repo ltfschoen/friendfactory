@@ -55,7 +55,7 @@ class Posting::CommentsController < ApplicationController
 
   def notify
     if comment.persisted?
-      posting.root.subscriptions.notify do |subscriber|
+      posting.root.subscriptions.notify(:exclude => comment.user) do |subscriber|
         Posting::CommentsMailer.delay.create(subscriber, comment, current_site, request.host, request.port)
       end
     end
