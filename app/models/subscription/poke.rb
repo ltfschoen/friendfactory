@@ -1,6 +1,6 @@
 class Subscription::Poke < Subscription::Base
 
-  AccumulatePokes = 1
+  AccumulatePokes = 2
 
   def self.tally(subscriptions)
     related_subscriptions = related_subscriptions(subscriptions)

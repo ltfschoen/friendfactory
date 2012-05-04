@@ -37,8 +37,8 @@ Friskyfactory::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
-
-  config.ignore_recipient_emailability = false
+  config.action_mailer.perform_deliveries = true
+  config.ignore_recipient_emailability = true
 
   # Enable threaded mode
   # config.threadsafe!
