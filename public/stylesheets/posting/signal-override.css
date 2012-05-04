@@ -1,3 +1,7 @@
+.post.signal .cell {
+	line-height: 12px;
+}
+
 .posting_persona .post.signal .cell {
 	background: url(/images/ribbon_orange.png);
 	color: #fff;
