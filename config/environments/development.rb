@@ -34,6 +34,8 @@ Friskyfactory::Application.configure do
 
   config.action_mailer.perform_deliveries = true
 
+  config.dummy_email = 'michael@michaelbamford.com'
+
   config.ignore_recipient_emailability = true
 
   config.action_mailer.smtp_settings = {

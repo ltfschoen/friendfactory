@@ -13,8 +13,6 @@ class ApplicationMailer < ActionMailer::Base
       :host_with_port,
       :featured_personages
 
-  DummyEmail = 'michael@michaelbamford.com'
-
   def create(recipient, posting, site, host, port)
     @recipient, @posting, @site, @host, @port = recipient, posting, site, host, port
   end
@@ -30,11 +28,11 @@ class ApplicationMailer < ActionMailer::Base
     when 'production'
       email
     when 'staging'
-      alternate_email || DummyEmail
+      Rails.configuration.action_mailer.dummy_email || alternate_email
     when 'test'
       email
     else
-      DummyEmail
+      Rails.configuration.action_mailer.dummy_email
     end
   end
 

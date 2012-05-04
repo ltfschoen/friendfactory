@@ -42,9 +42,7 @@ class Subscription::Base < ActiveRecord::Base
   }
 
   # Override
-  scope :notify?, lambda {
-    Rails.configuration.ignore_recipient_emailability
-  }
+  scope :notify?
 
   belongs_to :resource, :polymorphic => true
 
