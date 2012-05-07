@@ -35,7 +35,7 @@ module Subscribable
           subscriptions = *klass.tally(scoped.merge(klass.enabled).merge(klass.notify?).merge(klass.exclude_subscriber(exclude_subscriber)))
           subscriptions.each do |subscription|
             if subscription.notifiable? && yield(subscription.subscriber)
-              subscription.notified!
+              subscription.notified
             end
           end
         end

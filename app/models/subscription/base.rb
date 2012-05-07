@@ -71,7 +71,7 @@ class Subscription::Base < ActiveRecord::Base
     Rails.configuration.ignore_recipient_emailability || (subscriber.emailable? && subscriber.offline?)
   end
 
-  def notified!
+  def notified
     touch(:notified_at)
   end
 
