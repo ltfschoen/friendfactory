@@ -41,7 +41,7 @@ module Subscribable
         end
 
         def create(subscriber)
-          if klass = proxy_owner.subscription_class
+          if subscriber && klass = proxy_owner.subscription_class
             scoped.subscriber(subscriber).limit(1).first || (proxy_owner.subscriptions << klass.subscriber(subscriber).new)
           end
         end
@@ -50,9 +50,7 @@ module Subscribable
       has_many :subscribers, :through => :subscriptions
 
       after_create do |subscribable|
-        if subscribable.subscription_class
-          subscribable.subscriptions.create(subscribable.subscriber)
-        end
+        subscribable.subscriptions.create(subscribable.subscriber)
       end
     end
 
