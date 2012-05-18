@@ -20,6 +20,10 @@ module Subscribable
         end
       end
 
+      def subscriber?
+        subscriber.present?
+      end
+
       def subscription_class
         self.class.subscription_class
       end

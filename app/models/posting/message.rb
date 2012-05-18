@@ -11,8 +11,6 @@ class Posting::Message < Posting::Base
     where(:user_id => user[:id])
   }
 
-  delegate :subscriptions, :to => :receiver_wave
-
   def receiver
     @receiver ||= begin
       sender_wave.recipient

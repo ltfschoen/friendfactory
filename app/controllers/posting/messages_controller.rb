@@ -60,7 +60,7 @@ class Posting::MessagesController < ApplicationController
   end
 
   def notify_via_mailer
-    new_message.subscriptions.notify do |subscriber|
+    new_message.receiver_wave.subscriptions.notify do |subscriber|
       Posting::MessagesMailer.delay.create(subscriber, new_message, current_site, request.host, request.port)
     end
   end
