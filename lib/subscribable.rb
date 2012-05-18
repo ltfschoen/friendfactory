@@ -34,12 +34,13 @@ module Subscribable
           :order      => '`created_at` ASC',
           :dependent  => :destroy do
         def notify(opts = {})
-          klass = proxy_owner.subscription_class
-          exclude_subscriber = opts.delete(:exclude)
-          subscriptions = *klass.tally(scoped.merge(klass.enabled).merge(klass.notify?).merge(klass.exclude_subscriber(exclude_subscriber)))
-          subscriptions.each do |subscription|
-            if subscription.notifiable? && yield(subscription.subscriber)
-              subscription.notified
+          if klass = proxy_owner.subscription_class
+            exclude_subscriber = opts.delete(:exclude)
+            subscriptions = *klass.tally(scoped.merge(klass.enabled).merge(klass.notify?).merge(klass.exclude_subscriber(exclude_subscriber)))
+            subscriptions.each do |subscription|
+              if subscription.notifiable? && yield(subscription.subscriber)
+                subscription.notified
+              end
             end
           end
         end
