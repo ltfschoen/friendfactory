@@ -146,20 +146,20 @@ class User < ActiveRecord::Base
   end
 
   ###
-  ###
 
   public
 
   def update_attributes_with_role(attrs, role = {})
-    if attrs.present?
-      admin = attrs.delete(:admin)
-      state = attrs.delete(:state)
-      update_attributes_without_role(attrs)
-      if role[:as] == :admin
-        update_attribute(:admin, admin) if admin.present?
-        self.send(state.to_sym) if state.present?
+    admin = attrs.delete(:admin)
+    state = attrs.delete(:state)
+    updated = update_attributes_without_role(attrs)
+    if updated && role[:as] == :admin
+      self.send(state.to_sym) if state.present?
+      if admin.present?
+        updated = update_attribute(:admin, admin)
       end
     end
+    updated
   end
 
   alias_method_chain :update_attributes, :role
