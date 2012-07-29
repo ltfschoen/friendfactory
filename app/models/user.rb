@@ -31,17 +31,20 @@ class User < ActiveRecord::Base
     end
   end
 
-  scope :online, lambda {{ :conditions =>
-      [ 'last_request_at >= ? and current_login_at is not null', (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ] }}
+  scope :online, lambda {{
+    :conditions => [
+      'last_request_at >= ? and current_login_at is not null',
+      (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ]
+  }}
 
   scope :order_by_most_recent_request, order('`last_request_at` DESC')
 
   scope :persona, lambda { |*role_names| joins(:personages => :persona).
-      where(:personages => {
-        :personas => {
-          :type => role_names.map { |role_name| "persona/#{role_name}".camelize }
-        }
-      })
+    where(:personages => {
+      :personas => {
+        :type => role_names.map { |role_name| "persona/#{role_name}".camelize }
+      }
+    })
   }
 
   scope :enabled, where(:state => :enabled)
@@ -53,7 +56,7 @@ class User < ActiveRecord::Base
   validates_presence_of :site
 
   validate :email_domain, :if => lambda { |user|
-      user.site && user.site.email_domain_regex.present?
+    user.site && user.site.email_domain_regex.present?
   }
 
   private
