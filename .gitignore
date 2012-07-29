@@ -19,6 +19,7 @@ public/javascripts/*.cache.js
 public/stylesheets/**/*.cache.css
 public/stylesheets/all.css
 public/system
+tags
 test/fixtures/assets/**/*.jpg
 test/fixtures/assets/**/*.png
 tmp/**/*
