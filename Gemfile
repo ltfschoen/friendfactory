@@ -5,13 +5,13 @@ gem 'rails', '3.0.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '~> 0.2.0'
 
 # Use unicorn as the web server
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug'
@@ -23,11 +23,12 @@ gem 'mysql2'
 # gem 'aws-s3', :require => 'aws/s3'
 
 gem 'jquery-rails', '>= 1.0.12'
+
 gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
 gem 'authlogic', '~> 3.1.0'
-gem 'paperclip', '>= 2.4'
-gem 'remotipart'
-gem 'haml', '>= 3.1.2'
+gem 'paperclip', '~> 2.4'
+gem 'remotipart', '~> 0.2.1'
+gem 'haml', '~> 3.1.2'
 gem 'haml-rails'
 gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on', '~> 2.2.2'
@@ -49,10 +50,12 @@ gem 'bluecloth', '~> 2.0.10'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 
-gem 'letter_opener', :group => :development
+group :development do
+  gem 'letter_opener'
+end
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.6'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
   gem 'webrat', '>= 0.7.2'
   gem 'sql-logging'

@@ -1,8 +1,9 @@
 GIT
   remote: git://github.com/thoughtbot/factory_girl.git
-  revision: 4f5f5df39a1b565160ad7138a1f7d7a7c836664d
+  revision: cd984633bc9d735ef3dd51c3ed4afd0fd4fde80a
   specs:
-    factory_girl (2.0.0.beta2)
+    factory_girl (3.3.0)
+      activesupport (>= 3.0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -36,41 +37,48 @@ GEM
     activesupport (3.0.12)
     acts-as-taggable-on (2.2.2)
       rails (~> 3.0)
-    addressable (2.2.6)
+    addressable (2.2.8)
     arel (2.0.10)
     authlogic (3.1.0)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
     bluecloth (2.0.11)
     builder (2.1.2)
+    capistrano (2.12.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     chronic (0.6.7)
-    cocaine (0.2.0)
-    crack (0.1.8)
+    cocaine (0.2.1)
     daemons (1.1.8)
-    delayed_job (3.0.1)
+    delayed_job (3.0.3)
       activesupport (~> 3.0)
     delayed_job_active_record (0.3.2)
       activerecord (> 2.1.0)
       delayed_job (~> 3.0.0)
-    diff-lcs (1.1.2)
-    embedly (1.5.2)
+    diff-lcs (1.1.3)
+    embedly (1.5.6)
+      json
       oauth
       querystring
       typhoeus
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    haml (3.1.3)
+    haml (3.1.6)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    highline (1.6.13)
     i18n (0.5.0)
-    jquery-rails (1.0.14)
+    jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
-    json (1.6.5)
-    launchy (2.0.5)
+    json (1.7.3)
+    launchy (2.1.0)
       addressable (~> 2.2.6)
     letter_opener (0.0.2)
       launchy
@@ -81,18 +89,24 @@ GEM
       treetop (~> 1.4.8)
     memcache-client (1.8.5)
     mime-types (1.18)
-    multi_json (1.0.3)
-    mysql2 (0.2.6)
-    nokogiri (1.4.4)
-    oauth (0.4.5)
-    paperclip (2.4.5)
+    multi_json (1.3.6)
+    mysql2 (0.2.18)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.5.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
+    nokogiri (1.5.2)
+    oauth (0.4.6)
+    paperclip (2.7.0)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
     polyglot (0.3.3)
-    pusher (0.8.1)
-      crack (~> 0.1.0)
+    pusher (0.8.5)
       multi_json (~> 1.0)
       ruby-hmac (~> 0.4.0)
       signature (~> 0.1.2)
@@ -119,34 +133,33 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
-    remotipart (0.2.1)
-    rspec (2.5.0)
-      rspec-core (~> 2.5.0)
-      rspec-expectations (~> 2.5.0)
-      rspec-mocks (~> 2.5.0)
-    rspec-core (2.5.1)
-    rspec-expectations (2.5.0)
-      diff-lcs (~> 1.1.2)
-    rspec-mocks (2.5.0)
-    rspec-rails (2.5.0)
-      actionpack (~> 3.0)
-      activesupport (~> 3.0)
-      railties (~> 3.0)
-      rspec (~> 2.5.0)
+    remotipart (1.0.2)
+    rspec (2.10.0)
+      rspec-core (~> 2.10.0)
+      rspec-expectations (~> 2.10.0)
+      rspec-mocks (~> 2.10.0)
+    rspec-core (2.10.1)
+    rspec-expectations (2.10.0)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.10.1)
+    rspec-rails (2.10.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec (~> 2.10.0)
     ruby-hmac (0.4.0)
-    sass (3.1.1)
-    signature (0.1.2)
-      ruby-hmac
-    sql-logging (3.0.3)
-      rails (~> 3.0.0)
+    sass (3.1.19)
+    signature (0.1.3)
+    sql-logging (3.0.8)
+      rails (> 3.0.0)
     thor (0.14.6)
-    transitions (0.0.10)
+    transitions (0.0.18)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
     typhoeus (0.3.3)
       mime-types
-    tzinfo (0.3.32)
+    tzinfo (0.3.33)
     user_agent (1.1.1)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
@@ -155,7 +168,7 @@ GEM
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
-    will_paginate (3.0.2)
+    will_paginate (3.0.3)
 
 PLATFORMS
   ruby
@@ -164,21 +177,22 @@ DEPENDENCIES
   acts-as-taggable-on (~> 2.2.2)
   authlogic (~> 3.1.0)
   bluecloth (~> 2.0.10)
+  capistrano
   daemons
   delayed_job_active_record
   embedly (~> 1.5.2)
   factory_girl!
-  haml (>= 3.1.2)
+  haml (~> 3.1.2)
   haml-rails
   jquery-rails (>= 1.0.12)
   letter_opener
   memcache-client
-  mysql2
-  paperclip (>= 2.4)
+  mysql2 (~> 0.2.0)
+  paperclip (~> 2.4)
   pusher (~> 0.8.1)
   rails (= 3.0.12)
   remotipart
-  rspec-rails
+  rspec-rails (~> 2.6)
   sass (>= 3.1.1)
   sql-logging
   transitions (>= 0.0.10)
