@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425032937) do
+ActiveRecord::Schema.define(:version => 20120818235248) do
 
   create_table "accounts", :force => true do |t|
     t.string   "state"
@@ -76,6 +76,21 @@ ActiveRecord::Schema.define(:version => 20120425032937) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "delayed_jobs_to_do", :id => false, :force => true do |t|
+    t.integer  "id",         :default => 0, :null => false
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendships", :force => true do |t|
     t.string   "type"
@@ -297,6 +312,7 @@ ActiveRecord::Schema.define(:version => 20120425032937) do
     t.text    "body"
     t.integer "width"
     t.integer "height"
+    t.float   "duration"
   end
 
   create_table "resource_events", :force => true do |t|
@@ -383,7 +399,7 @@ ActiveRecord::Schema.define(:version => 20120425032937) do
     t.text     "css"
     t.string   "mailer"
     t.integer  "user_id"
-    t.string   "email_domain_regex",        :default => ".*"
+    t.string   "email_domain_regex"
     t.string   "email_domain_display_name"
   end
 
@@ -569,6 +585,21 @@ ActiveRecord::Schema.define(:version => 20120425032937) do
     t.string   "hash_key",           :limit => 8
     t.integer  "comments_count",                  :default => 0
     t.integer  "postings_count",                  :default => 0
+    t.datetime "commented_at"
+    t.datetime "primed_at"
+  end
+
+  create_table "waves_deleted", :id => false, :force => true do |t|
+    t.integer  "id",            :default => 0, :null => false
+    t.string   "type"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.string   "topic"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "resource_id"
+    t.string   "resource_type"
   end
 
   create_table "waves_not_as_postings", :force => true do |t|

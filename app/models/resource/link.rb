@@ -21,9 +21,9 @@ class Resource::Link < ActiveRecord::Base
     api = Embedly::API.new(:key => EmbedlyKey)
     if response = api.preview(:url => url, :maxwidth => 310).first
       response = response.marshal_dump
-      assign_attributes(response)
-      build_embeds(response)
-      download_images(response)
+      assign_attributes response
+      build_embeds response
+      download_images response
       true
     end
   rescue
@@ -43,10 +43,12 @@ class Resource::Link < ActiveRecord::Base
   end
 
   def build_embeds(response)
-    primary_embed = response[:object].present? ? response[:object].merge(:primary => true) : nil
-    ([ primary_embed ] + response[:embeds]).flatten.compact.each do |embed|
-        embeds.build(embed)
+    primary_embed = response[:object].present? ? response[:object].merge(primary: true) : nil
+    response[:embeds].push(primary_embed).flatten.compact.each do |embed|
+      embeds.build embed
     end
+  rescue ActiveRecord::UnknownAttributeError => exception
+    Rails.logger.warn exception.message
   end
 
   def download_images(response)
