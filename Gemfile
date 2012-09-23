@@ -5,7 +5,7 @@ gem 'rails', '3.0.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'pg'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -19,7 +19,6 @@ gem 'mysql2'
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
 gem 'jquery-rails', '>= 1.0.12'
@@ -55,7 +54,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
   gem 'webrat', '>= 0.7.2'
-  gem 'sql-logging'
 end
 
 group :production do
