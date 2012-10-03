@@ -1,9 +1,9 @@
-require 'sti'
+# require 'sti'
 
 Friskyfactory::Application.routes.draw do
 
   root :to => redirect { |params, request|
-    load 'sti.rb' if Rails.env.development?
+    # load 'sti.rb' if Rails.env.development?
     site_name = request.domain && request.domain.gsub(/\..*$/, '')
     if site = Site.find_by_name(site_name)
       wave = site.home_wave
