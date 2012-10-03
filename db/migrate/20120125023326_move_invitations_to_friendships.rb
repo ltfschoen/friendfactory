@@ -11,7 +11,7 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
       t.timestamps
       t.datetime  :expired_at
     end
-    
+
     create_table :invitation_confirmations, :force => true do |t|
       t.integer :invitation_id
       t.integer :friendship_id
@@ -25,16 +25,16 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
 
     ActiveRecord::Base.transaction do
       say_with_time 'moving site invitation postings to invitations' do
-        say "moved #{move_site_invitation_postings.length} site invitations"
+        # say "moved #{move_site_invitation_postings.length} site invitations"
       end
       say_with_time 'moving personal invitation postings to invitations' do
-        say "moved #{move_personal_invitation_postings.length} personal invitations"
+        # say "moved #{move_personal_invitation_postings.length} personal invitations"
       end
       say_with_time 'deleting invitation postings' do
-        delete_invitation_postings
+        # delete_invitation_postings
       end
       say_with_time 'deleting invitation waves' do
-        delete_invitation_waves
+        # delete_invitation_waves
       end
     end
 
@@ -68,7 +68,7 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
   end
 
   def self.move_personal_invitation_postings
-    Posting::Invitation.where('`body` IS NOT NULL').all.inject([]) do |memo, posting_invitation|
+    Posting::Invitation.where('body IS NOT NULL').all.inject([]) do |memo, posting_invitation|
       code    = posting_invitation.subject
       email   = posting_invitation.body
       user    = posting_invitation.user
@@ -93,7 +93,7 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
           friendship.user = user
           friendship.friend = invitee
           friendship.save!
-        end        
+        end
         confirmation.friendship = friendship
         confirmation.save!
       end

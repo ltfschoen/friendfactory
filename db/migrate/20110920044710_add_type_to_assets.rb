@@ -3,7 +3,7 @@ class AddTypeToAssets < ActiveRecord::Migration
     add_column :assets, :type, :string
     add_index :assets, [ :name, :type ]
     add_index :assets, [ :type ]
-    Asset::Base.update_all(:type => 'Asset::Image')
+    # Asset::Base.update_all(:type => 'Asset::Image')
   end
 
   def self.down

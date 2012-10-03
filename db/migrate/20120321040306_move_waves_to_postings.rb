@@ -96,7 +96,7 @@ class MoveWavesToPostings < ActiveRecord::Migration
 
   def self.create_waves_view
     ActiveRecord::Base.connection.execute %Q(
-      CREATE OR REPLACE VIEW waves AS SELECT * FROM `postings` WHERE `postings`.`type` LIKE 'Wave::%';)
+      CREATE OR REPLACE VIEW waves AS SELECT * FROM postings WHERE postings.type LIKE 'Wave::%';)
   end
 
   def self.remove_waves_view
@@ -104,7 +104,7 @@ class MoveWavesToPostings < ActiveRecord::Migration
   end
 
   def self.delete_all_waves_as_postings
-    ActiveRecord::Base.connection.execute %Q(DELETE FROM postings WHERE type LIKE 'Wave::%';)    
+    ActiveRecord::Base.connection.execute %Q(DELETE FROM postings WHERE type LIKE 'Wave::%';)
   end
 
 end

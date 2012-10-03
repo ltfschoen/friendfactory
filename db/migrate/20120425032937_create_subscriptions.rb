@@ -9,7 +9,10 @@ class CreateSubscriptions < ActiveRecord::Migration
       t.datetime  :notified_at
       t.timestamps
     end
-    add_index :subscriptions, [ :user_id, :resource_id, :resource_type ], :unique => true
+    add_index :subscriptions,
+      [ :user_id, :resource_id, :resource_type ],
+      name: 'index_subscriptions_on_user_id_resource_id_resource_type',
+      unique: true
   end
 
   def self.down

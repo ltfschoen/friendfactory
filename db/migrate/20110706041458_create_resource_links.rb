@@ -16,23 +16,23 @@ class CreateResourceLinks < ActiveRecord::Migration
       t.text    :title
       t.text    :description
       t.text    :author_name
-      t.text    :author_url      
+      t.text    :author_url
       t.text    :content
       t.integer :location_id
     end
-    
+
     create_table :resource_embeds, :force => true do |t|
       t.integer :resource_link_id
       t.string  :type
       t.boolean :primary, :default => false
       t.text    :body
       t.integer :width
-      t.integer :height      
+      t.integer :height
     end
   end
 
   def self.down
     drop_table :resource_links rescue nil
-    drop_table :resource_embeds rescue nil    
+    drop_table :resource_embeds rescue nil
   end
 end

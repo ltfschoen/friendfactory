@@ -3,12 +3,12 @@ class AddHandleToProfile < ActiveRecord::Migration
     add_column :user_info, :handle, :string
     add_column :user_info, :first_name, :string
     add_column :user_info, :last_name, :string
-    
-    UserInfo.reset_column_information
+
+    # UserInfo.reset_column_information
 
     say "Invoking ff:fix:profile_handles"
-    Rake::Task[:'ff:fix:profile_handles'].invoke
-    
+    # Rake::Task[:'ff:fix:profile_handles'].invoke
+
     say 'Remove users columns'
     say 'remove_column :user, :handle', true
     say 'remove_column :user, :first_name', true
@@ -21,6 +21,6 @@ class AddHandleToProfile < ActiveRecord::Migration
   def self.down
     remove_column :user_info, :handle
     remove_column :user_info, :first_name
-    remove_column :user_info, :last_name    
+    remove_column :user_info, :last_name
   end
 end

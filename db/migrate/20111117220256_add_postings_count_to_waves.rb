@@ -3,13 +3,13 @@ class AddPostingsCountToWaves < ActiveRecord::Migration
     add_column :waves, :postings_count, :integer, :default => 0 rescue nil
 
     # Remove Wave::Inbox obsolete class
-    Wave::Base.delete_all(:type => 'Wave::Inbox')
+    # Wave::Base.delete_all(:type => 'Wave::Inbox')
 
-    Wave::Base.reset_column_information
-    ActiveRecord::Base.record_timestamps = false
-    Wave::Base.all.each do |wave|
-      wave.update_attribute(:postings_count, wave.postings.published.count)
-    end
+    # Wave::Base.reset_column_information
+    # ActiveRecord::Base.record_timestamps = false
+    # Wave::Base.all.each do |wave|
+    #   wave.update_attribute(:postings_count, wave.postings.published.count)
+    # end
   end
 
   def self.down

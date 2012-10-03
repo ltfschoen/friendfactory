@@ -77,21 +77,6 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "delayed_jobs_to_do", :id => false, :force => true do |t|
-    t.integer  "id",         :default => 0, :null => false
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "friendships", :force => true do |t|
     t.string   "type"
     t.integer  "user_id"
@@ -105,12 +90,6 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   add_index "friendships", ["type", "user_id", "friend_id"], :name => "index_friendships_on_type_and_user_id_and_friend_id", :unique => true
 
   create_table "invitation_confirmations", :force => true do |t|
-    t.integer "invitation_id"
-    t.integer "friendship_id"
-    t.integer "invitee_id"
-  end
-
-  create_table "invitation_invitees", :force => true do |t|
     t.integer "invitation_id"
     t.integer "friendship_id"
     t.integer "invitee_id"
@@ -159,31 +138,6 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   add_index "notifications", ["posting_id"], :name => "index_notifications_on_posting_id"
   add_index "notifications", ["user_id", "posting_id"], :name => "index_notifications_on_user_id_and_posting_id"
 
-  create_table "nusers", :force => true do |t|
-    t.integer  "account_id"
-    t.integer  "site_id"
-    t.string   "state"
-    t.boolean  "emailable"
-    t.boolean  "admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
-    t.string   "perishable_token"
-    t.integer  "login_count",        :default => 0, :null => false
-    t.integer  "failed_login_count", :default => 0, :null => false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
-  end
-
-  add_index "nusers", ["last_request_at"], :name => "index_nusers_on_last_request_at"
-  add_index "nusers", ["persistence_token"], :name => "index_nusers_on_persistence_token"
-  add_index "nusers", ["site_id"], :name => "index_nusers_on_site_id"
-
   create_table "personages", :force => true do |t|
     t.integer  "user_id"
     t.integer  "persona_id"
@@ -228,13 +182,6 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   add_index "personas", ["first_name"], :name => "index_user_info_on_first_name"
   add_index "personas", ["handle"], :name => "index_user_info_on_handle"
 
-  create_table "posting_chats", :force => true do |t|
-    t.integer "receiver_id"
-    t.text    "body"
-  end
-
-  add_index "posting_chats", ["receiver_id"], :name => "index_posting_chats_on_receiver_id"
-
   create_table "postings", :force => true do |t|
     t.string   "type"
     t.string   "slug"
@@ -265,45 +212,12 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   add_index "postings", ["resource_id", "resource_type"], :name => "index_postings_on_resource_id_and_resource_type"
   add_index "postings", ["user_id"], :name => "index_postings_on_user_id"
 
-  create_table "postings_deleted", :id => false, :force => true do |t|
-    t.integer  "id",                 :default => 0, :null => false
-    t.string   "type"
-    t.string   "slug"
-    t.integer  "user_id"
-    t.integer  "parent_id"
-    t.integer  "resource_id"
-    t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "subject"
-    t.text     "body"
-    t.boolean  "active"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.integer  "width"
-    t.integer  "height"
-    t.boolean  "horizontal"
-  end
-
-  create_table "postings_waves_as_habtm", :id => false, :force => true do |t|
-    t.integer "posting_id"
-    t.integer "wave_id"
-  end
-
-  add_index "postings_waves_as_habtm", ["posting_id", "wave_id"], :name => "index_postings_waves_on_posting_id_and_wave_id"
-  add_index "postings_waves_as_habtm", ["wave_id"], :name => "index_postings_waves_on_wave_id"
-
   create_table "publications", :force => true do |t|
     t.integer  "wave_id",    :null => false
     t.integer  "posting_id", :null => false
     t.datetime "created_at"
     t.integer  "parent_id"
   end
-
-  add_index "publications", ["posting_id"], :name => "index_publications_on_resource_id"
-  add_index "publications", ["wave_id", "posting_id"], :name => "index_publications_on_wave_id_and_resource_id"
 
   create_table "resource_embeds", :force => true do |t|
     t.integer "resource_link_id"
@@ -321,14 +235,6 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.datetime "end_date"
     t.text     "body"
     t.string   "url"
-    t.boolean  "private"
-    t.boolean  "rsvp"
-  end
-
-  create_table "resource_events_bak", :id => false, :force => true do |t|
-    t.integer  "id",         :default => 0, :null => false
-    t.datetime "start_date"
-    t.datetime "end_date"
     t.boolean  "private"
     t.boolean  "rsvp"
   end
@@ -352,13 +258,6 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.text    "author_url"
     t.text    "content"
     t.integer "location_id"
-  end
-
-  create_table "roles", :force => true do |t|
-    t.string "name",                 :null => false
-    t.string "display_name",         :null => false
-    t.string "default_profile_type", :null => false
-    t.string "default_persona_type", :null => false
   end
 
   create_table "signal_categories", :force => true do |t|
@@ -442,7 +341,7 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.datetime "updated_at"
   end
 
-  add_index "subscriptions", ["user_id", "resource_id", "resource_type"], :name => "index_subscriptions_on_user_id_and_resource_id_and_resource_type", :unique => true
+  add_index "subscriptions", ["user_id", "resource_id", "resource_type"], :name => "index_subscriptions_on_user_id_resource_id_resource_type", :unique => true
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -459,29 +358,6 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
-  end
-
-  create_table "uber_waves", :id => false, :force => true do |t|
-    t.integer "uber_wave_id"
-    t.integer "wave_id"
-  end
-
-  add_index "uber_waves", ["uber_wave_id", "wave_id"], :name => "index_uber_waves_on_uber_wave_id_and_wave_id"
-  add_index "uber_waves", ["wave_id"], :name => "index_uber_waves_on_wave_id"
-
-  create_table "user_info_deleted", :id => false, :force => true do |t|
-    t.integer  "id",           :default => 0, :null => false
-    t.integer  "user_id"
-    t.date     "dob"
-    t.string   "age"
-    t.integer  "gender"
-    t.integer  "orientation"
-    t.integer  "relationship"
-    t.string   "location"
-    t.integer  "deafness"
-    t.text     "about_me"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -512,94 +388,9 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
   add_index "users", ["site_id", "email"], :name => "index_users_on_site_id_and_email", :unique => true
 
-  create_table "users_deleted", :id => false, :force => true do |t|
-    t.integer  "id",                 :default => 0, :null => false
-    t.string   "email",                             :null => false
-    t.string   "handle"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "slug"
-    t.date     "dob"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
-    t.string   "perishable_token"
-    t.integer  "login_count",        :default => 0, :null => false
-    t.integer  "failed_login_count", :default => 0, :null => false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
-  end
-
-  create_table "users_prelaunch", :id => false, :force => true do |t|
-    t.integer  "id",                 :default => 0, :null => false
-    t.string   "email",                             :null => false
-    t.string   "handle"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
-    t.string   "perishable_token"
-    t.integer  "login_count",        :default => 0, :null => false
-    t.integer  "failed_login_count", :default => 0, :null => false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
-    t.string   "domain"
-  end
-
   create_table "wave_to_posting_migration_logs", :force => true do |t|
     t.integer "wave_id"
     t.integer "posting_id"
-  end
-
-  create_table "waves", :id => false, :force => true do |t|
-    t.integer  "id",                              :default => 0, :null => false
-    t.string   "type"
-    t.string   "slug"
-    t.integer  "user_id"
-    t.integer  "parent_id"
-    t.integer  "resource_id"
-    t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "subject"
-    t.text     "body"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "sticky_until"
-    t.integer  "width"
-    t.integer  "height"
-    t.boolean  "horizontal"
-    t.string   "state"
-    t.string   "hash_key",           :limit => 8
-    t.integer  "comments_count",                  :default => 0
-    t.integer  "postings_count",                  :default => 0
-    t.datetime "commented_at"
-    t.datetime "primed_at"
-  end
-
-  create_table "waves_deleted", :id => false, :force => true do |t|
-    t.integer  "id",            :default => 0, :null => false
-    t.string   "type"
-    t.string   "slug"
-    t.integer  "user_id"
-    t.string   "topic"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "resource_id"
-    t.string   "resource_type"
   end
 
   create_table "waves_not_as_postings", :force => true do |t|

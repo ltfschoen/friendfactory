@@ -36,7 +36,7 @@ class CreatePersonas < ActiveRecord::Migration
           if profile = Wave::Profile.find_by_resource_id(person.id)
             if avatar = profile.postings.
                 where(:type => Posting::Avatar, :parent_id => nil, :active => true, :state => :published).
-                order('`postings`.`created_at` DESC').
+                order('postings.created_at DESC').
                 limit(1).first
               person.avatar_id = avatar.id
               person.save!(:validate => false)

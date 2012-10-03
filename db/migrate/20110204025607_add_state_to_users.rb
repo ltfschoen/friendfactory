@@ -1,7 +1,7 @@
 class AddStateToUsers < ActiveRecord::Migration
   def self.up
     rename_column :users, :status, :state
-    User.update_all(:state => :enabled)
+    # User.update_all(:state => :enabled)
   end
 
   def self.down
