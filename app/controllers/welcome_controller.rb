@@ -56,12 +56,11 @@ class WelcomeController < ApplicationController
 
   def featured_personages
     @featured_profiles ||= begin
-      Personage.enabled.
-          site(current_site).
-          joins(:persona => :avatar).
-          merge(Persona::Base.featured).
-          limit(4).
-          order('rand()')
+      Personage.enabled.site(current_site).
+        joins(:persona => :avatar).
+        merge(Persona::Base.featured).
+        limit(4).
+        order('random()')
     end
   end
 
