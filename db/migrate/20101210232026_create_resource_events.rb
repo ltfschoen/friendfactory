@@ -6,8 +6,11 @@ class CreateResourceEvents < ActiveRecord::Migration
       t.datetime    :end_date
       t.text        :body
       t.string      :url
-      t.boolean     :private
-      t.boolean     :rsvp
+
+      # t.boolean   :private
+      t.integer     :private
+      # t.boolean   :rsvp
+      t.integer     :rsvp
     end
   end
 

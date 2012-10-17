@@ -49,5 +49,6 @@ Friskyfactory::Application.configure do
   config.action_mailer.default_url_options = {
       :host => 'friskyfactory.localhost',
       :port => 3000 }
-  # config.after_initialize { load 'sti.rb' }
+
+  config.after_initialize { load 'sti.rb' }
 end

@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.integer  "persona_id"
     t.integer  "profile_id"
     t.string   "state"
-    t.boolean  "default",    :default => false
+    t.integer  "default"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -175,8 +175,8 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.string   "post_code"
     t.decimal  "lat",               :precision => 10, :scale => 7
     t.decimal  "lng",               :precision => 10, :scale => 7
-    t.boolean  "emailable"
-    t.boolean  "featured"
+    t.integer  "emailable"
+    t.integer  "featured"
   end
 
   add_index "personas", ["first_name"], :name => "index_user_info_on_first_name"
@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.datetime "sticky_until"
     t.integer  "width"
     t.integer  "height"
-    t.boolean  "horizontal"
+    t.integer  "horizontal"
     t.string   "state"
     t.string   "hash_key",           :limit => 8
     t.integer  "comments_count",                  :default => 0
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   create_table "resource_embeds", :force => true do |t|
     t.integer "resource_link_id"
     t.string  "type"
-    t.boolean "primary",          :default => false
+    t.integer "primary",          :default => 0
     t.text    "body"
     t.integer "width"
     t.integer "height"
@@ -235,8 +235,8 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.datetime "end_date"
     t.text     "body"
     t.string   "url"
-    t.boolean  "private"
-    t.boolean  "rsvp"
+    t.integer  "private"
+    t.integer  "rsvp"
   end
 
   create_table "resource_links", :force => true do |t|
@@ -245,7 +245,7 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.text    "url"
     t.string  "type"
     t.integer "cache_age"
-    t.boolean "safe"
+    t.integer "safe"
     t.string  "safe_type"
     t.text    "safe_message"
     t.string  "provider_name"
@@ -287,10 +287,10 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   add_index "signals", ["name"], :name => "index_signals_on_name", :unique => true
 
   create_table "sites", :force => true do |t|
-    t.string   "name",                                         :null => false
-    t.string   "display_name",                                 :null => false
-    t.boolean  "launch",                    :default => false
-    t.boolean  "invite_only",               :default => false
+    t.string   "name",                      :null => false
+    t.string   "display_name",              :null => false
+    t.integer  "launch"
+    t.integer  "invite_only"
     t.string   "analytics_domain_name"
     t.string   "analytics_account_number"
     t.datetime "created_at"
@@ -361,7 +361,7 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :null => false
+    t.string   "email",                             :null => false
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -369,16 +369,16 @@ ActiveRecord::Schema.define(:version => 20120818235248) do
     t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "perishable_token"
-    t.integer  "login_count",        :default => 0,     :null => false
-    t.integer  "failed_login_count", :default => 0,     :null => false
+    t.integer  "login_count",        :default => 0, :null => false
+    t.integer  "failed_login_count", :default => 0, :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.boolean  "admin",              :default => false
-    t.integer  "site_id",                               :null => false
-    t.integer  "account_id",                            :null => false
+    t.integer  "admin"
+    t.integer  "site_id",                           :null => false
+    t.integer  "account_id",                        :null => false
     t.integer  "score",              :default => 0
   end
 

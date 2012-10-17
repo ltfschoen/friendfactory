@@ -7,14 +7,19 @@ gem 'rails', '3.0.12'
 
 gem 'pg'
 
+group :development do
+  gem 'mysql2', '~> 0.3.0'
+
+  # Required for Rails ~> 3.0.x. Not required for Rails >= 3.1.x
+  gem 'activerecord-mysql2-adapter'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-# gem 'ruby-debug'
 
 # Bundle the extra gems:
 # gem 'bj'
@@ -48,11 +53,14 @@ gem 'bluecloth', '~> 2.0.10'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 
-gem 'letter_opener', :group => :development
+group :development do
+  gem 'letter_opener'
+  gem 'ruby-debug'
+end
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
+  gem 'rspec-rails'
   gem 'webrat', '>= 0.7.2'
 end
 

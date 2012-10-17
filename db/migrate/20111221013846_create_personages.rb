@@ -5,7 +5,8 @@ class CreatePersonages < ActiveRecord::Migration
       t.integer :persona_id
       t.integer :profile_id
       t.string  :state
-      t.boolean :default, :default => false
+      # t.boolean :default, :default => false
+      t.integer :default
       t.timestamps
     end
 

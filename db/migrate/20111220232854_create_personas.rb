@@ -50,14 +50,16 @@ class CreatePersonas < ActiveRecord::Migration
   end
 
   def self.down
-    add_column :postings, :active, :boolean
+    # add_column :postings, :active, :boolean
+    add_column :postings, :active, :integer
 
     say_with_time 'initializing active avatars' do
       Persona::Person.transaction do
         Persona::Person.all.each do |person|
           avatar = person.avatar
           if avatar && !avatar.silhouette?
-            avatar.active = true
+            # avatar.active = true
+            avatar.active = 1
             avatar.save!(:validate => false)
           end
         end

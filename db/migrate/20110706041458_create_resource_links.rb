@@ -6,7 +6,10 @@ class CreateResourceLinks < ActiveRecord::Migration
       t.text    :url
       t.string  :type
       t.integer :cache_age
-      t.boolean :safe
+
+      # t.boolean :safe
+      t.integer :safe
+
       t.string  :safe_type
       t.text    :safe_message
       t.string  :provider_name
@@ -24,7 +27,10 @@ class CreateResourceLinks < ActiveRecord::Migration
     create_table :resource_embeds, :force => true do |t|
       t.integer :resource_link_id
       t.string  :type
-      t.boolean :primary, :default => false
+
+      # t.boolean :primary, :default => false
+      t.integer :primary, :default => 0
+
       t.text    :body
       t.integer :width
       t.integer :height

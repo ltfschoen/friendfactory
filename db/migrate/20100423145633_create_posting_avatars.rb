@@ -1,6 +1,8 @@
 class CreatePostingAvatars < ActiveRecord::Migration
   def self.up
-    add_column :postings, :active,             :boolean
+    # add_column :postings, :active, :boolean
+    add_column :postings, :active, :integer
+
     add_column :postings, :image_file_name,    :string
     add_column :postings, :image_content_type, :string
     add_column :postings, :image_file_size,    :integer
