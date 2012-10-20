@@ -9,8 +9,8 @@ gem 'pg'
 
 group :development do
   gem 'mysql2', '~> 0.3.0'
-
-  # Required for Rails ~> 3.0.x. Not required for Rails >= 3.1.x
+  # Following gem required for Rails ~> 3.0.x. and mysql2 ~> 0.3.x
+  # Remove for Rails >= 3.1.x
   gem 'activerecord-mysql2-adapter'
 end
 
@@ -55,7 +55,7 @@ gem 'bluecloth', '~> 2.0.10'
 
 group :development do
   gem 'letter_opener'
-  gem 'ruby-debug'
+  gem 'debugger'
 end
 
 group :development, :test do
