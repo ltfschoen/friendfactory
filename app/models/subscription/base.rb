@@ -30,11 +30,11 @@ class Subscription::Base < ActiveRecord::Base
   }
 
   scope :exclude, lambda { |subscription|
-    subscription && subscription.persisted? ? where('`subscriptions`.`id` <> ?', subscription[:id]) : scoped
+    subscription && subscription.persisted? ? where('"subscriptions"."id" <> ?', subscription[:id]) : scoped
   }
 
   scope :exclude_subscriber, lambda { |user|
-    user ? where('`subscriptions`.`user_id` <> ?', user[:id]) : scoped
+    user ? where('"subscriptions"."user_id" <> ?', user[:id]) : scoped
   }
 
   scope :type, lambda { |*types|

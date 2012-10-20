@@ -44,7 +44,7 @@ class Persona::Base < ActiveRecord::Base
       where(:personages => { :users => { :site_id => site.id }})
   }
 
-  scope :has_avatar, where('`avatar_id` is not null')
+  scope :has_avatar, where('"avatar_id" is not null')
 
   scope :featured, where(:featured => true)
 

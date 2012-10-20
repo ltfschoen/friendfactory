@@ -60,13 +60,13 @@ class Admin::Invitation::SitesController < ApplicationController
   end
 
   def invitations
-    sort_fields = params[:sort].split('.').map{ |field| "`#{field}`" }.join('.')
+    sort_fields = params[:sort].split('.').map{ |field| %Q{"#{field}"} }.join('.')
     site.invitations.
-        select('`invitations`.*, count(`invitation_confirmations`.`id`) AS confirmations_count').
+        select('"invitations".*, count("invitation_confirmations"."id") AS confirmations_count').
         type(:site).
         joins(:user => :persona).
-        joins('LEFT OUTER JOIN `invitation_confirmations` ON `invitations`.`id` = `invitation_confirmations`.`invitation_id`').
-        group('`invitations`.`id`').
+        joins('LEFT OUTER JOIN "invitation_confirmations" ON "invitations"."id" = "invitation_confirmations"."invitation_id"').
+        group('"invitations"."id"').
         order("#{sort_fields} #{params[:direction]}")
   end
 

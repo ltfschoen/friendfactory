@@ -19,7 +19,7 @@ class Friendship::Base < ActiveRecord::Base
   }
 
   scope :since, lambda { |datetime|
-    where('`created_at` > ?', datetime)
+    where('"created_at" > ?', datetime)
   }
 
 end

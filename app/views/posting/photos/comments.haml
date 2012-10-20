@@ -2,7 +2,7 @@
   .photo
     =# link_to_unpublish(posting)
     = render_photo(posting)
-  - comments = posting.comments.published.includes(:user => :profile, :user => { :persona => :avatar }).order('`created_at` DESC')
+  - comments = posting.comments.published.includes(:user => :profile, :user => { :persona => :avatar }).order('"created_at" DESC')
   - comments.each do |comment|
     = render :partial => 'posting/comments/comment', :object => comment, :locals => { :posting => posting }
   = link_to 'New Comment'.html_safe, new_posting_comment_path(posting), :remote => true, :class => 'new_comment'

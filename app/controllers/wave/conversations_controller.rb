@@ -45,7 +45,7 @@ class Wave::ConversationsController < ApplicationController
   end
 
   def tags
-    personas.tag_counts.order('`name` ASC').select{ |tag| tag.count > 1 }
+    personas.tag_counts.order('"name" ASC').select{ |tag| tag.count > 1 }
   end
 
   memoize :paged_conversations, :tags
@@ -56,7 +56,7 @@ class Wave::ConversationsController < ApplicationController
     conversations = params[:tag] ? conversations_from_tagged_personas : conversations_from_all
     conversations.
         includes(:recipient => { :persona => :avatar }).
-        order('`postings`.`updated_at` DESC').scoped
+        order('"postings"."updated_at" DESC').scoped
   end
 
   def conversations_from_all
@@ -84,9 +84,9 @@ class Wave::ConversationsController < ApplicationController
 
   def conversation_dates
     current_user.inbox(current_site).
-        select('date(`postings`.`updated_at`) AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS recipient_ids').
-        group('date(`postings`.`updated_at`)').
-        order('date(`postings`.`updated_at`) DESC')
+        select('date("postings"."updated_at") AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS recipient_ids').
+        group('date("postings"."updated_at")').
+        order('date("postings"."updated_at") DESC')
   end
 
   def parameterize_tag(tag)

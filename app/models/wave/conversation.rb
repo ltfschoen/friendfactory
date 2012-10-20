@@ -1,10 +1,10 @@
 class Wave::Conversation < Wave::Base
 
   scope :unread,
-      joins('LEFT OUTER JOIN bookmarks ON `postings`.`id` = `bookmarks`.`wave_id` AND `postings`.`user_id` = `bookmarks`.`user_id`').
-      where('(`postings`.`updated_at` > `bookmarks`.`read_at`) OR (`bookmarks`.`read_at` IS NULL)')
+      joins('LEFT OUTER JOIN bookmarks ON "postings"."id" = "bookmarks"."wave_id" AND "postings"."user_id" = "bookmarks"."user_id"').
+      where('("postings"."updated_at" > "bookmarks"."read_at") OR ("bookmarks"."read_at" IS NULL)')
 
-  scope :chatty, where('`postings`.`postings_count` > 0')
+  scope :chatty, where('"postings"."postings_count" > 0')
 
   scope :recipient, lambda { |user|
     where(:resource_id => user[:id])

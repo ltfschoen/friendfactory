@@ -42,13 +42,13 @@ class Posting::Invitation < Posting::Base
   end
 
   scope :offered, where(:state => :offered)
-  scope :personal, where('`postings`.`body` IS NOT NULL')
+  scope :personal, where('"postings"."body" IS NOT NULL')
   scope :universal, where(:body => nil)
   scope :code, lambda { |code| where(:subject => code) }
 
   scope :age, lambda { |*days_old|
     where_clause = days_old.inject([[]]) do |memo, age|
-      memo.first << [ '(`postings`.`created_at` >= ? AND `postings`.`created_at` < ?)' ]
+      memo.first << [ '("postings"."created_at" >= ? AND "postings"."created_at" < ?)' ]
       memo << [ Date.today.at_midnight - (age + 1.day), Date.today.at_midnight - age ]
       memo
     end
@@ -56,23 +56,23 @@ class Posting::Invitation < Posting::Base
   }
 
   scope :not_redundant, lambda {
-    joins('LEFT OUTER JOIN `users` ON `postings`.`body` = `users`.`email`').
-    where('`users`.`id` IS NULL') }
+    joins('LEFT OUTER JOIN "users" ON "postings"."body" = "users"."email"').
+    where('"users"."id" IS NULL') }
 
   scope :redundant, lambda {
-    joins('LEFT OUTER JOIN `users` ON `postings`.`body` = `users`.`email`').
-    where('`users`.`id` IS NOT NULL') }
+    joins('LEFT OUTER JOIN "users" ON "postings"."body" = "users"."email"').
+    where('"users"."id" IS NOT NULL') }
 
   scope :aging, lambda {
     age(FIRST_REMINDER_AGE, SECOND_REMINDER_AGE).
-    order('`postings`.`created_at` ASC') }
+    order('"postings"."created_at" ASC') }
 
   scope :expiring, lambda {
     age(EXPIRATION_AGE).
-    order('`postings`.`created_at` ASC') }
+    order('"postings"."created_at" ASC') }
 
   def self.find_by_code(code)
-    order('`postings`.`created_at` DESC').find_by_subject(code.strip) if code
+    order('"postings"."created_at" DESC').find_by_subject(code.strip) if code
   end
 
   def email=(new_email)
@@ -100,5 +100,5 @@ class Posting::Invitation < Posting::Base
 
   def set_email_changed
     @email_changed = true
-  end    
+  end
 end

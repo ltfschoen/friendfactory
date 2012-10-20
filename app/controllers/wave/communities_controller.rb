@@ -69,7 +69,7 @@ class Wave::CommunitiesController < ApplicationController
 
   def paged_rollcall
     @paged_rollcall ||= begin
-      rollcall = wave.rollcall.order('`postings`.`created_at` DESC').includes(:persona => :avatar).scoped
+      rollcall = wave.rollcall.order('"postings"."created_at" DESC').includes(:persona => :avatar).scoped
       rollcall = rollcall.joins(:persona).merge(Persona::Base.tagged_with(parameterize_tag(params[:tag]), :on => :tags)).scoped if params[:tag]
       rollcall.paginate(:page => params[:page], :per_page => @@per_page)
     end
@@ -77,7 +77,7 @@ class Wave::CommunitiesController < ApplicationController
 
   def tags
     @tags ||= begin
-      personas.tag_counts.order('`name` ASC').select{ |tag| tag.count > 1 }
+      personas.tag_counts.order('"name" ASC').select{ |tag| tag.count > 1 }
     end
   end
 

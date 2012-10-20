@@ -13,7 +13,7 @@ class Resource::Link < ActiveRecord::Base
       :class_name  => 'Resource::Embed',
       :foreign_key => 'resource_link_id' do
     def primary
-      where(:primary => true).order('`resource_embeds`.`id` ASC').limit(1).first
+      where(:primary => true).order('"resource_embeds"."id" ASC').limit(1).first
     end
   end
 

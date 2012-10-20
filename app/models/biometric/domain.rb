@@ -28,12 +28,12 @@ class Biometric::Domain < ActiveRecord::Base
       :class_name  => 'Biometric::DomainValue',
       :foreign_key => 'category_id',
       :dependent   => :delete_all,
-      :order       => '`signal_categories_signals`.`ordinal` ASC',
+      :order       => '"signal_categories_signals"."ordinal" ASC',
       :autosave    => true
 
   has_many :values,
       :through => :domain_values,
-      :order   => '`signal_categories_signals`.`ordinal` ASC'
+      :order   => '"signal_categories_signals"."ordinal" ASC'
 
   alias :range :values
 

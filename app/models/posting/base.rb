@@ -66,11 +66,11 @@ class Posting::Base < ActiveRecord::Base
   }
 
   scope :exclude, lambda { |*types|
-      where('`postings`.`type` NOT IN (?)', types.map(&:to_s))
+      where('"postings"."type" NOT IN (?)', types.map(&:to_s))
   }
 
   scope :since, lambda { |date|
-      where('`postings`.`created_at` > ?', date)
+      where('"postings"."created_at" > ?', date)
   }
 
   scope :site, lambda { |site|
@@ -107,7 +107,7 @@ class Posting::Base < ActiveRecord::Base
       :class_name   => 'Posting::Comment',
       :foreign_key  => 'parent_id',
       :dependent    => :destroy,
-      :conditions   => 'length(`postings`.`body`) > 0',
+      :conditions   => 'length("postings"."body") > 0',
       :after_add    => :after_add_to_comments,
       :after_remove => :after_remove_from_comments,
       :counter_sql  => proc {
@@ -116,10 +116,10 @@ class Posting::Base < ActiveRecord::Base
                 (SELECT p1.id AS lev1, p2.id AS lev2
                 FROM postings AS p1
                 LEFT JOIN postings AS p2 ON p2.parent_id = p1.id
-                WHERE p1.`id` = #{id}
-                AND p2.`state` = 'published'
-                AND p2.`type` = 'Posting::Comment'
-                AND (length(p2.`body`) > 0)) AS p2
+                WHERE p1."id" = #{id}
+                AND p2."state" = 'published'
+                AND p2."type" = 'Posting::Comment'
+                AND (length(p2."body") > 0)) AS p2
              WHERE lev2 IS NOT NULL)
             UNION
             (SELECT DISTINCT p3.lev3 FROM
@@ -127,10 +127,10 @@ class Posting::Base < ActiveRecord::Base
                 FROM postings AS p1
                 LEFT JOIN postings AS p2 ON p2.parent_id = p1.id
                 LEFT JOIN postings AS p3 ON p3.parent_id = p2.id
-                WHERE p1.`id` = #{id}
-                AND p3.`state` = 'published'
-                AND p3.`type` = 'Posting::Comment'
-                AND (length(p3.`body` > 0))) as p3
+                WHERE p1."id" = #{id}
+                AND p3."state" = 'published'
+                AND p3."type" = 'Posting::Comment'
+                AND (length(p3."body" > 0))) as p3
              WHERE lev3 IS NOT NULL)) t1) }
 
   def after_add_to_comments(posting)
@@ -175,7 +175,7 @@ class Posting::Base < ActiveRecord::Base
   def fetchables(limit = nil)
     comments.published.
         includes(:user => :profile, :user => { :persona => :avatar }).
-        order('`created_at` DESC').
+        order('"created_at" DESC').
         limit(limit).
         sort_by { |comment| comment.created_at }
   end

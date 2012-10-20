@@ -81,7 +81,7 @@ class Personage < ActiveRecord::Base
   }
 
   scope :wave, lambda { |wave|
-      select('distinct `personages`.*').
+      select('distinct "personages".*').
       joins(:postings => :waves).
       joins(:persona).
       where(:postings => { :waves => { :id => wave.id }}).
@@ -100,7 +100,7 @@ class Personage < ActiveRecord::Base
   scope :enabled, where(:state => :enabled)
 
   scope :exclude, lambda { |*ids|
-      where('`personages`.`id` NOT IN (?)', ids)
+      where('"personages"."id" NOT IN (?)', ids)
   }
 
   scope :sidebar_rollcall, lambda { |site, persona_type, limit, *exclude_ids|
@@ -110,9 +110,9 @@ class Personage < ActiveRecord::Base
       joins(:profile).
       includes(:persona => :avatar).
       exclude(*exclude_ids).
-      where('`personas`.`avatar_id` IS NOT NULL').
+      where('"personas"."avatar_id" IS NOT NULL').
       limit(limit).
-      order('`postings`.`updated_at` DESC')
+      order('"postings"."updated_at" DESC')
   }
 
   def self.uid(id)
@@ -211,7 +211,7 @@ class Personage < ActiveRecord::Base
   end
 
   has_many :inverse_friendships,
-      :foreign_key => '`friend_id`',
+      :foreign_key => '"friend_id"',
       :class_name  => 'Friendship::Base'
 
   has_many :inverse_friends,
@@ -312,7 +312,7 @@ class Personage < ActiveRecord::Base
       :foreign_key => 'invitee_id',
       :class_name  => 'Invitation::Confirmation'
 
-  # @invitations = personage.profile.postings.type(Posting::Invitation).order('`postings`.`created_at` DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
+  # @invitations = personage.profile.postings.type(Posting::Invitation).order('"postings"."created_at" DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
 
   def find_or_create_invitation_wave_for_site(site)
     invitation_wave_for_site(site) || create_invitation_wave_for_site(site)

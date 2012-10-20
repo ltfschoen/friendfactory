@@ -33,7 +33,7 @@ class Wave::PlacesController < ApplicationController
   def postings
     wave.postings.
       published.
-      order('`postings`.`updated_at` DESC').
+      order('"postings"."updated_at" DESC').
       includes(:user => { :persona => :avatar }).
       paginate(:page => params[:page], :per_page => @@per_page)
   end

@@ -36,7 +36,7 @@ class Wave::AmbassadorsController < ApplicationController
   def postings
     wave.postings.published.
       includes(:user => { :persona => :avatar }).
-      order('`sticky_until` DESC, `updated_at` DESC').
+      order('"sticky_until" DESC, "updated_at" DESC').
       paginate(:page => params[:page], :per_page => @@per_page)
   end
 

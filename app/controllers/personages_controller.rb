@@ -17,7 +17,7 @@ class PersonagesController < ApplicationController
   @@per_page = 48
 
   def index
-    @users = users.order('`postings`.`updated_at` DESC').scoped
+    @users = users.order('"postings"."updated_at" DESC').scoped
     respond_to do |format|
       format.html { render :layout => 'rollcall' }
     end
@@ -145,7 +145,7 @@ class PersonagesController < ApplicationController
   def invitations
     respond_to do |format|
       if personage
-        @invitations = personage.profile.postings.type(Posting::Invitation).order('`postings`.`created_at` DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
+        @invitations = personage.profile.postings.type(Posting::Invitation).order('"postings"."created_at" DESC').limit(Wave::InvitationsHelper::MaximumDefaultImages)
         format.html { render :layout => false }
       else
         format.html { render :nothing => true }

@@ -35,7 +35,7 @@ class Wave::Base < ::Posting::Base
     end
 
     def natural_order
-      order('`postings`.`sticky_until` DESC, `postings`.`primed_at` DESC')
+      order('"postings"."sticky_until" DESC, "postings"."primed_at" DESC')
     end
   end
 
@@ -63,7 +63,7 @@ class Wave::Base < ::Posting::Base
 
   def rollcall
     @rollcall ||= begin
-      Personage.enabled.group('`personages`.`id`').
+      Personage.enabled.group('"personages"."id"').
           joins(:postings => :publishables).
           merge(Posting::Base.published).
           where(:publications => { :wave_id => self[:id] }).

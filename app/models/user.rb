@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
       (Time.now.utc - UserSession::InactivityTimeout).to_s(:db) ]
   }}
 
-  scope :order_by_most_recent_request, order('`last_request_at` DESC')
+  scope :order_by_most_recent_request, order('"last_request_at" DESC')
 
   scope :persona, lambda { |*role_names| joins(:personages => :persona).
     where(:personages => {
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   has_one :default_personage,
       :class_name => 'Personage',
-      :order      => '`default` DESC, `created_at` ASC'
+      :order      => '"default" DESC, "created_at" ASC'
 
   accepts_nested_attributes_for :default_personage
 

@@ -62,7 +62,7 @@ class Site < ActiveRecord::Base
   has_many :biometric_domains,
       :class_name  => 'Biometric::Domain',
       :foreign_key => 'site_id',
-      :order       => '`ordinal` ASC'
+      :order       => '"ordinal" ASC'
 
   accepts_nested_attributes_for :biometric_domains,
       :reject_if     => :all_blank,
@@ -70,11 +70,11 @@ class Site < ActiveRecord::Base
 
   has_many :assets, :class_name => 'Asset::Base' do
     def [](name)
-      scoped_by_name(name).order('`assets`.`created_at` desc').limit(1).first
+      scoped_by_name(name).order('"assets"."created_at" desc').limit(1).first
     end
   end
 
-  has_many :stylesheets, :order => '`controller_name` asc'
+  has_many :stylesheets, :order => '"controller_name" asc'
 
   has_many :images,    :class_name => 'Asset::Image'
   has_many :constants, :class_name => 'Asset::Constant'
@@ -90,7 +90,7 @@ class Site < ActiveRecord::Base
   def stylesheet(controller_name = nil)
     stylesheets = self.stylesheets.scoped
     if controller_name.present?
-      stylesheets = stylesheets.where('(`controller_name` is null) or (`controller_name` = ?)', controller_name)
+      stylesheets = stylesheets.where('("controller_name" is null) or ("controller_name" = ?)', controller_name)
     end
     stylesheets.map(&:css).compact.join("\n")
   end

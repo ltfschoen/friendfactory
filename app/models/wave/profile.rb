@@ -14,7 +14,7 @@ class Wave::Profile < Wave::Base
   has_many :photos,
       :through     => :publications,
       :conditions  => { :postings => { :state => :published, :type => 'Posting::Photo' }},
-      :order       => '`postings`.`created_at` DESC'
+      :order       => '"postings"."created_at" DESC'
 
   def writable?(user_id)
     owner?(user_id)
@@ -39,7 +39,7 @@ class Wave::Profile < Wave::Base
         published.
         where(:created_at => (Time.now - RepublishWindow)...Time.now).
         where(:user_id => posting.user[:id]).
-        where('`postings`.`id` <> ?', posting.id)
+        where('"postings"."id" <> ?', posting.id)
   end
 
 end

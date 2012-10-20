@@ -45,7 +45,7 @@ class FriendshipsController < ApplicationController
           where(:friendships => { :type => type }).
           includes(:persona => :avatar).
           includes(:profile).
-          order('`friendships`.`created_at` DESC').
+          order('"friendships"."created_at" DESC').
           limit(Wave::InvitationsHelper::MaximumDefaultImages)
     rescue
       nil

@@ -1,7 +1,7 @@
 class Wave::Album < Wave::Base
 
   def photos
-    postings.type(Posting::Photo).published.order('`created_at` ASC').scoped
+    postings.type(Posting::Photo).published.order('"created_at" ASC').scoped
   end
 
   def fetchables(limit = nil)
