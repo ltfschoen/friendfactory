@@ -84,7 +84,7 @@ class Wave::ConversationsController < ApplicationController
 
   def conversation_dates
     current_user.inbox(current_site).
-        select('date("postings"."updated_at") AS updated_at, count(*) AS count, group_concat(distinct resource_id) AS recipient_ids').
+        select('date("postings"."updated_at") AS updated_at, count(*) AS count, array_agg(distinct resource_id) AS recipient_ids').
         group('date("postings"."updated_at")').
         order('date("postings"."updated_at") DESC')
   end
