@@ -54,8 +54,8 @@ class Admin::SitesController < ApplicationController
     respond_to do |format|
       if site = Site.find_by_name(params[:site_name])
         variables = site.assets.type(Asset::Constant, Asset::Image).map(&:to_s)
-        css = site.stylesheet(params[:controller_name])
-        @engine = Sass::Engine.new((variables << css).compact.join, :syntax => :scss)
+        css = (variables << site.stylesheet(params[:controller_name])).compact.join
+        @engine = Sass::Engine.new(css, :syntax => :scss)
         format.css { render :text => @engine.render }
       else
         format.css { render :nothing => true }

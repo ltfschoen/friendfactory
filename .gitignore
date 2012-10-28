@@ -2,6 +2,7 @@
 *.tmproj
 .DS_Store
 .bundle
+.env.sample
 .footnotes
 bin/*
 config/*.sphinx.conf

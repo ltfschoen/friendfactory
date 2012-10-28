@@ -55,16 +55,28 @@ Friskyfactory::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address              => 'smtp.postmarkapp.com',
-      :port                 => 25,
-      :domain               => 'friskyfactory.com',
-      :user_name            => '3c6bca6d-6cd7-4476-bf7a-a2959f5778c7',
-      :password             => '3c6bca6d-6cd7-4476-bf7a-a2959f5778c7',
-      :authentication       => 'plain',
-      :enable_starttls_auto => true  }
+    :address              => 'smtp.postmarkapp.com',
+    :port                 => 25,
+    :domain               => 'friskyfactory.com',
+    :user_name            => '3c6bca6d-6cd7-4476-bf7a-a2959f5778c7',
+    :password             => '3c6bca6d-6cd7-4476-bf7a-a2959f5778c7',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true
+  }
 
-  config.action_mailer.default_url_options = { :host => 'staging.friskyfactory.com' }
+  config.action_mailer.default_url_options = {
+    :host => 'staging.friskyfactory.com'
+  }
+
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+    },
+    s3_permissions: :read_public,
+    bucket: ENV["S3_BUCKET_NAME"]
+  }
 
   config.after_initialize { require 'sti' }
-
 end

@@ -24,12 +24,10 @@ end
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
-# gem 'aws-s3', :require => 'aws/s3'
 
 gem 'jquery-rails', '>= 1.0.12'
 gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
 gem 'authlogic', '~> 3.1.0'
-gem 'paperclip', '>= 2.4'
 gem 'remotipart'
 gem 'haml', '>= 3.1.2'
 gem 'haml-rails'
@@ -43,6 +41,9 @@ gem 'user_agent'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'bluecloth', '~> 2.0.10'
+
+gem "paperclip", "~> 3.0", :path => "~/Gits/paperclip"
+gem "aws-sdk"
 
 # gem 'responsalizr'
 # gem 'exifr'
@@ -61,11 +62,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
-  gem 'rspec-rails'
-  gem 'webrat', '>= 0.7.2'
+  gem "factory_girl", :git => "git://github.com/thoughtbot/factory_girl.git"
+  gem "rspec-rails"
+  gem "webrat", ">= 0.7.2"
 end
 
 group :production do
-  gem 'memcache-client'
+  gem "memcache-client"
 end
