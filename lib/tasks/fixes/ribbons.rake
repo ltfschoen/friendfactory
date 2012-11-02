@@ -61,7 +61,7 @@ namespace :ff do
 
       def create_updated_persona_publications
         ActiveRecord::Base.record_timestamps = false
-        Persona::Person.includes(:user => { :user => :site }).where('`created_at` <> `updated_at`').each do |person|
+        Persona::Person.includes(:user => { :user => :site }).where("created_at <> updated_at").each do |person|
           created_at = person.updated_at
           personage = person.user
           posting = create_updated_persona_posting(personage, created_at)

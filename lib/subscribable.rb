@@ -30,8 +30,8 @@ module Subscribable
 
       has_many :subscriptions,
           :as         => :resource,
-          :class_name => 'Subscription::Base',
-          :order      => '`created_at` ASC',
+          :class_name => "Subscription::Base",
+          :order      => "created_at ASC",
           :dependent  => :destroy do
         def notify(opts = {})
           if klass = proxy_owner.subscription_class
