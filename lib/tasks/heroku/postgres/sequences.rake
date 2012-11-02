@@ -4,7 +4,7 @@ namespace :ff do
       task :sequences => [ :environment ] do
         postgres_klass = postgres_klass "users" # Any model will do
         table_names.each do |table_name|
-          print "#{table_name} "
+          puts "#{table_name} "
           postgres_klass.connection.execute %Q{
             SELECT setval('#{table_name}_id_seq', (SELECT MAX(id) FROM "#{table_name}"));
           }

@@ -22,7 +22,7 @@ namespace :ff do
 
         models.each do |model, attachment|
           idx = 0
-          puts model.name
+          print model.name
           styles = [ :original ]
           model.first.send(attachment).styles.each do |style|
             styles.push style[0]

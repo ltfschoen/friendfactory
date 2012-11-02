@@ -63,7 +63,7 @@ namespace :ff do
         postgres_klass.record_timestamps = false
         postgres_klass.delete_all
 
-        puts "#{model.name}: #{model.connection.adapter_name} #{model.table_name} (#{model.count}) -> #{postgres_klass.connection.adapter_name} #{postgres_klass.table_name}"
+        print "#{model.name} (#{model.count}) "
         idx = 0
         model.find_in_batches do |batch|
           postgres_klass.transaction do
@@ -81,7 +81,7 @@ namespace :ff do
             GC.start
           end
         end
-        puts if idx > 999
+        puts
       end
 
       def migrate_classless_table table_name
@@ -93,11 +93,15 @@ namespace :ff do
           rows = User.connection.execute %Q{
             select * from `#{table_name}`;
           }
-          puts "#{table_name} #{rows.length}"
+          print "#{table_name} (#{rows.count}) "
+          idx = 0
           rows.each do |row|
+            idx += 1
+            print "#{idx} " if idx % 1000 == 0
             postgres_klass.create! Hash[*rows.fields.zip(row).flatten]
           end
         end
+        puts
       end
     end
   end
