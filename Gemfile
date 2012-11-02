@@ -42,7 +42,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'bluecloth', '~> 2.0.10'
 
-gem "paperclip", "~> 3.0", :path => "~/Gits/paperclip"
+gem "paperclip", "~> 3.0"
 gem "aws-sdk"
 
 # gem 'responsalizr'

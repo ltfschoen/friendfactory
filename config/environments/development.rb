@@ -52,15 +52,17 @@ Friskyfactory::Application.configure do
     :port => 3000
   }
 
- config.paperclip_defaults = {
-    storage: :s3,
-    s3_credentials: {
+  if ENV["FRIENDFACTORY_USE_S3"] == "true"
+    config.paperclip_defaults = {
+      storage: :s3,
+      s3_credentials: {
       access_key_id: ENV["AWS_ACCESS_KEY_ID"],
       secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
     },
-    s3_permissions: :read_public,
-    bucket: ENV["S3_BUCKET_NAME"]
-  }
+      s3_permissions: :read_public,
+      bucket: ENV["S3_BUCKET_NAME"]
+    }
+  end
 
   config.after_initialize { load 'sti.rb' }
 end

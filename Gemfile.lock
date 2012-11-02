@@ -5,16 +5,6 @@ GIT
     factory_girl (3.3.0)
       activesupport (>= 3.0.0)
 
-PATH
-  remote: ~/Gits/paperclip
-  specs:
-    paperclip (3.3.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (~> 0.4.0)
-      mime-types
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -118,6 +108,12 @@ GEM
     mysql2 (0.3.11)
     nokogiri (1.5.2)
     oauth (0.4.6)
+    paperclip (3.2.1)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (>= 0.0.2)
+      mime-types
     pg (0.14.1)
     polyglot (0.3.3)
     pusher (0.8.5)
@@ -208,7 +204,7 @@ DEPENDENCIES
   letter_opener
   memcache-client
   mysql2 (~> 0.3.0)
-  paperclip (~> 3.0)!
+  paperclip (~> 3.0)
   pg
   pusher (~> 0.8.1)
   rails (= 3.0.12)
