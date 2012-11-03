@@ -19,7 +19,7 @@ namespace :ff do
 
         model, attachment = models[args[:model].to_sym]
         unless model.present?
-          puts "Unknown model: #{args["model"]}, use #{models.keys.to_setence('or')}"
+          puts "Unknown model: use #{models.keys.to_sentence(last_word_connector: ' or ')}"
         end
 
         bucket_name = ENV["S3_BUCKET_NAME"]

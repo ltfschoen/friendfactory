@@ -17,9 +17,7 @@ end
 # Use unicorn as the web server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
+gem 'capistrano'
 
 # Bundle the extra gems:
 # gem 'bj'
