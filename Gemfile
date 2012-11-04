@@ -1,6 +1,6 @@
-source 'http://rubygems.org'
+source "http://rubygems.org"
 
-gem 'rails', '3.0.12'
+gem "rails", "3.0.12"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -18,7 +18,7 @@ end
 # Use unicorn as the web server
 # gem 'unicorn'
 
-gem 'capistrano'
+# gem 'capistrano'
 
 # Bundle the extra gems:
 # gem 'bj'
@@ -41,7 +41,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'bluecloth', '~> 2.0.10'
 
-gem "paperclip", "~> 3.0"
+gem "paperclip", "~> 3.3.0"
 gem "aws-sdk"
 
 # gem 'responsalizr'
@@ -54,12 +54,12 @@ gem "aws-sdk"
 # and rake tasks are available in development mode:
 
 group :development do
-  gem "debugger"
   gem "foreman"
   gem "letter_opener"
 end
 
 group :development, :test do
+  gem "debugger"
   gem "factory_girl", :git => "git://github.com/thoughtbot/factory_girl.git"
   gem "rspec-rails"
   gem "webrat", ">= 0.7.2"
