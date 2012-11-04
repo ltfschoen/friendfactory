@@ -33,10 +33,14 @@ namespace :ff do
 
         model.all.each_with_index do |model, idx|
           styles.each do |style|
-            path = model.send(attachment).path(style).sub(%r{^/},'')
-            object = bucket.objects[path]
-            content_type = model.send(attachment).content_type
-            object.write Rails.root.join('public', 'system', path), { :acl => :public_read, :content_type => content_type }
+            begin
+              path = model.send(attachment).path(style).sub(%r{^/},'')
+              object = bucket.objects[path]
+              content_type = model.send(attachment).content_type
+              object.write Rails.root.join('public', 'system', path), { :acl => :public_read, :content_type => content_type }
+            rescue
+              Rails.logger.warn "Failed: #{path}"
+            end
           end
           print "#{idx} " if idx > 0 && idx % 100 == 0
         end
