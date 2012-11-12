@@ -11,24 +11,34 @@ gem "pg"
 # Use unicorn as the web server
 # gem 'unicorn'
 
-# gem 'capistrano'
+# Bundle the extra gems:
+# gem 'bj'
+# gem 'nokogiri'
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem "sass-rails",   "~> 3.1.5"
+  gem "coffee-rails", "~> 3.1.1"
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer'
+
+  gem "uglifier", ">= 1.0.3"
+end
+
+gem "jquery-rails"
 
 # Amazon S3
 gem "paperclip", "~> 3.3.0"
 gem "aws-sdk"
 
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-
-gem 'jquery-rails', '>= 1.0.12'
 gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
 gem 'authlogic', '~> 3.1.0'
 gem 'remotipart'
 
 gem 'haml', '>= 3.1.2'
 gem 'haml-rails'
-
 gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'pusher', '~> 0.8.1'
@@ -38,8 +48,8 @@ gem 'embedly', '~> 1.5.2'
 gem 'user_agent'
 
 # Delayed job
-gem 'delayed_job_active_record'
-gem 'daemons'
+gem "delayed_job_active_record"
+gem "daemons"
 
 gem 'bluecloth', '~> 2.0.10'
 

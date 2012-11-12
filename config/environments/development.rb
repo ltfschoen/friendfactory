@@ -16,9 +16,6 @@ Friskyfactory::Application.configure do
   # config.cache_store = :mem_cache_store, 'localhost:11211'
   config.cache_store = :memory_store
 
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = true
-
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -27,14 +24,19 @@ Friskyfactory::Application.configure do
 
   # config.action_controller.asset_host = "http://assets.friskyfactory.localhost:3000"
 
+  # Do not compress assets
+  config.assets.compress = false
+
+  # Expands the lines which load the assets
+  config.assets.debug = true
+
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   # config.action_mailer.delivery_method = :test
   # config.action_mailer.delivery_method = :letter_opener
-
   config.action_mailer.perform_deliveries = true
-
   config.dummy_email = 'michael@michaelbamford.com'
-
   config.ignore_recipient_emailability = true
 
   config.action_mailer.smtp_settings = {
