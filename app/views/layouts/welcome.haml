@@ -4,42 +4,19 @@
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
   <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
 %head
-  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-type" }
+  %meta{ :'http-equiv' => "X-UA-Compatible", :content => "chrome=1" }
   %title #{current_site.display_name} - Welcome!
 
-  = stylesheet_link_tag |
-      'layouts/reset', |
-      'application', |
-      'layouts/welcome/welcome', |
-      'layouts/welcome/welcome-override', |
-      'layouts/welcome/animation', |
-      'posting/headshot', |
-      'posting/portrait', |
-      'posting/portrait-override', |
-    :media => 'screen', |
-    :cache => 'layouts/welcome/cache'
-
-  = stylesheet_link_tag "#{current_site.name}/welcome", :media => 'screen'
-
-  - if Rails.env.development?
-    = stylesheet_link_tag 'development'
-    = javascript_include_tag 'jquery'
-    = javascript_include_tag 'jquery.tools-1.2.6.tiny.min'
+  = stylesheet_link_tag "layouts/welcome", media: "screen"
+  = stylesheet_link_tag "#{current_site.name}/welcome", media: "screen"
+  - if [ "development", "test" ].include? Rails.env
+    = stylesheet_link_tag "development"
+    = javascript_include_tag "development"
   - else
-    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
-    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
-
-  = javascript_include_tag |
-      'modernizr', |
-      'jquery-ui-1.8.16.custom.min', |
-      'jquery.flip', |
-      'jquery.placeholder.min', |
-      'jquery.headshot', |
-      'jquery_ujs', |
-      'application', |
-      'layouts/welcome', |
-    :cache => 'cache/welcome'
+    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min"
+    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min"
+  = javascript_include_tag "layouts/welcome"
 
 %body{ :class => page_class }
   = yield

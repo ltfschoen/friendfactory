@@ -1,0 +1,10 @@
+/*
+ *= require layouts/reset
+ *= require application
+ *= require layouts/welcome/welcome
+ *= require layouts/welcome/welcome-override
+ *= require layouts/welcome/animation
+ *= require posting/headshot
+ *= require posting/portrait
+ *= require posting/portrait-override
+*/
