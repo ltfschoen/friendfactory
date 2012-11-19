@@ -12,7 +12,7 @@ Friskyfactory::Application.routes.draw do
     end
   }
 
-  get '/stylesheets/:site_name(/:controller_name).:format' => 'admin/sites#stylesheets'
+  get '/assets/:site_name(/:controller_name).:format' => 'admin/sites#stylesheets'
 
   get '/h/:hash_key(/:style)' => 'posting/postings#show'
 
