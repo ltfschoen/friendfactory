@@ -4,19 +4,21 @@
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
   <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
 %head
-  %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-type" }
-  %meta{ :'http-equiv' => "X-UA-Compatible", :content => "chrome=1" }
+  %meta{ "http-equiv" => "Content-type", "content" => "text/html; charset=utf-8" }
+  %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{current_site.display_name} - Welcome!
 
-  = stylesheet_link_tag "layouts/welcome", media: "screen"
-  = stylesheet_link_tag "#{current_site.name}/welcome", media: "screen"
+  = stylesheet_link_tag "layouts/welcome", media: "all"
+  = stylesheet_link_tag "#{current_site.name}/welcome", media: "all"
+
   - if [ "development", "test" ].include? Rails.env
-    = stylesheet_link_tag "development"
-    = javascript_include_tag "development"
+    = javascript_include_tag "jquery-1.7.2"
+    = javascript_include_tag "jquery.tools-1.2.6.tiny.min"
   - else
-    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"
     = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min"
   = javascript_include_tag "layouts/welcome"
+  = javascript_include_tag "development" if Rails.env.development?
 
 %body{ :class => page_class }
   = yield

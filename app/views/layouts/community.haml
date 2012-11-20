@@ -5,116 +5,31 @@
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
   <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
 %head
-  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %meta{ "http-equiv" => "Content-type", "content" => "text/html; charset=utf-8" }
+  %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag |
-      'layouts/reset', |
-      'application', |
-      'effects', |
-      'hashify-editor', |
-      'hashify-editor-override', |
-      'posting/ads', |
-      'posting/album', |
-      'posting/blog', |
-      'posting/blog-override', |
-      'posting/checkin', |
-      'posting/comments', |
-      'posting/comments-override', |
-      'posting/comments_mini', |
-      'posting/comments_mini-override', |
-      'posting/headshot', |
-      'posting/itinerary', |
-      'posting/link-override', |
-      'posting/multi-photos', |
-      'posting/new_post', |
-      'posting/new_post-override', |
-      'posting/photos', |
-      'posting/photos-override', |
-      'posting/portrait', |
-      'posting/portrait-override', |
-      'posting/post', |
-      'posting/post-override', |
-      'posting/signal', |
-      'posting/signal-override', |
-      'posting/status', |
-      'posting/status-override', |
-      'posting/tweet', |
-      'posting/video', |
-      'posting/video-override', |
-      'layouts/shared/overlay', |
-      'layouts/shared/nav', |
-      'layouts/shared/tag_cloud', |
-      'layouts/shared/sidebar', |
-      'layouts/shared/sidebar-override', |
-      'layouts/shared/compatibility', |
-      'layouts/community/base', |
-      'layouts/community/base-override', |
-      'layouts/community/reaction', |
-      'layouts/community/reaction-override', |
-      'layouts/community/post_reaction', |
-      'layouts/community/floating', |
-    :media => 'screen', |
-    :cache => 'cache/community', :concat => (Rails.env.development? && isIE?)
-
-  = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
-
+  = stylesheet_link_tag "layouts/community", media: "all", concat: (Rails.env.development? && isIE?)
+  = stylesheet_link_tag "#{current_site.name}/community", media: "all"
   :css
     body.#{current_user.uid} .#{current_user.uid}:hover a.admin { visibility: visible; opacity: 1; }
     .ie8 body.#{current_user.uid} .#{current_user.uid}:hover a.admin { visibility: visible; }
 
-  - if Rails.env.development?
-    = stylesheet_link_tag 'development'
-    = javascript_include_tag 'jquery-1.7.2'
-    = javascript_include_tag 'jquery.tools-1.2.6.tiny.min'
-    = javascript_include_tag 'pusher'
+  - if [ "development", "test" ].include? Rails.env
+    = javascript_include_tag "jquery-1.7.2"
+    = javascript_include_tag "jquery.tools-1.2.6.tiny.min"
+    = javascript_include_tag "pusher"
   - else
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'
-    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
-    = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
-
-  = javascript_include_tag |
-      'modernizr', |
-      'jquery_ujs', |
-      'jquery.tools-1.2.6.expose.min', |
-      'jquery-ui-1.8.16.custom.min', |
-      'jquery.mustache', |
-      'jquery.flip', |
-      'jquery.scrollTo-1.4.2-min', |
-      'jquery.autoresize', |
-      'jquery.fileupload', |
-      'jquery.fileupload-ui', |
-      'jquery.placeholder.min', |
-      'jquery.chat', |
-      'jquery.headshot', |
-      'jquery.effects', |
-      'jquery.overlay', |
-      'hashify-editor', |
-      'showdown/showdown', |
-      'showdown/datetimes', |
-      'showdown/abbreviations', |
-      'application', |
-      'posting/base', |
-      'posting/link', |
-      'posting/text', |
-      'posting/post_it', |
-      'layouts/shared/album', |
-      'layouts/shared/compatibility', |
-      'layouts/shared/floating', |
-      'layouts/shared/nav', |
-      'layouts/shared/sidebar', |
-      'layouts/shared/video', |
-      'layouts/community', |
-    :cache => 'cache/community'
-
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"
+    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min"
+    = javascript_include_tag "http://js.pusherapp.com/1.8/pusher.min"
+  = javascript_include_tag "layouts/community"
   / [if lt IE 9]
-    = javascript_include_tag 'ie8', :media => 'screen'
-
-  - if Rails.env.development?
-    = javascript_include_tag 'development'
+    = javascript_include_tag "ie8"
+  = javascript_include_tag "development" if Rails.env.development?
 
   = csrf_meta_tag
+
 %body{ uid, gid, :class => page_class }
   = render :partial => 'layouts/shared/sidebar'
   = compatibility_tag
