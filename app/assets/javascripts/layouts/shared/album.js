@@ -35,7 +35,7 @@ jQuery(function($) {
 			downloadTable: $('.new_wave_album ul.posting_photos'),
 
 			buildUploadRow: function(files, index) {
-				return $('<li><div class="pulse photo canvas"><img src="/images/friskyfactory/silhouette-q.gif" class="photo h4x6 small"></div></li>');
+				return $('<li><div class="pulse photo canvas"><img src="/assets/friskyfactory/silhouette-q.gif" class="photo h4x6 small"></div></li>');
 			},
 
 			buildDownloadRow: function(photo) {
