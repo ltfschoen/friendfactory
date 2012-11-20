@@ -4,11 +4,6 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
-//= require_tree .
-
-
 //= require modernizr
 //= require jquery-ui-1.8.16.custom.min
 //= require jquery.flip
@@ -16,4 +11,4 @@
 //= require jquery.headshot
 //= require jquery_ujs
 //= require application
-//= require layouts/welcome
+//= require_tree .
