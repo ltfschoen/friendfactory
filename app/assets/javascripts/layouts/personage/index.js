@@ -1,0 +1,11 @@
+//= require modernizr
+//= require jquery.tools-1.2.6.expose.min
+//= require jquery-ui-1.8.16.custom.min
+//= require jquery.tmpl.min
+//= require jquery.fileupload
+//= require jquery.fileupload-ui
+//= require jquery.placeholder.min
+//= require jquery.overlay
+//= require jquery_ujs
+//= require layouts/shared/sidebar
+//= require_tree .

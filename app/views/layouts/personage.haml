@@ -4,59 +4,31 @@
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
   <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
 %head
-  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %meta{ "http-equiv" => "Content-type", "content" => "text/html; charset=utf-8" }
+  %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag |
-      'layouts/reset', |
-      'application', |
-      'posting/headshot', |
-      'posting/portrait', |
-      'posting/portrait-override', |
-      'layouts/personage/base', |
-      'layouts/shared/sidebar', |
-      'layouts/shared/sidebar-override', |
-      'layouts/shared/overlay', |
-    :media => 'screen', |
-    :cache => 'layouts/personage/cache'
+  = stylesheet_link_tag "layouts/personage", media: "screen"
+  = stylesheet_link_tag "#{current_site.name}/profile", media:"screen"
 
-  = stylesheet_link_tag "#{current_site.name}/profile", :media => 'screen'
-
-  - if Rails.env.development?
-    = stylesheet_link_tag 'development'
-    = javascript_include_tag 'jquery'
-    = javascript_include_tag 'jquery.tools-1.2.6.tiny.min'
+  - if [ "development", "test" ].include? Rails.env
+    = javascript_include_tag "jquery-1.6.4"
+    = javascript_include_tag "jquery.tools-1.2.6.tiny.min"
   - else
-    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
-    = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
-
-  = javascript_include_tag |
-      'modernizr', |
-      'jquery.tools-1.2.6.expose.min', |
-      'jquery-ui-1.8.16.custom.min', |
-      'jquery.tmpl.min', |
-      'jquery.fileupload', |
-      'jquery.fileupload-ui', |
-      'jquery.placeholder.min', |
-      'jquery.overlay', |
-      'jquery_ujs', |
-      'layouts/shared/sidebar', |
-      'layouts/personage', |
-    :cache => 'layouts/personage.cached'
-
+    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min"
+    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min"
+  = javascript_include_tag "layouts/personage"
   / [if lt IE 9]
-    = javascript_include_tag 'ie8', :media => 'screen'
+    = javascript_include_tag "ie8", media: "screen"
+  = javascript_include_tag "development" if Rails.env.development?
 
-  - if Rails.env.development?
-    = javascript_include_tag 'development'
-      
-  = csrf_meta_tag 
+  = csrf_meta_tag
+
 %body{ :class => page_class }
-  = render :partial => 'personages/sidebar_menu'
-  = render :partial => 'layouts/shared/sidebar'
+  = render :partial => "personages/sidebar_menu"
+  = render :partial => "layouts/shared/sidebar"
   = yield
   = render :partial => "layouts/shared/footer"
-  = render :partial => 'layouts/shared/analytics'
+  = render :partial => "layouts/shared/analytics"
 :plain
   </html>
