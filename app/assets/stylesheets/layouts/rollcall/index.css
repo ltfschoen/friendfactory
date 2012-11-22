@@ -1,0 +1,14 @@
+/*
+ *= require layouts/reset
+ *= require application
+ *= require posting/headshot
+ *= require posting/portrait
+ *= require posting/portrait-override
+ *= require layouts/shared/tag_cloud
+ *= require layouts/shared/sidebar
+ *= require layouts/shared/sidebar-override
+ *= require layouts/shared/compatibility
+ *= require layouts/community/base
+ *= require layouts/community/base-override
+ *= require_tree .
+*/

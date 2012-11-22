@@ -5,64 +5,31 @@
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
   <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
 %head
-  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
+  %meta{ "http-equiv" => "Content-type", "content" => "text/html; charset=utf-8" }
+  %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag |
-      'layouts/reset', |
-      'application', |
-      'posting/headshot', |
-      'posting/portrait', |
-      'posting/portrait-override', |
-      'layouts/shared/tag_cloud', |
-      'layouts/shared/sidebar', |
-      'layouts/shared/sidebar-override', |
-      'layouts/shared/compatibility', |
-      'layouts/community/base', |
-      'layouts/community/base-override', |
-      'layouts/rollcall/base', |
-    :media => 'screen', |
-    :cache => 'cache/rollcall' #, :concat => true
+  = stylesheet_link_tag "layouts/rollcall", media: "all", concat: (Rails.env.development? && isIE?)
+  = stylesheet_link_tag "#{current_site.name}/community", media: "all"
 
-  = stylesheet_link_tag "#{current_site.name}/community", :media => 'screen'
-
-  - if Rails.env.development?
-    = stylesheet_link_tag 'development'
-    = javascript_include_tag 'jquery'
-    = javascript_include_tag 'pusher'
+  - if [ "development", "test" ].include? Rails.env
+    = javascript_include_tag "jquery-1.6.4"
+    = javascript_include_tag "pusher"
   - else
-    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
-    = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
-
-  = javascript_include_tag |
-      'modernizr', |
-      'jquery-ui-1.8.16.custom.min', |
-      'jquery.flip', |
-      'jquery.scrollTo-1.4.2-min', |
-      'jquery.placeholder.min', |
-      'jquery.chat', |
-      'jquery.headshot', |
-      'jquery_ujs', |
-      'application', |
-      'layouts/shared/compatibility', |
-      'layouts/shared/sidebar', |
-      'layouts/rollcall', |
-    :cache => 'cache/rollcall'
-
+    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min.js"
+    = javascript_include_tag "http://js.pusherapp.com/1.8/pusher.min.js"
+  = javascript_include_tag "layouts/rollcall"
   / [if lt IE 9]
-    = javascript_include_tag 'ie8', :media => 'screen'
-
-  - if Rails.env.development?
-    = javascript_include_tag 'development'
+    = javascript_include_tag "ie8", media: "all"
+  = javascript_include_tag "development" if Rails.env.development?
 
   = csrf_meta_tag
 %body{ uid, gid, :class => page_class }
-  = render :partial => 'layouts/shared/sidebar'
+  = render :partial => "layouts/shared/sidebar"
   = compatibility_tag
   = yield
   - if Rails.env.development?
-    #footnotes_holder{ :style => 'display:block' }
-  = render :partial => 'layouts/shared/analytics'
+    #footnotes_holder{ :style => "display:block" }
+  = render :partial => "layouts/shared/analytics"
 :plain
   </html>
