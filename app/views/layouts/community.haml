@@ -34,8 +34,6 @@
   = render :partial => 'layouts/shared/sidebar'
   = compatibility_tag
   = yield
-  - if Rails.env.development?
-    #footnotes_holder{ :style => 'display:block' }
   = render :partial => 'layouts/shared/analytics'
 :plain
   </html>
