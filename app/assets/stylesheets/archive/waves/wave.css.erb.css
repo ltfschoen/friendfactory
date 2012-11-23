@@ -1,0 +1,43 @@
+.wave ul.nav {
+	height: 50px;
+    text-align: center;
+	margin-bottom: 30px;
+}
+
+.wave ul.nav li {
+	display: inline-block;
+}
+
+.wave ul.nav li a {
+	display: block;
+	background: url(<%= asset_path "posting-icons.png" %>) top left no-repeat;
+	text-indent: -1000em;
+	width: 50px;
+	height: 50px;
+}
+
+.wave ul.nav li {
+	width: 50px;
+}
+
+/*.no-cssanimations .wave ul.nav li {
+	position: relative;
+	height: 50px;
+}*/
+
+.wave ul.nav li {
+	position: relative;
+	height: 50px;
+}
+
+/*.no-cssanimations .wave ul.nav li a {
+	position: absolute;
+}*/
+
+.wave ul.nav li a {
+	position: absolute;
+}
+
+.wave .tab_content {
+	margin-bottom: 30px;
+}

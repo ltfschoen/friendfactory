@@ -37,7 +37,7 @@
 	width: 700px;
 	height: 254px;
 	background-color: transparent;
-	-webkit-transform-style: preserve-3d;	
+	-webkit-transform-style: preserve-3d;
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 1s;
 }
@@ -48,7 +48,7 @@
 
 .ticket-container > .ticket .face {
 	position: absolute;
-	-webkit-backface-visibility: hidden;    
+	-webkit-backface-visibility: hidden;
 }
 
 .ticket a.flip {
@@ -59,11 +59,11 @@
 	height: 20px;
 	margin-top: 208px;
 	margin-left: 62px;
-	background: url(/images/friskyfactory/buddy-bar.png) top left no-repeat;	
+	background: url(<%= asset_path "buddy-bar.png" %>) top left no-repeat;
 }
 
 .ticket .front.face {
-	background: url('/images/friskyfactory/ticket.png');	
+	background: url(<%= asset_path "ticket.png" %>);
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
@@ -96,7 +96,7 @@
 }
 
 .ticket .back.face {
-	background: url('/images/friskyfactory/ticket.png') 0 -250px;	
+	background: url('/images/friskyfactory/ticket.png') 0 -250px;
 	margin: 0 auto;
 	width: 700px;
 	height: 248px;
@@ -139,7 +139,7 @@
 #new_wave_event .front.face .header {
 	height: 38px;
 	margin: 12px auto 0;
-}	
+}
 
 #new_wave_event .front.face .presents {
 	margin: 5px auto;

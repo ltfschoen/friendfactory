@@ -32,7 +32,7 @@ module Posting::AvatarsHelper
 
   def placeholder_image_tag(opts = {})
     css_class = [ 'placeholder', opts.delete(:class) ].compact * ' '
-    image_tag 'friskyfactory/silhouette-q.gif', opts.merge(:site => false, :class => css_class)
+    image_tag "silhouette-q.gif", opts.merge(:site => false, :class => css_class)
   end
 
   def empty_image_tag(opts = {})

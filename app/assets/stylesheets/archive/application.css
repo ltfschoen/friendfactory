@@ -6,7 +6,7 @@ body {
 	-moz-user-select: auto;
 	-khtml-user-select: auto;
 	-webkit-user-select: auto;
-	user-select: auto;	
+	user-select: auto;
 }
 
 .hidden {
@@ -67,7 +67,7 @@ a.button {
 }*/
 
 .pagination {
-	text-align: center;	
+	text-align: center;
 }
 
 .pagination a,
@@ -83,19 +83,19 @@ a.button {
 }
 
 .pagination span.disabled {
-	color: #664;	
+	color: #664;
 	padding: 2px 4px;
 }
 
 .pagination em {
 	padding: 2px 4px;
 	color: #CCA;
-	background-color: #8C872C;		
+	background-color: #8C872C;
 }
 
 .page.footer {
 	clear: both;
-	text-align: center;	
+	text-align: center;
 	font-size: small;
 	color: #664;
 	padding-top: 20px;
@@ -117,7 +117,7 @@ a.button {
 #footnotes_debug {
 	margin: 1em auto !important;
 	padding: 1em 0;
-	width: 930px;	
+	width: 930px;
 	background-color: rgb(249, 249, 243);
 	background:
 		-webkit-gradient(linear, 0 0%, 0 80, from(lightgrey), to(rgba(249, 249, 243, 0))),
@@ -127,7 +127,7 @@ a.button {
 		-webkit-gradient(linear, 100% 0%, 80% 200, from(lightgrey), to(rgba(249, 249, 243, 0))), #FFF;
 
     -webkit-box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
-		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);		
+		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);
     -moz-box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
 		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);
     box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
@@ -135,8 +135,8 @@ a.button {
 
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px;	
-	border: none;	
+	border-radius: 4px;
+	border: none;
 }
 
 /*.posting_avatar {
@@ -174,7 +174,7 @@ a.bio {
 	color: #9C180C;
 }
 
-.header.primary { 
+.header.primary {
     position: relative;
 	width: 960px;
 	height: 110px;
@@ -454,7 +454,7 @@ a.facebook {
 		-webkit-gradient(linear, 100% 0%, 80% 200, from(lightgrey), to(rgba(249, 249, 243, 0))), #FFF;
 
     -webkit-box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
-		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);		
+		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);
     -moz-box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
 		inset 0px 0px 3px 3px rgba(255, 255, 255, 0.8);
     box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.2),
@@ -462,9 +462,9 @@ a.facebook {
 
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px;	
+	border-radius: 4px;
 	border: none;
-	padding: 18px 8px;	
+	padding: 18px 8px;
 	text-align: left;
 }
 

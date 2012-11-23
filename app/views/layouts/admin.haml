@@ -5,48 +5,25 @@
   <!--[if gt IE 8]><html lang="en-us" class="no-js ie ie9"><![endif]-->
   <!--[if !IE]>--><html lang="en-us" class="no-js no-ie"><!--<![endif]-->
 %head
-  %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-type' }
-  %meta{ :'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1' }
-  %title= page_title
+  %meta{ "http-equiv" => "Content-type", "content" => "text/html; charset=utf-8" }
+  %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
+  %title #{page_title}
 
-  = stylesheet_link_tag |
-      'layouts/reset', |
-      'application', |
-      'posting/portrait', |
-      'posting/portrait-override', |
-      'layouts/shared/compatibility', |
-      'layouts/shared/sidebar', |
-      'layouts/shared/sidebar-override', |
-      'layouts/admin/base', |
-    :media => 'screen', |
-    :cache => 'cache/admin'
-
-  = stylesheet_link_tag "#{current_site.name}/admin", :media => 'screen'
+  = stylesheet_link_tag "layouts/admin", media: "all"
+  = stylesheet_link_tag "#{current_site.name}/admin", media: "screen"
 
   - if Rails.env.development?
-    = stylesheet_link_tag 'development'
-    = javascript_include_tag 'jquery'
+    = javascript_include_tag "jquery-1.6.4"
   - else
-    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.4.min.js'
-
-  = javascript_include_tag |
-      'modernizr', |
-      'jquery.tmpl.min', |
-      'jquery_ujs', |
-      'application', |
-      'layouts/shared/compatibility', |
-      'layouts/shared/sidebar', |
-      'layouts/admin', |
-    :cache => 'cache/admin'
-
+    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min"
+  = javascript_include_tag "layouts/admin"
   / [if lt IE 9]
-    = javascript_include_tag 'ie8', :media => 'screen'
-
-  - if Rails.env.development?
-    = javascript_include_tag 'development'
+    = javascript_include_tag "ie8", media: "all"
+  = javascript_include_tag "development" if Rails.env.development?
 
   = csrf_meta_tag
-%body{ :class => [ 'admin', page_class ]}
+
+%body{ :class => [ "admin", page_class ]}
   #sidebar
     #head= site_logo_image_tag(site)
     .block.userspace
@@ -65,6 +42,6 @@
 
   = compatibility_tag
   = yield
-  = render :partial => 'layouts/shared/analytics'
+  = render :partial => "layouts/shared/analytics"
 :plain
   </html>

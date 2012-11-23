@@ -16,7 +16,7 @@
 %script#file-template{ :type => 'text/x-jquery-tmpl' }
   .tr.asset.image
     .td.silhouette
-      %img{ :alt => 'Silhouette-q', :src => '/images/friskyfactory/silhouette-q.gif', :height => '32', :width => '32' }
+      %img{ :alt => "Silhouette-q", :src => "#{asset_path %q{silhouette-q.gif}}", :height => '32', :width => '32' }
     .td
       <input id="site_images_attributes_${ seq }_name" name="site[images_attributes][${ seq }][name]" placeholder="name" type="text"><input id="site_images_attributes_${ seq }_asset" name="site[images_attributes][${ seq }][asset]" type="file">
 

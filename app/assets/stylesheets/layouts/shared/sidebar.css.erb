@@ -2,7 +2,7 @@
   width: 200px;
   height: 100%;
   float: left;
-  background: #b94f42 url(<%= asset_path 'pattern_a.png' %>);
+  background: #b94f42 url(<%= asset_path "pattern_a.png" %>);
   border-right: 1px solid #590000;
   -webkit-box-shadow: 0 0 10px #000000;
   -moz-box-shadow: 0 0 10px #000000;
@@ -29,7 +29,6 @@
   text-align: center;
 }
 #sidebar #head #logo {
-/*  background: url('/images/brands/friskyhands/logo.png');*/
   width: 200px;
   height: 75px;
 }
@@ -91,13 +90,9 @@
 #sidebar .block.navspace ul li {
   width: 180px;
   float: left;
-  /* background: url(/images/user_buttons_transparent.png) no-repeat; */
-
   cursor: pointer;
   position: relative;
   line-height: 28px;
-  /* text */
-
   text-shadow: 0 1px 1px #000;
   font-size: 13px;
 }
@@ -109,7 +104,7 @@
   width: 25px;
   height: 25px;
   /*-webkit-transition: all 0.1s;*/
-  background: url(/images/user_buttons_transparent.png);
+  background: url(<%= asset_path "user_buttons_transparent.png" %>);
 }
 #sidebar .block.navspace ul li:hover span {
   left: 22px;
@@ -129,7 +124,7 @@
   display: block;
   width: 25px;
   height: 25px;
-  background: url(/images/user_buttons_transparent.png);
+  background: url(<%= asset_path "user_buttons_transparent.png" %>);
   background-position: -25px 0;
 }
 #sidebar .block.navspace ul li ul li.signals:before {

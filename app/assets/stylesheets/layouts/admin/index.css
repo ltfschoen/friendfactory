@@ -1,0 +1,10 @@
+/*
+ *= require layouts/reset
+ *= require application
+ *= require posting/portrait
+ *= require posting/portrait-override
+ *= require layouts/shared/compatibility
+ *= require layouts/shared/sidebar
+ *= require layouts/shared/sidebar-override
+ *= require layouts/admin/base
+*/
