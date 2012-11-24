@@ -1,7 +1,7 @@
 namespace :ff do
   namespace :heroku do
     namespace :postgres do
-      task :sequences => [ :environment ] do
+      task :sequences => [ :environment, :postgres_klass ] do
         postgres_klass = postgres_klass "users" # Any model will do
         table_names.each do |table_name|
           puts "#{table_name} "

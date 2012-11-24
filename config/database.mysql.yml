@@ -31,3 +31,9 @@ test:
   password: ffu123
   # socket: /var/run/mysqld/mysqld.sock
   socket: /tmp/mysql.sock
+
+production:
+  database: friskyfactory_production
+  host: localhost
+  username: ffu
+  password: ffu123

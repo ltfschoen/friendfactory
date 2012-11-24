@@ -8,11 +8,11 @@ namespace :ff do
             establish_connection \
               adapter: "postgresql",
               encoding: "unicode",
-              host: ENV["HEROKU_POSTGRES_HOST"],
-              database: ENV["HEROKU_POSTGRES_DATABASE"],
+              host: "localhost",
+              database: "friendfactory_development",
               pool: 5,
-              username: ENV["HEROKU_POSTGRES_USERNAME"],
-              password: ENV["HEROKU_POSTGRES_PASSWORD"]
+              username: "friendfactory",
+              password: "ffu123"
           end
         end
       end

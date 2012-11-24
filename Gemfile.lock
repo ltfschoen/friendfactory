@@ -50,6 +50,12 @@ GEM
       uuidtools (~> 2.1)
     bluecloth (2.0.11)
     builder (3.0.4)
+    capistrano (2.13.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     chronic (0.6.7)
     cocaine (0.4.2)
     coffee-rails (3.1.1)
@@ -95,6 +101,7 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (~> 3.1)
       railties (>= 3.1, < 4.1)
+    highline (1.6.15)
     hike (1.2.1)
     httparty (0.9.0)
       multi_json (~> 1.0)
@@ -117,6 +124,13 @@ GEM
     multi_json (1.2.0)
     multi_xml (0.5.1)
     mysql2 (0.3.11)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.6.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
     oauth (0.4.7)
     paperclip (3.3.1)
@@ -220,6 +234,7 @@ DEPENDENCIES
   authlogic (~> 3.1.0)
   aws-sdk
   bluecloth (~> 2.0.10)
+  capistrano
   coffee-rails (~> 3.1.1)
   daemons
   debugger

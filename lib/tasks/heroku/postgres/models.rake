@@ -1,7 +1,7 @@
 namespace :ff do
   namespace :heroku do
     namespace :postgres do
-      task :models => [ :environment ] do
+      task :models => [ :environment, :postgres_klass ] do
         models.each do |model|
           if model.is_a? String
             migrate_classless_table model
@@ -45,19 +45,6 @@ namespace :ff do
         ]
       end
 
-      def postgres_klass table_name
-        Class.new ActiveRecord::Base do
-          set_table_name table_name
-          establish_connection \
-            adapter: "postgresql",
-            encoding: "unicode",
-            database: "friendfactory_development",
-            pool: 5,
-            username: "friendfactory",
-            password: "ffu123"
-        end
-      end
-
       def migrate_model model
         postgres_klass = postgres_klass model.table_name
         postgres_klass.record_timestamps = false
@@ -98,7 +85,8 @@ namespace :ff do
           rows.each do |row|
             idx += 1
             print "#{idx} " if idx % 1000 == 0
-            postgres_klass.create! Hash[*rows.fields.zip(row).flatten]
+            row = row.map { |field| field.blank? ? 'null' : %Q{'#{field.to_s.gsub(/'/, "''")}'} }
+            postgres_klass.connection.insert_sql %Q{INSERT INTO #{table_name} (#{rows.fields.join(",")}) VALUES (#{row.join(",")})}
           end
         end
         puts

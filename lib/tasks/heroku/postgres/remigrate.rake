@@ -1,7 +1,7 @@
 namespace :ff do
   namespace :heroku do
     namespace :postgres do
-      task :remigrate => [ :environment ] do
+      task :remigrate => [ :environment, :postgres_klass ] do
         remigrations.each do |sql|
           begin
             print sql
