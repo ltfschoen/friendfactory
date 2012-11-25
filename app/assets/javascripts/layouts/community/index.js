@@ -9,7 +9,7 @@
 //= require jquery.fileupload
 //= require jquery.fileupload-ui
 //= require jquery.placeholder.min
-//= require jquery.chat
+//= require jquery.chat.js
 //= require jquery.headshot
 //= require jquery.effects
 //= require jquery.overlay

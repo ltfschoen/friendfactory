@@ -9,19 +9,19 @@
   %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag "layouts/rollcall", media: "all", concat: (Rails.env.development? && isIE?)
+  = stylesheet_link_tag "layouts/rollcall/index.css", media: "all", concat: (Rails.env.development? && isIE?)
   = stylesheet_link_tag "#{current_site.name}/community", media: "all"
 
   - if [ "development", "test" ].include? Rails.env
-    = javascript_include_tag "jquery-1.6.4"
-    = javascript_include_tag "pusher"
+    = javascript_include_tag "jquery-1_6_4.js"
+    = javascript_include_tag "pusher.js"
   - else
     = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min.js"
     = javascript_include_tag "http://js.pusherapp.com/1.8/pusher.min.js"
-  = javascript_include_tag "layouts/rollcall"
+  = javascript_include_tag "layouts/rollcall/index.js"
   / [if lt IE 9]
-    = javascript_include_tag "ie8", media: "all"
-  = javascript_include_tag "development" if Rails.env.development?
+    = javascript_include_tag "ie8.js", media: "all"
+  = javascript_include_tag "development.js" if Rails.env.development?
 
   = csrf_meta_tag
 %body{ uid, gid, :class => page_class }

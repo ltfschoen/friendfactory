@@ -41,3 +41,13 @@ test:
   pool: 5
   username: friendfactory
   password: ffu123
+
+# Only used for assets:precompile
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: friendfactory_development
+  pool: 5
+  username: friendfactory
+  password: ffu123
+

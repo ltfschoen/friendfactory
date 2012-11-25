@@ -2,7 +2,7 @@
 //= require jquery-ui-1.8.16.custom.min
 //= require jquery.flip
 //= require jquery.scrollTo-1.4.2-min
-//= require jquery.chat
+//= require jquery.chat.js
 //= require jquery.headshot
 //= require jquery.effects
 //= require jquery_ujs

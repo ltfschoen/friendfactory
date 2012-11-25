@@ -8,19 +8,19 @@
   %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag "layouts/personage", media: "screen"
+  = stylesheet_link_tag "layouts/personage/index.css", media: "screen"
   = stylesheet_link_tag "#{current_site.name}/profile", media:"screen"
 
   - if [ "development", "test" ].include? Rails.env
-    = javascript_include_tag "jquery-1.6.4"
-    = javascript_include_tag "jquery.tools-1.2.6.tiny.min"
+    = javascript_include_tag "jquery-1_6_4.js"
+    = javascript_include_tag "jquery.tools-1.2.6.tiny.min.js"
   - else
-    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min"
-    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min"
-  = javascript_include_tag "layouts/personage"
+    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min.js"
+    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"
+  = javascript_include_tag "layouts/personage/index.js"
   / [if lt IE 9]
-    = javascript_include_tag "ie8", media: "screen"
-  = javascript_include_tag "development" if Rails.env.development?
+    = javascript_include_tag "ie8.js", media: "screen"
+  = javascript_include_tag "development.js" if Rails.env.development?
 
   = csrf_meta_tag
 

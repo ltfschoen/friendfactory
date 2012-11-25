@@ -8,17 +8,17 @@
   %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{current_site.display_name} - Welcome!
 
-  = stylesheet_link_tag "layouts/welcome", media: "all"
+  = stylesheet_link_tag "layouts/welcome/index.css", media: "all"
   = stylesheet_link_tag "#{current_site.name}/welcome", media: "all"
 
   - if [ "development", "test" ].include? Rails.env
-    = javascript_include_tag "jquery-1.7.2"
-    = javascript_include_tag "jquery.tools-1.2.6.tiny.min"
+    = javascript_include_tag "jquery-1_7_2.js"
+    = javascript_include_tag "jquery.tools-1_2_6.tiny.min.js"
   - else
-    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"
-    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min"
-  = javascript_include_tag "layouts/welcome"
-  = javascript_include_tag "development" if Rails.env.development?
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"
+  = javascript_include_tag "layouts/welcome/index.js"
+  = javascript_include_tag "development.js" if Rails.env.development?
 
 %body{ :class => page_class }
   = yield

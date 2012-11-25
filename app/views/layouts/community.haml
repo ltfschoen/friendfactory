@@ -9,24 +9,24 @@
   %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag "layouts/community", media: "all", concat: (Rails.env.development? && isIE?)
+  = stylesheet_link_tag "layouts/community/index.css", media: "all", concat: (Rails.env.development? && isIE?)
   = stylesheet_link_tag "#{current_site.name}/community", media: "all"
   :css
     body.#{current_user.uid} .#{current_user.uid}:hover a.admin { visibility: visible; opacity: 1; }
     .ie8 body.#{current_user.uid} .#{current_user.uid}:hover a.admin { visibility: visible; }
 
   - if [ "development", "test" ].include? Rails.env
-    = javascript_include_tag "jquery-1.7.2"
-    = javascript_include_tag "jquery.tools-1.2.6.tiny.min"
-    = javascript_include_tag "pusher"
+    = javascript_include_tag "jquery-1_7_2.js"
+    = javascript_include_tag "jquery.tools-1.2.6.tiny.min.js"
+    = javascript_include_tag "pusher.js"
   - else
-    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"
-    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min"
-    = javascript_include_tag "http://js.pusherapp.com/1.8/pusher.min"
-  = javascript_include_tag "layouts/community"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+    = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"
+    = javascript_include_tag "http://js.pusherapp.com/1.8/pusher.min.js"
+  = javascript_include_tag "layouts/community/index.js"
   / [if lt IE 9]
-    = javascript_include_tag "ie8"
-  = javascript_include_tag "development" if Rails.env.development?
+    = javascript_include_tag "ie8.js"
+  = javascript_include_tag "development.js" if Rails.env.development?
 
   = csrf_meta_tag
 

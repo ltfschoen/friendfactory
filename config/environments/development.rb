@@ -4,6 +4,9 @@ Friskyfactory::Application.configure do
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
+
+  # CACHING
+
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
@@ -22,13 +25,41 @@ Friskyfactory::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
+  # ASSETS
+
+  # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.friskyfactory.localhost:3000"
 
   # Do not compress assets
-  config.assets.compress = false
+  config.assets.compress = true
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
+
+  # Don't fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = false
+
+  # Generate digests for assets URLs
+  config.assets.digest = false
+
+  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+  config.assets.precompile += [ "jquery-1_6_4.js", "jquery-1_7_2.js", "jquery.tools-1_2_6.tiny.min" ]
+  config.assets.precompile += [ "layouts/admin/index.css", "layouts/admin/index.js" ]
+  config.assets.precompile += [ "layouts/community/index.css", "layouts/community/index.js" ]
+  config.assets.precompile += [ "layouts/inbox/index.css", "layouts/inbox/index.js" ]
+  config.assets.precompile += [ "layouts/personage/index.css", "layouts/personage/index.js" ]
+  config.assets.precompile += [ "layouts/rollcall/index.css", "layouts/rollcall/index.js" ]
+  config.assets.precompile += [ "layouts/welcome/index.css", "layouts/welcome/index.js" ]
+
+
+  # Raise exception on mass assignment protection for Active Record models
+  # config.active_record.mass_assignment_sanitizer = :strict
+
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL)
+  config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  # MAILER
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true

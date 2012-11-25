@@ -8,27 +8,25 @@
   %meta{ "http-equiv" => "X-UA-Compatible", :content => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag "layouts/inbox", media: "all"
+  = stylesheet_link_tag "layouts/inbox/index.css", media: "all"
   = stylesheet_link_tag "#{current_site.name}/conversation", media: "all"
 
   - if [ "development", "test" ].include? Rails.env
-    = javascript_include_tag "jquery-1.6.4"
-    = javascript_include_tag "jquery.tools-1.2.6.tiny.min"
-    = javascript_include_tag "pusher"
+    = javascript_include_tag "jquery-1_6_4.js"
+    = javascript_include_tag "jquery.tools-1_2_6.tiny.min.js"
+    = javascript_include_tag "pusher.js"
   - else
     = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min.js"
     = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"
     = javascript_include_tag "http://js.pusherapp.com/1.8/pusher.min.js"
-  = javascript_include_tag "layouts/inbox"
-  = javascript_include_tag "development" if Rails.env.development?
+  = javascript_include_tag "layouts/inbox/index.js"
+  = javascript_include_tag "development.js" if Rails.env.development?
 
   = csrf_meta_tag
 
 %body{ uid, gid }
   = render :partial => 'layouts/shared/sidebar'
   = yield
-  - if Rails.env.development?
-    #footnotes_holder{ :style => 'display:block' }
   = render :partial => 'layouts/shared/analytics'
 :plain
   </html>

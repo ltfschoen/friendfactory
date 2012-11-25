@@ -9,17 +9,17 @@
   %meta{ "http-equiv" => "X-UA-Compatible", "content" => "chrome=1" }
   %title #{page_title}
 
-  = stylesheet_link_tag "layouts/admin", media: "all"
+  = stylesheet_link_tag "layouts/admin/index.css", media: "all"
   = stylesheet_link_tag "#{current_site.name}/admin", media: "screen"
 
   - if Rails.env.development?
-    = javascript_include_tag "jquery-1.6.4"
+    = javascript_include_tag "jquery-1_6_4.js"
   - else
-    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min"
-  = javascript_include_tag "layouts/admin"
+    = javascript_include_tag "http://code.jquery.com/jquery-1.6.4.min.js"
+  = javascript_include_tag "layouts/admin/index.js"
   / [if lt IE 9]
-    = javascript_include_tag "ie8", media: "all"
-  = javascript_include_tag "development" if Rails.env.development?
+    = javascript_include_tag "ie8.js", media: "all"
+  = javascript_include_tag "development.js" if Rails.env.development?
 
   = csrf_meta_tag
 
