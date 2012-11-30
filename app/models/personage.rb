@@ -173,9 +173,7 @@ class Personage < ActiveRecord::Base
 
   ### Profile
 
-  belongs_to :profile,
-      :class_name => 'Wave::Base',
-      :autosave   => true
+  belongs_to :profile, :class_name => 'Wave::Base', :autosave => true
 
   alias_method :profile_without_initialized_user=, :profile=
 
@@ -201,8 +199,8 @@ class Personage < ActiveRecord::Base
   public
 
   has_many :friendships,
-      :foreign_key => 'user_id',
-      :class_name  => 'Friendship::Base'
+      :foreign_key => "user_id",
+      :class_name  => "Friendship::Base"
 
   has_many :friends, :through => :friendships do
     def type(*types)
@@ -211,8 +209,8 @@ class Personage < ActiveRecord::Base
   end
 
   has_many :inverse_friendships,
-      :foreign_key => '"friend_id"',
-      :class_name  => 'Friendship::Base'
+      :foreign_key => "friend_id",
+      :class_name  => "Friendship::Base"
 
   has_many :inverse_friends,
       :through => :inverse_friendships,
