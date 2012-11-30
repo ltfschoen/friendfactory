@@ -5,7 +5,7 @@
 // the compiled file.
 //
 //= require modernizr
-//= require jquery-ui-1.8.16.custom.min
+//= require jquery-ui/1.8.16/jquery-ui.custom.min
 //= require jquery.flip
 //= require jquery.placeholder.min
 //= require jquery.headshot
