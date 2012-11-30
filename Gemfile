@@ -31,9 +31,6 @@ gem 'jquery-rails'
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# To use debugger
-# gem 'debugger'
-
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
