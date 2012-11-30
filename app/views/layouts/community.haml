@@ -16,9 +16,9 @@
     .ie8 body.#{current_user.uid} .#{current_user.uid}:hover a.admin { visibility: visible; }
 
   - if [ "development", "test" ].include? Rails.env
-    = javascript_include_tag "jquery-1_7_2.js"
-    = javascript_include_tag "jquery.tools-1.2.6.tiny.min.js"
-    = javascript_include_tag "pusher.js"
+    = javascript_include_tag "jquery/1.7.2/jquery.js"
+    = javascript_include_tag "jquery.tools/1.2.6/tiny/jquery.tools.min.js"
+    = javascript_include_tag "pusher/1.8.3/pusher.js"
   - else
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
     = javascript_include_tag "http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"
