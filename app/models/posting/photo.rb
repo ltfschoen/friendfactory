@@ -75,7 +75,7 @@ class Posting::Photo < Posting::Base
   def best_orientation_small_style
     "#{best_orientation_style.to_s}s".to_sym
   end
-  
+
   def set_dimensions
     tempfile = self.image.queued_for_write[:original]
     unless tempfile.nil?
@@ -89,7 +89,7 @@ class Posting::Photo < Posting::Base
 
   def randomize_file_name
     extension = File.extname(image_file_name).downcase
-    self.image.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
+    self.image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
   end
 
 end
