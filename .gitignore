@@ -3,6 +3,7 @@
 .DS_Store
 .bundle
 .env.*
+!.env.development
 .footnotes
 bin/*
 config/*.sphinx.conf
