@@ -5,7 +5,7 @@ gem "rails", "3.2.9"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "thin"
+gem 'unicorn'
 gem "pg"
 
 # Gems used only for assets and not required
@@ -28,8 +28,6 @@ gem 'jquery-rails'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Bundle the extra gems:
 # gem 'bj'
