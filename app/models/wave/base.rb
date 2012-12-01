@@ -34,11 +34,18 @@ class Wave::Base < ::Posting::Base
         posting
       end
     end
-
     def natural_order
       order('"postings"."sticky_until" DESC, "postings"."primed_at" DESC')
     end
+    def authors_order
+      select(%{distinct "postings"."user_id", max("postings"."created_at") as created_at}).
+      group(%{"postings"."user_id"}).
+      merge(Posting::Base.published).
+      order("created_at DESC")
+    end
   end
+
+  has_many :personages, through: :postings, source: :user, uniq: true
 
   def publish_posting_to_waves(posting)
     [] # Override in descendant classes
@@ -63,13 +70,7 @@ class Wave::Base < ::Posting::Base
   has_many :bookmarks, :foreign_key => 'wave_id'
 
   def rollcall
-    @rollcall ||= begin
-      Personage.enabled.group('"personages"."id"').
-          joins(:postings => :publishables).
-          merge(Posting::Base.published).
-          where(:publications => { :wave_id => self[:id] }).
-          scoped
-    end
+    @rollcall ||= personages.scoped
   end
 
   def writable?(user_id)

@@ -15,7 +15,8 @@ class Wave::CommunitiesController < ApplicationController
   # Rollcall helpers
   helper_method \
       :tags,
-      :paged_rollcall
+      :paged_rollcall,
+      :paged_authors_order
 
   helper_method :page_title
 
@@ -67,11 +68,18 @@ class Wave::CommunitiesController < ApplicationController
     end
   end
 
+  def paged_authors_order
+    @paged_postings ||= begin
+      wave.postings.authors_order.paginate(:page => params[:page], :per_page => @@per_page)
+    end
+  end
+
   def paged_rollcall
     @paged_rollcall ||= begin
-      rollcall = wave.rollcall.order('"postings"."created_at" DESC').includes(:persona => :avatar).scoped
-      rollcall = rollcall.joins(:persona).merge(Persona::Base.tagged_with(parameterize_tag(params[:tag]), :on => :tags)).scoped if params[:tag]
-      rollcall.paginate(:page => params[:page], :per_page => @@per_page)
+      personages = wave.personages.where(%{"personages"."id" in (?)}, paged_authors_order.map(&:user_id))
+      paged_authors_order.inject([]) do |rollcall, posting|
+        rollcall << personages.detect { |personage| personage.id == posting.user_id }
+      end
     end
   end
 
