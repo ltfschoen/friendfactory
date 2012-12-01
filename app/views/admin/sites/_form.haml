@@ -177,7 +177,7 @@
             .tr.asset.image
               - if asset_form.object.new_record?
                 .td.silhouette
-                  = image_tag 'friskyfactory/silhouette-q.gif', :size => '32x32', :site => false
+                  = image_tag "silhouette-q.gif", :size => '32x32', :site => false
                 .td
                   = asset_form.text_field :name, :placeholder => 'name'
                   = asset_form.file_field :asset

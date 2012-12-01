@@ -3,18 +3,18 @@ class Wave::Profile < Wave::Base
   RepublishWindow = 6.hours
 
   delegate \
-      :handle,
-      :first_name,
-      :last_name,
-      :age,
-      :dob,
-      :location,
-    :to => :user
+    :handle,
+    :first_name,
+    :last_name,
+    :age,
+    :dob,
+    :location, :to => :user
 
   has_many :photos,
-      :through     => :publications,
-      :conditions  => { :postings => { :state => :published, :type => 'Posting::Photo' }},
-      :order       => '"postings"."created_at" DESC'
+    through: :publications,
+    source: :posting,
+    conditions: { postings: { state: "published", type: "Posting::Photo" }},
+    order: %{"postings"."created_at" DESC}
 
   def writable?(user_id)
     owner?(user_id)

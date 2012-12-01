@@ -1,7 +1,7 @@
 //= require modernizr
 //= require jquery_ujs
-//= require jquery.tools-1.2.6.expose.min
-//= require jquery-ui-1.8.16.custom.min
+//= require jquery.tools/1.2.6/expose/jquery.tools.min
+//= require jquery-ui/1.8.16/jquery-ui.custom.min
 //= require jquery.mustache
 //= require jquery.flip
 //= require jquery.scrollTo-1.4.2-min

@@ -4,7 +4,7 @@ class Wave::Base < ::Posting::Base
   alias_attribute :description, :body
 
   scope :site, lambda { |site|
-      joins(:sites).where(:sites => { :id => site[:id] })
+      joins(:sites).where(:sites => { :id => site[:id] }).readonly(false)
   }
 
   has_and_belongs_to_many :sites,
@@ -21,6 +21,7 @@ class Wave::Base < ::Posting::Base
       :through    => :publications,
       :conditions => { :parent_id => nil } do
     def <<(posting)
+      proxy_owner = proxy_association.owner
       proxy_owner.class.transaction do
         parent = proxy_owner.publications.create!(:posting => posting)
         secondary_waves = *proxy_owner.publish_posting_to_waves(posting)
@@ -33,11 +34,18 @@ class Wave::Base < ::Posting::Base
         posting
       end
     end
-
     def natural_order
       order('"postings"."sticky_until" DESC, "postings"."primed_at" DESC')
     end
+    def authors_order
+      select(%{distinct "postings"."user_id", max("postings"."created_at") as created_at}).
+      group(%{"postings"."user_id"}).
+      merge(Posting::Base.published).
+      order("created_at DESC")
+    end
   end
+
+  has_many :personages, through: :postings, source: :user, uniq: true
 
   def publish_posting_to_waves(posting)
     [] # Override in descendant classes
@@ -62,13 +70,7 @@ class Wave::Base < ::Posting::Base
   has_many :bookmarks, :foreign_key => 'wave_id'
 
   def rollcall
-    @rollcall ||= begin
-      Personage.enabled.group('"personages"."id"').
-          joins(:postings => :publishables).
-          merge(Posting::Base.published).
-          where(:publications => { :wave_id => self[:id] }).
-          scoped
-    end
+    @rollcall ||= personages.scoped
   end
 
   def writable?(user_id)

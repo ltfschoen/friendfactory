@@ -21,7 +21,7 @@ class Resource::Link < ActiveRecord::Base
     api = Embedly::API.new(:key => EmbedlyKey)
     if response = api.preview(:url => url, :maxwidth => 310).first
       response = response.marshal_dump
-      assign_attributes response
+      assign_attributes_from_pusher response
       build_embeds response
       download_images response
       true
@@ -36,7 +36,7 @@ class Resource::Link < ActiveRecord::Base
 
   private
 
-  def assign_attributes(response)
+  def assign_attributes_from_pusher response
     response.except(:object, :images, :embeds, :place, :event).each do |key, value|
       send("#{key}=", value) rescue nil
     end

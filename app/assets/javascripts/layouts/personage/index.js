@@ -1,6 +1,6 @@
 //= require modernizr
-//= require jquery.tools-1.2.6.expose.min
-//= require jquery-ui-1.8.16.custom.min
+//= require jquery.tools/1.2.6/expose/jquery.tools.min
+//= require jquery-ui/1.8.16/jquery-ui.custom.min
 //= require jquery.tmpl.min
 //= require jquery.fileupload
 //= require jquery.fileupload-ui

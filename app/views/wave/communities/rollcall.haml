@@ -3,4 +3,4 @@
 #rollcall
   - paged_rollcall.each do |user|
     = render_headshot(user)
-  = will_paginate paged_rollcall, :class => 'pagination footer', :inner_window => 1, :outer_window => 1
+  = will_paginate paged_authors_order, :class => 'pagination footer', :inner_window => 1, :outer_window => 1

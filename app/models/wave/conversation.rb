@@ -5,10 +5,7 @@ class Wave::Conversation < Wave::Base
       where('("postings"."updated_at" > "bookmarks"."read_at") OR ("bookmarks"."read_at" IS NULL)')
 
   scope :chatty, where('"postings"."postings_count" > 0')
-
-  scope :recipient, lambda { |user|
-    where(:resource_id => user[:id])
-  }
+  scope :recipient, lambda { |user| where resource_id: user.id }
 
   belongs_to :recipient,
       :class_name  => 'Personage',
@@ -25,9 +22,8 @@ class Wave::Conversation < Wave::Base
   end
 
   def publish_posting_to_waves(posting)
-    if (user_id != recipient_id) && wave = recipient.find_or_create_conversation_with(user, recipient.site)
-      wave.touch_and_publish!
-      wave
+    if (user_id != recipient_id)
+      recipient.find_or_create_conversation_with(user, recipient.site).touch_and_publish!
     end
   end
 
@@ -53,6 +49,7 @@ class Wave::Conversation < Wave::Base
 
   def touch_and_publish!
     published? ? touch : publish!
+    self
   end
 
   private

@@ -173,9 +173,7 @@ class Personage < ActiveRecord::Base
 
   ### Profile
 
-  belongs_to :profile,
-      :class_name => 'Wave::Base',
-      :autosave   => true
+  belongs_to :profile, :class_name => 'Wave::Base', :autosave => true
 
   alias_method :profile_without_initialized_user=, :profile=
 
@@ -201,8 +199,8 @@ class Personage < ActiveRecord::Base
   public
 
   has_many :friendships,
-      :foreign_key => 'user_id',
-      :class_name  => 'Friendship::Base'
+      :foreign_key => "user_id",
+      :class_name  => "Friendship::Base"
 
   has_many :friends, :through => :friendships do
     def type(*types)
@@ -211,8 +209,8 @@ class Personage < ActiveRecord::Base
   end
 
   has_many :inverse_friendships,
-      :foreign_key => '"friend_id"',
-      :class_name  => 'Friendship::Base'
+      :foreign_key => "friend_id",
+      :class_name  => "Friendship::Base"
 
   has_many :inverse_friends,
       :through => :inverse_friendships,
@@ -256,16 +254,14 @@ class Personage < ActiveRecord::Base
 
   ### Conversations
 
-  has_many :conversations, :class_name => 'Wave::Conversation', :foreign_key => 'user_id' do
-    def with(receiver, site)
-      if receiver && site
-        site(site).find_by_resource_id(receiver[:id])
-      end
-    end
-  end
+  has_many :conversations, class_name: "Wave::Conversation", foreign_key: "user_id"
 
-  def conversation_with(receiver, site)
-    conversations.with(receiver, site)
+  def find_or_create_conversation_with receiver, site = nil
+    if receiver != self
+      conversation = conversations.recipient(receiver).first
+      conversation = create_conversation_with receiver, site unless conversation
+      conversation
+    end
   end
 
   def create_conversation_with(receiver, site)
@@ -276,10 +272,6 @@ class Personage < ActiveRecord::Base
       wave.publish!
       wave
     end
-  end
-
-  def find_or_create_conversation_with(receiver, site)
-    conversation_with(receiver, site) || create_conversation_with(receiver, site)
   end
 
   private :create_conversation_with

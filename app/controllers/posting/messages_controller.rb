@@ -54,9 +54,10 @@ class Posting::MessagesController < ApplicationController
   end
 
   def notify_via_pusher
-    wave = new_message.receiver_wave
-    channel_id = dom_id(wave)
-    Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, new_message), :dom_id => "##{channel_id}" })
+    if wave = new_message.receiver_wave
+      channel_id = dom_id(wave)
+      Pusher[channel_id].trigger('message', { :url => wave_posting_message_path(wave, new_message), :dom_id => "##{channel_id}" })
+    end
   end
 
   def notify_via_mailer
