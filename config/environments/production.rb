@@ -11,7 +11,6 @@ Friskyfactory::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-
   # CACHING
 
   # Code is not reloaded between requests
@@ -24,11 +23,10 @@ Friskyfactory::Application.configure do
   # Use a different cache store in production
   config.cache_store = :mem_cache_store, 'localhost:11211'
 
-
   # ASSETS
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
-  config.action_controller.asset_host = "http://assets%d.friskyfactory.com"
+  # config.action_controller.asset_host = "http://assets%d.friskyfactory.com"
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
