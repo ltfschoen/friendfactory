@@ -42,7 +42,8 @@ class Posting::Link < Posting::Base
   end
 
   def embedify
-    if build_resource(:url => url).embedify
+    resource = build_resource url: url
+    if resource.embedify
       build_photos
       self
     else
