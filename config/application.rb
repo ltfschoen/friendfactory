@@ -22,6 +22,9 @@ module Friskyfactory
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Log to standout for Unicorn
+    config.logger = Logger.new STDOUT
+
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W( #{Rails.root.to_s}/app/presenters #{Rails.root.to_s}/app/sites)
