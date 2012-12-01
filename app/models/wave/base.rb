@@ -4,7 +4,7 @@ class Wave::Base < ::Posting::Base
   alias_attribute :description, :body
 
   scope :site, lambda { |site|
-      joins(:sites).where(:sites => { :id => site[:id] })
+      joins(:sites).where(:sites => { :id => site[:id] }).readonly(false)
   }
 
   has_and_belongs_to_many :sites,
@@ -21,6 +21,7 @@ class Wave::Base < ::Posting::Base
       :through    => :publications,
       :conditions => { :parent_id => nil } do
     def <<(posting)
+      proxy_owner = proxy_association.owner
       proxy_owner.class.transaction do
         parent = proxy_owner.publications.create!(:posting => posting)
         secondary_waves = *proxy_owner.publish_posting_to_waves(posting)
