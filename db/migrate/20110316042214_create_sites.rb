@@ -12,7 +12,7 @@ class CreateSites < ActiveRecord::Migration
 
       t.string    :analytics_domain_name
       t.string    :analytics_account_number
-      t.timestamps
+      t.timestamps :null => true
     end
 
     add_index :sites, :name

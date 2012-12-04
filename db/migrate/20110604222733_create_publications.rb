@@ -4,7 +4,7 @@ class CreatePublications < ActiveRecord::Migration
       t.integer   :wave_id, :null => false
       t.integer   :resource_id, :null => false
       t.string    :resource_type, :null => false
-      t.timestamps
+      t.timestamps :null => true
     end
     add_index :publications, [ :wave_id, :resource_id, :resource_type ]
     add_index :publications, [ :resource_id, :resource_type ]

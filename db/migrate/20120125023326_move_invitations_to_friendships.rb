@@ -8,7 +8,7 @@ class MoveInvitationsToFriendships < ActiveRecord::Migration
       t.string    :email
       t.string    :code
       t.string    :state
-      t.timestamps
+      t.timestamps :null => true
       t.datetime  :expired_at
     end
 

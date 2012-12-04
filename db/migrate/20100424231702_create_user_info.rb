@@ -10,7 +10,7 @@ class CreateUserInfo < ActiveRecord::Migration
       t.string    :location
       t.integer   :deafness
       t.text      :about_me
-      t.timestamps
+      t.timestamps :null => true
     end
   end
 

@@ -7,7 +7,7 @@ class CreatePersonages < ActiveRecord::Migration
       t.string  :state
       # t.boolean :default, :default => false
       t.integer :default
-      t.timestamps
+      t.timestamps :null => true
     end
 
     Personage.class_eval {
