@@ -6,21 +6,24 @@ gem "rails", "3.2.9"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'unicorn'
+
 gem "pg"
+gem "redis"
+gem "hiredis"
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem "sass-rails", "~> 3.2.3"
+  gem "coffee-rails", "~> 3.2.1"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
+  gem "uglifier", ">= 1.0.3"
 end
 
-gem 'jquery-rails'
+gem "jquery-rails"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -28,13 +31,9 @@ gem 'jquery-rails'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
-
-# Deploy with Capistrano
-gem 'capistrano'
 
 # Amazon S3
 gem "paperclip", "~> 3.3.0"
@@ -47,6 +46,7 @@ gem 'remotipart'
 gem 'haml', '>= 3.1.2'
 gem 'haml-rails'
 gem 'sass', '>= 3.1.1'
+
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem "acts_as_tree"
 gem "dynamic_form"
@@ -75,7 +75,6 @@ gem 'bluecloth', '~> 2.0.10'
 group :development do
   gem "foreman"
   gem "letter_opener"
-  gem "mysql2", "~> 0.3.0"
 end
 
 group :development, :test do
