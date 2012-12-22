@@ -8,7 +8,7 @@ class Posting::PostItsController < ApplicationController
 
   def create
     wave = Wave::Base.find(params[:wave_id])
-    add_posting_to_wave(new_post_it_posting, wave)
+    add_posting_to_wave((new_post_it_posting wave), wave)
     respond_to do |format|
       format.js { render :layout => false }
     end
@@ -16,10 +16,11 @@ class Posting::PostItsController < ApplicationController
 
   private
 
-  def new_post_it_posting
+  def new_post_it_posting feed
     @posting ||= begin
       Posting::PostIt.new(params[:posting_post_it]) do |post_it|
         post_it.user = current_user
+        post_it.feed = feed
       end
     end
   end
