@@ -77,8 +77,8 @@ end
 
 group :development, :test do
   gem "debugger"
-  gem "factory_girl", :git => "git://github.com/thoughtbot/factory_girl.git"
   gem "rspec-rails"
+  gem "factory_girl_rails", "~> 4.0"
   gem "webrat", ">= 0.7.2"
 end
 
