@@ -53,7 +53,7 @@ module Friskyfactory
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [ :password ]
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -63,8 +63,8 @@ module Friskyfactory
 
     config.generators do |g|
       g.template_engine :haml
-      g.test_framework :rspec, :fixture => true, :views => true
-      # g.fixture_replacement :factory_girl, :dir => "spec/support/factories"
+      g.test_framework :rspec, fixture: true, views: true
+      g.fixture_replacement :factory_girl
     end
   end
 end
