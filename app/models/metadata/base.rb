@@ -3,8 +3,13 @@ module Metadata
     def self.connection
       $redis
     end
+
     def self.ingest
-      # Noop
+      # Noop; override in descendant classes
+    end
+
+    def self.keys
+      []
     end
   end
 end
