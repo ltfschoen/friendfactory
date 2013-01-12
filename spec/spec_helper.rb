@@ -20,8 +20,8 @@ RSpec.configure do |config|
   config.mock_with :rspec
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/test/fixtures"
-  
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -31,15 +31,15 @@ end
 # def current_user(stubs = {})
 #   @current_user ||= mock_model(User, stubs)
 # end
-# 
+#
 # def user_session(stubs = {}, user_stubs = {})
 #   @current_user ||= mock(UserSession, { :record => current_user(user_stubs) }.merge(stubs))
 # end
-# 
+#
 # def login(session_stubs = {}, user_stubs = {})
 #   UserSession.stub!(:find).and_return(user_session(session_stubs, user_stubs))
 # end
-# 
+#
 # def logout
 #   @user_session = nil
 # end
@@ -83,7 +83,7 @@ class Hash
   def with(overrides = {})
     self.merge overrides
   end
-  
+
   def only(*keys)
     self.reject { |key,value| !keys.include?(key.to_sym ) }
   end
