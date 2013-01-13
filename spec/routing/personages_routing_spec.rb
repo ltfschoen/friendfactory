@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ProfilesController do
+describe PersonagesController do
   describe 'routing' do
     it 'recognizes #show' do
       pending
@@ -26,7 +26,7 @@ describe ProfilesController do
       pending
       { :put => '/profile' }.should route_to(:controller => 'waves/profile', :action => 'update')
     end
-    
+
     it 'recognizes #avatar to update an avatar' do
       pending
       { :post => '/profile/avatar' }.should route_to(:controller => 'waves/profile', :action => 'avatar')
@@ -36,5 +36,5 @@ describe ProfilesController do
       pending
       avatar_profile_path.should == '/profile/avatar'
     end
-  end    
+  end
 end
