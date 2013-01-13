@@ -10,7 +10,7 @@ class Posting::PostIt < Posting::Base
 protected
 
   def metadata_klasses
-    [ "Metadata::Author", "Metadata::Feed", "Metadata::State" ]
+    [ "Metadata::Author", "Metadata::Feed", "Metadata::State", "Metadata::Type" ]
   end
 
   def create_metadata

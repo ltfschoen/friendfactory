@@ -6,18 +6,8 @@ class Wave::CommunitiesController < ApplicationController
 
   before_filter :require_user
 
-  # Show helpers
-  helper_method \
-      :wave,
-      :paged_postings,
-      :sidebar_rollcall
-
-  # Rollcall helpers
-  helper_method \
-      :tags,
-      :paged_rollcall,
-      :paged_authors_order
-
+  helper_method :wave, :paged_postings, :sidebar_rollcall # Show helpers
+  helper_method :tags, :paged_rollcall, :paged_authors_order # Rollcall helpers
   helper_method :page_title
 
   layout 'community'
@@ -50,9 +40,18 @@ class Wave::CommunitiesController < ApplicationController
   end
 
   def postings
+    # @postings ||= begin
+    #   wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
+    # end
     @postings ||= begin
-      wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
+      metadata_klasses.each do |metadata_klass, criteria|
+        metadata_klass.select criteria
+      end
     end
+  end
+
+  def metadata_klasses
+    [[ Metadata::Origin, self[:id] ]]
   end
 
   def paged_postings
