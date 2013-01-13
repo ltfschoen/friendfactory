@@ -49,6 +49,7 @@ gem 'haml-rails'
 gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem "acts_as_tree"
+gem "dynamic_form"
 
 gem 'pusher', '~> 0.8.1'
 gem 'will_paginate', '~> 3.0.2'
