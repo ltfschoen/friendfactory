@@ -2,57 +2,47 @@
 
 community_wave_text_posting:
   wave_id: 4
-  resource_id: 1
-  resource_type: Posting::Base
+  posting_id: 1
 
 community_wave_post_it_posting:
   wave_id: 4
-  resource_id: 2
-  resource_type: Posting::Base
+  posting_id: 2
 
 community_wave_signal_posting:
   wave_id: 4
-  resource_id: 7
-  resource_type: Posting::Base
+  posting_id: 7
 
 community_wave_tweet_posting:
   wave_id: 4
-  resource_id: 8
-  resource_type: Posting::Base
+  posting_id: 8
 
 community_wave_link_posting:
   wave_id: 4
-  resource_id: 9
-  resource_type: Posting::Base
+  posting_id: 9
 
 # Invitiation Wave
 
 adam_invitation_wave_invitation_posting_1:
   wave_id: 6
-  resource_id: 3
-  resource_type: Posting::Base
+  posting_id: 3
 
 adam_invitation_wave_invitation_posting_2:
   wave_id: 6
-  resource_id: 4
-  resource_type: Posting::Base
+  posting_id: 4
 
 adam_invitation_wave_invitation_posting_3:
   wave_id: 6
-  resource_id: 5
-  resource_type: Posting::Base
+  posting_id: 5
   
 adam_profile_wave_invitation_posting_1:
   wave_id: 11
-  resource_id: 3
-  resource_type: Posting::Base
+  posting_id: 3
 
 adam_profile_wave_invitation_posting_2:
   wave_id: 11
-  resource_id: 4
-  resource_type: Posting::Base
+  posting_id: 4
 
 adam_profile_wave_invitation_posting_3:
   wave_id: 11
-  resource_id: 5
-  resource_type: Posting::Base
+  posting_id: 5
+  
