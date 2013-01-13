@@ -1,7 +1,7 @@
 .DS_Store
 .bundle
 .env.*
-!.env.development
+!.env.sample
 .footnotes
 .rspec
 *.swp
