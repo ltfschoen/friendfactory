@@ -2,7 +2,7 @@ class Personage < ActiveRecord::Base
 
   include ActiveRecord::Transitions
 
-  set_inheritance_column nil
+  self.inheritance_column = nil
 
   attr_accessible \
       :user_attributes,

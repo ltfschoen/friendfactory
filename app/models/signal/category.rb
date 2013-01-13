@@ -1,5 +1,6 @@
 class Signal::Category < ActiveRecord::Base
-  set_table_name :signal_categories
+
+  self.table_name = "signal_categories"
   validates_presence_of :name
 
   belongs_to :site
