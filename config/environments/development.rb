@@ -5,6 +5,9 @@ Friskyfactory::Application.configure do
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
 
+  # Log to standout for Unicorn
+  config.logger = Logger.new STDOUT
+
   # CACHING
 
   config.cache_classes = false

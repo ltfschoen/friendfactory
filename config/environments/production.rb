@@ -1,5 +1,8 @@
 Friskyfactory::Application.configure do
 
+  # Log to standout for Unicorn
+  config.logger = Logger.new STDOUT
+
   # See everything in the log (default is :info)
   config.log_level = :warn
 
