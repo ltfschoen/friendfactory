@@ -3,6 +3,7 @@
 .env.*
 !.env.development
 .footnotes
+.rspec
 *.swp
 *.esproj
 *.tmproj
