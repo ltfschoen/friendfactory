@@ -2,7 +2,7 @@ require 'empty_avatar'
 
 class Persona::Base < ActiveRecord::Base
 
-  set_table_name 'personas'
+  self.table_name = "personas"
 
   class_attribute :default_profile_type
   self.default_profile_type = 'Wave::Base'

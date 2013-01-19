@@ -11,7 +11,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string  :post_code
       t.decimal :lat, :precision => 10, :scale => 7
       t.decimal :lng, :precision => 10, :scale => 7
-      t.timestamps
+      t.timestamps :null => true
     end
   end
 

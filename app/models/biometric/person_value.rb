@@ -1,6 +1,6 @@
 class Biometric::PersonValue < ActiveRecord::Base
 
-  set_table_name :biometric_people_values
+  self.table_name = "biometric_people_values"
 
   belongs_to :person,
       :class_name => 'Persona::Person'

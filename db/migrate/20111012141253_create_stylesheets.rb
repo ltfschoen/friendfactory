@@ -4,7 +4,7 @@ class CreateStylesheets < ActiveRecord::Migration
       t.integer :site_id, :null => false
       t.string  :controller_name
       t.text    :css
-      t.timestamps
+      t.timestamps :null => true
     end
     # remove_column :sites, :css
     add_index :stylesheets, [ :site_id, :controller_name ]

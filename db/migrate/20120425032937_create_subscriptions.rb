@@ -7,7 +7,7 @@ class CreateSubscriptions < ActiveRecord::Migration
       t.string    :type,          :null => false
       t.string    :state
       t.datetime  :notified_at
-      t.timestamps
+      t.timestamps :null => true
     end
     add_index :subscriptions,
       [ :user_id, :resource_id, :resource_type ],

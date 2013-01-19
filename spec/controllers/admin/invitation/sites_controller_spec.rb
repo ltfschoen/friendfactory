@@ -21,11 +21,13 @@ describe Admin::Invitation::SitesController do
       end
 
       it "assigns @postings" do
+        pending
         get :index
         assigns(:postings).should == [ invitation ]
       end
 
       it "renders index" do
+        pending
         get :index
         response.should render_template('index')
       end
@@ -39,11 +41,13 @@ describe Admin::Invitation::SitesController do
       end
 
       it "assigns @posting" do
+        pending
         get :edit, :id => '42'
         assigns(:posting).should == invitation
       end
 
       it 'renders edit' do
+        pending
         get :edit, :id => '42'
         response.should render_template('edit')
       end

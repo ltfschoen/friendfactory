@@ -44,14 +44,13 @@
     = javascript_include_tag 'http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js'
     = javascript_include_tag 'http://js.pusherapp.com/1.8/pusher.min.js'
 
-  = javascript_includes |
+  = javascript_include_tag |
       'modernizr', |
       'lib/ff.buttonize', |
       'jquery.effects', |
       'jquery_ujs', |
       'application', |
-      'layouts/invitation', |
-    :cache => 'cache/invitation'
+      'layouts/invitation', :cache => 'cache/invitation'
 
   - if Rails.env.development?
     = javascript_include_tag 'development'

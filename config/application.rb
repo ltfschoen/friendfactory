@@ -22,9 +22,6 @@ module Friskyfactory
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Log to standout for Unicorn
-    config.logger = Logger.new STDOUT
-
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W( #{Rails.root.to_s}/app/presenters #{Rails.root.to_s}/app/sites)
@@ -53,7 +50,7 @@ module Friskyfactory
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [ :password ]
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -63,8 +60,8 @@ module Friskyfactory
 
     config.generators do |g|
       g.template_engine :haml
-      g.test_framework :rspec, :fixture => true, :views => true
-      # g.fixture_replacement :factory_girl, :dir => "spec/support/factories"
+      g.test_framework :rspec, fixture: true, views: true
+      g.fixture_replacement :factory_girl
     end
   end
 end

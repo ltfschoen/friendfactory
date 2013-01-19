@@ -5,7 +5,7 @@ class CreateBiometricPeopleValues < ActiveRecord::Migration
       t.integer :domain_id, :null => false
       t.integer :value_id
       t.string  :value
-      t.timestamps
+      t.timestamps :null => true
     end
 
     say_with_time "Migrating user_info attributes to biometric_people_values" do

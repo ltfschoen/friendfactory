@@ -6,7 +6,7 @@ class CreateWaves < ActiveRecord::Migration
       t.integer   :user_id
       t.string    :topic
       t.string    :description
-      t.timestamps
+      t.timestamps :null => true
     end
     add_index :waves, :type
     add_index :waves, :user_id

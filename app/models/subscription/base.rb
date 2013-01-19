@@ -2,7 +2,7 @@ class Subscription::Base < ActiveRecord::Base
 
   include ActiveRecord::Transitions
 
-  set_table_name :subscriptions
+  self.table_name = "subscriptions"
 
   state_machine do
     state :enabled

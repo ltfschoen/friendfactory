@@ -1,6 +1,6 @@
 class Invitation::Confirmation < ActiveRecord::Base
 
-  set_table_name 'invitation_confirmations'
+  self.table_name = "invitation_confirmations"
 
   attr_accessible :invitee
 

@@ -1,5 +1,8 @@
 Friskyfactory::Application.configure do
 
+  # Log to standout for Unicorn
+  config.logger = Logger.new STDOUT
+
   # See everything in the log (default is :info)
   config.log_level = :warn
 
@@ -92,9 +95,10 @@ Friskyfactory::Application.configure do
     storage: :s3,
     s3_credentials: {
       access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+      s3_headers: { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate },
     },
-    s3_permissions: :read_public,
+    s3_permissions: :public_read,
     bucket: ENV["S3_BUCKET_NAME"]
   }
 

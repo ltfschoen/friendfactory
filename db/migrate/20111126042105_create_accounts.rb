@@ -1,5 +1,5 @@
 class CreateAccounts < ActiveRecord::Migration
-  
+
   class XUser < ActiveRecord::Base
     set_table_name :users
     has_many :waves, :class_name => 'Wave::Base', :foreign_key => 'user_id'
@@ -15,7 +15,7 @@ class CreateAccounts < ActiveRecord::Migration
     create_table :accounts, :force => true do |t|
       t.string :state
       t.integer :parent_id
-      t.timestamps
+      t.timestamps :null => true
     end
 
     add_column :users, :site_id, :integer

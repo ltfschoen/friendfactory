@@ -5,6 +5,9 @@ Friskyfactory::Application.configure do
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
 
+  # Log to standout for Unicorn
+  config.logger = Logger.new STDOUT
+
   # CACHING
 
   config.cache_classes = false
@@ -92,7 +95,8 @@ Friskyfactory::Application.configure do
       storage: :s3,
       s3_credentials: {
         access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-        secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+        secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+        s3_headers: { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate },
       },
       s3_permissions: :public_read,
       bucket: ENV["S3_BUCKET_NAME"])
@@ -101,4 +105,7 @@ Friskyfactory::Application.configure do
   config.paperclip_defaults = paperclip_defaults
 
   config.after_initialize { load 'sti.rb' }
+
+  config.active_record.schema_format = :sql
+
 end

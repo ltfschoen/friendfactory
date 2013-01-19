@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :slug
       t.date      :dob
       t.string    :status
-      t.timestamps 
+      t.timestamps :null => true
 
       # Authlogic columns
       t.string    :crypted_password

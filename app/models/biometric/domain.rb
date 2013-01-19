@@ -1,6 +1,6 @@
 class Biometric::Domain < ActiveRecord::Base
 
-  set_table_name :signal_categories
+  self.table_name = "signal_categories"
   validates_presence_of :name
 
   before_validation :initialize_name

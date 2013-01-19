@@ -18,14 +18,14 @@ class Wave::Event < Wave::Base
       :body, :body=
 
   alias_attribute :promoter_name, :topic
-  
-  acts_as_slugable :source_column => :description, :slug_column => :slug
+
+  # acts_as_slugable :source_column => :description, :slug_column => :slug
 
   validates_presence_of :user_id, :promoter_name, :description
-  
+
   def initialize(attrs={})
     if start_date = attrs.delete('start_date')
-      start_date += " #{attrs['start_time(4i)']}:#{attrs['start_time(5i)']}" 
+      start_date += " #{attrs['start_time(4i)']}:#{attrs['start_time(5i)']}"
       attrs.delete('start_time(4i)')
       attrs.delete('start_time(5i)')
     end

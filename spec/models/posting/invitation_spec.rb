@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Posting::Invitation do
   describe "email changed" do
     let(:invitation) { @invitation }
-    before(:each) do 
-      @invitation = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => "yack@test.com")
+    before(:each) do
+      @invitation = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(Personage), :body => "yack@test.com")
     end
-    
+
     it "doesn't change on first assignment for a new record" do
       invitation.should_not be_email_changed
       invitation.email.should == 'yack@test.com'
@@ -16,38 +16,38 @@ describe Posting::Invitation do
       invitation.update_attribute(:email, 'zed@test.com')
       invitation.should be_email_changed
       invitation.email.should == 'zed@test.com'
-    end    
+    end
 
     it "does change when assigned new email to body attribute" do
       invitation.update_attribute(:body, 'zed@test.com')
       invitation.should be_email_changed
       invitation.body.should == 'zed@test.com'
-    end    
+    end
   end
-  
+
   describe 'scopes' do
     describe 'personal and universal' do
       let(:personal_invitation)  { @personal }
       let(:universal_invitation) { @universal }
-      
+
       before(:each) do
-        Posting::Invitation.delete_all        
-        @personal = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => 'zed@test.com')
-        @universal = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => nil)
+        Posting::Invitation.delete_all
+        @personal = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(Personage), :body => 'zed@test.com')
+        @universal = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(Personage), :body => nil)
       end
-      
+
       it "shows personal invitations" do
         Posting::Invitation.personal.should == [ personal_invitation ]
       end
 
       it "shows universal invitations" do
         Posting::Invitation.universal.should == [ universal_invitation ]
-      end      
+      end
     end
-    
+
     describe 'days old, aging and expiring' do
       let(:today) { DateTime.civil(2011, 1, 15, 1) }
-      let(:invitations) { @invitations }      
+      let(:invitations) { @invitations }
 
       before(:each) do
         Date.stub!(:today).and_return(today)
@@ -60,7 +60,7 @@ describe Posting::Invitation do
           created_at = today - age.days
           invitation = Posting::Invitation.create!(
               :site       => mock_model(Site),
-              :sponsor    => mock_model(User),
+              :sponsor    => mock_model(Personage),
               :body       => "user-#{age}@test.com",
               :state      => 'offered',
               :created_at => created_at)
@@ -80,27 +80,27 @@ describe Posting::Invitation do
       it "for aging invitations" do
         Posting::Invitation.aging.should == [ invitations[:'20110107'], invitations[:'20110113'] ]
       end
-    
+
       it "for expiring invitations" do
         Posting::Invitation.expiring.should == [ invitations[:'20110104'] ]
       end
     end
-    
+
     describe 'redundant and not redundant' do
-      fixtures :users      
+      fixtures :users
       let(:redundant_invitation)     { @redundant }
       let(:not_redundant_invitation) { @not_redundant }
-      
+
       before(:each) do
         Posting::Invitation.delete_all
-        @redundant = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => users(:adam).email)
-        @not_redundant = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(User), :body => 'zed@test.com')
+        @redundant = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(Personage), :body => users(:adam).email)
+        @not_redundant = Posting::Invitation.create!(:site => mock_model(Site), :sponsor => mock_model(Personage), :body => 'zed@test.com')
       end
-      
+
       it "shows redundant invitations" do
         Posting::Invitation.redundant.should == [ redundant_invitation ]
       end
-      
+
       it "shows not redundant invitations" do
         Posting::Invitation.not_redundant.should == [ not_redundant_invitation ]
       end

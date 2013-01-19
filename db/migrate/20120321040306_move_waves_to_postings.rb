@@ -1,8 +1,8 @@
 class MoveWavesToPostings < ActiveRecord::Migration
 
   class Wave < ActiveRecord::Base
-    set_table_name :waves
-    set_inheritance_column nil
+    self.table_name = "waves"
+    self.inheritance_column = nil
   end
 
   class SiteWave < ActiveRecord::Base
