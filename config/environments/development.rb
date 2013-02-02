@@ -91,7 +91,7 @@ Friskyfactory::Application.configure do
   paperclip_defaults = { command_path: "/usr/local/bin/" }
 
   if ENV["FRIENDFACTORY_USE_S3"] == "true"
-    paperclip_defaults.merge!(
+    paperclip_defaults.merge! \
       storage: :s3,
       s3_credentials: {
         access_key_id: ENV["AWS_ACCESS_KEY_ID"],
@@ -99,7 +99,11 @@ Friskyfactory::Application.configure do
         s3_headers: { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate },
       },
       s3_permissions: :public_read,
-      bucket: ENV["S3_BUCKET_NAME"])
+      bucket: ENV["S3_BUCKET_NAME"]
+  else
+    paperclip_defaults.merge! path: ":assets_root/:class/:attachment/:id_partition/:style/:filename"
+    # config.middleware.insert_before "ActionDispatch::Static", "Rack::File", ENV["FRIENDFACTORY_ASSETS_ROOT"]
+    # config.middleware.use "Rack::File", ENV["FRIENDFACTORY_ASSETS_ROOT"]
   end
 
   config.paperclip_defaults = paperclip_defaults
