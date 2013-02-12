@@ -40,19 +40,19 @@ class Wave::CommunitiesController < ApplicationController
   end
 
   def postings
-    # @postings ||= begin
-    #   wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
-    # end
     @postings ||= begin
-      metadata_klasses.each do |metadata_klass, criteria|
-        metadata_klass.select criteria
-      end
+      wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
     end
+    # @postings ||= begin
+    #   metadata_klasses.each do |metadata_klass, criteria|
+    #     metadata_klass.select criteria
+    #   end
+    # end
   end
 
-  def metadata_klasses
-    [[ Metadata::Origin, self[:id] ]]
-  end
+  # def metadata_klasses
+  #   [[ Metadata::Origin, self[:id] ]]
+  # end
 
   def paged_postings
     @paged_postings ||= begin

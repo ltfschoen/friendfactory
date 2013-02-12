@@ -1,15 +1,21 @@
 module Metadata
   class Base
-    def self.connection
-      $redis
-    end
+    class << self 
+      def connection
+        @connection ||= establish_connection
+      end
 
-    def self.ingest
-      # Noop; override in descendant classes
-    end
+      def ingest; end
 
-    def self.keys
-      []
+      private
+
+      def establish_connection
+        Redis.new host: uri.host, port: uri.port, password: uri.password, driver: "hiredis"
+      end
+
+      def uri
+        URI.parse ENV["REDISCLOUD_URL"] || "http://localhost:6379"
+      end
     end
   end
 end
