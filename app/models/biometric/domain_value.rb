@@ -1,6 +1,6 @@
 class Biometric::DomainValue < ActiveRecord::Base
 
-  set_table_name :signal_categories_signals
+  self.table_name = "signal_categories_signals"
 
   belongs_to :domain,
       :class_name  => 'Biometric::Domain',

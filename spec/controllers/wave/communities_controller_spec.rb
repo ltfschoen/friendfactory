@@ -9,6 +9,7 @@ describe Wave::CommunitiesController do
   describe 'requires lurker' do
     before(:each) { not_logged_in }
     it 'redirects to welcome page' do
+      pending
       get :show
       response.should redirect_to(welcome_url)
     end
@@ -28,6 +29,6 @@ describe Wave::CommunitiesController do
       Wave::Base.should_receive(:find_by_slug).with(Site::DefaultHomeWaveSlug).and_return(wave)
       get :show, nil, { :lurker => true }
       assigns[:wave].should equal(wave)
-    end    
+    end
   end
 end

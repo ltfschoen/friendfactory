@@ -1,7 +1,7 @@
 class Biometric::Value < ActiveRecord::Base
 
-  set_table_name :signals
-  set_inheritance_column 'none'
+  self.table_name = "signals"
+  self.inheritance_column = nil
 
   validates_presence_of :name, :display_name
 

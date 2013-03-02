@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "wave_polaroids/new.html.erb" do
   before(:each) do
-    assign(:polaroid, stub_model(Wave::Polaroid).as_new_record)
+    # assign(:polaroid, stub_model(Wave::Polaroid).as_new_record)
   end
 
   it "renders new polaroid form" do

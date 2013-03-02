@@ -1,0 +1,28 @@
+adam:
+  id: 1
+  email: adam@test.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  state: enabled
+  admin: true
+  site_id: 1
+  account_id: 1
+
+bert:
+  id: 2
+  email: bert@test.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  state: enabled
+  site_id: 1
+  account_id: 1
+  
+charlie:
+  id: 3
+  email: charlie@test.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  state: enabled
+  site_id: 1
+  account_id: 1
+  

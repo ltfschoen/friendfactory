@@ -1,10 +1,12 @@
-*.esproj
-*.tmproj
 .DS_Store
 .bundle
 .env.*
-!.env.development
+!.env.sample
 .footnotes
+.rspec
+*.swp
+*.esproj
+*.tmproj
 bin/*
 config/*.sphinx.conf
 config/database.yml

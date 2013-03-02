@@ -5,7 +5,7 @@ class Posting::Base < ActiveRecord::Base
   include ActiveRecord::Transitions
   include Subscribable
 
-  set_table_name :postings
+  self.table_name = "postings"
 
   delegate \
       :site,

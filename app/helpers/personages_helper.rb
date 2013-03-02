@@ -1,6 +1,7 @@
 module PersonagesHelper
 
-  def render_headshot(personage, opts = {})
+  def render_headshot personage, opts = {}
+    personage = Personage.includes(:persona => :avatar).find(posting[:user_id]) if personage.nil?
     render :partial => File.join('personages', personage.persona_type, 'headshot'), :locals => { :personage => personage }.merge(opts)
   end
 

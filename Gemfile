@@ -48,6 +48,9 @@ gem 'haml', '>= 3.1.2'
 gem 'haml-rails'
 gem 'sass', '>= 3.1.1'
 gem 'acts-as-taggable-on', '~> 2.2.2'
+gem "acts_as_tree"
+gem "dynamic_form"
+
 gem 'pusher', '~> 0.8.1'
 gem 'will_paginate', '~> 3.0.2'
 gem 'whenever', '~> 0.7.3', :require => false
@@ -77,8 +80,8 @@ end
 
 group :development, :test do
   gem "debugger"
-  gem "factory_girl", :git => "git://github.com/thoughtbot/factory_girl.git"
   gem "rspec-rails"
+  gem "factory_girl_rails", "~> 4.0"
   gem "webrat", ">= 0.7.2"
 end
 

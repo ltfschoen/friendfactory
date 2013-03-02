@@ -26,6 +26,7 @@ namespace :ff do
           "launch_users",
           "notifications",
           "personages",
+          "personas",
           "postings",
           "publications",
           "resource_embeds",

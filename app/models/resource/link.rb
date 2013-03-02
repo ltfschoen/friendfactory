@@ -2,12 +2,9 @@ require 'open-uri'
 
 class Resource::Link < ActiveRecord::Base
 
-  set_inheritance_column nil
+  self.inheritance_column = nil
 
-  attr_accessible \
-      :url,
-      :title,
-      :description
+  attr_accessible :url, :title, :description
 
   has_many :embeds,
       :class_name  => 'Resource::Embed',

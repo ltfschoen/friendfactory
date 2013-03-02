@@ -4,7 +4,7 @@ class Friendship::Base < ActiveRecord::Base
 
   include Subscribable
 
-  set_table_name :friendships
+  self.table_name = "friendships"
 
   attr_accessible :friend
 

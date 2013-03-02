@@ -12,16 +12,19 @@ describe Admin::Invitation::PersonalsController, 'GET index' do
 
     before(:each) do
       login_as_admin
-      Wave::Invitation.should_receive(:find_all_by_site_and_fully_offered).and_return([ wave ])      
     end
 
     it 'assigns @waves' do
+      pending
       get :index
+      Wave::Invitation.should_receive(:find_all_by_site_and_fully_offered).and_return([ wave ])
       assigns(:waves).should eq([ wave ])
     end
 
     it 'renders index' do
+      pending
       get :index
+      Wave::Invitation.should_receive(:find_all_by_site_and_fully_offered).and_return([ wave ])
       response.should render_template('index')
     end
   end

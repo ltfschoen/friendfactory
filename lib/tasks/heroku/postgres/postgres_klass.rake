@@ -4,7 +4,7 @@ namespace :ff do
       task :postgres_klass => [ :environment ] do
         self.class.send(:define_method, :postgres_klass) do |table_name|
           Class.new ActiveRecord::Base do
-            set_table_name table_name
+            self.table_name = table_name
             establish_connection \
               adapter: "postgresql",
               encoding: "unicode",

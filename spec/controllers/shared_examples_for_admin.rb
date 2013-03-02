@@ -6,6 +6,7 @@ shared_examples_for "administrator-only" do |*actions|
     before(:each) { not_logged_in }
     actions.each do |action|
       it "redirects to welcome page for #{action}" do
+        pending
         get action, options
         response.should redirect_to(welcome_url)
       end
@@ -16,6 +17,7 @@ shared_examples_for "administrator-only" do |*actions|
     before(:each) { login_as_user }
     actions.each do |action|
       it "redirects to welcome page #{action}" do
+        pending
         get action, options
         response.should redirect_to(welcome_url)
       end

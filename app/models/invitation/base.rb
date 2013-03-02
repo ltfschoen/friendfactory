@@ -4,7 +4,7 @@ class Invitation::Base < ActiveRecord::Base
 
   attr_reader :invitee_personage
 
-  set_table_name 'invitations'
+  self.table_name = "invitations"
 
   scope :offered, where(:state => 'offered')
 
