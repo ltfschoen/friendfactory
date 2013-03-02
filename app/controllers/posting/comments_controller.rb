@@ -1,13 +1,9 @@
 class Posting::CommentsController < ApplicationController
 
   before_filter :require_user
-
   after_filter :notify, :only => [ :create ]
 
-  helper_method \
-      :posting,
-      :comments,
-      :comment
+  helper_method :posting, :comments, :comment
 
   def index
     respond_to do |format|
