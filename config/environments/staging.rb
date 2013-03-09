@@ -5,6 +5,9 @@ Friskyfactory::Application.configure do
 
   config.filter_parameters = [ :password, :password_confirmation ]
 
+  # Log to standout for Unicorn
+  config.logger = Logger.new STDOUT
+
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
   config.cache_classes = true

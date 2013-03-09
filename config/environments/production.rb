@@ -9,6 +9,9 @@ Friskyfactory::Application.configure do
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
 
+  # Log to standout for Unicorn
+  config.logger = Logger.new STDOUT
+
   config.filter_parameters = [ :password, :password_confirmation ]
 
   # Send deprecation notices to registered listeners

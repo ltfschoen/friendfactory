@@ -8,8 +8,6 @@ Friskyfactory::Application.configure do
   # Log to standout for Unicorn
   config.logger = Logger.new STDOUT
 
-  # CACHING
-
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
@@ -27,8 +25,6 @@ Friskyfactory::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-
-  # ASSETS
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.friskyfactory.localhost:3000"

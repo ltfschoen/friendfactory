@@ -73,6 +73,7 @@ gem 'bluecloth', '~> 2.0.10'
 # and rake tasks are available in development mode:
 
 group :development do
+  gem "thin"
   gem "foreman"
   gem "letter_opener"
 end
