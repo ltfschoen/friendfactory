@@ -1104,14 +1104,6 @@ ALTER SEQUENCE wave_to_posting_migration_logs_id_seq OWNED BY wave_to_posting_mi
 
 
 --
--- Name: waves; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW waves AS
-    SELECT postings.id, postings.type, postings.slug, postings.user_id, postings.parent_id, postings.resource_id, postings.resource_type, postings.created_at, postings.updated_at, postings.subject, postings.body, postings.image_file_name, postings.image_content_type, postings.image_file_size, postings.sticky_until, postings.width, postings.height, postings.horizontal, postings.state, postings.hash_key, postings.comments_count, postings.postings_count, postings.commented_at, postings.primed_at, postings.feed_id FROM postings WHERE ((postings.type)::text ~~* 'Wave::%'::text);
-
-
---
 -- Name: waves_not_as_postings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1853,20 +1845,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: waves_delete; Type: RULE; Schema: public; Owner: -
---
-
-CREATE RULE waves_delete AS ON DELETE TO waves DO INSTEAD DELETE FROM postings;
-
-
---
--- Name: waves_insert; Type: RULE; Schema: public; Owner: -
---
-
-CREATE RULE waves_insert AS ON INSERT TO waves DO INSTEAD INSERT INTO postings (id, type, slug, user_id, parent_id, resource_id, resource_type, created_at, updated_at, subject, body, image_file_name, image_content_type, image_file_size, sticky_until, width, height, horizontal, state, hash_key, comments_count, postings_count, commented_at, primed_at, feed_id) VALUES (new.id, new.type, new.slug, new.user_id, new.parent_id, new.resource_id, new.resource_type, new.created_at, new.updated_at, new.subject, new.body, new.image_file_name, new.image_content_type, new.image_file_size, new.sticky_until, new.width, new.height, new.horizontal, new.state, new.hash_key, new.comments_count, new.postings_count, new.commented_at, new.primed_at, new.feed_id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -1985,5 +1963,3 @@ INSERT INTO schema_migrations (version) VALUES ('20120425032937');
 INSERT INTO schema_migrations (version) VALUES ('20120818235248');
 
 INSERT INTO schema_migrations (version) VALUES ('20121222215843');
-
-INSERT INTO schema_migrations (version) VALUES ('20121226122459');
