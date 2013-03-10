@@ -1,2 +1,3 @@
-# uri = URI.parse ENV["REDISCLOUD_URL"] || "http://localhost:6379"
-# $redis = Redis.new host: uri.host, port: uri.port, password: uri.password, driver: "hiredis"
+uri = URI.parse Rails.configuration.redis_url
+database = Rails.configuration.redis_database
+Redis.current = Redis.new host: uri.host, port: uri.port, password: uri.password, driver: "hiredis", db: database

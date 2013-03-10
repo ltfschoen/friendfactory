@@ -40,6 +40,9 @@ Friskyfactory::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'friskyfactory.com' }
 
+  config.redis_url = "http://localhost:6379"
+  config.redis_database = 2
+
   config.after_initialize { require 'sti' }
 
 end

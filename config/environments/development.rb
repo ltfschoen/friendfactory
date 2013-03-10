@@ -104,6 +104,9 @@ Friskyfactory::Application.configure do
 
   config.paperclip_defaults = paperclip_defaults
 
+  config.redis_url = "http://localhost:6379"
+  config.redis_database = 1
+
   config.after_initialize { load 'sti.rb' }
 
   config.active_record.schema_format = :sql

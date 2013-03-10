@@ -90,9 +90,10 @@ Friskyfactory::Application.configure do
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
 
-  config.action_mailer.default_url_options = {
-    :host => 'friskyfactory.com'
-  }
+  config.action_mailer.default_url_options = { :host => 'friskyfactory.com' }
+
+  config.redis_url = ENV["REDIS_URL"]
+  config.redis_database = ENV["REDIS_DATABASE"]
 
    config.paperclip_defaults = {
     storage: :s3,
