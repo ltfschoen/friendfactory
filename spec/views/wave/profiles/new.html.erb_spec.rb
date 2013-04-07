@@ -4,9 +4,7 @@ describe "/profiles/new.html.erb" do
   # include ProfilesHelper
 
   before(:each) do
-    assigns[:profile] = stub_model(Wave::Profile,
-      :new_record? => true
-    )
+    assigns[:profile] = mock_model Wave::Profile, new_record?: true
   end
 
   it "renders new profile form" do

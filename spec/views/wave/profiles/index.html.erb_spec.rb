@@ -5,8 +5,8 @@ describe "/profiles/index.html.erb" do
 
   before(:each) do
     assigns[:profiles] = [
-      stub_model(Wave::Profile),
-      stub_model(Wave::Profile)
+      mock_model(Wave::Profile),
+      mock_model(Wave::Profile)
     ]
   end
 
