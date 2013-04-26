@@ -4,13 +4,16 @@
 !.env.sample
 .footnotes
 .rspec
+.env
+.footnotes
+.rvmrc
 *.swp
 *.esproj
 *.tmproj
 bin/*
 config/*.sphinx.conf
 config/database.yml
-config/environments/development.rb
+/coverage
 db/*.sqlite3
 db/dumps/*
 db/sphinx/*
