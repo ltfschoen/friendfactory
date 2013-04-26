@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(:version => 20121226122459) do
     t.integer  "postings_count",                  :default => 0
     t.datetime "commented_at"
     t.datetime "primed_at"
-    t.integer  "feed_id"
+    t.integer  "wave_id"
   end
 
   add_index "postings", ["parent_id"], :name => "index_postings_on_parent_id"

@@ -1,14 +1,13 @@
 source "http://rubygems.org"
 
-gem "rails", "3.2.9"
+gem "rails", "~> 3.2.0"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'unicorn'
-
 gem "pg"
 gem "redis"
+gem "redis-objects"
 gem "hiredis"
 
 # Gems used only for assets and not required
@@ -39,7 +38,7 @@ gem "jquery-rails"
 gem "paperclip", "~> 3.3.0"
 gem "aws-sdk"
 
-gem 'transitions', '>= 0.0.10', :require => [ 'transitions', 'active_record/transitions' ]
+gem "transitions", "0.1.3", :require => [ "transitions", "active_record/transitions" ]
 gem 'authlogic', '~> 3.1.0'
 gem 'remotipart'
 
@@ -76,6 +75,8 @@ group :development do
   gem "thin"
   gem "foreman"
   gem "letter_opener"
+  gem "ZenTest"
+  gem "autotest-growl"
 end
 
 group :development, :test do
@@ -85,6 +86,11 @@ group :development, :test do
   gem "webrat", ">= 0.7.2"
 end
 
+group :test do
+  gem "simplecov", require: false
+end
+
 group :production do
+  gem "unicorn"
   gem "memcache-client"
 end

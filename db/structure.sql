@@ -557,7 +557,7 @@ CREATE TABLE postings (
     postings_count integer DEFAULT 0,
     commented_at timestamp without time zone,
     primed_at timestamp without time zone,
-    feed_id integer
+    wave_id integer
 );
 
 

@@ -46,6 +46,11 @@ module Friskyfactory
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
+    # Use SQL instead of Active Record's schema dumper when creating the database.
+    # This is necessary if your schema can't be completely dumped by the schema dumper,
+    # like if you have constraints or database-specific column types
+    config.active_record.schema_format = :sql
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
