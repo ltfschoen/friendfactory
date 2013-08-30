@@ -1,19 +1,18 @@
 require 'spec_helper'
 
 describe Posting::Base do
+  it { should be_an_instance_of Posting::Base }
+  it { should be_a ActiveRecord::Base }
 
-  describe "read only" do
-    # fixtures :users
-    it 'user' do
-      pending
-      adam = users(:adam)
-      video.user = adam
-      video.save!
-      video.user = users(:bert)
-      video.save!
-      video.reload
-      video.user.should == adam
-    end
+  describe "class" do
+    subject { described_class }
+    # it { should respond_to :ingest }
+    its(:included_modules) { should include ActiveRecord::Transitions }
+    its(:included_modules) { should include Subscribable }
+    # its(:metadata) { should include :wave }
   end
 
+  describe "instance" do
+    subject { Posting::Base.new }
+  end
 end

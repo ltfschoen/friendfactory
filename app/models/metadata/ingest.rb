@@ -11,14 +11,12 @@ module Metadata
 
     module ClassMethods
       def inherited klass
+        super
         klass.ingest *@_metadata
       end
 
       def ingest *klasses
         @_metadata ||= []
-        # klasses.map! do |klass|
-        #   defined? klass ? klass : (Rails.logger.warn "Metadata::Ingest unknown metadata class #{klass}")
-        # end
         @_metadata += klasses
         @_metadata = @_metadata.flatten.compact.uniq
       end
@@ -29,17 +27,33 @@ module Metadata
     end
 
     def ingest
-      self.class.metadata.map do |klass|
-        if klass.respond_to? :ingest
+      return false unless published?
+      self.class.metadata.select do |class_name|
+        if klass = (metadata_class class_name)
           klass.ingest self
+          class_name
         else
-          Rails.logger.warn "Metadata::Ingest #{klass} does not allow ingest"
+          warn_uningestable class_name
+          nil
         end
       end
     end
 
     def ingestable?
       true
+    end
+
+    def metadata
+      self.class.metadata
+    end
+
+    def warn_uningestable klass
+      Rails.logger.warn "Metadata::Ingest #{klass} does not allow ingest"
+    end
+
+    def metadata_class class_name
+      klass = "metadata/#{class_name.to_s}".camelize.safe_constantize
+      klass.respond_to?(:ingest) and klass
     end
   end
 end

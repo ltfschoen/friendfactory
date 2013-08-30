@@ -1,7 +1,9 @@
-= form_for Wave::Album.new, :html => { :multipart => true, :class => 'new_post_frame new_wave_album posting_album form' } do |f|
+= form_for Wave::Album.new(wave_id: wave.id), :html => { :multipart => true, :class => 'new_post_frame new_wave_album posting_album form' } do |f|
   = f.resolve resolver
   = hidden_field_tag :publish_id, wave.id
   = hidden_field_tag :wave_id
+  = f.hidden_field :wave_id
+  = f.hidden_field :secure_wave_id
   .new_post.photo
     .body
       .photo.canvas.dropzone

@@ -1,9 +1,26 @@
 module Metadata
   class Wave < Metadata::Base
-    def self.ingest ingestable
-      if ingestable.respond_to? :wave_id and wave_id = ingestable.wave_id
-        connection.sadd "wave:#{wave_id}", ingestable.id
+    class InvalidWaveIdError < Exception; end
+
+    class << self
+      def ingest ingestable
+        wave = new ingestable.wave_id
+        wave.postings << ingestable.id
+        wave
+      rescue NoMethodError
+        warn ingestable, "missing attribute wave_id"
+      rescue InvalidWaveIdError
+        warn ingestable, "invalid wave_id"
       end
+    end
+
+    attr_reader :id
+
+    set :postings
+
+    def initialize id
+      raise InvalidWaveIdError if id.nil?
+      @id = id
     end
   end
 end

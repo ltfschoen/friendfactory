@@ -41,18 +41,15 @@ class Wave::CommunitiesController < ApplicationController
 
   def postings
     @postings ||= begin
-      wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
+      debugger
+      set_name = current_user.id
+      wave.wave_postings.interstore "crap",  [ Posting::Base.published_postings.key ]
+      posting_ids = Redis::SortedSet.new("crap").members
+      debugger
+      postings = Posting::Base.find posting_ids
+    #   wave.postings.natural_order.published.joins(:user).merge(Personage.enabled).scoped
     end
-    # @postings ||= begin
-    #   metadata_klasses.each do |metadata_klass, criteria|
-    #     metadata_klass.select criteria
-    #   end
-    # end
   end
-
-  # def metadata_klasses
-  #   [[ Metadata::Origin, self[:id] ]]
-  # end
 
   def paged_postings
     @paged_postings ||= begin

@@ -83,6 +83,7 @@ describe Posting::InvitationsController do
       end
 
       it "should not redeliver mail if email doesn't change" do
+        pending
         posting = stub_model(Posting::Invitation, :update_attributes => true, :email_changed? => false)
         wave = stub_model(Wave::Invitation)
         wave.stub_chain(:postings, :find_by_id).and_return(posting)

@@ -4,6 +4,9 @@ class Posting::Base < ActiveRecord::Base
 
   include ActiveRecord::Transitions
   include Subscribable
+  # include Metadata::Ingest
+
+  include Redis::Objects
 
   self.table_name = "postings"
 
@@ -19,6 +22,25 @@ class Posting::Base < ActiveRecord::Base
     :to => :user
 
   before_create :initialize_primed_at
+
+  # ingest :wave
+  set :published_postings, global: true, key: "postings:published"
+  # counter :personage_postings_count, lambda { |posting| "personage:#{posting.user_id}:postings_count" }
+  # counter :personage_date_postings_count, lambda { |posting| }
+  # counter :personage_day_postings_count
+  # counter :personage_week_postings_count
+  # counter :personage_month_postings_count
+  # counter :personage_year_postings_count
+
+  after_create :ingest
+
+  def ingest
+    self.class.redis.pipelined do
+      self.class.published_postings << id if published?
+      user.add_posting self if user.present?
+      wave.add_posting self if wave.present?
+    end
+  end
 
   ###
 
@@ -92,7 +114,10 @@ class Posting::Base < ActiveRecord::Base
   has_many :waves,
       :through => :publishables
 
+  belongs_to :wave, class_name: "Wave::Base"
+
   ###
+
 
   belongs_to :parent,
       :class_name   => 'Posting::Base',

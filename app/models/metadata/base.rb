@@ -1,20 +1,14 @@
 module Metadata
   class Base
-    class << self 
+    include Redis::Objects
+
+    class << self
       def connection
-        @connection ||= establish_connection
+        Redis.current
       end
 
-      def ingest; end
-
-      private
-
-      def establish_connection
-        Redis.new host: uri.host, port: uri.port, password: uri.password, driver: "hiredis"
-      end
-
-      def uri
-        URI.parse ENV["REDISCLOUD_URL"] || "http://localhost:6379"
+      def warn ingestable, message
+        Rails.logger.warn "#{name} #{ingestable.class.name} #{message}"
       end
     end
   end

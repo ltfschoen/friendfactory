@@ -1,6 +1,7 @@
 class Personage < ActiveRecord::Base
 
   include ActiveRecord::Transitions
+  include Redis::Objects
 
   self.inheritance_column = nil
 
@@ -50,6 +51,12 @@ class Personage < ActiveRecord::Base
     event :enable do
       transitions :to => :enabled, :from => [ :disabled ]
     end
+  end
+
+  sorted_set :personage_postings, key: lambda { |personage| "personage:#{personage.id}:postings" }
+
+  def add_posting posting
+    personage_postings.add posting.id, posting.updated_at
   end
 
   def default=(bool)

@@ -1,11 +1,9 @@
-class Wave::Base < ::Posting::Base
+class Wave::Base < Posting::Base
 
   alias_attribute :topic,       :subject
   alias_attribute :description, :body
 
-  scope :site, lambda { |site|
-      joins(:sites).where(:sites => { :id => site[:id] }).readonly(false)
-  }
+  scope :site, lambda { |site| joins(:sites).where(:sites => { :id => site[:id] }).readonly(false) }
 
   has_and_belongs_to_many :sites,
       :class_name              => 'Site',
@@ -14,6 +12,14 @@ class Wave::Base < ::Posting::Base
       :association_foreign_key => 'site_id'
 
   ###
+
+  sorted_set :wave_postings, key: lambda {|wave| "wave:#{wave.id}:postings" }
+
+  HalfLife = 12.hours.to_f
+
+  def add_posting posting
+    wave_postings.add posting.id, posting.updated_at.to_i / HalfLife
+  end
 
   has_many :publications, :foreign_key => 'wave_id'
 
@@ -34,9 +40,11 @@ class Wave::Base < ::Posting::Base
         posting
       end
     end
+
     def natural_order
       order('"postings"."sticky_until" DESC, "postings"."primed_at" DESC')
     end
+
     def authors_order
       select(%{distinct "postings"."user_id", max("postings"."created_at") as created_at}).
       group(%{"postings"."user_id"}).
