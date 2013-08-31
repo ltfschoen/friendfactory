@@ -5,9 +5,19 @@ gem "rails", "3.2.9"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'unicorn'
-
+# Manually install and link nogoriki
+# See http://nokogiri.org/tutorials/installing_nokogiri.html
+# gem install nokogiri --
+#   --with-xml2-include=/usr/local/Cellar/libxml2/2.9.1/libxml2
+#   --with-xml2-lib=/usr/local/Cellar/libxml2/2.9.1/lib
+#   --with-xslt-dir=/usr/local/Cellar/libxslt/1.1.28
+#   --with-iconv-include=/usr/local/Cellar/libiconv/1.14/include
+#   --with-xslt-lib=/usr/local/Cellar/libiconv/1.14/lib
+# Also see:
+# http://stackoverflow.com/questions/11668604/mountain-lion-libxml-nokogirii
+gem 'nokogiri'
 gem "pg"
+gem 'unicorn'
 gem "redis"
 gem "hiredis"
 
@@ -33,7 +43,6 @@ gem "jquery-rails"
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
 
 # Amazon S3
 gem "paperclip", "~> 3.3.0"
@@ -79,7 +88,7 @@ group :development do
 end
 
 group :development, :test do
-  gem "debugger"
+  # gem "debugger"
   gem "rspec-rails"
   gem "factory_girl_rails", "~> 4.0"
   gem "webrat", ">= 0.7.2"
